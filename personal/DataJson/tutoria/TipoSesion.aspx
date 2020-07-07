@@ -1,0 +1,1 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="TipoSesion.aspx.vb" Inherits="DataJson_tutoria_TipoComunicacion" %>

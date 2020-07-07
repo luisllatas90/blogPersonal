@@ -1,0 +1,9 @@
+	'Ingresar a página del campus virtual
+	'if session("cronograma_mat")<>"0" then
+	'	pagina="comunicado.asp"
+	'else
+	'	if session("codigo_cpf")="2" then
+	'		pagina="avisos/derecho/index.html"
+	'	end if			
+	'end if
+	pagina="avisos/todousat/corteservicio.html"

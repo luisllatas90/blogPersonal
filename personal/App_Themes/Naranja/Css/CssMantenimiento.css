@@ -1,0 +1,41 @@
+﻿body {
+}
+
+/* Formularios de Mantenimiento */
+.DIV_Borde
+{
+    border: 2px solid #2D0F00;
+    font-family: verdana;
+    font-size: 11px;
+    text-align: center;
+    padding-bottom: 10px;
+    background-color: #FFFFCC;
+}
+.DIV_Titulo
+{
+    background-position: left;
+    padding: 3px 3px 3px 15px;
+    font-family: verdana;
+    font-size: 11px;
+    text-align: left;
+    background-color: #932500;
+    color: #FFFFFF;
+    font-weight: bold;
+    background-image: url(       '../Img/layout.png' );
+    background-repeat: no-repeat;
+}
+.DIV_margenes
+{
+    padding: 8px 4px 4px 0px;
+    font-family: verdana;
+    font-size: 11px;
+}
+
+.COL_etiquetas_datos
+{
+    font-family: verdana;
+    font-size: 11px;
+    text-align: right;
+    font-weight: bold;
+    padding-right: 8px;
+}

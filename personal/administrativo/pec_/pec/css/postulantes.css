@@ -1,0 +1,14 @@
+#postulantes {
+  position: relative; }
+
+#loading-gif {
+  position: absolute;
+  display: none;
+  width: 50px;
+  left: 50%;
+  top: 150px;
+  margin-left: -25px;
+  z-index: 9999; }
+
+#udpFiltros {
+  margin-bottom: 10px; }

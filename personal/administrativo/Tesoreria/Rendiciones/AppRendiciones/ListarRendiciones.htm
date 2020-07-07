@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+   
+    <link rel='stylesheet' href='../../../../academico/assets/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='../../../../academico/assets/css/material.css'/>
+    <link rel='stylesheet' href='../../../../academico/assets/css/style.css?x=1'/>
+    <link rel='stylesheet' href='../../../../academico/assets/css/jquery.dataTables.min.css'/>
+    
+    <script src="../../../../academico/assets/js/jquery.js" type="text/javascript"></script>
+    <script src="../../../../academico/assets/js/app.js" type="text/javascript"></script>
+    <script type="text/javascript" src='../../../../academico/assets/js/jquery.dataTables.min.js'></script>
+    <style type="text/css">
+        td.details-control 
+        {
+            
+            background: url('../../../../academico/assets/img/details_open.png') no-repeat center center;
+            cursor: pointer;
+        }
+        tr.details td.details-control {
+            background: url('../../../../academico/assets/img/resources/details_close.png') no-repeat center center;
+        }
+    </style>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+
+        
+        
+        $("#btnConsultar").click(function() {
+            
+            
+              //  $("#tablaRendiciones > tbody").html("");
+                //  $("#tblRendicion").empty();
+                $.ajax({
+                    type: "POST",
+                    url: "DataJson/ListarRendicion.aspx",
+                    data: { op: 1 },
+                    dataType: "json",
+                    success: function(data) {
+                    console.log(data);
+                     
+                     var tb = "";
+                        
+                        $("#tblRendicion").html("");
+                        $("#tblRendicion tr").remove();
+                        fnDestroyDataTableDetalle('tablaRendiciones');
+                        var t = '';
+                        var i = 0;
+                        var filas = data.length;
+                        for (i = 0; i < filas; i++) {
+                            tb += '<tr id="ren'+data[i].Id+'"+ role="row" style="font-size:11px;">';                           
+                            tb += '<td>' + data[i].Fecha+"" + '</td>';
+                            tb += '<td>' + data[i].Tdo + '</td>';
+                            tb += '<td>' + data[i].Numero + '&nbsp;&nbsp;&nbsp;</td>';
+                            tb += '<td>' + data[i].Moneda + '&nbsp;&nbsp;&nbsp;</td>';
+                            tb += '<td style="text-align:right;">' + data[i].Importe + '</td>';
+                            tb += '<td>' + data[i].Estado + '&nbsp;&nbsp;&nbsp;</td>';
+                            tb += '<td>' + data[i].Usuario + '&nbsp;&nbsp;&nbsp;</td>';
+                            tb += '<td>' + truncate(data[i].Obsservacion,60) + '&nbsp;&nbsp;&nbsp;</td>';
+                            tb += '<td>' + '<button onclick="Rendir(' + data[i].Id+ ');" class="btn btn-green"><i  class="ion-plus"><span></span></i></button>' + '</td>';
+                            tb += '<td>' + '<button class="btn btn-primary"><i class="ion ion-ios-eye"></i><span></span></button>' + '</td>';
+                           
+                            tb += '</tr>';
+                        }
+                        $('#tblRendicion').html(tb);
+                        fnResetDataTable('tablaRendiciones');
+                        //alert(result);
+
+                    },
+                    error: function(result) {
+                      //  console.log(result);
+                    }
+                });
+                /*
+                var oTable = $('#tablaRendiciones').DataTable({
+                "bPaginate": false,
+                "bFilter": true,
+                "bLengthChange": false,
+                "bInfo": false
+                });
+                */
+
+
+
+                var nCloneTh = document.createElement('th');
+                var nCloneTd = document.createElement('td');
+                nCloneTd.className = "details-control";
+
+                $('#tablaRendiciones thead tr').each(function() {
+                    this.insertBefore(nCloneTh, this.childNodes[0]);
+                });
+
+                $('#tablaRendiciones tbody tr').each(function() {
+                    this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+                });
+                $('#tablaRendiciones  thead  tr th:eq(0)').html('&nbsp;&nbsp;&nbsp;&nbsp;');
+
+                $('#tablaRendiciones tbody').on('click', 'td.details-control', function() {
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr);
+
+                    if (row.child.isShown()) {
+                        // This row is already open - close it
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    }
+                    else {
+                        // Open this row
+                        row.child(format(row.data())).show();
+                        tr.addClass('shown');
+                    }
+                });
+            });
+            
+          /*  
+       $('#tablaRendiciones tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+           // row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
+*/
+        });
+        function fnDestroyDataTableDetalle(table) {
+            var dt = $('#' + table).DataTable().fnDestroy();
+            return dt;
+        }
+        function fnResetDataTable(table) 
+        {
+          
+            
+            if ($.fn.DataTable.fnIsDataTable('#' + table)) 
+            {
+                $('#' + table).DataTable({
+                    "bDestroy": true
+                });
+            }
+            else 
+            {
+                var oTable = $('#' + table).DataTable({
+                    "sContentPadding": false
+                });
+                oTable = $('#' + table).DataTable().fnDestroy();
+                oTable = $('#' + table).DataTable({
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bLengthChange": false,
+                    "bInfo": false
+
+                    
+                });
+                
+                return oTable;
+            }
+        }
+        function Rendir(Id) {
+            alert(Id);
+        }
+        function truncate(str, num) {
+            if (num > str.length) {
+                return str;
+            } else {
+                str = str.substring(0, num);
+                return str + "...";
+            }
+
+        }
+    </script>
+</head>
+<body>
+     <div class="col-md-12 nopad-right">
+				<!-- panel -->
+				<div class="panel panel-piluku">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							Listado de rendiciones  
+							<span class="panel-options">
+								<a href="#" class="panel-refresh">
+									<i class="icon ti-reload"></i> 
+								</a>
+								<a href="#" class="panel-minimize">
+									<i class="icon ti-angle-up"></i> 
+								</a>
+								<a href="#" class="panel-close">
+									<i class="icon ti-close"></i> 
+								</a>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+					     <div class="col-md-12">            
+                        <div class="row">
+				            <div class="col-md-6" style="float:left">
+				          
+					            <ul>
+	                            <li class="list-unstyled"><i class="icon ion-checkmark text-primary"></i> &nbsp;<b>Codigo: </b>684. &nbsp;&nbsp; <i class="icon ion-checkmark text-primary"></i> &nbsp;<b>DNI: </b>41893730.</li>
+	                            <li class="list-unstyled"><i class="icon ion-checkmark text-primary"></i> &nbsp;<b>Colaborador: </b>Hugo Saavedra Sanchez.</li>
+	                            </ul>
+	                      
+				            </div>		
+				            </div>
+
+		             </div> 
+					
+					   <div class="row">
+                         <div class="col-md-4"  style="float:left">
+	                          <div class="form-group">
+			                        <label class="col-sm-5 control-label"><b>Estado de la Rendición :</b></label>
+                                    <div class="col-sm-7"> 
+                                        <select class="name_search form-control valid" name="choice" data-validation="required" data-validation-error-msg="Please make a choice">
+					                        <option value=""> - - Seleccione - - </option>
+					                        <option> Pendientes </option>
+					                        <option> Finalizadas </option>                					        
+					                    </select>
+					                </div>            
+                             </div>  
+                         </div>
+                         <div class="col-md-1" >
+                            <div class="form-group">                           
+                                <div class="col-sm-3"><Button type="button" name="btnConsultar" id="btnConsultar"  Text="Consultar Cursos" class="btn btn-primary">Consultar</button></div>  
+                            </div>  
+                         </div>
+                    </div> 						 
+						<!-- /row -->
+					  <div class="row">
+					    <div class="col-md-12">
+					        <div id="PnlList">
+					            <table class="table table-bordered table-hover table-striped display dataTable" id="tablaRendiciones">
+									<thead>
+										<tr>		
+											<th style="width:8%">Fecha</th>
+											<th style="width:8%">T.Documento</th>
+											<th style="width:8%">Numero</th>
+											<th style="width:8%">Moneda</th>
+											<th style="width:10%">Importe</th>											
+											<th style="width:8%">Estado</th>
+											<th style="width:10%">Usuario</th>
+											<th style="width:40%">Observacion</th>
+											<th style="width:40%">Rendir</th>
+											<th style="width:40%">Detalle</th>
+											 
+										</tr>
+									</thead>
+									<tbody id="tblRendicion">
+									</tbody>
+								</table>			
+					        </div>
+					    </div>
+					  </div>
+					</div>
+				</div>
+				<!-- /panel -->
+			</div>
+			<!-- col-md-6 -->
+<div id="DivRendicion" style="visibility:hidden">
+ gvghjhj
+</div>
+</body>
+</html>
+

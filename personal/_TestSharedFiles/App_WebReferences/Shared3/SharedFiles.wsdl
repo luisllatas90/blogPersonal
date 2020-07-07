@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://usat.edu.pe" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://usat.edu.pe" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio Web de Almacenamiento de Archivos en la Nube(Cloud)</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://usat.edu.pe">
+      <s:element name="UploadFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadFileInqRq" type="tns:ParameterFileType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ParameterFileType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Fecha" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Extencion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransaccionId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TablaId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NroOperacion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Archivo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Equipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ip" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="param8" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UploadFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadFileResult" type="tns:ResultMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusBody" type="tns:ErrorMessage" />
+          <s:element minOccurs="1" maxOccurs="1" name="TransactionId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="PdfBase64" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NamePdf" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ErrorMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="NroOperacion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NameXml" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipDoc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DownloadFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdArchivo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="param" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="param1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="param2" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DownloadFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DownloadFileResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateTicket">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="param1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="param2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="param3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="param4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="param5" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="param6" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="param7" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="param8" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateTicketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateTicketResult" type="tns:ResultMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateCTS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Semestre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Periodo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ImpTc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CodigoPer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Fecha" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TablaId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateCTSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateCTSResult" type="tns:ResultMessage" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExistsStudentPicture">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="image" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExistsStudentPictureResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExistsStudentPictureResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Demo">
+        <s:complexType />
+      </s:element>
+      <s:element name="DemoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DemoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="UploadFileSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadFile" />
+  </wsdl:message>
+  <wsdl:message name="UploadFileSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="DownloadFileSoapIn">
+    <wsdl:part name="parameters" element="tns:DownloadFile" />
+  </wsdl:message>
+  <wsdl:message name="DownloadFileSoapOut">
+    <wsdl:part name="parameters" element="tns:DownloadFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateTicketSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateTicket" />
+  </wsdl:message>
+  <wsdl:message name="GenerateTicketSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateCTSSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateCTS" />
+  </wsdl:message>
+  <wsdl:message name="GenerateCTSSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateCTSResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExistsStudentPictureSoapIn">
+    <wsdl:part name="parameters" element="tns:ExistsStudentPicture" />
+  </wsdl:message>
+  <wsdl:message name="ExistsStudentPictureSoapOut">
+    <wsdl:part name="parameters" element="tns:ExistsStudentPictureResponse" />
+  </wsdl:message>
+  <wsdl:message name="DemoSoapIn">
+    <wsdl:part name="parameters" element="tns:Demo" />
+  </wsdl:message>
+  <wsdl:message name="DemoSoapOut">
+    <wsdl:part name="parameters" element="tns:DemoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SharedFilesSoap">
+    <wsdl:operation name="UploadFile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Permite almacenar archivos</wsdl:documentation>
+      <wsdl:input message="tns:UploadFileSoapIn" />
+      <wsdl:output message="tns:UploadFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Permite descargar archivos</wsdl:documentation>
+      <wsdl:input message="tns:DownloadFileSoapIn" />
+      <wsdl:output message="tns:DownloadFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTicket">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Descargar Boleta de pago de planillas</wsdl:documentation>
+      <wsdl:input message="tns:GenerateTicketSoapIn" />
+      <wsdl:output message="tns:GenerateTicketSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateCTS">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Descargar Boleta de pago de planillas</wsdl:documentation>
+      <wsdl:input message="tns:GenerateCTSSoapIn" />
+      <wsdl:output message="tns:GenerateCTSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExistsStudentPicture">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Valida si existe la fotografia del Alumno</wsdl:documentation>
+      <wsdl:input message="tns:ExistsStudentPictureSoapIn" />
+      <wsdl:output message="tns:ExistsStudentPictureSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Demo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Descargar Boleta de pago de planillas</wsdl:documentation>
+      <wsdl:input message="tns:DemoSoapIn" />
+      <wsdl:output message="tns:DemoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SharedFilesSoap" type="tns:SharedFilesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UploadFile">
+      <soap:operation soapAction="http://usat.edu.pe/UploadFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <soap:operation soapAction="http://usat.edu.pe/DownloadFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTicket">
+      <soap:operation soapAction="http://usat.edu.pe/GenerateTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateCTS">
+      <soap:operation soapAction="http://usat.edu.pe/GenerateCTS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExistsStudentPicture">
+      <soap:operation soapAction="http://usat.edu.pe/ExistsStudentPicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo">
+      <soap:operation soapAction="http://usat.edu.pe/Demo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SharedFilesSoap12" type="tns:SharedFilesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UploadFile">
+      <soap12:operation soapAction="http://usat.edu.pe/UploadFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <soap12:operation soapAction="http://usat.edu.pe/DownloadFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTicket">
+      <soap12:operation soapAction="http://usat.edu.pe/GenerateTicket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateCTS">
+      <soap12:operation soapAction="http://usat.edu.pe/GenerateCTS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExistsStudentPicture">
+      <soap12:operation soapAction="http://usat.edu.pe/ExistsStudentPicture" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Demo">
+      <soap12:operation soapAction="http://usat.edu.pe/Demo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SharedFiles">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Servicio Web de Almacenamiento de Archivos en la Nube(Cloud)</wsdl:documentation>
+    <wsdl:port name="SharedFilesSoap" binding="tns:SharedFilesSoap">
+      <soap:address location="http://serverdev/campusvirtual/ArchivosCompartidos/SharedFiles.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SharedFilesSoap12" binding="tns:SharedFilesSoap12">
+      <soap12:address location="http://serverdev/campusvirtual/ArchivosCompartidos/SharedFiles.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

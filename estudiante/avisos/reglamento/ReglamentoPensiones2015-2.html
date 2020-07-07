@@ -1,0 +1,101 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<!-- <meta http-equiv="Refresh" content="0; URL=../../frmmatricula.asp" /> -->
+<title>Reglamento de Pensiones 2015-II</title>
+<style type="text/css">
+@charset "utf-8";
+body {
+
+  background-color: #FFF;
+  margin: 0px;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 13px;
+  color: #000;
+  padding: 100px;
+  padding-top: 50px;
+  
+}
+td.a{
+  text-decoration: none;
+  color: #4F1926;
+  outline:0;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+
+.info {
+  border : 1px solid;
+  margin: 10px 0px;
+  padding:10px 5px 10px 30px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  max-width:380px;
+  color: #9F6000;
+  background-color: #FEEFB3;
+ 
+}
+
+.btn
+       {
+            border:1px solid #5D7B9D; 
+            background:#F7F6F3 ; 
+            font-family:Tahoma; 
+            font-size:8pt; 
+            font-weight:bold;  padding:5px; 
+            cursor:hand;
+       }
+
+</style>
+<script>
+function handleClick() {
+  if(document.getElementById("myCheck").checked){
+  location.href="../../frmmatricula2015.asp";
+}
+  else{
+    alert("No has leído el reglamento de pensiones");
+  }
+}
+</script>
+
+</head>
+<body>
+ 
+<table border="0" align="center" cellpadding="0" cellspacing="0" 
+        style="vertical-align: top; height: 100%;" width="100%" >
+  <tr style="height: 95%" >
+    <td align="center" height="100%" valign="top">    
+         <a href="reglamento/reglamento2015-2.pdf" target="_blank">
+         <img src="img/screen.png"> 
+        </img>
+        </a><br/>
+        <span style="font-size:10px">Click en la imagen para visualizar el reglamento en versión PDF</span> 
+         <div class="info">
+        <input type="checkbox" id="myCheck"> He leído el reglamento de pensiones</input>   
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="center" >
+    <table width="70%" border="0" align="center" cellpadding="0" cellspacing="0">    
+      <tr>
+        <td width="50%" align="center">
+          <input type="button" class="btn" id ="btnacepto" name="cmdacepto" value="ACEPTO el Reglamento" onclick='handleClick()'  />
+        </td>
+        <td width="50%" align="center"><input   class="btn" type="button" name="cmdnoacepto" value="NO ACEPTO el Reglamento" onClick="top.window.close()" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center">&nbsp;</td>
+  </tr>
+</table>
+    
+</body>
+</html>
+<!--!>

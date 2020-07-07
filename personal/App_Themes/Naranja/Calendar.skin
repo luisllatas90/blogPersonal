@@ -1,0 +1,12 @@
+ <asp:Calendar skinID="CalendarioDefecto" runat="server" BorderColor="#003366" 
+        CellPadding="0">
+       <SelectedDayStyle BackColor="#003366" BorderColor="#003366" BorderStyle="Solid" 
+            BorderWidth="1px" />
+      <TodayDayStyle BorderColor="#003366" BorderStyle="Solid" BorderWidth="1px" 
+            CssClass="CAl_diaactual" />
+        <OtherMonthDayStyle CssClass="CAl_otrodiadelmes" />
+        <DayStyle CssClass="CAl_diadelmes" Height="21px" Width="28px" />
+        <DayHeaderStyle CssClass="CAL_nombredia" Height="21px"/>
+        <TitleStyle BackColor="#003366" CssClass="CAL_titulo" Height="25px" />
+        <NextPrevStyle ForeColor="White" />
+    </asp:Calendar>

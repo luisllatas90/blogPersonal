@@ -1,0 +1,17 @@
+<asp:Label 
+skinId="LblMensajError" 
+runat="server"
+Font-Names="Verdana" 
+Font-Size="10pt" 
+ForeColor="Red"
+>
+</asp:Label>
+
+<asp:Label
+skinId="LblTituloSistema"
+runat="server"
+Font-Names="verdana"
+Font-Size="9pt"
+ForeColor="white"
+>
+</asp:Label>

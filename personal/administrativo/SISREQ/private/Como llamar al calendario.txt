@@ -1,0 +1,82 @@
+PRimero debes de referenciar a las fnciones que se encuentran en : 
+
+PopCalendar.js
+
+luego copiar el siguiente script dentro del <BODY>; etse codigo se puede encontrar en la pagina iniciacalendar.asp, con la funcion cargacalendario. 
+
+Ademas cuando desee llamar al calendairo en una pagina, en la opcio OnClick debe coklocar el siguiente codigo:
+
+OnClick="PopCalendar.selectWeekendHoliday(1,1);PopCalendar.show(document.form1.Fec_38_82_TxtFecha,'dd/mm/yyyy')"
+
+
+
+document.form1.Fec_38_82_TxtFecha  
+
+ES EL CONTROL, NO COLOCAR ENTRE COMILLAS EL NOMBRE DEL CONTROL
+
+
+
+Ejm. 
+
+<HTML>
+<HEAD>
+</HEAD>
+<BODY>
+<script>
+PopCalendar=getCalendarInstance();
+PopCalendar.startAt = 0;
+PopCalendar.showWeekNumber = 0;
+PopCalendar.showToday = 1;
+PopCalendar.showWeekend = 1;
+PopCalendar.showHolidays = 1;
+PopCalendar.selectWeekend = 0;
+PopCalendar.selectHoliday = 0;
+PopCalendar.addCarnival = 0;
+PopCalendar.addGoodFriday = 1;
+PopCalendar.language = 0;
+PopCalendar.defaultFormat ='mm-dd-yyyy';
+PopCalendar.fixedX = -1;
+PopCalendar.fixedY = -1;
+PopCalendar.fade = 0;
+PopCalendar.shadow = 1;
+PopCalendar.move = 1;
+PopCalendar.saveMovePos = 1;
+PopCalendar.centuryLimit = 40;
+PopCalendar.initCalendar();
+</script>
+</BODY>
+</HTML>
+
+
+Y PARA .NET tengo una funcion en ClsFUnciones se ha agregado este metodo.
+
+Public Shared Function CargaCalendario() As String
+        Dim Rutina As String
+        Rutina = "<script>"
+        Rutina = Rutina & "PopCalendar=getCalendarInstance();"
+        Rutina = Rutina & "PopCalendar.startAt = 0;"
+        Rutina = Rutina & "PopCalendar.showWeekNumber = 0;"
+        Rutina = Rutina & "PopCalendar.showToday = 1;"
+        Rutina = Rutina & "PopCalendar.showWeekend = 1;"
+        Rutina = Rutina & "PopCalendar.showHolidays = 1;"
+        Rutina = Rutina & "PopCalendar.selectWeekend = 0;"
+        Rutina = Rutina & "PopCalendar.selectHoliday = 0;"
+        Rutina = Rutina & "PopCalendar.addCarnival = 0;"
+        Rutina = Rutina & "PopCalendar.addGoodFriday = 1;"
+        Rutina = Rutina & "PopCalendar.language = 0;"
+        Rutina = Rutina & "PopCalendar.defaultFormat ='mm-dd-yyyy';"
+        Rutina = Rutina & "PopCalendar.fixedX = -1;"
+        Rutina = Rutina & "PopCalendar.fixedY = -1;"
+        Rutina = Rutina & "PopCalendar.fade = 0;"
+        Rutina = Rutina & "PopCalendar.shadow = 1;"
+        Rutina = Rutina & "PopCalendar.move = 1;"
+        Rutina = Rutina & "PopCalendar.saveMovePos = 1;"
+        Rutina = Rutina & "PopCalendar.centuryLimit = 40;"
+        Rutina = Rutina & "PopCalendar.initCalendar();"
+        Rutina = Rutina & "</script>"
+        Return Rutina
+End Function
+
+
+donde se haia en Cada aspx:    <%  response.write(clsfunciones.cargacalendario) %>
+

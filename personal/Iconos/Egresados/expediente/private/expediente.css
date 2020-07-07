@@ -1,0 +1,72 @@
+﻿.tabla_personal
+{
+    border-right: darkred 1px solid;
+    border-top: darkred 1px solid;
+    border-left: darkred 1px solid;
+    border-bottom: darkred 1px solid;
+}
+.titulo_tabla
+{
+    font-size: 11pt;
+    color: white;
+    font-family: verdana;
+    background-color: darkred;
+    background-attachment: scroll;
+    background-repeat: repeat-x;
+    border-bottom: black 1px solid;
+}
+.titulo_items
+{
+    font-size: 8pt;
+    color: black;
+    font-family: verdana;
+}
+.datos_combo
+{
+    font-size: 8pt;
+    color: navy;
+    font-family: verdana;
+    background-color: aliceblue;
+}
+
+.borde_tab
+{
+    border-right: lightgrey 1px solid;
+    border-top: lightgrey 1px solid;
+    border-left: lightgrey 1px solid;
+    border-bottom: lightgrey 1px solid;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    margin: 5px;
+    padding-top: 5px;
+}
+.tab_seleccionado
+{
+    font-weight: bold;
+    font-size: 8pt;
+    background: white;
+    background-image: url(images/boton_seleccion.gif);
+    background-repeat: repeat-x;
+    font-family: Tahoma;
+    color: black;
+    vertical-align: middle;
+    text-align: center;
+}
+.tab_normal
+{
+    font-size: 8pt;
+    background: white;
+    background-image: url(images/boton_normal.gif);
+    background-repeat: repeat-x;
+    font-family: Tahoma;
+    color: black;
+    vertical-align: middle;
+    text-align: center;
+}
+.fila_datos
+{
+    font-size: 8pt;
+    font-family: Tahoma;
+ 
+}

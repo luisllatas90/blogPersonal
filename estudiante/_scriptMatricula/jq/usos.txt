@@ -1,0 +1,25 @@
+LLAMADA DE JQUERYMASCARA
+==========================
+
+<script src="jquery.js" type="text/javascript"></script>
+<script src="jquery.mascara.js" type="text/javascript"></script>
+
+
+/*colocar esto en un bloque script
+ref: http://digitalbush.com/projects/masked-input-plugin/
+*/
+
+$(document).ready(function(){
+jQuery(function($){
+   $("#date").mask("99/99/9999");
+   $("#phone").mask("(999) 999-9999");
+   $("#tin").mask("99-9999999");
+   $("#ssn").mask("999-99-9999");
+});
+
+})
+
+/*
+para ligthbox
+
+*/

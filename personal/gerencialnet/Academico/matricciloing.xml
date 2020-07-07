@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<OlapReports>
+  <OlapReport Name="Report 1" Description="" CubeName="cubEstadoMatricula" DataTitleFormat="Matriculados por Semestre de Ingreso y Ciclo Academico" ReadOnly="False" NonEmptyCellsOnly="True">
+    <AxisDescriptors>
+      <AxisDescriptor AxisName="Categorical">
+        <Dimensions>
+          <Dimension Name="Cicloingreso" LevelName="[Cicloingreso].[Cicloingreso]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="1999-I" UniqueName="[Cicloingreso].[Todas Cicloingreso].[1999-I]" />
+              <Member Name="1999-II" UniqueName="[Cicloingreso].[Todas Cicloingreso].[1999-II]" />
+              <Member Name="2000-I" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2000-I]" />
+              <Member Name="2000-II" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2000-II]" />
+              <Member Name="2001-I" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2001-I]" />
+              <Member Name="2001-II" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2001-II]" />
+              <Member Name="2002-I" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2002-I]" />
+              <Member Name="2002-II" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2002-II]" />
+              <Member Name="2003-I" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2003-I]" />
+              <Member Name="2003-II" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2003-II]" />
+              <Member Name="2004-I" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2004-I]" />
+              <Member Name="2004-II" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2004-II]" />
+              <Member Name="2005-I" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2005-I]" />
+              <Member Name="2005-II" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2005-II]" />
+              <Member Name="2006-I" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2006-I]" />
+              <Member Name="2006-II" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2006-II]" />
+              <Member Name="2007-I" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2007-I]" />
+              <Member Name="2007-II" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2007-II]" />
+              <Member Name="2008-I" UniqueName="[Cicloingreso].[Todas Cicloingreso].[2008-I]" />
+            </Members>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+      <AxisDescriptor AxisName="Series">
+        <Dimensions>
+          <Dimension Name="Measures" LevelName="" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="Cantidad" UniqueName="[Measures].[Cantidad]" />
+            </Members>
+          </Dimension>
+          <Dimension Name="CicloAcademico" LevelName="[CicloAcademico].[Tipo Semestre]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="2006-II" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2006-II]" />
+              <Member Name="2007-I" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2007-I]" />              
+              <Member Name="2007-II" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2007-II]" />
+              <Member Name="2008-I" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2008-I]" />
+              <Member Name="2008-II" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2008-II]" />
+            </Members>
+            <Parents>
+              
+              <Member UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular]" />
+            </Parents>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+      <AxisDescriptor AxisName="Slicer">
+        <Dimensions>
+          <Dimension Name="Estado Matricula" LevelName="[Estado Matricula].[(Todos)]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="Matriculado" UniqueName="[Estado Matricula].[Todas Estado Matricula].[Matriculado]" />
+            </Members>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+    </AxisDescriptors>
+    <ExpandedTuples>
+      <ExpandedTuple Name="[CicloAcademico].[Todas CicloAcademico].[Regular]" />
+      <ExpandedTuple Name="[Measures].[Cantidad], [CicloAcademico].[Todas CicloAcademico].[Regular]" />
+    </ExpandedTuples>
+    <ControlState>
+      <StateBag Name="olapchart"><![CDATA[AAEAAAD/////AQAAAAAAAAAMAgAAAE1TeXN0ZW0uV2ViLCBWZXJzaW9uPTIuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49YjAzZjVmN2YxMWQ1MGEzYQUBAAAAElN5c3RlbS5XZWIuVUkuUGFpcgIAAAAFRmlyc3QGU2Vjb25kAgICAAAACQMAAAAJBAAAAA8DAAAA9QIAAAJEQ0JGMzAwAAAAAAAAAADNrhSuAXm8G35cdGVtcC9DaGFydFBpY18jU0VRKDMwMCwzKarlquWqVAhDYW50aWRhZONHAYvvAAAAAMLt8IxB/6rbQEBA/x3WAAAA/5lGRURyYXdpbmdTdHlsZT1DeWxpbmRlciwgUGllRHJhd2luZ1N0eWxlPUNvbmNhdmUsIF9PbGFwRGF0YVNlcmllc189dHJ1ZU1CCENhbnRpZGFkAAAAAIZGBkR1bmRhc6YPCjYuMS4wLjE3MjjBdlCP6RH4cojlwMDA/wAA/CCI5cDAwP8AANfDKURlY3JlYXNlRm9udCwgTGFiZWxzQW5nbGVTdGVwOTAsIFdvcmRXcmFw9iUNVmFyaWFibGVDb3VudAAA6BH4cojl////AE5bAAAA/CCI5f///wAAAJhdTlsAAACMTojl////AKVwAAAAaKcHAAAA18MpRGVjcmVhc2VGb250LCBMYWJlbHNBbmdsZVN0ZXA5MCwgV29yZFdyYXDrlUUqyNDU/wAAAAC4TfhyiOXAwMD/TlsAAAD8IIjlwMDA/wAA18MpRGVjcmVhc2VGb250LCBMYWJlbHNBbmdsZVN0ZXA5MCwgV29yZFdyYXAAAJlN+HKI5cDAwP8AAPwgiOXAwMD/AADXwylEZWNyZWFzZUZvbnQsIExhYmVsc0FuZ2xlU3RlcDkwLCBXb3JkV3JhcAAARSr/////xtkCAAAAqttpOxr/NNQFU29saWSqVAdEZWZhdWx0AAAAAMVzcIeqVAdEZWZhdWx0RSr/////qttpOxr/xtkCAAAAAAAAAIIJj/iqVAlNYWluVGl0bGVg0BpDYW50aWRhZCBieSBDaWNsb0FjYWRlbWljb14sGk1pY3Jvc29mdCBTYW5zIFNlcmlmLCAxMnB0AACP+LltAKpUBk5vRGF0YeRtB0RlZmF1bHRg0BFObyBEYXRhIEF2YWlsYWJsZQAAAAAKMapI7ZVk/9nZ7ZVk/wAAAAAAAAAAAQQAAAABAAAACQUAAAAJBgAAABEFAAAAAAAAAA8GAAAAuAEAAAIBAAAAB0RlZmF1bHQCAAAAAAAAAAAA4D8AAAAAAAD4PwxDdXN0b20gTGFiZWwHUmVndWxhcgAAAAAFRmlyc3QHUmVndWxhcgAETm9uZQADQm94AAAPQVhJU19MQUJFTF9QTFVTAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxEbiQ3ODkyMzg3Qy9BQTcxMjVFRCFdXScpOyIgAAAAAAAA+D8AAAAAAAAEQAxDdXN0b20gTGFiZWwGVmVyYW5vAAAAAAVGaXJzdAZWZXJhbm8ABE5vbmUAA0JveAAAD0FYSVNfTEFCRUxfUExVUwAHI2ZmMDAwMHFocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsRG4kNzg5MjM4N0MvQzQyNUI3NzYhXV0nKTsiIAAAAAAAAAAAAAAAAAs=]]></StateBag>
+      <StateBag Name="olapclient1grid"><![CDATA[<?xml version="1.0"?><OlapGrid ForeColor="" BackColor="" BorderColor="" BorderWidth="" BorderStyle="NotSet" InterlacedRows="True" Visible="True" ID="OlapClient1Grid" EnableMemberDrillDown="True" Orientation="Vertical" EmptyCellValue="" TitleText="" ctm="True" SubTotals="True"><ColumnHeader /><Regular /><Interlaced /><RowHeader /><Total /><Title /></OlapGrid>]]></StateBag>
+    </ControlState>
+  </OlapReport>
+</OlapReports>

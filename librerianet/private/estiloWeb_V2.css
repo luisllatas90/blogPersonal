@@ -1,0 +1,66 @@
+﻿/*treyes*/
+body 
+{
+    font-family: Verdana, "Trebuchet MS", "Lucida Console", Arial, san-serif;
+	color: Black;
+	font-size:8pt;
+	margin:8px;
+	font: normal;
+}
+.pagina
+{
+    border: 1px solid #C2CFF1;
+    width: 100%;
+}
+.tituloPagina
+{
+    height: 35px;
+    border-bottom-width: 1px;
+    border-bottom-color: #0099FF;
+    background-color: #E3F9FF;
+    border-bottom-style: solid;
+    font-weight: bold;
+    color : #3366CC;
+    font-size: 14px;
+}
+.tituloTabla
+{
+	color: #FFFFFF;
+	font-family: Verdana;
+	font-weight: bold;
+	font-size: 10px;
+	background-color: #7CA0E8;
+}
+.cabeceraDatos
+{
+    font-weight: bold;
+    background-color: #E3F9FF;
+    color: #3366CC;
+}
+.observaciones
+{
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #E9ABAB;
+    padding: 4px;
+    height: auto;
+    font-size: 8pt;
+}
+
+.celdaTitulo
+{
+    border: 1px solid #808080;
+    background : #C4D7F4;
+    font-weight :normal ;
+}
+.celdaDatos
+{
+    border: 1px solid #808080;
+    }
+
+.nuevo      {border:1px solid #0099FF; background:#E3F9FF url('../images/anadir.gif') no-repeat 0% 50%; width:150px; font-family:Verdana; font-size:8pt; font-weight:bold; height:28px;}
+.guardar  	{border:1px solid #0099FF; background:#E3F9FF url('../images/guardar.gif') no-repeat 0% 50%; width:80px; font-family:Verdana; font-size:8pt; font-weight:bold; height:28px;}
+.volver     {border:1px solid #0099FF; background:#E3F9FF url('../images/atras.gif') no-repeat 0% 50%; width:80px; font-family:Verdana; font-size:8pt; font-weight:bold; height:28px;}
+.nuevoSmall {border:1px solid #0099FF; background:#E3F9FF url('../images/anadir.gif') no-repeat 0% 50%; width:70px; font-family:Verdana; font-size:7pt; font-weight:bold; height:20px;}
+.observar   {border:1px solid #E3F9FF; background:#E3F9FF url('../images/observar.gif') no-repeat 0% 50%; width:80px; font-family:Verdana; font-size:8pt; font-weight:bold; height:28px;}
+.aprobar    {border:1px solid #E3F9FF; background:#E3F9FF url('../images/aprobar.gif') no-repeat 0% 50%; width:80px; font-family:Verdana; font-size:8pt; font-weight:bold; height:28px;}

@@ -1,0 +1,2 @@
+<asp:DropDownList skinID="ComboDefecto" runat="server" CssClass="DDL_combos">
+    </asp:DropDownList>

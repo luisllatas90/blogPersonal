@@ -1,0 +1,94 @@
+<html>
+<head>
+<script>
+function ObtenerInformacionYActualizar()
+{
+   if (isNaN(formNumRows.value))
+   {
+      alert ("No es un número válido");
+      return;
+   }
+   else if (isNaN(formNumCols.value))
+   {
+      alert ("No es un número válido");
+      return;
+   }
+   var callerWindowObj = dialogArguments;
+   callerWindowObj.rtNumRows = formNumRows.value;
+   callerWindowObj.rtNumCols = formNumCols.value;
+   callerWindowObj.rtTblAlign = formTblAlign.value;
+   callerWindowObj.rtTblWidth = formTblWidth.value;
+   callerWindowObj.CrearTabla();
+   window.close();
+}
+</script>
+<title>Insertar Tabla</title>
+<link rel="stylesheet" type="text/css" href="../../../private/estiloaulavirtual.css">
+</head>
+<body topmargin="0" leftmargin="0">
+<table width="100%" style="border-collapse: collapse; border-color: #FFFFFF" bordercolor="#111111" cellpadding="4" cellspacing="0" height="168">
+<tr>
+ <td height="57" style="border-bottom-style: none; border-bottom-width: medium">
+  <fieldset style="padding-bottom:5px"><legend>Tamaño de la Tabla</legend>
+  <div align="center">
+    <center>
+  <table border="0" cellspacing="0" cellpadding="0" width="95%" style="border-collapse: collapse; border-color: #FFFFFF" bordercolor="#111111">
+   <tr>
+    <td width="25%" style="border-right-style: none; border-right-width: medium">Número de Filas:</td>
+    <td width="25%" style="border-left-style: none; border-left-width: medium; border-right-style: none; border-right-width: medium"><input type="text" size="2" value="1" id="formNumRows"><br></td>
+    <td width="25%" style="border-left-style: none; border-left-width: medium; border-right-style: none; border-right-width: medium">Número de Columnas:</td>
+    <td width="25%" style="border-left-style: none; border-left-width: medium"><input type="text" size="2" value="1" id="formNumCols"><br></td>
+   </tr>
+  </table>
+    </center>
+  </div>
+ </fieldset>
+ </td>
+</tr>
+<tr>
+ <td height="68" style="border-top-style: none; border-top-width: medium; border-bottom-style: none; border-bottom-width: medium">
+  <fieldset style="padding-bottom:5px"><legend>Diseño </legend>
+  <div align="center">
+    <center>
+  <table border="0" cellspacing="0" cellpadding="0" width="95%" style="border-collapse: collapse; border-color: #FFFFFF" bordercolor="#111111" height="39">
+   <tr>
+    <td width="25%" height="13" style="border-right-style: none; border-right-width: medium; border-bottom-style: none; border-bottom-width: medium">Ancho:</td>
+    <td width="25%" height="13" style="border-left-style: none; border-left-width: medium; border-bottom-style: none; border-bottom-width: medium">
+     <select id="formTblWidth" style="width: 80">
+	<option value="10%">10%</option>
+	<option value="20%">20%</option>
+        <option value="30%">30%</option>
+        <option value="40%">40%</option>
+        <option value="50%">50%</option>
+        <option value="60%">60%</option>
+        <option value="70%">70%</option>
+        <option value="80%">80%</option>
+        <option value="90%">90%</option>
+        <option selected value="100%">100%</option>
+        </select> 
+    </td>
+   </tr>
+   <tr>
+    <td width="25%" height="26" style="border-right-style: none; border-right-width: medium; border-top-style: none; border-top-width: medium">Alineación:</td>
+    <td width="25%" height="26" style="border-left-style: none; border-left-width: medium; border-top-style: none; border-top-width: medium">
+	<select id="formTblAlign" style="width: 80">
+	<option value="left">Izquierda</option>
+	<option selected value="center">Centrar</option>
+	<option value="right">Derecha</option>
+	</select></td>
+   </tr>
+   </table>
+    </center>
+  </div>
+ </fieldset>
+ </td>
+</tr>
+<tr>
+ <td align="right" height="19" style="border-top-style: none; border-top-width: medium">
+ <input type="button" value="Aceptar" class="boton" onclick="ObtenerInformacionYActualizar();">
+ <input type="button" value="Cancelar" class="boton" onClick="window.close();">
+ </td>
+</tr>
+</table>
+</body>
+</html>

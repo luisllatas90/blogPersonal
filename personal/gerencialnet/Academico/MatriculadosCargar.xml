@@ -1,0 +1,102 @@
+﻿<?xml version="1.0"?>
+<OlapReports>
+  <OlapReport Name="Report 1" Description="" CubeName="cubEstadoMatricula" DataTitleFormat="Matriculados por Ciclo Academico y Escuela Profesional" ReadOnly="False" NonEmptyCellsOnly="True">
+    <AxisDescriptors>
+      <AxisDescriptor AxisName="Categorical">
+        <Dimensions>
+          <Dimension Name="CarreraProfesional" LevelName="[CarreraProfesional].[Facultad]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="CIENCIAS EMPRESARIALES" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES]" />
+              <Member Name="ADMINISTRACIÓN DE EMPRESAS" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES].[ADMINISTRACIÓN DE EMPRESAS]" />
+              <Member Name="ADMINISTRACIÓN HOTELERA Y DE SERVICIOS" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES].[ADMINISTRACIÓN HOTELERA Y DE SERVICIOS]" />
+              <Member Name="CONTABILIDAD" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES].[CONTABILIDAD]" />
+              <Member Name="ECONOMÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES].[ECONOMÍA]" />
+              <Member Name="DERECHO" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[DERECHO]" />
+              <Member Name="DERECHO" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[DERECHO].[DERECHO]" />
+              <Member Name="HUMANIDADES" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES]" />
+              <Member Name="BIOLOGÍA  Y QUÍMICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[BIOLOGÍA  Y QUÍMICA]" />
+              <Member Name="CIENCIAS DE LA COMUNICACIÓN" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[CIENCIAS DE LA COMUNICACIÓN]" />
+              <Member Name="COMPLEMENTACIÓN ACADEMICA  DOCENTE" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[COMPLEMENTACIÓN ACADEMICA  DOCENTE]" />
+              <Member Name="EDUCACIÓN FÍSICA Y DANZAS" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[EDUCACIÓN FÍSICA Y DANZAS]" />
+              <Member Name="EDUCACIÓN INICIAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[EDUCACIÓN INICIAL]" />
+              <Member Name="EDUCACIÓN PRIMARIA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[EDUCACIÓN PRIMARIA]" />
+              <Member Name="FILOSOFÍA Y TEOLOGÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[FILOSOFÍA Y TEOLOGÍA]" />
+              <Member Name="HISTORIA Y GEOGRAFÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[HISTORIA Y GEOGRAFÍA]" />
+              <Member Name="LENGUA Y LITERATURA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[LENGUA Y LITERATURA]" />
+              <Member Name="MATEMÁTICA, COMPUTACIÓN E INFORMATICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[MATEMÁTICA, COMPUTACIÓN E INFORMATICA]" />
+              <Member Name="INGENIERÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA]" />
+              <Member Name="ARQUITECTURA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[ARQUITECTURA]" />
+              <Member Name="INGENIERÍA CIVIL Y AMBIENTAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA CIVIL Y AMBIENTAL]" />
+              <Member Name="INGENIERÍA DE SISTEMAS Y COMPUTACIÓN" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA DE SISTEMAS Y COMPUTACIÓN]" />
+              <Member Name="INGENIERÍA ENERGÉTICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA ENERGÉTICA]" />
+              <Member Name="INGENIERÍA INDUSTRIAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA INDUSTRIAL]" />
+              <Member Name="INGENIERÍA MECÁNICA ELÉCTRICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA MECÁNICA ELÉCTRICA]" />
+              <Member Name="INGENIERÍA NAVAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA NAVAL]" />
+              <Member Name="MEDICINA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA]" />
+              <Member Name="ENFERMERÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[ENFERMERÍA]" />
+              <Member Name="MEDICINA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[MEDICINA]" />
+              <Member Name="ODONTOLOGÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[ODONTOLOGÍA]" />
+              <Member Name="PSICOLOGÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[PSICOLOGÍA]" />
+            </Members>
+
+
+
+
+            <Parents>
+              <Member UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES]" />
+              <Member UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[DERECHO]" />
+              <Member UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES]" />
+              <Member UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA]" />
+              <Member UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA]" />
+            </Parents>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+      <AxisDescriptor AxisName="Series">
+        <Dimensions>
+          <Dimension Name="Measures" LevelName="" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="Cantidad" UniqueName="[Measures].[Cantidad]" />
+            </Members>
+          </Dimension>
+          <Dimension Name="CicloAcademico" LevelName="[CicloAcademico].[Tipo Semestre]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="2005-I" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2005-I]" />
+              <Member Name="2005-II" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2005-II]" />
+              <Member Name="2006-I" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2006-I]" />
+              <Member Name="2006-II" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2006-II]" />
+              <Member Name="2007-I" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2007-I]" />
+              <Member Name="2007-II" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2007-II]" />
+              <Member Name="2008-I" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2008-I]" />
+              <Member Name="2008-II" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2008-II]" />
+              <Member Name="2009-I" UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular].[2009-I]" />
+            </Members>
+            <Parents>
+              <Member UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular]" />
+              <Member UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular]" />
+              <Member UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular]" />
+              <Member UniqueName="[CicloAcademico].[Todas CicloAcademico].[Regular]" />
+            </Parents>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+      <AxisDescriptor AxisName="Slicer">
+        <Dimensions>
+          <Dimension Name="Estado Matricula" LevelName="[Estado Matricula].[(Todos)]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="Matriculado" UniqueName="[Estado Matricula].[Todas Estado Matricula].[Matriculado]" />
+            </Members>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+    </AxisDescriptors>
+    <ExpandedTuples>
+      <ExpandedTuple Name="[CicloAcademico].[Todas CicloAcademico].[Regular]" />
+      <ExpandedTuple Name="[Measures].[Cantidad], [CicloAcademico].[Todas CicloAcademico].[Regular]" />
+    </ExpandedTuples>
+    <ControlState>
+      <StateBag Name="olapchart"><![CDATA[AAEAAAD/////AQAAAAAAAAAMAgAAAE1TeXN0ZW0uV2ViLCBWZXJzaW9uPTIuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49YjAzZjVmN2YxMWQ1MGEzYQUBAAAAElN5c3RlbS5XZWIuVUkuUGFpcgIAAAAFRmlyc3QGU2Vjb25kAgICAAAACQMAAAAJBAAAAA8DAAAAfQMAAAJEQ0JGMzAwAAAAAAAAAADNrhSuAXm8G35cdGVtcC9DaGFydFBpY18jU0VRKDMwMCwzKarlquWqVAhDYW50aWRhZONHAYvvAAAAAMLt8IxB/6rbQEBA/x3WAAAA/5lGRURyYXdpbmdTdHlsZT1DeWxpbmRlciwgUGllRHJhd2luZ1N0eWxlPUNvbmNhdmUsIF9PbGFwRGF0YVNlcmllc189dHJ1ZU1CCENhbnRpZGFkAAAAAIZGBkR1bmRhc6YPCjYuMS4wLjE3MjjBdlCPqlQHRGVmYXVsdOkR+HKzaQRBdXRviOXAwMD/AAD8IIjlwMDA/wAAmF2zaQRBdXRvAADXwylEZWNyZWFzZUZvbnQsIExhYmVsc0FuZ2xlU3RlcDkwLCBXb3JkV3JhcCi/s2kEQXV0bwAA9iUNVmFyaWFibGVDb3VudAAA6BH4crNpBEF1dG+I5f///wBOWwAAAPwgiOX///8AAACYXbNpBEF1dG9OWwAAAIxOiOX///8ApXAAAABopwcAAADXwylEZWNyZWFzZUZvbnQsIExhYmVsc0FuZ2xlU3RlcDkwLCBXb3JkV3JhcCi/s2kEQXV0bwAAsNosxQAAAAAAABRAaKUAAAAAAAAuQAAA65VFKsjQ1P8AAAAAuE34crNpBEF1dG+I5cDAwP9OWwAAAPwgiOXAwMD/AACYXbNpBEF1dG8AANfDKURlY3JlYXNlRm9udCwgTGFiZWxzQW5nbGVTdGVwOTAsIFdvcmRXcmFwKL+zaQRBdXRvAAAAAJlN+HKzaQRBdXRviOXAwMD/AAD8IIjlwMDA/wAAmF2zaQRBdXRvAADXwylEZWNyZWFzZUZvbnQsIExhYmVsc0FuZ2xlU3RlcDkwLCBXb3JkV3JhcCi/s2kEQXV0bwAAAABFKv/////G2QIAAACq22k7Gv801AVTb2xpZAAAAADFc3CHqlQHRGVmYXVsdEUq/////6rbaTsa/8bZAgAAAAAAAACCCY/4qlQJTWFpblRpdGxlYNAaQ2FudGlkYWQgYnkgQ2ljbG9BY2FkZW1pY29eLBpNaWNyb3NvZnQgU2FucyBTZXJpZiwgMTJwdAAAj/i5bQCqVAZOb0RhdGHkbQdEZWZhdWx0YNARTm8gRGF0YSBBdmFpbGFibGUAAAAACjGqSO2VZP/Z2e2VZP8AAAAAAAAAAAEEAAAAAQAAAAkFAAAACQYAAAARBQAAAAAAAAAPBgAAAAQPAAACAQAAAAdEZWZhdWx0FAAAAAAAAAAAAOA/AAAAAAAA+D8MQ3VzdG9tIExhYmVsBjE5OTktSQAAAAAFRmlyc3QGMTk5OS1JAAROb25lAANCb3gAAAAAByNmZjAwMDBwaHJlZj0iamF2YXNjcmlwdDpPbGFwQ2FsbEJhY2soJ09sYXBDbGllbnQxTWFuYWdlcicsJ1tPbGFwQ2xpZW50MUNoYXJ0OjpPbGFwQ2hhcnRbIURybFVwJDZDMkFFNUQvMzg4NjUyMzQhXV0nKTsiIAAAAAAAAPg/AAAAAAAABEAMQ3VzdG9tIExhYmVsBzE5OTktSUkAAAAABUZpcnN0BzE5OTktSUkABE5vbmUAA0JveAAAAAAHI2ZmMDAwMHBocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkNkMyQUU1RC8xRUNGMzRFMCFdXScpOyIgAAAAAAAABEAAAAAAAAAMQAxDdXN0b20gTGFiZWwGMjAwMC1JAAAAAAVGaXJzdAYyMDAwLUkABE5vbmUAA0JveAAAAAAHI2ZmMDAwMHBocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkNkMyQUU1RC84QzcxNkJGQyFdXScpOyIgAAAAAAAADEAAAAAAAAASQAxDdXN0b20gTGFiZWwHMjAwMC1JSQAAAAAFRmlyc3QHMjAwMC1JSQAETm9uZQADQm94AAAAAAcjZmYwMDAwcGhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ2QzJBRTVEL0QxREFDRjBFIV1dJyk7IiAAAAAAAAASQAAAAAAAABZADEN1c3RvbSBMYWJlbAYyMDAxLUkAAAAABUZpcnN0BjIwMDEtSQAETm9uZQADQm94AAAAAAcjZmYwMDAwcGhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ2QzJBRTVEL0U5QzlGNzYxIV1dJyk7IiAAAAAAAAAWQAAAAAAAABpADEN1c3RvbSBMYWJlbAcyMDAxLUlJAAAAAAVGaXJzdAcyMDAxLUlJAAROb25lAANCb3gAAAAAByNmZjAwMDBwaHJlZj0iamF2YXNjcmlwdDpPbGFwQ2FsbEJhY2soJ09sYXBDbGllbnQxTWFuYWdlcicsJ1tPbGFwQ2xpZW50MUNoYXJ0OjpPbGFwQ2hhcnRbIURybFVwJDZDMkFFNUQvRThCMDJCNUQhXV0nKTsiIAAAAAAAABpAAAAAAAAAHkAMQ3VzdG9tIExhYmVsBjIwMDItSQAAAAAFRmlyc3QGMjAwMi1JAAROb25lAANCb3gAAAAAByNmZjAwMDBwaHJlZj0iamF2YXNjcmlwdDpPbGFwQ2FsbEJhY2soJ09sYXBDbGllbnQxTWFuYWdlcicsJ1tPbGFwQ2xpZW50MUNoYXJ0OjpPbGFwQ2hhcnRbIURybFVwJDZDMkFFNUQvRDFDMDU1MzIhXV0nKTsiIAAAAAAAAB5AAAAAAAAAIUAMQ3VzdG9tIExhYmVsBzIwMDItSUkAAAAABUZpcnN0BzIwMDItSUkABE5vbmUAA0JveAAAAAAHI2ZmMDAwMHBocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkNkMyQUU1RC9BOTYyQUU2QyFdXScpOyIgAAAAAAAAIUAAAAAAAAAjQAxDdXN0b20gTGFiZWwGMjAwMy1JAAAAAAVGaXJzdAYyMDAzLUkABE5vbmUAA0JveAAAAAAHI2ZmMDAwMHBocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkNkMyQUU1RC8yRjE4RTA5NyFdXScpOyIgAAAAAAAAI0AAAAAAAAAlQAxDdXN0b20gTGFiZWwHMjAwMy1JSQAAAAAFRmlyc3QHMjAwMy1JSQAETm9uZQADQm94AAAAAAcjZmYwMDAwcGhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ2QzJBRTVELzg0MjFFREQzIV1dJyk7IiAAAAAAAAAlQAAAAAAAACdADEN1c3RvbSBMYWJlbAYyMDA0LUkAAAAABUZpcnN0BjIwMDQtSQAETm9uZQADQm94AAAAAAcjZmYwMDAwb2hyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ2QzJBRTVELzFEMzk5OTAhXV0nKTsiIAAAAAAAACdAAAAAAAAAKUAMQ3VzdG9tIExhYmVsBzIwMDQtSUkAAAAABUZpcnN0BzIwMDQtSUkABE5vbmUAA0JveAAAAAAHI2ZmMDAwMG9ocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkNkMyQUU1RC84QkU1M0ZBIV1dJyk7IiAAAAAAAAApQAAAAAAAACtADEN1c3RvbSBMYWJlbAYyMDA1LUkAAAAABUZpcnN0BjIwMDUtSQAETm9uZQADQm94AAAAAAcjZmYwMDAwcGhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ2QzJBRTVELzVGMkMyNEY1IV1dJyk7IiAAAAAAAAArQAAAAAAAAC1ADEN1c3RvbSBMYWJlbAcyMDA1LUlJAAAAAAVGaXJzdAcyMDA1LUlJAAROb25lAANCb3gAAAAAByNmZjAwMDBwaHJlZj0iamF2YXNjcmlwdDpPbGFwQ2FsbEJhY2soJ09sYXBDbGllbnQxTWFuYWdlcicsJ1tPbGFwQ2xpZW50MUNoYXJ0OjpPbGFwQ2hhcnRbIURybFVwJDZDMkFFNUQvMUY5M0IwNDkhXV0nKTsiIAAAAAAAAC1AAAAAAAAAL0AMQ3VzdG9tIExhYmVsBjIwMDYtSQAAAAAFRmlyc3QGMjAwNi1JAAROb25lAANCb3gAAAAAByNmZjAwMDBwaHJlZj0iamF2YXNjcmlwdDpPbGFwQ2FsbEJhY2soJ09sYXBDbGllbnQxTWFuYWdlcicsJ1tPbGFwQ2xpZW50MUNoYXJ0OjpPbGFwQ2hhcnRbIURybFVwJDZDMkFFNUQvNDcyMjgyQzYhXV0nKTsiIAAAAAAAAC9AAAAAAACAMEAMQ3VzdG9tIExhYmVsBzIwMDYtSUkAAAAABUZpcnN0BzIwMDYtSUkABE5vbmUAA0JveAAAAAAHI2ZmMDAwMHBocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkNkMyQUU1RC8zNjY5MEM5OCFdXScpOyIgAAAAAACAMEAAAAAAAIAxQAxDdXN0b20gTGFiZWwGMjAwNy1JAAAAAAVGaXJzdAYyMDA3LUkABE5vbmUAA0JveAAAAAAHI2ZmMDAwMHBocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkNkMyQUU1RC9BNDdCMEUyQiFdXScpOyIgAAAAAACAMUAAAAAAAIAyQAxDdXN0b20gTGFiZWwHMjAwNy1JSQAAAAAFRmlyc3QHMjAwNy1JSQAETm9uZQADQm94AAAAAAcjZmYwMDAwcGhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ2QzJBRTVEL0JCMDU3MkJGIV1dJyk7IiAAAAAAAIAyQAAAAAAAgDNADEN1c3RvbSBMYWJlbAYyMDA4LUkAAAAABUZpcnN0BjIwMDgtSQAETm9uZQADQm94AAAAAAcjZmYwMDAwcGhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ2QzJBRTVELzc3MzVDNzI0IV1dJyk7IiAAAAAAAADgPwAAAAAAgDNADEN1c3RvbSBMYWJlbAdSZWd1bGFyAQAAAAZTZWNvbmQHUmVndWxhcgAETm9uZQADQm94AAAQQVhJU19MQUJFTF9NSU5VUwAHI2ZmMDAwMHFocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkNzg5MjM4N0MvQUE3MTI1RUQhXV0nKTsiIAAAAAAAAAAAAAAAAAs=]]></StateBag>
+      <StateBag Name="olapclient1grid"><![CDATA[<?xml version="1.0"?><OlapGrid ForeColor="" BackColor="" BorderColor="" BorderWidth="" BorderStyle="NotSet" InterlacedRows="True" Visible="True" ID="OlapClient1Grid" EnableMemberDrillDown="True" Orientation="Vertical" EmptyCellValue="" TitleText="" ctm="True" SubTotals="True"><ColumnHeader /><Regular /><Interlaced /><RowHeader /><Total /><Title /></OlapGrid>]]></StateBag>
+    </ControlState>
+  </OlapReport>
+</OlapReports>

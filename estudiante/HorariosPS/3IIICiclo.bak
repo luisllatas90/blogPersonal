@@ -1,0 +1,1887 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0060)http://intranet.usat.edu.pe/campusvirtual/estudiante/2IIciclo.htm -->
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 10">
+<link rel=File-List href="3IIICiclo_archivos/filelist.xml">
+<link rel=Edit-Time-Data href="3IIICiclo_archivos/editdata.mso">
+<link rel=OLE-Object-Data href="3IIICiclo_archivos/oledata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+x\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>USAT</o:Author>
+  <o:LastAuthor>HZelada</o:LastAuthor>
+  <o:LastPrinted>2010-04-16T21:47:14Z</o:LastPrinted>
+  <o:Created>2009-02-19T15:47:35Z</o:Created>
+  <o:LastSaved>2010-08-16T17:02:31Z</o:LastSaved>
+  <o:Company>USAT</o:Company>
+  <o:Version>10.6626</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:DownloadComponents/>
+  <o:LocationOfComponents HRef="/"/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<style>
+<!--table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{margin:.69in .79in .98in .44in;
+	mso-header-margin:0in;
+	mso-footer-margin:0in;}
+tr
+	{mso-height-source:auto;}
+col
+	{mso-width-source:auto;}
+br
+	{mso-data-placement:same-cell;}
+.style0
+	{mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	white-space:nowrap;
+	mso-rotate:0;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	color:windowtext;
+	font-size:8.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Arial;
+	mso-generic-font-family:auto;
+	mso-font-charset:0;
+	border:none;
+	mso-protection:locked visible;
+	mso-style-name:Normal;
+	mso-style-id:0;}
+td
+	{mso-style-parent:style0;
+	padding:0px;
+	mso-ignore:padding;
+	color:windowtext;
+	font-size:8.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Arial;
+	mso-generic-font-family:auto;
+	mso-font-charset:0;
+	mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	border:none;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	mso-protection:locked visible;
+	white-space:nowrap;
+	mso-rotate:0;}
+.xl24
+	{mso-style-parent:style0;
+	font-size:9.0pt;}
+.xl25
+	{mso-style-parent:style0;
+	font-size:9.0pt;
+	font-weight:700;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;}
+.xl26
+	{mso-style-parent:style0;
+	font-size:9.0pt;
+	text-align:left;}
+.xl27
+	{mso-style-parent:style0;
+	font-size:9.0pt;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;}
+.xl28
+	{mso-style-parent:style0;
+	text-align:left;}
+.xl29
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#3366FF;
+	mso-pattern:auto none;}
+.xl30
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	vertical-align:middle;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	background:#3366FF;
+	mso-pattern:auto none;}
+.xl31
+	{mso-style-parent:style0;
+	color:white;
+	font-weight:700;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:center;
+	vertical-align:middle;
+	border-top:1.0pt solid windowtext;
+	border-right:1.0pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	background:#3366FF;
+	mso-pattern:auto none;}
+.xl32
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl33
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl34
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:1.0pt solid windowtext;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl35
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl36
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl37
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl38
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FF99CC;
+	mso-pattern:auto none;}
+.xl39
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FF99CC;
+	mso-pattern:auto none;}
+.xl40
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FF99CC;
+	mso-pattern:auto none;}
+.xl41
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl42
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl43
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl44
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl45
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl46
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl47
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl48
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl49
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl50
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl51
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl52
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl53
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl54
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl55
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl56
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FF99CC;
+	mso-pattern:auto none;}
+.xl57
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FF99CC;
+	mso-pattern:auto none;}
+.xl58
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:1.0pt solid windowtext;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FF99CC;
+	mso-pattern:auto none;}
+.xl59
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#99CC00;
+	mso-pattern:auto none;}
+.xl60
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#99CC00;
+	mso-pattern:auto none;}
+.xl61
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#99CC00;
+	mso-pattern:auto none;}
+.xl62
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFCC00;
+	mso-pattern:auto none;}
+.xl63
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFCC00;
+	mso-pattern:auto none;}
+.xl64
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFCC00;
+	mso-pattern:auto none;}
+.xl65
+	{mso-style-parent:style0;
+	color:red;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl66
+	{mso-style-parent:style0;
+	color:red;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl67
+	{mso-style-parent:style0;
+	color:red;
+	font-size:9.0pt;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl68
+	{mso-style-parent:style0;
+	color:red;
+	font-size:9.0pt;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:1.0pt solid windowtext;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl69
+	{mso-style-parent:style0;
+	color:red;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl70
+	{mso-style-parent:style0;
+	color:red;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl71
+	{mso-style-parent:style0;
+	color:red;
+	font-size:9.0pt;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl72
+	{mso-style-parent:style0;
+	color:red;
+	font-size:9.0pt;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}
+.xl73
+	{mso-style-parent:style0;
+	color:red;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;}
+.xl74
+	{mso-style-parent:style0;
+	color:red;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;}
+.xl75
+	{mso-style-parent:style0;
+	color:red;
+	font-size:9.0pt;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;}
+.xl76
+	{mso-style-parent:style0;
+	color:red;
+	font-size:9.0pt;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;}
+.xl77
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFCC00;
+	mso-pattern:auto none;}
+.xl78
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFCC00;
+	mso-pattern:auto none;}
+.xl79
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:1.0pt solid windowtext;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#FFCC00;
+	mso-pattern:auto none;}
+.xl80
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl81
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl82
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl83
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl84
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl85
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:1.0pt solid windowtext;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl86
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl87
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl88
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:none;
+	border-right:1.0pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl89
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	text-align:left;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl90
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl91
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	border-top:1.0pt solid windowtext;
+	border-right:1.0pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl92
+	{mso-style-parent:style0;
+	font-size:11.0pt;
+	font-weight:700;
+	text-align:center;
+	vertical-align:middle;}
+.xl93
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:1.0pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl94
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid black;
+	border-left:1.0pt solid windowtext;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl95
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:.5pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#FF99CC;
+	mso-pattern:auto none;}
+.xl96
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid black;
+	border-left:1.0pt solid windowtext;
+	background:#FF99CC;
+	mso-pattern:auto none;}
+.xl97
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:.5pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl98
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid black;
+	border-left:1.0pt solid windowtext;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl99
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:1.0pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#33CCCC;
+	mso-pattern:auto none;}
+.xl100
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:.5pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl101
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid black;
+	border-left:1.0pt solid windowtext;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl102
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:1.0pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#FF99CC;
+	mso-pattern:auto none;}
+.xl103
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:.5pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#99CC00;
+	mso-pattern:auto none;}
+.xl104
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid black;
+	border-left:1.0pt solid windowtext;
+	background:#99CC00;
+	mso-pattern:auto none;}
+.xl105
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:1.0pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#FFCC00;
+	mso-pattern:auto none;}
+.xl106
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid black;
+	border-left:1.0pt solid windowtext;
+	background:#FFCC00;
+	mso-pattern:auto none;}
+.xl107
+	{mso-style-parent:style0;
+	color:red;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:1.0pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;}
+.xl108
+	{mso-style-parent:style0;
+	color:red;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid black;
+	border-left:1.0pt solid windowtext;}
+.xl109
+	{mso-style-parent:style0;
+	color:red;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:.5pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;}
+.xl110
+	{mso-style-parent:style0;
+	color:red;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid black;
+	border-left:1.0pt solid windowtext;}
+.xl111
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:.5pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#FFCC00;
+	mso-pattern:auto none;}
+.xl112
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:.5pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl113
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:1.0pt solid black;
+	border-left:1.0pt solid windowtext;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl114
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid black;
+	border-left:1.0pt solid windowtext;
+	background:#FF9900;
+	mso-pattern:auto none;}
+.xl115
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:1.0pt solid black;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:1.0pt solid windowtext;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+.xl116
+	{mso-style-parent:style0;
+	font-family:Arial, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:"dd\\-mmm";
+	text-align:center;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid black;
+	border-left:1.0pt solid windowtext;
+	background:#CC99FF;
+	mso-pattern:auto none;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <x:ExcelWorkbook>
+  <x:ExcelWorksheets>
+   <x:ExcelWorksheet>
+    <x:Name>Hoja1</x:Name>
+    <x:WorksheetOptions>
+     <x:DefaultRowHeight>240</x:DefaultRowHeight>
+     <x:DefaultColWidth>10</x:DefaultColWidth>
+     <x:Print>
+      <x:ValidPrinterInfo/>
+      <x:PaperSizeIndex>9</x:PaperSizeIndex>
+      <x:HorizontalResolution>600</x:HorizontalResolution>
+      <x:VerticalResolution>0</x:VerticalResolution>
+     </x:Print>
+     <x:Selected/>
+     <x:Panes>
+      <x:Pane>
+       <x:Number>3</x:Number>
+       <x:ActiveRow>89</x:ActiveRow>
+       <x:ActiveCol>4</x:ActiveCol>
+      </x:Pane>
+     </x:Panes>
+     <x:ProtectContents>False</x:ProtectContents>
+     <x:ProtectObjects>False</x:ProtectObjects>
+     <x:ProtectScenarios>False</x:ProtectScenarios>
+    </x:WorksheetOptions>
+   </x:ExcelWorksheet>
+  </x:ExcelWorksheets>
+  <x:WindowHeight>10905</x:WindowHeight>
+  <x:WindowWidth>19110</x:WindowWidth>
+  <x:WindowTopX>0</x:WindowTopX>
+  <x:WindowTopY>30</x:WindowTopY>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ProtectWindows>False</x:ProtectWindows>
+ </x:ExcelWorkbook>
+ <x:ExcelName>
+  <x:Name>_FilterDatabase</x:Name>
+  <x:Hidden/>
+  <x:SheetIndex>1</x:SheetIndex>
+  <x:Formula>=Hoja1!$A$5:$E$91</x:Formula>
+ </x:ExcelName>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1030"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body link=blue vlink=purple class=xl24>
+
+<table x:str border=0 cellpadding=0 cellspacing=0 width=1517 style='border-collapse:
+ collapse;table-layout:fixed;width:1139pt'>
+ <col class=xl25 width=72 style='width:54pt'>
+ <col class=xl26 width=133 style='mso-width-source:userset;mso-width-alt:5674;
+ width:100pt'>
+ <col class=xl27 width=342 style='mso-width-source:userset;mso-width-alt:14592;
+ width:257pt'>
+ <col class=xl26 width=246 style='mso-width-source:userset;mso-width-alt:10496;
+ width:185pt'>
+ <col class=xl24 width=148 style='mso-width-source:userset;mso-width-alt:6314;
+ width:111pt'>
+ <col class=xl24 width=72 span=8 style='width:54pt'>
+ <tr height=20 style='height:15.0pt'>
+  <td colspan=5 height=20 class=xl92 width=941 style='height:15.0pt;width:707pt'>PROGRAMA
+  DE PROFESIONALIZACIÓN DE INGENIERÍA DE SISTEMAS Y COMPUTACIÓN</td>
+  <td class=xl24 width=72 style='width:54pt'></td>
+  <td class=xl24 width=72 style='width:54pt'></td>
+  <td class=xl24 width=72 style='width:54pt'></td>
+  <td class=xl24 width=72 style='width:54pt'></td>
+  <td class=xl24 width=72 style='width:54pt'></td>
+  <td class=xl24 width=72 style='width:54pt'></td>
+  <td class=xl24 width=72 style='width:54pt'></td>
+  <td class=xl24 width=72 style='width:54pt'></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td colspan=5 height=20 class=xl92 style='height:15.0pt'>Horario III CICLO</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl25 style='height:12.0pt'></td>
+  <td class=xl26></td>
+  <td class=xl27></td>
+  <td class=xl28></td>
+  <td colspan=9 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl25 style='height:12.75pt'></td>
+  <td class=xl26></td>
+  <td class=xl27></td>
+  <td class=xl28></td>
+  <td colspan=9 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=21 style='mso-height-source:userset;height:15.75pt'>
+  <td height=21 class=xl29 id="_x0000_s1025" x:autofilter="all"
+  x:autofilterrange="$A$5:$E$91" style='height:15.75pt'>DIA</td>
+  <td class=xl30 id="_x0000_s1026" x:autofilter="all">HORA</td>
+  <td class=xl30 id="_x0000_s1027" x:autofilter="all">ASIGNATURA</td>
+  <td class=xl30 id="_x0000_s1028" x:autofilter="all">PROFESOR</td>
+  <td class=xl31 id="_x0000_s1029" x:autofilter="all">AMBIENTE</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl93 style='border-bottom:.5pt solid black;
+  height:24.0pt' x:num="40410">20-Ago</td>
+  <td class=xl32>Vie 07:30pm-08:40pm</td>
+  <td class=xl32>Arquitectura de Computadoras</td>
+  <td class=xl33>Luis Zuñe</td>
+  <td class=xl34>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl35 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl35>Arquitectura de Computadoras</td>
+  <td class=xl36>Luis Zuñe</td>
+  <td class=xl37>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl95 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40411">21-Ago</td>
+  <td class=xl38>Sáb 03:00pm-04:40pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl38 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl97 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40411">21-Ago</td>
+  <td class=xl35>Sáb 06:40pm-08:20pm</td>
+  <td class=xl35>Arquitectura de Computadoras</td>
+  <td class=xl36>Luis Zuñe</td>
+  <td class=xl37>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl41 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl41>Arquitectura de Computadoras</td>
+  <td class=xl42>Luis Zuñe</td>
+  <td class=xl43>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl99 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40417">27-Ago</td>
+  <td class=xl32>Vie 07:30pm-08:40pm</td>
+  <td class=xl32>Arquitectura de Computadoras</td>
+  <td class=xl33>Luis Zuñe</td>
+  <td class=xl34>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl35 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl35>Arquitectura de Computadoras</td>
+  <td class=xl36>Luis Zuñe</td>
+  <td class=xl37>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl95 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40418">28-Ago</td>
+  <td class=xl38>Sáb 03:00pm-04:40pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl38 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl97 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40418">28-Ago</td>
+  <td class=xl35>Sáb 06:40pm-08:20pm</td>
+  <td class=xl35>Arquitectura de Computadoras</td>
+  <td class=xl36>Luis Zuñe</td>
+  <td class=xl37>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl44 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl44>Arquitectura de Computadoras</td>
+  <td class=xl45>Luis Zuñe</td>
+  <td class=xl46>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl99 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40424">03-Sep</td>
+  <td class=xl35>Vie 07:30pm-08:40pm</td>
+  <td class=xl35>Arquitectura de Computadoras</td>
+  <td class=xl36>Luis Zuñe</td>
+  <td class=xl37>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl35 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl35>Arquitectura de Computadoras</td>
+  <td class=xl36>Luis Zuñe</td>
+  <td class=xl37>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl95 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40425">04-Sep</td>
+  <td class=xl38>Sáb 03:00pm-04:40pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl38 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl97 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40425">04-Sep</td>
+  <td class=xl35>Sáb 06:40pm-08:20pm</td>
+  <td class=xl35>Arquitectura de Computadoras</td>
+  <td class=xl36>Luis Zuñe</td>
+  <td class=xl37>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl41 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl41>Arquitectura de Computadoras</td>
+  <td class=xl42>Luis Zuñe</td>
+  <td class=xl43>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl99 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40431">10-Sep</td>
+  <td class=xl32>Vie 07:30pm-08:40pm</td>
+  <td class=xl32>Arquitectura de Computadoras</td>
+  <td class=xl33>Luis Zuñe</td>
+  <td class=xl34>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl35 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl35>Arquitectura de Computadoras</td>
+  <td class=xl36>Luis Zuñe</td>
+  <td class=xl37>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl95 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40432">11-Sep</td>
+  <td class=xl38>Sáb 03:00pm-04:40pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl38 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl100 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40432">11-Sep</td>
+  <td class=xl47>Sáb 06:40pm-08:20pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl50 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl50>Metodologías de Programación</td>
+  <td class=xl51>Héctor Zelada</td>
+  <td class=xl52>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl102 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40438">17-Sep</td>
+  <td class=xl38>Vie 07:30pm-08:40pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl38 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl95 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40439">18-Sep</td>
+  <td class=xl38>Sáb 03:00pm-04:40pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl38 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl100 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40439">18-Sep</td>
+  <td class=xl47>Sáb 06:40pm-08:20pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl53 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl53>Metodologías de Programación</td>
+  <td class=xl54>Héctor Zelada</td>
+  <td class=xl55>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl102 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40445">24-Sep</td>
+  <td class=xl56>Vie 07:30pm-08:40pm</td>
+  <td class=xl56>Metod. Inv. Científica</td>
+  <td class=xl57>Karla Reyes</td>
+  <td class=xl58>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl38 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl38>Metod. Inv. Científica</td>
+  <td class=xl39>Karla Reyes</td>
+  <td class=xl40>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl103 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40446">25-Sep</td>
+  <td class=xl59>Sáb 03:00pm-04:40pm</td>
+  <td class=xl59>Tecnología y Medio Ambiente</td>
+  <td class=xl60>Ana María Palacios</td>
+  <td class=xl61>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl59 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl59>Tecnología y Medio Ambiente</td>
+  <td class=xl60>Ana María Palacios</td>
+  <td class=xl61>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl100 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40446">25-Sep</td>
+  <td class=xl47>Sáb 06:40pm-08:20pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl50 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl50>Metodologías de Programación</td>
+  <td class=xl51>Héctor Zelada</td>
+  <td class=xl52>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl105 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40452">01-Oct</td>
+  <td class=xl62>Vie 07:30pm-08:40pm</td>
+  <td class=xl62>Matemática II</td>
+  <td class=xl63 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl64>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl62 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl62>Matemática II</td>
+  <td class=xl63 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl64>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl103 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40453">02-Oct</td>
+  <td class=xl59>Sáb 03:00pm-04:40pm</td>
+  <td class=xl59>Tecnología y Medio Ambiente</td>
+  <td class=xl60>Ana María Palacios</td>
+  <td class=xl61>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl59 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl59>Tecnología y Medio Ambiente</td>
+  <td class=xl60>Ana María Palacios</td>
+  <td class=xl61>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl100 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40453">02-Oct</td>
+  <td class=xl47>Sáb 06:40pm-08:20pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl53 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl53>Metodologías de Programación</td>
+  <td class=xl54>Héctor Zelada</td>
+  <td class=xl55>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl107 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40459">08-Oct</td>
+  <td class=xl65>Vie 07:30pm-08:40pm</td>
+  <td class=xl66>Feriado</td>
+  <td class=xl67>-</td>
+  <td class=xl68>-</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl69 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl70>Feriado</td>
+  <td class=xl71>-</td>
+  <td class=xl72>-</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl109 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40460">09-Oct</td>
+  <td class=xl69>Sáb 03:00pm-04:40pm</td>
+  <td class=xl70>Feriado</td>
+  <td class=xl71>-</td>
+  <td class=xl72>-</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl69 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl70>Feriado</td>
+  <td class=xl71>-</td>
+  <td class=xl72>-</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl109 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40460">09-Oct</td>
+  <td class=xl69>Sáb 06:40pm-08:20pm</td>
+  <td class=xl70>Feriado</td>
+  <td class=xl71>-</td>
+  <td class=xl72>-</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl73 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl74>Feriado</td>
+  <td class=xl75>-</td>
+  <td class=xl76>-</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl105 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40466">15-Oct</td>
+  <td class=xl62>Vie 07:30pm-08:40pm</td>
+  <td class=xl62>Matemática II</td>
+  <td class=xl63 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl64>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl62 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl62>Matemática II</td>
+  <td class=xl63 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl64>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl103 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40467">16-Oct</td>
+  <td class=xl59>Sáb 03:00pm-04:40pm</td>
+  <td class=xl59>Tecnología y Medio Ambiente</td>
+  <td class=xl60>Ana María Palacios</td>
+  <td class=xl61>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl59 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl59>Tecnología y Medio Ambiente</td>
+  <td class=xl60>Ana María Palacios</td>
+  <td class=xl61>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl100 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40467">16-Oct</td>
+  <td class=xl47>Sáb 06:40pm-08:20pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl50 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl50>Metodologías de Programación</td>
+  <td class=xl51>Héctor Zelada</td>
+  <td class=xl52>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl105 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40473">22-Oct</td>
+  <td class=xl62>Vie 07:30pm-08:40pm</td>
+  <td class=xl62>Matemática II</td>
+  <td class=xl63 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl64>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl62 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl62>Matemática II</td>
+  <td class=xl63 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl64>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl103 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40474">23-Oct</td>
+  <td class=xl59>Sáb 03:00pm-04:40pm</td>
+  <td class=xl59>Tecnología y Medio Ambiente</td>
+  <td class=xl60>Ana María Palacios</td>
+  <td class=xl61>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl59 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl59>Tecnología y Medio Ambiente</td>
+  <td class=xl60>Ana María Palacios</td>
+  <td class=xl61>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl100 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40474">23-Oct</td>
+  <td class=xl47>Sáb 06:40pm-08:20pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl53 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl53>Metodologías de Programación</td>
+  <td class=xl54>Héctor Zelada</td>
+  <td class=xl55>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl105 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40480">29-Oct</td>
+  <td class=xl77>Vie 07:30pm-08:40pm</td>
+  <td class=xl77>Matemática II</td>
+  <td class=xl78 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl79>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl62 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl62>Matemática II</td>
+  <td class=xl63 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl64>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl111 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40481">30-Oct</td>
+  <td class=xl62>Sáb 03:00pm-04:40pm</td>
+  <td class=xl62>Matemática II</td>
+  <td class=xl63 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl64>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl62 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl62>Matemática II</td>
+  <td class=xl63 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl64>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl112 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40481">30-Oct</td>
+  <td class=xl80>Sáb 06:40pm-08:20pm</td>
+  <td class=xl80>Análisis de Sistemas</td>
+  <td class=xl81>Marlon Vilchez</td>
+  <td class=xl82>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl83 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl83>Análisis de Sistemas</td>
+  <td class=xl84>Marlon Vilchez</td>
+  <td class=xl85>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl105 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40487">05-Nov</td>
+  <td class=xl62>Vie 07:30pm-08:40pm</td>
+  <td class=xl62>Matemática II</td>
+  <td class=xl63 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl64>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl62 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl62>Matemática II</td>
+  <td class=xl63 x:str="Edgar Uriarte ">Edgar Uriarte<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl64>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl100 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40488">06-Nov</td>
+  <td class=xl47>Sáb 03:00pm-04:40pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl47 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl112 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40488">06-Nov</td>
+  <td class=xl80>Sáb 06:40pm-08:20pm</td>
+  <td class=xl80>Análisis de Sistemas</td>
+  <td class=xl81>Marlon Vilchez</td>
+  <td class=xl82>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl86 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl86>Análisis de Sistemas</td>
+  <td class=xl87>Marlon Vilchez</td>
+  <td class=xl88>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl115 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40494">12-Nov</td>
+  <td class=xl89>Vie 07:30pm-08:40pm</td>
+  <td class=xl89>Análisis de Sistemas</td>
+  <td class=xl90>Marlon Vilchez</td>
+  <td class=xl91>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl80 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl80>Análisis de Sistemas</td>
+  <td class=xl81>Marlon Vilchez</td>
+  <td class=xl82>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl100 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40495">13-Nov</td>
+  <td class=xl47>Sáb 03:00pm-04:40pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl47 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl112 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40495">13-Nov</td>
+  <td class=xl80>Sáb 06:40pm-08:20pm</td>
+  <td class=xl80>Análisis de Sistemas</td>
+  <td class=xl81>Marlon Vilchez</td>
+  <td class=xl82>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl83 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl83>Análisis de Sistemas</td>
+  <td class=xl84>Marlon Vilchez</td>
+  <td class=xl85>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl115 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40501">19-Nov</td>
+  <td class=xl80>Vie 07:30pm-08:40pm</td>
+  <td class=xl80>Análisis de Sistemas</td>
+  <td class=xl81>Marlon Vilchez</td>
+  <td class=xl82>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl80 style='height:12.0pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl80>Análisis de Sistemas</td>
+  <td class=xl81>Marlon Vilchez</td>
+  <td class=xl82>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=32 class=xl100 style='border-bottom:.5pt solid black;
+  height:24.0pt;border-top:none' x:num="40502">20-Nov</td>
+  <td class=xl47>Sáb 03:00pm-04:40pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td height=16 class=xl47 style='height:12.0pt'>Sáb 04:40pm-06:20pm</td>
+  <td class=xl47>Metodologías de Programación</td>
+  <td class=xl48>Héctor Zelada</td>
+  <td class=xl49>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl112 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40502">20-Nov</td>
+  <td class=xl80>Sáb 06:40pm-08:20pm</td>
+  <td class=xl80>Análisis de Sistemas</td>
+  <td class=xl81>Marlon Vilchez</td>
+  <td class=xl82>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl86 style='height:12.75pt'>Sáb 08:20pm-10:00pm</td>
+  <td class=xl86>Análisis de Sistemas</td>
+  <td class=xl87>Marlon Vilchez</td>
+  <td class=xl88>Laboratorio</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=16 style='height:12.0pt'>
+  <td rowspan=2 height=33 class=xl115 style='border-bottom:1.0pt solid black;
+  height:24.75pt;border-top:none' x:num="40508">26-Nov</td>
+  <td class=xl89>Vie 07:30pm-08:40pm</td>
+  <td class=xl89>Análisis de Sistemas</td>
+  <td class=xl90>Marlon Vilchez</td>
+  <td class=xl91>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=17 style='height:12.75pt'>
+  <td height=17 class=xl83 style='height:12.75pt'>Vie 08:50pm-11:00pm</td>
+  <td class=xl83>Análisis de Sistemas</td>
+  <td class=xl84>Marlon Vilchez</td>
+  <td class=xl85>AULA</td>
+  <td colspan=8 class=xl24 style='mso-ignore:colspan'></td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=72 style='width:54pt'></td>
+  <td width=133 style='width:100pt'></td>
+  <td width=342 style='width:257pt'></td>
+  <td width=246 style='width:185pt'></td>
+  <td width=148 style='width:111pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+  <td width=72 style='width:54pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+</body>
+
+</html>

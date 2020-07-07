@@ -1,0 +1,29 @@
+ <asp:TextBox 
+ skinID="CajaTextoDefecto" 
+ runat="server" 
+ CssClass="TX_cajatexto" 
+ Height="21px" > 
+ </asp:TextBox>
+
+ <asp:TextBox 
+ skinID="CajaTextoSinMarco" 
+ runat="server" 
+ Height="21px"
+ BorderWidth="0"
+  > 
+ </asp:TextBox>
+ 
+ <asp:TextBox 
+ skinID="CajaTextoObligatorio" 
+ runat="server" 
+ CssClass="TX_cajatextoObligatorio" 
+ Height="21px" > 
+ </asp:TextBox>
+
+
+ <asp:TextBox 
+ skinID="CajaTextoBloqueado" 
+ runat="server" 
+ CssClass="TX_cajatextoBloqueado" 
+ Height="21px" > 
+ </asp:TextBox>

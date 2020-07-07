@@ -1,0 +1,28 @@
+<SCRIPT LANGUAGE='VBScript' RUNAT='Server'> 
+'Puede agregar controladores de cursovirtual especiales a este archivo que se ejecuten automáticamente al 
+'producirse cursovirtuals de páginas Active Server. Para ello, cree una subrutina y déle un nombre de la 
+'lista siguiente que se corresponda con el cursovirtual que desea utilizar. Por ejemplo, para crear un 
+'controlador de cursovirtual para Session_OnStart, debe insertar el siguiente código en 
+'este archivo (sin comentarios):
+'Sub Session_OnStart 
+'**Inserte el código aquí ** 
+'End Sub 
+'EventName              Descripción 
+'Session_OnStart        Se ejecuta la primera vez que un usuario abre cualquier página de la aplicación 
+'Session_OnEnd          Se ejecuta cuando finaliza el tiempo de espera de la sesión de un usuario o éste sale de la aplicación 
+'Application_OnStart    Se ejecuta una vez cuando un usuario abre por primera vez la primera página de la aplicación 
+'Application_OnEnd      Se ejecuta una vez cuando se apaga el servidor Web 
+
+
+Sub Application_OnStart
+    
+End Sub
+ 
+Sub Session_OnStart
+	Session.Timeout = 1200
+End Sub
+ 
+Sub Session_OnEnd
+	session.contents.removeall
+End Sub
+</SCRIPT>

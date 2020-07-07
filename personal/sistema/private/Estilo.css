@@ -1,0 +1,51 @@
+﻿#ListaDocente
+{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 37%;
+    height: 70%;
+}
+#Permisos
+{
+    position: absolute;
+    top: 72%;
+    left: 10px;
+    width: 37%;
+    height: 15%;    
+    font-family: Arial;
+    font-size: smaller;
+}
+#Aviso
+{
+   position:absolute;
+   top: 10px;
+   left: 39%;
+   width: 60%;
+   height: 18px;
+   background: #FFFFCC;
+   font-size: smaller;
+   font-family: Arial;
+   color: #0000FF;   
+   padding-left: 4px
+}        
+#ListaCCO
+{
+    position: absolute;
+    top: 40px;
+    left: 39%;
+    width: 60%;
+} 
+#ListaCCO table tr td
+{
+    font-size: smaller;
+    font-family: Arial;
+}
+#Error
+{
+   position:absolute;
+   top: 90%;
+   left: 10px;
+   width: 100%;
+   height: 10%;
+}

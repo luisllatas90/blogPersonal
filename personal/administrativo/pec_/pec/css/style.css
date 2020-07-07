@@ -1,0 +1,135 @@
+/* FORMULARIOS */
+.form-control {
+  border-radius: 0;
+  padding: 0.1rem 0.3rem;
+  font-size: 0.8rem; }
+
+form label.form-control-sm {
+  font-size: 0.75em;
+  font-weight: 500;
+  text-align: right;
+  line-height: 1.3; }
+
+form .card .card-body {
+  padding: 0.5rem; }
+
+.form-check label {
+  font-size: 0.8rem; }
+
+.table.table-sm {
+  font-size: 0.7em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif; }
+
+.table td, .table th {
+  vertical-align: middle; }
+
+.table .thead-dark th {
+  background-color: #E33439;
+  text-align: center; }
+
+.table button.btn {
+  font-size: 1em;
+  padding: .2rem .4rem; }
+
+.table td.operacion {
+  width: 45px; }
+
+#loading-gif {
+  width: 50px; }
+
+.card {
+  border-radius: 0; }
+  .card .card-header {
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    font-size: 0.85em;
+    border-radius: 0; }
+  .card .card-body {
+    padding: 0.8rem; }
+
+/* SELECT */
+.bootstrap-select.form-control-sm .dropdown-toggle {
+  border-radius: 0; }
+
+.dropdown-menu {
+  padding: 3px 0px;
+  border-radius: 0; }
+  .dropdown-menu .dropdown-item {
+    padding: 0.25rem 1.2rem;
+    font-size: 0.8rem; }
+
+.bs-searchbox, .bs-actionsbox, .bs-donebutton {
+  padding: 3px 6px 6px 6px; }
+
+select.form-control:not([size]):not([multiple]) {
+  height: auto !important; }
+
+/* BOTONES */
+.btn.btn-sm {
+  border-radius: 0.1rem; }
+  .btn.btn-sm > span.text {
+    margin-left: 4px; }
+
+/* TABS */
+.nav-tabs .nav-link {
+  border-radius: 0;
+  padding: .35rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600; }
+
+/* MODAL */
+.modal .modal-lg {
+  width: 1200px; }
+
+.modal .modal-header {
+  padding: 0.4rem 0.8rem;
+  border-radius: 0;
+  padding: 0.4rem 0.8rem;
+  background-color: #E33439; }
+  .modal .modal-header .modal-title {
+    color: white;
+    font-weight: 500; }
+
+.modal .modal-body {
+  padding: 0.5rem; }
+
+.modal form label.form-control-sm {
+  font-size: 0.75em; }
+
+.modal-header .close {
+  padding: 0rem;
+  margin: -0.2rem -0.2rem 0rem auto;
+  color: white;
+  text-shadow: none; }
+
+.modal-header .modal-title {
+  font-size: 0.9rem; }
+
+.close:not(:disabled):not(.disabled):focus, .close:not(:disabled):not(.disabled):hover {
+  color: white;
+  font-weight: 500; }
+
+.modal .modal-footer {
+  padding: 0.6rem; }
+  .modal .modal-footer .btn {
+    padding: 0.25rem 0.7rem;
+    font-size: 0.8rem;
+    border-radius: 0.1rem; }
+
+.modal .modal-content {
+  border-radius: 0; }
+
+.modal .card .card-header {
+  padding: 0.2rem 0.65rem;
+  font-size: 0.8rem; }
+
+.sw-main .step-content {
+  padding: 5px 5px; }
+
+.sw-main .sw-toolbar {
+  padding: 0;
+  background: transparent; }
+  .sw-main .sw-toolbar .btn {
+    padding: 0.25rem 0.7rem;
+    font-size: 0.8rem;
+    border-radius: 0.1rem; }

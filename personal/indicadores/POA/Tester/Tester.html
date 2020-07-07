@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Galeria de Fotos</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap-4.0.0-dist/js/lightbox-master/dist/ekko-lightbox.css" rel="stylesheet"
+        type="text/css" />
+
+    <script type="text/javascript" src="bootstrap-4.0.0-dist/js/jquery-3.3.1.js"></script>
+
+    <script src="bootstrap-4.0.0-dist/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <script src="bootstrap-4.0.0-dist/js/lightbox-master/anchor.min.js" type="text/javascript"></script>
+
+    <!--<script src="bootstrap-4.0.0-dist/js/lightbox-master/dist/ekko-lightbox.min.js" type="text/javascript"></script>-->
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //alert(msieversion());
+            if (msieversion() == 0) { // Cuando retorna 0 Es Chrome o Mozilla
+                $("head").append('<script language="javascript" src="bootstrap-4.0.0-dist/js/lightbox-master/dist/ekko-lightbox.min.js" type="text/javascript"><\/script>');
+            } else {
+                $("head").append('<script language="javascript" src="bootstrap-4.0.0-dist/js/lightbox-master/dist/ekko-lightboxIE.min.js" type="text/javascript"><\/script>');
+            }
+
+            $(document).on('click', '[data-toggle="lightbox"]:not([data-gallery="navigateTo"]):not([data-gallery="example-gallery-11"])', function(event) {
+                event.preventDefault();
+                return $(this).ekkoLightbox({
+                    onShown: function() {
+                        if (window.console) {
+                            return console.log('Checking our the events huh?');
+                        }
+                    },
+                    onNavigate: function(direction, itemIndex) {
+                        if (window.console) {
+                            return console.log('Navigating ' + direction + '. Current item: ' + itemIndex);
+                        }
+                    }
+                });
+            });
+
+            // disable wrapping
+            $(document).on('click', '[data-toggle="lightbox"][data-gallery="example-gallery-11"]', function(event) {
+                event.preventDefault();
+                return $(this).ekkoLightbox({
+                    wrapping: false
+                });
+            });
+
+            //Programmatically call
+            $('#open-image').click(function(e) {
+                e.preventDefault();
+                $(this).ekkoLightbox();
+            });
+            $('#open-youtube').click(function(e) {
+                e.preventDefault();
+                $(this).ekkoLightbox();
+            });
+
+            // navigateTo
+            $(document).on('click', '[data-toggle="lightbox"][data-gallery="navigateTo"]', function(event) {
+                event.preventDefault();
+
+                return $(this).ekkoLightbox({
+                    onShown: function() {
+
+                        this.modal().on('click', '.modal-footer a', function(e) {
+
+                            e.preventDefault();
+                            this.navigateTo(2);
+
+                        } .bind(this));
+
+                    }
+                });
+            });
+
+
+            /**
+            * Documentation specific - ignore this
+            */
+            anchors.options.placement = 'left';
+            anchors.add('h3');
+            $('code[data-code]').each(function() {
+
+                var $code = $(this),
+                        $pair = $('div[data-code="' + $code.data('code') + '"]');
+
+                $code.hide();
+                var text = $code.text($pair.html()).html().trim().split("\n");
+                var indentLength = text[text.length - 1].match(/^\s+/)
+                indentLength = indentLength ? indentLength[0].length : 24;
+                var indent = '';
+                for (var i = 0; i < indentLength; i++)
+                    indent += ' ';
+                if ($code.data('trim') == 'all') {
+                    for (var i = 0; i < text.length; i++)
+                        text[i] = text[i].trim();
+                } else {
+                    for (var i = 0; i < text.length; i++)
+                        text[i] = text[i].replace(indent, '    ').replace('    ', '');
+                }
+                text = text.join("\n");
+                $code.html(text).show();
+
+            });
+        });
+
+        function msieversion() {
+
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+            var version = 0;
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Internet Explorer, return version number
+            {
+                //alert(parseInt(ua.substring(msie + 5, ua.indexOf(".", msie))));
+                version = parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)));
+            }
+            else  // If another browser, return 0
+            {
+                version = 0;
+            }
+
+            return version;
+        }
+        </script>
+
+    <style type="text/css">
+        .img-fluid:hover
+        {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>
+                    Evento 001</h4>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>
+                                Evento generado para el deporte de los alumnos del colegio bla bla bla Evento generado
+                                para el deporte de los alumnos del colegio bla bla bla Evento generado para el deporte
+                                de los alumnos del colegio bla bla bla Evento generado para el deporte de los alumnos
+                                del colegio bla bla bla Evento generado para el deporte de los alumnos del colegio
+                                bla bla bla Evento generado para el deporte de los alumnos del colegio bla bla bla
+                                Evento generado para el deporte de los alumnos del colegio bla bla bla Evento generado
+                                para el deporte de los alumnos del colegio bla bla bla</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <div class="row">
+                        <a href="img/img1.png" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                            <img src="img/img1.png" class="img-fluid">
+                        </a><a href="img/img2.png" data-toggle="lightbox" data-gallery="example-gallery"
+                            class="col-sm-3">
+                            <img src="img/img2.png" class="img-fluid">
+                        </a><a href="img/img3.png" data-toggle="lightbox" data-gallery="example-gallery"
+                            class="col-sm-3">
+                            <img src="img/img3.png" class="img-fluid">
+                        </a><a href="img/img4.png" data-toggle="lightbox" data-gallery="example-gallery"
+                            class="col-sm-3">
+                            <img src="img/img4.png" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <a href="img/img5.png" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3">
+                            <img src="img/img5.png" class="img-fluid">
+                        </a><a href="img/img6.png" data-toggle="lightbox" data-gallery="example-gallery"
+                            class="col-sm-3">
+                            <img src="img/img6.png" class="img-fluid">
+                        </a><a href="img/img7.png" data-toggle="lightbox" data-gallery="example-gallery"
+                            class="col-sm-3">
+                            <img src="img/img7.png" class="img-fluid">
+                        </a><a href="img/img8.png" data-toggle="lightbox" data-gallery="example-gallery"
+                            class="col-sm-3">
+                            <img src="img/img8.png" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

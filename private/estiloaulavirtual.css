@@ -1,0 +1,685 @@
+﻿body {
+	font-family: "Trebuchet MS", "Lucida Console", Arial, san-serif;
+	color: #333333;
+	font-size: 8pt;
+}
+.objresaltado {
+	background-color: #395ACC;
+}
+.paginaRotulo {
+	border-left: 1px solid #C0C0C0;
+	PADDING-LEFT: 10px;
+	FONT-WEIGHT: bold;
+	COLOR: #000080;
+	HEIGHT: 30px;
+	BACKGROUND-COLOR: #A9C1D7;
+	border-right-width: 1;
+}
+.paginaDoc {
+	border-left: 1px solid #C0C0C0;
+	PADDING-LEFT: 10px;
+	FONT-WEIGHT: bold;
+	COLOR: #000080;
+	HEIGHT: 10px;
+	BACKGROUND-COLOR: #C0C0C0;
+	border-right-width: 1;
+}
+.contornotabla {
+	border: 1px solid #808080;
+}
+.tituloimportante {
+	font-size: 14pt;
+	color: #000080;
+	text-align: center;
+	background-color: #E9F3FC;
+}
+.contorno {
+	border: 1px solid #008000;
+	background-color: #FFCB97;
+	color: #000080;
+}
+.barraherramientas {
+	border-left-width: 1;
+	border-right-width: 1;
+	border-top-width: 1;
+	border-bottom: 1px solid #808080;
+	background-color: #EEEEEE;
+}
+.nodoRaiz {
+	color: #FFFFFF;
+	font-weight: bold;
+	background-color: #395ACC;
+}
+.menusuperior {
+	border-bottom: 2px solid #808080;
+	background-color: #ebe1bf;
+	font-weight: bold;
+}
+.menuizquierdo {
+	border-right: 1px solid #808080;
+	background-color: #DEE0C5;
+}
+.bordeizqinf {
+	border-left: 1px solid #808080;
+	border-right-width: 1;
+	border-top-width: 1;
+	border-bottom: 1px solid #808080;
+}
+.bordederinf {
+	border-left-width: 1;
+	border-right: 1px solid #808080;
+	border-top-width: 1;
+	border-bottom: 1px solid #808080;
+}
+.bordeizqsup {
+	border-left: 1px solid #808080;
+	border-right-width: 1;
+	border-top: 1px solid #808080;
+	border-bottom-width: 1;
+}
+.bordedersup {
+	border-left-width: 1;
+	border-right: 1px solid #808080;
+	border-top: 1px solid #808080;
+	border-bottom-width: 1;
+}
+.bordeinf {
+	border-left-width: 1;
+	border-right-width: 1;
+	border-top-width: 1;
+	border-bottom: 1px solid #808080;
+}
+.bordepestana {
+	border-left: 1px solid #808080;
+	border-right: 1px solid #808080;
+	border-top: 1px solid #808080;
+	border-bottom-width: 1;
+}
+.bordeder {
+	border-left-width: 1;
+	border-right: 1px solid #808080;
+	border-top-width: 1;
+	border-bottom-width: 1;
+}
+.bordesup {
+	border-left-width: 1;
+	border-right-width: 1;
+	border-top: 1px solid #808080;
+	border-bottom-width: 1;
+}
+.bordeizq {
+	border-left: 1px solid #808080;
+	border-right-width: 1;
+	border-top-width: 1;
+	border-bottom-width: 1;
+}
+.encabezadopregunta {
+	color: #800000;
+	font-weight: bold;
+	border-style: solid;
+	border-width: 1;
+	background-color: #F7EEB3;
+}
+.opciones {
+	font-size: 10pt;
+	color: #808080;
+	font-weight: bold;
+	font-family: Tahoma;
+}
+.etabla {
+	color: #000080;
+	font-weight: bold;
+	background-color: #F2F2F2;
+	text-align: center;
+}
+.franja {
+	border-top: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	font-weight: bold;
+	text-align: right;
+	background-color: #DEE0C5;
+}
+.etabla2 {
+	color: #800000;
+	font-weight: bold;
+	background-color: #D8D8C2;
+	text-align: center;
+}
+a:Active {
+	color: #800000;
+}
+a:Link {
+	color: #000000;
+	text-decoration: none;
+}
+a:Visited {
+	color: #000066;
+	text-decoration: none underline;
+}
+.e1 {
+	font-family: "Trebuchet MS", "Lucida Console", Arial, san-serif;
+	font-weight: bold;
+	font-size: 12pt;
+	color: #666666;
+}
+.e2 {
+	color: #808080;
+	font-weight: bold;
+	text-decoration: none;
+}
+.e3 {
+	font-size: 14pt;
+	font-weight: bold;
+	color: #996600;
+}
+table {
+	font-family: Arial,tahoma;
+	font-size: 8pt;
+}
+/*li           	{list-style-image: url('../images/vineta.gif') }*/
+.Flotante {
+	border: 1px solid #000000;
+}
+.encabezado {
+	font-family: Trebuchet MS;
+	font-size: 12pt;
+	font-weight: bold;
+	border-left-width: 1;
+	border-right-width: 1;
+	border-top-width: 1;
+	border-bottom: 1px solid #808080;
+	background-color: #FEFFE1;
+}
+.Cajas {
+	font-family: Verdana;
+	font-size: 8.5pt;
+	width: 98%;
+}
+.Cajas2 {
+	font-family: Verdana;
+	font-size: 8.5pt;
+}
+.cajalista {
+	font-family: Verdana;
+	font-size: 8.5pt;
+	width: 90%;
+}
+select {
+	font-family: Verdana;
+	font-size: 8.5pt;
+}
+.sugerencia {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/atencion.gif') no-repeat 0% 0%;
+	width: 100%;
+	height: 25;
+}
+.boton {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1;
+	font-family: tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+	cursor:pointer;
+	cursor: hand;
+}
+.botonresaltado {
+	border-left: 1px solid #C0C0C0;
+	border-right: 1px solid #C0C0C0;
+	border-top: 1px solid #C0C0C0;
+	border-bottom: 1px solid #FFFFFF;
+	background: #FAE8AF;
+	font-family: tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+	cursor: pointer;
+	cursor: hand;
+}
+.botonbloqueado {
+	border-left: 1px solid #C0C0C0;
+	border-right: 1px solid #C0C0C0;
+	border-top: 1px solid #C0C0C0;
+	border-bottom: 1px solid #FFFFFF;
+	background: #EEEEEE;
+	font-family: tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+	cursor: pointer;
+	cursor: hand;
+}
+.ayuda {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/ayuda.gif') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+	cursor: hand;
+}
+.guardar {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/guardar.gif') no-repeat 0% 80%;
+	width: 100;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.salir {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/salir.gif') no-repeat 0% 80%;
+	width: 100;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.cerrar {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/cerrar.gif') no-repeat 0% 80%;
+	width: 100;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.buscar {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/previo.gif') no-repeat 0% 80%;
+	width: 100;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.nuevo {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/nuevo.gif') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.modificar {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/editar.gif') no-repeat 0% 80%;
+	width: 100;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.permisos {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/menu0.gif') no-repeat 0% 80%;
+	width: 100;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.imprimir {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/imprimir.gif') no-repeat 0% 80%;
+	width: 100;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.eliminar {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/eliminar.gif') no-repeat 0% 80%;
+	width: 100;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.agregar {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/anadir.gif') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.exportar {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/ext/doc.gif') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.bloquear {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/bloquear.gif') no-repeat 0% 80%;
+	width: 100;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+.cunia {
+	border-right: 1px solid #91A9DB;
+	border-top: 1px solid #91A9DB;
+	border-bottom: 1px solid #91A9DB;
+	background-position: 0% 0%;
+	width: 17px;
+	height: 19px;
+	background-image: url('../images/cunia.gif');
+	background-repeat: no-repeat;
+}
+.agregar2 {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/anadir.gif') no-repeat 0% 80%;
+	width: 70;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 25;
+}
+.modificar2 {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/editar.gif') no-repeat 0% 80%;
+	width: 70;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 25;
+}
+.imprimir2 {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/imprimir.gif') no-repeat 0% 80%;
+	width: 70;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 25;
+}
+.eliminar2 {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/eliminar.gif') no-repeat 0% 80%;
+	width: 70;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 25;
+}
+.buscar2 {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/previo.gif') no-repeat 0% 80%;
+	width: 70;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 25;
+}
+.agregar3 {
+	border: 0px;
+	background: #EEEEEE url('../images/anadir.gif') no-repeat 0% center;
+	width: 80;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+	cursor: hand;
+}
+.cerrar3 {
+	border: 0px;
+	background: #EEEEEE url('../images/cerrar.gif') no-repeat 0% center;
+	width: 80;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+	cursor: hand;
+}
+.guardar3 {
+	border: 0px;
+	background: #EEEEEE url('../images/guardar.gif') no-repeat 0% center;
+	width: 80;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+	cursor: hand;
+}
+.modificar3 {
+	border: 0px;
+	background: #EEEEEE url('../images/editar.gif') no-repeat 0% center;
+	width: 80;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+	cursor: hand;
+}
+.eliminar3 {
+	border: 0px;
+	background: #EEEEEE url('../images/eliminar.gif') no-repeat 0% center;
+	width: 80;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+	cursor: hand;
+}
+.permisos3 {
+	border: 0px;
+	background: #EEEEEE url('../images/menu0.gif') no-repeat 0% center;
+	width: 80;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+	cursor: hand;
+}
+.agregar4 {
+	border: 0px;
+	background: #EEEEEE url('../images/anadir.gif') no-repeat 0% center;
+	width: 60;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 20;
+	cursor: hand;
+}
+.boton4 {
+	font-size: 8pt;
+	height: 23;
+	border: 1px solid #808080;
+}
+.guardar4 {
+	border: 0px;
+	background: #EEEEEE url('../images/guardar.gif') no-repeat 0% center;
+	width: 60;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 20;
+	cursor: hand;
+}
+.modificar4 {
+	border: 0px;
+	background: #EEEEEE url('../images/editar.gif') no-repeat 0% center;
+	width: 60;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 20;
+	cursor: hand;
+}
+.eliminar4 {
+	border: 0px;
+	background: #EEEEEE url('../images/eliminar.gif') no-repeat 0% center;
+	width: 60;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 20;
+	cursor: hand;
+}
+.permisos4 {
+	border: 0px;
+	background: #EEEEEE url('../images/menu0.gif') no-repeat 0% center;
+	width: 60;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 20;
+	cursor: hand;
+}
+.agregar5 {
+	border: 0px;
+	background: #D8D8C2 url('../images/anadir.gif') no-repeat 0% center;
+	width: 60;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 20;
+	cursor: hand;
+}
+.normal {
+	border: 0px;
+	background: #EEEEEE url('../images/normal.gif') no-repeat 0% center;
+	width: 60;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 20;
+	cursor: hand;
+}
+.html {
+	border: 0px;
+	background: #EEEEEE url('../images/html.gif') no-repeat 0% center;
+	width: 60;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 20;
+	cursor: hand;
+}
+.colorbarra {
+	border: 1px solid #808080;
+	background-color: #EBEBEB;
+}
+.imagen {
+	cursor: hand;
+}
+.imgGuardar {
+	cursor: hand;
+	border: 1px;
+	background: #FFFFFF url('../images/guardar.gif') no-repeat 0% 80%;
+	width: 100 font-family: Tahoma;
+	font-size: 8pt;
+	height: 20;
+}
+.atras {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/back.gif') no-repeat 0% 80%;
+	width: 80;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 25;
+}
+.siguiente {
+	border: 1px solid #C0C0C0;
+	background: #FEFFE1 url('../images/forward.gif') no-repeat 95% 0;
+	font-family: Tahoma;
+	font-size: 8pt;
+	font-weight: bold;
+	height: 25;
+}
+#encabezado {
+	border-bottom: 1px solid #CCCCCC;
+	background-color: #EBE1BF;
+	width: 100%;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	font-size: 13pt;
+	font-weight: bold;
+}
+.seccion {
+	color: #000080;
+}
+.variable {
+	color: #008080;
+}
+.indicador {
+	color: #996600;
+}
+.azul {
+	color: #0000FF;
+}
+.rojo {
+	color: #FF0000;
+}
+.fondoverde {
+	border: 1px solid #008080;
+	background-color: #00FF00;
+}
+.fondoamarillo {
+	border: 1px solid #008080;
+	background-image: url('../images/fa.gif');
+}
+.fondorojo {
+	color: #FFFFFF;
+	border: 1px solid #008080;
+	background-image: url('../images/CR.gif');
+}
+.fondonulo {
+	border: 1px solid #008080;
+	background-color: #E9E9E9;
+}
+/*tablas para impresión*/
+THEAD {
+	display: table-header-group;
+}
+TFOOT {
+	display: table-footer-group;
+}
+COLGROUP {
+	display: table-column-group;
+}
+/*Estilos para el menu derecho*/
+.Menu {
+	cursor: default;
+	width: 165px;
+	background-color: menu;
+	border: 2px outset buttonhighlight;
+;	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+}
+.bloque {
+	border-left: 1px solid #FFFFFF;
+	border-right: 1px solid #FFFFFF;
+	border-top: 1px solid #C0C0C0;
+	border-bottom: 1px solid #C0C0C0;
+}
+.Menucontainer {
+	position: absolute;
+	visibility: hidden;
+	left: 0;
+}
+.sinborde {
+	border: 1px solid #FFFFFF;
+}
+.etiqueta {
+	color: #666666;
+	font-weight: bold;
+}
+.Menuitems {
+	padding-left: 15px;
+	padding-right: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+}
+/*Estilos para los DIV con listas desplegables*/
+#listadiv {
+	position: relative;
+	width: 100%;
+	top: 0;
+	left: 0;
+	overflow: auto;
+}
+.e4 {
+	font-family: Arial;
+	font-size: 11pt;
+	color: #800000;
+	font-weight: bold;
+}

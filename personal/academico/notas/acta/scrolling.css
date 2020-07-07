@@ -1,0 +1,35 @@
+﻿.GridHeader
+{
+	color: white;
+	position: relative;
+	/* top: expression(this.offsetParent.scrollTop - 2);*/
+	background-color: #4d7893;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.GridRow
+{
+	color: #000000;
+	background-color: #FFFFFF;
+	font-weight: normal;
+	font-size: 10px;
+}
+
+.GridAlternateRow
+{
+	color: #000000;
+	background-color: #FFFFCC;
+	font-weight: normal;
+	font-size: 10px;
+}
+
+.Marco
+{
+	overflow: auto;
+} 
+
+.Marco .Grid 
+{
+    width: 95%;
+}

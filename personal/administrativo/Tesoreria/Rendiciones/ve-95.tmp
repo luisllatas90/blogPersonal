@@ -1,0 +1,106 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="frmdetallerendicion.aspx.vb" Inherits="frmdetallerendicion" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+<script src="funciones.js"></script>
+<script  src="calendario.js"></script>
+<link  rel ="stylesheet" href="estilo.css"/> 
+
+    <title>Página sin título</title>
+    <%
+        Dim codigo_rend2 As Integer
+        codigo_rend2 = Me.Request.QueryString("codigo_rend")
+     %>
+    <script language="javascript">
+        function RegistrarDetallerendicion()
+        {      
+        
+        window.open('frmregistrardetallerendicion.aspx?codigo_rend=<%=codigo_rend2%>','frmadjuntararchivo','toolbar=no,width=980,height=380') 
+        
+        }
+function cmdagregar_onclick() {
+
+}
+
+    </script> 
+</head>
+<body bgcolor="#EEEEEE" >
+    <form id="form1" runat="server"  style="height: 100%" >
+    
+        <table border="1" bordercolor="black" height="100%"  bordercolordark="black" style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: none; width: 100%;">
+            <tr height="2%">
+                <td colspan="5" class ="usatCeldaTitulo" style="width: 20%">Detalle de la rendición</td>
+            </tr>
+            <tr height ="3%">
+                <td bgcolor="#EEEEEE" bordercolor="#ffffff" colspan="5" style="vertical-align: top; text-align:  right ; width: 1357px;">
+                    <asp:Button ID="cmdcancelar" runat="server" BackColor="LemonChiffon" Font-Bold="False"
+                        Font-Names="Verdana" Font-Size="8pt" Height="24px" Style="background-image: url(iconos/salir.gif);
+                        background-repeat: no-repeat" Text=" Cerrar" Width="96px" BorderStyle="Groove" />
+                    <asp:Button ID="cmdfinalizar" runat="server" BackColor="LemonChiffon" Font-Bold="False" Text="   Dar por finalizada"
+                        Width="160px" Font-Names="Verdana" Font-Size="8pt" Height="24px" style="background-image: url(iconos/guardar.gif); background-repeat: no-repeat" BorderStyle="Groove" />
+                    <input id="cmdagregar" style="width: 112px; background-repeat: no-repeat; background-color: lemonchiffon"
+                        type="button" value="Agregar" language="javascript" onclick="RegistrarDetallerendicion()" />
+                </td>
+            </tr>
+            
+            <tr height="40%">    
+                <td colspan="5" bgcolor="#ffffff" bordercolor="#ffffff" style="width: 1357px">
+                <div height="100%">
+                    <table  class="NoImprimir" height="100%" width="100%">
+                        <tr width ="100%" height="100%">
+                            <td>                                
+                                    <asp:GridView ID="lstinformacion" runat="server" AutoGenerateColumns="False" Width="100%" Height="100%"  Font-Names="Arial" Font-Size="8pt" style="background-image: url(eliminar.gif); background-repeat: no-repeat; vertical-align:top">
+                                        <Columns>
+                                            <asp:BoundField DataField="codigo_dren">
+                                            <HeaderStyle CssClass="usatCeldaTitulo" Width="5%" />
+                                            </asp:BoundField>
+                                            <asp:BoundField HeaderText="Tipo Documento" DataField="descripcion_tdo">
+                                                <HeaderStyle Width="20" CssClass="usatCeldaTitulo"/>
+                                            </asp:BoundField>
+                                            <asp:BoundField HeaderText="Serie / N&#250;mero" DataField="serienumero_dren">
+                                                <HeaderStyle Width="10%" CssClass="usatCeldaTitulo"/>
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="fecha_dren" HeaderText="Fecha">                                
+                                                <HeaderStyle CssClass="usatCeldaTitulo" Width="20%" />
+                                            </asp:BoundField>
+                                            <asp:BoundField HeaderText="Instituci&#243;n / Empresa" DataField="institucion_dren">
+                                                <HeaderStyle Width="20%" CssClass="usatCeldaTitulo"/>
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="importe_dren" HeaderText="Importe">                                
+                                                <HeaderStyle Width="10%" CssClass="usatCeldaTitulo"/>
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="descripcion_dren" HeaderText="Descripci&#243;n">
+                                                <ItemStyle HorizontalAlign="Left" />
+                                                <HeaderStyle CssClass="usatCeldaTitulo" Width ="25%" />
+                                            </asp:BoundField>
+                                            <asp:CommandField ShowDeleteButton="True" DeleteImageUrl="~/eliminar.gif" ButtonType="Image" DeleteText=""  />
+                                            <asp:CommandField ShowSelectButton="True" ButtonType="Image" SelectImageUrl="~/iconos/anadir.gif" SelectText="" />
+                                            <asp:CommandField ShowSelectButton="True" ButtonType="Image" SelectImageUrl="~/iconos/download.gif" SelectText="" />
+                                            
+                                        </Columns>
+                                        <RowStyle BorderStyle="Solid" />
+                                        <EmptyDataRowStyle CssClass="usatCeldaTitulo" />
+                                    </asp:GridView>                    
+                                </tr>
+                    </table>                    
+                </div>
+                </td>                    
+            </tr>
+            <tr height="5%">   
+                <td><asp:HiddenField ID="hd" runat="server" /><asp:Label ID="lblmensaje" runat="server" ForeColor="Maroon" Width="1136px"></asp:Label> </td>
+            </tr>
+            <tr height="5%" >
+                <td class="pestanaresaltada">Datos adjuntos</td>
+                <td bgcolor="#ffffff" bordercolor="#000000" colspan="1" style="vertical-align: top;width: 80%; text-align: left"></td>                
+            </tr>
+            <tr  height="30%"  >
+                <td bgcolor="#EEEEEE" bordercolor="#EEEEEE" colspan="5" style="vertical-align:  top; text-align: left; width: 1357px;"><iframe id="documentodetalle"  src="frmadjuntararchivo.aspx" style="width: 100%; background-color: lemonchiffon;"  height=%100%%></iframe></td>
+            </tr>
+        </table>
+       
+       
+    </form>
+</body>
+</html>

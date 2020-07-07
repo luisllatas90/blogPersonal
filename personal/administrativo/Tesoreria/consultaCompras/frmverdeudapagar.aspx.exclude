@@ -1,0 +1,145 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="frmverdeudapagar.aspx.vb" Inherits="frmverdeudapagar" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <script src="funciones.js"></script>
+    <title>Página sin título</title>
+    <script type ="text/javascript" >
+        function mostrarpagos (y)
+            {
+                var x;
+                x=getElementByid('datos');
+                x.src="frmverpagos.aspx?codigo_ddp=" + y;
+            }
+    </script>
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+        }
+        .style2
+        {
+            color: #0000FF;
+            font-family: Arial;
+            font-size: x-small;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <span style="font-size: 8pt; color: #990033; font-family: Arial; text-decoration: underline">
+            Visualizar cargos (Deudas a pagar USAT)<br />
+        </span>
+        <br />
+        <asp:GridView ID="lstinformacioncargos" runat="server" AutoGenerateColumns="False"
+            Font-Names="Arial" Font-Size="8pt" Height="1px" Width="98%">
+            <Columns>
+                <asp:BoundField DataField="codigo_ddp" HeaderText="Id">
+                    <ItemStyle Font-Size="X-Small" Width="10%" />
+                    <HeaderStyle BackColor="#F0F0F0" Font-Names="Arial" Font-Size="X-Small" ForeColor="Blue" />
+                </asp:BoundField>
+                <asp:BoundField DataField="nombres" HeaderText="Nombres">
+                    <ItemStyle Font-Size="X-Small" Width="40%" />
+                    <HeaderStyle BackColor="#F0F0F0" Font-Names="Arial" Font-Size="X-Small" ForeColor="Blue" />
+                </asp:BoundField>
+                <asp:BoundField DataField="tipo" HeaderText="Tipo">
+                    <ItemStyle Font-Size="X-Small" />
+                    <HeaderStyle Font-Size="X-Small" ForeColor="Blue" />
+                </asp:BoundField>
+                <asp:BoundField DataField="descripcion_tip" HeaderText="Moneda">
+                    <ItemStyle Font-Size="X-Small" Width="20%" />
+                    <HeaderStyle BackColor="#F0F0F0" Font-Names="Arial" Font-Size="X-Small" ForeColor="Blue" />
+                </asp:BoundField>
+                <asp:BoundField DataField="importe_ddp" HeaderText="Importe">
+                    <ItemStyle Font-Size="X-Small" Width="20%" />
+                    <HeaderStyle BackColor="#F0F0F0" Font-Names="Arial" Font-Size="X-Small" ForeColor="Blue" />
+                </asp:BoundField>
+                <asp:BoundField DataField="importecancelado_ddp" HeaderText="Importe Cancelado">
+                    <ItemStyle Font-Size="X-Small" Width="10%" />
+                    <HeaderStyle BackColor="#F0F0F0" Font-Names="Arial" Font-Size="X-Small" ForeColor="Blue" />
+                </asp:BoundField>
+                <asp:CommandField />
+                <asp:ImageField DataImageUrlField="codigo_dplla" DataImageUrlFormatString="~/iconos/buscar.gif">
+                </asp:ImageField>
+            </Columns>
+        </asp:GridView>
+    
+    </div>
+    </form>
+    
+  <iframe  id="fradetalle" style="width: 98%; height: 264px; border-right: black 1px solid; border-top: black 1px solid; border-left: black 1px solid; cursor: hand; border-bottom: black 1px solid;">
+  
+  </iframe>
+<p>
+    &nbsp;</p>
+<p>
+    &nbsp;</p>
+<p>
+    &nbsp;</p>
+<p>
+    &nbsp;</p>
+<table class="style1">
+    <tr>
+        <td class="style2">
+            Id</td>
+            <td class="style2">
+                Nombres</td>
+            <td class="style2">
+                Tipo</td>
+            <td class="style2">
+                Moneda</td>
+            <td class="style2">
+                Importe</td>
+            <td class="style2">
+                Importe cancelado</td>
+            <td class="style2">
+                img</td>
+            <td class="style2">
+                img</td>
+        </tr>
+        <tr>
+            <td>
+                1</td>
+            <td>
+                nom</td>
+            <td>
+                tip</td>
+            <td>
+                soles</td>
+            <td>
+                importe</td>
+            <td>
+                importe cancelado</td>
+            <td>
+                img1</td>
+            <td>
+                img2</td>
+        </tr>
+        <tr>
+            <td colspan="8">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿body {
+}
+.DIV_fondomenus
+{
+    background-color: #F0F0F0;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #000000;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-right-color: #000000;
+    border-left-color: #000000;
+}
+
+.TBL_bordelogin
+{
+    border: 1px solid #001E2D;
+    background-color: #F0F0F0;
+}
+.LBL_etiquetalogin
+{
+    font-family: verdana;
+    font-size: 11px;
+    color: #000000;
+}
+.LST_listasucursales
+{
+    font-family: verdana;
+    font-size: 10px;
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #003366;
+}

@@ -1,0 +1,383 @@
+﻿body 
+{
+}
+/* Controles de ASPNET*/
+.GV_fila_cabecera
+{
+    border-color: 1;
+    font-family: verdana;
+    font-size: 11px;
+    font-weight: bold;
+    font-variant: normal;
+    text-transform: capitalize;
+    color: #FFFFFF;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #003366;
+}
+.GV_fila_detalle
+{
+    border-color: 1;
+    font-family: verdana;
+    font-size: 11px;
+    font-variant: normal;
+    text-transform: capitalize;
+    
+    color: #000000;
+    vertical-align: middle;
+}
+
+.GV_fila_alterna
+{
+  border-color: 1;
+  font-family: verdana;
+  font-size: 11px;
+  font-variant: normal;
+  text-transform: capitalize;
+  color: #000000;
+  vertical-align: middle;
+  background-color: #DFEFFF;
+}
+
+.GV_apariencia
+{
+    border-style: 1;
+    border-width: 1px;
+    border-color: #003366;
+}
+.GV_gridvacio
+{
+    margin: 8px;
+    padding: 8px;
+    font-family: verdana;
+    font-size: 11px;
+    color: #FF0000;
+    vertical-align: middle;
+    text-align: center;
+}
+.BU_boton_adjuntar
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/attach.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+
+.BU_boton_cerrar
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/cerrar.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+
+.BU_boton_salir
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/door_out.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+
+.BU_boton_guardar
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/disk.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+.BU_boton_libre
+{
+    border-style: 1;
+    background-position: left center;
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    cursor: hand;
+}
+.BU_boton_aceptar
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/accept.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+.BU_boton_cancelar
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/gtk-cancel.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+.BU_boton_eliminar
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/delete.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+.BU_boton_buscar
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/find.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+.BU_boton_modificar
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/pencil.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+.BU_boton_imprimir
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/printer.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+.BU_boton_aexcel
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/page_excel.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+.BU_boton_nuevo
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/page.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+.BU_boton_limpiar
+{
+    border-style: 1;
+    background-position: left center;
+    background-image: url( '../Img/edit-clear.png' );
+    background-color: #F4FCFF;
+    background-repeat: no-repeat;
+    font-family: verdana;
+    font-size: 9px;
+    border-width: 1px;
+    border-color: #003366;
+    padding-left: 15px;
+    cursor: hand;
+}
+.CAL_titulo
+{
+    border-style: 1;
+    font-family: verdana;
+    border-width: 1px;
+    border-color: #003366;
+    font-size: 12px;
+    font-variant: normal;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: #FFFFFF;
+    background-color: #003366;
+}
+.CAL_nombredia
+{
+    font-family: verdana;
+    font-size: 11px;
+    font-weight: bold;
+    color: #003366;
+    text-align: center;
+    vertical-align: middle;
+    text-transform: capitalize;
+}
+
+.CAl_diadelmes
+{
+    font-family: verdana;
+    font-size: 11px;
+    background-color: #DFEFFF;
+}
+.CAl_otrodiadelmes
+{
+    font-family: verdana;
+    font-size: 11px;
+  
+}
+.CAl_diaactual
+{
+    border-style: 1;
+    border-width: 1px;
+    border-color: #003366;
+    font-family: verdana;
+    font-size: 11px;
+    color: #003366;
+    background-color: #DFEFFF;
+    font-weight: bold;
+}
+
+.TX_cajatexto
+{ 
+    padding: 2px;
+    border-style: ;
+    font-family: verdana;
+    font-size: 11px;
+    color: #000000;
+    border-width: 1px;
+    border-color: #003366;
+    vertical-align: baseline;
+    background-color: #FFFFDD;
+ }
+
+.TX_cajatextoBloqueado
+{
+  padding: 1px;
+  border-style: 1;
+  font-family: verdana;
+  font-size: 11px;
+  color: #000000;
+  border-width: 1px;
+  border-color: #003366;
+  vertical-align: baseline;
+  background-color: #D7D7D7;
+}
+
+.TX_cajatextoObligatorio
+{
+    padding: 1px;
+    border-style: 1;
+    font-family: verdana;
+    font-size: 11px;
+    color: #000000;
+    border-width: 1px;
+    border-color: #003366;
+    vertical-align: baseline;
+    background-color: #E9FEFC;
+}
+
+.DDL_combos
+{
+    font-family: verdana;
+    font-size: 11px;
+    color: #000000;
+    background-color: #FFFFDD;
+}
+.DDL_combosObligatorio
+{
+    border-style: 1;
+    font-family: verdana;
+    font-size: 11px;
+    color: #000000;
+    border-width: 1px;
+    border-color: #003366;
+    background-color: #E9FEFC;
+}
+
+.DDL_combosBloqueados
+{
+  border-style: 1;
+  font-family: verdana;
+  font-size: 11px;
+  color: #000000;
+  border-width: 1px;
+  border-color: #003366;
+  background-color: #D7D7D7;
+}
+
+
+.CHK_checkbox
+{
+    font-family: verdana;
+    font-size: 11px;
+}
+
+.RDB_radiobutton
+{
+    font-family: verdana;
+    font-size: 11px;
+}
+

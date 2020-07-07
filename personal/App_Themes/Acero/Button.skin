@@ -1,0 +1,41 @@
+<asp:Button ToolTip="Exporta los registros a un formato .xls"  skinID="BotonAExcel" runat="server" CssClass="BU_boton_aexcel" 
+        Height="25px" Text="Exportar" Width="70px"  />
+        
+<asp:Button skinID="BotonAceptar" runat="server" CssClass="BU_boton_aceptar" 
+        Height="25px" Text="Aceptar" Width="70px"  />
+        
+<asp:Button  ToolTip="Realiza una búsqueda de acuerdo a los criterios seleccionados." skinID="BotonBuscar" runat="server" CssClass="BU_boton_buscar" 
+        Height="25px" Text="Buscar" Width="70px"  />
+        
+<asp:Button skinID="BotonCancelar" runat="server" ToolTip="Cancela las operaciones realizadas." CssClass="BU_boton_cancelar" 
+        Height="25px" Text="Cancelar" Width="70px"  />
+        
+<asp:Button ToolTip="Elimina un registro seleccionado u operación realizada." skinID="BotonEliminar" runat="server" CssClass="BU_boton_eliminar" 
+        Height="25px" Text="Eliminar" Width="70px"  />
+        
+<asp:Button ToolTip="Guarda los cambios realizados." skinID="BotonGuardar" runat="server" CssClass="BU_boton_guardar" 
+        Height="25px" Text="Guardar" Width="70px"  />
+        
+<asp:Button ToolTip="Imprime un documento." skinID="BotonImprimir" runat="server" CssClass="BU_boton_imprimir" 
+        Height="25px" Text="Imprimir" Width="70px"  />
+        
+<asp:Button ToolTip="Apertura la modificación del registro seleccionado o datos ingresados." skinID="BotonModificar" runat="server" CssClass="BU_boton_modificar" 
+        Height="25px" Text="Modificar" Width="70px"  />
+        
+<asp:Button ToolTip="Apertura el ingresos de nuevos datos." skinID="BotonNuevo" runat="server" CssClass="BU_boton_nuevo" 
+        Height="25px" Text="Nuevo" Width="70px"  />
+        
+<asp:Button ToolTip="Limpia datos ingresados." skinID="BotonLimpiar" runat="server" CssClass="BU_boton_limpiar" 
+        Height="25px" Text="Limpiar" Width="70px"  />        
+        
+<asp:Button skinID="BotonLibre" runat="server" CssClass="BU_boton_libre" />
+
+<asp:Button ToolTip="Abandona la aplicación o formulario actual." skinID="BotonSalir" runat="server" CssClass="BU_boton_salir" 
+        Height="25px" Text="Salir" Width="70px"  />    
+        
+<asp:Button ToolTip="Cierra la sesión o aplicación actual." skinID="BotonCerrar" runat="server" CssClass="BU_boton_cerrar" 
+    Height="25px" Width="70px"  Text="Cerrar" />    
+
+<asp:Button ToolTip="Adjunta un archivo." skinID="BotonAdjuntar" runat="server" CssClass="BU_boton_adjuntar" 
+    Height="25px" Width="70px"  Text="Adjuntar" />    
+   

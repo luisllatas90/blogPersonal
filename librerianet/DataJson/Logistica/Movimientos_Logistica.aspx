@@ -1,0 +1,1 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Movimientos_Logistica.aspx.vb" Inherits="DataJson_Logistica_Movimientos_Logistica" %>

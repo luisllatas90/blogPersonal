@@ -1,0 +1,10 @@
+--ALFARO ÑIQUEN, KATIANA KRYSTEL DEL MILAGRO
+SELECT	a.codigo_Alu, a.tempcodigo_cpf , p.*
+FROM	EgresadoAlumni (NOLOCK) ea
+INNER JOIN PERSONA (NOLOCK) p ON ea.codigo_pso = p.codigo_Pso
+INNER JOIN Alumno (NOLOCK) a ON a.codigo_alu = ea.codigo_alu
+--INNER JOIN Egresado (NOLOCK) e ON a.codigo_Alu = e.Codigo_Alu
+WHERE p.apellidoPaterno_Pso = 'ALFARO' AND p.apellidoMaterno_Pso = 'ÑIQUEN'
+
+SELECT * FROM EgresadoAlumni WHERE codigo_pso = 46002
+SELECT * FROM ALUMNI_ExperienciaLaboral WHERE codigo_pso = 46002

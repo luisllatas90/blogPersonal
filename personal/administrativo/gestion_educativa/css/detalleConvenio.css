@@ -1,0 +1,29 @@
+.card-body hr {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem; }
+
+#udpBtnSubmit {
+  display: inline-block; }
+
+#grwCuotas input[type="text"] {
+  text-align: center; }
+
+#grwCuotas .btn.btn-sm {
+  margin: 0px 4px; }
+
+.loading-gif {
+  display: none; }
+  .loading-gif#loading-gif-cuotas {
+    width: 25px; }
+
+#udpBtnGenerarCuotas {
+  display: inline-block; }
+
+#btnGenerarCuotas {
+  display: block;
+  font-size: 0.75rem; }
+  #btnGenerarCuotas .fa {
+    padding: 6px 7px 6px 7px; }
+
+.card:not(:first-child) {
+  margin-top: 10px; }

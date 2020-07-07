@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<response version="2">
+  <query>java</query>
+  <location>austin, tx</location>
+  <totalresults>1344</totalresults>
+  <start>0</start>
+  <end>10</end>
+  <results>
+    <result>
+      <jobkey>9qgmaiqpf3</jobkey>
+      <jobtitle>Programador JAVA</jobtitle>
+      <company>TECFLEX</company>
+      <city>Magdalena del Mar</city>
+      <state>
+      </state>
+      <country>PE</country>
+      <formattedLocation>Magdalena del Mar, PE</formattedLocation>
+      <source>Aptitus</source>
+      <date>Thu, 09 Jun 2016 13:33:11 -0400</date>
+      <snippet>PROGRAMADOR JAVA. Postula Datos de la Empresa. TECFLEX. Magdalena del Mar, Lima. TECFLEX. Magdalena del Mar...</snippet>
+      <url>http://neuvoo.com.pe/job.php?id=9qgmaiqpf3&amp;source=api&amp;publisher=f901eee1&amp;utm_source=api&amp;utm_medium=f901eee1&amp;chnl=default</url>
+      <onmousedown>this.href=this.href+'&amp;ref='+encodeURIComponent(document.URL)</onmousedown>
+      <logo>http://neuvoo.com.pe/img/logos/aptitus.png?empname=TECFLEX</logo>
+      <border>
+      </border>
+    </result>
+    <result>
+      <jobkey>67j5urhy3r</jobkey>
+      <jobtitle>Programador JAVA</jobtitle>
+      <company>TECFLEX</company>
+      <city>Magdalena del Mar</city>
+      <state>
+      </state>
+      <country>PE</country>
+      <formattedLocation>Magdalena del Mar, PE</formattedLocation>
+      <source>Aptitus</source>
+      <date>Thu, 09 Jun 2016 09:15:23 -0400</date>
+      <snippet>PROGRAMADOR JAVA. Postula Datos de la Empresa. TECFLEX. Magdalena del Mar, Lima. TECFLEX. Magdalena del Mar...</snippet>
+      <url>http://neuvoo.com.pe/job.php?id=67j5urhy3r&amp;source=api&amp;publisher=f901eee1&amp;utm_source=api&amp;utm_medium=f901eee1&amp;chnl=default</url>
+      <onmousedown>this.href=this.href+'&amp;ref='+encodeURIComponent(document.URL)</onmousedown>
+      <logo>http://neuvoo.com.pe/img/logos/aptitus.png?empname=TECFLEX</logo>
+      <border>
+      </border>
+    </result>
+    <result>
+      <jobkey>3veyd3txxb</jobkey>
+      <jobtitle>Programador Java</jobtitle>
+      <company>Qnet - Soluciones Tecnológicas</company>
+      <city>Lima</city>
+      <state>Lima</state>
+      <country>PE</country>
+      <formattedLocation>Lima, Lima, PE</formattedLocation>
+      <source>Bumeran</source>
+      <date>Thu, 09 Jun 2016 04:01:01 -0400</date>
+      <snippet>CONOCIMIENTOS. Programacion Java (Nivel Avanzado). Eclipse (Nivel Avanzado). Maven (Nivel Intermedio... Hibernate (Nivel Intermedio). Spring Core (Nivel Intermedio). Enterprise Java Beans (Nivel Intermedio...</snippet>
+      <url>http://neuvoo.com.pe/job.php?id=3veyd3txxb&amp;source=api&amp;publisher=f901eee1&amp;utm_source=api&amp;utm_medium=f901eee1&amp;chnl=default</url>
+      <onmousedown>this.href=this.href+'&amp;ref='+encodeURIComponent(document.URL)</onmousedown>
+      <logo>http://neuvoo.com.pe/img/logos/bumeran.png?empname=Qnet+-+Soluciones+Tecnol%C3%B3gicas</logo>
+      <border>
+      </border>
+    </result>
+    <result>
+      <jobkey>09cdpigeyq</jobkey>
+      <jobtitle>Desarrollador JAVA</jobtitle>
+      <company>Net Partners</company>
+      <city>San Isidro</city>
+      <state>Lima</state>
+      <country>PE</country>
+      <formattedLocation>San Isidro, Lima, PE</formattedLocation>
+      <source>Bumeran</source>
+      <date>Thu, 09 Jun 2016 22:01:01 -0400</date>
+      <snippet>Experiencia de al menos 4 años en proyectos empresariales Java (Web, Windows, Móviles, Portales) como... Contar con al menos 2 años, trabajando con Framework Spring. Fuertes conocimientos en Java SE. Java EE...</snippet>
+      <url>http://neuvoo.com.pe/job.php?id=09cdpigeyq&amp;source=api&amp;publisher=f901eee1&amp;utm_source=api&amp;utm_medium=f901eee1&amp;chnl=default</url>
+      <onmousedown>this.href=this.href+'&amp;ref='+encodeURIComponent(document.URL)</onmousedown>
+      <logo>http://neuvoo.com.pe/img/logos/bumeran.png?empname=Net+Partners</logo>
+      <border>
+      </border>
+    </result>
+    <result>
+      <jobkey>b44b0bsr56</jobkey>
+      <jobtitle>Programador Java</jobtitle>
+      <company>ARGUTRON</company>
+      <city>Lima</city>
+      <state>Lima</state>
+      <country>PE</country>
+      <formattedLocation>Lima, Lima, PE</formattedLocation>
+      <source>beBee</source>
+      <date>Mon, 06 Jun 2016 06:08:51 -0400</date>
+      <snippet>Mínimo 2 años de experiencia en desarrollo de Java e integración de servicios SOAP Experiencia en... Conocimiento de maquetación en HTML5, CSS3. Conocimientos en Javascript, jQuery. Experiencia en...</snippet>
+      <url>http://neuvoo.com.pe/job.php?id=b44b0bsr56&amp;source=api&amp;publisher=f901eee1&amp;utm_source=api&amp;utm_medium=f901eee1&amp;chnl=default</url>
+      <onmousedown>this.href=this.href+'&amp;ref='+encodeURIComponent(document.URL)</onmousedown>
+      <logo>http://neuvoo.com.pe/img/logos/bebee-pe.png?empname=ARGUTRON</logo>
+      <border>
+      </border>
+    </result>
+    <result>
+      <jobkey>jr9e5cngni</jobkey>
+      <jobtitle>Programador Java</jobtitle>
+      <company>Buscojobs</company>
+      <city>Lima</city>
+      <state>Lima</state>
+      <country>PE</country>
+      <formattedLocation>Lima, Lima, PE</formattedLocation>
+      <source>Buscojobs</source>
+      <date>Sat, 04 Jun 2016 11:14:34 -0400</date>
+      <snippet>Mínimo 2 años de experiencia en desarrollo de Java e integración de servicios (SOAP). Experiencia en... Conocimiento de maquetación en HTML5, CSS3. Conocimientos en Javascript, jQuery. Experiencia en...</snippet>
+      <url>http://neuvoo.com.pe/job.php?id=jr9e5cngni&amp;source=api&amp;publisher=f901eee1&amp;utm_source=api&amp;utm_medium=f901eee1&amp;chnl=default</url>
+      <onmousedown>this.href=this.href+'&amp;ref='+encodeURIComponent(document.URL)</onmousedown>
+      <logo>http://neuvoo.com.pe/img/logos/buscojobs-pe.png?empname=Buscojobs</logo>
+      <border>
+      </border>
+    </result>
+    <result>
+      <jobkey>snpc930kj2</jobkey>
+      <jobtitle>Desarrollador java</jobtitle>
+      <company>Consis International S.A.C</company>
+      <city>Lima</city>
+      <state>Lima</state>
+      <country>PE</country>
+      <formattedLocation>Lima, Lima, PE</formattedLocation>
+      <source>beBee</source>
+      <date>Tue, 07 Jun 2016 23:10:35 -0400</date>
+      <snippet>Manejo del idioma Ingles. No Limitativo. Sólidos Conocimientos Java. Conocimientos de IDEA o Eclipse... Conocimientos de Metodología de Trabajo Scrum. Metologia Agil. Manejo de herramientas Java, IDEA o...</snippet>
+      <url>http://neuvoo.com.pe/job.php?id=snpc930kj2&amp;source=api&amp;publisher=f901eee1&amp;utm_source=api&amp;utm_medium=f901eee1&amp;chnl=default</url>
+      <onmousedown>this.href=this.href+'&amp;ref='+encodeURIComponent(document.URL)</onmousedown>
+      <logo>http://neuvoo.com.pe/img/logos/bebee-pe.png?empname=Consis+International+S.A.C</logo>
+      <border>
+      </border>
+    </result>
+    <result>
+      <jobkey>8xmun3pjcs</jobkey>
+      <jobtitle>Desarrollador Java</jobtitle>
+      <company>Itteam</company>
+      <city>Lima</city>
+      <state>Lima</state>
+      <country>PE</country>
+      <formattedLocation>Lima, Lima, PE</formattedLocation>
+      <source>Buscojobs</source>
+      <date>Tue, 07 Jun 2016 04:46:46 -0400</date>
+      <snippet>Conocimientos 2 a 3 años de experiencia Java EE Nivel IntermedioAvanzado OraclePLSQL Nivel IntermedioAvanzado Linux Nivel Intermedio Web Services SOAP y Rest Nivel Avanzado SVN y Tortoise...</snippet>
+      <url>http://neuvoo.com.pe/job.php?id=8xmun3pjcs&amp;source=api&amp;publisher=f901eee1&amp;utm_source=api&amp;utm_medium=f901eee1&amp;chnl=default</url>
+      <onmousedown>this.href=this.href+'&amp;ref='+encodeURIComponent(document.URL)</onmousedown>
+      <logo>http://neuvoo.com.pe/img/logos/buscojobs-pe.png?empname=Itteam</logo>
+      <border>
+      </border>
+    </result>
+    <result>
+      <jobkey>f440a9bge2</jobkey>
+      <jobtitle>Desarrollador Java</jobtitle>
+      <company>Itteam</company>
+      <city>Lima</city>
+      <state>Lima</state>
+      <country>PE</country>
+      <formattedLocation>Lima, Lima, PE</formattedLocation>
+      <source>Buscojobs</source>
+      <date>Fri, 10 Jun 2016 11:27:59 -0400</date>
+      <snippet>Conocimientos 2 a 3 años de experiencia Java EE Nivel IntermedioAvanzado OraclePLSQL Nivel IntermedioAvanzado Linux Nivel Intermedio Web Services SOAP y Rest Nivel Avanzado SVN y Tortoise...</snippet>
+      <url>http://neuvoo.com.pe/job.php?id=f440a9bge2&amp;source=api&amp;publisher=f901eee1&amp;utm_source=api&amp;utm_medium=f901eee1&amp;chnl=default</url>
+      <onmousedown>this.href=this.href+'&amp;ref='+encodeURIComponent(document.URL)</onmousedown>
+      <logo>http://neuvoo.com.pe/img/logos/buscojobs-pe.png?empname=Itteam</logo>
+      <border>
+      </border>
+    </result>
+    <result>
+      <jobkey>xn6sfvvunk</jobkey>
+      <jobtitle>Desarrollador Java</jobtitle>
+      <company>Itteam</company>
+      <city>Lima</city>
+      <state>Lima</state>
+      <country>PE</country>
+      <formattedLocation>Lima, Lima, PE</formattedLocation>
+      <source>Buscojobs</source>
+      <date>Wed, 08 Jun 2016 06:56:18 -0400</date>
+      <snippet>Conocimientos 2 a 3 años de experiencia Java EE Nivel IntermedioAvanzado OraclePLSQL Nivel IntermedioAvanzado Linux Nivel Intermedio Web Services SOAP y Rest Nivel Avanzado SVN y Tortoise...</snippet>
+      <url>http://neuvoo.com.pe/job.php?id=xn6sfvvunk&amp;source=api&amp;publisher=f901eee1&amp;utm_source=api&amp;utm_medium=f901eee1&amp;chnl=default</url>
+      <onmousedown>this.href=this.href+'&amp;ref='+encodeURIComponent(document.URL)</onmousedown>
+      <logo>http://neuvoo.com.pe/img/logos/buscojobs-pe.png?empname=Itteam</logo>
+      <border>
+      </border>
+    </result>
+  </results>
+</response>

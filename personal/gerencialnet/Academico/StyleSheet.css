@@ -1,0 +1,46 @@
+body, span, div, table, tr, td, input, p, select, button
+{
+	font-size: 8pt;
+	font-family: Tahoma, 'Trebuchet MS',Verdana, 'Microsoft Sans Serif', Serif, Sans-Serif;
+}
+
+.ppbtn_normal
+{
+    float: left; 
+    font-size: 8pt;
+    border: solid 1px gainsboro; 
+    vertical-align:middle;
+    cursor:default;
+    height: 20px;
+	background-image: url(../../images/button-bg.gif);
+    background-repeat:repeat-x;    
+    position: absolute;
+    top: 0px; 
+}
+
+.ppbtn_selected
+{
+    float: left;
+    font-size: 8pt;
+    border: solid 1px gainsboro;
+    border-bottom: none;
+    background: white;
+    vertical-align: middle;
+    cursor: default;
+    height: 22px;
+    background-image: url(../../images/button-bg2.gif);
+    background-repeat: repeat-x;
+    position: absolute;
+    top: -1px;
+    z-index: 1;
+    font-weight: bold;
+}
+
+.ppbtn_over
+{
+    background-image: url(../../images/button-bg-ovr.gif);
+}
+.cabecera_celda
+{
+    width: 90px;
+}

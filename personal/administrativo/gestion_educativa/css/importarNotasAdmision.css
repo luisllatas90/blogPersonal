@@ -1,0 +1,15 @@
+.main {
+  position: relative; }
+  .main #loading-gif {
+    position: absolute;
+    display: none;
+    width: 30px;
+    right: 10px;
+    top: 5px;
+    z-index: 9999; }
+  .main .custom-file + .text-muted {
+    display: block;
+    margin-top: -0.4rem; }
+
+.custom-file-label {
+  padding: 0.3rem .55rem; }

@@ -1,0 +1,6 @@
+#udpRequisitos hr {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem; }
+
+#udpRequisitos .list-group-item:last-child {
+  border: none; }

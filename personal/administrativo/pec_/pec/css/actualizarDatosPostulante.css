@@ -1,0 +1,30 @@
+#actualizar-datos-postulante {
+  position: relative; }
+  #actualizar-datos-postulante #frmDatosPostulante {
+    opacity: 0;
+    display: none; }
+  #actualizar-datos-postulante #loading-gif {
+    position: absolute;
+    width: 50px;
+    left: 50%;
+    top: 150px;
+    margin-left: -25px;
+    z-index: 9999; }
+
+.sw-container .card .card-body {
+  padding: 0.5rem; }
+
+.sw-container .text-seccion {
+  font-size: 0.9rem; }
+  .sw-container .text-seccion + hr {
+    margin: 0.5rem 0rem; }
+
+.sw-container label.form-check-label {
+  margin-left: 4px;
+  line-height: 1; }
+
+.sw-container span.form-check-label {
+  line-height: 1; }
+
+#txtPaisProcExtranjero {
+  margin-left: 6px; }

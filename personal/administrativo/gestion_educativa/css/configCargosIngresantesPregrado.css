@@ -1,0 +1,13 @@
+.container-fluid {
+  padding-top: 10px; }
+
+.title {
+  font-size: 1rem; }
+  .title + hr {
+    margin: 8px 0px; }
+
+.row-agregar .title {
+  margin-bottom: 0px; }
+
+.btn-quitar {
+  margin-left: 10px; }

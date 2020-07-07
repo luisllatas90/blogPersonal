@@ -1,0 +1,6 @@
+ <asp:TextBox 
+ skinID="CajaTextoDefecto" 
+ runat="server" 
+ CssClass="TX_cajatexto" 
+ Height="21px" > 
+ </asp:TextBox>

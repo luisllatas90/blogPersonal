@@ -1,0 +1,86 @@
+﻿/*Estilos nuevos*/
+.celdaencabezado
+{
+    color: black;
+    font-family: Verdana;
+    background-color: #E9DF8D;/*palegoldenrod;*/
+    font-weight: bold;
+}
+body{ font-family: Verdana, "Trebuchet MS", "Lucida Console", Arial, san-serif;
+	color: Black;font-size:8pt;
+	margin-top:0px;
+	margin-left:0px;
+	margin-right :0px; 
+	font: normal;
+	}
+.cunia  	{border-right:1px solid #91A9DB; border-top:1px solid #91A9DB; border-bottom:1px solid #91A9DB; background-position: 0% 0%; width:17px;height:19px; background-image:url('../images/cunia.gif'); background-repeat:no-repeat;}
+.titulocel
+{
+    font-weight: bold;
+    color: #5382b4;
+    font-family: Verdana;
+    background-color: #f0f0f0;
+    font-size: 8pt;
+    text-align:left ;
+    height: 20px;
+}
+.aprobar1  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../../../images/aprobar1.png') no-repeat 0% 50%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.desaprobar1  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../../../images/desaprobar1.png') no-repeat 0% 50%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+
+.guardar  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/guardar.gif') no-repeat 0% 50%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.imgGuardar {border:0px solid #C0C0C0; background: url('../images/guardar.gif') no-repeat 0% 80%;font-family:Tahoma; font-size:8pt; font-weight:bold;cursor:hand}
+.Buscar     {border:1px solid #C0C0C0; background:#FEFFE1 url('../images/busca.gif') no-repeat 0% 50%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold}
+.cancelar   {border:1px solid #C0C0C0; background:#FEFFE1 url('../images/salir.gif') no-repeat 0% 50%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.limpiar    {border:1px solid #C0C0C0; background:#FEFFE1 url('../images/limpiar.gif') no-repeat 0% 50%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.nuevo      {border:1px solid #C0C0C0; background:#FEFFE1 url('../images/edit_add.gif') no-repeat 0% 50%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.volver     {border:1px solid #C0C0C0; background:#FEFFE1 url('../images/atras.gif') no-repeat 0% 50%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.cerrar     {border:1px solid #C0C0C0; background:#FEFFE1 url('../images/salir_prp.gif') no-repeat 0% 50%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+
+.celdatitulo
+{
+    height: 35px;
+    border-top-width: 5pt;
+    border-left-width: 5pt;
+    border-left-color: #f0f0f0;
+    border-bottom-width: 5pt;
+    border-bottom-color: #f0f0f0;
+    border-top-color: #f0f0f0;
+    background-color: #f0f0f0;
+    border-right-width: 5pt;
+    border-right-color: #f0f0f0;
+}
+
+.fondoblanco
+{
+    border-right: darkgray thin solid;
+    border-top: darkgray thin solid;
+    border-left: darkgray thin solid;
+    border-bottom: darkgray thin solid;
+    background-color: #ffffff;
+}
+.encabezadoDatos
+{
+    font-family: Verdana;
+    background-color: inactivecaptiontext;
+    font-weight: bold;
+}
+
+.fuente10
+{
+    font-family: Verdana;
+    text-align: left;
+    font-size: 10px;
+    text-transform: capitalize;
+}
+.TituloTabla
+{
+	background-color: #4182CD;
+	color: #FFFFFF;
+	font-family: Verdana;
+	font-weight: bold;
+	font-size: smaller;
+}
+.ExportarAWord{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/exportaraword.gif') no-repeat 0% 80%; width:70; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.ExportarAExcel{border:1px solid #C0C0C0; background:#FFFFFF url('../images/exportaraExcel.gif') no-repeat 0% 80%; width:70; font-family:Tahoma; font-size:8pt; font-weight:bold;}
+.Actualizar{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/actualizar.jpg') no-repeat 0% 80%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.TituloReq{	text-transform: uppercase; font-weight: bold; background-color: #365E89; color: #FFFFFF;	}

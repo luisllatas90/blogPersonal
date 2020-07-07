@@ -1,0 +1,135 @@
+.lnavItemSelected
+{
+    COLOR: #666666;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+    FONT-SIZE: 11px;
+    TEXT-DECORATION: none
+}
+.titulos {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #ffffff;
+	background-position: center center;
+	text-align: center;
+	vertical-align: middle;
+	width: 90px;
+	background-color: #990000;
+}
+.Datos {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-align: right;
+	vertical-align: middle;
+	font-weight: normal;
+	color: #000033;
+}
+.DatosNeg {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-align: right;
+	vertical-align: middle;
+	font-weight: normal;
+	color: #990000;
+}
+
+.tabla {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	font-weight: bold;
+	background-position: center center;
+	text-align: center;
+	text-transform: uppercase;
+	color: #ffffff;
+	background-color: #990000;
+}
+.nombreseccion {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #394B2E;
+	text-align: left;
+	vertical-align: middle;
+	background-color: #DECE9C;
+}
+.nombrefila {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-transform: uppercase;
+	text-align: left;
+	vertical-align: middle;
+	background-color: #ECE9D8;
+	color: #000000;
+}
+.nombretotal
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: left;
+    vertical-align: middle;
+    background-color: #ffffe1;
+    color: black;
+    border-top: black 1px solid;
+    border-bottom:black 1px solid;
+}
+.Totales
+{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-align: right;
+    vertical-align: middle;
+    font-weight: bold;
+    background-color: #ffffe1;
+    color: black;
+    border-top: black 1px solid;
+    border-bottom:black 1px solid;
+}
+.TotalGeneral
+{
+    font-weight: bold;
+    font-size: 11pt;
+    color: white;
+    font-family: Verdana;
+    background-color: maroon;
+    text-align: right;
+}
+.TotalColumnas
+{
+    font-weight: bold;
+    font-size: 8pt;
+    color: white;
+    font-family: verdana;
+    background-color: maroon;
+    text-align: right;
+}
+.TotalTitulo
+{
+    font-weight: bold;
+    font-size: 9pt;
+    color: white;
+    font-family: verdana;
+    background-color: maroon;
+    text-align: left;
+    text-transform: uppercase;
+}
+.contornotabla 
+{ 
+    border: 1px solid #808080; 
+    background-color:#FFFFFF 
+}
+.TotalGraf
+{
+    font-family: Arial;
+    font-size: 9px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #ffffe1;
+    color: black;
+    border-top: black 1px solid;
+    border-bottom:black 1px solid;
+}

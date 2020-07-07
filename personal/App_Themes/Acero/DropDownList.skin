@@ -1,0 +1,8 @@
+<asp:DropDownList skinID="ComboDefecto" runat="server" CssClass="DDL_combos">
+    </asp:DropDownList>
+    
+<asp:DropDownList skinID="ComboObligatorio" runat="server" CssClass="DDL_combosObligatorio">
+    </asp:DropDownList>    
+    
+<asp:DropDownList skinID="ComboBloqueado" runat="server" CssClass="DDL_combosBloqueados">
+    </asp:DropDownList>    

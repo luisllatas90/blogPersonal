@@ -1,0 +1,27 @@
+<!DOCTYPE HTML SYSTEM>
+<html>
+<body>
+ 
+<form name="aspnetForm" method="post" action="https://stsr4l.who.int/adfs/ls/?SAMLRequest=7b0HYBxJliUmL23Ke39K9UrX4HShCIBgEyTYkEAQ7MGIzeaS7B1pRyMpqyqBymVWZV1mFkDM7Z28995777333nvvvfe6O51OJ%2fff%2fz9cZmQBbPbOStrJniGAqsgfP358Hz8iHjfZolw9Ol638%2bWr%2fBet86ZNz55%2b9tHvv3vvINufHEy3Zw8n0%2b39e%2bf72w938vvb55PJ%2ft7OQX7wabb%2fUfqTed0U1fKzj%2fbGOx%2blZ02zzs%2bWTZstW%2fpoZ%2ffe9u4e%2fe%2fN7oNHuw8f7e%2bMdz49%2bKmP0qfUS7HMWn5z3rar5tHdu03b1Pvl%2bGpejYtlezebnTd3y%2bbuR%2blJtWxyAFzXy0dV1hTNo2W2yJtH7fTR6%2bMvnj%2bivh9NpdGj9bJZ5dPivMhnH6XvFuWyecQj3Pz2qq7aalqVHx095jHU8urml7KmyWuM4aMjjGFgCNTmspjmzd22Xjft47sC%2f%2bjx3T7hj%2f4f&amp;Signature=UdQwz3dMHqdIXjUtn9W4i1qU3ATgp9%2b3JIt5u93NgHFgmomnv5e32FZtgYV3oC2kAhC9iW023OETGaIvKeDlzhKSS6UexyGqAKHjrwbjYDwMwoE4Qz93ftjvBlZcAU53ejOXO%2frvxf0CVgmtBMWj1zTrKIqf7bdWJ74pQEIx4fFLCS0hmaFPY%2frtrX2%2ft6faQuBnfo9gFMdP6gTDqW6xGc0VTHE2EuiOYCwgyP%2fovApHl0wdp3PmhxRgdl5McZrX1uSXrPK5KSopkSvR69jjUvbInHGMHk2UVznSs3wuhEHb4auerOv3h4KLVxfzi8sWW8iPsl62DHa6MqMpaI6Vjg%3d%3d&amp;SigAlg=http%3a%2f%2fwww.w3.org%2f2001%2f04%2fxmldsig-more%23rsa-sha256" id="aspnetForm">
+ 
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTY2MTc3NjUzM2Rk" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBQK9msPZAQLnmcnFAQKzpa6MBwKo77JuAunYybIM" />
+ 
+ 
+<input type="hidden" name="__db" value="14" />
+<input name="ctl00$ContentPlaceHolder1$UsernameTextBox" type="hidden" id="ContentPlaceHolder1_UsernameTextBox" value="PER098"/>            
+<input name="ctl00$ContentPlaceHolder1$PasswordTextBox" type="hidden" id="ContentPlaceHolder1_PasswordTextBox" value="62701"/>            
+<input type="submit" style="display:none" name="ctl00$ContentPlaceHolder1$SubmitButton" value="Sign In" id="ContentPlaceHolder1_SubmitButton" class="Resizable" />
+</form>
+ 
+ 
+<script language="Javascript" type="text/javascript">
+function ADFSSubmit() {
+document.getElementById("ContentPlaceHolder1_SubmitButton").click();
+}
+window.onload = ADFSSubmit();
+</script>
+ 
+</html>
+</body>
+ 

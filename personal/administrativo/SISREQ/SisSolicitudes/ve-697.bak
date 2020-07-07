@@ -1,0 +1,359 @@
+﻿
+Partial Class administrativo_SISREQ_SisSolicitudes_frmConfirmarPagoSolicitudes
+    Inherits System.Web.UI.Page
+
+
+    Protected Sub gvLista_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gvLista.SelectedIndexChanged
+        Dim Ruta As New EncriptaCodigos.clsEncripta
+        Dim obj As New clsTramitesSolicitudes
+        Dim datos As New Data.DataTable
+
+        Me.pnlDatosEstudiante.Visible = True
+        Me.txtNombre.Text = ""
+        Me.txtCodigoUni.Text = gvLista.SelectedRow.Cells(3).Text
+        Me.txtNombre.Text = CChar(gvLista.SelectedRow.Cells(4).Text)
+        'Me.txtCarrera.Text=(Me.gvLista.SelectedDataKey.Item().ToString
+        Me.txtPlan.Text = Me.gvLista.SelectedDataKey.Item(4).ToString
+        Me.txtCiclo.Text = Me.gvLista.SelectedDataKey.Item(3).ToString
+        Me.txtCarrera.Text = Me.gvLista.SelectedDataKey.Item(5).ToString
+
+        Me.imgFoto.ImageUrl = "http://intranet.usat.edu.pe/imgestudiantes/" & Ruta.CodificaWeb("069" & gvLista.SelectedRow.Cells(3).Text)
+        Session("foto") = Me.imgFoto.ImageUrl
+        imgFoto.Width = 118
+        imgFoto.BorderColor = Drawing.Color.Black
+        imgFoto.Height = 120
+
+        datos = obj.ConsultarCursosExamenExtraordinario(Me.gvLista.SelectedDataKey.Item(0).ToString)
+        Me.gvListaCursos.DataSource = datos
+        Me.gvListaCursos.DataBind()
+        'Me.gvCodigo_Cup.DataBind()
+    End Sub
+
+    Protected Sub btnCalificar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCalificar.Click
+        Dim obj As New clsTramitesSolicitudes
+        Dim objTdt As New ClsSqlServer(ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString)
+
+        Dim datos As New Data.DataTable
+        Dim codigo_Pes As Int16
+        Dim codigo_Cur As Integer
+        Dim codigo_Cup As Data.DataTable
+        Dim detalleCodigos_Cup As New Data.DataTable
+        Dim codigo_Mat As String = ""
+        Dim codigo_Sol As String
+        Dim codigo_Alu As String
+        Dim total_Creditos As Integer = 0
+        Dim suma_Total As Decimal = 0.0
+        Dim cantFilasCursos As Integer
+        Dim codigo_Per As String
+        Dim fechaFin, fechaRetiro, fechaInicio As Date
+
+        Dim f, x As Integer
+
+
+        codigo_Pes = Me.gvLista.SelectedDataKey.Item(6).ToString
+        codigo_Sol = Me.gvLista.SelectedDataKey.Item(0).ToString()
+        codigo_Alu = Me.gvLista.SelectedDataKey.Item(1).ToString()
+        cantFilasCursos = Me.gvListaCursos.Rows.Count
+        codigo_Per = Request.QueryString("id")
+        'Response.Write(codigo_Cup)
+        'Response.Write(" " & codigo_Pes)
+        'Response.Write(" " & codigo_Sol)
+        'Response.Write(" " & codigo_Per)
+        fechaInicio = DateTime.Now.ToString
+        fechaFin = fechaInicio.AddDays(40)
+        fechaRetiro = fechaFin
+        'Response.Write(" " & fechaInicio)
+        'Response.Write(" " & fechaFin)
+        'Response.Write(" " & fechaRetiro)
+        'Response.Write(" " & codigo_Sol)
+
+        Dim detalle(cantFilasCursos, 4) As String
+
+        'Try
+        objTdt.IniciarTransaccion()
+
+
+        '' Primer Paso: Evaluar la solicitud de Examen Extraordinario'
+        'objTdt.Ejecutar("SOL_EvaluarSolicitudExamExtraordinario", 1, codigo_Per, DateTime.Now.ToString, _
+        '                              Me.txtObservacion.Text, Me.cboAprobacion.SelectedValue.ToString, _
+        '                              1, CInt(codigo_Sol))
+        'EvaluarSolicitudCliente(1, codigo_Per, DateTime.Now.ToString, Me.txtObservacion.Text, _
+        '                           Me.cboAprobacion.SelectedValue.ToString, 1, CInt(codigo_Sol))
+
+        ' fin de Programación del curso '
+        x = 0
+        If Me.cboAprobacion.SelectedValue = "A" Then
+
+            ' Segundo Paso: Programar el curso solicitado para examen extraordinario'
+            Dim matriculado As Boolean = False
+            Dim curConsultados As Boolean = False
+
+            For f = 0 To cantFilasCursos - 1
+                codigo_Cur = Me.gvListaCursos.Rows(f).Cells(2).Text
+                Response.Write(" " & codigo_Cur)
+                If curConsultados = False Then
+                    For x = x To cantFilasCursos - 1
+                        datos = objTdt.TraerDataTable("SOL_ConsultarCodigoCupCursoProgramado", CInt(codigo_Cur))
+                        'obj.ConsultarCodigoCupCursoProgramado(CInt(codigo_Cur)) ', CInt(Me.dpCodigo_cac.Text), codigo_Pes)
+                        total_Creditos = total_Creditos + CInt(datos.Rows(0).Item("creditos_Cur").ToString)
+                        suma_Total = suma_Total + 250
+                        'detalle(f, 1) = datos.Rows(f).Item(0).Value ' codigo_cup
+                        'detalle(f, 2) = codigo_Cur
+                        'detalle(f, 3) = datos.Rows(f).Item(1).Value ' credito_Cur
+                        'detalle(f, 4) = gvListaCursos.Rows(f).Cells(2).Text ' TotalHoras_Cur
+                    Next
+                    curConsultados = True
+                End If
+                Response.Write(" " & total_Creditos)
+                Response.Write(" " & suma_Total)
+                If matriculado = False Then
+                    codigo_Mat = objTdt.Ejecutar("SOL_RegistrarMatriculaExamenExtraordinario", "X", (fechaInicio), _
+                                           codigo_Alu, CInt(Me.dpCodigo_cac.Text), "P", _
+                                           "Matrícula Examen Extraordinario/Web", codigo_Per, "N", _
+                                           "Solicitud Web de Examen Extraordinario", "X", total_Creditos, suma_Total)
+                    Response.Write(" " & codigo_Mat)
+                    matriculado = True
+                End If
+
+                'If codigo_Mat <> "" Then
+
+                'End If
+
+                'codigo_Cup = objTdt.TraerDataTable("SOL_ProgramarCursoExamenExtraordinario", 0, Me.dpCodigo_cac.SelectedValue, _
+                '                                   codigo_Pes, codigo_Cur, 1, "X", DateTime.Now.Date, fechaFin, _
+                '                                   fechaRetiro, codigo_Per, "PROGRAMACIÓN POR EXAMEN EXTRAORDINARIO", 0, _
+                '                                     CInt(Me.txtCod_Cco.Text), 0)
+
+
+
+
+
+                'obj.ProgramarCursoExamenExtraordinario(0, Me.dpCodigo_cac.SelectedValue, CInt(codigo_Pes), _
+                '                                                    codigo_Cur, 1, "X", DateTime.Now.Date, ChrW(codigo_Per), _
+                '                                                    "PROGRAMACIÓN POR EXAMEN EXTRAORDINARIO", _
+                '                                                    CInt(Me.txtCod_Cco.Text), 0)
+
+                'detalle(f, 0) = codigo_Cup.Rows(0).Item("codigo_Cup").ToString
+            Next
+
+            'f = 0
+            'codigo_Cur = 0
+
+            '' fin de Programación del curso '
+
+            ''Tercer Paso: Matricular al estudiante en los cursos por Examen Extraordinario Programados'
+            'For f = 0 To cantFilasCursos - 1
+
+            '    codigo_Cur = CInt(Me.gvListaCursos.Rows(f).Cells(1).Text)
+            '    datos = obj.ConsultarCodigoCupCursoProgramado(detalle(f, 0)) ', CInt(Me.dpCodigo_cac.Text), codigo_Pes)
+            '    total_Creditos = total_Creditos + CInt(datos.Rows(0).Item(1).ToString)
+            '    suma_Total = suma_Total + 250
+            '    detalle(f, 1) = datos.Rows(f).Item(0).Value ' codigo_cup
+            '    detalle(f, 2) = codigo_Cur
+            '    detalle(f, 3) = datos.Rows(f).Item(1).Value ' credito_Cur
+            '    detalle(f, 4) = gvListaCursos.Rows(f).Cells(2).Text ' TotalHoras_Cur
+            'Next
+            'codigo_Mat = objTdt.Ejecutar("SOL_RegistrarMatriculaExamenExtraordinario", "X", DateTime.Now.ToString, _
+            '                             codigo_Alu, CInt(Me.dpCodigo_cac.Text), "P", _
+            '                             "Matrícula Examen Extraordinario/Web", codigo_Per, "N", _
+            '                             "Solicitud Web de Examen Extraordinario", "X", total_Creditos, suma_Total)
+            'obj.MatricularEstudianteExamenExtraordinario(CInt(codigo_Alu), _
+            '                                                          CInt(Me.dpCodigo_cac.Text), codigo_Per, _
+            '                                                          total_Creditos, suma_Total)
+            'For f = 0 To cantFilasCursos - 1
+
+            '    objTdt.TraerDataTable("SOL_RegistrarMatriculaExamenExtraordinario", codigo_Mat, detalle(f, 1), _
+            '                            detalle(f, 3), DateTime.Now.ToString, codigo_Per, detalle(f, 2), _
+            '                            codigo_Pes, codigo_Alu)
+            '    obj.RegistrarDetalleMatriculaExamenExtraordinario(codigo_Mat, codigo_Per, codigo_Alu, codigo_Pes, _
+            '                                                      detalle)
+            'Next
+
+        End If
+
+        'Catch ex As Exception
+        'objTdt.AbortarTransaccion()
+        ' Response.Write(ex.Message)
+        'Finally
+        objTdt.TerminarTransaccion()
+        ' gvLista.DataBind()
+        ' Me.pnlDatosEstudiante.Visible = False
+        'End Try
+
+    End Sub
+
+
+    Protected Sub btnBuscar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnBuscar.Click
+        Dim obj As New clsTramitesSolicitudes
+        Dim objTdt As New ClsSqlServer(ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString)
+        Dim objfun As New ClsFunciones
+
+        Dim datos As New Data.DataTable
+        Dim codigo_cpf As String
+        Dim resultados As New Data.DataTable
+        Try
+
+            datos = objTdt.TraerDataTable("SOL_ConsultarCodCpfPorResponsable", Request.QueryString("id"))
+            codigo_cpf = datos.Rows(0).Item("codigo_Cpf").ToString
+            'Response.Write(codigo_cpf)
+            Me.txtCod_Cco.Text = datos.Rows(0).Item("codigo_Cco").ToString
+            resultados = objTdt.TraerDataTable("SOL_ConsultarSolExamExtraPendientes", CInt(codigo_cpf), "P", _
+                                               Me.cboEstado.SelectedValue, _
+                                               txtParametroBusqueda.Text)
+            Me.gvLista.DataSource = resultados
+            Me.gvLista.DataBind()
+            objfun.CargarListas(Me.dpCodigo_cac, objTdt.TraerDataTable("ConsultarCicloAcademico", "TO", 0), "codigo_cac", "descripcion_cac")
+        Catch ex As Exception
+            Response.Write(ex.Message)
+        Finally
+            datos = Nothing
+            resultados = Nothing
+            obj = Nothing
+            objTdt = Nothing
+            objfun = Nothing
+        End Try
+    End Sub
+
+    Protected Sub lbtnEvaluar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lbtnEvaluar.Click
+        Dim Ruta As New EncriptaCodigos.clsEncripta
+        Dim obj As New clsTramitesSolicitudes
+        Dim datos As New Data.DataTable
+
+        Me.pnlDatosEstudiante.Visible = True
+        Me.txtNombre.Text = ""
+        Me.txtCodigoUni.Text = gvLista.SelectedRow.Cells(3).Text
+        Me.txtNombre.Text = CChar(gvLista.SelectedRow.Cells(4).Text)
+        'Me.txtCarrera.Text=(Me.gvLista.SelectedDataKey.Item().ToString
+        Me.txtPlan.Text = Me.gvLista.SelectedDataKey.Item(4).ToString
+        Me.txtCiclo.Text = Me.gvLista.SelectedDataKey.Item(3).ToString
+        Me.txtCarrera.Text = Me.gvLista.SelectedDataKey.Item(5).ToString
+
+        Me.imgFoto.ImageUrl = "http://intranet.usat.edu.pe/imgestudiantes/" & Ruta.CodificaWeb("069" & gvLista.SelectedRow.Cells(3).Text)
+        Session("foto") = Me.imgFoto.ImageUrl
+        imgFoto.Width = 118
+        imgFoto.BorderColor = Drawing.Color.Black
+        imgFoto.Height = 120
+
+        datos = obj.ConsultarCursosExamenExtraordinario(Me.gvLista.SelectedDataKey.Item(0).ToString)
+        Me.gvListaCursos.DataSource = datos
+        Me.gvListaCursos.DataBind()
+        'Me.gvCodigo_Cup.DataBind()
+    End Sub
+
+    'Protected Sub gvListaCursos_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles gvListaCursos.RowDataBound
+    '    Try
+    '        If e.Row.RowType = DataControlRowType.DataRow Then
+    '            e.Row.Attributes.Add("OnMouseOver", "Resaltar(1,this,'S')")
+    '            e.Row.Attributes.Add("OnMouseOut", "Resaltar(0,this,'S')")
+    '            e.Row.Attributes.Add("OnClick", "javascript:__doPostBack('gvPedidos','Select$" & e.Row.RowIndex & "');")
+    '            e.Row.Style.Add("cursor", "hand")
+    '        End If
+    '    Catch ex As Exception
+    '        Response.Write("Error en tabla pedidos: " & ex.Message)
+    '    End Try
+    'End Sub
+
+    Protected Sub gvListaCursos_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gvListaCursos.SelectedIndexChanged
+
+        Dim obj As New clsTramitesSolicitudes
+        Dim objTdt As New ClsSqlServer(ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString)
+        Dim datos As New Data.DataTable
+        Dim codigo_Cac As Integer
+        Dim codigo_Pes As Int16
+        Dim codigo_Cur As Integer
+        Dim codigo_Cup As New Data.DataTable
+        Dim detalle_Mat As New Data.DataTable
+        Dim codigo_Mat As New Data.DataTable
+        Dim codigo_Sol As String
+        Dim codigo_Alu As String
+        Dim total_Creditos As Integer = 0
+        Dim suma_Total As Decimal = 0.0
+        Dim cantFilasCursos As Integer
+        Dim codigo_Per As String
+        Dim fechaFin, fechaRetiro, fechaInicio As Date
+        Dim CodigoCup_Reg As Integer
+        Dim CodigoMat_Reg As Integer
+        Dim codigo_Deu As Integer
+
+        fechaInicio = DateTime.Now.ToString
+        fechaFin = fechaInicio.AddDays(40)
+        fechaRetiro = fechaFin
+
+        codigo_Pes = Me.gvLista.SelectedDataKey.Item(6)
+        codigo_Sol = Me.gvLista.SelectedDataKey.Item(0).ToString()
+        codigo_Alu = Me.gvLista.SelectedDataKey.Item(1).ToString()
+        cantFilasCursos = Me.gvListaCursos.Rows.Count
+        codigo_Per = Request.QueryString("id")
+        codigo_Cac = Me.dpCodigo_cac.SelectedValue
+        codigo_Cur = Me.gvListaCursos.SelectedDataKey.Item(1)
+
+
+        'CONSULTAMOS SI EL ESTUDIANTE ESTA MATRICULADO EN EL CICLO ACADEMICO SELECIONADO
+
+        codigo_Mat = obj.ConsultarMatriculaEstudiante(codigo_Alu, Me.dpCodigo_cac.SelectedValue)
+        CodigoMat_Reg = codigo_Mat.Rows(0).Item("codigo_Mat").ToString
+        Response.Write(codigo_Mat.Rows(0).Item("codigo_Mat").ToString)
+
+        If Me.cboAprobacion.SelectedValue = "A" Then
+
+            codigo_Cup = objTdt.TraerDataTable("SOL_ProgramarCursoExamenExtraordinario", 1, codigo_Cac, _
+                                       codigo_Pes, codigo_Cur, 1, "X", fechaInicio, fechaFin, _
+                                       fechaRetiro, codigo_Per, "PROGRAMACIÓN POR EXAMEN EXTRAORDINARIO", 0, _
+                                         CInt(Me.txtCod_Cco.Text), 0)
+            CodigoCup_Reg = codigo_Cup.Rows(0).Item("codigo_Cup").ToString
+            total_Creditos = codigo_Cup.Rows(0).Item("creditos_Cur").ToString
+
+
+            Response.Write("codCup: " & CodigoCup_Reg)
+            Response.Write(" codMatConsul: " & CodigoMat_Reg)
+            Response.Write(" total créditos: " & total_Creditos)
+
+            If CodigoMat_Reg = 0 Then
+                'Matriculamos'
+                codigo_Mat = objTdt.TraerDataTable("SOL_RegistrarMatriculaExamenExtraordinario", "X", fechaInicio, _
+                                             codigo_Alu, CInt(Me.dpCodigo_cac.Text), "P", _
+                                             "Matrícula Examen Extraordinario/Web", codigo_Per, "N", _
+                                             "Solicitud Web de Examen Extraordinario", "X", total_Creditos, 250)
+                CodigoMat_Reg = codigo_Mat.Rows(0).Item("codigo_Mat")
+                Response.Write("codMat: " & CodigoMat_Reg)
+                'Registramos Detalle Matricula'
+                detalle_Mat = objTdt.TraerDataTable("SOL_RegistrarDetalleMatriculaExamExtraordinario", CodigoMat_Reg, _
+                                        CodigoCup_Reg, total_Creditos, fechaInicio, codigo_Per, _
+                                        codigo_Cur, codigo_Pes, codigo_Alu)
+
+                objTdt.Ejecutar("SOL_GenerarDudaExamExtraordinario", fechaInicio, codigo_Alu, codigo_Cac, _
+                                                                    "Deuda Examen Extraordinario", 250, _
+                                                                    CInt(Me.txtCod_Cco.Text), codigo_Pes, _
+                                                                    codigo_Cur, CodigoCup_Reg)
+
+                Response.Write("  detMat: " & detalle_Mat.Rows(0).Item("codigo_Dma").ToString)
+            Else
+
+                'Actualizamos creditos e importe de matricula '
+                codigo_Mat = objTdt.TraerDataTable("SOL_ActualizarMatriculaExamExtraordinario", CodigoMat_Reg, _
+                                                  total_Creditos, 250)
+                ''Registramos Detalle Matricula'
+                detalle_Mat = objTdt.TraerDataTable("SOL_RegistrarDetalleMatriculaExamExtraordinario", CodigoMat_Reg, _
+                                        CodigoCup_Reg, total_Creditos, fechaInicio, codigo_Per, _
+                                        codigo_Cur, codigo_Pes, codigo_Alu)
+
+                Response.Write("  detMat: " & detalle_Mat.Rows(0).Item("codigo_Dma").ToString)
+
+                objTdt.Ejecutar("SOL_GenerarDudaExamExtraordinario", fechaInicio, codigo_Alu, codigo_Cac, _
+                                                                    "Deuda Examen Extraordinario", 250, _
+                                                                    CInt(Me.txtCod_Cco.Text), codigo_Pes, _
+                                                                    codigo_Cur)
+
+            End If
+            'objTdt.Ejecutar("SOL_EvaluarSolicitudExamExtraordinario", 1, codigo_Per, DateTime.Now.ToString, _
+            '                              Me.txtObservacion.Text, Me.cboAprobacion.SelectedValue.ToString, _
+            '                              1, CInt(codigo_Sol))
+            'EvaluarSolicitudCliente(1, codigo_Per, DateTime.Now.ToString, Me.txtObservacion.Text, _
+            '                           Me.cboAprobacion.SelectedValue.ToString, 1, CInt(codigo_Sol))
+        End If
+    End Sub
+
+    Protected Sub gvListaCursos_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles gvListaCursos.RowCommand
+
+    End Sub
+End Class

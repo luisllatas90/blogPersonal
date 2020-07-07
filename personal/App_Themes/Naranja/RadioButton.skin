@@ -1,0 +1,1 @@
+<asp:RadioButton skinID="RadioButtonDefecto" runat="server" CssClass="RDB_radiobutton" />

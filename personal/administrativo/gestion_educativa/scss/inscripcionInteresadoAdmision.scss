@@ -1,0 +1,39 @@
+#frmInscripcion {
+    .card {
+        margin-bottom: 10px;
+    }
+}
+
+#lblCentroCosto {
+    margin-left: 8px;
+}
+
+#lnkObtenerDatos, #lnkObtenerDatosPorApellidos {
+    margin-top: -2px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 0.75rem;
+    &:focus {
+        box-shadow: none;
+    }
+    .fa {
+        margin-right: 5px;
+    }
+}
+
+#rowCostos {
+    span {
+        font-size: 0.8rem;
+        font-weight: bold;
+        &#spnCostoCiclo {
+            color: #E33439;
+        }
+    }
+}
+
+#mdlCoincidencias {
+    .modal-lg {
+        max-width: none;
+        width: 80%;
+    }
+}

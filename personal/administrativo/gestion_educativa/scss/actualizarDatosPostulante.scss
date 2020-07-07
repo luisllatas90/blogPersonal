@@ -1,0 +1,69 @@
+#actualizar-datos-postulante {
+    position: relative;
+    #frmDatosPostulante {
+        opacity: 0;
+        display: none;
+        overflow-x: hidden;
+    }
+    #loading-gif {
+        position: absolute;
+        width: 50px;
+        left: 50%;
+        top: 150px;
+        margin-left: -25px;
+        z-index: 9999;
+    }
+}
+
+#lnkObtenerDatos, #lnkObtenerDatosPorApellidos {
+    margin-top: -2px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 0.75rem;
+    &:focus {
+        box-shadow: none;
+    }
+    .fa {
+        margin-right: 5px;
+    }
+}
+
+.sw-container {
+    .card {
+        .card-body {
+            padding: 0.5rem; 
+        } 
+    }
+
+    label {
+        &.form-check-label {
+            margin-left: 4px;
+            line-height: 1;
+        }
+    }
+
+    span {
+        &.form-check-label {
+            line-height: 1;
+        }
+    }
+}
+
+#txtPaisProcExtranjero {
+    margin-left: 6px;
+}
+
+#rowCostos {
+    span {
+        font-size: 0.75rem;
+        align-self: center;
+        font-weight: bold;
+        &#spnCostoCiclo {
+            color: #E33439;
+        }
+    }
+}
+
+#grwDeudas .vencida {
+    color: #E33439;
+}

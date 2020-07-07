@@ -1,0 +1,35 @@
+﻿body 
+{
+    font-family:Arial;
+    font-size:small;    
+}
+
+#table
+{
+    border:solid;
+    border-color:Black;
+    border-width:1px;
+    /* background-color: rgb(2,3,255); */
+}
+
+#tabla
+{
+    top:17%; /* 32px */
+    left: 0px;
+    width: 100%;      
+    position: absolute;                
+}
+
+.tbDetalle{
+    border-bottom-style:solid; 
+    border-bottom-width: 1px; 
+    border-bottom-color:#979494;
+}
+
+.celda
+{
+    font-size:smaller;                
+    border-bottom-style:solid; 
+    border-bottom-width: 1px; 
+    border-bottom-color:#979494;
+}

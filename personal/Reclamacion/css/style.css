@@ -1,0 +1,105 @@
+*
+{
+    border-radius: 0px !important;
+}
+html, body
+{
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    color: #7D7D7D;
+}
+.btn-cerrar-sesion
+{
+    margin-top: 7px;
+}
+.alert-text
+{
+    color: #A94442;
+}
+.img-logo
+{
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.title-book
+{
+    color: #B30000;
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.title-dark-red
+{
+    color: #B30000;
+    font-size: 35px;
+}
+.title-gray
+{
+    color: #989696;
+    font-size: 35px;
+}
+.table.table-sm {
+    font-size: 0.7em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+textarea
+{
+    resize: none;
+    height: 100px;
+}
+.panel-heading-custom
+{
+    background-color: #FFC4C4 !important;
+    color: White !important;
+    text-align: center;
+}
+.panel-title-custom
+{
+    font-size: 25px !important;
+}
+.radio-button-text
+{
+    color: #989696;
+}
+.row-continue
+{
+    margin-top: 20px;
+    text-align: center;
+}
+.footer
+{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    line-height: 34px;
+    background-color: rgb(51, 0, 26);
+    text-align: center;
+    color: RGB(255,255,255);
+}
+.btn-usat-color
+{
+    color: #FFFFFF;
+    background-color: #990000;
+    border-color: #4D0000;
+}
+.btn-usat-color:hover, .btn-usat-color:focus, .btn-usat-color:active
+{
+    color: #FFFFFF;
+    background-color: #CC0000;
+    border-color: #4D0000;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #CCCCCC;
+  color: #666666;
+}

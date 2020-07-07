@@ -1,0 +1,94 @@
+﻿
+/* CSS Document */
+html, body{
+	font-family:Verdana, Geneva, sans-serif;
+}
+ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul.menu{
+	background: #FFF;
+	max-width: 300px;
+}
+ul.menu li, ul.menu li a{
+	display: block;
+}
+ul.menu li{
+	clear: both;
+}
+ul.menu li a{
+	padding: 5px;
+}
+ul.menu li span{
+	color: #CCC;
+	font-size: 10px;
+	padding: 8px;
+}
+li.item{
+	margin-bottom: 5px;
+}
+li.item>a {
+	border: 1px solid #333;
+	background: #000 url('../img/item.gif') no-repeat top right;
+	color: #FFF;
+	text-decoration: none;
+	font-weight: bold;
+}
+li.item>a:hover {
+	background-color: #036;
+}
+
+li.subitem>a {
+	border: 1px solid #CCC;
+	border-top: none;
+	background: #EFEFEF url('../img/subitem.gif') no-repeat top right;
+	color:  #069;
+	font-weight: bold;
+	text-decoration: none;
+}
+li.subitem>a:hover{
+	background-color: #FFC;
+	border-color: #FC6;
+	color:#C90;
+}
+
+li.item.con_menu>a, li.subitem.con_menu>a{
+	background-position: center right;
+}
+li.item.actual>a, li.item.activo>a, li.subitem.actual>a, li.subitem.activo>a{
+	background-position: bottom right;
+}
+li.actual>a{
+	cursor:default;
+}
+
+li.subitem>ul{
+	border: 1px solid #CCC;
+	border-top: none;
+}
+
+li.subitem2{
+	padding: 0 10px;
+}
+li.subitem2 a{
+	border-bottom: 1px solid #EFEFEF;
+	color: #666;
+	font-size: 11px;
+	text-decoration: none;
+}
+li.subitem a:hover{
+	text-decoration: underline;
+	color: #069;
+}
+
+li#actual{
+	background: #CCC;
+}
+li#actual a{
+	color: #FFF;
+	font-weight: bold;
+	cursor:default;
+}

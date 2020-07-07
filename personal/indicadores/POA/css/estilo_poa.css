@@ -1,0 +1,356 @@
+﻿        body
+        {
+            font-family: "Trebuchet MS" , "Lucida Console" , Arial, san-serif;
+            color: Black;
+            font-size: 8pt;
+            font: normal;
+        }
+        /*==== DropDownList, Select =====*/
+        select
+        {
+            font-family: Verdana;
+            font-size: 8.5pt;
+            height: 16px;
+        }
+
+        select:hover
+        {
+            cursor:pointer;
+        }
+        /*==== Fin DropDownList, Select =====*/
+        
+        /*==== Tabla =====*/
+        table
+        {
+            font-family: Trebuchet MS;
+            font-size: 8pt;
+
+        }
+        tbody tr
+        {
+            font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+            font-size: 8pt;
+            color: #2F4F4F;
+        }
+        
+        thead tr
+        {
+            font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+            font-size: 9px; 
+            font-weight:bold;
+            border: rgb(169,169,169) 1px solid;
+            color: white; 
+            background-color: #3871b0;
+            cursor:auto;
+            text-align:center;
+            vertical-align:middle;
+            padding:2px;
+        }
+        thead tr th
+        {
+            font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+            font-size: 9px; 
+            font-weight:bold;
+            border: rgb(169,169,169) 1px solid;
+            color: white; 
+            background-color: #3871b0;
+            cursor:auto;
+            text-align:center;
+            vertical-align:middle;
+            padding:2px;
+        }
+        
+        .celda_combinada
+        {
+            border-color: rgb(169,169,169);
+            border-style: solid;
+            border-width: 1px;
+        }
+        /*==== Fin Tabla =====*/
+        
+        li
+        {
+            list-style-image: url('../images/vineta.gif');
+        }
+        
+        /*==== Libk : a href =====*/
+        
+        a:link
+        {
+            color:Black;
+            text-decoration:none;
+            
+        }
+        img
+        {
+            cursor:pointer;
+	}
+        /*==== Fin Libk : a href =====*/
+        
+        /*==== Botones =====*/
+        .btnCancelar
+        {
+            border: 1px solid #e0a6af;
+	        background: #f4dfe2 url('../../../Images/menus/noconforme_small.gif') no-repeat 0% center;
+	        color:Red;
+	        height:32px;
+	        font-weight:bold;
+	        
+        }
+        .btnCancelar:hover
+        {
+            border: 1px solid #cc6d7c;
+	        background:  url('../../../Images/menus/noconforme_small.gif') no-repeat 0% center;
+	        cursor:pointer;
+         }
+         
+        .btnGuardar
+        {
+            border: 1px solid #6dcc8e;
+	        background: #ccedd7 url('../../../images/guardar.gif') no-repeat 0% center;
+	        color:Green;
+	        font-weight:bold;
+	        height:32px;
+        }
+        .btnGuardar:hover
+        {
+            border: 1px solid #189252;
+	        background: url('../../../images/guardar.gif') no-repeat 0% center;
+	        cursor:pointer;
+         }
+         
+        .btnExporta
+        {
+            border: 1px solid #6dcc8e;
+	        background: #ccedd7 url('../../../images/excel.gif') no-repeat 0% center;
+	        color:Green;
+	        font-weight:bold;
+	        height:25px;
+        }
+        .btnExporta:hover
+        {
+            border: 1px solid #189252;
+	        background: url('../../../images/excel.gif') no-repeat 0% center;
+	        cursor:pointer;
+         }
+         
+        .btnGuardarCheck
+        {
+            border: 1px solid #6dcc8e;
+	        background: #ccedd7 url('../../../Images/Okey.gif') no-repeat 0% center;
+	        color:Green;
+	        font-weight:bold;
+	        height:32px;
+        }
+        .btnGuardarCheck:hover
+        {
+            border: 1px solid #189252;
+	        background: url('../../../Images/Okey.gif') no-repeat 0% center;
+	        cursor:pointer;
+         }
+
+        .btnClonarPOA
+        {
+            border: 1px solid #408ab2;
+	        background: #ccedd7 url('../../../Images/Okey.gif') no-repeat 0% center;
+	        color:#397c9f;
+	        font-weight:bold;
+	        height:25px;
+        }
+        .btnClonarPOA:hover
+        {
+            border: 1px solid #5fa2c6;
+	        background: #ccedd7 url('../../../Images/Okey.gif') no-repeat 0% center;
+	        cursor:pointer; 
+         }
+         
+        .btnCancelarClonar
+        {
+            border: 1px solid #e0a6af;
+	        background: #f4dfe2 url('../../../Images/menus/noconforme_small.gif') no-repeat 0% center;
+	        color:Red;
+	        height:25px;
+	        font-weight:bold;
+	        
+        }
+        .btnCancelarClonar:hover
+        {
+            border: 1px solid #cc6d7c;
+	        background:  url('../../../Images/menus/noconforme_small.gif') no-repeat 0% center;
+	        cursor:pointer;
+         }
+         
+                 
+        .btnNuevo
+        {
+            border: 1px solid #408ab2;
+	        background: #cfe4ee url('../../../../Images/agregar.gif') no-repeat 0% center;
+	        color:#397c9f;
+	        font-weight:bold;
+	        height:25px;
+        }
+        .btnNuevo:hover
+        {
+            border: 1px solid #5fa2c6;
+	        background: url('../../../../Images/agregar.gif') no-repeat 0% center;
+	        cursor:pointer; 
+         }
+        .btnBuscar
+        {
+            border: 1px solid #bfac4c;
+	        background: #eee9cf url('../../../../Images/buscar_poa.png') no-repeat 0% center;
+	        color:#685d25;
+	        font-weight:bold;
+	        height:25px;
+        }
+        .btnBuscar:hover
+        {
+            border: 1px solid #9f8e39;
+	        background: #f2f1b1 url('../../../../Images/buscar_poa.png') no-repeat 0% center;
+	        cursor:pointer; 
+         }
+         /*==== Fin Botones =====*/
+         
+        .titulo_poa
+        {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: "Helvetica Neue" ,Helvetica,Arial,sans-serif;
+            color: #337ab7;
+            background-color: White;
+            padding-bottom: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+            z-index: 1;
+        }
+        .contorno_poa
+        {
+            position: relative;
+            top: 10px;
+            border: 1px solid #C0C0C0;
+            padding-left: 4px;
+            padding-top: 20px;
+            padding-right: 4px;
+        }
+        .caja_poa
+        {
+            font-family: Verdana;
+            font-size: 8.5pt;
+        }
+        .menuseleccionado
+        {
+            background-color: #FFCC66;
+            border: 1px solid #808080;
+        }
+        .menuporelegir
+        {
+            border: 1px solid #808080;
+            background-color: #FFCC66;
+        }
+         /*==== Mensajes =====*/
+        .mensajeExito
+        {
+            background-color: #d9edf7;
+            border: 1px solid #808080;
+            font-weight: bold;
+            color: #31708f;
+            height: 25px;
+            font-size: 13px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            vertical-align:middle;
+        }
+        .mensajeEliminado
+        {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border: 1px solid #C5BE51;
+            font-weight: bold;
+            height: 25px;
+            font-size: 13px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            vertical-align:middle;
+        }
+        .mensajeError
+        {
+            background-color: #f2dede;
+            border: 1px solid #E9ABAB;
+            font-weight: bold;
+            color: #a94442;
+            height: 25px;
+            font-size: 13px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            vertical-align:middle;
+        }
+        /*==== Fin Mensajes =====*/
+        
+        /* ====== MANTENIMIENTO ACTIVIDAD_POA (REGISTRO PROGRAMAS Y PROYECTOS) ======== */
+
+        .btnRegresar
+        {
+            border: 1px solid #b96a22;
+	        background: #f6e0cc url('../../../../Images/atras_poa.png') no-repeat 0% center;
+	        color:#bd6a20;
+	        font-weight:bold;
+	        height:32px;
+        }
+        .btnRegresar:hover
+        {
+            border: 1px solid #dd8333;
+	        background: url('../../../../Images/atras_poa.png') no-repeat 0% center;
+	        cursor:pointer; 
+         }
+        
+       .tab_activo
+        {
+            vertical-align:middle;
+            font-weight:bold;
+            color:White;
+            background-color:#3871b0;
+            border-color:#285e8e;
+            border-style:inset;
+            border-width:1px;
+            border-bottom-width:0px;
+            font-size:12.5px;
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+            cursor:hand;
+            }
+        .tab_inactivo
+        {
+            vertical-align:middle;
+            font-weight:bold;
+            color:#FFFFFF;
+            background-color:#337ab7;
+            filter:alpha(opacity=65);
+            border-color:#ccc;
+            border-style:solid;
+            border-width:1px;
+            border-bottom-color:#337ab7 ;
+            font-size:12.5px;
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+            cursor: hand;
+
+            }
+        .tab_opciones
+        {
+            vertical-align:middle;
+            font-weight:bold;
+            background-color:#337ab7;
+            filter:alpha(opacity=65);
+            border-color:#ccc;
+            border-style:solid;
+            border-width:1px;
+            border-bottom-color:#337ab7 ;
+            font-size:12.5px;
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+            cursor: hand;
+
+            } 
+            
+        /* ====== Fin Mantenimiento de Actividad (REGISTRO PROGRAMAS Y PROYECTOS) ======== */
+        

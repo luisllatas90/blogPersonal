@@ -1,0 +1,22 @@
+jQuery.fn.cuentaCaracteres = function() {
+            this.each(function() {
+                elem = $(this);
+                var contador = $('<div style="color:#003366;">Máximo: ' + elem.attr("value").length + '/160 caracteres.</div>');
+                elem.after(contador);
+                elem.data("campocontador", contador);
+                elem.keyup(function() {
+                    var elem = $(this);
+                    var campocontador = elem.data("campocontador");
+                    if (elem.attr("value").length > 160) {
+                        var text = $(this).val();
+                        var new_text = text.substr(0, 160);
+                        elem.val(new_text);
+                    }
+                    campocontador.text('Máximo: ' + elem.attr("value").length + '/160 caracteres.');
+                });
+            });
+            return this;
+        };
+        $(document).ready(function() {
+            $("textarea").cuentaCaracteres();
+        })

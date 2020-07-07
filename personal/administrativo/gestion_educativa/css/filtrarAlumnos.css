@@ -1,0 +1,31 @@
+.main-title {
+  position: relative;
+  font-size: 1rem;
+  color: #26758c;
+  margin-top: 0.6rem;
+  margin-bottom: 0.3rem; }
+  .main-title #loadingGif {
+    position: absolute;
+    display: none;
+    top: -3px;
+    right: 0px;
+    width: 25px; }
+  .main-title + hr {
+    margin: 8px 0px; }
+
+.container-fluid {
+  min-height: 200px; }
+
+.subtitulo {
+  color: #26758c;
+  font-size: 0.9rem; }
+
+.custom-control-label::after {
+  top: 0.2rem; }
+
+.custom-radio .custom-control-label,
+.custom-checkbox .custom-control-label {
+  padding-left: 0; }
+
+#udpFiltrosAlumno hr {
+  margin: 8px 0px; }

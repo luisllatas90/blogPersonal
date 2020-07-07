@@ -1,0 +1,44 @@
+<html>
+
+<body>
+ 
+<script language="Javascript" type="text/javascript">
+function setSrc() {
+//document.getElementById("UAGiFrame").src="http://hinarilogin.research4life.org";
+}
+//onload=setSrc();
+</script>
+ 
+<iframe id="UAGiFrame" style="display:none"></iframe>
+ 
+<form method=post action="http://hinarilogin.research4life.org/uniquesiglocalhost:6001/uniquesig0/InternalSite/Validate.asp">
+<input type="hidden" name="user_name" id="user_name" value="PER098">
+<input type="hidden" id="password" name="password" value="62701">                                                                                          
+<input type="hidden" id="repository" name="repository" value="Hinari">
+<input type="hidden" name ="language" id="language" value="en-US">
+ 
+<input type="hidden" name ="site_name" id="site_name" value="Hinari">
+<input type="hidden" name ="secure" id="secure" value="0">
+<input type="hidden" name ="resource_id" id="resource_id" value="CF6D043525E94FBC9BDD255AE794E123">
+<input type="hidden" name ="login_type" id="login_type" value="2">
+ 
+<input style="display:none" class="button" type="submit" id="submit_button2" value="Log On">
+</form>
+ 
+ 
+<script language="Javascript" type="text/javascript">
+function doSubmit() {
+document.getElementById("submit_button2").click(); 
+}
+function doSubmit2() {
+ document.location.href = "http://intranet.usat.edu.pe/campusvirtual/estudiante/hinari/hinari2.html";
+}
+
+//setTimeout("doSubmit()",2000);
+//setTimeout("doSubmit2()",4000);
+</script>
+</body>
+</html>
+ 
+
+ 

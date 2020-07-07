@@ -1,0 +1,98 @@
+<form method="post" action="frmListaEgresados.aspx" id="ctl00">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="
+__VIEWSTATE" value="" />
+</div>
+<div>
+	<table cellspacing="0" cellpadding="2" rules="all" border="1" id="dgv_exportar" style="color:#333333;font-size:Smaller;height:16px;width:16%;border-collapse:collapse;">
+		<tr style="color:White;background-color:#5D7B9D;font-weight:bold;height:25px;">
+			<th scope="col">NRO</th><th scope="col">DNI</th><th scope="col">APELLIDOS Y NOMBRES</th><th scope="col">CONDICION</th><th scope="col">PROGRAMA ACAD&#201;MICO</th><th scope="col">SEXO</th><th scope="col">A&#209;O</th><th scope="col">SEMESTRE</th><th scope="col">CENTRO DE TRABAJO</th><th scope="col">DIRECCION</th><th scope="col">TELEFONO</th><th scope="col">CELULAR</th><th scope="col">CORREO ELECTR&#211;NICO</th><th scope="col">CORREO ELECTR&#211;NICO PERSONAL</th>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>1</td><td>41675000</td><td>BRIONES CUEVA LANDER MICHAEL</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2014</td><td>2014-II</td><td> </td><td>CALLE MANUEL &#205;ZAGA 956</td><td>&nbsp;</td><td>979699686</td><td>lanmic_05@hotmail.com</td><td>lanmic_05@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>2</td><td>43710114</td><td>CABREJOS SALCEDO CARLOS IVAN</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2014</td><td>2014-II</td><td> </td><td>ROOSEVELT 1633 J.L.O. J.L.O</td><td>&nbsp;</td><td>74979028932</td><td>ivan_2817@hotmail.com</td><td>ivan_2817@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>3</td><td>16758895</td><td>CAMPOS BANCES CESAR ARCEMIO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2014</td><td>2014-I</td><td> </td><td>PASAJE LOS ROSALES N&#176; 153-</td><td>257566</td><td>948312057</td><td>acampos@usat.edu.pe</td><td>acampos@usat.edu.pe</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>4</td><td>41314262</td><td>CEDILLO URBINA HUMBERT EDUARDO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2013</td><td>2013-II</td><td> </td><td>CA. LOS CEDROS 484 - CARLOS STEIN CHAVEZ - JOS&#201; L. ORTIZ CHICLAYO</td><td>&nbsp;</td><td>943115940</td><td>hcedillo_20@hotmail.com</td><td>hcedillo_20@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>5</td><td>41068573</td><td>CHAVEZ COLMENARES DANIEL ANGEL</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2014</td><td>2014-II</td><td> </td><td>JR. INDUSTRIAL 717</td><td>25-5885</td><td>97809-3993</td><td>dangel02_8@hotmail.com</td><td>dangel02_8@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>6</td><td>40418739</td><td>CHAYAN ALACHE FREDDY ALBERTO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2015</td><td>2015-II</td><td> </td><td>CALLE DEMETRIO ACOSTA 330 - PPJJ. SAN MART&#205;N</td><td>281279</td><td>979258437</td><td>freddyalberto_3@hotmail.com</td><td>freddyalberto_3@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>7</td><td>16527428</td><td>C&#211;RDOVA OBLITAS CESAR AUGUSTO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2013</td><td>2013-I</td><td> </td><td>CARRETERA CHICLAYO-PIMENTEL KM 9 (REF.: FRENTE A COLEGIO ESPECIAL NI&#209;O JESUS DE PRAGA / COSTADO DE 3B (RENTA CAR)</td><td>453582</td><td>#945438286</td><td>cacordova70@hotmail.com</td><td>cacordova70@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>8</td><td>45658696</td><td>DIAZ DELGADO FERNANDO ENRIQUE</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2014</td><td>2014-I</td><td> </td><td>MZ O LOTE 02 URBANIZACION 20 DE ENERO</td><td>&nbsp;</td><td>978968584</td><td>nando12246@hotmail.com</td><td>nando12246@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>9</td><td>16710076</td><td>ESTELA VASQUEZ EDGARD GONZALO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2015</td><td>2015-I</td><td> </td><td>AV. FELIPE SANTIAGO SALAVERRY 353</td><td>208691</td><td>979267160</td><td>edgardestelav@gmail.com</td><td>edgardestelav@sanagustinchiclayo.edu.pe</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>10</td><td>16744015</td><td>GAL&#193;N S&#193;NCHEZ CARLOS JHONNY</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-II</td><td> </td><td>DOS DE MAYO 508 SAN JOSE</td><td>&nbsp;</td><td>9435873</td><td>carlosjhonny@hotmail.com</td><td>carlosjhonny@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>11</td><td>16718809</td><td>GALLARDO CASTILLO FRANCISCO GENNER</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-I</td><td> </td><td>AV. ALFONSO UGARTE N&#186; 39 ZONA</td><td>&nbsp;</td><td>979579615</td><td>ggallardo01@hotmail.com</td><td>ggallardo01@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>12</td><td>43688921</td><td>IM&#193;N ESPINOZA RICARDO DAVID</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-I</td><td> </td><td>TAHUANTINSUYO N&#186;1801-JOSE LEONARDO ORTIZ</td><td>439025</td><td>978819534</td><td>richard.iman@gmail.com</td><td>richard.iman@gmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>13</td><td>16725687</td><td>L&#211;PEZ PINEDO MIGUEL</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2013</td><td>2013-I</td><td> </td><td>CA. COLOMBIA N&#176; 775 BARSALLO - JOS&#201; LEONARDO ORTIZ</td><td>&nbsp;</td><td>979686210</td><td>mlopezp@distriluz.com.pe</td><td>mlopezp@distriluz.com.pe</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>14</td><td>40489766</td><td>MALDONADO CASTRO EDWIN</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2014</td><td>2014-I</td><td> </td><td>CALLE CESAR VALLEJOS 168-A URB EL PORVENIR</td><td>074226513</td><td>978424301</td><td>edijmr@hotmail.com</td><td>edijmr@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>15</td><td>43455136</td><td>MALDONADO ZAMBRANO VICTOR HUGO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2015</td><td>2015-II</td><td> </td><td>EL VALLE 172 - URB. 3 DE OCTUBRE</td><td>201834</td><td>954633839</td><td>v_maldonado_z@yahoo.es</td><td>v_maldonado_z@yahoo.es</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>16</td><td>41691965</td><td>MART&#205;NEZ MU&#209;OZ JUAN ERASMO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2013</td><td>2013-I</td><td> </td><td>AV BOLIVAR 1830 JOSE LEONARDO ORTIZ</td><td>&nbsp;</td><td>978840659</td><td>juan.soft@hotmail.com</td><td>juan.soft@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>17</td><td>44177590</td><td>MERA MONTENEGRO HUILDER JUANITO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-II</td><td> </td><td>PLG. CAROLINA N&#176; 707-URRUNAGA V SECTOR</td><td>074328001</td><td>97-9070343</td><td>huilder84@hotmail.com</td><td>huilder84@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>18</td><td>16483657</td><td>MIGUEL CASAS MOISES JOSE</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2013</td><td>2013-I</td><td> </td><td>CALLE ALFREDO LAPOINT 631 CHICLAYO</td><td>&nbsp;</td><td>979991005</td><td>mmiguel@distriluz.com.pe</td><td>mmiguel@distriluz.com.pe</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>19</td><td>16804126</td><td>MIRANDA UBILL&#218;S ROBERTO ALEXANDER</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-II</td><td> </td><td>AV FEREDICO VILLAREAL DPAT 402 LOS PARQUES</td><td>&nbsp;</td><td>964989680 -978785774</td><td>ramu_101073@hotmail.com</td><td>ramu_101073@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>20</td><td>41527205</td><td>MOLINA RUIZ JULIO EDGAR</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2012</td><td>2012-I</td><td> </td><td>Av. 28 de julio n&#186; 860</td><td>284215</td><td>979009133</td><td>julio_molina@outlook.com</td><td>juliomolina19@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>21</td><td>41527205</td><td>MOLINA RUIZ JULIO EDGAR</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2012</td><td>2012-I</td><td>EMPRESA EDITORA EL COMERCIO S.A.</td><td>Av. 28 de julio n&#186; 860</td><td>284215</td><td>979009133</td><td>julio_molina@outlook.com</td><td>juliomolina19@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>22</td><td>16729462</td><td>MONJA CORNEJO WENCESLAO IBAN</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2016</td><td>2016-0</td><td> </td><td>AV. PANAMERICANA NORTE 454</td><td>761730</td><td>979769712</td><td>wmonja@sunat.gob.pe</td><td>wmonja@sunat.gob.pe</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>23</td><td>44250081</td><td>MORALES CUEVA GUSTAVO ALFREDO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2013</td><td>2013-I</td><td>COLEGIO DE INGENIEROS DEL PERU - CONSEJO DEPARTAMENTAL LAMBAYEQUE</td><td>AV. EL TRIUNFO N&#186; 990 CRUZ DE LA ESPERANZA - CHICLAYO</td><td>437465</td><td>948652746</td><td>gustavo_3587@hotmail.com</td><td>gustavo_3587@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>24</td><td>16660712</td><td>MORENO DESCALZI JULIO C&#201;SAR</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-I</td><td> </td><td>REMIGIO MORALES 470 URB. REMIGIO SILVA-</td><td>203791</td><td>979770706</td><td>jmoreno@usat.edu.pe</td><td>jmoreno@usat.edu.pe</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>25</td><td>43371672</td><td>MU&#209;OZ MEZA EVELIO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-I</td><td> </td><td>AV. MEXICO 790 URB. MEXICO</td><td>&nbsp;</td><td>979222660</td><td>emu&#241;ozmeza@hotmail.com</td><td>emu&#241;ozmeza@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>26</td><td>41657065</td><td>NAUCA TORRES ENRIQUE SANTOS</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-I</td><td>CONSORCIO REVAS SAC</td><td>-</td><td>&nbsp;</td><td>930411337</td><td>snauca@gmail.com</td><td>matana460@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>27</td><td>44546435</td><td>NECIOSUP MILLONES JHONNY</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2015</td><td>2015-II</td><td> </td><td>TENIENTE PINGLO MZ. B LT. 11 - VILLA EL MILAGRO</td><td>&nbsp;</td><td>978087599</td><td>jhonny.millones@gmail.com</td><td>jhonny.millones@gmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>28</td><td>16691056</td><td>OLIVOS CASTILLO JORGE LUIS</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2013</td><td>2013-I</td><td> </td><td>LA GRUTA N&#186;320 9 DE OCTUBRE-CHICLAYO</td><td>455063</td><td>979599056</td><td>jolivos@usat.edu.pe</td><td>jolivos@usat.edu.pe</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>29</td><td>42752412</td><td>PEJERREY GOMEZ PEDRO RICARDO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2013</td><td>2013-II</td><td> </td><td>Vicente de la Vega 1599</td><td>227103</td><td>972673296</td><td>taoutew@hotmail.es</td><td>taoutew@hotmail.es</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>30</td><td>16734519</td><td>PEREZ TESEN DANIEL RODOLFO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-II</td><td> </td><td>PSJE MARIA REYNA 110 5TA ETAPA REMIGIO SILVA</td><td>&nbsp;</td><td>952943792</td><td>dperez@alternativa.com.pe</td><td>dperez@alternativa.com.pe</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>31</td><td>16715879</td><td>PISFIL ORT&#205;Z FERNANDO MIGUEL</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-I</td><td> </td><td>JR. PROGRESO N&#186; 206 ZONA</td><td>&nbsp;</td><td>979563438</td><td>fernando_pisfil_ortiz@hotmail.com</td><td>fernando_pisfil_ortiz@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>32</td><td>43607262</td><td>POLO CAPU&#209;AY JOSE ALONSO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2015</td><td>2015-I</td><td> </td><td>EL VALLE 242 URB. 3 DE OCTUBRE</td><td>074651420</td><td>941967383</td><td>josepc_862@hotmail.com</td><td>josepc_862@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>33</td><td>16787131</td><td>RODRIGUEZ PANTA JHONNY JHEYNER</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-II</td><td> </td><td>P.J. JORGE CHAVEZ MZ D LT 30 P.J. JORGE CHAVE</td><td>&nbsp;</td><td>&nbsp;</td><td>jjheyner@hotmail.com</td><td>jjheyner@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>34</td><td>16449928</td><td>RUIZ OLIVA CARLOS HERIBERTO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-I</td><td> </td><td>LAS DIAMELAS 260 FEDERICO VILLARREAL</td><td>&nbsp;</td><td>979717564</td><td>cruizo52@hotmail.com</td><td>cruizo52@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>35</td><td>16693772</td><td>SALAZAR PAREDES SERGIO ENRIQUE</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2013</td><td>2013-I</td><td> </td><td>LUIS NEGREIROS 200</td><td>&nbsp;</td><td>964102540</td><td>ssalazarp@distriluz.com.pe</td><td>ssalazarp@distriluz.com.pe</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>36</td><td>06278551</td><td>SALAZAR TINEO JULIO CESAR</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2014</td><td>2014-0</td><td> </td><td>LOS PINOS DE LA PLATA EDIFICIO H DPTO 404 SANTA VICTORIA</td><td>&nbsp;</td><td>998453140</td><td>jhulius10@hotmail.com</td><td>jhulius10@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>37</td><td>42430965</td><td>SARMIENTO SARMIENTO JOS&#201; MANUEL</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-II</td><td> </td><td>VICTOR FONSECA N 217 URB. LA PRIMAVERA</td><td>&nbsp;</td><td>074-9383432</td><td>dibugraf@hotmail.com&#160;</td><td>dibugraf@hotmail.com&#160;</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>38</td><td>42165556</td><td>SOLARI ROJAS LUIS GERARDO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-II</td><td> </td><td>AV. 9 DE OCTUBRE # 180 PJ ADRIANO BACA BURGA MZ C LOTE 15 ADRIANO BACA BURGA</td><td>&nbsp;</td><td>0749763802</td><td>gerardosolari1982@hotmail.com</td><td>gerardosolari1982@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>39</td><td>45574844</td><td>TULLUME SALAZAR CHRISTIAN OMAR</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2013</td><td>2013-I</td><td> </td><td>MIRAFLORES 217  P.J SAN ANTONIO</td><td>074204228</td><td>958423459</td><td>christiantullume@hotmail.com</td><td>bitocho11@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>40</td><td>16673385</td><td>VALLEJOS D&#193;VILA C&#201;SAR WILDER</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-II</td><td> </td><td>PUERTO RICO 920 LUJAN</td><td>&nbsp;</td><td>97-9918516</td><td>cevada2000@hotmail.com</td><td>cevada2000@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>41</td><td>16786753</td><td>VERA ALVARADO WALTER PAOLO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-II</td><td> </td><td>CALLE ANTONIO RAIMONDY # 193 AMPLIACION NVO. SAN LORENZO</td><td>&nbsp;</td><td>979567782</td><td>wveraltva70@hotmail.com</td><td>wveraltva70@hotmail.com</td>
+		</tr><tr style="color:#284775;background-color:White;height:22px;white-space:nowrap;">
+			<td>42</td><td>16806896</td><td>VILCHEZ TELLO MOIS&#201;S DANIEL</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2013</td><td>2013-I</td><td> </td><td>Av Saenz Pe&#241;a N&#176; 2248 Urb. Latina JLO</td><td>25 2075</td><td>968 823717</td><td>mvilchezt@hotmail.com</td><td>mvilchezt@hotmail.com</td>
+		</tr><tr style="color:#333333;background-color:#F7F6F3;height:22px;white-space:nowrap;">
+			<td>43</td><td>17623281</td><td>ZULOAGA CACHAY JOS&#201; FORTUNATO</td><td>PRE GRADO</td><td>P.P. Ing. Sistemas y Computaci&#243;n</td><td>M</td><td>2011</td><td>2011-II</td><td> </td><td>-CALLE ANDR&#201;S R&#193;ZURI N&#186; 561</td><td>456921</td><td>979259511</td><td>jfzuloagac@hotmail.com</td><td>jfzuloagac@hotmail.com</td>
+		</tr>
+	</table>
+</div></form>

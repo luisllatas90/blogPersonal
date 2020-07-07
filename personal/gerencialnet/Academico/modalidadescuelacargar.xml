@@ -1,0 +1,112 @@
+﻿<?xml version="1.0"?>
+<OlapReports>
+  <OlapReport Name="Report 1" Description="" CubeName="cubModalidadIngreso" DataTitleFormat="Ingresantes por Semestre Academico y Escuela Profesional segun Modalidad de Ingreso" ReadOnly="False" NonEmptyCellsOnly="True">
+    <AxisDescriptors>
+      <AxisDescriptor AxisName="Categorical">
+        <Dimensions>
+          <Dimension Name="CarreraProfesional" LevelName="[CarreraProfesional].[Facultad]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              
+              <Member Name="ADMINISTRACIÓN DE EMPRESAS" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES].[ADMINISTRACIÓN DE EMPRESAS]" />
+              <Member Name="CONTABILIDAD" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES].[CONTABILIDAD]" />
+              <Member Name="ECONOMÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES].[ECONOMÍA]" />
+              <Member Name="DERECHO" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[DERECHO].[DERECHO]" />
+              <Member Name="BIOLOGÍA  Y QUÍMICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[BIOLOGÍA  Y QUÍMICA]" />
+              <Member Name="CIENCIAS DE LA COMUNICACIÓN" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[CIENCIAS DE LA COMUNICACIÓN]" />
+              <Member Name="COMPLEMENTACIÓN ACADEMICA  DOCENTE" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[COMPLEMENTACIÓN ACADEMICA  DOCENTE]" />
+              <Member Name="EDUCACIÓN FÍSICA Y DANZAS" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[EDUCACIÓN FÍSICA Y DANZAS]" />
+              <Member Name="EDUCACIÓN INICIAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[EDUCACIÓN INICIAL]" />
+              <Member Name="EDUCACIÓN PRIMARIA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[EDUCACIÓN PRIMARIA]" />
+              <Member Name="FILOSOFÍA Y RELIGIÓN" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[FILOSOFÍA Y RELIGIÓN]" />
+              <Member Name="HISTORIA Y GEOGRAFÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[HISTORIA Y GEOGRAFÍA]" />
+              <Member Name="LENGUA Y LITERATURA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[LENGUA Y LITERATURA]" />
+              <Member Name="MATEMÁTICA, COMPUTACIÓN E INFORMATICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[MATEMÁTICA, COMPUTACIÓN E INFORMATICA]" />
+              <Member Name="ARQUITECTURA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[ARQUITECTURA]" />
+              <Member Name="INGENIERÍA CIVIL Y AMBIENTAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA CIVIL Y AMBIENTAL]" />
+              <Member Name="INGENIERÍA DE SISTEMAS Y COMPUTACIÓN" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA DE SISTEMAS Y COMPUTACIÓN]" />
+              <Member Name="INGENIERÍA ENERGÉTICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA ENERGÉTICA]" />
+              <Member Name="INGENIERÍA INDUSTRIAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA INDUSTRIAL]" />
+              <Member Name="INGENIERÍA MECÁNICA ELÉCTRICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA MECÁNICA ELÉCTRICA]" />
+              <Member Name="INGENIERÍA NAVAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA NAVAL]" />
+              <Member Name="ENFERMERÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[ENFERMERÍA]" />
+              <Member Name="MEDICINA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[MEDICINA]" />
+              <Member Name="ODONTOLOGÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[ODONTOLOGÍA]" />
+              <Member Name="PSICOLOGÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[PSICOLOGÍA]" />
+            </Members>
+            <Parents>
+              <Member UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES]" />
+              <Member UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[DERECHO]" />
+              <Member UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES]" />
+              <Member UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA]" />
+              <Member UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA]" />
+            </Parents>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+      <AxisDescriptor AxisName="Series">
+        <Dimensions>
+          <Dimension Name="Measures" LevelName="" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="Cantidad" UniqueName="[Measures].[Cantidad]" />
+            </Members>
+          </Dimension>
+          <Dimension Name="Semestre Ingreso" LevelName="[Semestre Ingreso].[Tipo Semestre]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="2006-II" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2006-II]" />
+              <Member Name="2007-I" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2007-I]" />
+              <Member Name="2007-II" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2007-II]" />
+              <Member Name="2008-I" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2008-I]" />
+              <Member Name="2008-II" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2008-II]" />
+            </Members>
+            <Parents>
+              <Member UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular]" />
+            </Parents>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+      <AxisDescriptor AxisName="Slicer">
+        <Dimensions>
+          <Dimension Name="Modalidad Ingreso" LevelName="[Modalidad Ingreso].[(Todos)]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="Todas Modalidad Ingreso" UniqueName="[Modalidad Ingreso].[Todas Modalidad Ingreso]" />
+            </Members>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+    </AxisDescriptors>
+    <ExpandedTuples>
+      <ExpandedTuple Name="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES]" />
+      <ExpandedTuple Name="[CarreraProfesional].[Todas CarreraProfesional].[DERECHO]" />
+      <ExpandedTuple Name="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES]" />
+      <ExpandedTuple Name="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA]" />
+      <ExpandedTuple Name="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA]" />
+    </ExpandedTuples>
+    <ControlState>
+      <StateBag Name="olapchart"><![CDATA[AAEAAAD/////AQAAAAAAAAAMAgAAAE1TeXN0ZW0uV2ViLCBWZXJzaW9uPTIuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49YjAzZjVmN2YxMWQ1MGEzYQUBAAAAElN5c3RlbS5XZWIuVUkuUGFpcgIAAAAFRmlyc3QGU2Vjb25kAgICAAAACQMAAAAJBAAAAA8DAAAA6AUAAAJEQ0JGMzAwAAAAAAAAAADNrhSuAXm8G35cdGVtcC9DaGFydFBpY18jU0VRKDMwMCwzKarlquWqVBJDYW50aWRhZCAtIFJlZ3VsYXLjRwGL7wAAAADC7UG0/P+q20BAQP8d1gAAAP+ZRkVEcmF3aW5nU3R5bGU9Q3lsaW5kZXIsIFBpZURyYXdpbmdTdHlsZT1Db25jYXZlLCBfT2xhcERhdGFTZXJpZXNfPXRydWVNQhJDYW50aWRhZCAtIFJlZ3VsYXIAAKrlqlQSQ2FudGlkYWQgLSAyMDA2LUlJ40cBi+8AAAAAwu0KQOD/qttAQED/HdYAAAD/mUZFRHJhd2luZ1N0eWxlPUN5bGluZGVyLCBQaWVEcmF3aW5nU3R5bGU9Q29uY2F2ZSwgX09sYXBEYXRhU2VyaWVzXz10cnVlTUISQ2FudGlkYWQgLSAyMDA2LUlJAACq5apUEUNhbnRpZGFkIC0gMjAwNy1J40cBi+8AAAAAwu2SZAX/qttAQED/HdYAAAD/mUZFRHJhd2luZ1N0eWxlPUN5bGluZGVyLCBQaWVEcmF3aW5nU3R5bGU9Q29uY2F2ZSwgX09sYXBEYXRhU2VyaWVzXz10cnVlTUIRQ2FudGlkYWQgLSAyMDA3LUkAAKrlqlQSQ2FudGlkYWQgLSAyMDA3LUlJ40cBi+8AAAAAwu2/v7//qttAQED/HdYAAAD/mUZFRHJhd2luZ1N0eWxlPUN5bGluZGVyLCBQaWVEcmF3aW5nU3R5bGU9Q29uY2F2ZSwgX09sYXBEYXRhU2VyaWVzXz10cnVlTUISQ2FudGlkYWQgLSAyMDA3LUlJAACq5apUEUNhbnRpZGFkIC0gMjAwOC1J40cBi+8AAAAAwu1pOxr/qttAQED/HdYAAAD/mUZFRHJhd2luZ1N0eWxlPUN5bGluZGVyLCBQaWVEcmF3aW5nU3R5bGU9Q29uY2F2ZSwgX09sYXBEYXRhU2VyaWVzXz10cnVlTUIRQ2FudGlkYWQgLSAyMDA4LUkAAAAAhkYGRHVuZGFzpg8KNi4xLjAuMTcyOMF2UI+qVAdEZWZhdWx06RH4crNpBEF1dG+I5cDAwP8AAPwgiOXAwMD/AACYXbNpBEF1dG8AANfDKURlY3JlYXNlRm9udCwgTGFiZWxzQW5nbGVTdGVwOTAsIFdvcmRXcmFwKL+zaQRBdXRvAAD2JQ1WYXJpYWJsZUNvdW50AADoEfhys2kEQXV0b4jl////AE5bAAAA/CCI5f///wAAAJhds2kEQXV0b05bAAAAjE6I5f///wClcAAAAGinBwAAANfDKURlY3JlYXNlRm9udCwgTGFiZWxzQW5nbGVTdGVwOTAsIFdvcmRXcmFwKL+zaQRBdXRvAACw2izFAAAAAAAAAABopQAAAAAAAAhAAADrlUUqyNDU/wAAAAC4Tfhys2kEQXV0b4jlwMDA/05bAAAA/CCI5cDAwP8AAJhds2kEQXV0bwAA18MpRGVjcmVhc2VGb250LCBMYWJlbHNBbmdsZVN0ZXA5MCwgV29yZFdyYXAov7NpBEF1dG8AAAAAmU34crNpBEF1dG+I5cDAwP8AAPwgiOXAwMD/AACYXbNpBEF1dG8AANfDKURlY3JlYXNlRm9udCwgTGFiZWxzQW5nbGVTdGVwOTAsIFdvcmRXcmFwKL+zaQRBdXRvAAAAAEUq/////8bZAgAAAKrbaTsa/zTUBVNvbGlkAAAAAMVzcIeqVAdEZWZhdWx0RSr/////qttpOxr/xtkCAAAAAAAAAIIJj/iqVAlNYWluVGl0bGVg0DFDYW50aWRhZCBieSBTZW1lc3RyZSBJbmdyZXNvIGJ5IE1vZGFsaWRhZCBJbmdyZXNvXiwaTWljcm9zb2Z0IFNhbnMgU2VyaWYsIDEycHQAAI/4uW0AqlQGTm9EYXRh5G0HRGVmYXVsdGDQEU5vIERhdGEgQXZhaWxhYmxlAAAAAAoxqkjtlWT/2dntlWT/AAAAAAAAAAABBAAAAAEAAAAJBQAAAAkGAAAAEQUAAAAAAAAADwYAAACmCgAAAgEAAAAHRGVmYXVsdA0AAAAAAAAAAADgPwAAAAAAAPg/DEN1c3RvbSBMYWJlbAxBQ1JFRElUQUNJT04AAAAABUZpcnN0DEFDUkVESVRBQ0lPTgAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC8zODQ5QzVCQSFdXScpOyIgAAAAAAAA+D8AAAAAAAAEQAxDdXN0b20gTGFiZWwOQVVMQVMgQUJJRVJUQVMAAAAABUZpcnN0DkFVTEFTIEFCSUVSVEFTAAROb25lAANCb3gAAAAAByNmZjAwMDBxaHJlZj0iamF2YXNjcmlwdDpPbGFwQ2FsbEJhY2soJ09sYXBDbGllbnQxTWFuYWdlcicsJ1tPbGFwQ2xpZW50MUNoYXJ0OjpPbGFwQ2hhcnRbIURybFVwJDdEMTE2QkE0Lzk2NDlCNThGIV1dJyk7IiAAAAAAAAAEQAAAAAAAAAxADEN1c3RvbSBMYWJlbAlDT05WRU5JT1MAAAAABUZpcnN0CUNPTlZFTklPUwAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC83REY1RkJDNSFdXScpOyIgAAAAAAAADEAAAAAAAAASQAxDdXN0b20gTGFiZWwZRVNDVUVMQSBQUkUgVU5JVkVSU0lUQVJJQQAAAAAFRmlyc3QZRVNDVUVMQSBQUkUgVU5JVkVSU0lUQVJJQQAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC80Q0M5NzIwQiFdXScpOyIgAAAAAAAAEkAAAAAAAAAWQAxDdXN0b20gTGFiZWwURVNQRUNJQUwgRVNDVUVMQSBQUkUAAAAABUZpcnN0FEVTUEVDSUFMIEVTQ1VFTEEgUFJFAAROb25lAANCb3gAAAAAByNmZjAwMDBxaHJlZj0iamF2YXNjcmlwdDpPbGFwQ2FsbEJhY2soJ09sYXBDbGllbnQxTWFuYWdlcicsJ1tPbGFwQ2xpZW50MUNoYXJ0OjpPbGFwQ2hhcnRbIURybFVwJDdEMTE2QkE0LzQ2NzlCOUI2IV1dJyk7IiAAAAAAAAAWQAAAAAAAABpADEN1c3RvbSBMYWJlbBJFWEFNRU4gREUgQURNSVNJT04AAAAABUZpcnN0EkVYQU1FTiBERSBBRE1JU0lPTgAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC8xNzY2NEM3MSFdXScpOyIgAAAAAAAAGkAAAAAAAAAeQAxDdXN0b20gTGFiZWwVR1JBRFVBRE9TIFkgVElUVUxBRE9TAAAAAAVGaXJzdBVHUkFEVUFET1MgWSBUSVRVTEFET1MABE5vbmUAA0JveAAAAAAHI2ZmMDAwMHFocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkN0QxMTZCQTQvQUIyMDkxMTUhXV0nKTsiIAAAAAAAAB5AAAAAAAAAIUAMQ3VzdG9tIExhYmVsCklOREVGSU5JRE8AAAAABUZpcnN0CklOREVGSU5JRE8ABE5vbmUAA0JveAAAAAAHI2ZmMDAwMHFocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkN0QxMTZCQTQvNDc3MDFEOUEhXV0nKTsiIAAAAAAAACFAAAAAAAAAI0AMQ3VzdG9tIExhYmVsCE3DiVJJVE9TAAAAAAVGaXJzdAhNw4lSSVRPUwAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC81N0UxQTNENyFdXScpOyIgAAAAAAAAI0AAAAAAAAAlQAxDdXN0b20gTGFiZWwKUFJFRkVSRU5URQAAAAAFRmlyc3QKUFJFRkVSRU5URQAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC82RTMyMEUzMyFdXScpOyIgAAAAAAAAJUAAAAAAAAAnQAxDdXN0b20gTGFiZWwUUFJPR1JBTUFTIEVTUEVDSUFMRVMAAAAABUZpcnN0FFBST0dSQU1BUyBFU1BFQ0lBTEVTAAROb25lAANCb3gAAAAAByNmZjAwMDBxaHJlZj0iamF2YXNjcmlwdDpPbGFwQ2FsbEJhY2soJ09sYXBDbGllbnQxTWFuYWdlcicsJ1tPbGFwQ2xpZW50MUNoYXJ0OjpPbGFwQ2hhcnRbIURybFVwJDdEMTE2QkE0LzlEMzU2QTQyIV1dJyk7IiAAAAAAAAAnQAAAAAAAAClADEN1c3RvbSBMYWJlbAlURVNUIERIQUMAAAAABUZpcnN0CVRFU1QgREhBQwAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC9EMzkyQTQ3OSFdXScpOyIgAAAAAAAAKUAAAAAAAAArQAxDdXN0b20gTGFiZWwQVFJBU0xBRE8gRVhURVJOTwAAAAAFRmlyc3QQVFJBU0xBRE8gRVhURVJOTwAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC9FQ0RCNTkzMCFdXScpOyIgAAAAAAAAAAAAAAAACw==]]></StateBag>
+      <StateBag Name="olapclient1grid"><![CDATA[<?xml version="1.0"?><OlapGrid ForeColor="" BackColor="" BorderColor="" BorderWidth="" BorderStyle="NotSet" InterlacedRows="True" Visible="True" ID="OlapClient1Grid" EnableMemberDrillDown="True" Orientation="Vertical" EmptyCellValue="" TitleText="" ctm="True" SubTotals="True"><ColumnHeader /><Regular /><Interlaced /><RowHeader /><Total /><Title /></OlapGrid>]]></StateBag>
+    </ControlState>
+  </OlapReport>
+  <OlapReport Name="Report 2" Description="" CubeName="cubCajaIngreso" DataTitleFormat="#MEASURES by #DIMENSIONS" ReadOnly="False" NonEmptyCellsOnly="True">
+    <AxisDescriptors>
+      <AxisDescriptor AxisName="Categorical">
+        <Dimensions>
+          <Dimension Name="Tiempo" LevelName="[Tiempo].[Año]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None" />
+        </Dimensions>
+      </AxisDescriptor>
+      <AxisDescriptor AxisName="Series">
+        <Dimensions>
+          <Dimension Name="Measures" LevelName="" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="Cantidad" UniqueName="[Measures].[Cantidad]" />
+            </Members>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+      <AxisDescriptor AxisName="Slicer" />
+    </AxisDescriptors>
+    <ControlState>
+      <StateBag Name="olapchart"><![CDATA[AAEAAAD/////AQAAAAAAAAAMAgAAAE1TeXN0ZW0uV2ViLCBWZXJzaW9uPTIuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49YjAzZjVmN2YxMWQ1MGEzYQUBAAAAElN5c3RlbS5XZWIuVUkuUGFpcgIAAAAFRmlyc3QGU2Vjb25kAgICAAAACQMAAAAJBAAAAA8DAAAA6AUAAAJEQ0JGMzAwAAAAAAAAAADNrhSuAXm8G35cdGVtcC9DaGFydFBpY18jU0VRKDMwMCwzKarlquWqVBJDYW50aWRhZCAtIFJlZ3VsYXLjRwGL7wAAAADC7UG0/P+q20BAQP8d1gAAAP+ZRkVEcmF3aW5nU3R5bGU9Q3lsaW5kZXIsIFBpZURyYXdpbmdTdHlsZT1Db25jYXZlLCBfT2xhcERhdGFTZXJpZXNfPXRydWVNQhJDYW50aWRhZCAtIFJlZ3VsYXIAAKrlqlQSQ2FudGlkYWQgLSAyMDA2LUlJ40cBi+8AAAAAwu0KQOD/qttAQED/HdYAAAD/mUZFRHJhd2luZ1N0eWxlPUN5bGluZGVyLCBQaWVEcmF3aW5nU3R5bGU9Q29uY2F2ZSwgX09sYXBEYXRhU2VyaWVzXz10cnVlTUISQ2FudGlkYWQgLSAyMDA2LUlJAACq5apUEUNhbnRpZGFkIC0gMjAwNy1J40cBi+8AAAAAwu2SZAX/qttAQED/HdYAAAD/mUZFRHJhd2luZ1N0eWxlPUN5bGluZGVyLCBQaWVEcmF3aW5nU3R5bGU9Q29uY2F2ZSwgX09sYXBEYXRhU2VyaWVzXz10cnVlTUIRQ2FudGlkYWQgLSAyMDA3LUkAAKrlqlQSQ2FudGlkYWQgLSAyMDA3LUlJ40cBi+8AAAAAwu2/v7//qttAQED/HdYAAAD/mUZFRHJhd2luZ1N0eWxlPUN5bGluZGVyLCBQaWVEcmF3aW5nU3R5bGU9Q29uY2F2ZSwgX09sYXBEYXRhU2VyaWVzXz10cnVlTUISQ2FudGlkYWQgLSAyMDA3LUlJAACq5apUEUNhbnRpZGFkIC0gMjAwOC1J40cBi+8AAAAAwu1pOxr/qttAQED/HdYAAAD/mUZFRHJhd2luZ1N0eWxlPUN5bGluZGVyLCBQaWVEcmF3aW5nU3R5bGU9Q29uY2F2ZSwgX09sYXBEYXRhU2VyaWVzXz10cnVlTUIRQ2FudGlkYWQgLSAyMDA4LUkAAAAAhkYGRHVuZGFzpg8KNi4xLjAuMTcyOMF2UI+qVAdEZWZhdWx06RH4crNpBEF1dG+I5cDAwP8AAPwgiOXAwMD/AACYXbNpBEF1dG8AANfDKURlY3JlYXNlRm9udCwgTGFiZWxzQW5nbGVTdGVwOTAsIFdvcmRXcmFwKL+zaQRBdXRvAAD2JQ1WYXJpYWJsZUNvdW50AADoEfhys2kEQXV0b4jl////AE5bAAAA/CCI5f///wAAAJhds2kEQXV0b05bAAAAjE6I5f///wClcAAAAGinBwAAANfDKURlY3JlYXNlRm9udCwgTGFiZWxzQW5nbGVTdGVwOTAsIFdvcmRXcmFwKL+zaQRBdXRvAACw2izFAAAAAAAAAABopQAAAAAAAAhAAADrlUUqyNDU/wAAAAC4Tfhys2kEQXV0b4jlwMDA/05bAAAA/CCI5cDAwP8AAJhds2kEQXV0bwAA18MpRGVjcmVhc2VGb250LCBMYWJlbHNBbmdsZVN0ZXA5MCwgV29yZFdyYXAov7NpBEF1dG8AAAAAmU34crNpBEF1dG+I5cDAwP8AAPwgiOXAwMD/AACYXbNpBEF1dG8AANfDKURlY3JlYXNlRm9udCwgTGFiZWxzQW5nbGVTdGVwOTAsIFdvcmRXcmFwKL+zaQRBdXRvAAAAAEUq/////8bZAgAAAKrbaTsa/zTUBVNvbGlkAAAAAMVzcIeqVAdEZWZhdWx0RSr/////qttpOxr/xtkCAAAAAAAAAIIJj/iqVAlNYWluVGl0bGVg0DFDYW50aWRhZCBieSBTZW1lc3RyZSBJbmdyZXNvIGJ5IE1vZGFsaWRhZCBJbmdyZXNvXiwaTWljcm9zb2Z0IFNhbnMgU2VyaWYsIDEycHQAAI/4uW0AqlQGTm9EYXRh5G0HRGVmYXVsdGDQEU5vIERhdGEgQXZhaWxhYmxlAAAAAAoxqkjtlWT/2dntlWT/AAAAAAAAAAABBAAAAAEAAAAJBQAAAAkGAAAAEQUAAAAAAAAADwYAAACmCgAAAgEAAAAHRGVmYXVsdA0AAAAAAAAAAADgPwAAAAAAAPg/DEN1c3RvbSBMYWJlbAxBQ1JFRElUQUNJT04AAAAABUZpcnN0DEFDUkVESVRBQ0lPTgAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC8zODQ5QzVCQSFdXScpOyIgAAAAAAAA+D8AAAAAAAAEQAxDdXN0b20gTGFiZWwOQVVMQVMgQUJJRVJUQVMAAAAABUZpcnN0DkFVTEFTIEFCSUVSVEFTAAROb25lAANCb3gAAAAAByNmZjAwMDBxaHJlZj0iamF2YXNjcmlwdDpPbGFwQ2FsbEJhY2soJ09sYXBDbGllbnQxTWFuYWdlcicsJ1tPbGFwQ2xpZW50MUNoYXJ0OjpPbGFwQ2hhcnRbIURybFVwJDdEMTE2QkE0Lzk2NDlCNThGIV1dJyk7IiAAAAAAAAAEQAAAAAAAAAxADEN1c3RvbSBMYWJlbAlDT05WRU5JT1MAAAAABUZpcnN0CUNPTlZFTklPUwAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC83REY1RkJDNSFdXScpOyIgAAAAAAAADEAAAAAAAAASQAxDdXN0b20gTGFiZWwZRVNDVUVMQSBQUkUgVU5JVkVSU0lUQVJJQQAAAAAFRmlyc3QZRVNDVUVMQSBQUkUgVU5JVkVSU0lUQVJJQQAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC80Q0M5NzIwQiFdXScpOyIgAAAAAAAAEkAAAAAAAAAWQAxDdXN0b20gTGFiZWwURVNQRUNJQUwgRVNDVUVMQSBQUkUAAAAABUZpcnN0FEVTUEVDSUFMIEVTQ1VFTEEgUFJFAAROb25lAANCb3gAAAAAByNmZjAwMDBxaHJlZj0iamF2YXNjcmlwdDpPbGFwQ2FsbEJhY2soJ09sYXBDbGllbnQxTWFuYWdlcicsJ1tPbGFwQ2xpZW50MUNoYXJ0OjpPbGFwQ2hhcnRbIURybFVwJDdEMTE2QkE0LzQ2NzlCOUI2IV1dJyk7IiAAAAAAAAAWQAAAAAAAABpADEN1c3RvbSBMYWJlbBJFWEFNRU4gREUgQURNSVNJT04AAAAABUZpcnN0EkVYQU1FTiBERSBBRE1JU0lPTgAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC8xNzY2NEM3MSFdXScpOyIgAAAAAAAAGkAAAAAAAAAeQAxDdXN0b20gTGFiZWwVR1JBRFVBRE9TIFkgVElUVUxBRE9TAAAAAAVGaXJzdBVHUkFEVUFET1MgWSBUSVRVTEFET1MABE5vbmUAA0JveAAAAAAHI2ZmMDAwMHFocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkN0QxMTZCQTQvQUIyMDkxMTUhXV0nKTsiIAAAAAAAAB5AAAAAAAAAIUAMQ3VzdG9tIExhYmVsCklOREVGSU5JRE8AAAAABUZpcnN0CklOREVGSU5JRE8ABE5vbmUAA0JveAAAAAAHI2ZmMDAwMHFocmVmPSJqYXZhc2NyaXB0Ok9sYXBDYWxsQmFjaygnT2xhcENsaWVudDFNYW5hZ2VyJywnW09sYXBDbGllbnQxQ2hhcnQ6Ok9sYXBDaGFydFshRHJsVXAkN0QxMTZCQTQvNDc3MDFEOUEhXV0nKTsiIAAAAAAAACFAAAAAAAAAI0AMQ3VzdG9tIExhYmVsCE3DiVJJVE9TAAAAAAVGaXJzdAhNw4lSSVRPUwAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC81N0UxQTNENyFdXScpOyIgAAAAAAAAI0AAAAAAAAAlQAxDdXN0b20gTGFiZWwKUFJFRkVSRU5URQAAAAAFRmlyc3QKUFJFRkVSRU5URQAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC82RTMyMEUzMyFdXScpOyIgAAAAAAAAJUAAAAAAAAAnQAxDdXN0b20gTGFiZWwUUFJPR1JBTUFTIEVTUEVDSUFMRVMAAAAABUZpcnN0FFBST0dSQU1BUyBFU1BFQ0lBTEVTAAROb25lAANCb3gAAAAAByNmZjAwMDBxaHJlZj0iamF2YXNjcmlwdDpPbGFwQ2FsbEJhY2soJ09sYXBDbGllbnQxTWFuYWdlcicsJ1tPbGFwQ2xpZW50MUNoYXJ0OjpPbGFwQ2hhcnRbIURybFVwJDdEMTE2QkE0LzlEMzU2QTQyIV1dJyk7IiAAAAAAAAAnQAAAAAAAAClADEN1c3RvbSBMYWJlbAlURVNUIERIQUMAAAAABUZpcnN0CVRFU1QgREhBQwAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC9EMzkyQTQ3OSFdXScpOyIgAAAAAAAAKUAAAAAAAAArQAxDdXN0b20gTGFiZWwQVFJBU0xBRE8gRVhURVJOTwAAAAAFRmlyc3QQVFJBU0xBRE8gRVhURVJOTwAETm9uZQADQm94AAAAAAcjZmYwMDAwcWhyZWY9ImphdmFzY3JpcHQ6T2xhcENhbGxCYWNrKCdPbGFwQ2xpZW50MU1hbmFnZXInLCdbT2xhcENsaWVudDFDaGFydDo6T2xhcENoYXJ0WyFEcmxVcCQ3RDExNkJBNC9FQ0RCNTkzMCFdXScpOyIgAAAAAAAAAAAAAAAACw==]]></StateBag>
+      <StateBag Name="olapclient1grid"><![CDATA[<?xml version="1.0"?><OlapGrid ForeColor="" BackColor="" BorderColor="" BorderWidth="" BorderStyle="NotSet" InterlacedRows="True" Visible="True" ID="OlapClient1Grid" EnableMemberDrillDown="True" Orientation="Vertical" EmptyCellValue="" TitleText="" ctm="True" SubTotals="True"><ColumnHeader /><Regular /><Interlaced /><RowHeader /><Total /><Title /></OlapGrid>]]></StateBag>
+    </ControlState>
+  </OlapReport>
+</OlapReports>

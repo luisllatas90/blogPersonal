@@ -1,0 +1,19 @@
+<asp:Menu skinID="MenusDefecto" runat="server" Orientation="Horizontal" 
+        StaticEnableDefaultPopOutImage="False">
+            <StaticMenuStyle BackColor="#F0F0F0" BorderColor="#F0F0F0" BorderStyle="Solid" 
+                BorderWidth="1px" Height="22px" HorizontalPadding="1px" />
+            <StaticMenuItemStyle BackColor="#F0F0F0" BorderColor="#F0F0F0" 
+                BorderStyle="Solid" BorderWidth="1px" Font-Names="Microsoft Sans Serif" 
+                Font-Size="9pt" ForeColor="Black" Height="22px" HorizontalPadding="2px" 
+                ItemSpacing="2px" VerticalPadding="2px" />
+            <DynamicHoverStyle BackColor="#666666" BorderColor="#666666" 
+                BorderStyle="Solid" BorderWidth="1px" ForeColor="White" />
+            <DynamicMenuStyle BackColor="#F0F0F0" BorderColor="#E1E1E1" BorderStyle="Solid" 
+                BorderWidth="1px" Height="25px" HorizontalPadding="4px" VerticalPadding="4px" />
+            <DynamicMenuItemStyle BackColor="#F0F0F0" BorderColor="#F0F0F0" 
+                BorderStyle="Solid" BorderWidth="1px" Font-Names="Microsoft Sans Serif" 
+                Font-Size="9pt" ForeColor="Black" Height="22px" HorizontalPadding="1px" 
+                ItemSpacing="1px" VerticalPadding="1px" />
+            <StaticHoverStyle BackColor="#666666" BorderColor="#666666" BorderStyle="Solid" 
+                ForeColor="White" />
+</asp:Menu>

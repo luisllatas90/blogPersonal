@@ -1,0 +1,300 @@
+﻿body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin-top: 5px;
+}
+
+td {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+a:link {
+	color: #000000;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #000000;
+}
+a:hover {
+	text-decoration: none;
+	color: #0066CC;
+}
+a:active {
+	text-decoration: none;
+	color: #0066CC;
+}
+
+.contornotabla {
+	border: 1px solid #999999;
+}
+#tblcontenido {
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-width: 1px;
+	border-color: #808080;
+	width:100%;
+	background-color:white;
+}
+#listadiv {
+	position: relative;
+	width: 100%;
+	top: 0;
+	left: -1px;
+	overflow: auto;
+}
+input {
+	font-family: Tahoma;
+	font-size: 10px;
+	color: #000066;
+	margin-bottom: 0px;
+	}
+.cajas {
+	font-family: Tahoma;
+	font-size: 10px;
+	color: #000066;
+}
+.bordeizqder {
+	border-style: none solid none solid;
+	border-width: 1px;
+	border-color: #808080;
+}
+.bordeder {
+	border-style: none solid none none;
+	border-width: 1px;
+	border-color: #808080;
+}
+.bordeizq {
+	border-style: none none none solid;
+	border-width: 1px;
+	border-color: #808080;
+}
+.bordesup {
+	border-style: solid none none none;
+	border-width: 1px;
+	border-color: #808080;
+}
+.bordeinf {
+	border-style: none none solid none;
+	border-width: 1px;
+	border-color: #808080;
+}
+.titulomenu {
+	font-size: 13px;
+	font-weight: bold;
+	font-family: Tahoma;
+	color: #0066CC;
+	text-align: center;
+	background-color: #E5E5E5;
+}
+
+.titulomenu2 {
+	font-size: 13px;
+	font-weight: bold;
+	font-family: Tahoma;
+	color:#0066CC;
+	text-align: center;
+	background-color: #E5E5E5;
+}
+
+
+.fondocontenedor{
+	border: 1px solid #808080;
+	background-color: #FFCC66;
+}
+.celdaresalta {
+	border: 1px solid #85b1cd;
+	background-color: #e8f2f8;
+}
+.celdanoresalta {
+	background-color: #FFFFFF;
+}
+.selected {
+	background : #395ACC;
+	color : #FFFFFF;
+}
+.e1 {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000080;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.e2 {
+	border-width: 2px;
+	border-color: #FF9900;
+	font-size: 12px;
+	font-weight: bold;
+	color: #000080;
+	font-family: Arial, Helvetica, sans-serif;
+	border-bottom-style: solid;
+}
+.e3 {
+	font-size: 10px;
+	font-weight: bold;
+	color: #000080;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.rojo {
+	color: #FF0000;
+}
+.titulofrm
+{
+	font-size: 16px;
+	font-family: Arial;
+	color: #0066CC;
+	font-weight: bold;
+}
+
+#cmdNuevo
+{
+	border: 0px solid #800000;
+	background: url(   '../images/anadir.jpg' ) no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 35px;
+}
+.cmdModificar
+{
+	border: 0px solid #800000;
+	background: url(   '../images/editar.jpg' ) no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 35px;
+}
+.cmdGuardar{
+	border: 0px solid #666666;
+	background: none url(   '../images/guardar.png') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 35px;
+	cursor: hand;
+}
+.cmdCancelar{
+	border: 0px solid #666666;
+	background: none url(   '../images/cancelar.png') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 35px;
+	cursor: hand;
+}
+.cmdBorrador{
+	border: 0px solid #666666;
+	background: none url(   '../images/tarea.png') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 35px;
+	cursor: hand;
+}
+#cmdEliminar
+{
+	border: 0px solid #800000;
+	background: url(   '../images/quitar.jpg' ) no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 35px;
+}
+#cmdAyuda
+{
+	border: 0px solid #800000;
+	background: url(   '../images/ayuda.jpg' ) no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 35px;
+}
+
+#cmdBuscar{
+	border: 0px solid #666666;
+	background: none url(   '../images/buscar2.gif') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 20px;
+	cursor: hand;
+}
+
+#cmdHabilitar{
+	border: 0px solid #666666;
+	background: none url(   '../images/publicar.png') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 35px;
+	cursor: hand;
+}
+#cmdDeshabilitar{
+	border: 0px solid #666666;
+	background: none url(   '../images/nopublicar.png') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 35px;
+	cursor: hand;
+}
+
+.cmdBackUp{
+	border: 0px solid #666666;
+	background: none url('../images/backup.png') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 35px;
+	cursor: hand;
+}
+
+.cmdOK{
+	border: 0px solid #666666;
+	background: none url('../images/ok.png') no-repeat 0% 80%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 35px;
+	cursor: hand;
+}
+
+.cmdprocesarXLS{
+	border: 1px solid #666666;
+	background: none url('../images/mapa.gif') no-repeat 5% 50%;
+	font-family: Tahoma;
+	font-size: 8pt;
+	height: 20px;
+	cursor: hand;
+	width: 54px;
+}
+.pub_titulo
+{
+	font-size: 18px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #3366CC;
+}
+.pub_fecha
+{
+	font-style: italic;
+	color: #800000;
+}
+.pub_resumen
+{
+	font-family: 'Arial';
+	font-size: 10px;
+}
+.pub_contenido
+{
+	font-family: Arial;
+	font-size: 12px;
+}
+legend
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #003366;
+	font-style: italic;
+}
+.menuBlanco{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:white;
+}
+.menuDorado{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:#FFCC00;
+	
+}

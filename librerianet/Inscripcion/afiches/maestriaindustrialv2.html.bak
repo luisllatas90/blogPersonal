@@ -1,0 +1,5 @@
+<div style="text-align: center;">
+<form id="form1" action="http://intranet.usat.edu.pe/campusvirtual/librerianet/Inscripcion/frmpersona_v2.aspx" method="post">
+<input type="hidden" name="mod" value="0" />
+<input type="hidden" name="Evento" value="1E7R8C5V" />
+<input type="image" name="btn" src="http://intranet.usat.edu.pe/campusvirtual/librerianet/Inscripcion/afiches/maestriaindustrial_v2.jpg?x=2" alt="Preinscribete aqui" /></form> 

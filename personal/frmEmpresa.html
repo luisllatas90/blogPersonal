@@ -1,0 +1,186 @@
+<%@ Page Language="VB" AutoEventWireup="false" CodeFile="frmEmpresa.aspx.vb" Inherits="pages_frmEmpresa" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />  	
+    <title>Empresa</title>
+    <!-- Estilos externos -->
+    <link rel='stylesheet' href='../piluku/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='../piluku/css/material.css'>
+    <link rel='stylesheet' href='../piluku/css/style.css'>  
+    <link rel="stylesheet" href="../assets/css/sweetalert/sweetalert2.min.css">
+</head>
+<body>
+    <form id="frmEmpresa" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        
+        <asp:UpdatePanel ID="udpEmpresa" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+            <ContentTemplate>
+                <div class="panel panel-piluku">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Información de la Empresa</h3>
+                    </div>
+                    <!-- /panel-heading -->
+        
+                    <div class="panel-body">
+                        <div class="form form-horizontal">
+                            <div class="form-group">
+                                <label for="txtRuc" class="col-sm-2 control-label">RUC:</label>
+                                <div class="col-sm-5">                                    
+                                    <asp:TextBox ID="txtRuc" runat="server" ReadOnly="true" CssClass="form-control" />
+                                </div>
+                                <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-primary btn-icon-primary btn-icon-block btn-icon-blockleft">                                    
+                                    <i class="ion ion-android-search"></i>
+                                    <span class="text">Buscar</span>
+                                </asp:LinkButton>                                
+                            </div>
+                            <div class="form-group">
+                                <label for="txtNombreComercial" class="col-sm-2 control-label">Nombre Comercial:</label>
+                                <div class="col-sm-9">                                    
+                                    <asp:TextBox ID="txtNombreComercial" runat="server" CssClass="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtRazonSocial" class="col-sm-2 control-label">Razón Social:</label>
+                                <div class="col-sm-9">                                    
+                                    <asp:TextBox ID="txtRazonSocial" runat="server" CssClass="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cmbTipoEmpresa" class="col-sm-2 control-label">Tipo:</label>
+                                <div class="col-sm-3">
+                                    <asp:DropDownList ID="cmbTipoEmpresa" runat="server" AutoPostBack="true" CssClass="name_search form-control"></asp:DropDownList>
+                                </div>
+                                <label for="cmbSector" class="col-sm-2 control-label">Sector:</label>
+                                <div class="col-sm-4">
+                                    <asp:DropDownList ID="cmbSector" runat="server" AutoPostBack="true" CssClass="name_search form-control"></asp:DropDownList>
+                                </div>
+                            </div>   
+                            <div class="form-group">
+                                <label for="cmbDepartamento" class="col-sm-2 control-label">Departamento:</label>
+                                <div class="col-sm-2">
+                                    <asp:DropDownList ID="cmbDepartamento" runat="server" AutoPostBack="true" CssClass="name_search form-control"></asp:DropDownList>
+                                </div>
+                                <label for="cmbProvincia" class="col-sm-1 control-label">Provincia:</label>
+                                <div class="col-sm-2">
+                                    <asp:DropDownList ID="cmbProvincia" runat="server" AutoPostBack="true" CssClass="name_search form-control"></asp:DropDownList>
+                                </div>
+                                <label for="cmbDistrito" class="col-sm-1 control-label">Distrito:</label>
+                                <div class="col-sm-3">
+                                    <asp:DropDownList ID="cmbDistrito" runat="server" AutoPostBack="true" CssClass="name_search form-control"></asp:DropDownList>
+                                </div>                                                                                                
+                            </div>    
+                            <div class="form-group">
+                                <label for="txtDireccion" class="col-sm-2 control-label">Dirección:</label>
+                                <div class="col-sm-4">                                    
+                                    <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" />
+                                </div>
+                                <label for="txtWeb" class="col-sm-1 control-label">Web:</label>
+                                <div class="col-sm-4">                                    
+                                    <asp:TextBox ID="txtWeb" runat="server" CssClass="form-control" />
+                                </div>
+                            </div>     
+                            <div class="form-group">
+                                <label for="txtCorreo" class="col-sm-2 control-label">Correo:</label>
+                                <div class="col-sm-4">                                    
+                                    <asp:TextBox ID="txtCorreo" runat="server" CssClass="form-control" />
+                                </div>
+                                <label for="cmbTelefono" class="col-sm-1 control-label">Teléfono:</label>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <asp:DropDownList ID="cmbTelefono" runat="server" AutoPostBack="true" CssClass="name_search form-control"></asp:DropDownList>
+                                        </div>
+                                        <div class="col-sm-6">                                    
+                                            <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" />
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label for="txtCelular" class="col-sm-2 control-label">Celular:</label>
+                                <div class="col-sm-4">                                    
+                                    <asp:TextBox ID="txtCelular" runat="server" CssClass="form-control" />
+                                </div>
+                                <label class="col-sm-1 control-label">Logo:</label>                        
+                                <div class="col-sm-4">                            
+                                    <%--
+                                    <input type="file" id="txtLogo" name="txtLogo" runat="server" />
+                                    --%>
+                                </div>
+                            </div>                                        
+                            <hr/>    
+                            <div class="row" style="text-align: center;">
+                                <asp:LinkButton ID="btnGuardar" runat="server" CssClass="btn btn-green btn-icon-green btn-icon-block btn-icon-blockleft">                                    
+                                    <i class="ion ion-checkmark"></i>
+                                    <span class="text">Guardar</span>
+                                </asp:LinkButton>                           
+                            </div>                                                
+                        </div>
+                        <!-- /form-a -->
+                    </div>
+                    <!-- /panel-body -->
+                </div>
+                <!-- /panel -->
+            </ContentTemplate>
+        </asp:UpdatePanel>                                    
+    </form>
+
+    <!-- Scripts externos -->
+    <script src="../piluku/js/jquery.js"></script>
+    <script src="../piluku/js/bootstrap.min.js"></script>
+    <script src="../piluku/js/materialize.js"></script> 
+    <script src='../piluku/js/form-validation/jquery.form-validator.js'></script>    
+    <script src='../piluku/js/select2.js'></script>    
+    <script src="../assets/js/sweetalert/es6-promise.auto.min.js"></script>
+    <script src="../assets/js/sweetalert/sweetalert2.js"></script>
+    <script src="../assets/js/iframeresizer/iframeResizer.contentWindow.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".name_search").select2({
+                //placeholder: "SELECCIONE"
+            });
+        });            
+
+        /* Mostrar mensajes al usuario. */
+        function showMessage(message, messagetype) {              
+            swal({ 
+                title: message,
+                type: messagetype ,
+                confirmButtonText: "OK" ,
+                confirmButtonColor: "#45c1e6"
+            });
+        }  
+
+        function alertConfirm(ctl, event, titulo, icono) {
+            // STORE HREF ATTRIBUTE OF LINK CTL (THIS) BUTTON
+            var defaultAction = $(ctl).prop("href");          
+
+            // CANCEL DEFAULT LINK BEHAVIOUR
+            event.preventDefault();            
+            
+            swal({
+                title: titulo,                
+                type: icono,
+                showCancelButton: true ,
+                confirmButtonText: "SI" ,
+                confirmButtonColor: "#45c1e6" ,
+                cancelButtonText: "NO"
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+                    window.location.href = defaultAction;
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        } 
+    </script>
+</body>
+</html>

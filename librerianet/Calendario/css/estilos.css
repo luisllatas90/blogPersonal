@@ -1,0 +1,1169 @@
+﻿/*@charset "utf-8";*/
+
+*{ outline:none; }
+
+html{overflow-y:scroll;}
+
+form, img, body, ul, table{
+  border:0px;
+  padding:0px;
+  margin:0px;
+}
+
+body{
+	font-family: Arial, sans-serif;
+	font-size:11px; color: gray;
+  background:url(../Imagenes/pfondo.png) repeat-x #F2F2F2;
+}
+
+td{
+	vertical-align:top;}
+
+h1{
+  margin: 0px 0px 10px 0px;
+  padding: 0px;
+  display: block;
+  color: #336699;
+  text-transform: uppercase;
+  list-style: none;
+  padding: 5px;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  background-image:url(../Imagenes/fon_bot.png);
+  border: 1px solid #DBDBDB;
+  text-shadow: #FFF 0 1px 0;
+  text-align: center;
+}
+
+h2{
+  display: block;
+  color: #336699;
+  text-transform: uppercase;
+  padding: 0px 0px 10px 0px;
+  margin: 0px;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+input{
+  width: 250px;
+  border: 1px solid #D6D6D6;
+  border-top: 1px solid silver;
+  border-left: 1px solid silver;
+  font-size: 11px;
+  padding: 5px;
+  color: gray;
+}
+
+a.submit, button, input[type=submit]{
+  font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size:11px;
+  color:#326581;
+  border: 1px solid #DBDBDB;
+  text-shadow: #FFF 0 1px 0;
+  font-weight:bold;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:11px;
+  background-image:url(../Imagenes/fon_bot.png);
+  display: inline-block;
+  padding: 5px 15px 5px 15px;
+  margin: 10px 0px 0px 0px;
+  text-decoration: none;
+	}
+
+textarea{
+  display: block;
+  font-family:Arial, Helvetica, sans-serif;
+  width: 340px;
+  height: 150px;
+  border: 1px solid #D6D6D6;
+  border-top: 1px solid silver;
+  border-left: 1px solid silver;
+  font-size: 11px;
+  padding: 5px;
+  color: gray;
+  resize: none;
+}
+
+
+a{
+  text-decoration: none;
+  color: #336699;
+}
+
+a:hover{
+  color: gray;
+}
+
+/* ////////////////////// Elemento con Id ////////////////////// */
+
+div#contenedor{
+  height: auto;
+  width: 950px;
+  /*background: white;*/
+  padding-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+div#barra-sup{
+  height: 100px;
+  width: 950px;
+  position: relative;
+  background: url("../Imagenes/cabeimg.png");
+}
+
+div#fecha-reloj{
+	height:20px;
+	width:300px;
+	position:absolute;
+	top:80px;
+	right:8px;
+	color:#FFFFFF;
+	text-align:right;
+}
+
+a#logo-unicah{
+  position: absolute;
+  top: 5px;
+  left: 20px;
+  background: url(../Imagenes/logo.png);
+  height: 90px;
+  width: 56px;
+}
+
+div#conte-cuerpo{
+  height: auto;
+  width: 930px;
+  background: white;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+div#conte-cabeza-img{
+  position: relative;
+  height: 300px;
+  width: 950px;
+  background: black;
+}
+
+div#vincprica{
+  width: auto;
+  position: absolute;
+  right: 0px;
+  top: 230px;
+  z-index: 100;
+}
+
+div#vincprica a{
+  font-size: 12px;
+  position: relative;
+  display: block;
+  float: left;
+  padding: 13px 10px 12px 10px;
+  color: #F3F3F3;
+  font-weight: bold;
+  text-decoration: none;
+  background: url(../Imagenes/fondobot.png);
+}
+
+div#vincprica a.pri{
+  padding-left: 18px;
+  float: left;
+  border-radius:5px 0px 0px 10px;
+	-webkit-border-radius:5px 0px 0px 10px;
+	-moz-border-radius:5px 0px 0px 10px;
+}
+
+div#vincprica a:hover{
+  color: silver;
+}
+
+div.MDLV_CTD{
+	opacity:0;
+	}
+	
+div.mdlv_movmenos, div.mdlv_movmas{
+	height:20px;
+	width:20px;
+	position:absolute;
+	top:277px;
+	cursor:pointer;
+	}
+	
+div#MDLV_CTD1, div#MDLV_CTD2, div#MDLV_CTD3, div#MDLV_CTD4, div#MDLV_CTD5, div#MDLV_CTD6{
+	display:none;
+	}
+
+div.mdlv_movmenos{
+	right:25px;
+	background:url(../Imagenes/33kc51fw.png);
+	}
+
+div.mdlv_movmas{
+	right:5px;
+	background:url(../Imagenes/4ht62olh.png);
+	}
+
+div#MDLVPRI{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 0px;
+  padding-left: 20px;
+  height: 280px;
+  width: 200px;
+  background:url(../Imagenes/pixeltranspa.png);
+  color: white;
+  font-size: 11px;
+  z-index: 100;
+}
+
+div#mapa-sitio{
+  height: auto;
+  width: 930px;
+  text-align: center;
+  padding-top: 15px;
+  border-top: 1px dotted gray;
+}
+
+div#mapa-sitio table tr td{
+  vertical-align: top;
+}
+
+div#mapa-sitio ul{
+  text-align: left;
+  display: inline-block;
+  list-style: none;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-left: dotted gray 1px;
+  margin: 0px;
+  vertical-align: top;
+}
+
+div#mapa-sitio ul li a{
+  display: block;
+  color: gray;
+  padding-bottom: 5px;
+}
+
+div#mapa-sitio ul li a:hover{ color: #336699; }
+
+div#mapa-sitio ul li a.pri{
+  display: block;
+  color: #336699;
+  text-transform: uppercase;
+  list-style: none;
+  padding-bottom: 8px;
+  font-family: sans-serif;
+  font-size: 17px;
+}
+
+a#icontec{
+  display: block;
+  vertical-align: top;
+  height: 286px;
+  width: 150px;
+  background: url("../Imagenes/IconTec.png");
+}
+
+div#noticias{
+  vertical-align: top;
+  height: auto;
+  width: 300px;
+  padding-left: 20px;
+  margin-right: 20px;
+}
+
+div#noticias div#conte-evento a{
+  display: block;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-size: 9px;
+  font-weight: bold;
+  color: #336699;
+  margin-bottom: 5px;
+  
+  padding-top: 4px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #E0E0E0;
+  border-left: 2px solid #ABDF84; 
+  margin-bottom: 10px;
+  line-height: 18px;
+}
+
+div#noticias div#conte-evento span.fecha{
+  margin-left: 10px;
+  /*background: #ABDF84;*/
+  color: silver;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+
+div#noticias div#conte-noti{
+  padding-top: 2px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #E0E0E0;
+  border-left: 2px solid #4FA0DD; 
+  margin-bottom: 10px;
+  width: 288px;
+}
+
+div#noticias span#titulo{
+  display: block;
+  text-transform: uppercase;
+  margin: 0px;
+  font-family: sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #336699;
+  margin-bottom: 5px;
+}
+
+div#noticias-bar{
+	height: 18px;
+	background-image: url(../Imagenes/fon_bot.png);
+	text-align: right;
+	color: #999;
+	text-shadow: #FFF 0 1px 0;
+	font-weight: bold;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 11px;
+  padding-top: 5px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #D7D7D7;
+  }
+  
+.noticias-bar{
+	height: 18px;
+	background-image: url(../Imagenes/fon_bot.png);
+	text-align: right;
+	color: #999;
+	text-shadow: #FFF 0 1px 0;
+	font-weight: bold;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 11px;
+  padding-top: 5px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  border: 1px solid #D7D7D7;
+  }
+
+table#calendario-de-eventos{
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+table#calendario-de-eventos thead tr th{
+  height: 30px;
+  background: url("../Imagenes/fon_bot.png");
+  border: 1px solid #D7D7D7;
+  border-right: none;
+  cursor: pointer;
+}
+
+table#calendario-de-eventos thead tr th#year{
+  color: #E74141;
+  cursor: default;
+  /*background: url("../Imagenes/fon_bot02.png");*/
+  padding-left: 10px;
+  text-shadow: #FFFFFF 0 1px 0;
+  padding-right: 10px;
+}
+
+table#calendario-de-eventos tbody tr td div.line-fecha-event{
+  margin-top: 6px;
+  padding: 10px;
+  padding-left: 10px !important;
+  background: #D3F2CE;
+  border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+table#calendario-de-eventos tbody tr td div.line-fecha-event span.fecha{
+  width: 80px;
+  display: inline-block;
+  font-size: 30px;
+  color: white;
+  background: #62AACC;
+  margin-right: 10px;
+  /*padding-left: 20px;
+  padding-right: 20px;*/
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-weight: bold;
+  vertical-align: top;
+  border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+.conte-conte{
+  display:inline-block; 
+  left: 100px;
+  top: 0px;
+  width: 500px;
+}
+
+table#calendario-de-eventos tbody tr td div.line-fecha-event span.fecha span.dia{
+  font-size: 11px;
+}
+
+table#calendario-de-eventos tbody tr td div.line-fecha-event span span.titulo{
+  color: #336699;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+table#calendario-de-eventos tbody tr td div.line-fecha-event span span.contenido{
+  display: block;
+  color: #414141;
+  font-weight: normal;
+  text-transform: none;
+  margin-top: 10px;
+  vertical-align: top;
+}
+
+a#sli-boton-der, a#sli-boton-izq, div#correo-tip-fondo div#contenido a#salir, div#regon-tip-fondo div#contenido a#salir{
+  padding-left: 6px; 
+  padding-right: 6px; 
+  padding-top: 2px; 
+  padding-bottom: 2px;
+  color: white; 
+  background: silver; 
+  font-weight: bold;
+  border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+table#principal{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+table#principal tr td{
+  vertical-align: top;
+}
+
+div#telefonos-contactenos{
+  display: inline-block;
+  text-align: center !important;
+  width: 380px !important;
+  padding: 20px;
+  margin-left: 20px !important;
+  background: #F3F3F3;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+div#est-env{
+  padding: 10px;
+  margin-top: 10px;
+  width: auto;
+  color: white;
+  font-weight: bold;
+  -moz-border-radius: 10px; 
+  -webkit-border-radius: 10px; 
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+table#contacto{
+  margin-bottom: 20px;
+}
+
+table#contacto tr td{
+  vertical-align: top;
+}
+
+table#contacto tr td form#comentarios-contactenos{
+  padding-left: 10px;
+}
+
+div#MDLVPRI{
+	display:none;
+	}
+
+div#pipa{
+  position: relative;
+  padding-top: 10px;
+  text-align: center;
+}
+
+div#re-so{
+  position: absolute;
+  right: 0px;
+  top: 10px;
+}
+
+div#re-so a{
+  float: left;
+  display: block;
+  margin-left: 10px;
+}
+
+a#link-facebook{
+  height: 16px;
+  width: 16px;
+  background: url("../Imagenes/facebook_16.png");
+}
+
+a#link-twitter{
+  height: 16px;
+  width: 16px;
+  background: url("../Imagenes/twitter_16.png");
+}
+
+a#link-youtube{
+  height: 16px;
+  width: 16px;
+  background: url("../Imagenes/youtube_16.png");
+}
+
+
+div#sli-noti{
+  overflow: hidden;
+  position: relative;
+}
+
+div#sli-noti-conte{
+  left: 0px;
+  top: 0px;
+  width: 99999px;
+  position: relative;
+  text-align: left;
+}
+
+div#correo-tip-fondo{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: url("../Imagenes/pixeltranspa.png");
+  z-index: 10000;
+  display: none;
+}
+
+div#correo-tip-fondo div#contenido{
+  background: white;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  margin-bottom: auto;
+  height: 150px;
+  width: 300px;
+  padding-left: 40px;
+  padding-top: 35px;
+  position: relative;
+  border-bottom: 4px silver solid;
+  border-top: 4px silver solid;
+}
+
+div#correo-tip-fondo div#contenido a#alum{
+  display: block;
+  background: url("../Imagenes/mail-icon-alumno.png") no-repeat;
+  padding-left: 60px;
+  height: 50px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: silver;
+}
+
+div#correo-tip-fondo div#contenido a#admin{
+  display: block;
+  background: url("../Imagenes/mail-icon-admin.png") no-repeat;
+  padding-left: 60px;
+  height: 50px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: silver;
+}
+
+div#correo-tip-fondo div#contenido a#admin:hover, div#correo-tip-fondo div#contenido a#alum:hover{
+  color: gray;
+}
+
+div#correo-tip-fondo div#contenido a#salir{
+  right: 10px;
+  bottom: 10px;
+  position: absolute;
+}
+
+
+div#regon-tip-fondo{
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: url("../Imagenes/pixeltranspa.png");
+  z-index: 10000;
+  display: none;
+}
+
+div#default-tip-fondo{
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: url("../Imagenes/pixeltranspa.png");
+  z-index: 10000;
+  display: none;
+}
+
+div#default-tip-fondo table{
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div#default-tip-fondo table tr td#contenido{
+  background: white;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+div#default-tip-fondo table tr td#controles{
+  text-align: right;
+  padding: 5px;
+}
+
+div#default-tip-fondo table tr td a#salir{
+  padding-left: 6px;
+  padding-right: 6px; 
+  padding-top: 2px; 
+  padding-bottom: 2px;
+  margin-top: 10px;
+  color: white;
+  background: white; 
+  font-weight: bold;
+  border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+  color: #336699;
+}
+
+div#regon-tip-fondo div#contenido{
+  background: white;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  margin-bottom: auto;
+  height: 150px;
+  width: 300px;
+  padding-left: 40px;
+  padding-top: 35px;
+  position: relative;
+  border-bottom: 4px silver solid;
+  border-top: 4px silver solid;
+}
+
+div#regon-tip-fondo div#contenido a#alum{
+  display: block;
+  background: url("../Imagenes/regon-alum.png") no-repeat;
+  padding-left: 60px;
+  height: 50px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: silver;
+}
+
+div#regon-tip-fondo div#contenido a#aca{
+  display: block;
+  background: url("../Imagenes/regon-aca.png") no-repeat;
+  padding-left: 60px;
+  height: 50px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: silver;
+}
+
+div#regon-tip-fondo div#contenido a#aca:hover, div#regon-tip-fondo div#contenido a#alum:hover{
+  color: gray;
+}
+
+div#regon-tip-fondo div#contenido a#salir{
+  right: 10px;
+  bottom: 10px;
+  position: absolute;
+}
+
+
+
+
+div#flecha-calendario{
+  position: relative;
+  width: 1px;
+  height: 1px;
+}
+
+div#flecha-calendario div#flecha{
+  position: relative;
+  top: 5px;
+  left: -30px;
+  background: url("Imagenes/flecha-calendario.png");
+  width: 42px;
+  height: 84px;
+}
+
+div#campus-mapa{
+  position: relative;
+  height: 394px;
+  width: 664px;
+  background: url("../Imagenes/honduras.png");
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+div#campus-mapa a#c_spsp{
+  position: absolute;
+  top: 85px;
+  left: 135px;
+  background: url("../Imagenes/ubica.png");
+  height: 36px;
+  width: 35px;
+}
+
+div#campus-mapa a#c_js{
+  position: absolute;
+  top: 180px;
+  left: 165px;
+  background: url("../Imagenes/ubica.png");
+  height: 36px;
+  width: 35px;
+}
+
+div#campus-mapa a#c_srl{
+  position: absolute;
+  top: 165px;
+  left: 45px;
+  background: url("../Imagenes/ubica.png");
+  height: 36px;
+  width: 35px;
+}
+
+div#campus-mapa a#c_si{
+  position: absolute;
+  top: 70px;
+  left: 238px;
+  background: url("../Imagenes/ubica.png");
+  height: 36px;
+  width: 35px;
+}
+
+div#campus-mapa a#c_sc{
+  position: absolute;
+  top: 185px;
+  left: 308px;
+  background: url("../Imagenes/ubica.png");
+  height: 36px;
+  width: 35px;
+}
+
+div#campus-mapa a#c_des{
+  position: absolute;
+  top: 325px;
+  left: 238px;
+  background: url("../Imagenes/ubica.png");
+  height: 36px;
+  width: 35px;
+}
+
+div#campus-mapa a#c_sa{
+  position: absolute;
+  top: 249px;
+  left: 288px;
+  background: url("../Imagenes/ubica.png");
+  height: 36px;
+  width: 35px;
+}
+
+div#campus-mapa a#c_tabor{
+  position: absolute;
+  top: 182px;
+  left: 250px;
+  background: url("../Imagenes/ubica.png");
+  height: 36px;
+  width: 35px;
+}
+
+div#campus-mapa a#c_sj{
+  position: absolute;
+  top: 238px;
+  left: 234px;
+  background: url("../Imagenes/ubica.png");
+  height: 36px;
+  width: 35px;
+}
+
+div#campus-mapa a#c_scj{
+  position: absolute;
+  top: 240px;
+  left: 205px;
+  background: url("../Imagenes/ubica.png");
+  height: 36px;
+  width: 35px;
+}
+
+div#campus-mapa a#c_sjg{
+  position: absolute;
+  top: 95px;
+  left: 260px;
+  background: url("../Imagenes/ubica.png");
+  height: 36px;
+  width: 35px;
+}
+
+div#icontec-g{
+  float: right;
+  width: 150px;
+  height: 391px;
+  background: url("../Imagenes/IconTecG.png");
+}
+
+div#calidad-conte{
+  min-height: 400px;
+  width: 500px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+
+/* ////////////////////// Elementos con Clase ////////////////////// */
+
+div.barra-div{
+  height: 13px;
+  width: 950px;
+  background: url("../Imagenes/barra-div.png");
+}
+
+ul.mapa-sitio-ele{
+  text-align: left;
+  list-style: none;
+  padding-right: 10px;
+  padding-left: 0px;
+  padding-bottom: 10px;
+  padding-top: 0px;
+  margin: 0px;
+  margin-right: 10px !important;
+  vertical-align: top;
+}
+
+ul.mapa-sitio-ele li a{
+  display: block;
+  color: gray;
+  padding-bottom: 5px;
+  border-bottom: 1px dotted #CCC;
+	cursor:pointer;
+	text-decoration:none;
+	font-family:Tahoma, Geneva, sans-serif;
+	padding-left:15px;
+	display:block;
+	height:auto;
+	padding-top:4px;
+	padding-bottom:4px;
+	font-weight:normal;
+	font-size:11px;
+  background-color:#F9F9F9;
+}
+
+ul.mapa-sitio-ele li a:hover{
+  color:#036;
+	background-color:#FFF;
+	background-image:url(../Imagenes/icon_brick.png);
+	background-position:145px 3px;
+	background-repeat:no-repeat;
+}
+
+ul.mapa-sitio-ele li a.pri{
+  display: block;
+  color: #336699;
+  text-transform: uppercase;
+  list-style: none;
+  padding-bottom: 8px;
+  font-family: sans-serif;
+  font-size: 17px;
+}
+
+span.bloques_de_noticias{
+  float: left;
+}
+
+div.div-menu-uni{
+  height: 5px;
+  background: silver;
+}
+
+
+
+
+table.rango-fechas-calendario{
+  vertical-align: top;
+  margin-top: 5px;
+}
+
+table.rango-fechas-calendario tr td{
+  padding: 10px;
+  vertical-align: top;
+  border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+table.rango-fechas-calendario tr td.contenedor-bloque{
+  padding: 10px;
+  border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+  background: #D3F2CE;
+}
+
+table.rango-fechas-calendario tr td span.fecha{
+  vertical-align: top;
+  width: 80px;
+  display: inline-block;
+  font-size: 11px;
+  color: white;
+  background: #62AACC;
+  margin-right: 10px;
+  /*padding-left: 20px;
+  padding-right: 20px;*/
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-weight: bold;
+  vertical-align: top;
+  border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+table.rango-fechas-calendario tr td span.fechagris{
+  vertical-align: top;
+  width: 80px;
+  display: inline-block;
+  font-size: 11px;
+  color: white;
+  background: silver;
+  margin-right: 10px;
+  /*padding-left: 20px;
+  padding-right: 20px;*/
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-weight: bold;
+  vertical-align: top;
+  border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+table.rango-fechas-calendario tr td span.contenido{
+  vertical-align: top;
+  display: inline-block;
+  width: 300px;
+}
+
+table.rango-fechas-calendario tr td span.contenido span.titulo{
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #336699;
+}
+
+table.rango-fechas-calendario tr td span.contenido span.descripcion{
+  color: #414141;
+}
+
+
+table.facultades tr td{
+  padding: 20px;
+  padding-bottom: 30px !important;
+  vertical-align: top;
+  width: 50%;
+}
+
+
+
+/* ////////////////////// Cualquiera con Clase ////////////////////// */
+
+.b-dot-i{  border-right: 1px dotted gray; }
+.b-dot-d{  border-left: 1px dotted gray; }
+.nb-dot-di{ border-right: none !important; border-left: none !important; }
+.rojo{ color: maroon; }
+.verde{ color: #0C3; }
+.borde-izq{ border-right: 1px solid #D7D7D7 !important; }
+.texto-minimo{ font-size: 10px; color: silver; }
+
+div.app_idunicah_conte{
+	/*background:#F9F9F9;*/
+    width: 200px;
+}
+
+form.app_idunicah{
+	padding: 20px 20px 10px 30px;
+}
+
+.app_idunicah_button{
+    width: 60px;
+    margin-top: 10px;   
+    margin-left: 50px;
+}
+
+div.app_idunicah_tip{
+	position: absolute;
+	top: -10px;
+	color: white;
+	left: 110px;
+	font-weight: bold;
+	padding: 3px 6px 3px 6px;
+	background:silver;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+a.app_idunicah_registro{
+	margin: 0px 10px 20px 10px;
+	display: inline-block;
+	padding-top: 72px;
+	width: 72px;
+	background: url(registro.png) no-repeat top;
+	text-align: center;
+}
+
+a.app_idunicah_moodle{
+	margin: 20px;
+	display: inline-block;
+	padding-top: 72px;
+	width: 72px;
+	background: url(moodle.png) no-repeat top;
+	text-align: center;
+}
+
+
+div.papa-menu-la{
+	width:200px;
+	background:#000;
+	min-height:300px;
+	margin-right:20px;
+	}
+
+div.ocultables > h2{
+	height: 8px;
+	background-image: url(../Imagenes/fon_bot.png);
+	text-align: right;
+	color: #999;
+	text-shadow: #FFF 0 1px 0;
+	font-weight: bold;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 11px;
+  	padding-top: 5px;
+  	padding-right: 10px;
+ 	border: 1px solid #D7D7D7;
+	margin-bottom:10px;
+	text-transform:none;
+	cursor:pointer;
+	}
+
+div.ocultables > span.contenido{
+	margin-top:10px;
+	display:none;
+	}
+
+div.ocultables{
+	
+	}
+
+div.menuliturgiadias{
+	position:relative;
+	}
+
+div.menuliturgiadias > div.conte{
+	right:0px;
+	position:absolute;
+	padding:10px;
+	background:#EFEFEF;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	}
+
+div.MDLV_tit{
+	text-transform:uppercase;
+	margin-bottom:6px;
+	font-weight:bold;
+	font-size:11px;
+	}
+
+ol > li > a{
+	background-image:none !important;
+}
+
+div.menuliturgiadias > div.conte > a{
+	display:block;		
+	}
+
+
+ul.news{
+	border:1px solid #CCC;
+	list-style:none;
+	background:#FFF;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	padding:5px 10px 5px 130px;
+	background:#F7F7F7;
+	}
+
+div.news_etiq{
+	position:absolute;
+	padding:6px;
+	width:100px;
+	background:#033;
+	-moz-border-radius:5px 0px 0px 5px;
+	-webkit-border-radius:5px 0px 0px 5px;
+	border-radius:5px 0px 0px 5px;
+	background:url(../Imagenes/fondobot.png);
+	text-align:center;
+	font-weight:bold;
+	color:#FFF;
+	cursor:default;
+	}
+	
+ul.ticker-controls{
+	list-style:none;
+	position:absolute;
+	right:20px;
+	top:17px;
+	}
+
+ul.ticker-controls li{
+	display:inline-block;
+	}

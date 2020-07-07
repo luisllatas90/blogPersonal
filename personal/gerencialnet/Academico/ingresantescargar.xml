@@ -1,0 +1,190 @@
+﻿<?xml version="1.0"?>
+<OlapReports>
+  <OlapReport Name="Report 1" Description="" CubeName="cubModalidadIngreso" DataTitleFormat="Ingresantes por Semestre de Ingreso y Escuela Profesional" ReadOnly="False" NonEmptyCellsOnly="True">
+    <AxisDescriptors>
+      <AxisDescriptor AxisName="Categorical">
+        <Dimensions>
+          <Dimension Name="CarreraProfesional" LevelName="[CarreraProfesional].[Facultad]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+
+              <Member Name="ADMINISTRACIÓN HOTELERA Y DE SERVICIOS" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES].[ADMINISTRACIÓN HOTELERA Y DE SERVICIOS]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+
+
+              <Member Name="ADMINISTRACIÓN DE EMPRESAS" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES].[ADMINISTRACIÓN DE EMPRESAS]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              
+              <Member Name="CONTABILIDAD" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES].[CONTABILIDAD]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="ECONOMÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES].[ECONOMÍA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="DERECHO" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[DERECHO].[DERECHO]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="BIOLOGÍA  Y QUÍMICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[BIOLOGÍA  Y QUÍMICA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="CIENCIAS DE LA COMUNICACIÓN" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[CIENCIAS DE LA COMUNICACIÓN]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="COMPLEMENTACIÓN ACADEMICA  DOCENTE" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[COMPLEMENTACIÓN ACADEMICA  DOCENTE]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="EDUCACIÓN FÍSICA Y DANZAS" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[EDUCACIÓN FÍSICA Y DANZAS]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="EDUCACIÓN INICIAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[EDUCACIÓN INICIAL]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="EDUCACIÓN PRIMARIA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[EDUCACIÓN PRIMARIA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="FILOSOFÍA Y TEOLOGÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[FILOSOFÍA Y TEOLOGÍA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="HISTORIA Y GEOGRAFÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[HISTORIA Y GEOGRAFÍA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="LENGUA Y LITERATURA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[LENGUA Y LITERATURA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="MATEMÁTICA, COMPUTACIÓN E INFORMATICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES].[MATEMÁTICA, COMPUTACIÓN E INFORMATICA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="ARQUITECTURA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[ARQUITECTURA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="INGENIERÍA CIVIL Y AMBIENTAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA CIVIL Y AMBIENTAL]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="INGENIERÍA DE SISTEMAS Y COMPUTACIÓN" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA DE SISTEMAS Y COMPUTACIÓN]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="INGENIERÍA ENERGÉTICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA ENERGÉTICA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="INGENIERÍA INDUSTRIAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA INDUSTRIAL]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="INGENIERÍA MECÁNICA ELÉCTRICA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA MECÁNICA ELÉCTRICA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="INGENIERÍA NAVAL" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA].[INGENIERÍA NAVAL]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="ENFERMERÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[ENFERMERÍA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="MEDICINA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[MEDICINA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="ODONTOLOGÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[ODONTOLOGÍA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+              <Member Name="PSICOLOGÍA" UniqueName="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA].[PSICOLOGÍA]">
+                <Properties>
+                  <Property Name="F24AA1A6-107A-437c-BDCD-04DE92CEEF42" Value="true" />
+                </Properties>
+              </Member>
+            </Members>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+      <AxisDescriptor AxisName="Series">
+        <Dimensions>
+          <Dimension Name="Measures" LevelName="" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="Cantidad" UniqueName="[Measures].[Cantidad]" />
+            </Members>
+          </Dimension>
+          <Dimension Name="Semestre Ingreso" LevelName="[Semestre Ingreso].[Tipo Semestre]" NamedSetName="" ShowAllParentLevels="False" MemberSortOrder="None">
+            <Members>
+              <Member Name="2005-I" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2005-I]" />
+              <Member Name="2005-II" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2005-II]" />
+              <Member Name="2006-I" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2006-I]" />
+              <Member Name="2006-II" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2006-II]" />
+              <Member Name="2007-I" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2007-I]" />
+              <Member Name="2007-II" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2007-II]" />
+              <Member Name="2008-I" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2008-I]" />
+              <Member Name="2008-II" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2008-II]" />
+              <Member Name="2009-I" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2009-I]" />
+              <Member Name="2009-II" UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular].[2009-II]" />
+            </Members>
+            <Parents>
+              <Member UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular]" />
+              <Member UniqueName="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular]" />
+            </Parents>
+          </Dimension>
+        </Dimensions>
+      </AxisDescriptor>
+      <AxisDescriptor AxisName="Slicer" />
+    </AxisDescriptors>
+    <ExpandedTuples>
+      <ExpandedTuple Name="[Semestre Ingreso].[Todas Semestre Ingreso].[Regular]" />
+      <ExpandedTuple Name="[Measures].[Cantidad], [Semestre Ingreso].[Todas Semestre Ingreso].[Regular]" />
+      <ExpandedTuple Name="[CarreraProfesional].[Todas CarreraProfesional].[CIENCIAS EMPRESARIALES]" />
+      <ExpandedTuple Name="[CarreraProfesional].[Todas CarreraProfesional].[DERECHO]" />
+      <ExpandedTuple Name="[CarreraProfesional].[Todas CarreraProfesional].[HUMANIDADES]" />
+      <ExpandedTuple Name="[CarreraProfesional].[Todas CarreraProfesional].[INGENIERÍA]" />
+      <ExpandedTuple Name="[CarreraProfesional].[Todas CarreraProfesional].[MEDICINA]" />
+    </ExpandedTuples>
+    <ControlState>
+      <StateBag Name="olapchart"><![CDATA[AAEAAAD/////AQAAAAAAAAAMAgAAAE1TeXN0ZW0uV2ViLCBWZXJzaW9uPTIuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49YjAzZjVmN2YxMWQ1MGEzYQUBAAAAElN5c3RlbS5XZWIuVUkuUGFpcgIAAAAFRmlyc3QGU2Vjb25kAgICAAAACQMAAAAJBAAAAA8DAAAA5AIAAAJEQ0JGMzAwAAAAAAAAAADNrhSuAXm8G35cdGVtcC9DaGFydFBpY18jU0VRKDMwMCwzKarlquWqVAhDYW50aWRhZONHAYvvAAAAAMLt8IxB/6rbQEBA/x3WAAAA/5lGRURyYXdpbmdTdHlsZT1DeWxpbmRlciwgUGllRHJhd2luZ1N0eWxlPUNvbmNhdmUsIF9PbGFwRGF0YVNlcmllc189dHJ1ZU1CCENhbnRpZGFkAAAAAIZGBkR1bmRhc6YPCjYuMS4wLjE3MjjBdlCPNNQFU29saWTpEfhyiOXAwMD/AAD8IIjlwMDA/wAA18MpRGVjcmVhc2VGb250LCBMYWJlbHNBbmdsZVN0ZXA5MCwgV29yZFdyYXD2JQ1WYXJpYWJsZUNvdW50AADoEfhyiOX///8ATlsAAAD8IIjl////AAAAmF1OWwAAAIxOiOX///8ApXAAAABopwcAAADXwylEZWNyZWFzZUZvbnQsIExhYmVsc0FuZ2xlU3RlcDkwLCBXb3JkV3JhcOuVRSrI0NT/AAAAALhN+HKI5cDAwP9OWwAAAPwgiOXAwMD/AADXwylEZWNyZWFzZUZvbnQsIExhYmVsc0FuZ2xlU3RlcDkwLCBXb3JkV3JhcAAAmU34cojlwMDA/wAA/CCI5cDAwP8AANfDKURlY3JlYXNlRm9udCwgTGFiZWxzQW5nbGVTdGVwOTAsIFdvcmRXcmFwAABFKv/////G2QIAAACq22k7Gv+qVAdEZWZhdWx0AAAAAMVzcIeqVAdEZWZhdWx0RSr/////qttpOxr/xtkCAAAAAAAAAIIJj/iqVAlNYWluVGl0bGVg0AxDYW50aWRhZCBieSBeLBpNaWNyb3NvZnQgU2FucyBTZXJpZiwgMTJwdAAAj/iqVAZOb0RhdGHkbQdEZWZhdWx0YNARTm8gRGF0YSBBdmFpbGFibGUAAAAACjGqSO2VZP/Z2e2VZP8AAAAAAAAAAAEEAAAAAQAAAAkFAAAACQYAAAARBQAAAAAAAAAPBgAAABwAAAACAQAAAAdEZWZhdWx0AAAAAAAAAAAAAAAAAAAAAAs=]]></StateBag>
+      <StateBag Name="olapclient1grid"><![CDATA[<?xml version="1.0"?><OlapGrid ForeColor="" BackColor="" BorderColor="" BorderWidth="" BorderStyle="NotSet" InterlacedRows="True" Visible="True" ID="OlapClient1Grid" EnableMemberDrillDown="True" Orientation="Vertical" EmptyCellValue="" TitleText="" ctm="True" SubTotals="True"><ColumnHeader /><Regular /><Interlaced /><RowHeader /><Total /><Title /></OlapGrid>]]></StateBag>
+    </ControlState>
+  </OlapReport>
+</OlapReports>

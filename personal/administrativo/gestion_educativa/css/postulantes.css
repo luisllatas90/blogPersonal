@@ -1,0 +1,48 @@
+#udpCabecera {
+  position: relative;
+  margin: 8px 0px; }
+  #udpCabecera .title {
+    margin: 0px 6px 0px 6px;
+    color: #2F4F4F;
+    font-size: 0.9rem; }
+  #udpCabecera hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem; }
+  #udpCabecera #loading-gif {
+    position: absolute;
+    display: none;
+    width: 30px;
+    right: 10px;
+    top: 5px;
+    z-index: 9999; }
+
+.tab-pane {
+  position: relative; }
+  .tab-pane .loading-gif {
+    position: absolute;
+    display: none;
+    z-index: 9999;
+    right: 5px;
+    top: 3px;
+    width: 25px; }
+
+#udpFiltrosPostulantes hr {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem; }
+
+#udpFiltrosPostulantes #chkMostrarSinDeuda + .custom-control-label {
+  font-size: 0.75rem;
+  font-weight: 500; }
+
+#udpFiltrosIngresantes hr {
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem; }
+
+#udpFiltrosIngresantes .form-group:last-child {
+  margin-bottom: 0; }
+
+#udpPgrPostulantes {
+  margin-top: 10px; }
+
+#udpDatosEvento .table .thead-dark {
+  text-align-last: left; }

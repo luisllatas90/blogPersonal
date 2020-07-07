@@ -1,0 +1,54 @@
+body{
+	font-family: "Trebuchet MS", "Lucida Console", Arial, san-serif;
+	color: #333333;font-size:8pt
+	}
+
+.totalmatricula { border: 1px solid #000000; background-color: #FEFFE1 }
+.mensajeobt  { color: #0000FF; font-weight: bold }
+.opciones    { font-size: 10pt; color: #808080; font-weight: bold; font-family:Tahoma }
+.etabla   	{ color:#000000; font-weight: bold; background-color: #DFDBA4; text-align:center }
+.etabla2    {color:#000000; background-color: "#DFDBA4"}
+.Negrita    	{ color:#000000; font-weight: bold}
+
+
+.Nivel0 { color:#000000; background-color: "#FEFFE1"}
+.Nivel1 { color:#000000}
+.Nivel2 { color:#004E98}
+.Nivel3 { color:#7E2C32}
+.Nivel4 { color:#000000; font-weight: bold; background-color: "#DFDBA4"}
+.Nivel5 { color:#000000; background-color: "#FFFFFF"}
+
+
+/*
+.Nivel0 { color:#000000; background-color: "#FEFFE1"}
+.Nivel1 { color:#000000; background-color: "#EFEDE0"}
+.Nivel2 { color:#000000; background-color: "#ECF2ED"}
+.Nivel3 { color:#000000; background-color: "#F0FBE6" }
+.Nivel4 { color:#000000; font-weight: bold; background-color: "#DFDBA4"}
+.Nivel5 { color:#000000; background-color: "#FFFFFF"}
+*/
+
+
+
+a:Active		{color: #800000;  }
+a:Link			{color: #000000; text-decoration:none}
+a:Visited		{color: #000066; text-decoration:none underline}
+.e1           	{font-family: "Trebuchet MS", "Lucida Console", Arial, san-serif; font-weight: bold; font-size:12pt; color:#666666}
+.e2           	{color: #808080; font-weight: bold; text-decoration:underline}
+table        	{font-family: Arial,tahoma; font-size: 8pt }
+li           { list-style-image: url('../images/vineta.gif') }
+.Cajas  { font-family: Verdana; font-size: 8.5pt}
+select	{font-family: Verdana; font-size: 8.5pt}
+.boton  	{border:1px solid #C0C0C0; background:#FEFFE1; font-family:tahoma; font-size:8pt; font-weight:bold; height:25;cursorpointer; cursor:hand}
+.guardar  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/guardar.gif') no-repeat 0% 80%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.salir  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/salir.gif') no-repeat 0% 80%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.buscar  	{border:0px solid #FFFFFF; background:#FFFFFF url('../images/buscar.gif') no-repeat 0% 80%; width:120; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.nuevo  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/nuevo.gif') no-repeat 0% 80%; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.modificar  {border:1px solid #C0C0C0; background:#FEFFE1 url('../images/editar.gif') no-repeat 0% 80%; width:100; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.eliminar  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/eliminar.gif') no-repeat 0% 80%; width:150; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.previo  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/previo.gif') no-repeat 0% 80%; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.eliminar2  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/eliminar.gif') no-repeat 0% 80%; width:15; font-family:Tahoma; font-size:6pt; font-weight:bold; height:15}
+.aprobar  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/ok.gif') no-repeat 0% 80%; width:15; font-family:Tahoma; font-size:6pt; font-weight:bold; height:15}
+.desaprobar  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/eliminar.gif') no-repeat 0% 80%; width:15; font-family:Tahoma; font-size:6pt; font-weight:bold; height:15}
+.eliminar3  	{border:1px solid #C0C0C0; background:#FEFFE1 url('../images/eliminar.gif')no-repeat 0% 80%; width:150; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}
+.eliminar4  	{border:1px solid #C0C0C0; background:#F*EFFE1 url('../images/salir.gif') no-repeat 0% 80%; width:138; font-family:Tahoma; font-size:8pt; font-weight:bold; height:25}

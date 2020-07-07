@@ -1,0 +1,40 @@
+﻿body {
+	font-family: "Trebuchet MS", "Lucida Console", Arial, san-serif;
+	color: Black;
+	font-size: 8pt;
+	font: normal;
+}
+.Combos
+{
+    font-family: Verdana;
+    font-size: 11px;
+    background-color: #FFFFC4;
+    border: 1px solid #800000;
+}
+.Cajas
+{
+    font-family: Verdana;
+    font-size: 11px;
+    background-color: #FFFFC4;
+    border: 1px solid #800000;
+}
+.Botones
+{
+    font-family: Verdana;
+    font-size: 11px;
+    background-color: #FFFFC4;
+    border: 1px solid #800000;
+}
+.encabezado
+{
+    font-family: Verdana;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.filas
+{
+    font-family: Verdana;
+    font-size: 10px;
+    font-weight: normal;
+}

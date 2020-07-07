@@ -1,0 +1,8 @@
+textarea {
+  resize: none; }
+
+#divDatosDeudas h6 {
+  font-size: 0.9rem; }
+
+tr.vencida {
+  color: #E33439; }

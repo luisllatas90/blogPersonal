@@ -1,0 +1,63 @@
+#contentTabs .tab-pane > .card {
+  border-top: 0; }
+  #contentTabs .tab-pane > .card h5.title {
+    margin: 0px 6px 0px 6px;
+    color: #2F4F4F;
+    font-size: 0.9rem; }
+  #contentTabs .tab-pane > .card hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem; }
+
+#filters-card .dropdown-item .text-muted {
+  font-size: 0.75rem;
+  font-weight: bold; }
+  #filters-card .dropdown-item .text-muted .good {
+    color: #1e87db; }
+  #filters-card .dropdown-item .text-muted .bad {
+    color: #dc3545; }
+
+.form-group:last-child {
+  margin-bottom: 0.2rem; }
+
+.form-group div[class^="col-"] {
+  margin-bottom: 0.6rem; }
+
+.rel-absolute {
+  position: relative; }
+  .rel-absolute #loading-gif {
+    position: absolute;
+    display: none;
+    top: -4px;
+    right: 12px;
+    width: 24px; }
+
+td.operacion {
+  text-align: center; }
+  td.operacion > button {
+    margin: 0px 5px; }
+
+#btnNuevo.btn-accion {
+  font-size: 0.75rem; }
+  #btnNuevo.btn-accion .fa {
+    line-height: 0.7;
+    padding: 7px 8px 7px 8px; }
+
+#divOpciones {
+  display: flex;
+  align-items: center; }
+
+#divMainTabs {
+  margin-top: 10px; }
+
+#mantenimiento #loading-gif-mantenimiento {
+  position: absolute;
+  display: none;
+  top: 4px;
+  right: 8px;
+  width: 24px; }
+
+#mantenimiento .row.form-group {
+  margin-bottom: 0.5rem; }
+
+.toast-message {
+  font-size: 0.8rem; }

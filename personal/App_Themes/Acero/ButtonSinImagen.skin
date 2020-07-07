@@ -1,0 +1,42 @@
+<%--
+Botones sin Imágenes
+--%>
+
+<asp:Button ToolTip="Exporta los registros a un formato .xls"  skinID="BotonSinTextoAExcel" runat="server" CssClass="BU_boton_aexcel" 
+        Height="25px"     />
+        
+<asp:Button skinID="BotonSinTextoAceptar" runat="server" CssClass="BU_boton_aceptar" 
+        Height="25px"    />
+        
+<asp:Button  ToolTip="Realiza una búsqueda de acuerdo a los criterios seleccionados." skinID="BotonSinTextoBuscar" runat="server" CssClass="BU_boton_buscar" 
+        Height="25px"   />
+        
+<asp:Button skinID="BotonSinTextoCancelar" runat="server" ToolTip="Cancela las operaciones realizadas." CssClass="BU_boton_cancelar" 
+        Height="25px"   />
+        
+<asp:Button ToolTip="Elimina un registro seleccionado u operación realizada." skinID="BotonSinTextoEliminar" runat="server" CssClass="BU_boton_eliminar" 
+        Height="25px"    />
+        
+<asp:Button ToolTip="Guarda los cambios realizados." skinID="BotonSinTextoGuardar" runat="server" CssClass="BU_boton_guardar" 
+        Height="25px"    />
+        
+<asp:Button ToolTip="Imprime un documento." skinID="BotonSinTextoImprimir" runat="server" CssClass="BU_boton_imprimir" 
+        Height="25px"  />
+        
+<asp:Button ToolTip="Apertura la modificación del registro seleccionado o datos ingresados." skinID="BotonSinTextoModificar" runat="server" CssClass="BU_boton_modificar" 
+        Height="25px"     />
+        
+<asp:Button ToolTip="Apertura el ingresos de nuevos datos." skinID="BotonSinTextoNuevo" runat="server" CssClass="BU_boton_nuevo" 
+        Height="25px"    />
+        
+<asp:Button ToolTip="Limpia datos ingresados." skinID="BotonSinTextoLimpiar" runat="server" CssClass="BU_boton_limpiar" 
+        Height="25px"    />        
+        
+<asp:Button ToolTip="Abandona la aplicación o formulario actual." skinID="BotonSinTextoSalir" runat="server" CssClass="BU_boton_salir" 
+        Height="25px"    />    
+        
+<asp:Button ToolTip="Cierra la sesión o aplicación actual." skinID="BotonSinTextoCerrar" runat="server" CssClass="BU_boton_cerrar" 
+    Height="25px"     />    
+
+<asp:Button ToolTip="Adjunta un archivo." skinID="BotonSinTextoAdjuntar" runat="server" CssClass="BU_boton_adjuntar" 
+    Height="25px"     />    

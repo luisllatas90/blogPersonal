@@ -1,0 +1,8 @@
+<asp:GridView skinId="skinGridView" runat="server" CellPadding="2" 
+GridLines="Horizontal" CssClass="GV_apariencia" EmptyDataText="No se encontraron coincidencias a su búsqueda." >
+        <EmptyDataRowStyle CssClass="GV_gridvacio" Height="50px" />
+        <RowStyle CssClass="GV_fila_detalle"/>
+        <HeaderStyle CssClass="GV_fila_cabecera" HorizontalAlign="Center" 
+        VerticalAlign="Middle" Height="28px"
+        BorderColor="Black" BorderStyle="Solid"  BorderWidth="4"/>
+</asp:GridView>

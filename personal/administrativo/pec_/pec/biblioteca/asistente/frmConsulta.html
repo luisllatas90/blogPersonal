@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Imprimir Etiquetas</title>
+<link href="../../../private/estilo.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.Estilo4 {font-size: 12}
+.Estilo6 {font-size: 12px}
+.Estilo7 {color: #000000; font-size: 12px; }
+.Estilo8 {
+	color: #006699;
+	font-size: 12pt;
+	font-weight: bold;
+}
+.Estilo1 {color: #000000}
+.Estilo2 {color: #000000; font-weight: bold; }
+.Estilo9 {color: #000000; font-weight: bold; font-size: 16px; }
+-->
+</style>
+<script>
+<!--
+function VerVistaRango() {
+var inicio=frmConsulta.txtInicio.value
+var Fin=frmConsulta.TxtFin.value
+if (inicio!="" & Fin!=""){
+	frmConsulta.action="resultado.asp?accion=rango"
+	frmConsulta.target="_blank"
+	frmConsulta.submit()
+}
+else{
+alert ("Ingrese valor del código de ejemplar de Inicio y Fin para la búsqueda")
+}
+
+//alert(frmConsulta.txtInicio.value)
+
+}
+function ConsultarLista() {
+
+   var Destinatario=document.frmConsulta.ListaLibros.length
+	//alert (Destinatario)
+   if (Destinatario!=0){
+	    var Temporal=""
+	    for (i=0; i < Destinatario; i++) {
+			document.frmConsulta.ListaLibros.options[i].selected=true
+		} 
+		frmConsulta.action="resultado.asp?accion=lista"
+		frmConsulta.target="_blank"
+		frmConsulta.submit()
+//alert(frmConsulta.txtInicio.value)
+	}
+}
+ function QuitarItemLista()
+ {
+ 	var select=document.frmConsulta.ListaLibros
+	var num = select.options.length;
+  	var text = new Array();
+	var value = new Array();
+  	for (var i = num - 1; i >= 0; i--)
+		{
+    	if (select.options[i].selected)
+			{
+      		text[text.length] = select.options[i].text;
+			value[value.length] = select.options[i].value;
+			select.options[i] = null;
+			}
+		}
+	 document.frmConsulta.TxtContador.value=document.frmConsulta.ListaLibros.options.length
+ }
+ function AgregarItemLista()
+ {
+ var valor= document.frmConsulta.txtCodigo.value
+// alert (valor)
+if (valor !="")
+{ 
+    var text = new Array();
+	var value = new Array();
+
+      		text[text.length] = valor;//select.options[i].text;
+			value[value.length] = valor;//select.options[i].value;	
+  	for (var i = 0; i < text.length; i++)
+		{
+	  	var opt = new Option(text[i], value[i])
+		document.frmConsulta.ListaLibros.options[document.frmConsulta.ListaLibros.options.length] = opt;
+		}
+ }
+	document.frmConsulta.txtCodigo.value=""
+	document.frmConsulta.txtCodigo.focus()
+	 document.frmConsulta.TxtContador.value=document.frmConsulta.ListaLibros.options.length
+}
+
+function SoloNumero()
+{
+	if (event.keyCode < 45 || event.keyCode > 57)
+		{event.returnValue = false}
+}
+
+function VerEtiqueta(){
+var codigo= document.all.txtCodigo.value
+var pagina="etiqueta.asp?codigo=" + codigo
+//alert (codigo)
+	if (codigo!=""){
+		var ventana=window.open(pagina,"popup","height=250,width=300,statusbar=0,scrollbars=0,top=200,left=650,resizable=no,toolbar=no,menubar=no")
+		ventana.location.href=pagina
+		ventana=null
+	}
+}
+
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+<link href="../../../../private/estilo.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<form id="frmConsulta" name="frmConsulta" method="post">
+  <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><table width="60%" border="0" align="center" cellpadding="3" cellspacing="3" class="contornotabla">
+        <tr>
+          <td colspan="3" align="center"><span class="Estilo8">Imprimir Etiquetas por Rango </span></td>
+        </tr>
+        <tr>
+          <td width="12%">&nbsp;</td>
+          <td width="6%">&nbsp;</td>
+          <td width="82%">&nbsp;</td>
+        </tr>
+        <tr>
+          <td><span class="Estilo7">Inicio</span></td>
+          <td><span class="Estilo6"></span></td>
+          <td><span class="Estilo6">
+            <input name="txtInicio" type="text" id="txtInicio" onkeypress="SoloNumero()" />
+          </span></td>
+        </tr>
+        <tr>
+          <td><span class="Estilo7">Fin</span></td>
+          <td><span class="Estilo6"></span></td>
+          <td><span class="Estilo6">
+            <input name="TxtFin" type="text" id="TxtFin" onkeypress="SoloNumero()" />
+          </span></td>
+        </tr>
+        <tr>
+          <td><span class="Estilo4"></span></td>
+          <td><span class="Estilo4"></span></td>
+          <td><span class="Estilo4"></span></td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center"><input name="Submit" onclick="VerVistaRango()"  type="button" class="buscar" value="    Vista Previa" /></td>
+        </tr>
+      </table></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><table width="60%" border="0" align="center" cellpadding="3" cellspacing="3" class="contornotabla">
+        <tr>
+          <td colspan="5" align="center"><span class="Estilo8">Imprimir Etiquetas Seleccionadas </span></td>
+        </tr>
+        <tr>
+          <td width="12%">&nbsp;</td>
+          <td width="6%">&nbsp;</td>
+          <td width="82%" colspan="3">&nbsp;</td>
+        </tr>
+        <tr>
+          <td><span class="Estilo7">C&oacute;digo</span></td>
+          <td><span class="Estilo6"></span></td>
+          <td><span class="Estilo6">
+            <input name="txtCodigo" type="text" id="txtCodigo"  onkeypress="SoloNumero()"/>
+          </span></td>
+          <td><input onclick="VerEtiqueta()" name="Submit3" type="button" class="horario2" value="   Ver Etiqueta" /></td>
+          <td><input name="Submit32" type="button" class="agregar2" value="     Agregar    " onclick="AgregarItemLista()" /></td>
+        </tr>
+
+        <tr>
+          <td colspan="5"><span class="Estilo4"></span><span class="Estilo4"></span></td>
+          </tr>
+        <tr>
+          <td rowspan="2">&nbsp;</td>
+          <td rowspan="2">&nbsp;</td>
+          <td colspan="2" rowspan="2"><select name="ListaLibros" size="14" multiple="multiple" id="ListaLibros"  style="width:100%" >
+                    </select></td>
+          <td valign="top"><input name="Submit322" type="button" class="eliminar2" value="     Quitar       " onclick="QuitarItemLista()" /></td>
+        </tr>
+        <tr>
+          <td valign="bottom">
+
+	  Etiquetas:
+	  <input name="TxtContador" type="text" id="TxtContador" style="border: 0px solid #C0C0C0; text-align:center" value="0" /></td>
+		      
+        </tr>
+        <tr>
+          <td colspan="5" align="center"><input name="Submit2"  type="button"  onclick="ConsultarLista()" class="buscar" value="    Vista Previa" /></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

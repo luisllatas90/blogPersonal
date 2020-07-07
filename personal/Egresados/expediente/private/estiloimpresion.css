@@ -1,0 +1,33 @@
+/* 
+Estilos para Imprimir Página HTML, solo se aplicarán a los TAG HTML
+*/
+.NoImprimir {display: none;}
+
+/*Aplica salto de página en modo de impresión*/
+.SaltoDePagina
+{
+	page-break-after: always;
+}
+
+IFRAME
+{
+	border:1px solid #FFFFFF;
+	overflow: visible;
+	width: 100%;
+	height: 100%
+}
+.AltoObjeto
+{
+	height:100%;
+	width:100%
+}
+/*
+@page: left {
+	margin-left: 5cm;
+	margin-right: 7cm;
+}
+/*Margenes en la primera página
+@page :first {
+  margin-top: 10cm
+}
+*/
