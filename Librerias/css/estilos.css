@@ -1,0 +1,20 @@
+div
+{
+    border: red 1px solid;
+}
+
+
+
+.col-md-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 16.5px;
+}
+
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 20%;
+        float: left;
+    }
+}
