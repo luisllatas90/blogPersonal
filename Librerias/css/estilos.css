@@ -1,0 +1,60 @@
+div
+{
+    border: red 1px solid;
+}
+.col-sm-2col_personalizada,
+.col-sm-1col_personalizada,
+.col-md-5col_personalizada,
+.col-lg-10col_personalizadas {
+    min-height: 1px; 
+    position: relative;
+}
+
+/*extra pequeño*/
+@media (min-width: 100px) { 
+  .col-sm-1col_personalizada {
+    float: left;
+    width: 100%;
+
+  }
+  
+  .col-sm-2col_personalizada
+  {
+    float: left;
+    width: 50%;
+  }
+}
+
+/*Mediano*/
+@media (min-width: 768px) {
+
+    .col-md-5col_personalizada {
+      float: left;
+      width: 50%;
+  
+    }
+  
+  }
+
+/*Mediano*/
+@media (min-width: 992px) {   
+    .col-lg-10col_personalizadas {
+      float: left;
+      width: 10%;
+    }
+  
+}
+
+/*Grande*/
+@media (min-width: 1200px) {
+  .col-lg-10col_personalizadas {
+    float: left;
+    width: 10%;
+
+  }
+}
+
+
+
+
+
