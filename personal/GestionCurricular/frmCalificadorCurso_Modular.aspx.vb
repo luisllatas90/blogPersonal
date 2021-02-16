@@ -188,6 +188,22 @@ Partial Class GestionCurricular_frmCalificadorCurso_Modular
                                     ' ---------------------------------------------------------------------------------------/
                                 End If
 
+                                ' 20200801-ENEVADO ----------------------------------------------------------------------\
+                                Dim _aux_nota As String = fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup)
+                                If String.IsNullOrEmpty(_aux_nota) Then
+                                    _aux_nota = fc_getNotaMoodle(_codigo_pso, _codigo_ins)
+
+                                    If String.IsNullOrEmpty(_aux_nota) Then
+                                        _aux_nota = "0"
+                                    End If
+                                End If
+                                If _tipo_prom_ind = 2 Then
+                                    _sum_ind += (CDbl(_aux_nota) * _peso_ins)
+                                Else
+                                    _sum_ind += CDbl(_aux_nota)
+                                End If
+                                ' ---------------------------------------------------------------------------------------/
+
                             Else
 
                                 Dim lblNotaReg As New Label()
@@ -209,11 +225,24 @@ Partial Class GestionCurricular_frmCalificadorCurso_Modular
                                     End If
                                 End If
 
-                                If _tipo_prom_ind = 2 Then
-                                    _sum_ind += (fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup) * _peso_ins)
-                                Else
-                                    _sum_ind += fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup) '20191009-ENEVADO
+                                Dim _aux_nota As String = fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup) 'por Luis Q.T. | 10072020
+
+                                If String.IsNullOrEmpty(_aux_nota) Then 'por Luis Q.T. | 10072020
+                                    _aux_nota = "0"
                                 End If
+
+                                ' 20200801-ENEVADO ----------------------------------------------------------------------\
+                                'If _tipo_prom_ind = 2 Then
+                                '    _sum_ind += (fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup) * _peso_ins)
+                                'Else
+                                '    _sum_ind += fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup) '20191009-ENEVADO
+                                'End If
+                                If _tipo_prom_ind = 2 Then
+                                    _sum_ind += (_aux_nota * _peso_ins)
+                                Else
+                                    _sum_ind += _aux_nota '20191009-ENEVADO
+                                End If
+                                '------------------------------------------------------------------------------------------/
 
                                 ' 20191015-ENEVADO ----------------------------------------------------------------------\
                                 Dim _codigo_ece As Integer
@@ -1441,8 +1470,25 @@ Partial Class GestionCurricular_frmCalificadorCurso_Modular
 
             obj.AbrirConexion()
             dt = obj.TraerDataTable("DEA_NotasParciales_listar", "", -1, -1, "P", codigo_cup, codigo_cor) 'Por Luis Q.T | 10DIC2019: Obtener las notas del corte
-            dtNM = obj.TraerDataTable("DEA_NotasParciales_listar", "CE", -1, -1, "P", codigo_cup)
-            obj.CerrarConexion()
+
+            Dim publicado As String = ""
+
+            If dt.Rows.Count > 0 Then
+                publicado = dt.Rows(0)("publicado").ToString()
+            End If
+
+            If Not publicado.Equals("R") Then
+                dtNM = obj.TraerDataTable("DEA_NotasParciales_listar", "CE", -1, -1, "P", codigo_cup)
+            Else
+                dtNM.Columns.Add("shortname")
+                dtNM.Columns.Add("codigo_ins")
+                dtNM.Columns.Add("scaleid")
+                dtNM.Columns.Add("username")
+                dtNM.Columns.Add("finalgrade")
+                dtNM.Columns.Add("nota_mdl")
+            End If
+			
+			obj.CerrarConexion()
             Session("gc_dtNotas") = dt
             Session("gc_dtNotasMoodle") = dtNM
         Catch ex As Exception
@@ -1574,8 +1620,8 @@ Partial Class GestionCurricular_frmCalificadorCurso_Modular
 
                 ' If (dtN.Rows.Count + dtM.Rows.Count) > 0 And dtI.Rows.Count > 0 Then
 
-                ' 2020-07-03 ENevado -----------------------------------------------------------------
-                If dtA Is Nothing Then
+                ' 2020-07-15 ENevado -----------------------------------------------------------------
+                If (dtA.rows.count - 1) = 0 Then
                     Throw New Exception("¡ No hay alumnos asignados en el sub-grupo seleccionado !")
                 End If
                 ' -------------------------------------------------------------------------------------

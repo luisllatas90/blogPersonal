@@ -161,7 +161,7 @@ Public Class clsaccesodatos
             End Select
         Next
         'ejecutar = 0
-        ' hacemos que devuelva el ultimo parametro en la función para darle soporte a los procedimientos antiguos
+        ' hacemos que devuelva el ultimo parametro en la funciï¿½n para darle soporte a los procedimientos antiguos
         If devuelve_valor = True Then
             ejecutar = cmd_consulta.Parameters(cmd_consulta.Parameters.Count - 1).Value
         End If
@@ -169,7 +169,7 @@ Public Class clsaccesodatos
 
 
     End Function
-
+       
 Public Function TraerDataTable(ByVal procedimiento As String, ByVal ParamArray x() As Object) As Data.DataTable
 
         Dim cmd_consulta As New SqlClient.SqlCommand

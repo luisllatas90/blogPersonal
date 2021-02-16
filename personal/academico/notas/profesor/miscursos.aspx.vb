@@ -41,7 +41,7 @@ Partial Class academico_notas_profesor_miscursos
             dt.Dispose()
             obj = Nothing
         Catch ex As Exception
-            ShowMessage("Error: " & ex.Message.Replace("'", ""), MessageType.Error)
+            ShowMessage("Error4: " & ex.Message.Replace("'", ""), MessageType.Error)
         End Try
     End Sub
 
@@ -61,7 +61,7 @@ Partial Class academico_notas_profesor_miscursos
 
             obj = Nothing
         Catch ex As Exception
-            ShowMessage("Error: " & ex.Message.Replace("'", ""), MessageType.Error)
+            ShowMessage("Error3: " & ex.Message.Replace("'", ""), MessageType.Error)
         End Try
     End Sub
 
@@ -81,7 +81,7 @@ Partial Class academico_notas_profesor_miscursos
 
             obj = Nothing
         Catch ex As Exception
-            ShowMessage("Error: " & ex.Message.Replace("'", ""), MessageType.Error)
+            ShowMessage("Error2: " & ex.Message.Replace("'", ""), MessageType.Error)
         End Try
     End Sub
 
@@ -100,7 +100,7 @@ Partial Class academico_notas_profesor_miscursos
 
             obj = Nothing
         Catch ex As Exception
-            ShowMessage("Error: " & ex.Message.Replace("'", ""), MessageType.Error)
+            ShowMessage("Error1: " & ex.Message.Replace("'", ""), MessageType.Error)
         End Try
     End Sub
 
@@ -149,7 +149,9 @@ Partial Class academico_notas_profesor_miscursos
             '    e.Row.Enabled = True
             'ElseIf codigo_cpf = 24 Then
             '    e.Row.Enabled = True
-            'Else
+            
+			
+			
             If (codigo_test = 2 Or codigo_test = 4) And refrecuperacion_cup = 0 Then
                 e.Row.Enabled = False
             Else
@@ -159,7 +161,16 @@ Partial Class academico_notas_profesor_miscursos
 
             'End If
 
-
+            'andy.diaz - 30/07/2020
+            If e.Row.DataItem("codigo_cpf") = 407 Then
+                e.Row.Enabled = True
+            End If
+			
+			'Activar para medicina
+			If e.Row.DataItem("codigo_cpf") = 24 Then
+                e.Row.Enabled = True
+            end if
+			
         End If
     End Sub
 

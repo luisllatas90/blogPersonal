@@ -187,7 +187,7 @@ function modificarmatricula(modo,ID,dc,cp,accion)
 	var pagina="";
 	if (modo=='N'){ //Para nueva matrícula
 	    //pagina="../academico/matricula/mantenimiento/frmagregarcurso2015.asp?esnuevamatricula=S&accion=agregarcursomatricula&codigo_pes=" + ID
-	    pagina = "frmagregarcurso2015.asp?esnuevamatricula=S&accion=matriculasegura&codigo_pes=" + ID
+	    pagina = "frmagregarcurso2015.asp?esnuevamatricula=S&accion=matriculasegura&codigo_pes=" + ID		
 		window.location.href = pagina
 	}
 		

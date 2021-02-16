@@ -14,9 +14,10 @@
     <link rel="stylesheet" href="../../assets/bootstrap-select-1.13.1/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="../../assets/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="../../assets/fontawesome-5.2/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/toastr-2.1.4-7/toastr.min.css">
     <!-- Estilos propios -->
-    <link rel="stylesheet" href="css/style.css?30">
-    <link rel="stylesheet" href="css/postulantes.css?10">
+    <link rel="stylesheet" href="css/style.css?x=40">
+    <link rel="stylesheet" href="css/postulantes.css?x=20">
 </head>
 
 <body>
@@ -155,7 +156,7 @@
                         ChildrenAsTriggers="false">
                         <ContentTemplate>
                             <asp:GridView ID="grwPostulantes" runat="server" AutoGenerateColumns="false"
-                                DataKeyNames="codigo_pso, cli" CssClass="table table-sm" GridLines="None">
+                                DataKeyNames="codigo_pso, cli, codigoUniver_Alu" CssClass="table table-sm" GridLines="None">
                                 <Columns>
                                     <asp:BoundField HeaderText="Nro" />
                                     <asp:BoundField DataField="TipoDoc" HeaderText="Tipo Doc." />
@@ -181,6 +182,8 @@
                                         HeaderText="Cargo" />
                                     <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="operacion"
                                         HeaderText="Anul." />
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="operacion"
+                                        HeaderText="Enviar" />
                                 </Columns>
                                 <HeaderStyle CssClass="thead-dark" />
                             </asp:GridView>
@@ -374,13 +377,19 @@
                                             <div class="card">
                                                 <div class="card-header">Opciones</div>
                                                 <div class="card-body">
+                                                    <button type="button" id="btnActivarOnline" runat="server" 
+                                                        class="btn btn-accion btn-celeste">
+                                                        <i class="fa fa-signal"></i>
+                                                        <span class="text">Activar Inscripción Online</span>
+                                                    </button>
+                                                    <hr>
                                                     <button type="button" id="btnAnularCargosEvento" runat="server"
                                                         class="btn btn-accion btn-rojo">
                                                         <i class="fa fa-minus-circle"></i>
                                                         <span class="text">Anular Cargos</span>
                                                     </button>
                                                     <button type="button" id="btnInactivarInscritosEvento"
-                                                        runat="server" class="btn btn-accion btn-naranja">
+                                                        runat="server" class="btn btn-accion btn-naranja ml-1">
                                                         <i class="fa fa-ban"></i>
                                                         <span class="text">Inactivar Inscritos</span>
                                                     </button>
@@ -555,6 +564,52 @@
                 </asp:UpdatePanel>
             </div>
         </div>
+        <div id="mdlActivarOnline" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <asp:UpdatePanel ID="udpActivarOnline" runat="server" UpdateMode="Conditional"
+                    ChildrenAsTriggers="false">
+                    <ContentTemplate>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="modal-title">Activar Inscripción Online</span>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <asp:HiddenField ID="hddRptaActivarOnline" runat="server" Value='' />
+                                <asp:HiddenField ID="hddMsgActivarOnline" runat="server" Value='' />
+                                <asp:GridView ID="grwServicioCentroCosto" runat="server" AutoGenerateColumns="false" CssClass="table table-sm" GridLines="None">
+                                    <Columns>
+                                        <asp:BoundField DataField="descripcion_Sco" HeaderText="Servicio" />
+                                        <asp:BoundField DataField="precio_Sco" HeaderText="Precio" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center" />
+                                        <asp:BoundField DataField="fechaVencimiento_Sco" HeaderText="Fecha de Vencimiento" ItemStyle-HorizontalAlign="Center"
+                                            HeaderStyle-CssClass="text-center" DataFormatString="{0:dd/MM/yyyy}" />
+                                        <asp:BoundField DataField="nroPartes_Sco" HeaderText="Cuotas" HeaderStyle-CssClass="text-center" ItemStyle-HorizontalAlign="Center" />
+                                        <asp:TemplateField HeaderText="Por Defecto" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="text-center">
+                                            <ItemTemplate>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="rbtPrincipal" class="custom-control-input" runat="server"
+                                                        value='<%# Eval("codigo_scc") %>'>
+                                                    <label class="custom-control-label form-control-sm" for="rbtPrincipal"></label>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-accion btn-primary submit" id="btnGuardarActivarOnline" runat="server">
+                                    <i class="fa fa-save"></i>
+                                    <span class="text">Guardar</span>
+                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
         <div id="mdlMensajes" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
@@ -667,9 +722,10 @@
     <script src="../../assets/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js"></script>
     <script src="../../assets/iframeresizer/iframeResizer.min.js"></script>
     <script src="../../assets/fileDownload/jquery.fileDownload.js"></script>
+    <script src="../../assets/toastr-2.1.4-7/toastr.min.js"></script>
     <!-- Scripts propios -->
     <script src="js/funciones.js"></script>
-    <script src="js/postulantes.js?70"></script>
+    <script src="js/postulantes.js?x=80"></script>
     <script type="text/javascript">
         var controlId = ''
         Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(function (sender, args) {
@@ -706,6 +762,10 @@
                     CargandoPanelValServ(controlId);
                     break;
                 case 'btnValServProcesar':
+                    AtenuarBoton(controlId, false);
+                    break;
+                case 'btnActivarOnline':
+                case 'btnGuardarActivarOnline':
                     AtenuarBoton(controlId, false);
                     break;
             }
@@ -750,6 +810,9 @@
             for (var i = 0; i < updatedPanels.length; i++) {
                 var udpPanel = updatedPanels[i];
                 switch (udpPanel.id) {
+                    case 'udpActivarOnline':
+                        configRadioNames('AO');
+                        break;
                 }
             }
         });
@@ -793,6 +856,13 @@
                     break;
                 case 'btnValServProcesar':
                     AtenuarBoton(controlId, true);
+                    break;
+                case 'btnActivarOnline':
+                    CargarModalActivarOnline(controlId);
+                    break;
+                case 'btnGuardarActivarOnline':
+                    AtenuarBoton(controlId, true);
+                    VerificarRespuestaActivarOnline();
                     break;
             }
 

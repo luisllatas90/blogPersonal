@@ -1,0 +1,193 @@
+<!--#include file="../../funciones.asp"-->
+<%
+if(session("codigo_usu") = "") then
+    Response.Redirect("../sinacceso.html")
+end if
+
+codigo_cac=request.querystring("codigo_cac")
+codigo_cpf=request.querystring("codigo_cpf")
+curso=request.querystring("curso")
+codigo_tfu=session("codigo_tfu")
+codigo_usu=session("codigo_usu")
+
+dim tipoestudio 
+tipoestudio = request.querystring("mod")
+if(request.querystring("mod") <> 2) then
+    if(request.querystring("mod") <> 10) then
+        tipoestudio = request.querystring("mod")
+    else
+        tipoestudio = 10
+    end if
+else
+    tipoestudio = 2
+end if
+
+if curso="" then curso="%"
+if codigo_cac="" then codigo_cac=session("codigo_cac")
+
+Set Obj= Server.CreateObject("PryUSAT.clsAccesoDatos")
+	obj.AbrirConexion
+		Set rsCiclo=obj.Consultar("ConsultarCicloAcademico","FO","TO",0)		
+		if codigo_tfu=1 OR codigo_tfu=7 OR codigo_tfu=16 or codigo_tfu=18 or codigo_tfu=85 or codigo_tfu=181 then
+			tipo="S"						
+		    if(CInt(tipoestudio) <> 5) then
+		        if(CInt(tipoestudio) <> 10) then		   
+		            Set rsEscuela=obj.Consultar("ConsultarCarreraProfesional","FO","MA",tipoestudio)
+		        else	            
+		            Set rsEscuela=obj.Consultar("ConsultarCarreraProfesional","FO","GO",0)
+		        end if
+		    else		        
+		        Set rsEscuela=obj.Consultar("ACAD_CarrerasPostgrado","FO",0,"")
+		    end if
+		    
+		else
+		    if(CInt(tipoestudio) <> 5) then		    
+		        Set rsEscuela=obj.Consultar("consultaracceso","FO","ESC",tipoestudio,codigo_usu)		        
+		    else		        
+		        Set rsEscuela=obj.Consultar("ACAD_CarrerasPostgrado","FO",0,"")
+		    end if
+			
+		end if
+		
+		if codigo_cpf<>"-2" and codigo_cpf<>"" then
+			curso=ReemplazarTildes(curso)
+			Set rsCursos=Obj.Consultar("ConsultarHorarios","FO","10",codigo_cac,codigo_cpf,curso)
+			
+			if Not(rscursos.BOF and rsCursos.EOF) then
+				HayReg=true
+				alto="height=""93%"""
+			end if
+		end if
+	obj.CerrarConexion
+Set Obj=nothing
+%>
+<html>
+<head>
+<meta http-equiv="Content-Language" content="es" />
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+<title>Registro de horarios por Ambiente</title>
+<link rel="stylesheet" type="text/css" href="../../private/estilo.css" />
+<script language="JavaScript" src="../../private/funciones.js"></script>
+<script language="JavaScript" src="../../private/tooltip.js"></script>
+<script>
+var termino	= "%";
+var txtcodigo_cup=0
+
+function ConsultarHorarios(modo,codigo_cup,fila,codigo_per)
+{
+	if (modo=="C"){
+		txtcodigo_cup=codigo_cup
+		SeleccionarFila()
+		var th=fila.cells[5].innerText
+		//alert(1);
+		fraHorario.location.href = "tblhorario.asp?codigo_cup=" + txtcodigo_cup + "&codigo_cac=" + cbocodigo_cac.value + "&th=" + th + "&codigo_cpf=" + cbocodigo_cpf.value + "&codigo_per=" + codigo_per + "&mod=" + mod.value 
+	}
+	else {
+	    //alert(2);
+	    fraHorario.location.href = "tblhorario.asp?codigo_cup=" + txtcodigo_cup + "&codigo_cac=" + cbocodigo_cac.value + "&codigo_cpf=" + cbocodigo_cpf.value + "&codigo_cpf=" + codigo_per + "&mod=" + mod.value 
+	}	
+}
+
+function ConsultarCursos()
+{
+	location.href="frmhorarioambiente.asp?codigo_cac=" + cbocodigo_cac.value + "&codigo_cpf=" + cbocodigo_cpf.value + "&curso=" + termino + "&mod=" + mod.value
+}
+
+function AbrirBusqueda()
+	{
+	   showModalDialog("frmbuscarcursoprogramado.asp",window,"dialogWidth:400px;dialogHeight:250px;status:no;help:no;center:yes");
+	}
+	
+</script>
+
+</head>
+<body>
+
+<p class="usatTitulo">Registro de horarios por Ambiente</p>
+<table style="border-collapse: collapse" width="100%" <%=alto%>>
+	<tr>
+		<td height="5%" style="width: 15%">Semestre Académico:</td>
+		<td height="5%" style="width: 15%">
+		<%call llenarlista("cbocodigo_cac","ConsultarCursos()",rsCiclo,"codigo_cac","descripcion_cac",codigo_cac,"","","")%>			
+		</td>
+		<% response.write("<input type='hidden' id='mod' name='mod' value='" + request("mod") + "'  />") %>
+		<td height="5%" style="width: 20%" align="right">Carrera Profesional:</td>
+		<td height="5%" style="width: 45%">
+		<%call llenarlista("cbocodigo_cpf","ConsultarCursos()",rsEscuela,"codigo_cpf","nombre_cpf",codigo_cpf,"Seleccione la Escuela Profesional",tipo,"")%>		
+		</td>
+		<td height="5%" style="width: 5%" align="right">
+		<%if HayReg=true then%>
+		<img src="../../../images/menus/buscar_small12.gif" alt="Abrir formulario de búsqueda" onclick="AbrirBusqueda()">
+		<%end if%>
+		</td>
+	</tr>
+	<%if HayReg=true then%>
+	<tr height="40%" valign="top">
+		<td width="100%" class="contornotabla" colspan="5">
+			<table height="100%" width="100%" cellpadding="2" cellspacing="0" style="border-collapse: collapse" cellpadding="3" cellspacing="0">
+			<tr class="etabla">
+				<td width="2%" height="10%">#</td>	
+				<td width="3%" align="left" height="10%">Ciclo</td>
+				<td width="7%" align="left" height="10%">Código</td>
+				<td width="20%" height="10%">Descripción</td>
+				<td width="3%" align="left" height="15%">Crd.</td>
+				<td width="2%" height="10%">TH</td>
+				<td width="2%" height="10%">GH</td>
+				<td width="20%" height="10%">Docente</td>
+				<td width="3%"  align="left" height="10%">Matric.</td>
+				<td width="3%" align="right" height="10%">Vacan.</td>
+				<td width="2%" align="left"  height="10%">&nbsp;HM</td>
+				<td width="4%" align="left" height="10%">&nbsp;&nbsp;DF</td>								
+			</tr>
+			<tr>
+				<td width="100%" colspan="13">
+				<div id="listadiv" style="height:100%" class="NoImprimir">
+				<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#ccccccc" id="tblcursosprogramados">
+					<%
+					codigo=0
+					i=0
+					Do while not rsCursos.EOF
+						i=i+1
+						bordeciclo=Agrupar(rsCursos("identificador_cur"),codigo)
+					%>
+					<!--<tr height="20px" class="piepagina" onMouseOver="Resaltar(1,this,'S')" onMouseOut="Resaltar(0,this,'S')" class="Sel" Typ="Sel" onclick="ConsultarHorarios('C','<%=rsCursos("codigo_cup")%>',this)">-->
+					<tr height="20px" class="piepagina" onMouseOver="Resaltar(1,this,'S')" onMouseOut="Resaltar(0,this,'S')" class="Sel" Typ="Sel" onclick="ConsultarHorarios('C','<%=rsCursos("codigo_cup")%>',this,'<%=rsCursos("codigo_Per")%>')">
+						<td <%=bordeciclo%> align="center" width="2%"><%=i%></td>
+						<td <%=bordeciclo%> align="center" width="2%"><%=ConvRomano(rsCursos("ciclo_Cur"))%></td>
+						<td <%=bordeciclo%> width="7%"><%=rsCursos("identificador_Cur")%></td>
+						<td <%=bordeciclo%> width="30%"><%=replace(rsCursos("nombre_Cur"),"<br>","")%></td>
+						<td <%=bordeciclo%> align="left" width="3%"><%=rsCursos("creditos_cur")%></td>
+						<td <%=bordeciclo%> align="left" width="3%"><font color="red"><%=rsCursos("totalhoras_Cur")%></font></td>
+						<td <%=bordeciclo%> align="left" width="3%"><%=rsCursos("grupohor_Cup")%></td>
+						<td <%=bordeciclo%> align="left" width="23%"><%=rsCursos("profesor")%></td>
+						<td <%=bordeciclo%> align="center" width="5%"><%=rsCursos("matriculados")%></td>
+						<td <%=bordeciclo%> align="center" width="3%"><%=rsCursos("vacantes_Cup")%></td>
+					    <td <%=bordeciclo%> align="right" width="3%"><%=rsCursos("HorMarcada")%></td>    
+						<td <%=bordeciclo%> align="center" width="4%"><%=rsCursos("HorFalta")%></td>					
+					</tr>
+					<%
+					rscursos.movenext
+					Loop
+					Set rscursos=nothing
+					%>
+				</table>
+				</div>
+				</td>
+			</tr>
+			</table>
+			</td>
+	</tr>
+	<tr  height="55%" valign="top">
+		<td colspan="5" width="100%" class="contornotabla">
+		<iframe name="fraHorario" id="fraHorario" height="100%" width="100%" border="0" frameborder="0">El 
+		explorador no admite los marcos flotantes o no está configurado actualmente 
+		para mostrarlos.
+		</iframe>
+		</td>
+	</tr>
+	<%end if%>	
+	</table>
+</body>
+
+</html>
+

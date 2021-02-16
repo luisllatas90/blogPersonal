@@ -38,18 +38,32 @@ Partial Class frmmatricula_cursoprogramado
             Dim abr As String = ""
             Dim tipo As String = ""
             Dim cpal As String = ""
-            'ACT
+
+            'VALORES TFU
             '1	    ADMINISTRADOR DEL SISTEMA	
             '9	    DIRECTOR DE ESCUELA	
             '138	COORDINADOR DE DIRECCIÓN ACADÉMICA
             '182	COORDINADOR ACADÉMICO  
+            '214	COORDINADOR ACADÉMICO ADMISIÓN  
             '222    COORDINADOR ACADÉMICO DE POSGRADO	
 
-            'TFU
+            'VALORES ACT
+            '1	    MATRICULA: VÍA CAMPUS ESTUDIANTE	MATALU	6
             '9	    MATRICULA: VÍA CAMPUS ASESOR	MATASE	4
             '12	    MATRICULA: VIA CAMPUS COORD. ACADEMICA	MATEVRE	5
-            '1	    MATRICULA: VÍA CAMPUS ESTUDIANTE	MATALU	6
-            cpal = DesencriptarMenu(Request.QueryString("capl"))
+            '22	    MATRICULA: RETIRO Y AGREGADOS ASESORES	RAASE	9
+
+
+            'cpal = DesencriptarMenu(Request.QueryString("capl"))            
+
+            Select Case Request.QueryString("mod") 'JBANDA 16-10-2020
+                Case 1 : cpal = 32
+                Case 3 : cpal = 30
+                Case 4 : cpal = 43
+                Case 5 : cpal = 37
+                Case Else : cpal = 0
+            End Select
+
             'Response.Write(cpal)
             cls.AbrirConexion()
             ' dt = cls.TraerDataTable("MAT_consultarTipoFuncion", Session("id_per"), 37)
@@ -68,15 +82,16 @@ Partial Class frmmatricula_cursoprogramado
                     abr = "MATEVRE" '12
                 ElseIf ctf = 9 Or ctf = 182 Or ctf = 222 Then  'EPENA 29102019 ID-28314-  SE AGREGO EL CODIGO_TFU 222: COORDINADOR ACADÉMICO DE POSGRADO
                     abr = "MATASE" '9
+                ElseIf ctf = 214 Then 'Por JQuepuy | 05ENE2021
+                    abr = "RAASE"
                 Else
                     abr = ""
                 End If
             End If
 
-            Response.Write(abr)
             cls.AbrirConexion()
             dt = cls.TraerDataTable("ACAD_ConsultarCronograma", abr, Me.dpCodigo_cac.SelectedValue, Request.QueryString("mod"))
-            cls.CerrarConexion()
+            cls.CerrarConexion()            
 
 			If Request.QueryString("mod")<> 6 then
 		
@@ -102,6 +117,10 @@ Partial Class frmmatricula_cursoprogramado
 
         Catch ex As Exception
             'ShowMessage("Error: " & ex.Message.ToString, MessageType.Error)
+            'JBANDA 16-10-2020
+            lblMensaje.Text = ex.Message.ToString
+            lblMensaje.CssClass = "MensajeError"
+            HdCronograma.Value = False
         End Try
     End Sub
 
@@ -219,8 +238,8 @@ Partial Class frmmatricula_cursoprogramado
             Dim fila As Data.DataRowView
             fila = e.Row.DataItem
             Me.lblGrupos.Text = "Lista de Grupos Horario Programados (" & e.Row.RowIndex + 1 & ")"
-            e.Row.Attributes.Add("OnMouseOver", "Resaltar(1,this,'S')")
-            e.Row.Attributes.Add("OnMouseOut", "Resaltar(0,this,'S')")
+            'e.Row.Attributes.Add("OnMouseOver", "Resaltar(1,this,'S')")
+            'e.Row.Attributes.Add("OnMouseOut", "Resaltar(0,this,'S')")
             e.Row.Cells(7).Text = IIf(fila.Row("estado_cup") = False, "Cerrado", "Abierto")
 
             'Cargar Profesores y Horario
@@ -256,8 +275,8 @@ Partial Class frmmatricula_cursoprogramado
             Dim fila As Data.DataRowView
             fila = e.Row.DataItem
 
-            e.Row.Attributes.Add("OnMouseOver", "Resaltar(1,this,'S')")
-            e.Row.Attributes.Add("OnMouseOut", "Resaltar(0,this,'S')")
+            'e.Row.Attributes.Add("OnMouseOver", "Resaltar(1,this,'S')")
+            'e.Row.Attributes.Add("OnMouseOut", "Resaltar(0,this,'S')")
             CType(e.Row.FindControl("chkElegir"), CheckBox).Attributes.Add("OnClick", "PintarFilaMarcada(this.parentNode.parentNode,this.checked)")
             e.Row.Cells(1).Text = e.Row.RowIndex + 1
             e.Row.Cells(5).Text = IIf(fila.Row("estadoactual_alu") = 0, "Inactivo", "Activo")

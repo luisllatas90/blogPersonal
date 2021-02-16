@@ -716,6 +716,18 @@ function fnListarAlumnos() {
                                     tb += '<button type="button" id="btnQuitarEnvio" class="btn btn-sm btn-danger" onclick="fnConfirmarEnviar(\'' + data[i].cod_tes + '\',\'' + data[i].cod_alu + '\',1,\'I\')" title="Quitar Candado" ><i class="ion-unlocked"></i></button>';
                                 }
                             }
+                            if (ObtenerValorGET("ctf") == "1" || ObtenerValorGET("ctf") == "144") {
+                                if ($("#cboEtapa").val() == "E") {
+                                    if (data[i].notaEjecucion > 0) {
+                                        tb += '<button type="button" id="btnAnularNotaAsesor" class="btn btn-sm btn-primary" onclick="AnularNotaAsesor(\'' + data[i].cod_tes + '\',\'' + data[i].cac + '\',\'E\')" title="Restablecer nota y porcentaje de Asesor" ><i class="ion ion-close"></i></button>';
+                                    }
+                                }
+                                if ($("#cboEtapa").val() == "I") {
+                                    if (data[i].notaInforme > 0) {
+                                        tb += '<button type="button" id="btnAnularNotaAsesor" class="btn btn-sm btn-primary" onclick="AnularNotaAsesor(\'' + data[i].cod_tes + '\',\'' + data[i].cac + '\',\'I\')" title="Restablecer nota y porcentaje de Asesor" ><i class="ion ion-close"></i></button>';
+                                    }
+                                }
+                            }
                         }
 
                         //                        tb += '<button type="button" id="btnEnviar" class="btn btn-sm btn-orange" onclick="Enviar(\'' + data[i].cod_tes + '\')" title="Enviar" ><i class="ion-arrow-right-a"></i></button>';
@@ -865,6 +877,7 @@ function Nuevo(cod, cod_alu, etapa) {
             $("#lblFacultad").html(data[0].facultad);
             $("#lblCarrera").html(data[0].carrera);
             $("#txtfeciniTes").val(data[0].fecini_cac);
+
             $("#Lista").attr("style", "display:none")
             $("#RegistroTabs").attr("style", "display:block")
             VerTabxEtapa(etapa)
@@ -901,6 +914,11 @@ function Nuevo(cod, cod_alu, etapa) {
             fnResetDataTableBasic('tAutor', 0, 'asc', 10);
             $("#cbotipoInvestigacion").focus();
             $("#chkOCDE").prop('checked', false);
+
+
+            if (data[0].matTesis > 0) {
+                $("#hdValidaJur").val(etapa);
+            }
         },
         error: function(result) {
             //fnMensaje("error", result)
@@ -1100,8 +1118,9 @@ function Editar(cod, cod_alu, etapa, cup) {
                 $("#ocde").attr("style", "display:none");
             }
 
-
-
+            if (data[0].matTesis > 0) {
+                $("#hdValidaJur").val(etapa);
+            }
         },
         error: function(result) {
             //fnMensaje("error", result)
@@ -1713,7 +1732,7 @@ function fnValidarTesis() {
         return false;
     }
 
-    if ($("#txtFechaSustentacionP").val() != "" && Jurado.length < 3) {
+    if ($("#txtFechaSustentacionP").val() != "" && Jurado.length < 3 && $("#hdValidaJur").val() == "P") {
         fnMensaje("error", "Para colocar fecha de sustentación debe asignar los 3 Jurados de sustentación.");
         return false;
     }
@@ -1880,6 +1899,7 @@ function fnLimpiarProyecto() {
     $("#file_actainforme").html("");
     $("#filesimilitud").val("");
     $("#file_similitud").html("");
+    $("#hdValidaJur").val("0");
 
     Autores = [];
     fnDestroyDataTableDetalle('tAutor');
@@ -2584,7 +2604,7 @@ function fnValidarInforme() {
             return false;
         }
     }
-    if ($("#file_informe").html() == "") {
+    if ($("#file_informe").html() == "" && $("#hdValidaJur").val() != "0") {
         if ($("#fileinforme").val() == '' && $("#txtLinkInforme").val() == '') {
             fnMensaje("error", "Debe Seleccionar un archivo de informe o colocar el link de informe.");
             return false;
@@ -2722,14 +2742,16 @@ function fnValidarInforme() {
     return false;
     }
     */
-    if ($("#txtNotaSustentacionI").val() != "" && ($("#txtFechaSustentacionI").val() == "" || ($("#fileactainforme").val() == "" && $("#file_actainforme").html() == ""))) {
-        fnMensaje("error", "Para colocar nota de sustentación debe colocar fecha de sustentación y adjuntar el acta de Sustentación.");
-        return false;
-    }
+    if ($("#hdValidaJur").val() != "0") {
+        if ($("#txtNotaSustentacionI").val() != "" && ($("#txtFechaSustentacionI").val() == "" || ($("#fileactainforme").val() == "" && $("#file_actainforme").html() == ""))) {
+            fnMensaje("error", "Para colocar nota de sustentación debe colocar fecha de sustentación y adjuntar el acta de Sustentación.");
+            return false;
+        }
 
-    if ($("#txtFechaSustentacionI").val() != "" && JuradoInforme.length < 2) {
-        fnMensaje("error", "Para colocar fecha de sustentación debe asignar los Jurados.");
-        return false;
+        if ($("#txtFechaSustentacionI").val() != "" && JuradoInforme.length < 2 /*&& $("#hdValidaJur").val()=="I"*/) {
+            fnMensaje("error", "Para colocar fecha de sustentación debe asignar los Jurados.");
+            return false;
+        }
     }
     return true
 }
@@ -3432,6 +3454,46 @@ function fnListarAreaOCDE(cod) {
             $("#cboArea").html(tb);
         }
         fnLoading(false);
+    } else {
+        window.location.href = rpta
+    }
+}
+
+function AnularNotaAsesor(cod_tes, cac,etapa) {
+    rpta = fnvalidaSession()
+    if (rpta == true) {
+        if (confirm("¿Está seguro que desea anular la nota colocada por el asesor?")) {
+            fnLoading(true);
+            $('body').append('<form id="frm"></form>');
+            $('form#frm').append('<input type="hidden" id="action" name="action" value="AnularNotaAsesor" />');
+            $('form#frm').append('<input type="hidden" id="tes" name="tes" value="' + cod_tes + '" />');
+            $('form#frm').append('<input type="hidden" id="cac" name="cac" value="' + cac + '" />');
+            $('form#frm').append('<input type="hidden" id="etapa" name="etapa" value="' + etapa + '" />');
+            var form = $("#frm").serializeArray();
+            $("form#frm").remove();
+            //console.log(form);
+            $.ajax({
+                type: "POST",
+                url: "../DataJson/GestionInvestigacion/Tesis.aspx",
+                data: form,
+                dataType: "json",
+                //cache: false,
+                async: false,
+                success: function(data) {
+                    if (data[0].rpta == "1") {
+                        fnMensaje("success", data[0].msje)
+                        fnListarAlumnos();
+                    } else {
+                        fnMensaje("error", "No se pudo realizar la operación")
+                    }
+                    fnLoading(false);
+                },
+                error: function(result) {
+                    //fnMensaje("error", result)
+                    fnLoading(false);
+                }
+            });
+        }
     } else {
         window.location.href = rpta
     }

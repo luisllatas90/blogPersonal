@@ -219,49 +219,50 @@ Partial Class ListadoTrabajosInvestigacion
                 Me.btnGuardar.OnClientClick = "return ValidarRubrica();"
                 Me.DivRubrica.Visible = True
                 Me.divArchivoRubrica.Visible = False
-                Me.DivActa.Visible = False
+                'Me.DivActa.Visible = False
                 Me.DivArchivoActa.Visible = False
-                Me.lblacta.Visible = False
+                'Me.lblacta.Visible = False
                 Me.condicion.Visible = False
                 Me.btnGuardar.Visible = True
-                Me.lblRubricaTexto.Visible = True
+                'Me.lblRubricaTexto.Visible = True
                 If Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_tat").ToString = "0" Then
                     Me.DivRubrica.Visible = False
                     Me.btnGuardar.Visible = False
-                    Me.lblRubricaTexto.Visible = False
+                    'Me.lblRubricaTexto.Visible = False
                 End If
             ElseIf Me.gvAlumnos.DataKeys(e.CommandArgument).Values("estado").ToString = "CON RÚBRICA" Then
                 Me.btnGuardar.Text = "Guardar Acta"
-                Me.btnGuardar.OnClientClick = "return ValidarActa();"
+                Me.btnGuardar.OnClientClick = "return Validar();"
                 Me.btnGuardar.Visible = True
-                Me.lblRubricaTexto.Visible = True
+                'Me.lblRubricaTexto.Visible = True
                 Me.DivRubrica.Visible = False
                 Me.divArchivoRubrica.Visible = True
-                Me.DivActa.Visible = True
+                'Me.DivActa.Visible = True
                 Me.DivArchivoActa.Visible = False
-                Me.lblacta.Visible = True
+                'Me.lblacta.Visible = True
                 Me.condicion.Visible = True
                 Me.ddlCondicion.Enabled = True
+                Me.ddlCondicion.SelectedValue = ""
                 If Request("ctf") = 13 Then
-                    Me.lblacta.Visible = False
-                    Me.DivActa.Visible = False
+                    'Me.lblacta.Visible = False
+                    'Me.DivActa.Visible = False
                     Me.DivArchivoActa.Visible = False
                     Me.btnGuardar.Visible = False
                     Me.condicion.Visible = False
                 End If
             ElseIf Me.gvAlumnos.DataKeys(e.CommandArgument).Values("estado").ToString = "CON ACTA" Then
                 Me.btnGuardar.Visible = False
-                Me.lblRubricaTexto.Visible = True
+                'Me.lblRubricaTexto.Visible = True
                 Me.DivRubrica.Visible = False
                 Me.divArchivoRubrica.Visible = True
-                Me.DivActa.Visible = False
+                'Me.DivActa.Visible = False
                 Me.DivArchivoActa.Visible = True
-                Me.lblacta.Visible = True
+                'Me.lblacta.Visible = True
                 Me.condicion.Visible = True
                 Me.ddlCondicion.Enabled = False
                 If Request("ctf") = 13 Then
-                    Me.lblacta.Visible = False
-                    Me.DivActa.Visible = False
+                    'Me.lblacta.Visible = False
+                    'Me.DivActa.Visible = False
                     Me.DivArchivoActa.Visible = False
                     Me.btnGuardar.Visible = False
                     Me.condicion.Visible = False
@@ -270,27 +271,27 @@ Partial Class ListadoTrabajosInvestigacion
             CargarDatosTrabajoInvestigacion(codigo, codigo_cac)
             Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "MostrarModal('mdEditar')", True)
         End If
-        If e.CommandName = "Bloquear" Then
-            Dim codigo As Integer = Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_tba").ToString
-            Dim codigo_cac As Integer = Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_cac").ToString
-            Dim bloqueo As Integer = Me.gvAlumnos.DataKeys(e.CommandArgument).Values("bloqueo").ToString
-        End If
+        'If e.CommandName = "Bloquear" Then
+        '    Dim codigo As Integer = Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_tba").ToString
+        '    Dim codigo_cac As Integer = Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_cac").ToString
+        '    Dim bloqueo As Integer = Me.gvAlumnos.DataKeys(e.CommandArgument).Values("bloqueo").ToString
+        'End If
     End Sub
 
-    Private Sub ActualizarBloqueoTrabajo(ByVal codigo_tba As Integer, ByVal codigo_cac As Integer, ByVal bloqueo As Integer, ByVal codigo_per As Integer)
-        Dim obj As New ClsConectarDatos
-        obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
-        obj.AbrirConexion()
-        Dim tb As New Data.DataTable
-        tb = obj.TraerDataTable("INV_ActualizarBloqueoTrabajoInvestigacion", codigo_tba, codigo_cac, bloqueo, codigo_per)
+    'Private Sub ActualizarBloqueoTrabajo(ByVal codigo_tba As Integer, ByVal codigo_cac As Integer, ByVal bloqueo As Integer, ByVal codigo_per As Integer)
+    '    Dim obj As New ClsConectarDatos
+    '    obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+    '    obj.AbrirConexion()
+    '    Dim tb As New Data.DataTable
+    '    tb = obj.TraerDataTable("INV_ActualizarBloqueoTrabajoInvestigacion", codigo_tba, codigo_cac, bloqueo, codigo_per)
 
-        obj.CerrarConexion()
-        If tb.Rows(0).Item("Respuesta") = 1 Then
-            Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('success','" + tb.Rows(0).Item("Mensaje") + "')", True)
-        Else
-            Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('error','" + tb.Rows(0).Item("Mensaje") + "')", True)
-        End If
-    End Sub
+    '    obj.CerrarConexion()
+    '    If tb.Rows(0).Item("Respuesta") = 1 Then
+    '        Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('success','" + tb.Rows(0).Item("Mensaje") + "')", True)
+    '    Else
+    '        Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('error','" + tb.Rows(0).Item("Mensaje") + "')", True)
+    '    End If
+    'End Sub
 
     Protected Sub btnGuardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
         If (Session("id_per") Is Nothing) Then
@@ -311,18 +312,41 @@ Partial Class ListadoTrabajosInvestigacion
             End If
         End If
         If Me.btnGuardar.Text = "Guardar Acta" Then
-            If Me.archivoacta.HasFile = True Then
-                If validarArchivos() = True Then
-                    If SubirArchivo(29, Me.hdcod.Value, Me.archivoacta.PostedFile, 4, Me.hdcac.Value, Me.ddlCondicion.SelectedValue) Then
+            If Me.ddlCondicion.SelectedValue <> "" Then
+                Dim dt As New Data.DataTable
+                dt = GuardarActa(Me.hdcod.Value, Me.hdcac.Value, Me.ddlCondicion.SelectedValue, Session("id_per"))
+                If dt.Rows(0).Item("Respuesta") = "1" Then
+                    Dim codigo_dot As Integer = 0
+                    codigo_dot = GenerarActa(Me.hdcod.Value, Session("id_per"), Session("perlogin").ToString)
+                    If codigo_dot > 0 Then
+                        ActualizarCodigoActa(dt.Rows(0).Item("cod"), codigo_dot)
                         listarAlumnos(Me.ddlSemestre.SelectedValue, Me.ddlCarrera.SelectedValue, Me.ddlAsignatura.SelectedValue, Me.ddlEstado.SelectedValue, Session("id_per"), Request("ctf"))
-                        Me.lblmensaje.InnerText = "Acta adjuntada correctamente"
-                        Me.lblmensaje.Attributes.Add("class", "alert alert-success")
                     Else
-                        Me.lblmensaje.InnerText = "No se pudo subir acta"
+                        Me.lblmensaje.InnerText = "No se pudo generar acta"
                         Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
                     End If
+                    Me.lblmensaje.InnerText = dt.Rows(0).Item("Mensaje").ToString
+                    Me.lblmensaje.Attributes.Add("class", "alert alert-success")
+                Else
+                    Me.lblmensaje.InnerText = dt.Rows(0).Item("Mensaje").ToString
+                    Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
                 End If
+            Else
+                Me.lblmensaje.InnerText = "Debe seleccionar una condición de trabajo de investigación"
+                Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
             End If
+            'If Me.archivoacta.HasFile = True Then
+            '    If validarArchivos() = True Then
+            '        If SubirArchivo(29, Me.hdcod.Value, Me.archivoacta.PostedFile, 4, Me.hdcac.Value, Me.ddlCondicion.SelectedValue) Then
+            '            listarAlumnos(Me.ddlSemestre.SelectedValue, Me.ddlCarrera.SelectedValue, Me.ddlAsignatura.SelectedValue, Me.ddlEstado.SelectedValue, Session("id_per"), Request("ctf"))
+            '            Me.lblmensaje.InnerText = "Acta adjuntada correctamente"
+            '            Me.lblmensaje.Attributes.Add("class", "alert alert-success")
+            '        Else
+            '            Me.lblmensaje.InnerText = "No se pudo subir acta"
+            '            Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
+            '        End If
+            '    End If
+            'End If
         End If
     End Sub
 
@@ -337,33 +361,33 @@ Partial Class ListadoTrabajosInvestigacion
                 Return False
             End If
 
-            Dim Extensiones As String() = {".pdf"}
+            Dim Extensiones As String() = {".pdf", ".doc", ".docx"}
             Dim validarArchivo As Integer = -1
             validarArchivo = Array.IndexOf(Extensiones, System.IO.Path.GetExtension(archivorubrica.FileName))
             If validarArchivo = -1 Then
-                Me.lblmensaje.InnerText = "Solo puede adjuntar archivos de rúbrica en formato .pdf"
+                Me.lblmensaje.InnerText = "Solo puede adjuntar archivos de rúbrica en formato .pdf,.doc,.docx"
                 Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
                 Return False
             End If
 
         End If
-        If Me.archivoacta.HasFile = True Then
-            If Me.archivoacta.PostedFile.ContentLength > 20971520 Then
-                Me.lblmensaje.InnerText = "Solo puede adjuntar archivos de un tamaño máximo de 20MB"
-                Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
-                Return False
-            End If
+        'If Me.archivoacta.HasFile = True Then
+        '    If Me.archivoacta.PostedFile.ContentLength > 20971520 Then
+        '        Me.lblmensaje.InnerText = "Solo puede adjuntar archivos de un tamaño máximo de 20MB"
+        '        Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
+        '        Return False
+        '    End If
 
-            Dim Extensiones As String() = {".pdf"}
-            Dim validarArchivo As Integer = -1
-            validarArchivo = Array.IndexOf(Extensiones, System.IO.Path.GetExtension(archivoacta.FileName))
-            If validarArchivo = -1 Then
-                Me.lblmensaje.InnerText = "Solo puede adjuntar archivos de acta en formato .pdf"
-                Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
-                Return False
-            End If
+        '    Dim Extensiones As String() = {".pdf"}
+        '    Dim validarArchivo As Integer = -1
+        '    validarArchivo = Array.IndexOf(Extensiones, System.IO.Path.GetExtension(archivoacta.FileName))
+        '    If validarArchivo = -1 Then
+        '        Me.lblmensaje.InnerText = "Solo puede adjuntar archivos de acta en formato .pdf"
+        '        Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
+        '        Return False
+        '    End If
 
-        End If
+        'End If
         Return True
     End Function
 
@@ -435,30 +459,91 @@ Partial Class ListadoTrabajosInvestigacion
         End Try
     End Function
 
+    Private Function GuardarActa(ByVal codigo_Tba As Integer, ByVal codigo_cac As Integer, ByVal condicion As String, ByVal usuario As Integer) As Data.DataTable
+        Dim obj As New ClsConectarDatos
+        obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        obj.AbrirConexion()
+        Dim dt As New Data.DataTable
+        dt = obj.TraerDataTable("INV_RegistrarEvaluacionTrabajoBachiller", codigo_Tba, codigo_cac, condicion, usuario)
+        obj.CerrarConexion()
+        Return dt
+    End Function
+
+    Private Function ActualizarCodigoActa(ByVal codigo_eva As Integer, ByVal codigo_dot As Integer) As Data.DataTable
+        Dim obj As New ClsConectarDatos
+        obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        obj.AbrirConexion()
+        Dim dt As New Data.DataTable
+        dt = obj.TraerDataTable("INV_ActualizarCodigoActaTrabajo", codigo_eva, codigo_dot)
+        obj.CerrarConexion()
+        Return dt
+    End Function
+
+    Private Function GenerarActa(ByVal codigo_tba As Integer, ByVal codigo_per As Integer, ByVal usuario_per As String) As Integer
+        'Dim codigo_dot As Integer
+        Dim codigo_cda As Integer = 7 ''-- Configuracion del documento
+        Dim codigo_dot As Integer = 0 '- Codigo del doumento generado en la tabla DOC_documentoArchivo
+        Dim serieCorrelativoDoc As String '- Serie o numeracion del comprobante
+        Try
+            'Dim obj As New clsDocumentacion
+            ''''**** 1. GENERA CORRELATIVO DEL DOCUMENTO CONFIGURADO *******************************************************
+            serieCorrelativoDoc = clsDocumentacion.ObtenerSerieCorrelativoDocPorCda(codigo_cda, Year(Now), codigo_per)
+
+            ''''******* GENERA DOCUMENTO PDF *****************************************************************************
+            If serieCorrelativoDoc <> "" Then
+                '--------necesarios
+                Dim arreglo As New Dictionary(Of String, String)
+                arreglo.Add("nombreArchivo", "ActaTrabajoBachiller")
+                arreglo.Add("sesionUsuario", usuario_per)
+                '-----------------                
+                arreglo.Add("codigo_tba", codigo_tba)
+
+                '******** 2. GENERA DOCUMENTO PDF **************************************************************
+                codigo_dot = clsDocumentacion.generarDocumentoPdf(serieCorrelativoDoc, arreglo)
+                'codigo_dot = clsDocumentacion.generarDocumentoPdf(serieCorrelativoDoc, memory, arreglo)
+                '**********************************************************************************************
+            Else
+                codigo_dot = 0
+            End If
+
+        Catch ex As Exception
+            codigo_dot = 0
+        End Try
+        Return codigo_dot
+    End Function
+
+
     Protected Sub gvAlumnos_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles gvAlumnos.RowDataBound
         If e.Row.RowType = DataControlRowType.DataRow Then
             Dim estado As String = Me.gvAlumnos.DataKeys(e.Row.RowIndex).Values("estado").ToString
-            If estado = "CON RÚBRICA" Or estado = "CON ACTA" Then
-                Dim boton As LinkButton = DirectCast(e.Row.Cells(5).FindControl("btnBloquear"), LinkButton)
-                Dim boton2 As LinkButton = DirectCast(e.Row.Cells(5).FindControl("btnAutorizar"), LinkButton)
-                boton.Visible = False
-                boton2.Visible = False
+            If estado = "PENDIENTE" Or (estado = "CON RÚBRICA" And Request("ctf") = 9) Then
+                e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#fdd193")
             Else
-                If Me.gvAlumnos.DataKeys(e.Row.RowIndex).Values("bloqueo") = "1" Then
-                    Dim boton As LinkButton = DirectCast(e.Row.Cells(5).FindControl("btnBloquear"), LinkButton)
-                    boton.CssClass = "btn btn-warning btn-sm"
-                    boton.ToolTip = "Desbloquear"
-                    boton.Text = "<span class='fa fa-unlock'></span>"
-                    boton.OnClientClick = "return confirm('¿Está seguro que desea desbloquear trabajo?')"
-                End If
-                If Me.gvAlumnos.DataKeys(e.Row.RowIndex).Values("autoriza") = "1" Then
-                    Dim boton As LinkButton = DirectCast(e.Row.Cells(5).FindControl("btnAutorizar"), LinkButton)
-                    boton.CssClass = "btn btn-warning btn-sm"
-                    boton.ToolTip = "Quitar Autorización"
-                    boton.Text = "<span class='fa fa-times-circle'></span>"
-                    boton.OnClientClick = "return confirm('¿Estpa seguro que desea quitar autorización del registro?')"
-                End If
+                e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#C8FFC8")
             End If
+            '        Dim estado As String = 
+
+            '        If estado = "CON RÚBRICA" Or estado = "CON ACTA" Then
+            '            Dim boton As LinkButton = DirectCast(e.Row.Cells(5).FindControl("btnBloquear"), LinkButton)
+            '            Dim boton2 As LinkButton = DirectCast(e.Row.Cells(5).FindControl("btnAutorizar"), LinkButton)
+            '            boton.Visible = False
+            '            boton2.Visible = False
+            '        Else
+            '            If Me.gvAlumnos.DataKeys(e.Row.RowIndex).Values("bloqueo") = "1" Then
+            '                Dim boton As LinkButton = DirectCast(e.Row.Cells(5).FindControl("btnBloquear"), LinkButton)
+            '                boton.CssClass = "btn btn-warning btn-sm"
+            '                boton.ToolTip = "Desbloquear"
+            '                boton.Text = "<span class='fa fa-unlock'></span>"
+            '                boton.OnClientClick = "return confirm('¿Está seguro que desea desbloquear trabajo?')"
+            '            End If
+            '            If Me.gvAlumnos.DataKeys(e.Row.RowIndex).Values("autoriza") = "1" Then
+            '                Dim boton As LinkButton = DirectCast(e.Row.Cells(5).FindControl("btnAutorizar"), LinkButton)
+            '                boton.CssClass = "btn btn-warning btn-sm"
+            '                boton.ToolTip = "Quitar Autorización"
+            '                boton.Text = "<span class='fa fa-times-circle'></span>"
+            '                boton.OnClientClick = "return confirm('¿Estpa seguro que desea quitar autorización del registro?')"
+            '            End If
+            '        End If
         End If
     End Sub
 End Class

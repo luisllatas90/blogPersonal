@@ -1,11 +1,11 @@
-﻿    <%
+﻿<%
  'tipo_uap=request.querystring("cbxtipo")
 
-' Dado que el usuario siempre se loguea como personal a una autenticaci�n, entonces le asignamos
+' Dado que el usuario siempre se loguea como personal a una autenticación, entonces le asignamos
  'el tipo_uap = P', para que acceda directamente
 on error resume next
 
-tipo_uap = "P" 
+tipo_uap = "P"
 
 Session.Contents.RemoveAll    
 if tipo_uap="" then response.redirect "../tiempofinalizado.asp"
@@ -16,57 +16,34 @@ Login=Request.ServerVariables("LOGON_USER")
  
 'Login="USAT\" & Login 
 'Para verificar por usuario   
-  
+ 
   
 Login=  UCASE(Login)  
 'response.write "<script>alert('" & Login & "')</script>" 
-    
-     
-' serverdev      
-'Login = "USAT\scastro"
-'Login = "USAT\HMERA"
-'Login = "USAT\MCRUZ"  
-'Login = "USAT\DOJEDA" 
-'Login = "USAT\JFUPUY" 
-'Login = "USAT\MVILCHEZ"
-'Login = "USAT\MMELENDEZ"  
-'LOGIN = "USAT\ovargas"
-'Login = "USAT\andy.diaz"
-'Login = "USAT\rtimana"
-Login = "USAT\Esaavedra"
-'Login = "USAT\wgarcia"
-login = "USAT\ESAAVEDRA"
-'login = "USAT\byzasiga"
-'login = "USAT\lllontop"
-'login = "USAT\mtesen"
-'login = "USAT\kreyes"
+ 
 
+'IF LOGIN = "USAT\"  THEN 
+'	LOGIN = "USAT\" 
+'END IF    
 
-
-
-
-
-
-
-
-
-
-
-
-
-IF LOGIN = "USAT\MNECIOSUP" THEN    
-   LOGIN = "USAT\JOLIVA" 
-END IF
-
+' =====================================================================================================================================================================
+' NO MODIFICAR ESTE ARCHIVO! Para cambiar de usuario ingresar a: http://serverdev/CAMPUSVIRTUAL/personal/sistema/frmAsignarUsuariosTemporales.aspx?id=684&ctf=1&apl=73
+' =====================================================================================================================================================================
 
 if Login="USAT\cmasias" or Login="USAT\fguerrero"  then
 else 
 Clave="0"
 
 
-'Buscar en la base de datos el id del usuario,seg�n el tipo
+'Buscar en la base de datos el id del usuario,según el tipo
 Set ObjUsuario= Server.CreateObject("PryUSAT.clsAccesoDatos")
 	ObjUsuario.AbrirConexion
+		'andy.diaz 04/01/2020
+		Set rsCambioAcceso=ObjUsuario.Consultar("MAN_ConsultarCambioAccesoUsuario","FO",Replace(Login, "USAT\", ""))
+		If Not(rsCambioAcceso.BOF and rsCambioAcceso.EOF) then
+			Login = "USAT\" & rsCambioAcceso("usuario_per")
+		End if
+		'------------------------
 		Set rsPersonal=ObjUsuario.Consultar("consultaracceso","FO",tipo_uap,Login,Clave)				
 		Set rsCiclo=ObjUsuario.Consultar("consultarcicloAcademico","FO","CV",1)
 	ObjUsuario.CerrarConexion
@@ -85,7 +62,7 @@ If Not(rsPersonal.BOF and rsPersonal.EOF) then
 	session("Equipo_bit")=Request.ServerVariables("REMOTE_ADDR")
 	session("Usuario_bit")=Login
     
-	'Almacenar datos del ciclo acad�mico
+	'Almacenar datos del ciclo académico
 	session("Codigo_Cac")=rsCiclo("codigo_cac")
 	session("descripcion_Cac")=rsCiclo("descripcion_cac")
 	session("tipo_Cac")=rsCiclo("tipo_cac")
@@ -102,7 +79,7 @@ If Not(rsPersonal.BOF and rsPersonal.EOF) then
 	session("Ident_Usu2")=session("Ident_Usu")
 	session("Nombre_Usu2")=session("Nombre_Usu")
 	session("Usuario_bit2")=session("Usuario_bit")
-	'Almacenar datos del ciclo acad�mico
+	'Almacenar datos del ciclo académico
 	session("Codigo_Cac2")=session("Codigo_Cac")
 	session("descripcion_Cac2")=session("descripcion_Cac")
 	session("tipo_Cac2")=session("tipo_Cac")
@@ -115,7 +92,7 @@ If Not(rsPersonal.BOF and rsPersonal.EOF) then
 	'end if
 Else%>
 	<script type="text/javascript" language="javascript">
-	    alert('Lo sentimos, Ud. no tiene acceso al Campus Virtual\n\Para cualquier consulta cont�ctese con el Administrador del Sistema')
+	    alert('Lo sentimos, Ud. no tiene acceso al Campus Virtual\n\Para cualquier consulta contactese con Direccion de Personal o con su Director de Departamento')
 	    top.window.close()
 	    //top.location.href="../index.asp"
 	</script>

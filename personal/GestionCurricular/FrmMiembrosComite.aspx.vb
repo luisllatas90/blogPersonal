@@ -440,7 +440,7 @@ Partial Class GestionCurricular_FrmMiembrosComite
             Dim dt As New Data.DataTable("data")
 
             C.AbrirConexion()
-            dt = C.TraerDataTable("ConsultarCicloAcademico", "DA", "")
+            dt = C.TraerDataTable("ConsultarCicloAcademico", "DAN", "")
             C.CerrarConexion()
 
             ddlSemestre.DataSource = dt

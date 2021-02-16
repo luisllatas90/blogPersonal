@@ -53,7 +53,8 @@ Partial Class academico_estudiante_separacion_Separacion
 
         If datos.Rows.Count > 0 Then
             With datos.Rows(0)
-
+                'Response.Write(Me.GvAlumnos.DataKeys.Item(Me.GvAlumnos.SelectedIndex).Values("codigo_trl").ToString())
+                Me.lbldta.value = Me.GvAlumnos.DataKeys.Item(Me.GvAlumnos.SelectedIndex).Values("codigo_dta").ToString()
                 Me.LblCodigoUniv.Text = .Item("codigouniver_alu").ToString
                 Me.LblNombres.Text = .Item("nombres").ToString
                 Me.lblPlanEstudio.Text = .Item("descripcion_pes").ToString
@@ -130,6 +131,7 @@ Partial Class academico_estudiante_separacion_Separacion
         objCnx.AbrirConexion()
         Dim datos As New Data.DataTable
         datos = objCnx.TraerDataTable("Alumno_ListarTramiteJusti", CInt(Session("id_per")), CInt(Request.QueryString("ctf")), Request.QueryString("mod"))
+        'datos = objCnx.TraerDataTable("Alumno_ListarTramiteJusti", CInt(147), CInt(Request.QueryString("ctf")), Request.QueryString("mod"))
         Me.GvAlumnos.DataSource = datos
         Me.GvAlumnos.DataBind()
         objCnx.CerrarConexion()
@@ -174,6 +176,8 @@ Partial Class academico_estudiante_separacion_Separacion
             End If
 
             Dim njust As Integer = 0
+            Dim evaluado As Boolean = False
+            Dim codigo_dta As Integer = 0
 
             For I As Int16 = 0 To Me.gridSesiones.Rows.Count - 1
                 Fila = Me.gridSesiones.Rows(I)
@@ -191,9 +195,17 @@ Partial Class academico_estudiante_separacion_Separacion
                         objCnx.AbrirConexion()
                         objCnx.Ejecutar("Alumno_RegistrarJustificacionAlumno", codigo_alu, codigo_cac, codigo_cup, codigo_lho, fechaclase, CInt(Session("id_per")), codigo_trl)
                         objCnx.CerrarConexion()
+                        evaluado = True
                     End If
                 End If
             Next
+
+            If evaluado Then
+                codigo_dta = CInt(Me.lbldta.value)
+                objCnx.AbrirConexion()
+                objCnx.Ejecutar("TRL_DetalleTramiteAlumno_EvaluaJusti", codigo_dta, CInt(Session("id_per")))
+                objCnx.CerrarConexion()
+            End If
 
             If njust > 1 Then
                 'ShowMessage("Se han procesado " & njust.ToString & " justificaciones. Se envió notificación por correo.", MessageType.Success)

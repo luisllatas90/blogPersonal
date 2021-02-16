@@ -4,8 +4,6 @@ codigo_alu=request.querystring("codigo_alu")
 codigouniver_alu=request.querystring("codigouniver_alu")
 dim mostrarfichapersonal 
 mostrarfichapersonal = true
-
-
 if session("codigo_tfu")="13" then
 	mostrarfichapersonal=false ' no se puede mostrar la ficha de personal para los docentes	
 end if 
@@ -208,7 +206,7 @@ if codigo_alu<>"" then
     -->
    
     
-        <img border="1" src="//intranet.usat.edu.pe/imgestudiantes/<%=codigofoto%>" width="100" height="118" alt="Sin Foto"> 
+        <img border="1" src="https://intranet.usat.edu.pe/imgestudiantes/<%=codigofoto%>" width="100" height="118" alt="Sin Foto"> 
         </td>
         <td width="83%" valign="top">
         
@@ -313,14 +311,20 @@ if codigo_alu<>"" then
 	                
 	            end if 
           	    if Not(rsMerito.BOF and rsMerito.EOF) then
+		            if cdbl(rsMerito("promedio_im")) > 0.0 then 
+		                HayMedio_est = "Sí"
+		                cicloIngreso = rsMerito("ciclo_i")
+		            else
+		                HayMedio_est = "No aplica"
+		            end if 
 		            if cdbl(rsMerito("promedio_it")) > 0.0 then 
-		                HayTercio_est = "Si"
+		                HayTercio_est = "Sí"
 		                cicloIngreso = rsMerito("ciclo_i")
 		            else
 		                HayTercio_est = "No"
 		            end if 
 		            if cdbl(rsMerito("promedio_iq")) > 0.0 then 
-		                HayQuinto_est = "Si"
+		                HayQuinto_est = "Sí"
 		            else
 		                HayQuinto_est = "No"
 		            end if 
@@ -335,13 +339,13 @@ if codigo_alu<>"" then
 				'	RESPONSE.WRITE rsMerito("promedio_et")
 
 		                if cdbl(rsMerito("promedio_et")) > 0.0 then 
-		                    HayTercio_egr = "Si"
+		                    HayTercio_egr = "Sí"
 		                    cicloEgreso = rsMerito("ciclo_Egr")
 		                else
 		                    HayTercio_egr = "No"
 		                end if     
 		                if cdbl(rsMerito("promedio_eq")) > 0.0 then 
-		                    HayQuinto_egr = "Si"
+		                    HayQuinto_egr = "Sí"
 		                else
 		                    HayQuinto_egr = "No"
 		                end if  
@@ -382,12 +386,14 @@ if codigo_alu<>"" then
 	                    tercio = HayTercio_egr
 	                    quinto = HayQuinto_egr
 	               end if 
+	               medio="No aplica"
 	            else
 	                strCicloReferencia = rsMerito("CicloReferencia")
 ''	              if es_estudiante = true then	                        
 	                    text1 = "(Est) - Ref.:" + strCicloReferencia
 	                    'text2 = "*"
 	                    promedio_general = promedio_est
+	                    medio = HayMedio_est
 	                    tercio = HayTercio_est
 	                    quinto = HayQuinto_est                    
 	            end if
@@ -398,6 +404,13 @@ if codigo_alu<>"" then
 	    	<td style="width: 16%;">: <%= promedio_general%></td>	 
 	    	<td style="width: 16%;">Ponderado Ciencias Salud (Psi. <= 8vo ciclo || Med. Enf. Odo. Sin Internado )</td>	 
 	    	<td style="width: 16%;">: <%= formatnumber(promedioAprobados,2) %></td>	 
+          </tr>
+          <tr class="usatTablaInfo">
+	    	<td style="width: 24%; ">Medio Superior <%=text1 & text2%></td>
+	    	<td style="width: 16%;">: <%= medio%>	    	
+	    	</td>	 
+	    	<td>   		    		    	</td>
+	    	<td>   		    		    	</td>
           </tr>
           <tr class="usatTablaInfo">
 	    	<td style="width: 24%; ">Tercio Superior <%=text1 & text2%></td>
@@ -414,14 +427,14 @@ if codigo_alu<>"" then
           </tr>
           
           <tr class="usatTablaInfo">
-           <% if (HayTercio_est)="Si"  then %>
+           <% if (HayTercio_est)="Sí"  then %>
 	    	<td style="width: 24%" colspan="2"> 	    	
 	    	    <input class="buscar2" name="cmdVer" type="button" value="    Méritos Estudiante" style="width: 110px"        
                 onclick="AbrirPopUp('promedioTercioQuinto.aspx?codigo_alu=<%=codigo_alu%>&tipo=EST&cpf=<%=codigo_cpf %>&ci=<%=cicloIngreso %>','400','780','yes','yes','yes')">
                 
 		    </td>
 		    <% end if %>
-		    <% if (HayTercio_egr)="Si" then %>
+		    <% if (HayTercio_egr)="Sí" then %>
 	    	<td style="width: 16%;" colspan="2"> 	    	    
 			    <input class="buscar2" name="cmdVer0" type="button" value="    Méritos Egresado" style="width: 110px" 
                 onclick="AbrirPopUp('promedioTercioQuinto.aspx?codigo_alu=<%=codigo_alu%>&tipo=EGR&cpf=<%=codigo_cpf %>&ce=<%=cicloEgreso %>','400','850','yes','yes','yes')">                

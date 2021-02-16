@@ -31,13 +31,13 @@ set obEnc=Nothing
         'Modificacion: Se modifico el http://www.usat.edu.pe por http://intranet.usat.edu.pe
     '---------------------------------------------------------------------------------------------------------------
     -->
-        <img border="0" src="//intranet.usat.edu.pe/imgestudiantes/<%=codigofoto%>" width="95" height="106" alt="Sin Foto"></td>
+        <img border="0" src="//intranet.usat.edu.pe/imgestudiantes/<%=codigofoto%>" width="95" height="106" alt="Sin Foto"/></td>
     <td width="85%" valign="top">
         <table border="0" cellpadding="3" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" class="contornotabla">
           <tr>
     <td width="15%">Código Universitario&nbsp;</td>
     <td class="usatsubtitulousuario" width="75%" colspan="3">: 
-    <input class="cajas" size="27" name="txtcodigouniver_alu" value="<%=session("codigoUniver_alu")%>" onkeyup="if(event.keyCode==13){enviarConsulta()}"><%if session("qb")="" then%><input type="button" class="buscar2" class="NoImprimir" onclick="enviarConsulta()" value="  Buscar...">
+    <input class="cajas" size="27" name="txtcodigouniver_alu" value="<%=session("codigoUniver_alu")%>" onkeyup="if(event.keyCode==13){enviarConsulta()}"><%if session("qb")="" then%><input type="button" class="buscar2" class="NoImprimir" onclick="enviarConsulta()" value="  Buscar..."/>
 		<%end if%>
     </td>
           </tr>

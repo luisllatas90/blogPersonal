@@ -48,7 +48,7 @@
     </head>
 <body>
     <form id="form1" runat="server">
-    <%Response.Write(ClsFunciones.CargaCalendario)%> 
+    <%--Response.Write(ClsFunciones.CargaCalendario)--%> 
     <p class="usatTitulo">Matricula por Curso Programado</p>
 <table cellpadding="3" cellspacing="0" style="width: 100%; border:1px solid #96ACE7" 
             border="0">

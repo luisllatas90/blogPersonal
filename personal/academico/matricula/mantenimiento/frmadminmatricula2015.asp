@@ -80,13 +80,14 @@ if codigo_alu<>"" and trim(modo)="resultado" then
 	if Not(rsSeparacion.BOF and rsSeparacion.EOF) then
 	    'tieneSeparacion= 1 'comentado por yperez 10.01.2018
 	    if rsSeparacion("codigo_tse") =1 then
+	        tieneSeparacion=1 'Bloquear si es temporal sin revocacion ID:38642  solicitado por marilin
 	        motivoSeparacion = "<b>" & rsSeparacion("descripcion_tse") & "</b>" & " desde " & rsSeparacion("fechaIni_sep") & " hasta " & rsSeparacion("fechafin_sep") & " por motivo: " & "<b>" & rsSeparacion("motivo_sep") & "</b>"
 	    else
 	        tieneSeparacion= 1 'solo bloquear si es definitiva- desde 2018-0 yperez 10.01.2018
 	        motivoSeparacion = "<b>" & rsSeparacion("descripcion_tse") & "</b>" & " por motivo: <b>" & rsSeparacion("motivo_sep") & "</b>"
 	    end if 
 	end if 
-    
+ 
 end if
 %>
 <%
@@ -171,7 +172,10 @@ function ObjAplicacion(ciclo,cm,fecha,tipo,obs,crd,emat)
       </td>
     </tr>
 
-    <%   if tieneSeparacion = 1 then 
+    <%   
+  
+    if tieneSeparacion = 1 then 
+    
     %>
     <tr>
       <td width="100%" class="etiqueta" valign="top" height="85%">

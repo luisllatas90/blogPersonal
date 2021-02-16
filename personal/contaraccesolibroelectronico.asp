@@ -107,11 +107,10 @@ Set obj=nothing
 </head>
 
 <body>
-    <!--<script type="text/javascript" src="../estudiante/Scripts/jquery-2.1.1.js?x=1"></script> -->
+    <!--<script type="text/javascript" src="https://intranet.usat.edu.pe/campusvirtual/estudiante/Scripts/jquery-2.1.1.js?x=1"></script> -->
 
     <center>
         <br /><br />
-        <!-- 2020-06-04-ENevado -->
         <img alt="Biblioteca" longdesc="Biblioteca" src="../images/pearson.png"
             style="width: 490px; height: 250px" /><br />
         <div>
@@ -119,6 +118,7 @@ Set obj=nothing
             <!-- andy.diaz - 03/06/2019 -->
             <a id="lnkUrl" href="" onclick="return fnRedirect()">INGRESAR</a>
             <form method="post" id="frmRedirect" action="../VitalSource/frmLaunchFormVitalSource.aspx" target="_blank">
+            <!--<form method="post" id="frmRedirect" action="copia.aspx" target="_blank">-->
                 <input type="hidden" name="userId" value="<%=session("codigo_Usu") %>">
                 <input type="hidden" name="roles" value="DOCENTE">
                 <input type="hidden" name="nombreCompleto" value="<%=session("Nombre_Usu") %>">

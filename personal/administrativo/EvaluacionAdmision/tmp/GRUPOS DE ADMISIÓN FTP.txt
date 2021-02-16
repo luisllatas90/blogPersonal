@@ -1,0 +1,7 @@
+Z:\personal\assets\tempusdominus-bootstrap-3
+
+Z:\personal\App_Code\clsAdmisionVirtual.vb
+Z:\personal\administrativo\gestion_educativa\frmGrupoAdmisionVirtual.aspx
+Z:\personal\administrativo\gestion_educativa\frmGrupoAdmisionVirtual.aspx.vb
+Z:\personal\administrativo\gestion_educativa\frmGrupoAsignacionAlumno.aspx
+Z:\personal\administrativo\gestion_educativa\frmGrupoAsignacionAlumno.aspx.vb

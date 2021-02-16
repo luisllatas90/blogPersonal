@@ -177,11 +177,14 @@ Partial Class GestionCurricular_frmPublicarSilabo
         Dim idTransa, var As Long
 
         Try
+            Dim _modular As Boolean
+
             index = CInt(e.CommandArgument)
             codigo_cup = CInt(Me.gvAsignatura.DataKeys(index).Values("codigo_cup"))
             idTransa = CLng(Me.gvAsignatura.DataKeys(index).Values("codigo_dis"))
             var = CLng(Me.gvAsignatura.DataKeys(index).Values("IdArchivo_Anexo"))
-            
+            _modular = CBool(Me.gvAsignatura.DataKeys(index).Values("modular_pcu"))
+
             Select Case e.CommandName
                 Case "Ver"
                     'Dim curso As String
@@ -190,12 +193,15 @@ Partial Class GestionCurricular_frmPublicarSilabo
                     clsPdf.fuente = Server.MapPath(".") & "/segoeui.ttf"
                     'clsPdf.anexo = Server.MapPath(".") & "/ManualTutoria.pdf"
 
-                    clsPdf.mt_GenerarSilabo(codigo_cup, Server.MapPath(".") & "/logo_usat.png", memory, True)
+                    If _modular Then 'Adicionado por Luis Q.T.| 01SEP2020
+                        clsPdf.mt_GenerarSilabo2(codigo_cup, Server.MapPath(".") & "/logo_usat.png", memory, True)
+                    Else
+                        clsPdf.mt_GenerarSilabo(codigo_cup, Server.MapPath(".") & "/logo_usat.png", memory, True)
+                    End If
 
                     Dim bytes() As Byte = memory.ToArray
                     memory.Close()
 
-                    
                     If var <> -1 Then
                         Dim bytes_anexo() As Byte = fc_ObtenerArchivo(idTransa, 24, "SU3WMBVV4W", var)
                         'mt_CopiarPdf(bytes, bytes_anexo, memory_pdf, True)
@@ -234,14 +240,12 @@ Partial Class GestionCurricular_frmPublicarSilabo
                         Dim codigo_sib As Integer
                         Dim dt As New Data.DataTable
                         Dim respuesta, nombre_silabo, curso, grupo, semestre As String
-                        Dim _modular As Boolean
 
                         respuesta = "" : nombre_silabo = ""
                         curso = Me.gvAsignatura.DataKeys(index).Values("nombre_Cur")
                         grupo = Me.gvAsignatura.DataKeys(index).Values("grupoHor_Cup")
                         semestre = Me.gvAsignatura.DataKeys(index).Values("descripcion_Cac")
-                        _modular = CBool(Me.gvAsignatura.DataKeys(index).Values("modular_pcu"))
-
+                        
                         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
                         If Not (IsDBNull(Session("perlogin"))) And Session("perlogin").ToString <> "" Then
                             obj.IniciarTransaccion()
@@ -283,7 +287,7 @@ Partial Class GestionCurricular_frmPublicarSilabo
 
                             obj.Ejecutar("SilaboCurso_actualizar", codigo_sib, codigo_cup, 0, Date.Now.Date, 1, cod_user)
                             obj.TerminarTransaccion()
-                            mt_ShowMessage("¡ Se ha publicado el silabo correctamente !", MessageType.Success)
+                            mt_ShowMessage("¡ El sílabo fue publicado correctamente !", MessageType.Success)
                             'mt_CargarDatos(Me.cboSemestre.SelectedValue, Me.cboTipoEstudio.SelectedValue)
                             cboPlanEstudio_SelectedIndexChanged(Nothing, Nothing)
                         Else
@@ -298,14 +302,14 @@ Partial Class GestionCurricular_frmPublicarSilabo
                 Case "Descargar"
                     Dim idArchivo As Long
                     idArchivo = CLng(Me.gvAsignatura.DataKeys(index).Values("IdArchivo"))
-                    If idArchivo = 0 Then Throw New Exception("¡ Este silabo no se encuentra disponible !")
+                    If idArchivo = 0 Then Throw New Exception("¡ Este sílabo no se encuentra disponible !")
                     'Page.RegisterStartupScript("BusyBox", "<script>fc_ocultarBusy();</script>")
                     'Response.Write("<script>fc_OcultarBussy();</script>")
                     mt_DescargarArchivo(idArchivo, 22, "YAXVXFQACX")
                     'RegisterStartupScript("", "<script>fc_OcultarBussy();</script>")
                     'Page.ClientScript.RegisterStartupScript(Me.GetType, "script", "return fc_OcultarBussy()")
                     'btnListar_Click(Nothing, Nothing)
-                    mt_ShowMessage("¡ Se ha descargado el silabo correctamente !", MessageType.Success)
+                    mt_ShowMessage("¡ Se ha descargado el sílabo correctamente !", MessageType.Success)
 
                     'EPENA 23/08/2019{
                 Case "Despublicar"
@@ -358,6 +362,8 @@ Partial Class GestionCurricular_frmPublicarSilabo
             If e.Row.RowType = DataControlRowType.DataRow AndAlso e.Row.RowIndex >= 0 Then
                 Dim i As Integer = e.Row.RowIndex
                 Dim ins_total, ins_asign, ins_pend, ses_total, ses_asign, ses_pend, fec_total, fec_asign, fec_pend As String
+                Dim aux_ins, aux_ses, pend_ins, pend_ses, pend_fec As Integer ' Por Luis Q.T. | 26OCT2020
+                Dim aux_fec As String ' Por Luis Q.T. | 26OCT2020
 
                 ins_total = Me.gvAsignatura.DataKeys(i).Values("instr_total")
                 ins_asign = Me.gvAsignatura.DataKeys(i).Values("instr_asign")
@@ -371,17 +377,27 @@ Partial Class GestionCurricular_frmPublicarSilabo
                 fec_asign = Me.gvAsignatura.DataKeys(i).Values("fechas_asign")
                 fec_pend = Me.gvAsignatura.DataKeys(i).Values("fechas_pend")
 
-                e.Row.Cells(6).Text = ins_total & "     |     " & ins_asign & "     |     " & CStr(ins_pend.Length - ins_pend.Replace("|", "").Length)
-                e.Row.Cells(6).ToolTip = ins_pend.Replace("|", vbCr).Replace("|", vbLf)
+                ' Por Luis Q.T. | 26OCT2020
+                pend_ins = CInt(ins_total) - CInt(ins_asign)
+                pend_ses = CInt(ses_total) - CInt(ses_asign)
+                pend_fec = CInt(fec_total) - CInt(fec_asign)
+
+                aux_ins = (ins_pend.Length - ins_pend.Replace("|", "").Length)
+                aux_ses = (ses_pend.Length - ses_pend.Replace("|", "").Length)
+                aux_fec = Left(fec_pend, 55)
+
+                e.Row.Cells(6).Text = ins_total & "     |     " & ins_asign & "     |     " & CStr(pend_ins) 'CStr(ins_pend.Length - ins_pend.Replace("|", "").Length) ' Por Luis Q.T. | 26OCT2020
+                e.Row.Cells(6).ToolTip = ins_pend.Replace("|", vbCr).Replace("|", vbLf) & IIf((pend_ins - aux_ins) > 0, "... Y " & CStr(pend_ins - aux_ins) & " más", "")
                 e.Row.Cells(6).HorizontalAlign = HorizontalAlign.Center
 
-                e.Row.Cells(7).Text = ses_total & "     |     " & ses_asign & "     |     " & CStr(ses_pend.Length - ses_pend.Replace("|", "").Length)
-                e.Row.Cells(7).ToolTip = ses_pend.Replace("|", vbCr).Replace("|", vbLf)
+                e.Row.Cells(7).Text = ses_total & "     |     " & ses_asign & "     |     " & CStr(pend_ses) 'CStr(ses_pend.Length - ses_pend.Replace("|", "").Length) ' Por Luis Q.T. | 26OCT2020
+                e.Row.Cells(7).ToolTip = ses_pend.Replace("|", vbCr).Replace("|", vbLf) & IIf((pend_ses - aux_ses) > 0, "... Y " & CStr(pend_ses - aux_ses) & " más", "")
                 e.Row.Cells(7).HorizontalAlign = HorizontalAlign.Center
 
-                e.Row.Cells(8).Text = fec_total & "     |     " & fec_asign & "     |     " & CStr(CInt(Len(fec_pend) / 11))
-                e.Row.Cells(8).ToolTip = fec_pend.Replace("|", vbCr).Replace("|", vbLf)
+                e.Row.Cells(8).Text = fec_total & "     |     " & fec_asign & "     |     " & CStr(pend_fec) 'CStr(CInt(Len(fec_pend) / 11)) ' Por Luis Q.T. | 26OCT2020
+                e.Row.Cells(8).ToolTip = aux_fec.Replace("|", vbCr).Replace("|", vbLf) & IIf((pend_fec - CInt(Len(aux_fec) / 11)) > 0, "... Y " & CStr(pend_fec - CInt(Len(aux_fec) / 11)) & " más", "")
                 e.Row.Cells(8).HorizontalAlign = HorizontalAlign.Center
+
             End If
         Catch ex As Exception
             mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.Error)
@@ -416,7 +432,7 @@ Partial Class GestionCurricular_frmPublicarSilabo
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
         Try
             obj.AbrirConexion()
-            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DA", "")
+            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DAN", "")
             obj.CerrarConexion()
             mt_CargarCombo(Me.cboSemestre, dt, "codigo_Cac", "descripcion_Cac")
         Catch ex As Exception

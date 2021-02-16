@@ -52,7 +52,7 @@ Partial Class Alumni_frmEmpresa
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             If (Session("id_per") Is Nothing OrElse Session("perlogin") Is Nothing) Then
-                Response.Redirect("../../sinacceso.html")
+                Response.Redirect("https://intranet.usat.edu.pe/campusvirtual/sinacceso.html")
             End If
 
             cod_user = Session("id_per")
@@ -806,7 +806,7 @@ Partial Class Alumni_frmEmpresa
     Private Function fu_ValidarRegistrarEmpresa() As Boolean
         Try
             If String.IsNullOrEmpty(Me.txtRuc.Text.Trim) Then mt_ShowMessage("Debe ingresar un número de RUC.", MessageType.warning) : Me.txtRuc.Focus() : Return False
-            If Not md_Funciones.ValidarRucSunat(Me.txtRuc.Text.Trim) Then mt_ShowMessage("El RUC ingresado no se encuentra registrado en SUNAT.", MessageType.warning) : Return False
+            'If Not md_Funciones.ValidarRucSunat(Me.txtRuc.Text.Trim) Then mt_ShowMessage("El RUC ingresado no se encuentra registrado en SUNAT.", MessageType.warning) : Return False
             If String.IsNullOrEmpty(Me.txtNombreComercial.Text.Trim) Then mt_ShowMessage("Debe ingresar un nombre comercial.", MessageType.warning) : Me.txtNombreComercial.Focus() : Return False
             If Not String.IsNullOrEmpty(Me.txtTelefono.Text.Trim) AndAlso String.IsNullOrEmpty(Me.cmbTelefono.SelectedValue.Trim) Then mt_ShowMessage("Debe seleccionar el código de ciudad al que pertenece el número de teléfono.", MessageType.warning) : Return False
             If Not String.IsNullOrEmpty(Me.txtCorreo.Text.Trim) AndAlso Not md_Funciones.ValidarEmail(Me.txtCorreo.Text.Trim) Then mt_ShowMessage("Debe ingresar un correo de empresa válido.", MessageType.warning) : Me.txtCorreo.Focus() : Return False

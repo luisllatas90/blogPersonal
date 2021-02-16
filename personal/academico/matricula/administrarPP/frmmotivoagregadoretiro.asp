@@ -77,7 +77,7 @@ Set obj=nothing
   <tr>
     <td width="22%" valign="top">Observación:</td>
     <td width="78%">
-      <textarea class="cajas2" rows="5" name="txtobs" cols="20"><%=obs%></textarea>
+      <textarea class="cajas2" rows="5" name="txtobs" id="txtobs" cols="20"><%=obs%></textarea>
    </td>
   </tr>
   <tr>

@@ -22,6 +22,8 @@ Public Class e_Categoria
     Public nombre_cat As String
     Public grupo_cat As String
     Public codigoSuperior As String
+    Public abreviatura_cat As String
+
     Public cod_user As String
     Public operacion As String    
 #End Region
@@ -33,6 +35,8 @@ Public Class e_Categoria
         nombre_cat = String.Empty
         grupo_cat = String.Empty
         codigoSuperior = String.Empty
+        abreviatura_cat = String.Empty
+
         cod_user = String.Empty
         operacion = String.Empty
     End Sub
@@ -361,6 +365,8 @@ Public Class e_CentroCostos
 #End Region
 
 #Region "Propiedades"
+    Public codigo_cco As String
+    Public codigo_sco As String
     Public descripcion_cco As String
     Public codigo_test As String
     Public visibilidad_cco As Boolean
@@ -374,6 +380,8 @@ Public Class e_CentroCostos
 #Region "Metodos"
 
     Private Sub Inicializar()
+        codigo_cco = String.Empty
+        codigo_sco = String.Empty
         descripcion_cco = String.Empty
         codigo_test = String.Empty
         visibilidad_cco = True
@@ -791,9 +799,15 @@ Public Class e_Alumno
     Public nombres As String
     Public accion As String
     Public codigo_pcur As String
+    Public nivel_ega As String
+    Public tiene_diploma As String
+
+    Public cod_user As String
+    Public operacion As String
 #End Region
 
 #Region "Metodos"
+
     Private Sub Inicializar()
         codigo_alu = String.Empty
         codigoUniver_alu = String.Empty
@@ -813,7 +827,13 @@ Public Class e_Alumno
         codigo_per = String.Empty
         accion = String.Empty
         codigo_pcur = String.Empty
+        nivel_ega = String.Empty
+        tiene_diploma = String.Empty
+
+        cod_user = String.Empty
+        operacion = String.Empty
     End Sub
+
 #End Region
 
 End Class
@@ -960,6 +980,8 @@ Public Class e_Departamento
     Public codigo_dep As String
     Public nombre_dep As String
     Public codigo_pai As String
+    Public ubigeo_dep As String
+
     Public cod_user As String
     Public operacion As String
 #End Region
@@ -970,6 +992,8 @@ Public Class e_Departamento
         codigo_dep = String.Empty
         nombre_dep = String.Empty
         codigo_pai = String.Empty
+        ubigeo_dep = String.Empty
+
         cod_user = String.Empty
         operacion = String.Empty
     End Sub
@@ -992,6 +1016,8 @@ Public Class e_Provincia
     Public codigo_pro As String
     Public nombre_pro As String
     Public codigo_dep As String
+    Public ubigeo_pro As String
+
     Public cod_user As String
     Public operacion As String
 #End Region
@@ -1002,6 +1028,8 @@ Public Class e_Provincia
         codigo_pro = String.Empty
         nombre_pro = String.Empty
         codigo_dep = String.Empty
+        ubigeo_pro = String.Empty
+
         cod_user = String.Empty
         operacion = String.Empty
     End Sub
@@ -1024,6 +1052,9 @@ Public Class e_Distrito
     Public codigo_dis As String
     Public nombre_dis As String
     Public codigo_pro As String
+    Public ubigeo_dis As String
+    Public ubigeoReniec As String
+
     Public cod_user As String
     Public operacion As String
 #End Region
@@ -1034,6 +1065,9 @@ Public Class e_Distrito
         codigo_dis = String.Empty
         nombre_dis = String.Empty
         codigo_pro = String.Empty
+        ubigeo_dis = String.Empty
+        ubigeoReniec = String.Empty
+
         cod_user = String.Empty
         operacion = String.Empty
     End Sub
@@ -1654,9 +1688,21 @@ Public Class e_ComunicadoPersonal
 #Region "Propiedades"
     Public codigo_cpe As String
     Public codigo_per As String
+    Public numeroComunicado_cpe As String
+    Public nombreComunicado_cpe As String
+    Public tipo_cpe As String
+    Public fechaVigenciaIni_cpe As DateTime
+    Public fechaVigenciaFin_cpe As DateTime
+    Public indDescarga_cpe As String
+    Public fechaDescarga_cpe As DateTime
+    Public descripcionVar1_cpe As String
+    Public var1_cpe As String
+    Public descripcionVar2_cpe As String
+    Public var2_cpe As String
 
     Public cod_user As String
     Public operacion As String
+    Public verificaVigencia As String
 #End Region
 
 #Region "Metodos"
@@ -1664,9 +1710,21 @@ Public Class e_ComunicadoPersonal
     Private Sub Inicializar()
         codigo_cpe = String.Empty
         codigo_per = String.Empty
+        numeroComunicado_cpe = String.Empty
+        nombreComunicado_cpe = String.Empty
+        tipo_cpe = String.Empty
+        fechaVigenciaIni_cpe = #1/1/1901#
+        fechaVigenciaFin_cpe = #1/1/1901#
+        indDescarga_cpe = String.Empty
+        fechaDescarga_cpe = #1/1/1901#
+        descripcionVar1_cpe = String.Empty
+        var1_cpe = String.Empty
+        descripcionVar2_cpe = String.Empty
+        var2_cpe = String.Empty
 
         cod_user = String.Empty
         operacion = String.Empty
+        verificaVigencia = String.Empty
     End Sub
 
 #End Region
@@ -1765,6 +1823,8 @@ Public Class e_DatosPersonal
     Public operadorCelular_per As String
     Public operadorInternet_per As String
     Public actualizoDatos_per As String
+    Public codigo_pro As String
+    Public distrito As String
 
     Public cod_user As String
     Public operacion As String
@@ -1782,9 +1842,1006 @@ Public Class e_DatosPersonal
         operadorCelular_per = String.Empty
         operadorInternet_per = String.Empty
         actualizoDatos_per = String.Empty
+        codigo_pro = String.Empty
+        distrito = String.Empty
 
         cod_user = String.Empty
         operacion = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_MotivoNotaAbono
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_mno As String
+    Public descripcion_mno As String
+    Public codigo_pco As String
+    Public bloqueaAgregadoRetiros As Boolean
+    Public conveniobeca As Boolean
+    Public solicitudAnulacion As Boolean
+    Public codigo_gmn As String
+
+    Public cod_user As String
+    Public operacion As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_mno = String.Empty
+        descripcion_mno = String.Empty
+        codigo_pco = String.Empty
+        bloqueaAgregadoRetiros = False
+        conveniobeca = False
+        solicitudAnulacion = False
+        codigo_gmn = String.Empty
+
+        cod_user = String.Empty
+        operacion = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_GrupoMotivoAbono
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_gmn As String
+    Public nombre_gmn As String
+
+    Public cod_user As String
+    Public operacion As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_gmn = String.Empty
+        nombre_gmn = String.Empty
+
+        cod_user = String.Empty
+        operacion = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_Adeudos
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_ade As String
+    Public codigo_alu As String
+    Public codigoArea_cco As String
+    Public codigo_tfu As String
+    Public codigo_sco As String
+    Public codigo_cco As String
+    Public codigoUniver_alu As String
+    Public nombre_alu As String
+    Public motivo_ade As String
+    Public fechaDeuda_ade As String
+    Public monto_ade As String
+    Public codigo_deu As String
+    Public fechaCancelado_ade As String
+    Public comentario_ade As String
+    Public estado_ade As String
+
+    Public cod_user As String
+    Public operacion As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_ade = String.Empty
+        codigo_alu = String.Empty
+        codigoArea_cco = String.Empty
+        codigo_tfu = String.Empty
+        codigo_sco = String.Empty
+        codigo_cco = String.Empty
+        codigoUniver_alu = String.Empty
+        nombre_alu = String.Empty
+        motivo_ade = String.Empty
+        fechaDeuda_ade = #1/1/1901#
+        monto_ade = String.Empty
+        codigo_deu = String.Empty
+        fechaCancelado_ade = #1/1/1901#
+        comentario_ade = String.Empty
+        estado_ade = String.Empty
+
+        cod_user = String.Empty
+        operacion = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_ConfiguracionInstanciasAdeudos
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_cia As String
+    Public codigoArea_cco As String
+    Public codigo_tfu As String
+    Public codigo_sco As String
+    Public codigo_cco As String
+    Public estado_cia As String
+
+    Public cod_user As String
+    Public operacion As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_cia = String.Empty
+        codigoArea_cco = String.Empty
+        codigo_tfu = String.Empty
+        codigo_sco = String.Empty
+        codigo_cco = String.Empty
+        estado_cia = String.Empty
+
+        cod_user = String.Empty
+        operacion = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_AsistenciaDocente
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_ado As String
+    Public codigo_hdo As String
+    Public codigo_cup As String    
+    Public codigo_lho As String
+    Public codigo_hop As String
+    Public codigo_per As String    
+    Public descripcionHorario_ado As String    
+    Public tipo As String
+    Public observacion As String
+
+    Public cod_user As String
+    Public operacion As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_ado = String.Empty
+        codigo_hdo = String.Empty
+        codigo_cup = String.Empty        
+        codigo_lho = String.Empty
+        codigo_hop = String.Empty
+        codigo_per = String.Empty        
+        descripcionHorario_ado = String.Empty        
+        tipo = String.Empty
+        observacion = String.Empty
+
+        cod_user = String.Empty
+        operacion = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_Consejo
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_con As String
+    Public nombre_con As String
+    Public codigo_fac As String
+    Public vigencia_gyt As String
+    Public operacion As String
+    Public abreviatura_con As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_con = String.Empty
+        nombre_con = String.Empty
+        codigo_fac = String.Empty
+        vigencia_gyt = String.Empty
+        operacion = String.Empty
+        abreviatura_con = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_ConsejoFacultad
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_cjf As String
+    Public codigo_fac As String
+    Public codigo_pcc As String
+    Public estado_cjf As String
+    Public cargo_cjf As String
+    Public codigo_con As String
+    Public codigo_cgo As String
+    Public usuario As String
+
+    Public operacion As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_cjf = String.Empty
+        codigo_fac = String.Empty
+        codigo_pcc = String.Empty
+        estado_cjf = String.Empty
+        cargo_cjf = String.Empty
+        codigo_con = String.Empty
+        codigo_cgo = String.Empty
+        operacion = String.Empty
+        usuario = String.Empty
+
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_SesionConsejoUniv_GYT
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_scu As String
+    Public descripcion_scu As String
+    Public fecha_scu As String
+    Public estado_scu As String
+    Public usuario_reg As String
+    Public fecha_reg As String
+    Public vigencia_scu As String
+    Public abreviatura_con As String
+    Public tipo_sesion As String
+    Public codigo_fac As String
+    Public operacion As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_scu = String.Empty
+        descripcion_scu = String.Empty
+        fecha_scu = String.Empty
+        estado_scu = String.Empty
+        usuario_reg = String.Empty
+        fecha_reg = String.Empty
+        vigencia_scu = String.Empty
+        abreviatura_con = String.Empty
+        tipo_sesion = String.Empty
+        codigo_fac = String.Empty
+        operacion = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_ServicioConcepto
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_sco As String
+    Public tipo_sco As String
+    Public descripcion_sco As String
+    Public adeudo_sco As String
+
+    Public cod_user As String
+    Public operacion As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_sco = String.Empty
+        tipo_sco = String.Empty
+        descripcion_sco = String.Empty
+        adeudo_sco = String.Empty
+
+        cod_user = String.Empty
+        operacion = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_TramiteAlumno
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_trl As String
+    Public codigo_alu As String
+    Public codigo_cac As String
+    Public correlativo_trl As String
+    Public glosaCorrelativo_trl As String
+    Public fechaReg_trl As String
+    Public estado_trl As String
+    Public observacion_trl As String
+    Public fechaMod_AUD As String
+    Public usuarioMod_AUD As String
+    Public codigo_tfu As String
+    Public estado_dft As String
+    Public estadoAprobacion As String
+
+    Public operacion As String
+    Public fechaIni As String
+    Public fechaFin As String
+
+
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_trl = String.Empty
+        codigo_alu = String.Empty
+        codigo_cac = String.Empty
+        correlativo_trl = String.Empty
+        glosaCorrelativo_trl = String.Empty
+        fechaReg_trl = String.Empty
+        estado_trl = String.Empty
+        observacion_trl = String.Empty
+        fechaMod_AUD = String.Empty
+        usuarioMod_AUD = String.Empty
+        codigo_tfu = String.Empty
+        estado_dft = String.Empty
+        estadoAprobacion = String.Empty
+
+        operacion = String.Empty
+        fechaIni = String.Empty
+        fechaFin = String.Empty
+
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_Tesis
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_Tes As String
+    Public FechaReg_Tes As String
+    Public Codigo_TIn As String
+    Public CodigoReg_Tes As String
+    Public Titulo_Tes As String
+    Public FechaInicio_Tes As String
+    Public FechaFin_Tes As String
+    Public url_Tes As String
+    Public fechaUrl_tes As String
+    Public Codigo_per As String
+
+    Public operacion As String
+   
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+
+        codigo_Tes = String.Empty
+        FechaReg_Tes = String.Empty
+        Codigo_TIn = String.Empty
+        CodigoReg_Tes = String.Empty
+        Titulo_Tes = String.Empty
+        FechaInicio_Tes = String.Empty
+        FechaFin_Tes = String.Empty
+        url_Tes = String.Empty
+        fechaUrl_tes = String.Empty
+        Codigo_per = String.Empty
+
+        operacion = String.Empty
+
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_GrupoEgresado
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_gru As String
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_gru = String.Empty
+
+        operacion = String.Empty
+        cod_user = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_TipoDenominacionGradoTitulo
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_tdg As String
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_tdg = String.Empty
+
+        operacion = String.Empty
+        cod_user = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_EnvioDiplomasProveedor
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_edp As String
+    Public tipo_edp As String
+    Public codigo_scu As String
+    Public codigo_tdg As String
+    Public tipo_emision As String
+    Public codigo_dta As String
+    Public codigo_tfu As String
+
+    Public detalles As List(Of e_EnvioDiplomasProveedorDetalle)
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_edp = String.Empty
+        tipo_edp = String.Empty
+        codigo_scu = String.Empty
+        codigo_tdg = String.Empty
+        tipo_emision = String.Empty
+        codigo_dta = String.Empty
+        codigo_tfu = String.Empty
+        detalles = New List(Of e_EnvioDiplomasProveedorDetalle)
+
+        operacion = String.Empty
+        cod_user = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_EnvioDiplomasProveedorDetalle
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_edd As String
+    Public codigo_edp As String
+    Public codigo_trl As String
+    Public codigo_egr As String    
+    Public codigoOperacionGrupo As String
+    Public estadoOperacionGrupo As String
+    Public mensajeOperacionGrupo As String
+    Public estadoOperacionFirma As String
+    Public mensajeOperacionFirma As String
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_edd = String.Empty
+        codigo_edp = String.Empty
+        codigo_trl = String.Empty
+        codigo_egr = String.Empty
+
+        codigoOperacionGrupo = String.Empty
+        estadoOperacionGrupo = String.Empty
+        mensajeOperacionGrupo = String.Empty
+        estadoOperacionFirma = String.Empty
+        mensajeOperacionFirma = String.Empty
+
+        operacion = String.Empty
+        cod_user = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_ControlPersonal
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_cpe As String
+    Public codigo_per As String
+    Public tipo As String
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_cpe = String.Empty
+        codigo_per = String.Empty
+        tipo = String.Empty
+
+        operacion = String.Empty
+        cod_user = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_Marcaciones
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_mar As String
+    Public dni_per As String
+    Public id_marcador As String
+    Public procesado_mar As String
+    Public tipo_mar As String
+    Public id_marcacion_zk As String
+    Public codigo_cpe As String
+    Public tipo_operacion As String
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_mar = String.Empty
+        dni_per = String.Empty
+        id_marcador = String.Empty
+        procesado_mar = String.Empty
+        tipo_mar = String.Empty
+        id_marcacion_zk = String.Empty
+        codigo_cpe = String.Empty
+        tipo_operacion = String.Empty
+        operacion = String.Empty
+        cod_user = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_RecursoVirtual
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_rvi As String
+    Public tipoRepo_rvi As String
+    Public disciplinaRepo_rvi As String
+    Public nombre_rvi As String
+    Public logo_rvi As String
+    Public contarVisita_rvi As String
+    Public codigo_biv As String
+    Public acceso_rvi As String
+    Public orden_rvi As String
+    Public IdArchivosCompartidos As String
+    Public estado_rvi As String
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_rvi = String.Empty
+        tipoRepo_rvi = String.Empty
+        disciplinaRepo_rvi = String.Empty
+        nombre_rvi = String.Empty
+        logo_rvi = String.Empty
+        contarVisita_rvi = String.Empty
+        codigo_biv = String.Empty
+        acceso_rvi = String.Empty
+        orden_rvi = String.Empty
+        IdArchivosCompartidos = String.Empty
+        estado_rvi = String.Empty
+
+        operacion = String.Empty
+        cod_user = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_RecursoVirtualDetalle
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_rvd As String
+    Public codigo_rvi As String
+    Public titulo_rvd As String
+    Public cuerpo_rvd As String
+    Public acceso_rvd As String
+    Public orden_rvd As String
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_rvd = String.Empty
+        codigo_rvi = String.Empty
+        titulo_rvd = String.Empty
+        cuerpo_rvd = String.Empty
+        acceso_rvd = String.Empty
+        orden_rvd = String.Empty
+
+        operacion = String.Empty
+        cod_user = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_RecursoVirtualEnlace
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_rve As String
+    Public codigo_rvd As String
+    Public descripcion_rve As String
+    Public enlace_rve As String
+    Public contarVisita_rve As String
+    Public codigo_biv As String
+    Public acceso_rve As String
+    Public orden_rve As String
+    Public IdArchivosCompartidos As String
+
+    Public enlace As String
+
+    Public tipo_vis As String
+    Public codigo_vis As String    
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_rve = String.Empty
+        codigo_rvd = String.Empty
+        descripcion_rve = String.Empty
+        enlace_rve = String.Empty
+        contarVisita_rve = String.Empty
+        codigo_biv = String.Empty
+        acceso_rve = String.Empty
+        orden_rve = String.Empty
+        IdArchivosCompartidos = String.Empty
+
+        tipo_vis = String.Empty
+        codigo_vis = String.Empty
+        codigo_biv = String.Empty
+        enlace = String.Empty
+
+        operacion = String.Empty
+        cod_user = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_BibliotecaVirtual
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+    Public codigo_biv As String
+    Public nombre_biv As String
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_biv = String.Empty
+        nombre_biv = String.Empty
+
+        operacion = String.Empty
+        cod_user = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_DerechoHabientes
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+
+    Public codigo_dhab As String
+    Public codigo_per As String
+    Public nombre As String
+    Public edad As String
+
+    Public codigo_niv As String
+    Public nivel As String
+    Public codigo_gra As String
+    Public grado As String
+    Public centro_estudios As String
+    Public IdArchivosCompartidosRecibo As String
+    Public IdArchivosCompartidosDNI As String
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_dhab = String.Empty
+        codigo_per = String.Empty
+        nombre = String.Empty
+        edad = String.Empty
+
+        codigo_niv = String.Empty
+        nivel = String.Empty
+        codigo_gra = String.Empty
+        grado = String.Empty
+        centro_estudios = String.Empty
+        IdArchivosCompartidosRecibo = 0
+        IdArchivosCompartidosDNI = 0
+
+        operacion = String.Empty
+        cod_user = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
+Public Class e_SolicitudEscolaridad
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+
+    Public codigo_soe As String
+    Public codigo_dhab As String
+    Public estado_soe As String
+    Public tipocentroestudio_soe As String
+    Public nombrecentroestudio_soe As String
+    Public grado_soe As String
+    Public centroaplicacion_soe As Boolean
+    Public documentosadjuntos_soe As String
+    Public IdArchivosCompartidosRecibo As String
+    Public IdArchivosCompartidosDNI As String
+    Public codigo_per As String
+    Public anio_soe As String
+
+    Public operacion As String
+    Public cod_user As String
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()        
+        codigo_soe = String.Empty
+        codigo_dhab = String.Empty
+        estado_soe = String.Empty
+        tipocentroestudio_soe = String.Empty
+        nombrecentroestudio_soe = String.Empty
+        grado_soe = String.Empty
+        centroaplicacion_soe = False
+        documentosadjuntos_soe = String.Empty
+        IdArchivosCompartidosRecibo = String.Empty
+        IdArchivosCompartidosDNI = String.Empty
+        codigo_per = String.Empty
+        anio_soe = String.Empty
+
+        operacion = String.Empty
+        cod_user = String.Empty
     End Sub
 
 #End Region
@@ -1811,7 +2868,8 @@ Public Class d_Categoria
                                      le_Categoria.codigo_cat, _
                                      le_Categoria.nombre_cat, _
                                      le_Categoria.grupo_cat, _
-                                     le_Categoria.codigoSuperior)
+                                     le_Categoria.codigoSuperior, _
+                                     le_Categoria.abreviatura_cat)
 
             cnx.TerminarTransaccion()
             Return dt
@@ -1831,7 +2889,8 @@ Public Class d_Categoria
             dt = cnx.TraerDataTable("GEN_CategoriaListar", le_Categoria.operacion, _
                                     le_Categoria.codigo_cat, _
                                     le_Categoria.grupo_cat, _
-                                    le_Categoria.nombre_cat)
+                                    le_Categoria.nombre_cat, _
+                                    le_Categoria.abreviatura_cat)
 
             cnx.TerminarTransaccion()
             Return dt
@@ -1855,6 +2914,40 @@ Public Class d_Categoria
             Return dt
         Catch ex As Exception
             cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetCategoria(ByVal codigo As Integer) As e_Categoria
+        Try
+            Dim me_Categoria As New e_Categoria
+
+            If codigo > 0 Then
+                me_Categoria.operacion = "GEN"
+                me_Categoria.codigo_cat = codigo
+
+                dt = ListarCategoria(me_Categoria)
+                If dt.Rows.Count = 0 Then Throw New Exception("El registro de categoría no ha sido encontrado.")
+
+                me_Categoria = New e_Categoria
+
+                With me_Categoria
+                    .codigo_cat = dt.Rows(0).Item("codigo_cat")
+                    .nombre_cat = dt.Rows(0).Item("nombre_cat")
+                    .grupo_cat = dt.Rows(0).Item("grupo_cat")
+                    .codigoSuperior = dt.Rows(0).Item("codigoSuperior_cat")
+                    .abreviatura_cat = dt.Rows(0).Item("abreviatura_cat")
+                End With
+            Else
+                With me_Categoria
+                    .codigo_cat = 0
+                    .codigoSuperior = 0
+                    .cod_user = 0
+                End With
+            End If
+
+            Return me_Categoria
+        Catch ex As Exception
             Throw ex
         End Try
     End Function
@@ -2168,7 +3261,7 @@ Public Class d_CarreraProfesional
         End Try
     End Function
 
-   
+
 End Class
 
 Public Class d_Anio
@@ -2380,6 +3473,25 @@ Public Class d_CentroCostos
             dt = cnx.TraerDataTable("ALUMNI_ListarEventosAlumni", _
                                     le_CentroCostos.anio, _
                                     le_CentroCostos.descripcion_cco)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ListarCentroCostos(ByVal le_CentroCostos As e_CentroCostos) As Data.DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PEN_CentroCostosListar", le_CentroCostos.operacion, _
+                                    le_CentroCostos.codigo_cco, _
+                                    le_CentroCostos.codigo_sco)
 
             cnx.TerminarTransaccion()
             Return dt
@@ -2938,7 +4050,7 @@ Public Class d_CicloAcademico
         End Try
     End Function
 
-    
+
 
 
 End Class
@@ -3039,7 +4151,7 @@ Public Class d_Empresa
                     .codigo_pro = dt.Rows(0).Item("codigo_pro")
                     .codigo_dis = dt.Rows(0).Item("codigo_dis")
                     .direccion_emp = dt.Rows(0).Item("direccion_emp")
-                    .logo_emp = dt.Rows(0).Item("logo_emp")                    
+                    .logo_emp = dt.Rows(0).Item("logo_emp")
                     .correo_emp = dt.Rows(0).Item("correo_emp")
                     .direccionWeb_emp = dt.Rows(0).Item("direccionWeb_emp")
                     .prefijoTel_emp = dt.Rows(0).Item("prefijoTel_emp")
@@ -3081,6 +4193,7 @@ End Class
 Public Class d_Alumno
     Private cnx As ClsConectarDatos
     Private dt As Data.DataTable
+
     Public Function ListarAlumReqEgr(ByVal le_Alumno As e_Alumno) As Data.DataTable
         Try
             cnx = New ClsConectarDatos : dt = New Data.DataTable
@@ -3096,6 +4209,7 @@ Public Class d_Alumno
             Throw ex
         End Try
     End Function
+
     Public Function ListarAlumnoReq(ByVal le_Alumno As e_Alumno) As Data.DataTable
         Try
             cnx = New ClsConectarDatos : dt = New Data.DataTable
@@ -3111,6 +4225,7 @@ Public Class d_Alumno
             Throw ex
         End Try
     End Function
+
     Public Function ListarReqEgreDePlanCurByCodAlum(ByVal le_Alumno As e_Alumno) As Data.DataTable
         Try
             cnx = New ClsConectarDatos : dt = New Data.DataTable
@@ -3126,6 +4241,7 @@ Public Class d_Alumno
             Throw ex
         End Try
     End Function
+
     Public Function ListarAlumnoReqEgreByPEstudioCprofe(ByVal le_Alumno As e_Alumno) As Data.DataTable
         Try
             cnx = New ClsConectarDatos : dt = New Data.DataTable
@@ -3141,6 +4257,7 @@ Public Class d_Alumno
             Throw ex
         End Try
     End Function
+
     Public Function FinalizarPlanEstudio(ByVal le_alumno As e_Alumno) As Data.DataTable
         Try
             cnx = New ClsConectarDatos
@@ -3158,6 +4275,7 @@ Public Class d_Alumno
             Throw ex
         End Try
     End Function
+
     Public Function FinalizarPlanEstudioAlumni(ByVal le_alumno As e_Alumno) As Data.DataTable
         Try
             cnx = New ClsConectarDatos
@@ -3167,6 +4285,69 @@ Public Class d_Alumno
             'Ejecutar Procedimiento
 
             dt = cnx.TraerDataTable("ALUMNI_InsertaEgresadov2", le_alumno.codigo_alu, le_alumno.codigo_per, "Campus de Personal.", "72")
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ListarAlumno(ByVal le_Alumno As e_Alumno) As Data.DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("ACAD_AlumnoListar", _
+                                    le_Alumno.operacion, _
+                                    le_Alumno.codigo_alu, _
+                                    le_Alumno.codigo_cac, _
+                                    le_Alumno.cicloIng_alu, _
+                                    le_Alumno.nivel_ega, _
+                                    le_Alumno.codigo_Fac, _
+                                    le_Alumno.tempcodigo_cpf, _
+                                    le_Alumno.alumno, _
+                                    le_Alumno.tiene_diploma)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ListarHistorialAcademico(ByVal le_Alumno As e_Alumno) As Data.DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("ConsultarNotas", le_Alumno.operacion, _
+                                    le_Alumno.codigo_alu, _
+                                    "", "")
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ConsultarAlumnoMatricula(ByVal le_Alumno As e_Alumno) As Data.DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("EVE_ConsultarAlumnoParaMatricula", le_Alumno.codigoUniver_alu, _
+                                    "-1", "0")
 
             cnx.TerminarTransaccion()
             Return dt
@@ -3330,6 +4511,23 @@ Public Class d_Personal
         End Try
     End Function
 
+    Public Function CorreoPersonal(ByVal le_Personal As e_Personal) As Data.DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PER_CorreoPersonal", le_Personal.codigo_per)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
 End Class
 
 Public Class d_Departamento
@@ -3374,6 +4572,38 @@ Public Class d_Departamento
         End Try
     End Function
 
+    Public Function GetDepartamento(ByVal codigo As Integer) As e_Departamento
+        Try
+            Dim me_Departamento As New e_Departamento
+
+            If codigo > 0 Then
+                me_Departamento.operacion = "GEN"
+                me_Departamento.codigo_dep = codigo
+
+                dt = ListarDepartamento(me_Departamento)
+                If dt.Rows.Count = 0 Then Throw New Exception("El registro de departamento no ha sido encontrado.")
+
+                me_Departamento = New e_Departamento
+
+                With me_Departamento
+                    .codigo_dep = dt.Rows(0).Item("codigo_Dep")
+                    .nombre_dep = dt.Rows(0).Item("nombre_Dep")
+                    .codigo_pai = dt.Rows(0).Item("codigo_Pai")
+                    .ubigeo_dep = dt.Rows(0).Item("ubigeo_Dep")
+                End With
+            Else
+                With me_Departamento
+                    .codigo_dep = 0
+                    .codigo_pai = 0
+                End With
+            End If
+
+            Return me_Departamento
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
 End Class
 
 Public Class d_Provincia
@@ -3401,6 +4631,38 @@ Public Class d_Provincia
         End Try
     End Function
 
+    Public Function GetProvincia(ByVal codigo As Integer) As e_Provincia
+        Try
+            Dim me_Provincia As New e_Provincia
+
+            If codigo > 0 Then
+                me_Provincia.operacion = "GEN"
+                me_Provincia.codigo_pro = codigo
+
+                dt = ListarProvincia(me_Provincia)
+                If dt.Rows.Count = 0 Then Throw New Exception("El registro de provincia no ha sido encontrado.")
+
+                me_Provincia = New e_Provincia
+
+                With me_Provincia
+                    .codigo_pro = dt.Rows(0).Item("codigo_Pro")
+                    .nombre_pro = dt.Rows(0).Item("nombre_Pro")
+                    .codigo_dep = dt.Rows(0).Item("codigo_Dep")
+                    .ubigeo_pro = dt.Rows(0).Item("ubigeo_Pro")
+                End With
+            Else
+                With me_Provincia
+                    .codigo_pro = 0
+                    .codigo_dep = 0
+                End With
+            End If
+
+            Return me_Provincia
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
 End Class
 
 Public Class d_Distrito
@@ -3424,6 +4686,39 @@ Public Class d_Distrito
             Return dt
         Catch ex As Exception
             cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetDistrito(ByVal codigo As Integer) As e_Distrito
+        Try
+            Dim me_Distrito As New e_Distrito
+
+            If codigo > 0 Then
+                me_Distrito.operacion = "GEN"
+                me_Distrito.codigo_dis = codigo
+
+                dt = ListarDistrito(me_Distrito)
+                If dt.Rows.Count = 0 Then Throw New Exception("El registro de distrito no ha sido encontrado.")
+
+                me_Distrito = New e_Distrito
+
+                With me_Distrito
+                    .codigo_dis = dt.Rows(0).Item("codigo_Dis")
+                    .nombre_dis = dt.Rows(0).Item("nombre_Dis")
+                    .codigo_pro = dt.Rows(0).Item("codigo_Pro")
+                    .ubigeo_dis = dt.Rows(0).Item("ubigeo_Dis")
+                    .ubigeoReniec = dt.Rows(0).Item("ubigeoReniec")
+                End With
+            Else
+                With me_Distrito
+                    .codigo_dis = 0
+                    .codigo_pro = 0
+                End With
+            End If
+
+            Return me_Distrito
+        Catch ex As Exception
             Throw ex
         End Try
     End Function
@@ -3737,7 +5032,7 @@ Public Class d_ArchivoCompartido
     End Function
 
     Public Function CargarArchivoCompartido(ByVal le_ArchivoCompartido As e_ArchivoCompartido, ByVal archivo_subir As HttpPostedFile) As Data.DataTable
-        Try           
+        Try
             Dim file As HttpPostedFile = archivo_subir
             Dim Input(file.ContentLength) As Byte
             dt = New DataTable
@@ -3748,6 +5043,9 @@ Public Class d_ArchivoCompartido
             'Dim ws_cloud As New ClsArchivosCompartidos
             Dim ws_cloud As New ClsArchivosCompartidosV2
             Dim parametros As New Dictionary(Of String, String)
+
+            'Modificar el nombre con caracteres validos
+            le_ArchivoCompartido.nombre_archivo = QuitarCaracteresEspeciales(le_ArchivoCompartido.nombre_archivo)
 
             With le_ArchivoCompartido
                 parametros.Add("Fecha", .fecha)
@@ -3867,6 +5165,57 @@ Public Class d_ArchivoCompartido
         Catch ex As Exception
             Throw ex
         End Try
+    End Function
+
+    Public Function ObtenerIdTabla(ByVal tokenTabla As String) As Integer
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            Dim IdTabla As Integer = 0
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("ObtenerTablaArchivoByToken", tokenTabla)
+
+            If dt.Rows.Count > 0 Then
+                IdTabla = CInt(dt.Rows(0).Item("IdTabla").ToString)
+            End If
+
+            cnx.TerminarTransaccion()
+
+            Return IdTabla
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function QuitarCaracteresEspeciales(ByVal cadena As String, Optional ByVal chars As String = ":<>{}[]^+,;_-/*?¿!$%&/¨()='¡|@Ã› " + Chr(34)) As String
+        cadena = Replace(cadena, "á", "a")
+        cadena = Replace(cadena, "é", "e")
+        cadena = Replace(cadena, "í", "i")
+        cadena = Replace(cadena, "ó", "o")
+        cadena = Replace(cadena, "ú", "u")
+        cadena = Replace(cadena, "ñ", "n")
+        cadena = Replace(cadena, "Á", "A")
+        cadena = Replace(cadena, "É", "E")
+        cadena = Replace(cadena, "Í", "I")
+        cadena = Replace(cadena, "Ó", "O")
+        cadena = Replace(cadena, "Ú", "U")
+        cadena = Replace(cadena, "Ñ", "N")
+
+        Dim i As Integer
+        Dim nCadena As String
+        On Error Resume Next
+        'Asignamos valor a la cadena de trabajo para
+        'no modificar la que envía el cliente.
+        nCadena = cadena
+        For i = 1 To Len(chars)
+            nCadena = Replace(nCadena, Mid(chars, i, 1), "")
+        Next i
+        'Devolvemos la cadena tratada
+        QuitarCaracteresEspeciales = nCadena
     End Function
 
 End Class
@@ -4285,7 +5634,9 @@ Public Class d_ComunicadoPersonal
             'Ejecutar Procedimiento
             dt = cnx.TraerDataTable("PER_ComunicadoPersonalListar", le_ComunicadoPersonal.operacion, _
                                     le_ComunicadoPersonal.codigo_cpe, _
-                                    le_ComunicadoPersonal.codigo_per)
+                                    le_ComunicadoPersonal.codigo_per, _
+                                    le_ComunicadoPersonal.numeroComunicado_cpe, _
+                                    le_ComunicadoPersonal.verificaVigencia)
 
             cnx.TerminarTransaccion()
             Return dt
@@ -4304,12 +5655,48 @@ Public Class d_ComunicadoPersonal
             'Ejecutar Procedimiento
             dt = cnx.TraerDataTable("PER_ComunicadoPersonalIUD", le_ComunicadoPersonal.operacion, _
                                     le_ComunicadoPersonal.cod_user, _
-                                    le_ComunicadoPersonal.codigo_cpe)
+                                    le_ComunicadoPersonal.codigo_cpe, _
+                                    le_ComunicadoPersonal.numeroComunicado_cpe, _
+                                    le_ComunicadoPersonal.nombreComunicado_cpe, _
+                                    le_ComunicadoPersonal.codigo_per, _
+                                    le_ComunicadoPersonal.tipo_cpe, _
+                                    le_ComunicadoPersonal.fechaVigenciaIni_cpe, _
+                                    le_ComunicadoPersonal.fechaVigenciaFin_cpe, _
+                                    le_ComunicadoPersonal.indDescarga_cpe, _
+                                    le_ComunicadoPersonal.fechaDescarga_cpe, _
+                                    le_ComunicadoPersonal.descripcionVar1_cpe, _
+                                    le_ComunicadoPersonal.var1_cpe, _
+                                    le_ComunicadoPersonal.descripcionVar2_cpe, _
+                                    le_ComunicadoPersonal.var2_cpe)
 
             cnx.TerminarTransaccion()
             Return dt
         Catch ex As Exception
             cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetComunicadoPersonal(ByVal codigo As Integer) As e_ComunicadoPersonal
+        Try
+            Dim me_ComunicadoPersonal As New e_ComunicadoPersonal
+
+            If codigo > 0 Then
+
+            Else
+                With me_ComunicadoPersonal
+                    .cod_user = 0
+                    .codigo_cpe = 0
+                    .codigo_per = 0
+                    .numeroComunicado_cpe = 0
+                    .fechaVigenciaIni_cpe = #1/1/1901#
+                    .fechaVigenciaFin_cpe = #1/1/1901#
+                    .fechaDescarga_cpe = #1/1/1901#
+                End With
+            End If
+
+            Return me_ComunicadoPersonal
+        Catch ex As Exception
             Throw ex
         End Try
     End Function
@@ -4408,7 +5795,9 @@ Public Class d_DatosPersonal
                                     le_DatosPersonal.telefono_per, _
                                     le_DatosPersonal.operadorCelular_per, _
                                     le_DatosPersonal.operadorInternet_per, _
-                                    le_DatosPersonal.actualizoDatos_per)
+                                    le_DatosPersonal.actualizoDatos_per, _
+                                    le_DatosPersonal.codigo_pro, _
+                                    le_DatosPersonal.distrito)
 
             cnx.TerminarTransaccion()
             Return dt
@@ -4441,15 +5830,1512 @@ Public Class d_DatosPersonal
                     .operadorCelular_per = dt.Rows(0).Item("operadorCelular_Per")
                     .operadorInternet_per = dt.Rows(0).Item("operadorInternet_Per")
                     .actualizoDatos_per = dt.Rows(0).Item("actualizoDatos_Per")
+                    .codigo_pro = dt.Rows(0).Item("codigo_pro")
+                    .distrito = dt.Rows(0).Item("distrito")
                 End With
             Else
                 With me_DatosPersonal
                     .codigo_per = 0
+                    .codigo_pro = 0
+                    .distrito = 0
                 End With
             End If
 
             Return me_DatosPersonal
         Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_MotivoNotaAbono
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarMotivoNotaAbono(ByVal le_MotivoNotaAbono As e_MotivoNotaAbono) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PEN_MotivoNotaAbonoListar", le_MotivoNotaAbono.operacion, _
+                                    le_MotivoNotaAbono.codigo_mno, _
+                                    le_MotivoNotaAbono.descripcion_mno, _
+                                    le_MotivoNotaAbono.codigo_gmn)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function RegistrarMotivoNotaAbono(ByVal le_MotivoNotaAbono As e_MotivoNotaAbono) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PEN_MotivoNotaAbonoIUD", le_MotivoNotaAbono.operacion, _
+                                    le_MotivoNotaAbono.codigo_mno, _
+                                    le_MotivoNotaAbono.descripcion_mno, _
+                                    le_MotivoNotaAbono.codigo_pco, _
+                                    le_MotivoNotaAbono.bloqueaAgregadoRetiros, _
+                                    le_MotivoNotaAbono.conveniobeca, _
+                                    le_MotivoNotaAbono.solicitudAnulacion, _
+                                    le_MotivoNotaAbono.codigo_gmn)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetMotivoNotaAbono(ByVal codigo As Integer) As e_MotivoNotaAbono
+        Try
+            Dim me_MotivoNotaAbono As New e_MotivoNotaAbono
+
+            If codigo > 0 Then
+                me_MotivoNotaAbono.operacion = "GEN"
+                me_MotivoNotaAbono.codigo_mno = codigo
+
+                dt = ListarMotivoNotaAbono(me_MotivoNotaAbono)
+                If dt.Rows.Count = 0 Then Throw New Exception("El registro de motivo de nota de abono no ha sido encontrado.")
+
+                me_MotivoNotaAbono = New e_MotivoNotaAbono
+
+                With me_MotivoNotaAbono
+                    .codigo_mno = dt.Rows(0).Item("codigo_mno")
+                    .descripcion_mno = dt.Rows(0).Item("descripcion_mno")
+                    .codigo_pco = dt.Rows(0).Item("codigo_pco")
+                    .bloqueaAgregadoRetiros = CBool(dt.Rows(0).Item("bloqueaAgregadoRetiros"))
+                    .conveniobeca = CBool(dt.Rows(0).Item("conveniobeca"))
+                    .solicitudAnulacion = CBool(dt.Rows(0).Item("solicitudAnulacion"))
+                    .codigo_gmn = dt.Rows(0).Item("codigo_gmn")
+                End With
+            Else
+                With me_MotivoNotaAbono
+                    .codigo_mno = 0
+                    .codigo_pco = 0
+                    .codigo_gmn = 0
+                End With
+            End If
+
+            Return me_MotivoNotaAbono
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_GrupoMotivoAbono
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarGrupoMotivoAbono(ByVal le_GrupoMotivoAbono As e_GrupoMotivoAbono) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PEN_GrupoMotivoAbonoListar", le_GrupoMotivoAbono.operacion, _
+                                    le_GrupoMotivoAbono.codigo_gmn, _
+                                    le_GrupoMotivoAbono.nombre_gmn)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_Adeudos
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarAdeudos(ByVal le_Adeudos As e_Adeudos) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_AdeudosListar", le_Adeudos.operacion, _
+                                    le_Adeudos.codigo_ade, _
+                                    le_Adeudos.estado_ade)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function RegistrarAdeudos(ByVal le_Adeudos As e_Adeudos) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_AdeudosIUD", le_Adeudos.operacion, _
+                                    le_Adeudos.cod_user, _
+                                    le_Adeudos.codigo_ade, _
+                                    le_Adeudos.codigo_alu, _
+                                    le_Adeudos.codigoArea_cco, _
+                                    le_Adeudos.codigo_tfu, _
+                                    le_Adeudos.codigo_sco, _
+                                    le_Adeudos.codigo_cco, _
+                                    le_Adeudos.motivo_ade, _
+                                    le_Adeudos.fechaDeuda_ade, _
+                                    le_Adeudos.monto_ade, _
+                                    le_Adeudos.codigo_deu, _
+                                    le_Adeudos.fechaCancelado_ade, _
+                                    le_Adeudos.comentario_ade, _
+                                    le_Adeudos.estado_ade)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetAdeudos(ByVal codigo As Integer) As e_Adeudos
+        Try
+            Dim me_Adeudos As New e_Adeudos
+
+            If codigo > 0 Then
+                me_Adeudos.operacion = "GEN"
+                me_Adeudos.codigo_ade = codigo
+
+                dt = ListarAdeudos(me_Adeudos)
+                If dt.Rows.Count = 0 Then Throw New Exception("El registro de adeudo no ha sido encontrado.")
+
+                me_Adeudos = New e_Adeudos
+
+                With me_Adeudos
+                    .codigo_ade = dt.Rows(0).Item("codigo_ade")
+                    .codigo_alu = dt.Rows(0).Item("codigo_alu")
+                    .codigoArea_cco = dt.Rows(0).Item("codigoArea_cco")
+                    .codigo_tfu = dt.Rows(0).Item("codigo_tfu")
+                    .codigo_sco = dt.Rows(0).Item("codigo_sco")
+                    .codigo_cco = dt.Rows(0).Item("codigo_cco")
+                    .codigoUniver_alu = dt.Rows(0).Item("codigoUniver_alu")
+                    .nombre_alu = dt.Rows(0).Item("nombre_alu")
+                    .motivo_ade = dt.Rows(0).Item("motivo_ade")
+                    .fechaDeuda_ade = dt.Rows(0).Item("fechaDeuda_ade")
+                    .monto_ade = dt.Rows(0).Item("monto_ade")
+                    .codigo_deu = dt.Rows(0).Item("codigo_deu")
+                    .fechaCancelado_ade = dt.Rows(0).Item("fechaCancelado_ade")
+                    .comentario_ade = dt.Rows(0).Item("comentario_ade")
+                    .estado_ade = dt.Rows(0).Item("estado_ade")
+                End With
+            Else
+                With me_Adeudos
+                    .cod_user = 0
+                    .codigo_ade = 0
+                    .codigo_alu = 0
+                    .codigoArea_cco = 0
+                    .codigo_tfu = 0
+                    .codigo_sco = 0
+                    .codigo_cco = 0
+                    .monto_ade = 0
+                    .codigo_deu = 0
+                End With
+            End If
+
+            Return me_Adeudos
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_ConfiguracionInstanciasAdeudos
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarConfiguracionInstanciasAdeudos(ByVal le_ConfiguracionInstanciasAdeudos As e_ConfiguracionInstanciasAdeudos) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_ConfiguracionInstanciasAdeudosListar", le_ConfiguracionInstanciasAdeudos.operacion, _
+                                    le_ConfiguracionInstanciasAdeudos.codigo_cia, _
+                                    le_ConfiguracionInstanciasAdeudos.codigoArea_cco, _
+                                    le_ConfiguracionInstanciasAdeudos.codigo_tfu, _
+                                    le_ConfiguracionInstanciasAdeudos.estado_cia, _
+                                    le_ConfiguracionInstanciasAdeudos.cod_user)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function RegistrarConfiguracionInstanciasAdeudos(ByVal le_ConfiguracionInstanciasAdeudos As e_ConfiguracionInstanciasAdeudos) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_ConfiguracionInstanciasAdeudosIUD", le_ConfiguracionInstanciasAdeudos.operacion, _
+                                    le_ConfiguracionInstanciasAdeudos.cod_user, _
+                                    le_ConfiguracionInstanciasAdeudos.codigo_cia, _
+                                    le_ConfiguracionInstanciasAdeudos.codigoArea_cco, _
+                                    le_ConfiguracionInstanciasAdeudos.codigo_tfu, _
+                                    le_ConfiguracionInstanciasAdeudos.codigo_sco, _
+                                    le_ConfiguracionInstanciasAdeudos.codigo_cco, _
+                                    le_ConfiguracionInstanciasAdeudos.estado_cia)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetConfiguracionInstanciasAdeudos(ByVal codigo As Integer) As e_ConfiguracionInstanciasAdeudos
+        Try
+            Dim me_ConfiguracionInstanciasAdeudos As New e_ConfiguracionInstanciasAdeudos
+
+            If codigo > 0 Then
+                me_ConfiguracionInstanciasAdeudos.operacion = "GEN"
+                me_ConfiguracionInstanciasAdeudos.codigo_cia = codigo
+
+                dt = ListarConfiguracionInstanciasAdeudos(me_ConfiguracionInstanciasAdeudos)
+                If dt.Rows.Count = 0 Then Throw New Exception("El registro de configuración de Instancia de Adeudo no ha sido encontrado.")
+
+                me_ConfiguracionInstanciasAdeudos = New e_ConfiguracionInstanciasAdeudos
+
+                With me_ConfiguracionInstanciasAdeudos
+                    .codigo_cia = dt.Rows(0).Item("codigo_cia")
+                    .codigoArea_cco = dt.Rows(0).Item("codigoArea_cco")
+                    .codigo_tfu = dt.Rows(0).Item("codigo_tfu")
+                    .codigo_sco = dt.Rows(0).Item("codigo_sco")
+                    .codigo_cco = dt.Rows(0).Item("codigo_cco")
+                    .estado_cia = dt.Rows(0).Item("estado_cia")
+                End With
+            Else
+                With me_ConfiguracionInstanciasAdeudos
+                    .cod_user = 0
+                    .codigo_cia = 0
+                    .codigoArea_cco = 0
+                    .codigo_tfu = 0
+                    .codigo_sco = 0
+                    .codigo_cco = 0
+                End With
+            End If
+
+            Return me_ConfiguracionInstanciasAdeudos
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_AsistenciaDocente
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarAsistenciaDocente(ByVal le_AsistenciaDocente As e_AsistenciaDocente) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PER_AsistenciaDocenteListar", le_AsistenciaDocente.operacion, _
+                                    le_AsistenciaDocente.codigo_ado, _
+                                    le_AsistenciaDocente.codigo_per, _
+                                    le_AsistenciaDocente.codigo_hdo, _
+                                    le_AsistenciaDocente.codigo_cup, _
+                                    le_AsistenciaDocente.codigo_lho, _
+                                    le_AsistenciaDocente.codigo_hop, _
+                                    le_AsistenciaDocente.tipo)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function RegistrarAsistenciaDocente(ByVal le_AsistenciaDocente As e_AsistenciaDocente) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PER_AsistenciaDocenteIUD", le_AsistenciaDocente.operacion, _
+                                    le_AsistenciaDocente.cod_user, _
+                                    le_AsistenciaDocente.codigo_ado, _
+                                    le_AsistenciaDocente.codigo_hdo, _
+                                    le_AsistenciaDocente.codigo_cup, _
+                                    le_AsistenciaDocente.codigo_lho, _
+                                    le_AsistenciaDocente.codigo_hop, _
+                                    le_AsistenciaDocente.codigo_per, _
+                                    le_AsistenciaDocente.descripcionHorario_ado, _
+                                    le_AsistenciaDocente.tipo, _
+                                    le_AsistenciaDocente.observacion)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetAsistenciaDocente(ByVal codigo As Integer) As e_AsistenciaDocente
+        Try
+            Dim me_AsistenciaDocente As New e_AsistenciaDocente
+
+            If codigo > 0 Then
+
+            Else
+                With me_AsistenciaDocente
+                    .cod_user = 0
+                    .codigo_ado = 0
+                    .codigo_hdo = 0
+                    .codigo_cup = 0
+                    .codigo_lho = 0
+                    .codigo_hop = 0
+                    .codigo_per = 0
+                End With
+            End If
+
+            Return me_AsistenciaDocente
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ConsultarCodigoAccesoMoodle(ByVal le_AsistenciaDocente As e_AsistenciaDocente) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("MOODLE_ConsultarCodigoAcceso", le_AsistenciaDocente.operacion, _
+                                    le_AsistenciaDocente.codigo_per)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ConsultarAplicacionUsuario(ByVal le_AsistenciaDocente As e_AsistenciaDocente) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("ConsultarAplicacionUsuario", le_AsistenciaDocente.operacion, "", _
+                                    le_AsistenciaDocente.codigo_per, "")
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_Consejo
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarConsejos(ByVal le_Consejo As e_Consejo) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_ListaConsejo", le_Consejo.operacion, _
+                                    le_Consejo.codigo_con, _
+                                    le_Consejo.nombre_con, _
+                                    le_Consejo.codigo_fac, _
+                                    le_Consejo.vigencia_gyt, _
+                                    le_Consejo.abreviatura_con)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_ConsejoFacultad
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarConsejoFacultad(ByVal le_ConsejoFacultad As e_ConsejoFacultad) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_ListaConsejoFacultad", le_ConsejoFacultad.operacion, _
+                                    le_ConsejoFacultad.codigo_cjf, _
+                                    le_ConsejoFacultad.codigo_fac, _
+                                    le_ConsejoFacultad.codigo_pcc, _
+                                    le_ConsejoFacultad.estado_cjf, _
+                                    le_ConsejoFacultad.cargo_cjf, _
+                                    le_ConsejoFacultad.codigo_con, _
+                                    le_ConsejoFacultad.codigo_cgo)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+    ''lista personal para consejos
+    Public Function ListarPersonalConsejo(ByVal le_consejoFacultad As e_ConsejoFacultad) As Data.DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento ya echo se adecuo
+            dt = cnx.TraerDataTable("PRP_ListaPersonalConsejo_POA", le_consejoFacultad.codigo_con, _
+                                    le_consejoFacultad.operacion, le_consejoFacultad.codigo_fac)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    ''lista cargos por personal de consejo
+    Public Function ListarCargosPersonalConsejo(ByVal le_Personal As e_Personal) As Data.DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PRP_ConsultarCargosPersonal_POA", le_Personal.codigo_per)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    'inserta o actualiza personal o miembro del consejo
+    Public Function ActualizaConsejo(ByVal le_consejo As e_ConsejoFacultad) As Data.DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PRP_RegistrarMiembroConsejo_v2", le_consejo.codigo_con, _
+                                    le_consejo.codigo_pcc, le_consejo.estado_cjf, le_consejo.cargo_cjf, _
+                                    le_consejo.codigo_cgo, le_consejo.codigo_cjf, le_consejo.codigo_fac, le_consejo.usuario)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+
+
+End Class
+
+Public Class d_SesionConsejoUniv_GYT
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarSesionesConsejo(ByVal le_SesionConsejoUniv_GYT As e_SesionConsejoUniv_GYT) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            'cambio 11/11/2020
+            'dt = cnx.TraerDataTable("GYT_ListaSesionConsejoUniversitario", le_SesionConsejoUniv_GYT.operacion, _
+            '                        le_SesionConsejoUniv_GYT.codigo_scu)
+
+            dt = cnx.TraerDataTable("GYT_ListaSesionesConsejo", le_SesionConsejoUniv_GYT.operacion, _
+                                                                le_SesionConsejoUniv_GYT.codigo_scu, _
+                                                                le_SesionConsejoUniv_GYT.descripcion_scu, _
+                                                                le_SesionConsejoUniv_GYT.fecha_scu, _
+                                                                le_SesionConsejoUniv_GYT.estado_scu, _
+                                                                le_SesionConsejoUniv_GYT.usuario_reg, _
+                                                                le_SesionConsejoUniv_GYT.fecha_reg, _
+                                                                le_SesionConsejoUniv_GYT.abreviatura_con, _
+                                                                le_SesionConsejoUniv_GYT.vigencia_scu, _
+                                                                le_SesionConsejoUniv_GYT.tipo_sesion, _
+                                                                le_SesionConsejoUniv_GYT.codigo_fac)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+    Public Function ActualizaSesionesConsejo(ByVal le_SesionConsejoUniv_GYT As e_SesionConsejoUniv_GYT) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_ActualiaSesionesConsejo", le_SesionConsejoUniv_GYT.operacion, _
+                                    le_SesionConsejoUniv_GYT.codigo_scu, _
+                                    le_SesionConsejoUniv_GYT.descripcion_scu, _
+                                    le_SesionConsejoUniv_GYT.fecha_scu, _
+                                    le_SesionConsejoUniv_GYT.estado_scu, _
+                                    le_SesionConsejoUniv_GYT.usuario_reg, _
+                                    le_SesionConsejoUniv_GYT.fecha_reg, _
+                                    le_SesionConsejoUniv_GYT.abreviatura_con, _
+                                    le_SesionConsejoUniv_GYT.vigencia_scu, _
+                                    le_SesionConsejoUniv_GYT.tipo_sesion, _
+                                    le_SesionConsejoUniv_GYT.codigo_fac)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_ServicioConcepto
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarServicioConcepto(ByVal le_ServicioConcepto As e_ServicioConcepto) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PEN_ServicioConceptoListar", le_ServicioConcepto.operacion, _
+                                    le_ServicioConcepto.codigo_sco, _
+                                    le_ServicioConcepto.tipo_sco, _
+                                    le_ServicioConcepto.descripcion_sco, _
+                                    le_ServicioConcepto.adeudo_sco)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_TramiteAlumno
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarTramitesTitulosUrl(ByVal le_tramiteAlumno As e_TramiteAlumno) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_ListaTramitesAlumnos", le_tramiteAlumno.operacion, le_tramiteAlumno.codigo_tfu, le_tramiteAlumno.estado_dft, le_tramiteAlumno.estadoAprobacion, le_tramiteAlumno.fechaIni, le_tramiteAlumno.fechaFin _
+                                    , le_tramiteAlumno.codigo_trl, le_tramiteAlumno.codigo_alu _
+                                    , le_tramiteAlumno.codigo_cac, le_tramiteAlumno.correlativo_trl _
+                                    , le_tramiteAlumno.glosaCorrelativo_trl, le_tramiteAlumno.fechaReg_trl _
+                                    , le_tramiteAlumno.estado_trl, le_tramiteAlumno.observacion_trl)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+
+Public Class d_Tesis
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ActualizarUrlTesis(ByVal le_tesis As e_Tesis) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_ActualizarTesis", le_tesis.codigo_Tes, le_tesis.Titulo_Tes, le_tesis.url_Tes, le_tesis.operacion)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+    Public Function ConsultarTesis(ByVal le_tesis As e_Tesis) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_ConsultarTesis", le_tesis.operacion, "", le_tesis.codigo_Tes, "")
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_GrupoEgresado
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ConsultarGrupoEgresado(ByVal le_GrupoEgresado As e_GrupoEgresado) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("ConsultarGrupoEgresado", le_GrupoEgresado.operacion, _
+                                    le_GrupoEgresado.codigo_gru)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_TipoDenominacionGradoTitulo
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ConsultarTipoDenominacion(ByVal le_TipoDenominacionGradoTitulo As e_TipoDenominacionGradoTitulo) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_ConsultarTipoDenominacion", le_TipoDenominacionGradoTitulo.operacion, _
+                                    le_TipoDenominacionGradoTitulo.codigo_tdg)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_EnvioDiplomasProveedor
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function FormatoTramaEmisionDiploma(ByVal le_EnvioDiplomasProveedor As e_EnvioDiplomasProveedor) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_FormatoTramaEmisionDiploma", le_EnvioDiplomasProveedor.operacion, _
+                                    le_EnvioDiplomasProveedor.codigo_scu, _
+                                    le_EnvioDiplomasProveedor.codigo_tdg, _
+                                    le_EnvioDiplomasProveedor.tipo_emision)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function EstructuraTramaElectronica(ByVal le_EnvioDiplomasProveedor As e_EnvioDiplomasProveedor) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_EstructuraTramaElectronica", le_EnvioDiplomasProveedor.operacion, _
+                                    le_EnvioDiplomasProveedor.codigo_scu, _
+                                    le_EnvioDiplomasProveedor.codigo_tdg, _
+                                    le_EnvioDiplomasProveedor.tipo_emision)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function EntregarTramite(ByVal le_EnvioDiplomasProveedor As e_EnvioDiplomasProveedor) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("TRL_EntregaTramite", le_EnvioDiplomasProveedor.codigo_dta, _
+                                    le_EnvioDiplomasProveedor.codigo_tfu, _
+                                    le_EnvioDiplomasProveedor.cod_user)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function RegistrarEnvioDiplomasProveedor(ByVal le_EnvioDiplomasProveedor As e_EnvioDiplomasProveedor) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_EnvioDiplomasProveedorIUD", le_EnvioDiplomasProveedor.operacion, _
+                                    le_EnvioDiplomasProveedor.cod_user, _
+                                    le_EnvioDiplomasProveedor.codigo_edp, _
+                                    le_EnvioDiplomasProveedor.tipo_edp, _
+                                    le_EnvioDiplomasProveedor.codigo_scu, _
+                                    le_EnvioDiplomasProveedor.codigo_tdg, _
+                                    le_EnvioDiplomasProveedor.tipo_emision)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetEnvioDiplomasProveedor(ByVal codigo As Integer) As e_EnvioDiplomasProveedor
+        Try
+            Dim me_EnvioDiplomasProveedor As New e_EnvioDiplomasProveedor
+
+            If codigo > 0 Then
+
+            Else
+                With me_EnvioDiplomasProveedor
+                    .cod_user = 0
+                    .codigo_edp = 0
+                    .codigo_scu = 0                    
+                    .codigo_tdg = 0                    
+                End With
+            End If
+
+            Return me_EnvioDiplomasProveedor
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_EnvioDiplomasProveedorDetalle
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function RegistrarEnvioDiplomasProveedorDetalle(ByVal le_EnvioDiplomasProveedorDetalle As e_EnvioDiplomasProveedorDetalle) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_EnvioDiplomasProveedorDetalleIUD", le_EnvioDiplomasProveedorDetalle.operacion, _
+                                                le_EnvioDiplomasProveedorDetalle.cod_user, _
+                                                le_EnvioDiplomasProveedorDetalle.codigo_edd, _
+                                                le_EnvioDiplomasProveedorDetalle.codigo_edp, _
+                                                le_EnvioDiplomasProveedorDetalle.codigo_trl, _
+                                                le_EnvioDiplomasProveedorDetalle.codigo_egr, _
+                                                le_EnvioDiplomasProveedorDetalle.codigoOperacionGrupo, _
+                                                le_EnvioDiplomasProveedorDetalle.estadoOperacionGrupo, _
+                                                le_EnvioDiplomasProveedorDetalle.mensajeOperacionGrupo, _
+                                                le_EnvioDiplomasProveedorDetalle.estadoOperacionFirma, _
+                                                le_EnvioDiplomasProveedorDetalle.mensajeOperacionFirma)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetEnvioDiplomasProveedorDetalle(ByVal codigo As Integer) As e_EnvioDiplomasProveedorDetalle
+        Try
+            Dim me_EnvioDiplomasProveedorDetalle As New e_EnvioDiplomasProveedorDetalle
+
+            If codigo > 0 Then
+
+            Else
+                With me_EnvioDiplomasProveedorDetalle
+                    .cod_user = 0                    
+                    .codigo_edd = 0
+                    .codigo_edp = 0
+                    .codigo_trl = 0
+                    .codigo_egr = 0
+                    .codigoOperacionGrupo = 0
+                    .estadoOperacionGrupo = 0
+                    .estadoOperacionFirma = -1
+                End With
+            End If
+
+            Return me_EnvioDiplomasProveedorDetalle
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    ''***** OLLUEN 13/11/2020
+    Public Function ListarEstadoFirmaDiplomaProveedor(ByVal le_EnvioDiplomasProveedorDetalle As e_EnvioDiplomasProveedorDetalle) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("GYT_ConsultaEstadoFirmaProveedor", le_EnvioDiplomasProveedorDetalle.operacion, _
+                                    le_EnvioDiplomasProveedorDetalle.estadoOperacionFirma)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+
+End Class
+
+Public Class d_ControlPersonal
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarControlPersonal(ByVal le_ControlPersonal As e_ControlPersonal) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PER_ControlPersonalListar", le_ControlPersonal.operacion, _
+                                    le_ControlPersonal.codigo_cpe, _
+                                    le_ControlPersonal.codigo_per, _
+                                    le_ControlPersonal.tipo)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_Marcaciones
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function RegistrarMarcaciones(ByVal le_Marcaciones As e_Marcaciones) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PER_MarcacionesIUD", le_Marcaciones.operacion, _
+                                    le_Marcaciones.codigo_mar, _
+                                    le_Marcaciones.dni_per, _
+                                    le_Marcaciones.id_marcador, _
+                                    le_Marcaciones.procesado_mar, _
+                                    le_Marcaciones.tipo_mar, _
+                                    le_Marcaciones.id_marcacion_zk, _
+                                    le_Marcaciones.codigo_cpe, _
+                                    le_Marcaciones.tipo_operacion)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetMarcaciones(ByVal codigo As Integer) As e_Marcaciones
+        Try
+            Dim me_Marcaciones As New e_Marcaciones
+
+            If codigo > 0 Then
+
+            Else
+                With me_Marcaciones
+                    .cod_user = 0
+                    .codigo_mar = 0
+                    .procesado_mar = 0
+                    .id_marcacion_zk = 0
+                    .codigo_cpe = 0
+                End With
+            End If
+
+            Return me_Marcaciones
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_RecursoVirtual
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarRecursoVirtual(ByVal le_RecursoVirtual As e_RecursoVirtual) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("BIB_RecursoVirtualListar", le_RecursoVirtual.operacion, _
+                                    le_RecursoVirtual.codigo_rvi, _
+                                    le_RecursoVirtual.tipoRepo_rvi, _
+                                    le_RecursoVirtual.disciplinaRepo_rvi, _
+                                    le_RecursoVirtual.acceso_rvi, _
+                                    le_RecursoVirtual.estado_rvi)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function RegistrarRecursoVirtual(ByVal le_RecursoVirtual As e_RecursoVirtual) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("BIB_RecursoVirtualIUD", le_RecursoVirtual.operacion, _
+                                    le_RecursoVirtual.cod_user, _
+                                    le_RecursoVirtual.codigo_rvi, _
+                                    le_RecursoVirtual.tipoRepo_rvi, _
+                                    le_RecursoVirtual.disciplinaRepo_rvi, _
+                                    le_RecursoVirtual.nombre_rvi, _
+                                    le_RecursoVirtual.logo_rvi, _
+                                    le_RecursoVirtual.contarVisita_rvi, _
+                                    le_RecursoVirtual.codigo_biv, _
+                                    le_RecursoVirtual.acceso_rvi, _
+                                    le_RecursoVirtual.orden_rvi, _
+                                    le_RecursoVirtual.IdArchivosCompartidos, _
+                                    le_RecursoVirtual.estado_rvi)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetRecursoVirtual(ByVal codigo As Integer) As e_RecursoVirtual
+        Try
+            Dim me_RecursoVirtual As New e_RecursoVirtual
+
+            If codigo > 0 Then
+                me_RecursoVirtual.operacion = "GEN"
+                me_RecursoVirtual.codigo_rvi = codigo
+
+                dt = ListarRecursoVirtual(me_RecursoVirtual)
+                If dt.Rows.Count = 0 Then Throw New Exception("El registro de recurso virtual no ha sido encontrado.")
+
+                me_RecursoVirtual = New e_RecursoVirtual
+
+                With me_RecursoVirtual
+                    .codigo_rvi = dt.Rows(0).Item("codigo_rvi")
+                    .tipoRepo_rvi = dt.Rows(0).Item("tipoRepo_rvi")
+                    .disciplinaRepo_rvi = dt.Rows(0).Item("disciplinaRepo_rvi")
+                    .nombre_rvi = dt.Rows(0).Item("nombre_rvi")
+                    .logo_rvi = dt.Rows(0).Item("logo_rvi")
+                    .contarVisita_rvi = dt.Rows(0).Item("contarVisita_rvi")
+                    .codigo_biv = dt.Rows(0).Item("codigo_biv")
+                    .acceso_rvi = dt.Rows(0).Item("acceso_rvi")
+                    .orden_rvi = dt.Rows(0).Item("orden_rvi")
+                    .IdArchivosCompartidos = dt.Rows(0).Item("IdArchivosCompartidos")
+                    .estado_rvi = dt.Rows(0).Item("estado_rvi")
+                End With
+            Else
+                With me_RecursoVirtual
+                    .cod_user = 0
+                    .codigo_rvi = 0
+                    .codigo_biv = 0
+                    .orden_rvi = 0
+                    .IdArchivosCompartidos = 0
+                End With
+            End If
+
+            Return me_RecursoVirtual
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_RecursoVirtualDetalle
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarRecursoVirtualDetalle(ByVal le_RecursoVirtualDetalle As e_RecursoVirtualDetalle) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("BIB_RecursoVirtualDetalleListar", le_RecursoVirtualDetalle.operacion, _
+                                    le_RecursoVirtualDetalle.codigo_rvd, _
+                                    le_RecursoVirtualDetalle.codigo_rvi, _
+                                    le_RecursoVirtualDetalle.acceso_rvd)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function RegistrarRecursoVirtualDetalle(ByVal le_RecursoVirtualDetalle As e_RecursoVirtualDetalle) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("BIB_RecursoVirtualDetalleIUD", le_RecursoVirtualDetalle.operacion, _
+                                    le_RecursoVirtualDetalle.cod_user, _
+                                    le_RecursoVirtualDetalle.codigo_rvd, _
+                                    le_RecursoVirtualDetalle.codigo_rvi, _
+                                    le_RecursoVirtualDetalle.titulo_rvd, _
+                                    le_RecursoVirtualDetalle.cuerpo_rvd, _
+                                    le_RecursoVirtualDetalle.acceso_rvd, _
+                                    le_RecursoVirtualDetalle.orden_rvd)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetRecursoVirtualDetalle(ByVal codigo As Integer) As e_RecursoVirtualDetalle
+        Try
+            Dim me_RecursoVirtualDetalle As New e_RecursoVirtualDetalle
+
+            If codigo > 0 Then
+                me_RecursoVirtualDetalle.operacion = "GEN"
+                me_RecursoVirtualDetalle.codigo_rvd = codigo
+
+                dt = ListarRecursoVirtualDetalle(me_RecursoVirtualDetalle)
+                If dt.Rows.Count = 0 Then Throw New Exception("El registro de recurso virtual detalle no ha sido encontrado.")
+
+                me_RecursoVirtualDetalle = New e_RecursoVirtualDetalle
+
+                With me_RecursoVirtualDetalle
+                    .codigo_rvd = dt.Rows(0).Item("codigo_rvd")
+                    .codigo_rvi = dt.Rows(0).Item("codigo_rvi")
+                    .titulo_rvd = dt.Rows(0).Item("titulo_rvd")
+                    .cuerpo_rvd = dt.Rows(0).Item("cuerpo_rvd")
+                    .acceso_rvd = dt.Rows(0).Item("acceso_rvd")
+                    .orden_rvd = dt.Rows(0).Item("orden_rvd")
+                End With
+            Else
+                With me_RecursoVirtualDetalle
+                    .cod_user = 0
+                    .codigo_rvd = 0
+                    .codigo_rvi = 0                    
+                    .orden_rvd = 0
+                End With
+            End If
+
+            Return me_RecursoVirtualDetalle
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_RecursoVirtualEnlace
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarRecursoVirtualEnlace(ByVal le_RecursoVirtualEnlace As e_RecursoVirtualEnlace) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("BIB_RecursoVirtualEnlaceListar", le_RecursoVirtualEnlace.operacion, _
+                                    le_RecursoVirtualEnlace.codigo_rve, _
+                                    le_RecursoVirtualEnlace.codigo_rvd, _
+                                    le_RecursoVirtualEnlace.acceso_rve)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function RegistrarRecursoVirtualEnlace(ByVal le_RecursoVirtualEnlace As e_RecursoVirtualEnlace) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("BIB_RecursoVirtualEnlaceIUD", le_RecursoVirtualEnlace.operacion, _
+                                    le_RecursoVirtualEnlace.cod_user, _
+                                    le_RecursoVirtualEnlace.codigo_rve, _
+                                    le_RecursoVirtualEnlace.codigo_rvd, _
+                                    le_RecursoVirtualEnlace.descripcion_rve, _
+                                    le_RecursoVirtualEnlace.enlace_rve, _
+                                    le_RecursoVirtualEnlace.contarVisita_rve, _
+                                    le_RecursoVirtualEnlace.codigo_biv, _
+                                    le_RecursoVirtualEnlace.acceso_rve, _
+                                    le_RecursoVirtualEnlace.orden_rve, _
+                                    le_RecursoVirtualEnlace.IdArchivosCompartidos)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetRecursoVirtualEnlace(ByVal codigo As Integer) As e_RecursoVirtualEnlace
+        Try
+            Dim me_RecursoVirtualEnlace As New e_RecursoVirtualEnlace
+
+            If codigo > 0 Then
+                me_RecursoVirtualEnlace.operacion = "GEN"
+                me_RecursoVirtualEnlace.codigo_rve = codigo
+
+                dt = ListarRecursoVirtualEnlace(me_RecursoVirtualEnlace)
+                If dt.Rows.Count = 0 Then Throw New Exception("El registro de recurso virtual enlace no ha sido encontrado.")
+
+                me_RecursoVirtualEnlace = New e_RecursoVirtualEnlace
+
+                With me_RecursoVirtualEnlace
+                    .codigo_rve = dt.Rows(0).Item("codigo_rve")
+                    .codigo_rvd = dt.Rows(0).Item("codigo_rvd")
+                    .descripcion_rve = dt.Rows(0).Item("descripcion_rve")
+                    .enlace_rve = dt.Rows(0).Item("enlace_rve")
+                    .contarVisita_rve = dt.Rows(0).Item("contarVisita_rve")
+                    .codigo_biv = dt.Rows(0).Item("codigo_biv")
+                    .acceso_rve = dt.Rows(0).Item("acceso_rve")
+                    .orden_rve = dt.Rows(0).Item("orden_rve")
+                    .IdArchivosCompartidos = dt.Rows(0).Item("IdArchivosCompartidos")
+                    .enlace = dt.Rows(0).Item("enlace")
+                End With
+            Else
+                With me_RecursoVirtualEnlace
+                    .cod_user = 0
+                    .codigo_rve = 0
+                    .codigo_rvd = 0                    
+                    .codigo_biv = 0
+                    .orden_rve = 0
+                    .IdArchivosCompartidos = 0
+                End With
+            End If
+
+            Return me_RecursoVirtualEnlace
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function RegistrarVisita(ByVal le_RecursoVirtualEnlace As e_RecursoVirtualEnlace) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("BIB_RegistrarVisita", le_RecursoVirtualEnlace.tipo_vis, _
+                                    le_RecursoVirtualEnlace.codigo_vis, _
+                                    le_RecursoVirtualEnlace.codigo_biv)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_BibliotecaVirtual
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarBibliotecaVirtual(ByVal le_BibliotecaVirtual As e_BibliotecaVirtual) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("BIB_BibliotecaVirtualListar", le_BibliotecaVirtual.operacion, _
+                                    le_BibliotecaVirtual.codigo_biv, _
+                                    le_BibliotecaVirtual.nombre_biv)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_DerechoHabientes
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function ListarDerechoHabientes(ByVal le_DerechoHabientes As e_DerechoHabientes) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PER_DerechoHabientesListar", le_DerechoHabientes.operacion, _
+                                    le_DerechoHabientes.codigo_dhab, _
+                                    le_DerechoHabientes.codigo_per)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetDerechoHabientes(ByVal codigo As Integer) As e_DerechoHabientes
+        Try
+            Dim me_DerechoHabientes As New e_DerechoHabientes
+
+            If codigo > 0 Then
+
+            Else
+                With me_DerechoHabientes
+                    .cod_user = 0
+                    .codigo_dhab = 0
+                    .codigo_niv = 0
+                    .codigo_gra = 0
+                    .IdArchivosCompartidosRecibo = 0
+                    .IdArchivosCompartidosDNI = 0
+                End With
+            End If
+
+            Return me_DerechoHabientes
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_SolicitudEscolaridad
+    Private cnx As ClsConectarDatos
+    Private dt As DataTable
+
+    Public Function RegistrarSolicitudEscolaridad(ByVal le_SolicitudEscolaridad As e_SolicitudEscolaridad) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PER_SolicitudEscolaridadIUD", le_SolicitudEscolaridad.operacion, _
+                                    le_SolicitudEscolaridad.codigo_soe, _
+                                    le_SolicitudEscolaridad.codigo_dhab, _
+                                    le_SolicitudEscolaridad.estado_soe, _
+                                    le_SolicitudEscolaridad.tipocentroestudio_soe, _
+                                    le_SolicitudEscolaridad.nombrecentroestudio_soe, _
+                                    le_SolicitudEscolaridad.grado_soe, _
+                                    le_SolicitudEscolaridad.centroaplicacion_soe, _
+                                    le_SolicitudEscolaridad.documentosadjuntos_soe, _
+                                    le_SolicitudEscolaridad.IdArchivosCompartidosRecibo, _
+                                    le_SolicitudEscolaridad.IdArchivosCompartidosDNI)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ListarSolicitudEscolaridad(ByVal le_SolicitudEscolaridad As e_SolicitudEscolaridad) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("PER_SolicitudEscolaridadListar", le_SolicitudEscolaridad.operacion, _
+                                    le_SolicitudEscolaridad.codigo_soe, _
+                                    le_SolicitudEscolaridad.codigo_dhab, _
+                                    le_SolicitudEscolaridad.codigo_per, _
+                                    le_SolicitudEscolaridad.anio_soe)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function GetSolicitudEscolaridad(ByVal codigo As Integer) As e_SolicitudEscolaridad
+        Try
+            Dim me_SolicitudEscolaridad As New e_SolicitudEscolaridad
+
+            If codigo > 0 Then
+
+            Else
+                With me_SolicitudEscolaridad
+                    .cod_user = 0
+                    .codigo_soe = 0
+                    .codigo_dhab = 0
+                    .centroaplicacion_soe = False
+                    .codigo_per = 0
+                End With
+            End If
+
+            Return me_SolicitudEscolaridad
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ListarNivelEscolaridad(ByVal le_SolicitudEscolaridad As e_SolicitudEscolaridad) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("ES_ListaNivelEscolaridad")
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ListarGrados(ByVal le_SolicitudEscolaridad As e_SolicitudEscolaridad) As DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("ES_ListarGrados", le_SolicitudEscolaridad.tipocentroestudio_soe)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
             Throw ex
         End Try
     End Function
@@ -4670,6 +7556,28 @@ Public Class d_Funciones
                     fila("codigo") = "OTRO" : fila("nombre") = "OTRO"
                     dt.Rows.Add(fila)
 
+                Case "ESTADO_CONF_INSTANCIA_ADEUDOS"
+                    Dim fila As Data.DataRow
+
+                    fila = dt.NewRow()
+                    fila("codigo") = "A" : fila("nombre") = "ACTIVO"
+                    dt.Rows.Add(fila)
+
+                    fila = dt.NewRow()
+                    fila("codigo") = "I" : fila("nombre") = "INACTIVO"
+                    dt.Rows.Add(fila)
+
+                Case "ESTADO_ADEUDOS"
+                    Dim fila As Data.DataRow
+
+                    fila = dt.NewRow()
+                    fila("codigo") = "P" : fila("nombre") = "PENDIENTE"
+                    dt.Rows.Add(fila)
+
+                    fila = dt.NewRow()
+                    fila("codigo") = "D" : fila("nombre") = "DEVUELTO"
+                    dt.Rows.Add(fila)
+
             End Select
 
             Return dt
@@ -4847,7 +7755,10 @@ Public Class d_Funciones
         Try
             Dim content_type As String = String.Empty
 
-            Select Case extencion.ToLower
+            Select Case extencion.Trim.ToLower
+                Case ".pdf"
+                    content_type = "application/pdf"
+
                 Case ".txt"
                     content_type = "text/plain"
 
@@ -5004,7 +7915,7 @@ Public Class g_VariablesGlobales
     Public Shared CodigoAplicacionAlumni As Integer = 47
 
     'Rutas
-    Public Shared RutaLogos As String = "../Alumni/files/logos/"    
+    Public Shared RutaLogos As String = "../Alumni/files/logos/"
     Public Shared RutaPlantillaOnomastico As String = "../../../filesOnomastico/img/"
     Public Shared RutaEmpresaLogin As String = ConfigurationManager.AppSettings("RutaCampus").ToString & "CampusEmpresa/frmLogin.aspx"
 
@@ -5021,7 +7932,7 @@ Public Class g_VariablesGlobales
 #Region "ENVIO_CORREOS"
 
     'CORREOS
-    Public Shared CorreoPrueba As String = "olluen@usat.edu.pe"
+    Public Shared CorreoPrueba As String = "adiazval20@gmail.com"
     Public Shared CorreoAlumni As String = "alumni@usat.edu.pe"
     Public Shared CorreoCoordinadorAlumni As String = "esther.vasquez@usat.edu.pe"
 

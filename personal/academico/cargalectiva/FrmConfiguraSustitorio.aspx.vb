@@ -128,6 +128,7 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorio
 
     End Function
 
+
     Private Function fnEsDirectorAcademico() As Boolean ' #EPENA 261/11/2019
         Try
             Dim rpta As Boolean = False
@@ -143,7 +144,6 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorio
             Return False
         End Try
     End Function
-
     Private Function fnEsDirectorDepartamento() As Boolean ' #EPENA 261/11/2019
         Try
             Dim rpta As Boolean = False
@@ -159,7 +159,6 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorio
             Return False
         End Try
     End Function
-
     Private Function fnEsCoordinadorDA() As Boolean ' #EPENA 261/11/2019
 
         Try
@@ -208,7 +207,6 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorio
         End Try
 
     End Function
-
     Private Function fnEsAdministradorSistema() As Boolean ' #EPENA 261/11/2019
         Try
 
@@ -306,15 +304,32 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorio
             obj1.AbrirConexion()
             dt = obj1.TraerDataTable("ACAD_VerificaCronogramaExamen")
             obj1.CerrarConexion()
-            If (dt.Rows.Count = 0) Then
-                Me.btnBuscar.Enabled = False
-                Me.btnGenerar.Enabled = False
-                Me.lblMensaje.Text = "El cronograma no permite registrar programación de examenes de recuperación."
-            Else
+
+            'andy.diaz 23/12/2020: Habilito las operaciones para COORD. DIRECCIÓN ACADÉMICA y DIRECCIÓN ACADÉMICA
+            'If (dt.Rows.Count = 0) Then
+            '    Me.btnBuscar.Enabled = False
+            '    Me.btnGenerar.Enabled = False
+            '    Me.lblMensaje.Text = "El cronograma no permite registrar programación de examenes de recuperación."
+            'Else
+            '    Me.btnBuscar.Enabled = True
+            '    Me.btnGenerar.Enabled = True
+            '    Me.lblMensaje.Text = ""
+            'End If
+            Dim tfuCoordinadorDirAcad As Integer = 85
+            Dim tfuAdmin As Integer = 1
+            Dim tienePermiso As Boolean = (Request.QueryString("ctf") = tfuCoordinadorDirAcad _
+                                           OrElse Request.QueryString("ctf") = tfuAdmin)
+            If dt.Rows.Count > 0 OrElse tienePermiso Then
                 Me.btnBuscar.Enabled = True
                 Me.btnGenerar.Enabled = True
                 Me.lblMensaje.Text = ""
+            Else
+                Me.btnBuscar.Enabled = False
+                Me.btnGenerar.Enabled = False
+                Me.lblMensaje.Text = "El cronograma no permite registrar programación de examenes de recuperación."
             End If
+            '/andy.diaz 23/12/2020
+
         Catch ex As Exception
             Me.lblMensaje.Text = "Error al verificar el cronograma: " & ex.Message
             Me.btnBuscar.Enabled = False
@@ -353,6 +368,7 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorio
         Try
             obj1.AbrirConexion()
             dt = obj1.TraerDataTable("ACAD_ListaCicloAcademico")
+			'dt = obj1.TraerDataTable("ConsultarCicloAcademico","TN ","")
             obj1.CerrarConexion()
             obj1 = Nothing
 
@@ -486,7 +502,7 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorio
             combo.SelectedValue = Convert.ToString(row("codigo_per"))
             texto.Text = Convert.ToString(row("asistenciarec_cup"))
             texto2.Text = Convert.ToString(row("vacantes_Cup"))
-
+            Response.Write(texto.Text)
             ' Response.Write(fnEsDirectorDepartamento())
             If fnEsDirectorDepartamento() Then
                 combo.Enabled = True
@@ -645,7 +661,7 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorio
             Dim personal As Integer = Convert.ToInt32(combo.SelectedValue)
 
             Dim texto As TextBox = TryCast(gvDatos.Rows(e.RowIndex).FindControl("txtAsistencia"), TextBox)
-   
+
             Dim texto2 As TextBox = TryCast(gvDatos.Rows(e.RowIndex).FindControl("txtVacantes"), TextBox)
 
             'Buscamos cursos relacionados
@@ -660,7 +676,7 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorio
             'Me.lblMensaje.Text = "El curso no tiene docente asignado."
             'End If
             'Next
-
+            'Response.Write(texto)
             If (sw = 0) Then
                 Me.lblMensaje.Text = "sw = 0"
                 For i As Integer = 0 To dt.Rows.Count - 1
@@ -702,7 +718,7 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorio
                 Exit Sub
             End If
 
-         
+            Dim swreg As Boolean = False
          
             For I As Int16 = 0 To Me.gvDatos.Rows.Count - 1
                 Fila = Me.gvDatos.Rows(I)
@@ -719,15 +735,22 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorio
                         For j As Integer = 0 To dt.Rows.Count - 1
 
                             obj1.AbrirConexion()
-                            obj1.Ejecutar("ACAD_CreaCursoSustitutorio", dt.Rows(j).Item("codigo_cup"), 0, Session("id_per"), dt.Rows(j).Item("asistenciarec_cup"), dt.Rows(j).Item("vacantes_cup"))
+                            'obj1.Ejecutar("ACAD_CreaCursoSustitutorio", dt.Rows(j).Item("codigo_cup"), 0, Session("id_per"), dt.Rows(j).Item("asistenciarec_cup"), dt.Rows(j).Item("vacantes_cup"))
+                            obj1.Ejecutar("ACAD_CreaCursoSustitutorio", dt.Rows(j).Item("codigo_cup"), 0, Session("id_per"), 70, dt.Rows(j).Item("vacantes_cup")) '#EPENA 17/07/2020 - por defecto 70
                             obj1.CerrarConexion()
-
+                            swreg = True
                         Next
                     End If
                 End If
             Next
+            If swreg Then
+                ClientScript.RegisterStartupScript(Me.GetType, "Pop", "<script>alert('Curso de recuperación registrado con éxito');</script>")
+                'Me.lblMensaje.Text = "Curso de recuperación registrado con éxito"
 
-            Me.lblMensaje.Text = ""
+            Else
+                Me.lblMensaje.Text = ""
+            End If
+
             Buscar()
         Catch ex As Exception
             Me.lblMensaje.Text = "Error al generar: " & ex.Message

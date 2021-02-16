@@ -1,0 +1,1398 @@
+$modalidad-carrera-color: #6f53c8;
+$datos-personales-color: #f7b35f;
+$datos-academicos-color: #fc5b4e;
+$datos-academicos-color-2: $datos-academicos-color * 1.7;
+$datos-padres-color: #acc969;
+$disabled-color: #eeeeee;
+$disabled-color-2: #777777;
+$red-color: #e33439;
+$gray-color: #9d9d9d;
+$sky-color: #1e97ec;
+
+// ESTILOS GENERALES
+// ------------------------------------------------------------------------------
+input[type="text"] {
+    text-transform: uppercase;
+}
+
+#toast-container {
+    margin-bottom: 100px;
+}
+
+.bootstrap-select {
+    background-color: transparent;
+    .btn.dropdown-toggle {
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        .filter-option-inner {
+            color: $disabled-color-2;
+        }
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+    .dropdown-menu {
+        li {
+            &:focus {
+                outline: none;
+            }
+        }
+        .dropdown-item {
+            .text {
+                font-family: "Roboto", sans-serif;
+                font-size: 12px;
+                .text-muted {
+                    font-size: 12px;
+                }
+            }
+            &.active {
+                small.text-muted {
+                    color: white !important;
+                }
+            }
+            &:focus {
+                outline: none;
+                small.text-muted {
+                    color: white !important;
+                }
+            }
+        }
+        .no-results {
+            font-family: "Roboto", sans-serif;
+            font-size: 12px;
+        }
+    }
+    .bs-searchbox {
+        input[type="text"] {
+            padding: 3px 5px;
+            border-radius: 0;
+            font-family: "Roboto", sans-serif;
+            font-size: 13px;
+        }
+    }
+    &.is-valid {
+        .dropdown-toggle {
+            border: none;
+        }
+    }
+    &.is-invalid {
+        .dropdown-toggle {
+            border: 1px solid red !important;
+        }
+        &::focus {
+            box-shadow: 0 0 0 0.05rem red !important;
+        }
+    }
+}
+#spLoadingValidacionEmail {
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    color: #575757;
+    font-weight: 500;
+    font-style: italic;
+    > img {
+        width: 25px;
+        margin-right: 10px;
+    }
+}
+.error-validation-email {
+    flex: 1 1 100%;
+    padding: 10px 40px;
+    li {
+        margin-top: 0;
+        font-family: "Roboto", sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        font-style: italic;
+        color: green;
+    }
+}
+.error-validation {
+    flex: 1 1 100%;
+    padding: 10px 40px;
+    li {
+        margin-top: 0;
+        font-family: "Roboto", sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        font-style: italic;
+        color: red;
+    }
+}
+
+.card {
+    border-radius: 0;
+}
+
+.form-control {
+    border-radius: 0px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    color: $disabled-color-2;
+    &::placeholder {
+        font-family: "Roboto", sans-serif;
+        color: $disabled-color-2 * 1.3;
+    }
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+.custom-radio {
+    font-size: 14px;
+    font-weight: 400;
+    color: $disabled-color-2;
+    margin: 0px 5px;
+    .custom-control-label {
+        &::before {
+            top: 0.15rem;
+        }
+        &::after {
+            top: 0.15rem;
+        }
+    }
+}
+
+.custom-checkbox {
+    font-size: 14px;
+    font-weight: 400;
+    color: $disabled-color-2;
+    margin: 0px 5px;
+    .custom-control-label {
+        &::before {
+            top: 0.15rem;
+        }
+        &::after {
+            top: 0.15rem;
+        }
+    }
+}
+
+.custom-control-input {
+    &.is-valid {
+        ~ .custom-control-label {
+            &::before {
+                background-color: #dee2e6;
+            }
+        }
+    }
+}
+
+.datepicker-dropdown {
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+}
+
+label {
+    margin: 0px 5px;
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: $disabled-color-2;
+}
+
+.custom-control-input {
+    &.is-valid {
+        ~ .custom-control-label {
+            color: inherit;
+        }
+    }
+}
+
+.was-validated {
+    .custom-control-input {
+        &:valid {
+            ~ .custom-control-label {
+                color: inherit;
+                &::before {
+                    color: inherit;
+                }
+            }
+        }
+    }
+}
+
+.modal-dialog {
+    .modal-content {
+        border-radius: 0;
+    }
+    .modal-footer {
+        padding: 8px 10px;
+        button {
+            border-radius: 0;
+        }
+    }
+}
+
+.alert {
+    border-radius: 0;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    margin: 0;
+}
+
+// ESTILOS ESPECÍFICOS
+// ------------------------------------------------------------------------------
+.groupbox {
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    padding: 5px 5px 5px 5px;
+    margin-top: 5px;
+    background-color: transparent;
+    .header-groupbox {
+        margin: -15px 10px -10px 10px;
+        padding: 2px 4px;
+        background-color: $disabled-color;
+        border: none;
+        color: $disabled-color-2;
+        font-size: 11px;
+        font-weight: 400;
+    }
+    > .card-body {
+        display: flex;
+        flex-basis: 100%;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0px !important;
+        > .form-control,
+        #udpCelular,
+        #udpEmail {
+            margin: 5px !important;
+        }
+    }
+}
+
+#pasos-tabs {
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    .nav-link {
+        display: flex;
+        align-items: stretch;
+        margin: 10px 10px;
+        padding: 2px 2px;
+        width: 25%;
+        border-radius: 10px;
+        font-family: "Roboto", sans-serif;
+        &:not(.disabled) {
+            color: #fff;
+        }
+        &.disabled {
+            color: $disabled-color-2;
+        }
+        .numero {
+            display: flex;
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            justify-content: center;
+            flex-direction: column;
+            margin: 4px 4px 4px 4px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 50%;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .scope-texto {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+            .texto {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+                font-size: 16px;
+                font-weight: 500;
+            }
+        }
+    }
+    .nav-link[href="#modalidad-carrera"] {
+        &:not(.disabled) {
+            background-color: $modalidad-carrera-color;
+            .numero {
+                color: $modalidad-carrera-color;
+            }
+        }
+    }
+    .nav-link[href="#datos-personales"] {
+        &:not(.disabled) {
+            background-color: $datos-personales-color;
+            .numero {
+                color: $datos-personales-color;
+            }
+        }
+    }
+    .nav-link[href="#datos-academicos"] {
+        &:not(.disabled) {
+            background-color: $datos-academicos-color;
+            .numero {
+                color: $datos-academicos-color;
+            }
+        }
+    }
+    .nav-link[href="#datos-padres"] {
+        &:not(.disabled) {
+            background-color: $datos-padres-color;
+            .numero {
+                color: $datos-padres-color;
+            }
+        }
+    }
+    .nav-link.disabled {
+        background-color: $disabled-color;
+        cursor: not-allowed;
+    }
+}
+
+@media only screen and (min-width: 1224px) {
+    #contenido-tabs {
+        padding: 25px 30px;
+    }
+}
+
+@media (min-width: 700px) {
+    .scope-texto {
+        max-width: 100% !important;
+    }
+}
+
+.tab-pane {
+    > .card {
+        padding: 14px 10px;
+        background-color: $disabled-color;
+        .title-header {
+            padding: 8px 14px;
+            text-align: center;
+            color: #fff;
+            font-size: 19px;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+    }
+    .form-group:last-child {
+        margin-bottom: 0;
+    }
+    &#modalidad-carrera {
+        .form-control {
+            &:focus {
+                box-shadow: 0 0 0 0.05rem $modalidad-carrera-color;
+            }
+            &.is-invalid {
+                &:focus {
+                    box-shadow: 0 0 0 0.05rem red;
+                }
+            }
+        }
+        .custom-control-input {
+            &:focus {
+                ~ .custom-control-label {
+                    &::before {
+                        outline: none;
+                        box-shadow: 0 0 0 0.05rem $modalidad-carrera-color;
+                    }
+                }
+            }
+            &:checked {
+                ~ .custom-control-label {
+                    &::before {
+                        background-color: $modalidad-carrera-color;
+                    }
+                }
+            }
+        }
+        .dropdown-menu {
+            .dropdown-item {
+                &.active {
+                    background-color: $modalidad-carrera-color;
+                }
+                &:active {
+                    background-color: $modalidad-carrera-color * 0.9;
+                }
+            }
+        }
+        .parent-card {
+            border: 1px solid $modalidad-carrera-color;
+            .title-header {
+                background-color: $modalidad-carrera-color;
+            }
+        }
+        .dropdown-toggle {
+            border: 1px solid $modalidad-carrera-color;
+        }
+        .card-body {
+            padding: 40px;
+        }
+        .bootstrap-select {
+            .btn.dropdown-toggle {
+                .filter-option-inner {
+                    text-align: center;
+                }
+            }
+        }
+        #udpModalidades {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            #divContainerModalidades {
+                flex: 0 0 100%;
+                > .card-body {
+                    display: flex;
+                    justify-content: space-around;
+                }
+            }
+            .modalidad {
+                display: flex;
+                flex-basis: 200px;
+                align-items: center;
+                justify-content: space-around;
+                margin-bottom: 15px;
+                padding: 20px;
+                background-color: #fff;
+                color: $disabled-color-2;
+                border: 1px solid $modalidad-carrera-color;
+                border-radius: 6px;
+                font-weight: 400;
+                -webkit-font-smoothing: antialiased;
+                cursor: pointer;
+                &.active {
+                    background-color: $modalidad-carrera-color * 1.1;
+                    color: white;
+                    font-weight: 500;
+                }
+                &:hover {
+                    text-decoration: none;
+                }
+                &:focus {
+                    outline: none;
+                }
+                &.disabled {
+                    background-color: $disabled-color-2 * 2;
+                    cursor: not-allowed;
+                }
+                img {
+                    width: 45px;
+                    margin-right: 10px;
+                }
+                .texto {
+                    text-align: center;
+                }
+            }
+            &.active {
+                background-color: $modalidad-carrera-color;
+                color: #fff;
+            }
+            #alertProcesoConcluido {
+                font-size: 1rem;
+            }
+        }
+    }
+    &#datos-personales {
+        .form-control {
+            &:not(.bootstrap-select) {
+                border: 1px solid red;
+            }
+            &:focus {
+                box-shadow: 0 0 0 0.07rem $datos-personales-color;
+            }
+            &.is-invalid {
+                &:focus {
+                    box-shadow: 0 0 0 0.05rem red;
+                }
+            }
+            &:not(.is-invalid) {
+                border: 1px solid $datos-personales-color;
+            }
+        }
+        .custom-control-input {
+            &:focus {
+                ~ .custom-control-label {
+                    &::before {
+                        outline: none;
+                        box-shadow: 0 0 0 0.05rem $datos-personales-color;
+                    }
+                }
+            }
+            &:checked {
+                ~ .custom-control-label {
+                    &::before {
+                        background-color: $datos-personales-color;
+                    }
+                }
+            }
+        }
+        .dropdown-menu {
+            .dropdown-item {
+                &.active {
+                    background-color: $datos-personales-color;
+                }
+                &:active {
+                    background-color: $datos-personales-color * 0.9;
+                }
+            }
+        }
+        #tituloDatosPersonales {
+            display: block;
+            text-align: center;
+            font-family: "Roboto", sans-serif;
+            color: $disabled-color-2;
+            font-size: 22px;
+            font-weight: 400;
+        }
+        .parent-card {
+            border: 1px solid $datos-personales-color;
+            .title-header {
+                background-color: $datos-personales-color;
+            }
+            > .card-body {
+                padding: 15px 15px;
+                @media only screen and (max-width: 768px) {
+                    padding: 0;
+                }
+            }
+            .groupbox {
+                border: 1px solid $datos-personales-color;
+            }
+        }
+        .groupbox {
+            margin: 10px;
+            &.tipo-documento {
+                flex-grow: 2;
+                .bootstrap-select {
+                    flex-basis: 220px;
+                    flex-grow: 1;
+                    flex-shrink: 0;
+                }
+                #txtNroDocIdentidad {
+                    flex-basis: 150px;
+                    flex-grow: 1;
+                    flex-shrink: 1;
+                }
+            }
+            &.nacionalidad {
+                flex-grow: 2;
+                .custom-radio {
+                    flex-basis: 100px;
+                    flex-grow: 1;
+                }
+                #udpPaisNacimiento {
+                    flex-basis: 110px;
+                    flex-grow: 1;
+                    flex-shrink: 0;
+                }
+                #udpBtnFakeNacionalidad {
+                    display: none;
+                }
+            }
+            &.sexo {
+                flex-grow: 1;
+                flex-basis: 120px;
+            }
+            &.fecha-nacimiento {
+                flex-grow: 1;
+                flex-basis: 140px;
+                #dtpFecNacimiento {
+                    flex-shrink: 1;
+                }
+            }
+            &.nombre-completo {
+                flex-basis: 90%;
+                flex-grow: 1;
+                #txtNombres {
+                    flex: 1 0 200px;
+                }
+                #txtApellidoPaterno {
+                    flex: 1 0 160px;
+                }
+                #txtApellidoMaterno {
+                    flex: 1 0 160px;
+                }
+            }
+            &.lugar-nacimiento {
+                #udpDepNacimiento {
+                    flex: 1 1 280px;
+                    margin: 5px 10px;
+                }
+                #udpProNacimiento {
+                    flex: 1 1 280px;
+                    margin: 5px 10px;
+                }
+                #udpDisNacimiento {
+                    flex: 1 1 280px;
+                    margin: 5px 10px;
+                }
+            }
+            &.direccion-actual {
+                #txtDireccionActual {
+                    flex: 1 1 320px;
+                }
+                #udpDepActual {
+                    flex: 1 1 200px;
+                    margin: 5px 5px;
+                }
+                #udpProActual {
+                    flex: 1 1 200px;
+                    margin: 5px 5px;
+                }
+                #udpDisActual {
+                    flex: 1 1 200px;
+                    margin: 5px 5px;
+                }
+            }
+            &.contacto {
+                #txtTelefono {
+                    flex: 1 1 170px;
+                }
+                #udpCelular {
+                    flex: 1 1 170px;
+                }
+                #udpEmail {
+                    flex: 1 1 260px;
+                }
+                #txtFacebook {
+                    flex: 1 1 400px;
+                }
+            }
+            &.discapacidad {
+                flex: 0 1 50%;
+                align-items: center;
+                > .card-body {
+                    flex: 1 1 100%;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .pregunta {
+                    flex: 0 0 185px;
+                    text-align: center;
+                }
+                .bootstrap-select {
+                    flex: 0 0 150px;
+                }
+                #txtOtraDiscapacidad {
+                    flex: 1 0 200px;
+                }
+            }
+        }
+        .pregunta-discapacidad {
+            flex: 0 0 200px;
+            align-items: center;
+            margin: 0px 5px 10px 5px;
+            padding: 4px 10px;
+            background-color: #fff;
+            color: $disabled-color-2;
+            border: 1px solid $datos-personales-color;
+            font-size: 24px;
+            border-radius: 6px;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            cursor: pointer;
+            &.active {
+                background-color: $datos-personales-color;
+                color: #fff;
+            }
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 0.05rem $datos-personales-color;
+            }
+        }
+        .container-discapacidad {
+            display: flex;
+            justify-content: center;
+        }
+        .container-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .botones {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                .btn {
+                    flex: 0 1 auto;
+                    margin: 10px 0px 30px 0px;
+                    padding: 6px 35px;
+                    margin: 0px 10px;
+                    font-family: "Roboto", sans-serif;
+                    font-size: 15px;
+                    font-weight: 400;
+                    background-color: $datos-personales-color;
+                    color: #fff;
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0 0 0 0.05rem $datos-personales-color;
+                    }
+                }
+            }
+        }
+    }
+    &#datos-academicos {
+        .form-control {
+            &:not(.bootstrap-select) {
+                border: 1px solid red;
+            }
+            &:focus {
+                box-shadow: 0 0 0 0.07rem $datos-academicos-color-2;
+            }
+            &.is-invalid {
+                &:focus {
+                    box-shadow: 0 0 0 0.05rem red;
+                }
+            }
+            &:not(.is-invalid) {
+                border: 1px solid $datos-academicos-color-2;
+            }
+        }
+        .custom-control-input {
+            &:focus {
+                ~ .custom-control-label {
+                    &::before {
+                        outline: none;
+                        box-shadow: 0 0 0 0.05rem $datos-academicos-color-2;
+                    }
+                }
+            }
+            &:checked {
+                ~ .custom-control-label {
+                    &::before {
+                        background-color: $datos-academicos-color-2;
+                    }
+                }
+            }
+        }
+        .dropdown-menu {
+            .dropdown-item {
+                &.active {
+                    background-color: $datos-academicos-color;
+                }
+                &:active {
+                    background-color: $datos-academicos-color * 0.9;
+                }
+            }
+        }
+        .parent-card {
+            border: 1px solid $datos-academicos-color-2;
+            .title-header {
+                background-color: $datos-academicos-color;
+            }
+            > .card-body {
+                padding: 15px 15px;
+            }
+            .groupbox {
+                border: 1px solid $datos-academicos-color-2;
+            }
+        }
+        .groupbox {
+            &.ubicacion-colegio {
+                > .card-body {
+                    justify-content: space-around;
+                }
+                #udpDepInstitucionEducativa {
+                    flex: 1 1 200px;
+                    margin: 5px 5px;
+                }
+                #udpInstitucionEducativa {
+                    flex: 1 1 500px;
+                    margin: 5px 5px;
+                }
+            }
+            &.condicion-estudiante {
+                flex: 0 1 400px;
+                #udpCondicionEstudiante {
+                    flex: 1 1 100%;
+                    margin: 5px 5px;
+                }
+            }
+        }
+        .container-estudiante {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            .container-condicion {
+                flex: 1 1 250px;
+                margin: 5px 0px;
+                padding: 0px 5px;
+            }
+            #udpDatosCondicion {
+                flex: 1 1 350px;
+                margin: 5px 0px;
+                padding: 0px 5px;
+                .bootstrap-select {
+                    flex: 1 1 150px;
+                }
+                #txtAnioEgreso {
+                    flex: 1 0 150px;
+                }
+                #txtOtroMerito {
+                    flex: 1 0 200px;
+                }
+            }
+        }
+        .container-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .botones {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                .btn {
+                    flex: 0 1 auto;
+                    margin: 10px 0px 30px 0px;
+                    margin: 0px 10px;
+                    padding: 6px 35px;
+                    font-family: "Roboto", sans-serif;
+                    font-size: 15px;
+                    font-weight: 400;
+                    background-color: $datos-academicos-color;
+                    color: #fff;
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0 0 0 0.05rem $datos-academicos-color;
+                    }
+                }
+            }
+        }
+    }
+    &#datos-padres {
+        &.largo {
+            padding-bottom: 580px;
+        }
+        .form-control {
+            &:not(.bootstrap-select) {
+                border: 1px solid red;
+            }
+            &:focus {
+                box-shadow: 0 0 0 0.07rem $datos-padres-color;
+            }
+            &.is-invalid {
+                &:focus {
+                    box-shadow: 0 0 0 0.05rem red;
+                }
+            }
+            &:not(.is-invalid) {
+                border: 1px solid $datos-padres-color;
+            }
+        }
+        .custom-control-input {
+            &:focus {
+                ~ .custom-control-label {
+                    &::before {
+                        outline: none;
+                        box-shadow: 0 0 0 0.05rem $datos-padres-color;
+                    }
+                }
+            }
+            &:checked {
+                ~ .custom-control-label {
+                    &::before {
+                        background-color: $datos-padres-color;
+                    }
+                }
+            }
+        }
+        .dropdown-menu {
+            .dropdown-item {
+                &.active {
+                    background-color: $datos-padres-color;
+                }
+                &:active {
+                    background-color: $datos-padres-color * 0.9;
+                }
+            }
+        }
+        .parent-card {
+            border: 1px solid $datos-padres-color;
+            .title-header {
+                background-color: $datos-padres-color;
+            }
+            > .card-body {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 15px 15px;
+            }
+            .groupbox {
+                border: 1px solid $datos-padres-color;
+                margin: 10px 5px;
+                &.nombres {
+                    flex: 1 1 800px;
+                    input[id^="txtDni"] {
+                        flex: 1 1 120px;
+                    }
+                    input[id^="txtNombres"] {
+                        flex: 1 1 250px;
+                    }
+                    input[id^="txtApellidoPaterno"] {
+                        flex: 1 1 150px;
+                    }
+                    input[id^="txtApellidoMaterno"] {
+                        flex: 1 1 150px;
+                    }
+                }
+                &.fecha-nacimiento {
+                    flex: 1 1 200px;
+                    input[id^="dtpFecNac"] {
+                        flex: 1 1 200px;
+                    }
+                }
+                &.direccion-actual {
+                    flex: 1 1 100%;
+                    input[id^="txtDireccion"] {
+                        flex: 1 1 400px;
+                    }
+                    div[id^="udpDep"] {
+                        flex: 1 1 200px;
+                        margin: 5px;
+                    }
+                    div[id^="udpPro"] {
+                        flex: 1 1 200px;
+                        margin: 5px;
+                    }
+                    div[id^="udpDis"] {
+                        flex: 1 1 200px;
+                        margin: 5px;
+                    }
+                }
+                &.datos-contacto {
+                    flex: 1 1 100%;
+                    input[id^="txtTelefono"] {
+                        flex: 1 1 150px;
+                    }
+                    input[id^="txtCelular"] {
+                        flex: 1 1 150px;
+                    }
+                    input[id^="txtEmail"] {
+                        flex: 1 1 250px;
+                    }
+                    .custom-radio {
+                        flex: 1 1 180px;
+                    }
+                }
+            }
+            .collapse {
+                > .card-body {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+            }
+        }
+        .container-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .botones {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                .btn {
+                    flex: 0 1 auto;
+                    margin: 10px 0px 30px 0px;
+                    margin: 0px 10px;
+                    padding: 6px 35px;
+                    font-family: "Roboto", sans-serif;
+                    font-size: 15px;
+                    font-weight: 400;
+                    background-color: $datos-padres-color;
+                    color: #fff;
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0 0 0 0.05rem $datos-padres-color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#mdlConfirmarInscripcion {
+    .modal-content {
+        > .modal-header {
+            display: flex;
+            padding: 14px 0px;
+            background: $red-color;
+            margin: 10px;
+            border-radius: 0;
+            align-items: center;
+            justify-content: center;
+            font-family: "Roboto", sans-serif;
+            h1 {
+                flex: 1 1 100%;
+                color: white;
+                font-size: 18px;
+                margin: 0;
+                text-align: center;
+            }
+            .close {
+                flex: 0 0 30px;
+                align-items: center;
+                margin: 0px;
+                padding: 0;
+                span {
+                    display: flex;
+                    font-size: 16px;
+                    justify-content: center;
+                    color: white;
+                }
+            }
+        }
+        .instrucciones {
+            padding: 0px 15px;
+            #udpInstrucciones {
+                flex: 0 0 100%;
+                flex-direction: column;
+                font-family: "Roboto", sans-serif;
+                .paso {
+                    display: flex;
+                    flex-wrap: wrap;
+                    font-size: 18px;
+                    font-weight: 400;
+                    justify-content: space-around;
+                    text-align: center;
+                    margin-bottom: 10px;
+                    .numero {
+                        display: flex;
+                        flex-grow: 0;
+                        flex-shrink: 0;
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 50%;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: $red-color;
+                        font-size: 25px;
+                        font-weight: 400;
+                        color: white;
+                    }
+                    .contenido {
+                        flex: 0 1 650px;
+                        p {
+                            margin: 0;
+                        }
+                        #spnPrecioInscripcion {
+                            display: inline-block;
+                            margin: 5px 0px;
+                            padding: 5px 10px;
+                            background-color: $disabled-color;
+                            color: $red-color;
+                            font-size: 30px;
+                        }
+                        .container-imagenes {
+                            img {
+                                margin: 5px 10px;
+                            }
+                            #imgBcp {
+                                width: 116px;
+                            }
+                            #imgBbva {
+                                width: 213px;
+                            }
+                        }
+                        span[id^="spnMensajeTiempoPago"] {
+                            background: $disabled-color;
+                            color: $red-color;
+                            display: inline-block;
+                            margin: 10px 0px;
+                        }
+                        #spnMensajeAnulacionCargo {
+                            background: $disabled-color;
+                            color: $modalidad-carrera-color;
+                            display: inline-block;
+                            margin: 10px 0px;
+                        }
+                        #grwRequisitosAdmision {
+                            width: 80%;
+                            margin: 5px auto 10px auto;
+                            font-size: 16px;
+                            .thead-dark {
+                                th {
+                                    background-color: $red-color;
+                                    border-color: transparent;
+                                }
+                            }
+                        }
+                    }
+                }
+                .terminos-condiciones {
+                    padding: 0px 20px;
+                    h1 {
+                        text-align: center;
+                        font-size: 16px;
+                        color: white;
+                        background-color: $red-color;
+                        padding: 10px 0px;
+                    }
+                    .custom-control-label {
+                        color: black;
+                        font-weight: 500;
+                        span.rojo {
+                            a {
+                                color: $red-color;
+                            }
+                        }
+                    }
+                }
+                #collapseTerminosCondiciones {
+                    padding: 15px;
+                    h1 {
+                        padding: 5px 0px;
+                        font-size: 15px;
+                    }
+                    p {
+                        font-size: 14px;
+                    }
+                }
+            }
+            .guia-token {
+                text-align: center;
+                font-weight: bold;
+                font-size: 16px;
+            }
+            #udpToken {
+                display: flex;
+                flex-direction: column;
+                margin: 20px 0px 0px 0px;
+                .container-token {
+                    display: flex;
+                    justify-content: center;
+                    > a {
+                        flex-grow: 0;
+                        flex-shrink: 1;
+                        width: auto;
+                        text-align: center;
+                        margin: 0px 5px;
+                        padding: 5px 10px;
+                        font-size: 14px;
+                        font-family: "Roboto", sans-serif;
+                        font-weight: 400;
+                        color: #fff;
+                        border-radius: 0;
+                    }
+                    #btnGenerarToken {
+                        background-color: $datos-personales-color;
+                        &:hover {
+                            text-decoration: none;
+                        }
+                        &:focus {
+                            outline: none;
+                            box-shadow: 0 0 0 0.05rem $datos-personales-color;
+                        }
+                        &.disabled {
+                            background-color: $disabled-color-2 * 1.4;
+                            cursor: not-allowed;
+                        }
+                    }
+                    #txtToken {
+                        width: 150px;
+                        margin: 0px 5px;
+                    }
+                    #btnValidarToken {
+                        background-color: $datos-padres-color;
+                        &:hover {
+                            text-decoration: none;
+                        }
+                        &:focus {
+                            outline: none;
+                            box-shadow: 0 0 0 0.05rem $datos-padres-color;
+                        }
+                        &.disabled {
+                            background-color: $disabled-color-2 * 1.4;
+                            cursor: not-allowed;
+                        }
+                    }
+                }
+            }
+            .container-celular-token {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 15px;
+                .custom-control-label {
+                    font-weight: 500;
+                }
+                #txtCelularToken {
+                    width: 150px;
+                }
+            }
+        }
+        .container-nav {
+            display: flex;
+            flex-direction: column;
+            margin: 10px 10px;
+            #msg-paciencia {
+                // white-space: normal;
+                font-size: 0.95rem;
+                font-weight: bold;
+                margin-top: 15px;
+            }
+            #udpConfirmarInscripcion {
+                display: flex;
+                justify-content: center;
+                margin: 10px 0px 0px 0px;
+            }
+            #btnVerificarDatos {
+                flex-grow: 0;
+                flex-shrink: 1;
+                margin: 20px 0px;
+                padding: 6px 35px;
+                font-size: 15px;
+                line-height: initial;
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+                background-color: $gray-color;
+                color: #fff;
+                border-radius: 0;
+                border: none;
+                cursor: pointer;
+                &:hover {
+                    text-decoration: none;
+                }
+                &:focus {
+                    outline: none;
+                    box-shadow: 0 0 0 0.05rem $gray-color;
+                }
+                &.disabled {
+                    background-color: $disabled-color-2 * 1.4;
+                    cursor: not-allowed;
+                }
+            }
+            #btnConfirmarInscripcion {
+                flex-grow: 0;
+                flex-shrink: 1;
+                margin: 20px 0px 20px 60px;
+                padding: 6px 35px;
+                font-size: 15px;
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+                background-color: $red-color;
+                color: #fff;
+                border-radius: 0;
+                &:hover {
+                    text-decoration: none;
+                }
+                &:focus {
+                    outline: none;
+                    box-shadow: 0 0 0 0.05rem $red-color;
+                }
+                &.disabled {
+                    background-color: $disabled-color-2 * 1.4;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}
+
+#mdlMensajesServidor {
+    .modal-content {
+        > .modal-header {
+            display: flex;
+            padding: 10px 0px;
+            background: $red-color;
+            margin: 10px 10px 0px 10px;
+            border-radius: 0;
+            align-items: center;
+            justify-content: center;
+            font-family: "Roboto", sans-serif;
+            #udpMensajeServidorHeader {
+                flex: 1 1 100%;
+                color: white;
+                font-size: 15px;
+                margin: 0;
+                text-align: center;
+            }
+            .close {
+                flex: 0 0 30px;
+                align-items: center;
+                margin: 0px;
+                padding: 0;
+                span {
+                    display: flex;
+                    font-size: 16px;
+                    justify-content: center;
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+#mdlMensajeConfirmacion {
+    .modal-content {
+        > .modal-header {
+            display: flex;
+            padding: 10px 15px;
+            background: $modalidad-carrera-color;
+            margin: 10px 10px 0px 10px;
+            border-radius: 0;
+            align-items: center;
+            justify-content: center;
+            font-family: "Roboto", sans-serif;
+            color: white;
+            span {
+                width: 100%;
+            }
+            .close {
+                flex: 0 0 auto;
+                align-items: center;
+                margin: 0px;
+                padding: 0;
+                span {
+                    display: flex;
+                    font-size: 16px;
+                    justify-content: center;
+                    color: white;
+                }
+            }
+        }
+        .container-descargar-ficha {
+            display: flex;
+            justify-content: center;
+            .btn {
+                flex-grow: 0;
+                flex-shrink: 1;
+                margin: 20px 0px;
+                padding: 6px 35px;
+                font-size: 15px;
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+                color: #fff;
+                border-radius: 0;
+                &.disabled {
+                    cursor: not-allowed;
+                }
+                &#btnDescargarFicha {
+                    background-color: $red-color;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0 0 0 0.05rem $red-color;
+                    }
+                    &.disabled {
+                        background-color: $disabled-color-2 * 1.4;
+                    }
+                }
+                &#btnEnviarFichaCorreo {
+                    margin-left: 100px;
+                    background-color: $sky-color;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0 0 0 0.05rem $sky-color;
+                    }
+                    &.disabled {
+                        background-color: $disabled-color-2 * 1.4;
+                    }
+                }
+            }
+        }
+    }
+}

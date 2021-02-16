@@ -65,7 +65,10 @@ function ConsultarHorarios(modo,codigo_cup,fila)
 		SeleccionarFila()
 		var th=fila.cells[5].innerText
 		
-		fraHorario.location.href="tblhorario.asp?codigo_cup=" + txtcodigo_cup + "&codigo_cac=" + cbocodigo_cac.value + "&th=" + th + "&codigo_cpf=" + cbocodigo_cpf.value  
+		//fraHorario.location.href="tblhorario.asp?codigo_test=1&codigo_cup=" + txtcodigo_cup + "&codigo_cac=" + cbocodigo_cac.value + "&th=" + th + "&codigo_cpf=" + cbocodigo_cpf.value  
+        //se añade mod=1 desde esta pag para pre  YPEREZ 18.12.20
+		fraHorario.location.href="tblhorario.asp?mod=1&codigo_cup=" + txtcodigo_cup + "&codigo_cac=" + cbocodigo_cac.value + "&th=" + th + "&codigo_cpf=" + cbocodigo_cpf.value  
+
 	}
 	else{
 		fraHorario.location.href="tblhorario.asp?codigo_cup=" + txtcodigo_cup + "&codigo_cac=" + cbocodigo_cac.value + "&codigo_cpf=" + cbocodigo_cpf.value

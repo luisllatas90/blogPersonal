@@ -80,7 +80,7 @@ Set obj=nothing
 <script type="text/javascript" language="JavaScript" src="../../../../private/jq/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" language="JavaScript" src="../../../../private/funciones.js"></script>
 <script type="text/javascript" language="JavaScript" src="private/validarciclocurso.js?v=<% response.Write DateDiff("s", "12/31/1969 00:00:00", Now) %>"></script>
-<script type="text/javascript" language="JavaScript" src="private/validarfichamatricula2015.js?v=<% response.Write DateDiff("s", "12/31/1969 00:00:00", Now) %>"></script>
+<script type="text/javascript" language="JavaScript" src="private/validarfichamatricula2015.js?x=<% response.Write DateDiff("s", "12/31/1969 00:00:00", Now) %>"></script>
 </head>
 <body bgcolor="#EEEEEE">
 <table width="100%">

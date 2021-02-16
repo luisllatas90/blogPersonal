@@ -1,0 +1,255 @@
+* {
+    border-radius: 0px !important;
+}
+
+html, body {
+    /*height: 100%;*/
+    padding: 0px;
+    margin: 0px;
+    color: #7D7D7D;
+}
+
+.ms-choice>span {
+    font-size: 0.75em;
+    height: 23px;
+}
+
+.ms-drop ul>li label {
+    font-weight: normal;
+    display: block;
+    font-size: 13px;
+    white-space: nowrap;
+    line-height: 0;
+}
+
+#panProgramacion .modal-body {
+    padding: 10px;
+}
+
+/* FORMULARIOS */
+
+.form-control {
+    border-radius: 0;
+    padding: 0.15rem 0.3rem;
+    font-size: 0.8rem;
+}
+
+.form-control-sm {
+    font-size: 0.75em;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 0.0rem;
+}
+
+.label {
+    display: inline-block;
+}
+
+form label.form-control-sm {
+    font-size: 0.75em;
+    font-weight: 500;
+    text-align: right;
+    line-height: 1.3;
+    margin-bottom: 0.0rem;
+}
+
+.form-group {
+    margin-bottom: 0.0rem;
+}
+
+form legend {
+    font-size: 0.8em;
+    margin-bottom: 0em;
+}
+
+select#cboPeriodo.form-control.form-control-sm {
+    height: 24px;
+}
+
+select#cboTipoMensaje.form-control.form-control-sm {
+    height: 24px;
+}
+
+select#cboTipoProgramacion.form-control.form-control-sm {
+    height: 24px;
+}
+
+select#cboTipoFrecuencia.form-control.form-control-sm {
+    height: 24px;
+}
+
+select#cboFrecuenciaTiempo.form-control.form-control-sm {
+    height: 25px;
+}
+
+select#cboOrdinal.form-control.form-control-sm {
+    height: 24px;
+}
+
+select#cboDiaSemana.form-control.form-control-sm {
+    height: 24px;
+}
+
+.ui-datepicker>ui-datepicker-calendar {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.bootstrap-select.form-control-sm {
+    display: block;
+    font-size: 0.75em;
+    font-weight: 500;
+    line-height: 1.5;
+    height: 23px;
+}
+
+.bootstrap-select.form-control-sm .dropdown-toggle {
+    border-radius: 0;
+    padding: 0.1rem 0.5rem;
+    height: 24px;
+}
+
+.alert-text {
+    color: #A94442;
+}
+
+.img-logo {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.title-book {
+    color: #B30000;
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.title-dark-red {
+    color: #B30000;
+    font-size: 35px;
+}
+
+.title-gray {
+    color: #989696;
+    font-size: 35px;
+}
+
+table.table:last-of-type {
+    margin-left: 0px;
+}
+
+table.table th {
+    text-align: left;
+}
+
+table.table tbody tr.selected {
+    background-color: #f0f0f0;
+}
+
+.table.table-sm {
+    font-size: 0.7em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-left: 0px;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.table .thead-dark th {
+    background-color: #E33439;
+    text-align: center;
+}
+
+.table button.btn {
+    font-size: 1em;
+    padding: .2rem .4rem;
+}
+
+.table .progress {
+    float: left;
+    width: 90%;
+}
+
+.table .pg-total {
+    float: left;
+    width: 10%;
+    text-align: center;
+    font-weight: bold;
+}
+
+textarea {
+    resize: none;
+    height: 100px;
+}
+
+.panel-heading-custom {
+    background-color: #FFC4C4 !important;
+    color: White !important;
+    text-align: center;
+}
+
+.panel-title-custom {
+    font-size: 25px !important;
+}
+
+.radio-button-text {
+    color: #989696;
+}
+
+button:disabled, button[disabled] {
+    border: 1px solid #999999;
+    background-color: #CCCCCC;
+    color: #666666;
+}
+
+/* BOTONES */
+
+.btn {
+    padding: 0.25rem 0.7rem;
+    font-size: 0.8rem;
+    border-radius: 0.1rem;
+}
+
+.btn.btn-sm {
+    border-radius: 0.1rem;
+}
+
+.btn.btn-sm>span.text {
+    margin-left: 4px;
+}
+
+#btnMensajePrueba {
+    display: block;
+    padding: 0.1rem 0.5rem
+}
+
+hr {
+    margin-top: 0.6rem;
+    margin-bottom: 0.2rem;
+}
+
+.page-header {
+    margin-top: 0px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #FFC4C4;
+}
+
+#lblEvento {
+    color: rgb(205, 0, 0);
+}
+
+/* SMARTWIZARD */
+.sw-theme-default .step-content {
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    .modal-xl {
+        width: 80%;
+        max-width:900px;
+    }
+}

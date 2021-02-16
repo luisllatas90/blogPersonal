@@ -11,7 +11,18 @@ Partial Class FrmRevisionTesisAsesor
             Response.Redirect("../../../sinacceso.html")
         End If
         If IsPostBack = False Then
-            ConsultarTesis(Session("id_per"), Request("ctf"), Me.ddlEstado.SelectedValue)
+            If Request("ctf") = 1 Then ' No validar ORCID si es administrador
+                ConsultarTesis(Session("id_per"), Request("ctf"), Me.ddlEstado.SelectedValue)
+                Me.ddlEstado.Enabled = True
+            Else
+                If VerificarORCID(Session("id_per")) = True Then
+                    ConsultarTesis(Session("id_per"), Request("ctf"), Me.ddlEstado.SelectedValue)
+                    Me.ddlEstado.Enabled = True
+                Else
+                    Me.ddlEstado.Enabled = False
+                End If
+            End If
+           
         End If
     End Sub
 
@@ -83,21 +94,28 @@ Partial Class FrmRevisionTesisAsesor
             If (e.CommandName = "Conformidad") Then
                 Dim codigo_Rtes As Integer = Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_RTes")
                 Dim codigo_tes As Integer = Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_Tes")
+                Dim codigo_test As Integer = Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_test")
                 'Dar Conformidad
                 Dim dt As New Data.DataTable
                 dt = ActualizarConformidad(codigo_Rtes, 1)
                 If dt.Rows.Count() > 0 Then
                     If dt.Rows(0).Item("Respuesta") = 1 Then ' dio conformidad
                         'Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('success','" + dt.Rows(0).Item("Mensaje") + "')", True)
-                        Dim codigo_dot As Integer = 0
-                        codigo_dot = GenerarInformeAsesor(codigo_tes, Session("id_per"), Session("perlogin").ToString)
-                        If codigo_dot > 0 Then
-                            ACtualizarCodigoDocumento(codigo_Rtes, codigo_dot)
-                            Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('success','Informe de asesor generado correctamente')", True)
+                        Dim codigo_Dot As Integer = 0
+                        codigo_Dot = GenerarInformeAsesor(codigo_tes, codigo_test, Session("id_per"), Session("perlogin").ToString)
+                        If codigo_Dot > 0 Then
+                            Dim dta As New Data.DataTable
+                            dta = ACtualizarCodigoDocumento(codigo_Rtes, codigo_Dot)
+                            If dta.Rows(0).Item("Respuesta") = 1 Then
+                                Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert2", "fnMensaje('success','se generó correctamente informe de asesor')", True)
+                            Else
+                                Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert2", "fnMensaje('error','No se pudo generar informe de asesor')", True)
+                            End If
                         Else
-                            Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('error','No se pudo generar informe de asesor')", True)
+                            Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "error", "fnMensaje('error','No se pudo generar informe de asesor')", True)
 
                         End If
+
                         Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('success','" + dt.Rows(0).Item("Mensaje") + "')", True)
 
                         ConsultarTesis(Session("id_per"), Request("ctf"), Me.ddlEstado.SelectedValue)
@@ -132,6 +150,7 @@ Partial Class FrmRevisionTesisAsesor
                 Me.DivAsesorias.Visible = True
                 Me.hdrtes.Value = Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_RTes")
                 Me.hdtes.Value = Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_Tes")
+                LimpiarDatos()
                 ConsultarDatosTesis(Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_Tes"))
                 CargarLineaTiempo(Me.gvAlumnos.DataKeys(e.CommandArgument).Values("codigo_Tes"))
                 limpiarobservacion()
@@ -152,6 +171,21 @@ Partial Class FrmRevisionTesisAsesor
         End Try
     End Sub
 
+    Private Sub LimpiarDatos()
+        Me.txttitulo.Text = ""
+        Me.txtAutor.Text = ""
+        Me.txtarea.Text = ""
+        Me.txtcarrera.Text = ""
+        Me.txtFacultad.Text = ""
+        Me.txtFinanciamiento.Text = ""
+        Me.txtdisciplina.Text = ""
+        Me.txtlinea.Text = ""
+        Me.txtObjetivoE.Text = ""
+        Me.txtObjetivoG.Text = ""
+        Me.txtPresupuesto.Text = ""
+        Me.txtsubarea.Text = ""
+        Me.txtarea.Text = ""
+    End Sub
 
     Protected Sub gvAlumnos_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles gvAlumnos.RowDataBound
         If e.Row.RowType = DataControlRowType.DataRow Then
@@ -172,6 +206,13 @@ Partial Class FrmRevisionTesisAsesor
                     gvAlumnos.Rows(CurrentRow).Cells(0).RowSpan += 1
                 End If
                 e.Row.Cells(0).Visible = False
+
+                If (gvAlumnos.Rows(CurrentRow).Cells(1).RowSpan = 0) Then
+                    gvAlumnos.Rows(CurrentRow).Cells(1).RowSpan = 2
+                Else
+                    gvAlumnos.Rows(CurrentRow).Cells(1).RowSpan += 1
+                End If
+                e.Row.Cells(1).Visible = False
 
                 If (gvAlumnos.Rows(CurrentRow).Cells(2).RowSpan = 0) Then
                     gvAlumnos.Rows(CurrentRow).Cells(2).RowSpan = 2
@@ -311,6 +352,7 @@ Partial Class FrmRevisionTesisAsesor
                 End If
             End If
             'End If
+            EnviarNotificacionObservacion(Session("id_per"), Request("ctf"), 47, codigo_Tes)
             limpiarobservacion()
             CargarLineaTiempo(Me.hdtes.Value)
 
@@ -534,16 +576,26 @@ Partial Class FrmRevisionTesisAsesor
         Return dt
     End Function
 
-    Private Function GenerarInformeAsesor(ByVal codigo_Tes As Integer, ByVal codigo_per As Integer, ByVal usuario_per As String) As Integer
+    Private Function GenerarInformeAsesor(ByVal codigo_Tes As Integer, ByVal codigo_test As Integer, ByVal codigo_per As Integer, ByVal usuario_per As String) As Integer
         'Dim codigo_dot As Integer
         Dim codigo_cda As Integer = 4 ''-- Configuracion del documento
         Dim codigo_dot As Integer = 0 '- Codigo del doumento generado en la tabla DOC_documentoArchivo
         Dim serieCorrelativoDoc As String '- Serie o numeracion del comprobante
+
+        Dim abreviatura_tid As String = "INFO" '---fijo 
+        Dim abreviatura_doc As String = "IASE" '---fijo
+        Dim abreviatura_are As String
+        If codigo_Test = 5 Then
+            abreviatura_are = "PGRA" '---fijo / para postgrado
+        Else
+            abreviatura_are = "USAT" '---fijo / para pregrado,prof,go
+        End If
+
         Try
             'Dim obj As New clsDocumentacion
             ''''**** 1. GENERA CORRELATIVO DEL DOCUMENTO CONFIGURADO *******************************************************
-            serieCorrelativoDoc = clsDocumentacion.ObtenerSerieCorrelativoDocPorCda(codigo_cda, Year(Now), codigo_per)
-
+            'serieCorrelativoDoc = clsDocumentacion.ObtenerSerieCorrelativoDocPorCda(codigo_cda, Year(Now), codigo_per)
+            serieCorrelativoDoc = clsDocumentacion.ObtenerSerieCorrelativoDocPorAbreviatura(abreviatura_tid, abreviatura_doc, abreviatura_are, Year(Now), codigo_per)
             ''''******* GENERA DOCUMENTO PDF *****************************************************************************
             If serieCorrelativoDoc <> "" Then
                 '--------necesarios
@@ -552,6 +604,7 @@ Partial Class FrmRevisionTesisAsesor
                 arreglo.Add("sesionUsuario", usuario_per)
                 '-----------------                
                 arreglo.Add("codigo_tes", codigo_Tes)
+                arreglo.Add("tipoEstudio", codigo_test)
 
                 '******** 2. GENERA DOCUMENTO PDF **************************************************************
                 codigo_dot = clsDocumentacion.generarDocumentoPdf(serieCorrelativoDoc, arreglo)
@@ -565,6 +618,67 @@ Partial Class FrmRevisionTesisAsesor
             codigo_dot = 0
         End Try
         Return codigo_dot
+    End Function
+
+    Private Sub EnviarNotificacionObservacion(ByVal codigo_per_emisor As Integer, ByVal codigo_tfu_emisor As Integer, ByVal codigo_apl As Integer, ByVal codigo_Tes As Integer)
+        Try
+            Dim obj As New ClsConectarDatos
+            obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+            obj.AbrirConexion()
+            Dim dt As New Data.DataTable
+            dt = obj.TraerDataTable("SUST_DatosNotificacionObservacionAsesor", codigo_Tes)
+            obj.CerrarConexion()
+
+            If dt.Rows.Count > 0 Then
+
+                Dim codigo_envio As Integer = ClsComunicacionInstitucional.ObtenerCodigoEnvio(codigo_per_emisor, codigo_tfu_emisor, codigo_apl)
+                Dim correo_destino As String = ""
+                Dim mensaje As String = ""
+                Dim bandera As Integer = 0
+
+                For i As Integer = 0 To dt.Rows.Count - 1
+                    If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
+                        correo_destino = dt.Rows(i).Item("correo")
+                    Else
+                        correo_destino = "hcano@usat.edu.pe,ravalos@usat.edu.pe,csenmache@usat.edu.pe,yperez@usat.edu.pe"
+                    End If
+                    If ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "SUST", "MPBO", "1", codigo_per_emisor, "codigo_alu", dt.Rows(i).Item("codigo_alu"), codigo_apl, correo_destino, "", "", "", dt.Rows(i).Item("estudiante"), dt.Rows(i).Item("asesor"), dt.Rows(i).Item("Titulo_Tes")) Then
+                        mensaje += ", Notificación enviada al estudiante: " + dt.Rows(i).Item("estudiante")
+
+                    Else
+                        mensaje += ", No se pudo enviar notificación al estudiante: " + dt.Rows(i).Item("estudiante")
+                        bandera = bandera + 1
+                    End If
+                Next
+                'If bandera = 0 Then
+                '    ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "valida1", "fnMensaje('success','" + mensaje + "');", True)
+                'Else
+                '    ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "valida2", "fnMensaje('error','" + mensaje + "');", True)
+                'End If
+                Me.lblMensajeObservación.InnerText = Me.lblMensajeObservación.InnerText + mensaje
+            End If
+        Catch ex As Exception
+            'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "valida3", "fnMensaje('error','Operación no se ejecuto correctamente');", True)
+        End Try
+
+    End Sub
+
+    Private Function VerificarORCID(ByVal codigo_per As Integer) As Boolean
+        Dim dt As New Data.DataTable
+        Dim obj As New ClsConectarDatos
+        obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        obj.AbrirConexion()
+        dt = obj.TraerDataTable("SUST_VerificarIdentificadorORCID", codigo_per)
+        obj.CerrarConexion()
+        Dim mensaje As String = ""
+        If dt.Rows.Count > 0 Then
+            Return True
+        Else
+            mensaje = "<span>Estimado docente, no cuenta con el código orcid registrado en sus datos laborales. <span style=\'color:red;font-weight:bold;\'>Deberá ingresarlo en el módulo correspondiente y esperar la aprobación de Vicerrectorado de Investigación</span>, para poder realizar la aprobación de sus asesorados.</span>"
+            ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "msj", "MensajeValidacion('" + mensaje + "');", True)
+            Return False
+        End If
+
     End Function
 
 

@@ -13,6 +13,9 @@ Partial Class ComunicadoPersonal_frmComunicadoPersonalPDF
     Dim me_ComunicadoPersonal As e_ComunicadoPersonal
 
     Dim cod_user As Integer = 0
+    Dim tipo_comunicado As String = ""
+    Dim num_comunicado As Integer = 0
+
     Dim nombre_personal As String = ""
     Dim tipo_personal As String = ""
     Dim cargo_personal As String = ""
@@ -24,45 +27,12 @@ Partial Class ComunicadoPersonal_frmComunicadoPersonalPDF
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
-            Dim cod_user As String = Request("codigo_usu")
-
-            Dim dt As New Data.DataTable : me_ComunicadoPersonal = New e_ComunicadoPersonal
-            With me_ComunicadoPersonal
-                .operacion = "CP1"
-                .codigo_per = cod_user
-            End With
-
-            dt = md_ComunicadoPersonal.ListarComunicadoPersonal(me_ComunicadoPersonal)
-
-            Dim codigo_cpe As Integer = 0
-
-            If dt.Rows.Count > 0 Then
-                With dt.Rows(0)
-                    nombre_personal = .Item("nombre_personal")
-                    cargo_personal = .Item("cargo_personal")
-                    tipo_personal = .Item("tipo_cpe")
-                    fecha_entrega = .Item("fecha_entrega")
-                    fecha_trabajo = .Item("fecha_trabajo")
-
-                    If .Item("indDescarga_cpe").ToString.Trim.Equals("N") Then
-                        codigo_cpe = CInt(.Item("codigo_cpe"))
-                    End If
-                End With
-
-                If codigo_cpe > 0 Then
-                    me_ComunicadoPersonal = New e_ComunicadoPersonal
-
-                    With me_ComunicadoPersonal
-                        .operacion = "L"
-                        .codigo_cpe = codigo_cpe
-                        .cod_user = cod_user
-                    End With
-
-                    md_ComunicadoPersonal.RegistrarComunicadoPersonal(me_ComunicadoPersonal)
-                End If
-            End If
+            cod_user = Request("codigo_usu")
+            tipo_comunicado = Request("tipo_comunicado")
+            num_comunicado = Request("num_comunicado")            
 
             Call GenerarDocumento()
+
         Catch ex As Exception
             Throw ex
         End Try
@@ -73,6 +43,89 @@ Partial Class ComunicadoPersonal_frmComunicadoPersonalPDF
 #Region "Metodos"
 
     Private Sub GenerarDocumento()
+        Try
+            Dim dt As New Data.DataTable : me_ComunicadoPersonal = New e_ComunicadoPersonal
+
+            Select Case tipo_comunicado
+                Case "TRABAJO_REMOTO" 'COMUNICADO DE TRABAJO REMOTO
+                    With me_ComunicadoPersonal
+                        .operacion = "CP1"
+                        .codigo_per = cod_user
+                        .numeroComunicado_cpe = num_comunicado
+                    End With
+
+                    dt = md_ComunicadoPersonal.ListarComunicadoPersonal(me_ComunicadoPersonal)
+
+                    Dim codigo_cpe As Integer = 0
+
+                    If dt.Rows.Count > 0 Then
+                        With dt.Rows(0)
+                            nombre_personal = .Item("nombre_personal")
+                            cargo_personal = .Item("cargo_personal")
+                            tipo_personal = .Item("tipo_cpe")
+                            fecha_entrega = .Item("fecha_entrega")
+                            fecha_trabajo = .Item("fecha_trabajo")
+
+                            If .Item("indDescarga_cpe").ToString.Trim.Equals("N") Then
+                                codigo_cpe = CInt(.Item("codigo_cpe"))
+                            End If
+                        End With
+
+                        If codigo_cpe > 0 Then
+                            me_ComunicadoPersonal = md_ComunicadoPersonal.GetComunicadoPersonal(0)
+
+                            With me_ComunicadoPersonal
+                                .operacion = "L"
+                                .codigo_cpe = codigo_cpe
+                                .cod_user = cod_user                                
+                            End With
+
+                            md_ComunicadoPersonal.RegistrarComunicadoPersonal(me_ComunicadoPersonal)
+                        End If
+                    End If
+
+                    Call GenerarDocumentoComunicado1()
+
+                Case "RIT" 'COMUNICADO DE REGLAMENTO INTERNO DE TRABAJO
+                    With me_ComunicadoPersonal
+                        .operacion = "RIT"
+                        .codigo_per = cod_user
+                        .numeroComunicado_cpe = num_comunicado
+                        .verificaVigencia = "N"
+                    End With
+
+                    dt = md_ComunicadoPersonal.ListarComunicadoPersonal(me_ComunicadoPersonal)
+                    Dim fecha_actual As DateTime = DateTime.Now
+
+                    If dt.Rows.Count = 0 Then
+                        me_ComunicadoPersonal = md_ComunicadoPersonal.GetComunicadoPersonal(0)
+
+                        With me_ComunicadoPersonal
+                            .operacion = "I"
+                            .cod_user = cod_user
+                            .numeroComunicado_cpe = num_comunicado
+                            .nombreComunicado_cpe = "REGLAMENTO INTERNO DE TRABAJO"
+                            .codigo_per = cod_user
+                            .fechaVigenciaIni_cpe = fecha_actual
+                            .fechaVigenciaFin_cpe = fecha_actual
+                            .indDescarga_cpe = "S"
+                            .fechaDescarga_cpe = fecha_actual
+                        End With
+
+                        md_ComunicadoPersonal.RegistrarComunicadoPersonal(me_ComunicadoPersonal)
+                    End If
+
+                    Dim script As String = ""
+                    script = "window.location.replace('../../librerianet/reglamentos/ritUsat.pdf');"
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "closewindows", script, True)
+
+            End Select
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Private Sub GenerarDocumentoComunicado1()
         Try
             Dim ms As New MemoryStream
             Dim writer As PdfWriter
@@ -129,22 +182,22 @@ Partial Class ComunicadoPersonal_frmComunicadoPersonalPDF
             ls_Parrafo.Add(ls_Linea)
 
             ls_Linea = New Phrase("De nuestra mayor consideración, " & vbCrLf & vbCrLf, fo_Letra)
-            ls_Parrafo.Add(ls_Linea)            
+            ls_Parrafo.Add(ls_Linea)
 
             ls_Linea = New Phrase("Como una medida preventiva a fin de evitar y/o reducir el riesgo de contagio del COVID-19, considerando la naturaleza de los servicios por los cuales fue contratado y respetando lo dispuesto por el Decreto Supremo N° 010-2020-TR, le comunicamos que desde el ", fo_Letra)
-            ls_Parrafo.Add(ls_Linea)            
+            ls_Parrafo.Add(ls_Linea)
 
             ls_Linea = New Phrase(fecha_trabajo & " ", fo_LetraNegrita)
             ls_Parrafo.Add(ls_Linea) 'Negrita            
 
             ls_Linea = New Phrase("usted ha estado ", fo_Letra)
-            ls_Parrafo.Add(ls_Linea)            
+            ls_Parrafo.Add(ls_Linea)
 
             ls_Linea = New Phrase("prestando servicios bajo la modalidad del trabajo remoto", fo_LetraNegritaSubrayada)
             ls_Parrafo.Add(ls_Linea) 'Negrita y subrayado            
 
             ls_Linea = New Phrase(", para lo cual pedimos tomar en consideración la siguiente información:" & vbCrLf & vbCrLf, fo_Letra)
-            ls_Parrafo.Add(ls_Linea)            
+            ls_Parrafo.Add(ls_Linea)
 
             ls_Linea = New Phrase("1. ", fo_LetraNegrita)
             ls_Parrafo.Add(ls_Linea) 'Negrita
@@ -394,7 +447,7 @@ Partial Class ComunicadoPersonal_frmComunicadoPersonalPDF
             Response.OutputStream.Flush()
             Response.End()
         Catch ex As Exception
-            
+            Throw ex
         End Try
     End Sub
 

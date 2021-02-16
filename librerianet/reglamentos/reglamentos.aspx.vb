@@ -237,7 +237,7 @@ Partial Class reglamentos
 
     Protected Sub Button8_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button8.Click
         'Response.Redirect("../../librerianet/reglamentos/R5219012.pdf?x=1")
-        Response.Redirect("../../librerianet/reglamentos/DIRECTIVA ASIGNACION CARGA LECTIVA Y NO LECTIVA DOCENTE USAT.pdf?x=1")
+        Response.Redirect("../../librerianet/reglamentos/DIRECTIVA ASIGNACION CARGA LECTIVA Y NO LECTIVA DEL DOCENTE USAT 2021.pdf?x=1")
     End Sub
 
     Protected Sub Button9_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button9.Click
@@ -251,6 +251,9 @@ Partial Class reglamentos
     'Protected Sub Button11_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button11.Click
     '    Response.Redirect("../../librerianet/reglamentos/PLAN DE CONTINGENCIAS USAT 2017.pdf?x=1")
     'End Sub
+    Protected Sub Button11_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button11.Click
+        Response.Redirect("../../librerianet/reglamentos/REGLAMENTO PREVENCIÓN HOSTIGAMIENTO SEXUAL.pdf?x=1")
+    End Sub
 
     Protected Sub Button12_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button12.Click
         Response.Redirect("../../librerianet/reglamentos/R5219016.pdf?x=1")
@@ -259,15 +262,15 @@ Partial Class reglamentos
     Protected Sub Button14_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button14.Click
         Response.Redirect("../../librerianet/reglamentos/R5219024.pdf?x=1")
     End Sub
-    'Protected Sub Button15_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button14.Click
+    'Protected Sub Button15_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button15.Click
     '    Response.Redirect("../../librerianet/reglamentos/R5219021.pdf?x=1")
     'End Sub
 
     Protected Sub btnDirPlanEstrategico_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDirPlanEstrategico.Click
         Response.Redirect("../../librerianet/reglamentos/RegDirPlnEstOpe.pdf?x=1")
     End Sub
-	
-	Protected Sub cmdReglamento35_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmdReglamento35.Click
+
+    Protected Sub cmdReglamento35_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmdReglamento35.Click
         Response.Redirect("../../librerianet/reglamentos/LINEAMIENTOS_ASESORIAS_TESIS_v1.pdf?x=1")
     End Sub
 
@@ -275,4 +278,15 @@ Partial Class reglamentos
         Response.Redirect("../../librerianet/reglamentos/Lineamientos para Sustentación de Tesis 2020-1.pdf?x=1")
     End Sub
 
+    Protected Sub cmdReglamento37_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmdReglamento37.Click
+        Response.Redirect("../../librerianet/reglamentos/LINEAMIENTOS_DOCENTES_DE_TUTORIA_ACADEMICA_COMPLEMENTARIA_ESTUDIANTES_GO-2020-II.pdf?x=1")
+    End Sub
+    Protected Sub cmdReglamento38_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmdReglamento38.Click
+        Response.Redirect("../../librerianet/reglamentos/Dis_Gestion_Calidad_Usat.pdf?x=1")
+    End Sub
+    Protected Sub Button15_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button15.Click
+
+        Response.Redirect("../../librerianet/reglamentos/DIRECTIVA_GRUPOS_DE_INVESTIGACION.pdf")
+
+    End Sub
 End Class

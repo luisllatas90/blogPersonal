@@ -61,6 +61,7 @@ Partial Class academico_estudiante_separacion_Separacion
         If datos.Rows.Count > 0 Then
             With datos.Rows(0)
                 Panel1.Visible = True
+                Me.cboCicloAcademico.enabled = True
                 Me.LblCodigoUniv.Text = .Item("codigouniver_alu").ToString
 
                 Me.LblNombres.Text = .Item("nombres").ToString
@@ -80,6 +81,7 @@ Partial Class academico_estudiante_separacion_Separacion
                 End If
                 'Session("codigo_alu") = datos.Rows(0).Item("codigo_alu").ToString
                 Me.Panel1.Visible = True
+                CargarCombos()
             End With
         Else
 
@@ -115,7 +117,16 @@ Partial Class academico_estudiante_separacion_Separacion
             Me.lnkAdministrar.Visible = False
         End If
     End Sub
+    Private Sub CargarCombos()
 
+        Dim objcnx As New ClsConectarDatos
+        Dim objFun As New ClsFunciones
+        objcnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        objcnx.AbrirConexion()
+        objFun.CargarListas(Me.cboCicloAcademico, objcnx.TraerDataTable("ConsultarCicloAcademico", "DA", ""), "codigo_cac", "descripcion_cac")
+        objcnx.CerrarConexion()
+
+    End Sub
 
     Protected Sub lnkHistorico_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkHistorico.Click
         Try
@@ -149,23 +160,25 @@ Partial Class academico_estudiante_separacion_Separacion
             Dim objCnx As New ClsConectarDatos
             Dim objFun As New ClsFunciones
             Dim verificar As New Data.DataTable
-
+            Dim codigo_act As Integer = 0
 
             '### Consultar separación vigente ### 
             objCnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
             objCnx.AbrirConexion()
-
-            verificar = objCnx.TraerDataTable("ConsultarCronogramaSeparacion", 0, Request.QueryString("mod"))
+            codigo_act = Me.cboCicloAcademico.SelectedValue
+            verificar = objCnx.TraerDataTable("ConsultarCronogramaSeparacionv2", codigo_act, "REG. SEP", Request.QueryString("mod"))
             If verificar.Rows.Count > 0 Then
             
                 If CType(Date.Now(), Date) >= CType(verificar.Rows(0).Item("fechaIni_Cro"), Date) And CType(Date.Now(), Date) <= CType(verificar.Rows(0).Item("fechaFin_Cro"), Date) Then
 
-
+                    Me.cboCicloAcademico.enabled = False
                     Me.pnlHistorico.Visible = False
                     Me.pnlAdministrar.Visible = False
                     Me.pnlDatos.Visible = True
                     Me.txtMotivo.Text = ""
                     Me.txtFecha.Text = ""
+
+                  
 
                     datos = objCnx.TraerDataTable("ACAD_ConsultarSeparacionVigente", Me.GvAlumnos.SelectedValue)
                     'objFun.CargarListas(cboTipo, objCnx.TraerDataTable("ACAD_ConsultarTipoSeparacionV2"), "codigo_tse", "descripcion_tse", "<-- Seleccione -->")
@@ -203,7 +216,11 @@ Partial Class academico_estudiante_separacion_Separacion
                     Me.lnkHistorico.Font.Bold = False
                     Me.txtFecha.Text = Date.Now.AddYears(1).ToString("dd/MM/yyyy")
                     'Response.Write(Me.GvAlumnos.SelectedValue)
+
+
+
                 Else
+                    Me.cboCicloAcademico.enabled = True
                     ClientScript.RegisterStartupScript(Me.GetType, "Fuera", "alert('La separación de alumnos se podrá registrar dentro del siguiente rango de fechas: " + verificar.Rows(0).Item("fechaIni_Cro").ToString + " hasta el " + verificar.Rows(0).Item("fechaFin_Cro").ToString + "')", True)
                 End If
             Else
@@ -221,6 +238,14 @@ Partial Class academico_estudiante_separacion_Separacion
             Dim valoresdevueltos(1) As Boolean
             Dim rpta As Boolean
 
+
+            If Me.cboCicloAcademico.SelectedValue = -1 Then
+
+                ClientScript.RegisterStartupScript(Me.GetType, "Fuera", "alert('Seleccione Semestre Academico')", True)
+                Exit Sub
+            End If
+
+
             If Me.cboTipo.SelectedValue <> 2 Or Me.cboTipo.SelectedValue <> 4 Then
                 If CDate(Me.txtFecha.Text) < Now.Date Then
                     ClientScript.RegisterStartupScript(Me.GetType, "Fecha", "alert('La fecha final de la separación debe ser mayor a la fecha actual')", True)
@@ -228,27 +253,33 @@ Partial Class academico_estudiante_separacion_Separacion
                 End If
             End If
 
+
+
             objCnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
             objCnx.AbrirConexion()
             If Me.cboTipo.SelectedValue = 2 Or Me.cboTipo.SelectedValue = 4 Then 'separacion definitiva
                 'ClientScript.RegisterStartupScript(Me.GetType, "Formulario", "window.open('frmSeparacionDefinitiva.aspx?codUniv=" & Me.LblCodigoUniv.Text & "&res=" & Me.txtNroResolucion.Text & "')", True)
                 'Response.Write("<script>window.open('frmSeparacionDefinitiva.aspx?codUniv=" & Me.LblCodigoUniv.Text & "&res=" & Me.txtNroResolucion.Text & "&tipo=" & Me.cboTipo.SelectedValue & "&codSep=''')</script>")
-                objCnx.Ejecutar("ACAD_AgregarSeparacionAlumno", Me.txtMotivo.Text, DBNull.Value, Me.GvAlumnos.SelectedValue, Session("id_per"), Me.cboTipo.SelectedValue, Me.hddCodigo_sep.Value, Me.txtNroResolucion.Text, 0).copyto(valoresdevueltos, 0)
+                'objCnx.Ejecutar("ACAD_AgregarSeparacionAlumno", Me.txtMotivo.Text, DBNull.Value, Me.GvAlumnos.SelectedValue, Session("id_per"), Me.cboTipo.SelectedValue, Me.hddCodigo_sep.Value, Me.txtNroResolucion.Text, 0).copyto(valoresdevueltos, 0)
+                objCnx.Ejecutar("ACAD_AgregarSeparacionAlumnov2", Me.cboCicloAcademico.SelectedValue, Me.txtMotivo.Text, DBNull.Value, Me.GvAlumnos.SelectedValue, Session("id_per"), Me.cboTipo.SelectedValue, Me.hddCodigo_sep.Value, Me.txtNroResolucion.Text, 0).copyto(valoresdevueltos, 0)
             Else
                 'ClientScript.RegisterStartupScript(Me.GetType, "Formulario", "window.open('frmSeparacionDefinitiva.aspx?codUniv=" & Me.LblCodigoUniv.Text & "&res=" & Me.txtNroResolucion.Text & "')", True)
                 'Response.Write("<script>window.open('frmSeparacionDefinitiva.aspx?codUniv=" & Me.LblCodigoUniv.Text & "&res=" & Me.txtNroResolucion.Text & "&tipo=" & Me.cboTipo.SelectedValue & "&codSep=''')</script>")
-                objCnx.Ejecutar("ACAD_AgregarSeparacionAlumno", Me.txtMotivo.Text, Me.txtFecha.Text, Me.GvAlumnos.SelectedValue, Session("id_per"), Me.cboTipo.SelectedValue, Me.hddCodigo_sep.Value, Me.txtNroResolucion.Text, 0).copyto(valoresdevueltos, 0)
+                'objCnx.Ejecutar("ACAD_AgregarSeparacionAlumno", Me.txtMotivo.Text, Me.txtFecha.Text, Me.GvAlumnos.SelectedValue, Session("id_per"), Me.cboTipo.SelectedValue, Me.hddCodigo_sep.Value, Me.txtNroResolucion.Text, 0).copyto(valoresdevueltos, 0)
+                objCnx.Ejecutar("ACAD_AgregarSeparacionAlumnov2", Me.cboCicloAcademico.SelectedValue, Me.txtMotivo.Text, Me.txtFecha.Text, Me.GvAlumnos.SelectedValue, Session("id_per"), Me.cboTipo.SelectedValue, Me.hddCodigo_sep.Value, Me.txtNroResolucion.Text, 0).copyto(valoresdevueltos, 0)
             End If
             objCnx.CerrarConexion()
             rpta = valoresdevueltos(0)
+            'Response.Write(rpta)
             If rpta = True Then
+                Me.cboCicloAcademico.enabled = True
                 ClientScript.RegisterStartupScript(Me.GetType, "Guardado", "alert('Se guardaron correctamente los datos')", True)
             Else
                 ClientScript.RegisterStartupScript(Me.GetType, "Actualizado", "alert('Se actualizaron los datos de la separación vigente del estudiante')", True)
             End If
-            lnkHistorico_Click(sender, e)            
+            lnkHistorico_Click(sender, e)
         Catch ex As Exception
-            ClientScript.RegisterStartupScript(Me.GetType, "Error", "alert('" & ex.Message & "')", True)
+            ClientScript.RegisterStartupScript(Me.GetType, "Error", "alert('" & ex.Message.Replace("'", " ").Replace(Chr(10), " ").Replace(Chr(13), " ") & "')", True)
         End Try
     End Sub
 

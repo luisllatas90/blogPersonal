@@ -469,7 +469,8 @@ var DateTimePicker = function ($, moment) {
             } else {
                 if (!this._options.keepInvalid) {
                     if (this.input !== undefined) {
-                        this.input.val('' + (this.unset ? '' : this._dates[index].format(this.actualFormat)));
+                        // this.input.val('' + (this.unset ? '' : this._dates[index].format(this.actualFormat))); andy.diaz 05/01/2020
+                        this.input.val('' + (this.unset ? '' : ( this._dates[index] === undefined ? '' : this._dates[index].format(this.actualFormat))));
                         this.input.trigger('input');
                     }
                 } else {

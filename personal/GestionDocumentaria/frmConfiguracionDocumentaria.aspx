@@ -15,8 +15,8 @@
     <meta http-equiv="Pragma" content="no-cache" />    
     
     <!--Boopstrap-->    
-    <link href="../assets/bootstrap-4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    
+    <!--<link href="../assets/bootstrap-4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
+     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> <!--hcano-->
     <!-- Iconos -->    
     <link rel="stylesheet" href="../assets/fontawesome-5.2/css/all.min.css"/> 
     
@@ -25,11 +25,12 @@
     <link href="../Alumni/css/sweetalert/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     
     <!--Jquery-->
-    <script src="../assets/jquery/jquery-3.3.1.js" type="text/javascript"></script>
-    <%-- <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>--%>
+    <script type="text/javascript" src='../assets/js/jquery.js'></script>
+    <!--<script src="../assets/jquery/jquery-3.3.1.js" type="text/javascript"></script>-->
+    
     <!--Modal -->
-    <script src="../assets/bootstrap-4.1/js/bootstrap.bundle.js" type="text/javascript"></script>
-        
+    <%-- <script src="../assets/bootstrap-4.1/js/bootstrap.bundle.js" type="text/javascript"></script>--%>
+        <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- Datatable -->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
@@ -100,9 +101,92 @@
         
        /*  fin formato grilla */
         
-        
+       
+       function alertConfirm(ctl, event, titulo, icono) {
+            // STORE HREF ATTRIBUTE OF LINK CTL (THIS) BUTTON
+            var defaultAction = $(ctl).prop("href");          
+
+            // CANCEL DEFAULT LINK BEHAVIOUR
+            event.preventDefault();            
+            
+            swal({
+                title: titulo,                
+                type: icono,
+                showCancelButton: true ,
+                confirmButtonText: "SI" ,
+                confirmButtonColor: "#45c1e6" ,
+                cancelButtonText: "NO"
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+                    window.location.href = defaultAction;
+                    return true;
+                } else {
+                    return false;
+                }
+            }).catch(swal.noop);
+        } 
+
     </script>
     
+     <style type="text/css">            
+        body
+        {
+            padding-right: 0 !important;
+        }
+        .modal-open
+        {
+            overflow: inherit;
+        }
+        .form table th
+        {
+            text-align: center;
+        }
+        .form-group
+        {
+            margin: 6px;
+        }
+        .form-control
+        {
+            color: Black;
+        }
+        .bootstrap-select .dropdown-toggle .filter-option
+        {
+            position: relative;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-left: 0px;
+        }
+        .dropdown-menu open
+        {
+            min-width: 0px;
+            max-width: 500px;
+        }
+        .table > thead > tr > th
+        {
+            color: White;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .table > tbody > tr > td
+        {
+            color: black;
+            vertical-align: middle;
+        }
+        .table tbody tr th
+        {
+            color: White;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+        }
+        #datetimepicker1 a
+        {
+            color: #337ab7;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+    </style>
     
     
     
@@ -112,138 +196,177 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager" runat="server">
         </asp:ScriptManager> 
-        <div class="container-fluid">   
-            <br />
-            <div class="panel-cabecera">
-            <div class="card">             
-                <div class="card-header">CONFIGURACIÓN DE DOCUMENTOS</div>      
-                <div class="card-body">
-                     <asp:UpdatePanel ID="udpFiltros" runat="server" UpdateMode="Conditional" >
-	                    <ContentTemplate>	                             
-                    <div class="row">
-                            <label class="col-sm-1 control-label" for="ddlCodigo_are">Area:</label>
-                            <div class="col-sm-4">                              
-                                <asp:DropDownList ID="ddlCodigo_are" runat="server" class="form-control">
-                                </asp:DropDownList>
-                            </div>
-                            <div class="col-sm-1" >
-                                <asp:LinkButton ID="lbNuevaArea" runat="server" CssClass="btn btn-primary" ToolTip="Nueva Area">
-                                    <span><i class="fa fa-file"></i></span>
-						        </asp:LinkButton>
-                            </div>
-                            <label class="col-sm-1 control-label" for="ddlCodigo_tfu">Función:</label>
-                            <div class="col-sm-4">
-                               <%-- <select runat="server" name="ddlCodigo_tfu" id="ddlCodigo_tfu" class="form-control">
-                                </select>--%>
-                                <asp:DropDownList ID="ddlCodigo_tfu" runat="server" class="form-control">
-                                </asp:DropDownList>
-                            </div>                       
-                    </div>
-                    <br />
-                    <div class="row">
-                        <label class="col-sm-1 control-label" for="ddlCodigo_are">Tipo:</label>
-                        <div class="col-sm-4">                              
-                            <asp:DropDownList ID="ddlCodigo_tid" runat="server" class="form-control">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-1" >
-                            <asp:LinkButton ID="lbNuevoTipDoc" runat="server" CssClass="btn btn-primary" ToolTip="Nuevo Tipo de Documento">
-                            <span><i class="fa fa-file"></i></span>
-						    </asp:LinkButton>
-                        </div>
-                        <label class="col-sm-1 control-label" for="ddlCodigo_are">Documento:</label>
-                        <div class="col-sm-4">                              
-                            <asp:DropDownList ID="ddlDocumento" runat="server" class="form-control">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-sm-1" >
-                            <asp:LinkButton ID="lbNuevoDoc" runat="server" CssClass="btn btn-primary" ToolTip="Nuevo Documento">
-                            <span><i class="fa fa-file"></i></span>
-						    </asp:LinkButton>
-                        </div>
-                    </div>
-                    <br />                   
-                    <div class="row">
-                        <label class="col-sm-1 control-label" for="ddlEstado_doc">Estado:</label>
-                        <div class="col-sm-2">                           
-                            <asp:DropDownList ID="ddlEstado_cda" runat="server" class="form-control">
-                            </asp:DropDownList>
-                        </div>  
-                        <div class="col-sm-4" >                    
-                             <div class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" id="chkIndFirma" runat="server" >
-                              <label class="custom-control-label" for="chkIndFirma">Requiere Firma</label>
-                            </div>
-                        </div>                                             
-                        <div class="col-sm-4" >
-                           <asp:Image ID="imgIndicacion" runat="server"  style="float:inherit" />
-                        </div>
-                        
-                         <asp:TextBox ID="txtCodigo_cda" runat="server" Visible="false"></asp:TextBox>  
-                        <div class="col-sm-3"></div>
-                        
-                    </div>
-                   
-                    <div class="row">
-                        <div class="col-sm-1">
-	                        <asp:LinkButton ID="lbAgregar" runat="server" CssClass="btn btn-success" ToolTip="Agregar">
-                            <span><i class="fa fa-plus-square"></i></span> &nbsp; &nbsp;Agregar
-						    </asp:LinkButton>
-	                    </div>
-	                     <div class="col-sm-1">
-	                        <asp:LinkButton ID="lbModificar" runat="server" CssClass="btn btn-info" ToolTip="Modificar">
-                            <span><i class="fa fa-edit"></i></span> &nbsp; &nbsp;Modificar
-						    </asp:LinkButton>
-	                    </div>              
-                    </div>
-                    <hr />                    
-                       </ContentTemplate>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+           <%-- <div class="card"> --%>            
+                <div class="panel-heading"><b>CONFIGURACIÓN DE DOCUMENTOS</b></div>      
+                <div class="panel-body">   
+                             
+                    <asp:UpdatePanel ID="udpListadoConf" runat="server" UpdateMode="Conditional" >
+	                    <ContentTemplate>
+	                        <div id="divLista" runat="server" visible="true">
+	                            <div class="form-horizontal">
+	                                <div class="form-group">
+	                                    <asp:Label ID="Label7" runat="server" CssClass="col-sm-1 control-label" for="ddlCodigo_are">Documento:</asp:Label>                                    
+                                        <div class="col-sm-4">                              
+                                            <asp:DropDownList ID="ddlDocumentoSel" runat="server" class="form-control" AutoPostBack = "true">
+                                            </asp:DropDownList>
+                                        </div>
+	                                </div>
+	                                <div class="form-group">
+	                                   
+                                        <div class="col-sm-1">
+                                            <asp:LinkButton ID="lbAdd" runat="server" CssClass="btn btn-success" ToolTip="Agregar">	                        
+                                            <span><i class="fa fa-plus-square"></i></span> &nbsp; &nbsp;Agregar
+				                            </asp:LinkButton>
+                                        </div>                                        
+                                    </div>
+                                    <hr />  
+	                            </div> 	                                        
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:GridView ID="gvListaConfiguraDocumnetos" runat="server" CssClass="table table-striped table-bordered" 
+                                        AutoGenerateColumns="False" DataKeyNames="codigo_cda, indFirma">
+                                        <RowStyle Font-Size="12px" /> 
+                                            <Columns>
+                                                <asp:BoundField DataField="descripcion_tid" HeaderText="TIPO DOCUMENTO" HeaderStyle-Width="15%" />                                                                                                                                 
+                                                <asp:BoundField DataField="descripcion_doc" HeaderText="DOCUMENTO" HeaderStyle-Width="15%" />                                  
+                                                <asp:BoundField DataField="descripcion_are" HeaderText="ÁREA" HeaderStyle-Width="15%" />
+                                                <asp:BoundField DataField="descripcion_Tfu" HeaderText="FUNCIÓN" HeaderStyle-Width="15%" />
+                                                <asp:BoundField DataField="abreviatura_tid" HeaderText="ABREV. TIPO" HeaderStyle-Width="5%" />
+                                                <asp:BoundField DataField="abreviatura_doc" HeaderText="ABREV. DOCUMENTO" HeaderStyle-Width="8%" />
+                                                <asp:BoundField DataField="abreviatura_are" HeaderText="ABREV. ÁREA" HeaderStyle-Width="5%" />
+                                                <asp:BoundField DataField="correlativo" HeaderText="CORRELATIVO" />
+                                                <%--<asp:BoundField DataField="indFirma" HeaderText="FIRMA" Visible = "false"  />--%>
+                                                <asp:BoundField DataField="estado_cda" HeaderText="ESTADO" />   
+                                                <asp:TemplateField HeaderText="OPCIÓN" HeaderStyle-Width="8%">            
+			                                        <ItemTemplate>
+                                                        <asp:LinkButton ID="btnSelEditar" ToolTip="Editar" runat="server" 
+					                                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 
+					                                        CommandName="editConfiDoc" CssClass="btn btn-success btn-sm">
+                                                            <span><i class="fa fa-edit"></i></span>
+						                                </asp:LinkButton>
+						                                 <asp:LinkButton ID="btnFirmar" ToolTip="Firmas" runat="server" 
+					                                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 
+					                                        CommandName="editFirmas" CssClass="btn btn-danger btn-sm">
+                                                            <span><i class="fa fa-barcode"></i></span>
+						                                </asp:LinkButton>
+                                                    </ItemTemplate>                                            
+                                                </asp:TemplateField>
+                                            </Columns>
+                                        <HeaderStyle BackColor="#E33439" Font-Bold="True" Font-Size="12px" ForeColor="White" />                                 
+                                        </asp:GridView>     
+                                    </div>                          
+                                </div>
+	                        </div>	                                            
+                        </ContentTemplate>
+                        <Triggers>
+                          
+                            <asp:AsyncPostBackTrigger ControlID="ddlDocumentoSel" EventName="SelectedIndexChanged" />
+                            
+                        </Triggers>
 	                 </asp:UpdatePanel>
 	                 
-                     <asp:UpdatePanel ID="udpListadoConf" runat="server" UpdateMode="Conditional" >
+	                <asp:UpdatePanel ID="udpFiltros" runat="server" UpdateMode="Conditional" >	                    
 	                    <ContentTemplate>
-                    
-                    <div class="row">
-                        <div class="col-md-12">
-                            <asp:GridView ID="gvListaConfiguraDocumnetos" runat="server" CssClass="table table-striped table-bordered" 
-                            AutoGenerateColumns="False" DataKeyNames="codigo_cda, indFirma">
-                            <RowStyle Font-Size="12px" /> 
-                            <Columns>
-                                <asp:BoundField DataField="descripcion_tid" HeaderText="TIPO DOCUMENTO" />                                                                                                                                 
-                                <asp:BoundField DataField="descripcion_doc" HeaderText="DOCUMENTO" />                                  
-                                <asp:BoundField DataField="descripcion_are" HeaderText="AREA" />
-                                <asp:BoundField DataField="descripcion_Tfu" HeaderText="FUNCION" />
-                                <asp:BoundField DataField="abreviatura_tid" HeaderText="ABREV. TIPO" />
-                                <asp:BoundField DataField="abreviatura_doc" HeaderText="ABREV. DOCUMENTO" />
-                                <asp:BoundField DataField="abreviatura_are" HeaderText="ABREV. AREA" />
-                                <asp:BoundField DataField="correlativo" HeaderText="CORRELATIVO" />
-                                <%--<asp:BoundField DataField="indFirma" HeaderText="FIRMA" Visible = "false"  />--%>
-                                <asp:BoundField DataField="estado_cda" HeaderText="ESTADO" />   
-                                <asp:TemplateField HeaderText="OPCION">            
-			                        <ItemTemplate>
-                                        <asp:LinkButton ID="btnSelEditar" ToolTip="Editar" runat="server" 
-					                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 
-					                        CommandName="editConfiDoc" CssClass="btn btn-success btn-sm">
-                                            <span><i class="fa fa-edit"></i></span>
-						                </asp:LinkButton>
-						                 <asp:LinkButton ID="btnFirmar" ToolTip="Firmas" runat="server" 
-					                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 
-					                        CommandName="editFirmas" CssClass="btn btn-danger btn-sm">
-                                            <span><i class="fa fa-barcode"></i></span>
-						                </asp:LinkButton>
-                                    </ItemTemplate>                                            
-                                </asp:TemplateField>
-                            </Columns>
-                            <HeaderStyle BackColor="#E33439" Font-Bold="True" Font-Size="12px" ForeColor="White" />                                 
-                            </asp:GridView>     
-                        </div>                          
-                    </div>
-                    
+	                        <div id="divActualiza" runat="server" visible="false">
+	                            <div class="col-sm-12 col-md-12" style="">
+                                    <div class="form-group text-center">
+                                        <asp:Button runat="server" ID="btnResgresar" CssClass="btn btn-success" Text="Regresar" />
+                                    </div>  
+                                    <hr />                       
+                                </div>                       
+	                            <div class="form-horizontal">
+	                                <div class="form-group">
+                                        <asp:Label ID="Label1" runat="server" CssClass="col-sm-1 control-label" for="ddlCodigo_are">Área:</asp:Label>
+                                        <div class="col-sm-4">                              
+                                            <asp:DropDownList ID="ddlCodigo_are" runat="server" class="form-control">
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div class="col-sm-1" >
+                                            <asp:LinkButton ID="lbNuevaArea" runat="server" CssClass="btn btn-primary" ToolTip="Nueva Área">
+                                                <span><i class="fa fa-file"></i></span>
+						                    </asp:LinkButton>
+                                        </div>
+                                        <asp:Label ID="Label2" runat="server" CssClass="col-sm-1 control-label" for="ddlCodigo_are">Función:</asp:Label>                                    
+                                        <div class="col-sm-4">                                     
+                                            <asp:DropDownList ID="ddlCodigo_tfu" runat="server" class="form-control">
+                                            </asp:DropDownList>
+                                        </div>                       
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label ID="Label3" runat="server" CssClass="col-sm-1 control-label" for="ddlCodigo_are">Tipo:</asp:Label>                                    
+                                        <div class="col-sm-4">                              
+                                            <asp:DropDownList ID="ddlCodigo_tid" runat="server" class="form-control">
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div class="col-sm-1" >
+                                            <asp:LinkButton ID="lbNuevoTipDoc" runat="server" CssClass="btn btn-primary" ToolTip="Nuevo Tipo de Documento">
+                                            <span><i class="fa fa-file"></i></span>
+						                    </asp:LinkButton>
+                                        </div>
+                                        <asp:Label ID="Label4" runat="server" CssClass="col-sm-1 control-label" for="ddlCodigo_are">Documento:</asp:Label>                                    
+                                        <div class="col-sm-4">                              
+                                            <asp:DropDownList ID="ddlDocumento" runat="server" class="form-control">
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div class="col-sm-1" >
+                                            <asp:LinkButton ID="lbNuevoDoc" runat="server" CssClass="btn btn-primary" ToolTip="Nuevo Documento">
+                                            <span><i class="fa fa-file"></i></span>
+						                    </asp:LinkButton>
+                                        </div>
+                                    </div>                                                   
+                                    <div class="form-group">
+                                        <asp:Label ID="Label5" runat="server" CssClass="col-sm-1 control-label" for="Label5">Estado:</asp:Label>                                    
+                                        <div class="col-sm-2">                           
+                                            <asp:DropDownList ID="ddlEstado_cda" runat="server" class="form-control">
+                                            </asp:DropDownList>
+                                        </div>  
+                                        <div class="col-sm-3">
+                                              <input type="checkbox" class="custom-control-input" id="chkIndFirma" runat="server" />
+                                              <asp:Label ID="Label6" runat="server" class="custom-control-label" for="Label6">Requiere Firma</asp:Label>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-3" >
+                                            <asp:Image ID="imgIndicacion" runat="server"  style="float:inherit" Width="100%" Height="100%" />
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                                                     
+                                        
+                                        
+                                         <asp:TextBox ID="txtCodigo_cda" runat="server" Visible="false"></asp:TextBox>  
+                                      <%--  <div class="col-sm-3"></div>--%>
+                                
+                                    </div>                   
+                                    <div class="form-group">
+                                       <%-- <div class="col-sm-1">
+	                                        <asp:LinkButton ID="lbAgregar" runat="server" CssClass="btn btn-success" ToolTip="Agregar"
+	                                        OnClientClick="return alertConfirm(this, event, '¿Está seguro de agregar la configuración del documento?', 'warning');">	                        
+                                            <span><i class="fa fa-plus-square"></i></span> &nbsp; &nbsp;Agregar
+						                    </asp:LinkButton>
+	                                    </div>
+	                                    <div class="col-sm-1">
+	                                        <asp:LinkButton ID="lbModificar" runat="server" CssClass="btn btn-info" ToolTip="Modificar"
+	                                        OnClientClick="return alertConfirm(this, event, '¿Está seguro de modificar la configuración del documento?', 'warning');">
+                                            <span><i class="fa fa-edit"></i></span> &nbsp; &nbsp;Modificar
+						                    </asp:LinkButton>
+	                                    </div>--%>
+	                                    <div class="col-sm-1">
+	                                        <asp:LinkButton ID="lbGuardarConf" runat="server" CssClass="btn btn-primary" ToolTip="Guardar"
+	                                        OnClientClick="return alertConfirm(this, event, '¿Está seguro de guardar la configuración del documento?', 'warning');">	                        
+                                            <span><i class="fa fa-save"></i></span> &nbsp; &nbsp;Guardar
+						                    </asp:LinkButton>
+	                                    </div>              
+                                    </div>
+                                <hr />                    
+	                        </div>
+	                        </div>
+	                        
                         </ContentTemplate>
-	                 </asp:UpdatePanel>
+	                </asp:UpdatePanel>
 	                 
                 </div>
-            </div>   
+           <%-- </div>   --%>
         </div>   
         </div>
     <!-- Modal Area -->
@@ -288,9 +411,9 @@
                                         AutoGenerateColumns="False" DataKeyNames="codigo_are">
                                         <RowStyle Font-Size="12px" /> 
                                         <Columns>                                                                                                                             
-                                            <asp:BoundField DataField="descripcion_are" HeaderText="AREA" />
+                                            <asp:BoundField DataField="descripcion_are" HeaderText="ÁREA" />
                                             <asp:BoundField DataField="abreviatura_are" HeaderText="ABREV." />   
-                                            <asp:TemplateField HeaderText="OPCION">            
+                                            <asp:TemplateField HeaderText="OPCIÓN">            
 			                                    <ItemTemplate>
                                                     <asp:LinkButton ID="btnSelEditarArea" ToolTip="Editar Área" runat="server" 
 					                                    CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 
@@ -352,9 +475,9 @@
                                         AutoGenerateColumns="False" DataKeyNames="codigo_tid">
                                         <RowStyle Font-Size="12px" /> 
                                         <Columns>                                                                                                                             
-                                            <asp:BoundField DataField="descripcion_tid" HeaderText="AREA" />
+                                            <asp:BoundField DataField="descripcion_tid" HeaderText="ÁREA" />
                                             <asp:BoundField DataField="abreviatura_tid" HeaderText="ABREV." />   
-                                            <asp:TemplateField HeaderText="OPCION">            
+                                            <asp:TemplateField HeaderText="OPCIÓN">            
 			                                    <ItemTemplate>
                                                     <asp:LinkButton ID="btnSelEditarDoc" ToolTip="Editar Tipo Documento" runat="server" 
 					                                    CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 
@@ -417,7 +540,7 @@
                                         <Columns>                                                                                                                             
                                             <asp:BoundField DataField="descripcion_doc" HeaderText="DOCUMENTO" />
                                             <asp:BoundField DataField="abreviatura_doc" HeaderText="ABREV." />   
-                                            <asp:TemplateField HeaderText="OPCION">            
+                                            <asp:TemplateField HeaderText="OPCIÓN">            
 			                                    <ItemTemplate>
                                                     <asp:LinkButton ID="btnSelEditarDocumento" ToolTip="Editar Documento" runat="server" 
 					                                    CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 
@@ -467,7 +590,7 @@
                                 <div class="row">
                                     <label class="col-sm-2 control-label" for="ddlCodigo_are">Perfil Usuario:</label>
                                     <div class="col-sm-8">                              
-                                        <asp:DropDownList ID="ddlCodigo_tfu_modFma" runat="server" class="form-control">                                        
+                                        <asp:DropDownList ID="ddlCodigo_tfu_modFma" runat="server" class="form-control" AutoPostBack = "true">                                        
                                         </asp:DropDownList>
                                     </div>
                                 </div>
@@ -475,7 +598,7 @@
                                 <div class="row">
                                     <label class="col-sm-2 control-label" for="ddlCodigo_are">Alcance:</label>
                                     <div class="col-sm-8">                              
-                                        <asp:DropDownList ID="ddlAlcance_modFma" runat="server" class="form-control">                                        
+                                        <asp:DropDownList ID="ddlAlcance_modFma" runat="server" class="form-control" AutoPostBack="true" >                                        
                                         </asp:DropDownList>
                                     </div>
                                 </div>
@@ -498,14 +621,14 @@
                                 <div class="row">
                                      <div class="col-md-12">
                                         <asp:GridView ID="gvConfiguraFirma" runat="server" CssClass="table table-striped table-bordered" 
-                                        AutoGenerateColumns="False" DataKeyNames="">
+                                        AutoGenerateColumns="False" DataKeyNames="codigo_fma">
                                         <RowStyle Font-Size="12px" /> 
                                         <Columns>                                                                                                                             
-                                            <asp:BoundField DataField="codigo_fma" HeaderText="CODIGO" />
+                                            <asp:BoundField DataField="codigo_fma" HeaderText="CÓDIGO" />
                                             <asp:BoundField DataField="descripcion_tfu" HeaderText="TIPO" />
                                             <asp:BoundField DataField="alcance" HeaderText="ALCANCE" />
                                             <asp:BoundField DataField="orden_fma" HeaderText="ORDEN" />   
-                                            <asp:TemplateField HeaderText="OPCION">            
+                                            <asp:TemplateField HeaderText="OPCIÓN">            
 			                                    <ItemTemplate>
                                                     <asp:LinkButton ID="editFirma" ToolTip="Editar Documento" runat="server" 
 					                                    CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 

@@ -1,4 +1,7 @@
-﻿
+﻿Imports System
+Imports System.Web
+Imports System.Web.HttpWorkerRequest
+
 Partial Class administrativo_propuestas2_Miembros_frmConsejoFacultad
     Inherits System.Web.UI.Page
     Dim ObjCnx As New ClsSqlServer(ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString)
@@ -28,7 +31,7 @@ Partial Class administrativo_propuestas2_Miembros_frmConsejoFacultad
     Sub cargarPersonal()
         Dim tb As New Data.DataTable
 
-        ' Response.Write("PRP_ListaPersonalConsejo_POA " & Me.ddlFacultad.SelectedValue & ",'T'")
+        Response.Write("PRP_ListaPersonalConsejo_POA " & Me.ddlFacultad.SelectedValue & ",'T'")
 
         tb = ObjCnx.TraerDataTable("PRP_ListaPersonalConsejo_POA", Me.ddlFacultad.SelectedValue, "T")
 
@@ -48,7 +51,7 @@ Partial Class administrativo_propuestas2_Miembros_frmConsejoFacultad
     Sub cargoPersonal(ByVal codigo_pcc As Integer)
         Dim tb As New Data.DataTable
 
-        ' Response.Write("  PRP_ConsultarCargosPersonal_POA " & codigo_pcc)
+        'Response.Write("  PRP_ConsultarCargosPersonal_POA " & codigo_pcc)
 
         tb = ObjCnx.TraerDataTable("PRP_ConsultarCargosPersonal_POA", codigo_pcc)
         Me.ddlCargoPersonal.DataSource = tb
@@ -60,7 +63,7 @@ Partial Class administrativo_propuestas2_Miembros_frmConsejoFacultad
     Sub cargarPersonalAsignado()
         Dim tb As New Data.DataTable
 
-        ' Response.Write("  PRP_ListaPersonalConsejo_POA '" & Me.ddlFacultad.SelectedValue & "', 'L'")
+        Response.Write("  PRP_ListaPersonalConsejo_POA '" & Me.ddlFacultad.SelectedValue & "', 'L'")
 
         tb = ObjCnx.TraerDataTable("PRP_ListaPersonalConsejo_POA", Me.ddlFacultad.SelectedValue, "L")
         Me.dgvLista.DataSource = tb

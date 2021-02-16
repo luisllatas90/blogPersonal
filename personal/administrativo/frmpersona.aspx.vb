@@ -158,7 +158,6 @@ Partial Class frmpersona
                     BuscarEstudiosSecundariosGO(Request.QueryString("pso"), 0)
                 End If
 
-
                 Me.txtdni.Enabled = False
                 Me.dpTipoDoc.Enabled = False
                 Me.cmdCancelar.UseSubmitBehavior = False
@@ -235,12 +234,16 @@ Partial Class frmpersona
             '==================================
             'Buscar a la Persona
             '==================================
+
+            'Response.Write("PERSON_ConsultarPersona: " & tipo & "," & valor)
+
             tbl = obj.TraerDataTable("PERSON_ConsultarPersona", tipo, valor)
             If tbl.Rows.Count > 0 Then
                 ExistePersona = True
                 '==================================
                 'Buscar Deudas de la persona
                 '==================================
+
                 If Request.QueryString("accion") <> "M" Then
                     Dim dtDeudas As New Data.DataTable
 
@@ -308,12 +311,10 @@ Partial Class frmpersona
                 End If
                 '***==================================================================================
 
-
                 '==================================
                 'Buscar Datos del alumno
                 '==================================                
                 tblalumno = obj.TraerDataTable("PERSON_ConsultarAlumnoPersona", 0, tbl.Rows(0).Item("codigo_pso"), Request.QueryString("cco"), 0)
-
                 'Cargar datos del alumno
                 If tblalumno.Rows.Count > 0 Then
                     'Response.Write(tblalumno.Rows(0).Item("codigo_min").ToString)
@@ -341,10 +342,10 @@ Partial Class frmpersona
                     MuestraCombosDptoDistritoProvincia()
                 End If
 
-                'Si es Extranjero, muestra combo País
+                'Si es Extranjero, muestra combo País // 'CECI 18-01 CARNE EXTRANJERIA no existe, se corrige
                 If tbl.Rows(0).Item("tipoDocIdent_Pso").ToString = "PAS" Or _
                 tbl.Rows(0).Item("tipoDocIdent_Pso").ToString = "CARNÉ DE EXTRANJERÍA" Or _
-                tbl.Rows(0).Item("tipoDocIdent_Pso").ToString = "CARNE EXTRANJERIA" Or _
+                tbl.Rows(0).Item("tipoDocIdent_Pso").ToString = "CARNET DE EXTRANJERÍA" Or _
                 tbl.Rows(0).Item("tipoDocIdent_Pso").ToString = "CE." Then
                     MuestraComboPais()
                 End If
@@ -374,6 +375,11 @@ Partial Class frmpersona
             obj.CerrarConexion()
             obj = Nothing
 
+
+            
+
+            ''--Response.Write("accion: " & ExistePersona & " -------------")
+
             If ExistePersona = True Then
                 Me.hdcodigo_pso.Value = tbl.Rows(0).Item("codigo_Pso")
                 If mostrardni = True Then
@@ -397,20 +403,25 @@ Partial Class frmpersona
                 If (tbl.Rows(0).Item("sexo_Pso") Is System.DBNull.Value = False) AndAlso (tbl.Rows(0).Item("sexo_Pso").ToString.Trim <> "") Then
                     Me.dpSexo.SelectedValue = tbl.Rows(0).Item("sexo_Pso").ToString.ToUpper
                 End If
-
-                If (tbl.Rows(0).Item("tipoDocIdent_Pso").ToString = "CE.") Then
-
+                
+                'CECI 18-01, se agregaron dos líneas más en el If
+                If (tbl.Rows(0).Item("tipoDocIdent_Pso").ToString = "CE.") Or _
+                    (tbl.Rows(0).Item("tipoDocIdent_Pso").ToString = "CARNET DE EXTRANJERÍA") Or _
+                    (tbl.Rows(0).Item("tipoDocIdent_Pso").ToString = "CARNÉ DE EXTRANJERÍA") Then
                     Me.dpTipoDoc.SelectedIndex = 1
                 Else
                     'Inicio Hcano 27-06-17
                     If tbl.Rows(0).Item("tipoDocIdent_Pso").ToString = "PASAPORTE" Then
                         Me.dpTipoDoc.SelectedValue = "PAS"
+
                     Else
-                        Me.dpTipoDoc.SelectedValue = tbl.Rows(0).Item("tipoDocIdent_Pso").ToString
+                        ' Moises.Vilchez 09-02-2021 se quito los espacios TRIM
+                        Me.dpTipoDoc.SelectedValue = tbl.Rows(0).Item("tipoDocIdent_Pso").ToString.Trim
                     End If
                     'Fin Hcano 27-06-17
-
                 End If
+
+
                 Me.txtemail1.Text = tbl.Rows(0).Item("emailPrincipal_Pso").ToString
                 Me.txtemail2.Text = tbl.Rows(0).Item("emailAlternativo_Pso").ToString
                 Me.txtdireccion.Text = tbl.Rows(0).Item("direccion_Pso").ToString
@@ -424,6 +435,7 @@ Partial Class frmpersona
                 End If
                 Me.txtruc.Text = tbl.Rows(0).Item("nroRuc_Pso").ToString
 
+                
                 'Si hay pais extranjero registrado para la persona
                 If tbl.Rows(0).Item("codigo_Pai").ToString <> "" Then
                     If tbl.Rows(0).Item("codigo_Pai").ToString <> 156 Then
@@ -450,7 +462,6 @@ Partial Class frmpersona
                         Me.dpdistrito.SelectedValue = tbl.Rows(0).Item("codigo_dis")
                     End If
                 End If
-
                 'Buscar si tiene DEUDAS
                 '## Modificado por mvillavicencio 06/08/2012. 
                 'Se puede registrar si tiene 1 o 0 deudas
@@ -458,13 +469,17 @@ Partial Class frmpersona
                 EvaluarDeuda()
                 'Bloque nombres cuando no es Administrador
                 DesbloquearNombres(False)
+
                 DesbloquearOtrosDatos(True)
+
                 lnkComprobarNombres.Visible = False
+
             ElseIf ValidarNroIdentidad() = True Then
                 Me.hdcodigo_pso.Value = 0
                 lnkComprobarNombres.Visible = True
                 DesbloquearNombres(True)
                 DesbloquearOtrosDatos(False)
+
 
                 If Me.txtAPaterno.Enabled = True Then
                     Me.txtAPaterno.Focus()
@@ -1079,6 +1094,7 @@ Partial Class frmpersona
         Me.txtAMaterno.Enabled = estado
         Me.txtNombres.Enabled = estado
     End Sub
+
     Private Sub DesbloquearOtrosDatos(ByVal estado As Boolean)
         Me.txtFechaNac.Enabled = estado
         Me.dpSexo.Enabled = estado
@@ -1271,7 +1287,7 @@ Partial Class frmpersona
     Private Sub MuestraComboPais()
         'Si es Extranjero, carga como País
         lblDepartamento.Text = "País"
-        dppais.Visible = True
+        dppais.Visible = True    
         CompareValidator8.Visible = True
         txtciudad.Visible = True
         lblciudad.Visible = True

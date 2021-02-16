@@ -7,7 +7,7 @@ var hd = true;
 var PropVentana="width=" + ancho +",height=" + alto +",statusbar=yes,scrollbars=yes,top=0,left=0,resizable=yes,toolbar=no,menubar=no"
 
 
-//desactiva botón derecho del menú
+//desactiva botï¿½n derecho del menï¿½
 
 //document.oncontextmenu="return false"
 
@@ -21,16 +21,25 @@ function PintarCeldas(ocultar)
 			if (ArrFilas[f].className==""){
 				var ArrCeldas=ArrFilas[f].cells
 				i=0
-				
+				var str=''; //EPENA 05/10/2020 - ID 41890
 				for (var c=0;c<ArrCeldas.length; c++){
 					var Celda=ArrCeldas[c]			
 					if(Celda.className=="" && Celda.innerText!=""){
-						Celda.className="CU"
+						str=Celda.innerText //EPENA 05/10/2020 - ID 41890
+						
+						if (str.indexOf('*')!=-1){ //EPENA 05/10/2020 - ID 41890
+							Celda.className="DE2"
+						}else{
+							Celda.className="CU"
+						}
+						
+						
 						i=i+1
 						total=total+1
+						
 					}
 				}
-				/*Oculta filas vacías*/
+				/*Oculta filas vacï¿½as*/
 				
 				if (i==0 && ocultar=="S"){
 					ArrFilas[f].style.display="none"
@@ -76,7 +85,7 @@ function PintarCeldas(ocultar)
 						total=total+1
 					}
 				}
-				/*Oculta filas vacías*/
+				/*Oculta filas vacï¿½as*/
 				
 				if (i==0 && ocultar=="S"){
 					ArrFilas[f].style.display="none"
@@ -371,7 +380,7 @@ function nopintarfilamarcada(idcheck)
 
 function cerrarSistema(pagina)
 {
-	if (confirm("Está seguro que desea salir del Sistema")==true)
+	if (confirm("Estï¿½ seguro que desea salir del Sistema")==true)
 		{top.location.href=pagina}
 }
 
@@ -746,7 +755,7 @@ function EjecutarFormulario(formulario)
  {
  	  if (form.ListaPara.options.length == 0)
 		{
-			alert("Debe seleccionar algún miembro de la lista nombres.");
+			alert("Debe seleccionar algï¿½n miembro de la lista nombres.");
 			return false;
 		}
 		SeleccionarDestinatarios()
@@ -924,7 +933,7 @@ function elegirItem(texto,lista)
 }
 
 function LimpiarError() {
- window.status="Se ha producido un error. Contáctese con el Administrador del Sistema"
+ window.status="Se ha producido un error. Contï¿½ctese con el Administrador del Sistema"
  return true;
 } 
 
@@ -1032,7 +1041,7 @@ function ContarTextArea(campo,limite,obj)
 {
 	if (campo.value.length >limite){
 	    campo.value = campo.value.substring(0, limite);
-	    alert( 'Este campo sólo aceptar hasta '  + limite + ' caracteres');
+	    alert( 'Este campo sï¿½lo aceptar hasta '  + limite + ' caracteres');
 	    return false;
 	}
 	else{
@@ -1122,4 +1131,3 @@ function ocultar() {
     }
 
 }
-

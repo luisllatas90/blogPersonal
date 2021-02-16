@@ -42,7 +42,7 @@ form .card .card-body {
 form .custom-control-label {
   font-size: 0.85rem; }
   form .custom-control-label::before {
-    top: 0.2rem; }
+    top: 0.25rem; }
 
 form .list-group-item {
   padding: 0.5rem 0.6rem; }

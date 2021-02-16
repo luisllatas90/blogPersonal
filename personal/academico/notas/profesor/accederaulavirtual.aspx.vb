@@ -269,14 +269,14 @@ Partial Class academico_notas_profesor_accederaulavirtual
             obj.CerrarConexion()
 
             If dtUsr.Rows.Count > 0 Then
-                Dim _url As String = "http://intranet.usat.edu.pe/aulavirtual/login/index.php"
+                Dim _url As String = "//intranet.usat.edu.pe/aulavirtual/login/index.php"
                 Dim _user As String = dtUsr.Rows(0).Item("codigo_pso").ToString
                 Dim _pass As String = dtUsr.Rows(0).Item("ClaveInterna_Pso").ToString
                 Dim _curso As String = IIf(modo.Equals("no"), modo, "grades")
                 Dim _idcurso As String = "0"
 
                 If ConfigurationManager.AppSettings("CorreoUsatActivo") = "0" Then
-                    _url = "http://10.10.14.69/aulavirtual/login/index.php"
+                    '_url = "//10.10.14.69/aulavirtual/login/index.php"
                 End If
 
                 If Not modo.Equals("no") Then

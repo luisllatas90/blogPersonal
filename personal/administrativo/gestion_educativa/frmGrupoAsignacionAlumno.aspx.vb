@@ -12,6 +12,8 @@ Partial Class administrativo_gestion_educativa_frmGrupoAsignacionAlumno
     Private oeGrupoAlu As e_GrupoAdmisionVirtual_Alumno, odGrupoAlu As d_GrupoAdmisionVirtual_Alumno
     Private _fuente As String = Server.MapPath(".") & "/segoeui.ttf"
 
+    Private oeTipoGrupoEval As e_TipoGrupoEvaluacion, odTipoGrupoEval As d_TipoGrupoEvaluacion '20201215-ENevado
+
     Public Enum MessageType
         Success
         [Error]
@@ -39,7 +41,8 @@ Partial Class administrativo_gestion_educativa_frmGrupoAsignacionAlumno
             cod_ctf = Request.QueryString("ctf")
             cod_test = Request.QueryString("mod")
             If Not IsPostBack Then
-                'mt_CargarCentroCosto()
+                mt_CargarCentroCosto()
+                mt_CargarTipoGrupoEval() '20201215-ENevado
                 mt_CargarGrupoVirtual()
                 Me.btnAgregar.visible = False
                 Me.chkDisponible.visible = False
@@ -53,16 +56,16 @@ Partial Class administrativo_gestion_educativa_frmGrupoAsignacionAlumno
         End Try
     End Sub
 
-    'Protected Sub cboCentroCosto_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboCentroCosto.SelectedIndexChanged
-    '    Try
+    Protected Sub cboCentroCosto_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboCentroCosto.SelectedIndexChanged
+        Try
 
-    '        mt_CargarGrupoVirtual(IIf(Me.cboCentroCosto.SelectedValue = -1, 0, Me.cboCentroCosto.SelectedValue))
-    '        cboGrupo_SelectedIndexChanged(Nothing, Nothing)
+            mt_CargarGrupoVirtual()
+            cboGrupo_SelectedIndexChanged(Nothing, Nothing)
 
-    '    Catch ex As Exception
-    '        mt_ShowMessage(ex.Message.Replace("'", ""), MessageType.Error)
-    '    End Try
-    'End Sub
+        Catch ex As Exception
+            mt_ShowMessage(ex.Message.Replace("'", ""), MessageType.Error)
+        End Try
+    End Sub
 
     Protected Sub cboGrupo_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboGrupo.SelectedIndexChanged
         Try
@@ -212,6 +215,19 @@ Partial Class administrativo_gestion_educativa_frmGrupoAsignacionAlumno
         End Try
     End Sub
 
+    '20200904-andy.diaz
+    Protected Sub chkConDeuda_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkConDeuda.CheckedChanged
+        Try
+            If Me.divBusqueda.Visible Then
+                mt_CargarDatos(IIf(Me.cboGrupo.SelectedValue = -1, 0, Me.cboGrupo.SelectedValue), Me.cboEstado.SelectedValue, Me.cboEscuela.SelectedValue)
+            Else
+                mt_CargarDatos(IIf(Me.cboGrupo.SelectedValue = -1, 0, Me.cboGrupo.SelectedValue), Me.cboEstado.SelectedValue, -1)
+            End If
+        Catch ex As Exception
+            mt_ShowMessage(ex.Message.Replace("'", ""), MessageType.Error)
+        End Try
+    End Sub
+
     Protected Sub btnGenerarDoc_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGenerarDoc.Click
         Dim memory As New System.IO.MemoryStream
         Dim dtGru, dtPos As New System.Data.DataTable
@@ -324,10 +340,49 @@ Partial Class administrativo_gestion_educativa_frmGrupoAsignacionAlumno
     End Sub
 
     Protected Sub btnQuitarTodos_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnQuitarTodos.Click
+        Dim dt As New System.Data.DataTable
+        Dim _codigo_alu As String = ""
+        Dim _cant As Integer = 0
         Try
-
+            For i As Integer = 0 To Me.gvGrupoAlumno.Rows.Count - 1
+                If _codigo_alu.Length > 0 Then _codigo_alu &= ","
+                _codigo_alu &= Me.gvGrupoAlumno.datakeys(i).values("codigo_gva")
+                _cant += 1
+            Next
+            If _codigo_alu = "" Then
+                mt_ShowMessage("¡ No hay registros para realizar esta operación !", MessageType.Warning)
+                Exit Sub
+            End If
+            oeGrupoAlu = New e_GrupoAdmisionVirtual_Alumno : odGrupoAlu = New d_GrupoAdmisionVirtual_Alumno
+            oeGrupoAlu.codigo_gru = Me.cboGrupo.selectedvalue : oeGrupoAlu.codigo_per = cod_user
+            oeGrupoAlu.codigo_alu = _codigo_alu
+            dt = odGrupoAlu.fc_QuitarTodos(oeGrupoAlu)
+            If dt.Rows.Count > 0 Then
+                mt_ShowMessage("¡ Se quitaron correctamente " & _cant & " postulantes !", MessageType.Success)
+                cboEstado_SelectedIndexChanged(Nothing, Nothing)
+            Else
+                mt_ShowMessage("¡ Ocurrio un error en el registro !", MessageType.Error)
+            End If
         Catch ex As Exception
             mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.Error)
+        End Try
+    End Sub
+
+    Protected Sub cboTipoGrupo_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboTipoGrupo.SelectedIndexChanged
+        Try
+
+            If Me.cbotipogrupo.selectedvalue = 3 Then
+                Me.chkConDeuda.enabled = False
+                Me.chkConDeuda.checked = False
+            Else
+                Me.chkConDeuda.enabled = True
+            End If
+
+            mt_CargarGrupoVirtual()
+            cboGrupo_SelectedIndexChanged(Nothing, Nothing)
+
+        Catch ex As Exception
+            mt_ShowMessage(ex.Message.Replace("'", ""), MessageType.Error)
         End Try
     End Sub
 
@@ -346,30 +401,68 @@ Partial Class administrativo_gestion_educativa_frmGrupoAsignacionAlumno
         'End If
     End Sub
 
-    'Private Sub mt_CargarCentroCosto()
-    '    ClsFunciones.LlenarListas(Me.cboCentroCosto, mo_RepoAdmision.ListarCentroCosto(cod_ctf, cod_user, cod_test), "codigo_Cco", "Nombre", "-- Seleccione --")
-    'End Sub
+    Private Sub mt_CargarCentroCosto()
+        Dim _ctf As Integer = 0
+        _ctf = iif(cod_ctf = 26 Or cod_ctf = 168, 1, cod_ctf)
+        ClsFunciones.LlenarListas(Me.cboCentroCosto, mo_RepoAdmision.ListarCentroCosto(_ctf, cod_user, cod_test), "codigo_Cco", "Nombre")
+    End Sub
 
     Private Sub mt_CargarGrupoVirtual()
+        Dim codigos_cco As String = ""
+        For Each item As ListItem In cboCentroCosto.Items
+            If item.Selected Then
+                If codigos_cco <> "" Then
+                    codigos_cco &= ","
+                End If
+                codigos_cco &= item.Value
+            End If
+        Next
+
         oeGrupo = New e_GrupoAdmisionVirtual : odGrupo = New d_GrupoAdmisionVirtual
-        oeGrupo.tipoOperacion = "LT"
-        ClsFunciones.LlenarListas(Me.cboGrupo, odGrupo.fc_ListarGrupoAdmisionVirtual(oeGrupo), "codigo_gru", "descripcion_gru", "-- Seleccione --")
+        'oeGrupo.codigo_cco = cod_test '20200806-ENevado
+        oeGrupo.tipoOperacion = "" '20200904-andy.diaz
+        oeGrupo.codigo_cco = codigos_cco '20200904-andy.diaz
+        oeGrupo.codigo_tge = Me.cboTipoGrupo.SelectedValue
+        ClsFunciones.LlenarListas(Me.cboGrupo, odGrupo.fc_ListarGrupoAdmisionVirtual(oeGrupo), "codigo_gru", "nombre", "-- Seleccione --")
     End Sub
 
     Private Sub mt_CargarDatos(ByVal _codigo_gru As Integer, ByVal _estado As Integer, ByVal _codigo_cpf As Integer)
         Try
             Dim dt, dt2 As New System.Data.DataTable
             oeGrupoAlu = New e_GrupoAdmisionVirtual_Alumno : odGrupoAlu = New d_GrupoAdmisionVirtual_Alumno
-            oeGrupoAlu.codigo_gru = _codigo_gru : oeGrupoAlu.codigo_alu = -1
+            oeGrupoAlu.codigo_gru = _codigo_gru ': oeGrupoAlu.codigo_alu = -1
+            oeGrupoAlu.codigo_alu = cod_test '20200806-ENevado
+            oeGrupoAlu.mostrar_con_deuda = chkConDeuda.Checked '20200904-andy.diaz
             dt = odGrupoAlu.fc_ListarGrupoAdmisionVirtual_Alumno(oeGrupoAlu)
             If dt.Rows.Count > 0 Then
+                Dim _estadoadm As String = "", _centrocosto As String = ""
+                If _estado = 0 Then
+                    If Me.cbotipogrupo.selectedvalue = 3 Then
+                        _estadoadm = " AND estadoAdmision = 'INGRESANTE'"
+                    End If
+                    '20200121-ENevado ------------------------------------------------------------\
+                    If Me.cbotipogrupo.selectedvalue = 2 Then
+                        _estadoadm = " AND estadoAdmision IN ('POSTULANTE','INTERESADO')"
+                    End If
+                    Dim codigos_cco As String = ""
+                    For Each item As ListItem In cboCentroCosto.Items
+                        If item.Selected Then
+                            If codigos_cco <> "" Then
+                                codigos_cco &= ","
+                            End If
+                            codigos_cco &= item.Value
+                        End If
+                    Next
+                    _centrocosto = " AND codigo_Cco IN (" & codigos_cco & ")"
+                    '---------------------------------------------------------------------------/
+                End If
                 If _estado <> -1 Then
                     Dim dv As Data.DataView
                     If _codigo_cpf = -1 Then
-                        dv = New Data.DataView(dt, iif(_estado = 0, "codigo_gva = -1", "codigo_gva <> -1"), "", Data.DataViewRowState.CurrentRows)
+                        dv = New Data.DataView(dt, iif(_estado = 0, "codigo_gva = -1 ", "codigo_gva <> -1") & _estadoadm & _centrocosto, "", Data.DataViewRowState.CurrentRows)
                     Else
                         dv = New Data.DataView(dt, _
-                                               iif(_estado = 0, "codigo_gva = -1 AND codigo_Cpf = " & _codigo_cpf, "codigo_gva <> -1 AND codigo_Cpf = " & _codigo_cpf), _
+                                               iif(_estado = 0, "codigo_gva = -1 ", "codigo_gva <> -1 ") & " AND codigo_Cpf = " & _codigo_cpf & _estadoadm & _centrocosto, _
                                                "", _
                                                Data.DataViewRowState.CurrentRows)
                     End If
@@ -407,6 +500,16 @@ Partial Class administrativo_gestion_educativa_frmGrupoAsignacionAlumno
         oeGrupoAlu = New e_GrupoAdmisionVirtual_Alumno : odGrupoAlu = New d_GrupoAdmisionVirtual_Alumno
         oeGrupoAlu.codigo_gru = _codigo_gru : oeGrupoAlu.codigo_alu = -1 : oeGrupoAlu.tipoOperacion = "CB"
         ClsFunciones.LlenarListas(Me.cboEscuela, odGrupoAlu.fc_ListarGrupoAdmisionVirtual_Alumno(oeGrupoAlu), "codigo_Cpf", "nombre_Cpf", "-- Todas las Carreras --")
+    End Sub
+
+    ''' <summary>
+    ''' Metodo para llenar los combos de Tipo Grupo Evaluacion
+    ''' </summary>
+    ''' <remarks>20201215-ENevado</remarks>
+    Private Sub mt_CargarTipoGrupoEval()
+        oeTipoGrupoEval = New e_TipoGrupoEvaluacion : odTipoGrupoEval = New d_TipoGrupoEvaluacion
+        oeTipoGrupoEval.tipoOpe = iif(cod_ctf = 1, "", "TU") : oeTipoGrupoEval.codigo_tge = cod_ctf
+        ClsFunciones.LlenarListas(Me.cboTipoGrupo, odTipoGrupoEval.fc_Listar(oeTipoGrupoEval), "codigo_tge", "nombre_tge", "-- Seleccionar --")
     End Sub
 
 #End Region

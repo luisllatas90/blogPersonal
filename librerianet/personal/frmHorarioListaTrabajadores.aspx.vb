@@ -1109,9 +1109,8 @@ Partial Class personal_frmHorarioListaTrabajadores
             Dim obj As New clsPersonal
             Dim Fila As GridViewRow
             Dim sw As Byte = 0
-            Dim vCodigo_per As Integer
+            Dim vCodigo_per As Integer = 0
             Dim dts As New Data.DataTable
-
 
             For i As Integer = 0 To gvListaTrabajadores.Rows.Count - 1
                 'Capturamos las filas que estan activas

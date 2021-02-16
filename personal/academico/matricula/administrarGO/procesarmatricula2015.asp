@@ -88,7 +88,8 @@ End If
 		'Validar cruces de horarios entre asignaturas marcadas
 		'*************************************************************************************
 		'set rs_cruceshorario = objMatricula.Consultar("sp_validarCrucesMatriculaWebGO","FO",codigo_alu,codigo_cac,cursosprogramados)
-		set rs_cruceshorario = objMatricula.Consultar("ACAD_validaCrucesMatriculaGO","FO",codigo_alu,codigo_cac,cursosprogramados)
+		'set rs_cruceshorario = objMatricula.Consultar("ACAD_validaCrucesMatriculaGO","FO",codigo_alu,codigo_cac,cursosprogramados)
+		set rs_cruceshorario = objMatricula.Consultar("sp_validarcrucesmatriculaweb","FO",codigo_alu,codigo_pes,codigo_cac,cursosprogramados)		
 		if rs_cruceshorario.eof=false and rs_cruceshorario.bof=false then
             response.Write("<script>alert('Cruce de horario')</script>")
 		else		
@@ -137,8 +138,8 @@ End If
 
 
 		'set rs_cruceshorario = objMatricula.Consultar("sp_validarcrucesmatriculaweb","FO",codigo_alu,codigo_pes,codigo_cac,cursosprogramados)
-		set rs_cruceshorario = objMatricula.Consultar("ACAD_validaCrucesMatriculaGO","FO",codigo_alu,codigo_cac,cursosprogramados)
-		'set rs_cruceshorario = objMatricula.Consultar("sp_validarcrucesmatriculaweb_v2","FO",codigo_alu,codigo_pes,codigo_cac,cursosprogramados)
+		'set rs_cruceshorario = objMatricula.Consultar("ACAD_validaCrucesMatriculaGO","FO",codigo_alu,codigo_cac,cursosprogramados)
+		set rs_cruceshorario = objMatricula.Consultar("sp_validarcrucesmatriculaweb","FO",codigo_alu,codigo_pes,codigo_cac,cursosprogramados)
 		if rs_cruceshorario.eof=false and rs_cruceshorario.bof=false then
 		    response.Write("<script>alert('Cruce de horario')</script>")
 		else

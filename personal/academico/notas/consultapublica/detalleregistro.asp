@@ -1,9 +1,10 @@
 <%
 codigo_cup=request.querystring("codigo_cup")
+codigo_cpf=request.querystring("codigo_cpf")
 
 set obj=Server.createObject("PryUSAT.clsAccesoDatos")
 	obj.AbrirConexion
-		Set rsAlumnos=Obj.Consultar("ConsultarAlumnosMatriculados","FO",5,codigo_cup,0,0)
+		Set rsAlumnos=Obj.Consultar("ConsultarAlumnosMatriculados","FO",5,codigo_cup,codigo_cpf,0)
 	Obj.CerrarConexion
 Set obj=nothing
 %>
@@ -60,10 +61,10 @@ Set obj=nothing
 				retirados=retirados+1
 			end if 
 
-			if rsAlumnos("condicion_dma")="Aprobado" and rsAlumnos("estado_dma")="M" then					
+			if rsAlumnos("condicion_dma")="Aprobado" or rsAlumnos("condicion_dma")="Acredita" and rsAlumnos("estado_dma")="M" then					
 					aprobados=aprobados+1
 			end if 
-			if rsAlumnos("condicion_dma")="Desaprobado" and rsAlumnos("estado_dma")="M" then					
+			if (rsAlumnos("condicion_dma")="Desaprobado" or rsAlumnos("condicion_dma")="No Acredita") and rsAlumnos("estado_dma")="M" then					
 					desaprobados=desaprobados+1
 			end if
 			if rsAlumnos("condicion_dma")="Inhabilitado" and rsAlumnos("estado_dma")="M" then					
@@ -87,8 +88,8 @@ Set obj=nothing
 %>
 <tr>
 	<td width="100%" height="5%" colspan="6" class="usattablainfo">
-	&nbsp;<span class="azul">Aprobados:<%=aprobados%></span>  | 
-	<span class="rojo">Desaprobados: <%=desaprobados%> | </span> 
+	&nbsp;<span class="azul"><% if codigo_cpf="407" then %>Acreditados: <% else %>Aprobados: <% end if %>  <%=aprobados%></span>  | 
+	<span class="rojo"><% if codigo_cpf="407" then %>No Acreditados: <% else %>Desaprobados: <% end if %>  <%=desaprobados%> | </span> 
 	<span class ="cursos">Retirados: <%=retirados%>| </span> 
 	<span style="color:orange;">Inhabilitados: <%=inhabilitados%>&nbsp;</span>
 	</td>

@@ -180,8 +180,9 @@ function Actualizar(idCheck, maxCreditos)
 	
 }
 
-function modificarmatricula(modo,ID)
-{
+function modificarmatricula(modo,ID) {
+    
+    var codigo_mar = parseInt(document.getElementById("cbocodigo_mar").value);
 	var pagina=""
 	if (modo=='N'){ //Para nueva matrícula
 	    pagina = "../academico/matricula/administrarcomplementario/frmagregarcurso.asp?accion=matriculasegura&codigo_pes=" + ID
@@ -194,9 +195,10 @@ function modificarmatricula(modo,ID)
 	}
 
 	if (modo == 'R') { //Para retiro de asinaturas
-	    if (parseInt($("#cbocodigo_mar").val()) > 0) {
+	    //if (parseInt($("#cbocodigo_mar").val()) > 0) {
+	    if (codigo_mar > 0) {
             if (confirm(arrMensajes[3])==true){
-			    location.href="procesarmatricula.asp?accion=retirarcursomatricula&codigo_dma=" + ID + "&estado_dma=" + modo
+                location.href = "procesarmatricula.asp?accion=retirarcursomatricula&codigo_dma=" + ID + "&estado_dma=" + modo + "&codigo_mar=" + codigo_mar
 		    }
 	    } else {
 	        alert("Debe seleccionar un motivo para retirar al alumno.");

@@ -58,7 +58,14 @@
                 <asp:BoundField DataField="fechaFinAnuncio" HeaderText="FECHA DE FIN" />
                 <asp:BoundField DataField="lugar_ofe" HeaderText="CIUDAD" />
                 <asp:BoundField DataField="egresado" HeaderText="EGRESADO" />
-                <asp:BoundField DataField="fechaPost" HeaderText="FECHA CV" />                                
+                <asp:BoundField DataField="fechaPost" HeaderText="FECHA CV" />
+                <asp:BoundField DataField="correoProfesional_Ega" HeaderText="CORREO" />                               
+                <asp:HyperLinkField HeaderText="CV ENVIO" Text="CV" DataNavigateUrlFields="url" 
+                    Target="_blank" >
+                
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:HyperLinkField>
+                
             </Columns>
                         <EmptyDataTemplate>
                  <div style="color:#3266DB; background-color:#E8EEF7; padding:5px; font-style:italic;">

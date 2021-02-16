@@ -56,6 +56,7 @@ Public Class e_CoordinadorAsignatura
     Public codigo_per As Integer
     Public codigo_per_reg As Integer
     Public indicador_coo As Integer = 0
+    Public creditos_cur As Integer = 0 '--> Por Luis Q.T. 16DIC2020
 
 End Class
 
@@ -108,6 +109,15 @@ Public Class e_SuspensionPorHoras
     Public horaFin_sph As String = "00:00"
     Public codigo_per As Integer = 684
     Public año As Integer = -1
+
+End Class
+
+
+Public Class e_CicloAcademicoFechas
+    '20200706 JQuepuy
+    Public codigo_cac As Integer
+    Public fecha_ini As String
+    Public fecha_fin As String
 
 End Class
 
@@ -201,7 +211,7 @@ Public Class d_DiseñoAsignatura
     End Function
 
     ''' <summary>
-    ''' Función para Eliminar el Archivo de Anexo del Diseño de Asigantura
+    ''' Función para Eliminar el Archivo de Anexo del Diseño de Asignatura
     ''' </summary>
     ''' <param name="obj"></param>
     ''' <returns></returns>
@@ -258,6 +268,39 @@ Public Class d_DiseñoAsignatura
         End Try
     End Function
 
+    ''' <summary>
+    ''' Función que Anula el Diseño de Asignatura Actual
+    ''' </summary>
+    ''' <param name="obj"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function fc_AnularDiseñoAsignatura(ByVal obj As e_DiseñoAsignatura) As System.Data.DataTable '--> Por Luis Q.T. | 15DIC2020
+        dt = New System.Data.DataTable
+
+        Try
+            cnx = New ClsConectarDatos
+            cnx.CadenaConexion = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.AbrirConexion()
+
+            With obj
+                dt = cnx.TraerDataTable("DEA_DiseñoAsignatura_anular", .codigo_cac, .codigo_dis, .codigo_per)
+            End With
+            cnx.CerrarConexion()
+
+        Catch ex As Exception
+            dt.Rows.Clear() : dt.Columns.Clear()
+
+            dt.Columns.Add("rpta", Type.GetType("System.String"))
+            dt.Columns.Add("valor", Type.GetType("System.String"))
+
+            Dim dr As Data.DataRow = dt.NewRow
+            dr("rpta") = "0" : dr("valor") = ex.ToString().Replace(vbCr, " ").Replace(vbLf, "")
+            dt.Rows.Add(dr)
+        End Try
+
+        Return dt
+    End Function
+
 End Class
 
 ''' <summary>
@@ -292,7 +335,7 @@ Public Class d_CoordinadorAsignatura
             cnx.CadenaConexion = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
             cnx.AbrirConexion()
             With obj
-                dt = cnx.TraerDataTable("COM_RegistrarCoordinadorAsignatura", .codigo_per, .codigo_cac, .codigo_cur, IIf(.codigo_pes = -2, DBNull.Value, .codigo_pes), .codigo_per_reg, .indicador_coo)
+                dt = cnx.TraerDataTable("COM_RegistrarCoordinadorAsignatura", .codigo_per, .codigo_cac, .codigo_cur, IIf(.codigo_pes = -2, DBNull.Value, .codigo_pes), .codigo_per_reg, .indicador_coo, .creditos_cur)
             End With
             cnx.CerrarConexion()
             Return dt
@@ -307,7 +350,7 @@ Public Class d_CoordinadorAsignatura
             cnx.CadenaConexion = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
             cnx.AbrirConexion()
             With obj
-                cnx.Ejecutar("COM_ActualizarCoordinadorAsignatura", .codigo_coo, .codigo_per, .codigo_cac, .codigo_cur, IIf(.codigo_pes = -2, DBNull.Value, .codigo_pes), .codigo_per_reg, .indicador_coo)
+                cnx.Ejecutar("COM_ActualizarCoordinadorAsignatura", .codigo_coo, .codigo_per, .codigo_cac, .codigo_cur, IIf(.codigo_pes = -2, DBNull.Value, .codigo_pes), .codigo_per_reg, .indicador_coo, .creditos_cur)
             End With
             cnx.CerrarConexion()
             Return True
@@ -537,6 +580,46 @@ Public Class d_SuspensionPorHoras
             cnx.AbrirConexion()
             With obj
                 cnx.Ejecutar("ACA_SuspensionPorHoras_eliminar", .codigo_sph, .codigo_per)
+            End With
+            cnx.CerrarConexion()
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+
+Public Class d_CicloAcademicoFechas
+    '20200706 JQuepuy
+    Private cnx As ClsConectarDatos
+    Private dt As System.Data.DataTable
+
+
+    Public Function fc_ListarCicloAcademico_Fechas(ByVal obj As e_CicloAcademicoFechas) As System.Data.DataTable
+        Try
+            dt = New System.Data.DataTable
+            cnx = New ClsConectarDatos
+            cnx.CadenaConexion = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.AbrirConexion()
+
+            dt = cnx.TraerDataTable("DEA_CicloAcademicoFechaListar", obj.codigo_cac)
+
+            cnx.CerrarConexion()
+            Return dt
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function fc_GuardarCicloAcademico_Fechas(ByVal obj As e_CicloAcademicoFechas) As Boolean
+        Try
+            cnx = New ClsConectarDatos
+            cnx.CadenaConexion = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.AbrirConexion()
+            With obj
+                cnx.Ejecutar("DEA_CicloAcademicoFechaGuardar", .codigo_cac, .fecha_ini, .fecha_fin)
             End With
             cnx.CerrarConexion()
             Return True

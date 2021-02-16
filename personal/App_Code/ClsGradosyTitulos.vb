@@ -209,7 +209,7 @@ Public Class ClsGradosyTitulos
                              ByVal fecha_act As String, ByVal fecha_consejo As String, ByVal nro_res As String, ByVal fecha_res As String, _
                               ByVal codigo_gru As Integer, ByVal nrolibro As String, ByVal nrofolio As String, ByVal nroregistro As String, ByVal codigo_fac As Integer, ByVal codigo_esp As Integer, _
                               ByVal modalidad_estudio As String, ByVal tipo_emision As String, ByVal observaciones As String, ByVal autoridad1 As Integer, ByVal autoridad2 As Integer, ByVal autoridad3 As Integer, _
-                              ByVal estado As Integer, ByVal usuario As Integer, ByVal codigo_tes As Integer, ByVal titulo_tesis As String, ByVal nrores_Fac As String, ByVal fechares_fac As String) As Data.DataTable
+                              ByVal estado As Integer, ByVal usuario As Integer, ByVal codigo_tes As Integer, ByVal titulo_tesis As String, ByVal nrores_Fac As String, ByVal fechares_fac As String, ByVal autoridad4 As Integer) As Data.DataTable
 
         ', ByVal fecha_consejo As String, ByVal nro_resolucion As String, ByVal fecha_resolucion As String, ByVal fecha_diploma As String, _
         'ByVal nrolibro As String, ByVal nrofolio As Integer, ByVal codigo_gru As Integer
@@ -217,7 +217,7 @@ Public Class ClsGradosyTitulos
         cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
         cnx.AbrirConexion()
         'dts = cnx.TraerDataTable("GYT_ActualizarEgresado", codigo_egr, nro_expediente, codigo_alu, codigo_dgt, codigo_act, fecha_act, fecha_consejo, nro_res, fecha_res, codigo_gru, nrolibro, nrofolio, nroregistro, codigo_fac, codigo_esp, modalidad_estudio, tipo_emision, observaciones, autoridad1, autoridad2, autoridad3, estado, usuario)
-        dts = cnx.TraerDataTable("GYT_ActualizarEgresado", codigo_egr, nro_expediente, codigo_alu, codigo_dgt, codigo_act, fecha_act, codigo_gru, nrolibro, nrofolio, nroregistro, codigo_fac, codigo_esp, modalidad_estudio, tipo_emision, observaciones, autoridad1, autoridad2, autoridad3, estado, usuario, codigo_tes, titulo_tesis, nrores_Fac, fechares_fac)
+        dts = cnx.TraerDataTable("GYT_ActualizarEgresado", codigo_egr, nro_expediente, codigo_alu, codigo_dgt, codigo_act, fecha_act, codigo_gru, nrolibro, nrofolio, nroregistro, codigo_fac, codigo_esp, modalidad_estudio, tipo_emision, observaciones, autoridad1, autoridad2, autoridad3, estado, usuario, codigo_tes, titulo_tesis, nrores_Fac, fechares_fac, autoridad4)
         cnx.CerrarConexion()
         Return dts
     End Function
@@ -487,7 +487,6 @@ Public Class ClsGradosyTitulos
         cnx.CerrarConexion()
         Return dts
     End Function
-
     Public Function ActualizarEstadoEnvioEntregaDiploma(ByVal codigos As String) As Data.DataTable
         Dim dts As New Data.DataTable
         cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
@@ -505,5 +504,130 @@ Public Class ClsGradosyTitulos
         cnx.CerrarConexion()
         Return dts
     End Function
+
+    '*********************************************************************************
+    '*********************** GESTIÓN DEL EGRESADO ************************************
+    '*********************************************************************************
+    '*********************** Inicio HCANO 19/08/2020 *********************************
+    Public Function ConsultarTramites(ByVal estado As String, ByVal texto As String) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_ListarExpedientes", estado, texto)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+
+    Public Function ConsultarRequisitos(ByVal glosacorrelativo As String) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_ListarRequisitosTramite", glosacorrelativo)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+
+    Public Function SolicitarResolucionConsejoUniv(ByVal codigo As Integer, ByVal usuario As Integer) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_SolicitarResolucionConsejoUniversitario", codigo, usuario)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+
+    Public Function ExpedientesPendientesCorrelativos(ByVal estado As String, ByVal codigo_scu As String, ByVal codigo_test As String, ByVal codigo_cpf As String, ByVal texto As String, ByVal codigo_tdg As String) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_ListaTramitesPendientesNumeracion", estado, codigo_scu, codigo_test, codigo_cpf, texto, codigo_tdg)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+
+    Public Function InformarInscripcionSUNEDU(ByVal codigos_egresados As String, ByVal codigo_per As Integer, ByVal ctf As Integer, ByVal tipo As String) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_InformarInscripcionSUNEDU", codigos_egresados, codigo_per, ctf, tipo)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+
+
+    Public Function ConsultarInscripcionSuneduxEstado(ByVal estado As String, ByVal codigo_sesion As String, ByVal codigo_tdg As String, ByVal texto As String) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_ConsultarInscripcionSuneduxEstado", estado, codigo_sesion, codigo_tdg, texto)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+
+    Public Function ObtenerSecretariaFacultadApruebaTramite(ByVal codigo_Dta As Integer) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_ObtenerCorreoUsuarioApruebaTramite", codigo_Dta)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+
+    Public Function ConsultarInformarInscripcionSUNEDUElectronico(ByVal estado As String, ByVal codigo_tdg As String, ByVal texto As String) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_ConsultarInscripcionSuneduElectronicoxEstado", estado, codigo_tdg, texto)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+
+    Public Function ListarArchivosTramite(ByVal tipo As String, ByVal codigo_trl As String, ByVal codigo_dta As String) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("TRL_Tramiteadicionalinfo", tipo, codigo_trl, codigo_dta)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+
+    '*********************** Fin HCANO 19/08/2020 *********************************
+
+    '*********************** Inicio OLLUEN 10/09/2020 *********************************
+    Public Function ConsultarEntregaDiplomasEstado(ByVal codigo_sesion As String, ByVal codigo_tdg As String, ByVal texto As String, ByVal estado As String) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_ConsultarEntregaDiplomasEstado", codigo_sesion, codigo_tdg, texto, estado)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+    Public Function ListarEntregaDiploma(ByVal tipo As String, ByVal codigo As String, ByVal param1 As String, ByVal texto As String) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_ListarEntregaDiplomas", tipo, codigo, param1, texto)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+    Public Function ActualizarEntregaNew(ByVal codigo As Integer, ByVal entregado As String, ByVal codigo_dta As Integer, ByVal codigo_tfu As Integer, ByVal id As Integer) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_ActualizarEntregaDiplomaNew", codigo, entregado, codigo_dta, codigo_tfu, id)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+    'olluen 13/11/2020
+    Public Function TraeCodigo_dta(ByVal operacion As String, ByVal codigo As Integer) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("GYT_TraeCodigo_dta", operacion, codigo)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
+
+    '*********************** Fin OLLUEN  **********************************************
 
 End Class

@@ -5,7 +5,7 @@ Partial Class carpetas
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If IsPostBack = False Then
             'Try
-		' Try ' try 'try
+            ' Try ' try 'try
             'Cargar solamente menús Padre
             Me.hdid.Value = Request.Form("id")
             Me.hdctf.Value = Request.Form("ctf")

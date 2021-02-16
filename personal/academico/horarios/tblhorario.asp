@@ -422,7 +422,7 @@ function ConsultarHorarios()
 	}
 	var obj =document.getElementById("hddHabilitar")
 	Habilitar = obj.value
-	location.href="tblhorario.asp?modo=A&codigo_cup=<%=codigo_cup%>&codigo_amb=" + codigo_amb + "&codigo_cac=<%=codigo_cac%>&th=<%=th%>&codigo_cpf=<%=codigo_cpf%>&codigo_per=" + codigo_per + "&fechaini=" + fechaini + "&fechafin=" + fechafin + "&Hab=" + Habilitar
+	location.href="tblhorario.asp?modo=A&codigo_cup=<%=codigo_cup%>&codigo_amb=" + codigo_amb + "&codigo_cac=<%=codigo_cac%>&th=<%=th%>&codigo_cpf=<%=codigo_cpf%>&codigo_per=" + codigo_per + "&fechaini=" + fechaini + "&fechafin=" + fechafin + "&Hab=" + Habilitar + "&mod=<%=test%>"
    
 }
 

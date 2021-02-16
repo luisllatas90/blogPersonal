@@ -3,7 +3,7 @@
     margin: 8px 0px;
     .title {
         margin: 0px 6px 0px 6px;
-        color: #2F4F4F;
+        color: #2f4f4f;
         font-size: 0.9rem;
     }
     hr {
@@ -24,7 +24,7 @@
     position: relative;
     .loading-gif {
         position: absolute;
-        display: none; 
+        display: none;
         z-index: 9999;
         right: 5px;
         top: 3px;
@@ -61,6 +61,18 @@
     .table {
         .thead-dark {
             text-align-last: left;
+        }
+    }
+}
+
+#udpActivarOnline {
+    .custom-radio {
+        margin: 0;
+        input[type="radio"] {
+            display: none;
+        }
+        .custom-control-label {
+            padding: 0;
         }
     }
 }

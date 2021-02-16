@@ -187,6 +187,7 @@ Partial Class GestionCurricular_frmResumenCalificador
                 mt_AgregarCabecera(objgridviewrow, objtablecell, 1, "Observaciones", "#D9534F")
                 mt_AgregarCabecera(objgridviewrow, objtablecell, 1, "Visualizar", "#D9534F") 'Here
                 mt_AgregarCabecera(objgridviewrow, objtablecell, 1, " ", "#D9534F")
+                mt_AgregarCabecera(objgridviewrow, objtablecell, 1, "Estado", "#D9534F")
                 objGridView.Controls(0).Controls.AddAt(0, objgridviewrow)
             End If
         Catch ex As Exception
@@ -221,21 +222,27 @@ Partial Class GestionCurricular_frmResumenCalificador
                     Response.Redirect("~/gestioncurricular/frmEnlazarEvaluacionMoodle.aspx")
                 ElseIf e.CommandName = "Visualizar" Then
                     dt = CType(Session("gc_dtCorte"), Data.DataTable)
-
+                    ' 20200722-ENEVADO ----------------------------------------------------------------------\
+                    Dim _nombre_reg As String
+                    _nombre_reg = IIf(_modular, "frmGenerarPromedio_Modular.aspx", "frmGenerarPromedio.aspx")
+                    ' ----------------------------------------------------------------------------------------\
                     If dt.Rows.Count > 0 Then
                         Session("gc_fecha_fin") = dt.Rows(dt.Rows.Count - 1).Item("fecha")
                         Session("gc_visualizar") = "1"
-                        Response.Redirect("~/gestioncurricular/frmGenerarPromedio.aspx")
+                        Response.Redirect("~/gestioncurricular/" & _nombre_reg) ' 20200722-ENEVADO
                     Else
                         mt_ShowMessage("Aún no se han establecido las fechas de corte", MessageType.Info)
                     End If
                 ElseIf e.CommandName = "Generar" Then
                     dt = CType(Session("gc_dtCorte"), Data.DataTable)
-
+                    ' 20200722-ENEVADO ----------------------------------------------------------------------\
+                    Dim _nombre_prom As String
+                    _nombre_prom = IIf(_modular, "frmGenerarPromedio_Modular.aspx", "frmGenerarPromedio.aspx")
+                    ' ----------------------------------------------------------------------------------------\
                     If dt.Rows.Count > 0 Then
                         Session("gc_fecha_fin") = dt.Rows(dt.Rows.Count - 1).Item("fecha")
                         Session("gc_visualizar") = "0"
-                        Response.Redirect("~/gestioncurricular/frmGenerarPromedio.aspx")
+                        Response.Redirect("~/gestioncurricular/" & _nombre_prom) ' 20200722-ENEVADO
                     Else
                         mt_ShowMessage("Aún no se han establecido las fechas de corte", MessageType.Info)
                     End If
@@ -564,7 +571,6 @@ Partial Class GestionCurricular_frmResumenCalificador
 
                     ' Crear button Para Generar Promedio
                     If _nro_cortes = dt.Rows.Count And cod_ctf = 13 Then
-
                         btn = New LinkButton()
                         btn.ID = "btnGenerar"
                         btn.Text = "<i class='fa fa-arrow-alt-circle-right'></i>"
@@ -573,8 +579,20 @@ Partial Class GestionCurricular_frmResumenCalificador
                         'btn.OnClientClick = "return confirm('¿Desea generar el promedio?');"
                         btn.CssClass = "btn btn-primary btn-sm"
                         e.Row.Cells(orden_col + 1 + _nro_col + 3).Controls.Add(btn) 'Here
-
                     End If
+
+                    ' Crear Info para Estado de Silabus
+                    Dim _estado_sil As String = Me.gvAsignatura.DataKeys(e.Row.RowIndex).Values("estado_sil")
+                    Dim lblEstadoSil As New Label()
+                    lblEstadoSil.ID = "lblEstadoSil"
+                    lblEstadoSil.ToolTip = ""
+                    lblEstadoSil.Font.Size = 16
+                    If _estado_sil = "E" Then
+                        lblEstadoSil.Text = "<span class='badge badge-pill badge-success'> Publicado </span>"
+                    Else
+                        lblEstadoSil.Text = "<span class='badge badge-pill badge-secondary'> Sin Publicar </span>"
+                    End If
+                    e.Row.Cells(orden_col + 1 + _nro_col + 4).Controls.Add(lblEstadoSil)
                 End If
             End If
         Catch ex As Exception
@@ -604,6 +622,16 @@ Partial Class GestionCurricular_frmResumenCalificador
         Catch ex As Exception
             mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.Error)
         End Try
+    End Sub
+
+    ''' <summary>
+    ''' '20200128ENevado
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub cboEstado_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboEstado.SelectedIndexChanged
+        cboCarrProf_SelectedIndexChanged(Nothing, Nothing)
     End Sub
 
 #End Region
@@ -681,6 +709,16 @@ Partial Class GestionCurricular_frmResumenCalificador
             Session("gc_dtCorteEnviados") = dtAux
             Session("gc_dtCursoEvaCorte") = dtEC
 
+            '20200128ENevado -------------------------------------------------------------------------\
+            If Me.cboEstado.selectedvalue <> "" Then
+                Dim dv As Data.DataView
+                If dt.Rows.Count > 0 Then
+                    dv = New Data.DataView(CType(Session("gc_dtCursoProg"), Data.DataTable), "estado_sil = '" & Me.cboEstado.selectedvalue & "' ", "", Data.DataViewRowState.CurrentRows)
+                    dt = dv.ToTable
+                End If
+            End If
+            '-----------------------------------------------------------------------------------------/
+
             Me.gvAsignatura.DataSource = dt 'CType(Session("gc_dtCursoProg"), Data.DataTable)
             Me.gvAsignatura.DataBind()
 
@@ -702,7 +740,7 @@ Partial Class GestionCurricular_frmResumenCalificador
 
         If paint Then
             objtablecell.Style.Add("background-color", backcolor)
-            objtablecell.Style.Add("font-weight", "600")
+            objtablecell.Style.Add("font-weight", "bold")
         End If
 
         objtablecell.HorizontalAlign = HorizontalAlign.Center
@@ -782,6 +820,12 @@ Partial Class GestionCurricular_frmResumenCalificador
             tfield.HeaderText = "Promedios"
             tfield.ItemStyle.HorizontalAlign = HorizontalAlign.Center
             Me.gvAsignatura.Columns.Add(tfield)
+            ' Crear Column para estado del silabus - 20210128ENevado ------------------\
+            tfield = New TemplateField()
+            tfield.HeaderText = "Sílabo"
+            tfield.ItemStyle.HorizontalAlign = HorizontalAlign.Center
+            Me.gvAsignatura.Columns.Add(tfield)
+            ' -------------------------------------------------------------------------/
             'mt_ShowMessage("mt_CrearColumns: " & dtColumns.Rows.Count & " | " & Me.gvAsignatura.Columns.Count, MessageType.Warning)
         Catch ex As Exception
             Throw ex

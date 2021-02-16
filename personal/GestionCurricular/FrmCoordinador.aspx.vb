@@ -83,12 +83,14 @@ Partial Class GestionCurricular_FrmCoordinador
     Protected Sub btnAceptar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
         ' Dim obj As New ClsConectarDatos
         Dim codigo_coo, codigo_cur, codigo_pes As Integer
+        Dim creditos_cur As Integer
         Dim dt As New Data.DataTable
         'obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
         Try
             'If Not (IsDBNull(Session("perlogin"))) And Session("perlogin").ToString <> "" Then
             codigo_cur = Session("gc_codigo_cur")
             codigo_pes = Session("gc_codigo_pes")
+            creditos_cur = Session("gc_creditos_cur")
             codigo_coo = 0
             'mt_ShowMessage("code: " & Session("gc_codigo_coo"), MessageType.Info)
             'obj.AbrirConexion()
@@ -96,6 +98,7 @@ Partial Class GestionCurricular_FrmCoordinador
             With oeCoordinador
                 .codigo_per = Me.ddlDocente.SelectedValue : .codigo_cac = Me.cboSemestre.SelectedValue : .codigo_cur = codigo_cur
                 .codigo_pes = IIf(Me.cboTipoCur.SelectedValue = 1, -2, codigo_pes) : .codigo_per_reg = cod_user : .indicador_coo = IIf(Me.chkDocente.Checked, 1, 0)
+                .creditos_cur = creditos_cur '--> Por Luis Q.T. 16DIC2020
             End With
             If String.IsNullOrEmpty(Session("gc_codigo_coo")) Then
                 'dt = obj.TraerDataTable("COM_RegistrarCoordinadorAsignatura", Me.ddlDocente.SelectedValue, Me.cboSemestre.SelectedValue, codigo_cur, IIf(Me.cboTipoCur.SelectedValue = 1, DBNull.Value, codigo_pes), cod_user, IIf(Me.chkDocente.Checked, 1, 0))
@@ -213,7 +216,7 @@ Partial Class GestionCurricular_FrmCoordinador
 
     Protected Sub gvCoordinador_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles gvCoordinador.RowCommand
         Dim obj As New ClsConectarDatos
-        Dim index, codigo_cur, codigo_pes, codigo_per, codigo_coo As Integer
+        Dim index, codigo_cur, codigo_pes, codigo_per, codigo_coo, creditos_Cur As Integer
         Dim indicador As Boolean = False
         Dim asignatura As String
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
@@ -225,6 +228,7 @@ Partial Class GestionCurricular_FrmCoordinador
             codigo_coo = Me.gvCoordinador.DataKeys(index).Values("codigo_coo")
             asignatura = Me.gvCoordinador.DataKeys(index).Values("nombre_Cur")
             indicador = CBool(Me.gvCoordinador.DataKeys(index).Values("indicador_coo"))
+            creditos_Cur = Me.gvCoordinador.DataKeys(index).Values("creditos_Cur")
 
             If indicador Then
                 If cod_ctf = 236 Then
@@ -240,6 +244,7 @@ Partial Class GestionCurricular_FrmCoordinador
             Session("gc_codigo_coo") = ""
             Session("gc_codigo_cur") = codigo_cur
             Session("gc_codigo_pes") = codigo_pes
+            Session("gc_creditos_cur") = creditos_Cur
             Me.chkDocente.Checked = indicador
             'Me.chkDocente.Text = "Listar Docentes de la Carrera Profesional"
             Select Case e.CommandName
@@ -350,7 +355,7 @@ Partial Class GestionCurricular_FrmCoordinador
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
         Try
             obj.AbrirConexion()
-            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DA", "")
+            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DAN", "")
             obj.CerrarConexion()
             mt_CargarCombo(Me.cboSemestre, dt, "codigo_Cac", "descripcion_Cac")
         Catch ex As Exception

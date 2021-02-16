@@ -181,7 +181,10 @@ Partial Class personales
 
             'Nivel Educativo
             If .Item("codigo_nive").ToString <> "" Then
-                ddlNivelEducativo.SelectedValue = .Item("codigo_nive").ToString
+                Try
+                    ddlNivelEducativo.SelectedValue = .Item("codigo_nive").ToString
+                Catch ex As Exception
+                End Try
             End If
             'Fecha de inscripcion en el registro pensionario
             If .Item("FechaInscripcionRegPen_Per").ToString <> "" Then
@@ -193,7 +196,10 @@ Partial Class personales
             End If
             ' ------  Direccion 01  ----
             If .Item("codigo_tvia").ToString <> "" Then
-                ddlTipoVia1.SelectedValue = .Item("codigo_tvia").ToString.Trim
+                Try
+                    ddlTipoVia1.SelectedValue = .Item("codigo_tvia").ToString.Trim
+                Catch ex As Exception
+                End Try
             Else
                 ddlTipoVia1.SelectedValue = "0"
             End If
@@ -210,7 +216,10 @@ Partial Class personales
             End If
             '--Tipo Zona  ---------------------------------------------------------
             If .Item("codigo_tzon").ToString.Trim <> "" Then
-                ddlTipoZona1.SelectedValue = .Item("codigo_tzon").ToString.Trim
+                Try
+                    ddlTipoZona1.SelectedValue = .Item("codigo_tzon").ToString.Trim
+                Catch ex As Exception
+                End Try
             Else
                 ddlTipoZona1.SelectedValue = "0"
             End If
@@ -232,7 +241,10 @@ Partial Class personales
             ' ------  Direccion 02  -------------------------------------------------------------------
 
             If .Item("codigo2_tvia").ToString.Trim <> "" Then
-                ddlTipoVia2.SelectedValue = .Item("codigo2_tvia").ToString
+                Try
+                    ddlTipoVia2.SelectedValue = .Item("codigo2_tvia").ToString
+                Catch ex As Exception
+                End Try
             End If
             If .Item("nombreVia2_Per").ToString.Trim <> "" Then
                 txtnombreVia_Per2.Text = .Item("nombreVia2_Per").ToString.Trim
@@ -244,7 +256,10 @@ Partial Class personales
                 txtinteriorVia_Per2.Text = .Item("interiorVia2_Per").ToString.Trim
             End If
             If .Item("codigo2_tzon").ToString.Trim <> "" Then
-                ddlTipoZona2.SelectedValue = .Item("codigo2_tzon").ToString.Trim
+                Try
+                    ddlTipoZona2.SelectedValue = .Item("codigo2_tzon").ToString.Trim
+                Catch ex As Exception
+                End Try
             Else
                 ddlTipoZona2.SelectedValue = "0"
             End If
@@ -264,12 +279,18 @@ Partial Class personales
 
             'Entidadad Financiera Cuenta /CTS ------------------------------------------------
             If .Item("codigo_Efi").ToString.Trim <> "" Then
-                ddlEntidadFinancieraCuenta.SelectedValue = .Item("codigo_Efi").ToString.Trim
+                Try
+                    ddlEntidadFinancieraCuenta.SelectedValue = .Item("codigo_Efi").ToString.Trim
+                Catch ex As Exception
+                End Try
             Else
                 ddlEntidadFinancieraCuenta.SelectedValue = "0"
             End If
             If .Item("codigoEfi_CTS").ToString.Trim <> "" Then
-                ddlEntidadFinancieraCts.SelectedValue = .Item("codigoEfi_CTS").ToString.Trim
+                Try
+                    ddlEntidadFinancieraCts.SelectedValue = .Item("codigoEfi_CTS").ToString.Trim
+                Catch ex As Exception
+                End Try
             Else
                 ddlEntidadFinancieraCts.SelectedValue = "0"
             End If
@@ -279,20 +300,29 @@ Partial Class personales
             End If
             '---Seguridad Social ----
             If .Item("codigo_Rsa").ToString.Trim <> "" Then
-                ddlRegimenSalud.SelectedValue = .Item("codigo_Rsa").ToString.Trim
+                Try
+                    ddlRegimenSalud.SelectedValue = .Item("codigo_Rsa").ToString.Trim
+                Catch ex As Exception
+                End Try
             Else
                 ddlRegimenSalud.SelectedValue = 0
             End If
             '--------------------------------------------------------------------------------------
             'Regimen Pensionario-----
             If .Item("regPensionario_Per") <> 0 Then
-                ddlRegPension.SelectedValue = .Item("regPensionario_Per")
+                Try
+                    ddlRegPension.SelectedValue = .Item("regPensionario_Per")
+                Catch ex As Exception
+                End Try
             Else
                 ddlRegPension.SelectedValue = 0
             End If
             '---------------------------------------------------------------------------------------
             If .Item("situacionEPS_Per").ToString.Trim <> "" Then
-                ddlSituacionEPS.SelectedValue = .Item("situacionEPS_Per").ToString.Trim
+                Try
+                    ddlSituacionEPS.SelectedValue = .Item("situacionEPS_Per").ToString.Trim
+                Catch ex As Exception
+                End Try
             Else
                 ddlSituacionEPS.SelectedValue = "0"
             End If
@@ -303,7 +333,10 @@ Partial Class personales
             '-----------------------------------------------------------------------------------------
             'EPS
             If .Item("codigo_EPS").ToString.Trim <> "" Then
-                ddlCodigoEPS.SelectedValue = .Item("codigo_EPS").ToString.Trim
+                Try
+                    ddlCodigoEPS.SelectedValue = .Item("codigo_EPS").ToString.Trim
+                Catch ex As Exception
+                End Try
             Else
                 ddlCodigoEPS.SelectedValue = "0"
             End If
@@ -314,7 +347,10 @@ Partial Class personales
             'Codigo AFP
             If .Item("codigo_Afp") <> -1 Then
                 'Response.Write(.Item("codigo_Afp"))
-                ddlAfps.SelectedValue = .Item("codigo_Afp")
+                Try
+                    ddlAfps.SelectedValue = .Item("codigo_Afp")
+                Catch ex As Exception
+                End Try
             Else
                 ddlAfps.SelectedValue = -1
             End If
@@ -335,21 +371,30 @@ Partial Class personales
                     If dts.Rows.Count > 0 Then
                         With dts.Rows(0)
                             'Cargamos el departamento
-                            ddlDepartamento1.SelectedValue = .Item("codigo_Dep")
+                            Try
+                                ddlDepartamento1.SelectedValue = .Item("codigo_Dep")
+                            Catch ex As Exception
+                            End Try
                             'Cargamos la lista de provincias que tiene el departamento
                             ddl.LlenaProvincia(ddlProvincia1, .Item("codigo_Dep"))
                             'Apuntams la provincia que le corresponde.
-                            ddlProvincia1.SelectedValue = .Item("codigo_Pro")
+                            Try
+                                ddlProvincia1.SelectedValue = .Item("codigo_Pro")
+                            Catch ex As Exception
+                            End Try
                             'Cargamos la lista de distritos que tiene esa provincia.
                             ddl.LlenaDistrito(ddlDistrito1, .Item("codigo_Pro"))
                             'Apuntamos el distrito que tiene registrado
-                            ddlDistrito1.SelectedValue = .Item("codigo_Dis")
+                            Try
+                                ddlDistrito1.SelectedValue = .Item("codigo_Dis")
+                            Catch ex As Exception
+                            End Try
                         End With
                     End If
                 End If
             Else
                 ddlDepartamento1.SelectedValue = 0
-                ddlDistrito1.SelectedValue = 0
+                ddlProvincia1.SelectedValue = 0
                 ddlDistrito1.SelectedValue = 0
             End If
 
@@ -368,15 +413,24 @@ Partial Class personales
                     If dts.Rows.Count > 0 Then
                         With dts.Rows(0)
                             'Cargamos el departamento
-                            ddlDepartamento2.SelectedValue = .Item("codigo_Dep")
+                            Try
+                                ddlDepartamento2.SelectedValue = .Item("codigo_Dep")
+                            Catch ex As Exception
+                            End Try
                             'Cargamos la lista de provincias que tiene el departamento
                             ddl.LlenaProvincia(ddlProvincia2, .Item("codigo_Dep"))
                             'Apuntams la provincia que le corresponde.
-                            ddlProvincia2.SelectedValue = .Item("codigo_Pro")
+                            Try
+                                ddlProvincia2.SelectedValue = .Item("codigo_Pro")
+                            Catch ex As Exception
+                            End Try
                             'Cargamos la lista de distritos que tiene esa provincia.
                             ddl.LlenaDistrito(ddlDistrito2, .Item("codigo_Pro"))
                             'Apuntamos el distrito que tiene registrado
-                            ddlDistrito2.SelectedValue = .Item("codigo_Dis")
+                            Try
+                                ddlDistrito2.SelectedValue = .Item("codigo_Dis")
+                            Catch ex As Exception
+                            End Try
                         End With
                     End If
                 End If
@@ -388,22 +442,32 @@ Partial Class personales
 
             '---------------------------------------------------------------------------------------------
             If Not String.IsNullOrEmpty(.Item("operadorInternet_Per").ToString.Trim) Then
-                Me.ddlOperadorInternet.Text = .Item("operadorInternet_Per").ToString.Trim
+                Try
+                    Me.ddlOperadorInternet.Text = .Item("operadorInternet_Per").ToString.Trim
+                Catch ex As Exception
+                End Try
 
-                If String.IsNullOrEmpty(Me.ddlOperadorInternet.SelectedValue) Then
+                If String.IsNullOrEmpty(Me.ddlOperadorInternet.SelectedValue) OrElse _
+                    Me.ddlOperadorInternet.SelectedValue.Equals("OTRO") Then
+                    Me.ddlOperadorInternet.Text = "OTRO"
                     Me.txtOperadorInternet.Text = .Item("operadorInternet_Per").ToString.Trim
                     Me.txtOperadorInternet.ReadOnly = False
-                    Me.ddlOperadorInternet.Text = "OTRO"
+                    Me.txtOperadorInternet.Visible = True
                 End If
             End If
 
             If Not String.IsNullOrEmpty(.Item("operadorCelular_Per").ToString.Trim) Then
-                Me.ddlOperadorMovil.Text = .Item("operadorCelular_Per").ToString.Trim
+                Try
+                    Me.ddlOperadorMovil.Text = .Item("operadorCelular_Per").ToString.Trim
+                Catch ex As Exception
+                End Try
 
-                If String.IsNullOrEmpty(Me.ddlOperadorMovil.SelectedValue) Then
+                If String.IsNullOrEmpty(Me.ddlOperadorMovil.SelectedValue) OrElse _
+                    Me.ddlOperadorMovil.SelectedValue.Equals("OTRO") Then
+                    Me.ddlOperadorMovil.Text = "OTRO"
                     Me.txtOperadorMovil.Text = .Item("operadorCelular_Per").ToString.Trim
                     Me.txtOperadorMovil.ReadOnly = False
-                    Me.ddlOperadorMovil.Text = "OTRO"
+                    Me.txtOperadorMovil.Visible = True
                 End If
             End If
 
@@ -513,8 +577,8 @@ Partial Class personales
                                                      CType(Me.txtfecinusat.Text.Trim, Date), _
                                                      Me.ddlTipoZona1.SelectedValue, _
                                                      Me.ddlTipoZona2.SelectedValue, _
-                                                     Me.ddlOperadorInternet.SelectedValue, _
-                                                     Me.ddlOperadorMovil.SelectedValue)
+                                                     IIf(ddlOperadorInternet.SelectedValue.Trim.Equals("OTRO"), Me.txtOperadorInternet.Text.Trim.ToUpper, ddlOperadorInternet.SelectedValue.Trim), _
+                                                     IIf(ddlOperadorMovil.SelectedValue.Trim.Equals("OTRO"), Me.txtOperadorMovil.Text.Trim.ToUpper, ddlOperadorMovil.SelectedValue.Trim))
 
 
             ObjCnx.Ejecutar("PER_ActualizarFirmaCarta", Request.QueryString("id"), Me.chkFirmoCarta.Checked)
@@ -691,9 +755,11 @@ Partial Class personales
 
             If ddlOperadorInternet.SelectedValue.Equals("OTRO") Then
                 Me.txtOperadorInternet.ReadOnly = False
+                Me.txtOperadorInternet.Visible = True
                 Me.txtOperadorInternet.Focus()
             Else
                 Me.txtOperadorInternet.ReadOnly = True
+                Me.txtOperadorInternet.Visible = False
             End If
         Catch ex As Exception
             Response.Write(ex.Message)
@@ -706,9 +772,11 @@ Partial Class personales
 
             If ddlOperadorMovil.SelectedValue.Equals("OTRO") Then
                 Me.txtOperadorMovil.ReadOnly = False
+                Me.txtOperadorMovil.Visible = True
                 Me.txtOperadorMovil.Focus()
             Else
                 Me.txtOperadorMovil.ReadOnly = True
+                Me.txtOperadorMovil.Visible = False
             End If
         Catch ex As Exception
             Response.Write(ex.Message)

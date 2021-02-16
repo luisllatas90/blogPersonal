@@ -252,7 +252,8 @@ Partial Class academico_frmEgresadoAlumni
             Dim y As Integer = 0
             For x As Integer = 0 To TablaCronograma.rows.count - 1
                 If TablaCronograma.rows(x).item("descripcion_cac").toString = Me.cboCiclo.selecteditem.text Then
-                    Me.lblCronograma.text = iif(TablaCronograma.rows(x).item("fechaini_cro").toString <> "", TablaCronograma.rows(x).item("fechaini_cro").toString.substring(0, 10), "") & " al " & iif(TablaCronograma.rows(x).item("fechafin_cro").toString <> "", TablaCronograma.rows(x).item("fechafin_cro").toString.substring(0, 10), "")
+                    'Me.lblCronograma.text = iif(TablaCronograma.rows(x).item("fechaini_cro").toString <> "", TablaCronograma.rows(x).item("fechaini_cro").toString.substring(0, 10), "") & " al " & iif(TablaCronograma.rows(x).item("fechafin_cro").toString <> "", TablaCronograma.rows(x).item("fechafin_cro").toString.substring(0, 10), "")
+					 Me.lblCronograma.text = iif(TablaCronograma.rows(x).item("fechaini_cro").toString <> "", TablaCronograma.rows(x).item("fechaini_cro"), "") & " al " & iif(TablaCronograma.rows(x).item("fechafin_cro").toString <> "", TablaCronograma.rows(x).item("fechafin_cro"), "")
                     y = x
                     Exit For
                 End If
@@ -261,6 +262,10 @@ Partial Class academico_frmEgresadoAlumni
                 Me.lblCronograma.text = "No establecido"
                 Me.cmdGuardar.enabled = False
             Else
+			
+				'response.write (Date.Now)
+				'response.write (Date.Now.substring(0,10))
+				
                 If Date.Now >= CDate(TablaCronograma.rows(y).item("fechaini_cro")) And Date.Now <= CDate(TablaCronograma.rows(y).item("fechafin_cro")) Then
                     Me.cmdGuardar.enabled = True
                 Else

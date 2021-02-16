@@ -1124,94 +1124,95 @@
     </head>
     <body>
        
-            <div class="col-md-12 nopad-right">
-                <!-- panel -->
-                <div class="panel panel-piluku">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Listado de rendiciones  
-                            <span class="panel-options">
-                                <a href="#" class="panel-refresh">
-                                    <i class="icon ti-reload"></i> 
-                                </a>
-                                <a href="#" class="panel-minimize">
-                                    <i class="icon ti-angle-up"></i> 
-                                </a>
-                                <a href="#" class="panel-close">
-                                    <i class="icon ti-close"></i> 
-                                </a>
-                            </span>
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="col-md-12">            
-                            <div class="row">
-                                <div class="col-md-6" style="float:left">
-
-                                    <ul>
-                                        <li class="list-unstyled"><i class="icon ion-checkmark text-primary"></i> &nbsp;
-                                        <b><label class="">CODIGO:&nbsp;</label> </b><label runat="server" id="lblCodigo" name="lblCodigo"></label>. &nbsp;&nbsp; <i class="icon ion-checkmark text-primary"></i> &nbsp;<b><label>DNI: &nbsp;</label> </b><label runat="server" id="lblDni" name="lblDni"></label>.</li>
-                                        <li class="list-unstyled"><i class="icon ion-checkmark text-primary"></i> &nbsp;<b><label>COLABORADOR:&nbsp; </label> </b><label runat="server" id="lblColaborador" name="Codigo"></label></li>
-                                    </ul>
-
-                                </div>		
-                            </div>
-
-                        </div> 
-
+        <div class="col-md-12 nopad-right">
+            <!-- panel -->
+            <div class="panel panel-piluku">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Listado de rendiciones  
+                        <span class="panel-options">
+                            <a href="#" class="panel-refresh">
+                                <i class="icon ti-reload"></i> 
+                            </a>
+                            <a href="#" class="panel-minimize">
+                                <i class="icon ti-angle-up"></i> 
+                            </a>
+                            <a href="#" class="panel-close">
+                                <i class="icon ti-close"></i> 
+                            </a>
+                        </span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12">            
                         <div class="row">
-                        <form  method="post" >
-                      
-                            <div class="col-md-4 col-sm-4 col-xs-4"  style="float:left">
-                                <div class="form-group">
-                                    <label class="col-sm-5 col-xs-5 control-label"><b>Estado de la Rendición :</b></label>
-                                    <div class="col-sm-6 col-xs-6"> 
-                                        <select class="name_search  form-control valid" name="EstRend" id="EstRend" data-validation="required" data-validation-error-msg="Please make a choice">
-                                          
-                                            <option value="P" >Pendientes </option>
-                                            <option value="F"> Finalizadas </option>                					        
-                                        </select>
-                                    </div>            
-                                </div>  
-                            </div>
-                            <div class="col-md-1 col-sm-2 col-xs-2" >
-                                <div class="form-group">                           
-                                    <div class="col-sm-3"><input type="submit" name="btnConsultar" id="btnConsultar"  Text="Consultar" class="btn btn-primary" value="Consultar"/></div>  
-                                </div>  
-                            </div>
-                         </form>
-                        </div> 						 
-                        <!-- /row -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div id="PnlList">
-                                    <table class="display dataTable cell-border" id="tablaRendiciones">
-                                        <thead>
-                                            <tr role="row">		
-                                                <th style="width:8%">Fecha</th>
-                                                <th style="width:8%">T.Documento</th>
-                                                <th style="width:8%">Número</th>
-                                                <th style="width:8%">Moneda</th>
-                                                <th class="text-right" style="width:10%">Importe</th>											
-                                                <th style="width:8%">Estado</th>
-                                                <th style="width:10%">Usuario</th>
-                                                <th style="width:40%">Observación</th>
-                                               
-                                                <th style="width:40%">Detalle</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbRendicion" runat="server">
-                                        </tbody>									 
-                                    </table>	
-                                </div>
+                            <div class="col-md-6" style="float:left">
+
+                                <ul>
+                                    <li class="list-unstyled"><i class="icon ion-checkmark text-primary"></i> &nbsp;
+                                    <b><label class="">CODIGO:&nbsp;</label> </b><label runat="server" id="lblCodigo" name="lblCodigo"></label>. &nbsp;&nbsp; <i class="icon ion-checkmark text-primary"></i> &nbsp;<b><label>DNI: &nbsp;</label> </b><label runat="server" id="lblDni" name="lblDni"></label>.</li>
+                                    <li class="list-unstyled"><i class="icon ion-checkmark text-primary"></i> &nbsp;<b><label>COLABORADOR:&nbsp; </label> </b><label runat="server" id="lblColaborador" name="Codigo"></label></li>
+                                </ul>
+
+                            </div>		
+                        </div>
+
+                    </div> 
+
+                    <div class="row">
+                    <form  method="post" >
+                  
+                        <div class="col-md-4 col-sm-4 col-xs-4"  style="float:left">
+                            <div class="form-group">
+                                <label class="col-sm-5 col-xs-5 control-label"><b>Estado de la Rendición :</b></label>
+                                <div class="col-sm-6 col-xs-6"> 
+                                    <select class="name_search  form-control valid" name="EstRend" id="EstRend" data-validation="required" data-validation-error-msg="Please make a choice">
+                                      
+                                        <option value="P" >Pendientes </option>
+                                        <option value="F"> Finalizadas </option>                					        
+                                    </select>
+                                </div>            
+                            </div>  
+                        </div>
+                        <div class="col-md-1 col-sm-2 col-xs-2" >
+                            <div class="form-group">                           
+                                <div class="col-sm-3"><input type="submit" name="btnConsultar" id="btnConsultar"  Text="Consultar" class="btn btn-primary" value="Consultar"/></div>  
+                            </div>  
+                        </div>
+                     </form>
+                    </div> 						 
+                    <!-- /row -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="PnlList">
+                                <table class="display dataTable cell-border" id="tablaRendiciones">
+                                    <thead>
+                                        <tr role="row">		
+                                            <th style="width:8%">Fecha</th>
+                                            <th style="width:8%">T.Documento</th>
+                                            <th style="width:8%">Número</th>
+                                            <th style="width:8%">Moneda</th>
+                                            <th class="text-right" style="width:10%">Importe</th>											
+                                            <th style="width:8%">Estado</th>
+                                            <th style="width:10%">Usuario</th>
+                                            <th style="width:40%">Observación</th>
+                                           
+                                            <th style="width:40%">Detalle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbRendicion" runat="server">
+                                    </tbody>									 
+                                </table>	
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /panel -->
             </div>
-            <!-- col-md-6 -->
-            <div class="modal fade modal-md"  style=" z-index:0; overflow:scroll" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false">
+            <!-- /panel -->
+        </div>
+        
+        <!-- col-md-6 -->
+        <div class="modal fade modal-md"  style=" z-index:0; overflow:scroll" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content" style="max-width: 800px">
                         <!--Header-->
@@ -1260,8 +1261,9 @@
                         </div>--%>
                     </div>
                 </div>
-            </div> 
-            <div id="DivListado" class="row" style="display:none">  
+            </div>
+          
+        <div id="DivListado" class="row" style="display:none">  
                 <div class="row">
                     <div class ="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                     </div>
@@ -1288,7 +1290,8 @@
                     </table>	
                 </div>
             </div>
-            <div id="DivAgregar" class="form-horizontal" style="display:none">
+         
+        <div id="DivAgregar" class="form-horizontal" style="display:none">
 
                 <div class="col-lg-12">
                     <form  enctype="multipart/form-data"  class="form-horizontal" role="form" id="frmRegistro" name="frmRegistro" enctype="multipart/form-data" method="post"   >
@@ -1416,15 +1419,12 @@
                     </form>
                 </div>         
 
-            </div> 
-            <div id="temp1"></div>
-            <div id="temp2"></div>  
+            </div>
+         
+        <div id="temp1"></div>
+        <div id="temp2"></div>  
             
-            
-            
-            
-            
-            <div class="modal fade modal-md" id="ModalPrint" tabindex="-1" role="dialog" aria-labelledby="ModalPrint" data-backdrop="static" data-keyboard="false">
+        <div class="modal fade modal-md" id="ModalPrint" tabindex="-1" role="dialog" aria-labelledby="ModalPrint" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content" style="max-width: 800px">
                         <!--Header-->
@@ -1570,10 +1570,9 @@
                         </div>--%>
                     </div>
                 </div>
-            </div> 
+            </div>        
                  
-                 
-                 <div class="modal fade modal-md" style="z-index:0" id="ModelDetalle" tabindex="-1" role="dialog" aria-labelledby="ModelDetalle" data-backdrop="static" data-keyboard="false">
+        <div class="modal fade modal-md" style="z-index:0" id="ModelDetalle" tabindex="-1" role="dialog" aria-labelledby="ModelDetalle" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content" style="max-width: 800px">
                         <!--Header-->
@@ -1605,7 +1604,8 @@
                     </div>
                 </div>
             </div>
-         <div  class="modal fade  "id="GaleriaImages" role="dialog" data-backdrop="static" data-keyboard="false">
+         
+        <div  class="modal fade  "id="GaleriaImages" role="dialog" data-backdrop="static" data-keyboard="false">
           <div class="modal-dialog modal-md" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -1632,20 +1632,20 @@
         </div>  
         
         <div class="modal fade" id="continuemodal"  role="dialog"   data-backdrop="static">
-		<div class="modal-dialog modal-md" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="ti-close"></span></button>
-					<h4 class="modal-title" id="myModalLabel3">Alerta</h4>
-				</div>
-				<div class="modal-body">
-					<div id="DivSessionUser" class=""></div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary"  data-dismiss="modal">Cerrar</button>
-				</div>
-			</div>
-		</div>
-	</div>
+		    <div class="modal-dialog modal-md" role="document">
+			    <div class="modal-content">
+				    <div class="modal-header">
+					    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="ti-close"></span></button>
+					    <h4 class="modal-title" id="myModalLabel3">Alerta</h4>
+				    </div>
+				    <div class="modal-body">
+					    <div id="DivSessionUser" class=""></div>
+				    </div>
+				    <div class="modal-footer">
+					    <button type="button" class="btn btn-primary"  data-dismiss="modal">Cerrar</button>
+				    </div>
+			    </div>
+		    </div>
+	    </div>
     </body>
 </html>

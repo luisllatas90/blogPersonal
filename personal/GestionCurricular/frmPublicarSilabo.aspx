@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
     <meta name="google" value="notranslate" />
-    <title>Publicar Silabo</title>
+    <title>Publicar Sílabo</title>
     <!-- custom scrollbar stylesheet -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv='X-UA-Compatible' content='IE=7' />
@@ -124,7 +124,7 @@
 <body>
     <form id="form1" runat="server" method="post" autocomplete="off">
     <%--<busyboxdotnet:BusyBox ID="BusyBox1" runat="server" ShowBusyBox="OnLeavingPage" Image="Clock" Text="Su solicitud esta siendo procesada..." Title="Por favor espere" />--%>
-    <!-- Listado de Silabos -->
+    <!-- Listado de Sílabos -->
     <div class="container-fluid">
         <div class="messagealert" id="alert_container">
         </div>
@@ -132,7 +132,7 @@
         <div class="panel panel-default" id="pnlLista" runat="server">
             <div class="panel panel-heading">
                 <h4>
-                    Publicar Silabos</h4>
+                    Publicar Sílabos</h4>
             </div>
             <div class="panel panel-body">
                 <div class="row" style="background-color: Yellow; margin-top: -35px; margin-bottom: 15px">
@@ -232,32 +232,32 @@
                                             <asp:LinkButton ID="btnVer" runat="server" CommandName="Ver" ToolTip="Visualizar Sílabo"
                                                 CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" CssClass="btn btn-info btn-sm"
                                                 Visible='<%# IIf(Eval("dis_aprobado")=0, False, IIf(Eval("IdArchivo")=0, True, False)) %>'
-                                                OnClientClick="return confirm('¿Desea visualizar el silabo?');">
+                                                OnClientClick="return confirm('¿Desea visualizar el sílabo?');">
                                             <span><i class="fa fa-eye"></i></span>
                                             </asp:LinkButton>
                                             <asp:LinkButton ID="btnPublicar" runat="server" CommandName="Publicar" ToolTip="Publicar Sílabo"
                                                 CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" CssClass="btn btn-success btn-sm"
                                                 Visible='<%# IIF(Eval("tieneCronograma")=0, False, IIF(Eval("dis_aprobado")=1 and Len(Eval("instr_pend"))=0 and Len(Eval("sesion_pend"))=0 and Len(Eval("fechas_pend"))=0 and Eval("IdArchivo")=0 and Eval("docente_cur").tostring.trim <> "", True, False)) %>'
-                                                OnClientClick="return confirm('¿Desea publicar el silabo?');">
+                                                OnClientClick="return confirm('¿Desea publicar el sílabo?');">
                                             <span><i class="fa fa-share-alt"></i></span>
                                             </asp:LinkButton>
                                             <%--<asp:LinkButton ID="btnObservar" runat="server" CommandName="Observar" ToolTip="Observar Sílabo"
                                                 CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" CssClass="btn btn-danger btn-sm" 
                                                 Visible='<%# IIf(Eval("dis_aprobado")=1 and Eval("sin_fecha")=0,True,False) %>'  
-                                                OnClientClick="return confirm('¿Desea generar una observación el silabo?');" >
+                                                OnClientClick="return confirm('¿Desea generar una observación el sílabo?');" >
                                                 <span><i class="fa fa-unlink"></i></span>
                                             </asp:LinkButton>--%>
                                             <asp:LinkButton ID="btnDescargar" runat="server" CommandName="Descargar" OnClick="btnDescargar_Click"
                                                 ToolTip="Descargar Sílabo" CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
                                                 CssClass="btn btn-warning btn-sm" Visible='<%# IIF(Eval("dis_aprobado")=1 and Len(Eval("instr_pend"))=0 and Len(Eval("sesion_pend"))=0 and Len(Eval("fechas_pend"))=0 and Eval("IdArchivo")<>0, True, False) %>'
-                                                OnClientClick="return confirm('¿Desea Descargar el silabo?');">
+                                                OnClientClick="return confirm('¿Desea Descargar el sílabo?');">
                                             <span><i class="fa fa-download"></i></span>
                                             </asp:LinkButton>
                                             <!--EPENA{ -->
                                             <asp:LinkButton ID="btnDespublicar" runat="server" CommandName="Despublicar" OnClick="btnDespublicar_Click"
                                                 ToolTip="Retirar publicación del Sílabo" CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
                                                 CssClass="btn btn-primary btn-sm" Visible='<%# IIF(Eval("tieneCronograma")=0, False, IIF(Eval("IdArchivo")>0 and (Request.QueryString("ctf") = "1" or Request.QueryString("ctf") = "9"), True, False)) %>'
-                                                OnClientClick="return confirm('¿Desea retirar la publicación del silabo?');">
+                                                OnClientClick="return confirm('¿Desea retirar la publicación del sílabo?');">
                                             <span><i class="fa fa-calendar-times"></i></span>
                                             </asp:LinkButton>
                                             <!--}EPENA -->

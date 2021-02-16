@@ -262,6 +262,7 @@ Partial Class administrativo_tramite_FrmListaTramite
 
                 Dim codigo_dta As Integer = 0
                 hddtareq.Value = Encriptar(gvDatos.DataKeys(index).Values("codigo_dta").ToString)
+				hddtaindex.value=index
                 codigo_dta = gvDatos.DataKeys(index).Values("codigo_dta")
                 Me.nroTramite.Value = gvDatos.DataKeys(index).Values("glosaCorrelativo_trl")
 
@@ -541,8 +542,11 @@ Partial Class administrativo_tramite_FrmListaTramite
                 obj.CerrarConexion()
 
                 If (dt.Rows.Count > 0) Then
-                    str = "Puedes recoger tu documento en " & dt.Rows(0).Item("ubicacion_ctr").ToString
-                    str = str & ", previa presentación de tu DNI. " & dt.Rows(0).Item("mensaje").ToString
+                    '#EPENA  ID 42260 
+                    'str = "Puedes recoger tu documento en " & dt.Rows(0).Item("ubicacion_ctr").ToString
+                    'str = str & ", previa presentación de tu DNI. " & dt.Rows(0).Item("mensaje").ToString
+                    str = "Se ha enviado el documento solicitado al correo registrado en nuestro Campus Virtual."
+
                     Me.txtObservacion.Text = str
                 End If
             End If
@@ -577,7 +581,9 @@ Partial Class administrativo_tramite_FrmListaTramite
             End If
 
             listaEmail = divEmailErroneo.InnerHtml.ToString
+
             ShowMessageEmailDestino(listaEmail, "info")
+
             divEmailErroneo.InnerHtml = ""
             CargaDatos()
 
@@ -849,7 +855,7 @@ Partial Class administrativo_tramite_FrmListaTramite
 			If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
                 EmailVarios = EmailDestino & ";" & EmailDestino2
             Else
-                EmailVarios = "epena@usat.edu.pe;fatima.vasquez@usat.edu.pe"
+                EmailVarios = "hcano@usat.edu.pe;epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;olluen@usat.edu.pe"
             End If
 
             De = ""
@@ -879,7 +885,7 @@ Partial Class administrativo_tramite_FrmListaTramite
                 strMensaje = strMensaje & " ha enviado el siguiente mensaje:  <br/><br/>"
                 strMensaje = strMensaje & "<em>" & dt.Rows(0).Item("observacionAlumno_dft").ToString & "</em>"
                 ' cls.EnviarMail("campusvirtual@usat.edu.pe", "Campus Virtual", EmailVarios, "Fecha de Entrega Trámite", strMensaje, True, "", "")
-               'rpta = cls.EnviarMailVariosV2(De, EmailVarios, Asunto, strMensaje, True)
+                'rpta = cls.EnviarMailVariosV2(De, EmailVarios, Asunto, strMensaje, True)
                 rptaEmail = cls.EnviarMailVariosV3(De, EmailVarios, Asunto, strMensaje, True)
             End If
             'Correo de Finaliza Tramite
@@ -989,7 +995,7 @@ Partial Class administrativo_tramite_FrmListaTramite
             If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
                 EmailVarios = EmailDestino & ";" & EmailDestino2
             Else
-                EmailVarios = "epena@usat.edu.pe;fatima.vasquez@usat.edu.pe"
+                EmailVarios = "hcano@usat.edu.pe;epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;olluen@usat.edu.pe"
             End If
 
             De = ""
@@ -1099,11 +1105,17 @@ Partial Class administrativo_tramite_FrmListaTramite
 
         Dim alumno, escuela As String
 
-
+        Dim Plantilla As String = "TRVE"
+        Dim PlantillaEmailAprobacion As String = "ATRL"
+        Dim PlantillaEmailRechazo As String = "RTRL"
+        Dim PlantillaEmailObservado As String = "OTRL"
+        Dim dtDFT As New Data.DataTable
         Try
             obj.AbrirConexion()
             dt = obj.TraerDataTable("TRL_DatosAlumnoxDetalle", dta)
             obj.CerrarConexion()
+
+
 
             alumno = dt.Rows(0).Item("apellidoPat_Alu").ToString & " " & dt.Rows(0).Item("apellidoMat_Alu").ToString & " " & dt.Rows(0).Item("nombres_Alu").ToString
             escuela = dt.Rows(0).Item("nombre_Cpf").ToString
@@ -1119,10 +1131,23 @@ Partial Class administrativo_tramite_FrmListaTramite
 
             If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
                 EmailVarios = EmailDestino & ";" & EmailDestino2
+
             Else
-                EmailVarios = "epena@usat.edu.pe;fatima.vasquez@usat.edu.pe"
+                EmailVarios = "hcano@usat.edu.pe;epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;olluen@usat.edu.pe"
             End If
             'Correo de evaluacion Rechazada
+
+
+            obj.AbrirConexion()
+            dtDFT = obj.TraerDataTable("TRL_DatosAlumnoxDetalleFlujo", dft)
+            obj.CerrarConexion()
+
+            If dtDFT.Rows.Count > 0 Then
+                Plantilla = dtDFT.Rows(0).Item("clasePlantilla")
+                PlantillaEmailAprobacion = dtDFT.Rows(0).Item("procesoEmailAprobacion")
+                PlantillaEmailRechazo = dtDFT.Rows(0).Item("procesoEmailRechazo")
+                PlantillaEmailObservado = dtDFT.Rows(0).Item("procesoEmailObservado")
+            End If
 
 
             De = ""
@@ -1146,8 +1171,14 @@ Partial Class administrativo_tramite_FrmListaTramite
                 'rpta = cls.EnviarMailVariosV2(De, EmailVarios, Asunto, strMensaje, True)
                 'rptaEmail = cls.EnviarMailVariosV3(De, EmailVarios, Asunto, strMensaje, True)
 
+                If PlantillaEmailRechazo = "RTRL" And Plantilla <> "TRVE" Then
+                    Plantilla = "TRVE"
+                End If
+
+
                 Dim codigo_envio As Integer = ClsComunicacionInstitucional.ObtenerCodigoEnvio(CInt(Me.Request.QueryString("id")), tfu, 64)
-                rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "TRVE", "RTRL", 1, CInt(Me.Request.QueryString("id")), "codigo_alu", dt.Rows(0).Item("codigoalu"), 64, EmailVarios, "serviciosti@usat.edu.pe", "", "", escuela, alumno, tfuorden, tfudes, Nombrectr)
+                'rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "TRVE", "RTRL", 1, CInt(Me.Request.QueryString("id")), "codigo_alu", dt.Rows(0).Item("codigoalu"), 64, EmailVarios, "serviciosti@usat.edu.pe", "", "", escuela, alumno, tfuorden, tfudes, Nombrectr)
+                rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, Plantilla, PlantillaEmailRechazo, 1, CInt(Me.Request.QueryString("id")), "codigo_alu", dt.Rows(0).Item("codigoalu"), 64, EmailVarios, "serviciosti@usat.edu.pe", "", "", escuela, alumno, tfuorden, tfudes, Nombrectr)
 
 
 
@@ -1167,9 +1198,15 @@ Partial Class administrativo_tramite_FrmListaTramite
                 'rpta = cls.EnviarMailVariosV2(De, EmailVarios, Asunto, strMensaje, True)
                 'rptaEmail = cls.EnviarMailVariosV3(De, EmailVarios, Asunto, strMensaje, True)
 
-
+                If PlantillaEmailAprobacion = "ATRL" And Plantilla <> "TRVE" Then
+                    Plantilla = "TRVE"
+                End If
+                'Response.Write(Plantilla & " -" & PlantillaEmailAprobacion)
                 Dim codigo_envio As Integer = ClsComunicacionInstitucional.ObtenerCodigoEnvio(CInt(Me.Request.QueryString("id")), tfu, 64)
-                rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "TRVE", "ATRL", 1, CInt(Me.Request.QueryString("id")), "codigo_alu", dt.Rows(0).Item("codigoalu"), 64, EmailVarios, "serviciosti@usat.edu.pe", "", "", escuela, alumno, tfuorden, tfudes, Nombrectr)
+                'rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "TRVE", "ATRL", 1, CInt(Me.Request.QueryString("id")), "codigo_alu", dt.Rows(0).Item("codigoalu"), 64, EmailVarios, "serviciosti@usat.edu.pe", "", "", escuela, alumno, tfuorden, tfudes, Nombrectr)
+                rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, Plantilla, PlantillaEmailAprobacion, 1, CInt(Me.Request.QueryString("id")), "codigo_alu", dt.Rows(0).Item("codigoalu"), 64, EmailVarios, "serviciosti@usat.edu.pe", "", "", escuela, alumno, tfuorden, tfudes, Nombrectr)
+
+
 
             ElseIf tipo = "O" Then
                 '----------------------------------------------------------------------------------------------------
@@ -1186,9 +1223,15 @@ Partial Class administrativo_tramite_FrmListaTramite
                 'cls.EnviarMail("campusvirtual@usat.edu.pe", "Campus Virtual", EmailDestino, "TRÁMITE VIRTUAL: " & dt.Rows(0).Item("descripcion_ctr").ToString.ToUpper(), strMensaje, True, "", "")
                 'rpta = cls.EnviarMailVariosV2(De, EmailVarios, Asunto, strMensaje, True)
                 'rptaEmail = cls.EnviarMailVariosV3(De, EmailVarios, Asunto, strMensaje, True)
+                If PlantillaEmailObservado = "OTRL" And Plantilla <> "TRVE" Then
+                    Plantilla = "TRVE"
+                End If
 
                 Dim codigo_envio As Integer = ClsComunicacionInstitucional.ObtenerCodigoEnvio(CInt(Me.Request.QueryString("id")), tfu, 64)
-                rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "TRVE", "OTRL", 1, CInt(Me.Request.QueryString("id")), "codigo_alu", dt.Rows(0).Item("codigoalu"), 64, EmailVarios, "serviciosti@usat.edu.pe", "", "", escuela, alumno, tfuorden, tfudes, Nombrectr)
+                'rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "TRVE", " ", 1, CInt(Me.Request.QueryString("id")), "codigo_alu", dt.Rows(0).Item("codigoalu"), 64, EmailVarios, "serviciosti@usat.edu.pe", "", "", escuela, alumno, tfuorden, tfudes, Nombrectr)
+                'rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "TRVE", "OTRL", 1, CInt(Me.Request.QueryString("id")), "codigo_alu", dt.Rows(0).Item("codigoalu"), 64, EmailVarios, "serviciosti@usat.edu.pe", "", "", escuela, alumno, Nombrectr, tfuorden, tfudes)
+                rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, Plantilla, PlantillaEmailObservado, 1, CInt(Me.Request.QueryString("id")), "codigo_alu", dt.Rows(0).Item("codigoalu"), 64, EmailVarios, "serviciosti@usat.edu.pe", "", "", escuela, alumno, Nombrectr, tfuorden, tfudes)
+
 
 
             End If
@@ -1213,6 +1256,8 @@ Partial Class administrativo_tramite_FrmListaTramite
 
             cls = Nothing
             obj = Nothing
+            dtDFT = Nothing
+            dt = Nothing
             Return rpta
         Catch ex As Exception
             ShowMessage("Error: " & ex.Message.Replace("'", ""), MessageType.Error)
@@ -1221,7 +1266,80 @@ Partial Class administrativo_tramite_FrmListaTramite
         End Try
     End Function
 
-  
+
+    Private Sub EnviaCorreoNotificar(ByVal dta As Integer, ByVal tipo As String, ByVal dft As Integer)
+
+
+        Dim obj As New ClsConectarDatos
+        Dim rpta As Boolean
+        Dim strMensaje As String = ""
+        obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+
+
+        Dim tfu As String = Me.hdTfu.value
+        Dim tfudes As String = Me.hdTfuDesc.value
+        Dim tfuorden As String = Me.hdOrden.value
+        Dim Nombrectr As String = Me.hdNombrectr.value
+
+
+
+        Try
+
+            Dim dtnoti As New Data.DataTable
+            Dim EmailNoti As String = ""
+            Dim lista As String = ""
+
+            Dim codigo_envionoti As Integer
+
+
+
+            obj.AbrirConexion()
+            dtnoti = obj.TraerDataTable("TRL_NotificarCorreoDocentes", tipo, dta, dft)
+            obj.CerrarConexion()
+
+
+            If dtnoti.Rows.Count > 0 Then
+                codigo_envionoti = ClsComunicacionInstitucional.ObtenerCodigoEnvio(CInt(Me.Request.QueryString("id")), tfu, 64)
+                For i As Integer = 0 To dtnoti.Rows.Count - 1
+                    If tipo = "1" Then
+                        lista = lista & dtnoti.Rows(i).Item("docenteapoyo") & "<br>"
+
+                    End If
+                    If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
+                        EmailNoti = dtnoti.Rows(i).Item("correo")
+                    Else
+                        EmailNoti = "hcano@usat.edu.pe;epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;olluen@usat.edu.pe"
+
+                    End If
+
+                    'Response.Write(dtnoti.Rows(i).Item("docenteapoyo") & "<br>")
+                    'Response.Write(EmailNoti & "<br>")
+                    rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envionoti, dtnoti.Rows(i).Item("clasePlantilla"), dtnoti.Rows(i).Item("procesoNotificarDocentes"), 1, CInt(Me.Request.QueryString("id")), dtnoti.Rows(i).Item("campo"), dtnoti.Rows(i).Item("codigo_Per"), 64, EmailNoti, "serviciosti@usat.edu.pe", "", "", dtnoti.Rows(i).Item("docenteapoyo"))
+
+                Next
+
+
+                If rpta Then
+                    If tipo = "1" Then
+                        ShowMessageEmailDestino("Se envió correo a los siguientes docentes:<br> " & lista.ToString, "info")
+                    End If
+                Else
+
+
+                    ShowMessageEmailDestino("Problemas al enviar correo", "error")
+                End If
+
+            End If
+
+            dtnoti = Nothing
+            obj = Nothing
+
+        Catch ex As Exception
+            ShowMessageEmailDestino("Error: " & ex.Message.Replace("'", ""), "error")
+
+
+        End Try
+    End Sub
 
     Private Function EnviarCorreoPlanEstudio(ByVal dft As Integer) As Boolean
         Dim cls As New ClsMail
@@ -1254,7 +1372,7 @@ Partial Class administrativo_tramite_FrmListaTramite
             If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
                 EmailVarios = EmailDestino & ";" & EmailDestino2
             Else
-                EmailVarios = "epena@usat.edu.pe;fatima.vasquez@usat.edu.pe"
+                EmailVarios = "hcano@usat.edu.pe;epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;olluen@usat.edu.pe"
             End If
 
             dta = CInt(Me.HdTramite.Value.ToString)
@@ -1325,11 +1443,11 @@ Partial Class administrativo_tramite_FrmListaTramite
                 End If
             End If
 
-			If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
-				EmailGYT = "pdiaz@usat.edu.pe;vtaboada@usat.edu.pe"
+            If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
+                EmailGYT = "pdiaz@usat.edu.pe;vtaboada@usat.edu.pe"
                 EmailVarios = EmailDestino & ";" & EmailDestino2 & ";" & EmailGYT
             Else
-                EmailVarios = "epena@usat.edu.pe;fatima.vasquez@usat.edu.pe"
+                EmailVarios = "hcano@usat.edu.pe;epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;olluen@usat.edu.pe"
             End If
 
             De = "campusvirtual@usat.edu.pe"
@@ -1337,9 +1455,9 @@ Partial Class administrativo_tramite_FrmListaTramite
 
             If dt.Rows(0).Item("descripcion_ctr").ToString.Contains("BACHILLER") Then
                 GradoAcademico = "Grado Académico de Bachiller"
-			ElseIf dt.Rows(0).Item("descripcion_ctr").ToString.Contains("MAESTRÍA") Or dt.Rows(0).Item("descripcion_ctr").ToString.Contains("TITULO") Then
+            ElseIf dt.Rows(0).Item("descripcion_ctr").ToString.Contains("MAESTRÍA") Or dt.Rows(0).Item("descripcion_ctr").ToString.Contains("TITULO") Then
                 GradoAcademico = "Grado Académico de Maestro"
-			ElseIf dt.Rows(0).Item("descripcion_ctr").ToString.Contains("DOCTOR") Or dt.Rows(0).Item("descripcion_ctr").ToString.Contains("TITULO") Then
+            ElseIf dt.Rows(0).Item("descripcion_ctr").ToString.Contains("DOCTOR") Or dt.Rows(0).Item("descripcion_ctr").ToString.Contains("TITULO") Then
                 GradoAcademico = "Grado Académico de Doctor"
             ElseIf dt.Rows(0).Item("descripcion_ctr").ToString.Contains("TÍTULO") Or dt.Rows(0).Item("descripcion_ctr").ToString.Contains("TITULO") Then
                 GradoAcademico = "Título Profesional"
@@ -1456,9 +1574,9 @@ Partial Class administrativo_tramite_FrmListaTramite
             End If
 
             If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
-                EmailVarios = EmailDestino & ";" & EmailDestino2 
+                EmailVarios = EmailDestino & ";" & EmailDestino2
             Else
-                EmailVarios = "epena@usat.edu.pe;fatima.vasquez@usat.edu.pe"
+                EmailVarios = "hcano@usat.edu.pe;epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;olluen@usat.edu.pe"
             End If
 
             De = "campusvirtual@usat.edu.pe"
@@ -2501,8 +2619,17 @@ Partial Class administrativo_tramite_FrmListaTramite
                         If DetPryTesis = 1 Then
                             verDetPryTesis(codigoAlu)
                         End If
+						dim indexdta as integer=0
+						indexdta=hddtaindex.value
+						
+                        Dim fechaPago As String = ""
+                        If Not IsDBNull(gvDatos.DataKeys(indexdta).Values("fecha_Cin")) Then
+                            fechaPago = gvDatos.DataKeys(indexdta).Values("fecha_Cin")
+                        End If
+                        Dim fechaTramite As String = ""
+                        fechaTramite = gvDatos.DataKeys(indexdta).Values("fecharegistro").ToString
 
-                        accionURL(codigoUniver, codigoAlu, DetTipo, codigo_trl, codigo_dta, tramite, tramiteObservacion)
+                        accionURL(codigoUniver, codigoAlu, DetTipo, codigo_trl, codigo_dta, tramite, tramiteObservacion, fechaPago, fechaTramite)
                         verConceptoTramiteInfo(codigo_dft)
                         If (DetAccion = 1) Then
                             ' Response.Write("accion: " & codigo_dta & "  " & DetAccion)
@@ -2529,7 +2656,12 @@ Partial Class administrativo_tramite_FrmListaTramite
                                 Case "GENERAR DEUDA POR REINGRESO", "GENERAR DEUDA POR TRAMITE"
                                     Me.ifrGeneraDeudaPorSemestre.Visible = True
                                     Me.rowObservacion.Visible = False
-                                    PrevisualizarDeudaPorTramite(codigo_dft)
+                                    PrevisualizarDeudaPorTramite(codigo_dft, "1")
+
+                                Case "GENERAR DEUDA POR CADA NIVEL"
+                                    Me.ifrGeneraDeudaPorSemestre.Visible = True
+                                    Me.rowObservacion.Visible = False
+                                    PrevisualizarDeudaPorTramite(codigo_dft, "2")
                                 Case "TRASLADO INTERNO"
                                     Me.rowObservacion.Visible = False
                                 Case Else
@@ -2592,6 +2724,7 @@ Partial Class administrativo_tramite_FrmListaTramite
 
         Catch ex As Exception
             Response.Write(ex.Message & " -- " & ex.StackTrace)
+
         End Try
     End Sub
 
@@ -2695,14 +2828,15 @@ Partial Class administrativo_tramite_FrmListaTramite
 
     End Sub
 
-    Private Sub PrevisualizarDeudaPorTramite(ByVal codigo_dft As Integer)
+    Private Sub PrevisualizarDeudaPorTramite(ByVal codigo_dft As Integer, ByVal tipo As String)
         Dim obj As New ClsConectarDatos
         Dim dt As New Data.DataTable
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
         Try
             obj.AbrirConexion()
             'dt = obj.TraerDataTable("TRL_BuscaTramiteLinea", Me.txtAlumno.Text.Replace(" ", "%"), Me.cboEstado.SelectedValue, Me.Request.QueryString("ctf"), Me.Request.QueryString("id"))
-            dt = obj.TraerDataTable("TRL_conceptotramiteDeudaPorTramite_Listar", "1", codigo_dft)
+            'dt = obj.TraerDataTable("TRL_conceptotramiteDeudaPorTramite_Listar", "1", codigo_dft)
+            dt = obj.TraerDataTable("TRL_conceptotramiteDeudaPorTramite_Listar", tipo, codigo_dft)
             obj.CerrarConexion()
 
             Me.gvDeudaPorSemestre.DataSource = dt
@@ -2715,6 +2849,8 @@ Partial Class administrativo_tramite_FrmListaTramite
         End Try
 
     End Sub
+
+
 
     Private Sub MostrarConceptoTramiteInfo(ByVal opc As String, ByVal sw As Boolean)
         If opc = "ALU_ULTFECASIST" Then
@@ -2799,7 +2935,7 @@ Partial Class administrativo_tramite_FrmListaTramite
 
     End Sub
 
-    Private Sub accionURL(ByVal codigoUniversitario As String, ByVal codigoAlu As Integer, ByVal DetTipo As String, ByVal codigo_trl As Integer, ByVal codigo_dta As Integer, ByVal tramite As String, ByVal tramiteObservacion As String)
+    Private Sub accionURL(ByVal codigoUniversitario As String, ByVal codigoAlu As Integer, ByVal DetTipo As String, ByVal codigo_trl As Integer, ByVal codigo_dta As Integer, ByVal tramite As String, ByVal tramiteObservacion As String, ByVal fechaPago As String, ByVal fechaTramite As String)
         Try
             ddlCiclo.Items.Clear()
             ifrAccion.Visible = True
@@ -2811,7 +2947,8 @@ Partial Class administrativo_tramite_FrmListaTramite
             Me.lblTramite.Text = tramite
             Me.txtTramiteObservacion.Text = tramiteObservacion
 
-
+            Me.lblFechaPago.Text = fechaPago
+            Me.lblFechaTramite.Text = fechaTramite
             If DetTipo = "" Then
                 Me.ddlCiclo.Visible = False
 
@@ -3214,6 +3351,11 @@ Partial Class administrativo_tramite_FrmListaTramite
                                                 'If mensaje(0).Contains("correctamente") Then
                                                 '    fnMostrarEvaluarFlujo(False)
                                                 'End If
+                                            Case "GENERAR DEUDA POR CADA NIVEL"
+                                                obj.Ejecutar("TRL_conceptotramiteDeudaPorTramite_Registrar", "2", codigo_dft, "").copyto(mensaje, 0)
+                                                'If mensaje(0).Contains("correctamente") Then
+                                                '    fnMostrarEvaluarFlujo(False)
+                                                'End If
                                             Case "TRASLADO INTERNO"
                                                 obj.Ejecutar("TRL_TrasladoInterno_Registrar", "1", codigo_dft, "").copyto(mensaje, 0)
                                                 'If mensaje(0).Contains("correctamente") Then
@@ -3233,6 +3375,9 @@ Partial Class administrativo_tramite_FrmListaTramite
                                         ' Response.Write("<br>")
                                         ' Response.Write("verDetProyectotesis: " & Me.gvFlujoTramite.DataKeys(i).Values("verDetProyectotesis"))
 
+                                        'EPENA 20/10/2020{
+                                        EnviaCorreoNotificar(idta, "1", codigo_dft)
+                                        '}EPENA 20/10/2020
                                         If Me.gvFlujoTramite.DataKeys(i).Values("tieneEmailAprobacion") = 1 Then
 
                                             If Me.gvFlujoTramite.DataKeys(i).Values("verDetProyectotesis") = 1 Then
@@ -3278,11 +3423,14 @@ Partial Class administrativo_tramite_FrmListaTramite
                                                 End If
 
                                                 listaEmail = divEmailErroneo.InnerHtml.ToString
-                                                ShowMessageEmailDestino(listaEmail, "info")
+                                                If divEmailErroneo.InnerHtml.ToString <> "" Then
+                                                    ShowMessageEmailDestino(listaEmail, "info")
+
+                                                End If
                                                 divEmailErroneo.InnerHtml = ""
 
 
-                                            End If
+                                                End If
 
 
                                         End If
@@ -3386,10 +3534,14 @@ Partial Class administrativo_tramite_FrmListaTramite
                                             End If
 
                                             listaEmail = divEmailErroneo.InnerHtml.ToString
-                                            ShowMessageEmailDestino(listaEmail, "info")
+
+                                            If divEmailErroneo.InnerHtml.ToString <> "" Then
+                                                ShowMessageEmailDestino(listaEmail, "info")
+                                            End If
+
                                             divEmailErroneo.InnerHtml = ""
 
-                                        End If
+                                            End If
 
 
                                     End If
@@ -3408,7 +3560,7 @@ Partial Class administrativo_tramite_FrmListaTramite
                                     listaEmail = divEmailErroneo.InnerHtml.ToString
                                     ShowMessageEmailDestino(listaEmail, "info")
                                     divEmailErroneo.InnerHtml = ""
-                                    EnviarSMS(txtcodalu.Value, idta, codigo_dft, "", "Observado")
+                                    'EnviarSMS(txtcodalu.Value, idta, codigo_dft, "", "Observado")
 
                                 End If ' FIN APROBAR
 
@@ -3564,7 +3716,7 @@ Partial Class administrativo_tramite_FrmListaTramite
             e.Row.Cells(1).BackColor = Drawing.Color.Linen
             e.Row.Cells(2).Font.Size = 10
             e.Row.Cells(2).BackColor = Drawing.Color.Linen
-            If e.Row.Cells(0).Text = "ARCHIVO" Then
+            If e.Row.Cells(0).Text.Contains("ARCHIVO") Then
                 Dim myLink As HyperLink = New HyperLink()
                 myLink.NavigateUrl = "javascript:void(0)"
                 myLink.Text = "Descargar"

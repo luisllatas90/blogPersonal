@@ -9,10 +9,8 @@ Partial Class academico_AsignaSesionNet
             Session.Add("perlogin", Request.QueryString("perlogin"))
             Session.Add("nombreper", Request.QueryString("nombre"))
 
-
-
             Response.Redirect("../libreriaNet/AsignaSesionesPer.aspx?per=" & Request.QueryString("per") & "&t=" & Now.Millisecond & "&log=" & Request.QueryString("perlogin"))
-            'Response.Redirect("listaaplicaciones.asp?sw=1")        
+            'Response.Redirect("listaaplicaciones.asp?sw=1")   
         End If
         Response.Redirect("../")
     End Sub

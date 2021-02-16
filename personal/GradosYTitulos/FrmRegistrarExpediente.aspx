@@ -82,7 +82,7 @@
 
     <script src="js/_General.js?a=2" type="text/javascript"></script>
 
-    <script src="js/RegistroEgresado.js?x=1" type="text/javascript"></script>
+    <script src="js/RegistroEgresado.js?x=3" type="text/javascript"></script>
 
     <style type="text/css">
         .row
@@ -219,6 +219,19 @@
                                         <div class="col-md-12">
                                             <input type="text" id="txtNroExp" name="txtNroExp" class="form-control" />
                                         </div>
+                                    </div>
+                                    <!--Agregado por OLLUEN-->
+                                    <div class="row">
+                                        <label class="col-md-12 control-label" style="text-align: left">
+                                            Descargar Archivos de trámite:</label>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                           <button type="button" id="Button1" name="btnEditarDatos" class="btn btn-primary">
+                                                    DESCARGAR</button>
+                                        </div>
+                                           
+                                        
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12" style="height: 50px">
@@ -524,6 +537,24 @@
                                         </select>
                                     </div>
                                 </div>
+                                <!-- 11.08.2020 JBANDA Cuarta Autoridad -->
+                                <div class="row">
+                                    <label class="col-md-1 control-label">
+                                        Cargo:</label>
+                                    <div class="col-md-4">
+                                        <select id="cboCargo4" name="cboCargo4" class="form-control">
+                                            <option value="0">-- SELECCIONE --</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-md-1 control-label">
+                                        Autoridad:</label>
+                                    <div class="col-md-6">
+                                        <select id="cboAutoridad4" name="cboAutoridad4" class="form-control">
+                                            <option value="0">-- SELECCIONE --</option>
+                                        </select>
+                                    </div>    
+                                </div>
+                                <!-- 11.08.2020 JBANDA Cuarta Autoridad -->                                
                             </div>
                             <!-- /panel -->
                         </div>
@@ -534,6 +565,10 @@
                         <center>
                             <button type="button" id="btnGuardar" name="btnGuardar" class="btn btn-primary">
                                 Guardar</button>
+                            <button type="button" id="Button2" name="btnObservar" class="btn btn-warning">
+                                Observar</button>
+                            <button type="button" id="Button3" name="btnConformidad" class="btn btn-success">
+                                Conformidad</button>
                             <button type="button" class="btn btn-danger" id="btnCancelarReg" data-dismiss="modal">
                                 Cancelar</button>
                         </center>

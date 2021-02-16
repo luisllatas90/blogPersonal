@@ -730,7 +730,13 @@ Partial Class frmprogramacioncademicaeve
             Dim objfun As New ClsFunciones
             obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
             obj.AbrirConexion()
-            objfun.CargarListas(Me.dpCodigo_per, obj.TraerDataTable("ConsultarDocente", "ADP", Me.hdcodigo_cup.Value, dpCodigo_cac.selectedvalue), "codigo_per", "docente", "--Seleccione el Profesor--")
+            'jbanda 19.10.2020 Listado completo de docentes para asignación Posgrado / Educ. Continua
+            If (Request.QueryString("mod") = 5 OrElse Request.QueryString("mod") = 6) AndAlso _
+                (Request.QueryString("ctf") = 1 OrElse Request.QueryString("ctf") = 85 OrElse Request.QueryString("ctf") = 138 OrElse Request.QueryString("ctf") = 181) Then
+                objfun.CargarListas(Me.dpCodigo_per, obj.TraerDataTable("ConsultarDocente", "ADP", 0, dpCodigo_cac.SelectedValue), "codigo_per", "docente", "--Seleccione el Profesor--")
+            Else
+                objfun.CargarListas(Me.dpCodigo_per, obj.TraerDataTable("ConsultarDocente", "ADP", Me.hdcodigo_cup.Value, dpCodigo_cac.SelectedValue), "codigo_per", "docente", "--Seleccione el Profesor--")
+            End If
             obj.CerrarConexion()
 
             Me.CargarDetalleGrupoHorario(3, Me.hdcodigo_cup.Value, "e")

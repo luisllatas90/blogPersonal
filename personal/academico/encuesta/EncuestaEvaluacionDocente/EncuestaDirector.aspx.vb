@@ -2,7 +2,7 @@
 Partial Class academico_encuesta_EncuestaEvaluacionDocente_EncuestaDirector
     Inherits System.Web.UI.Page
     Dim tipo As String = ""
-
+    Dim resp As String = "" '28/10 Ceci
     Public Enum MessageType
         Success
         [Error]
@@ -40,6 +40,11 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_EncuestaDirector
                 ConsultarAcceso()
             End If
 
+        End If
+
+        resp = Request.QueryString("resp")
+        If resp = "si" Then
+            ShowMessage("Se registraron las respuestas correctamente.", MessageType.Success) '27/10 Ceci
         End If
 
     End Sub

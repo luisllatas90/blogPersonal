@@ -28,26 +28,7 @@
 
     <script src="js/bootbox.min.js" type="text/javascript"></script>
 
-    <script src="js/gridviewscroll.js" type="text/javascript"></script>
-
     <script type="text/javascript">
-
-//        window.onload = function() {
-//            var gridViewScroll = new GridViewScroll({
-//                elementID: "gvNotas", // Target element id
-//                width : "100%", // Integer or String(Percentage)
-//                height : 800, // Integer or String(Percentage)
-//                //freezeColumn : true, // Boolean
-//                //freezeFooter : false, // Boolean
-//                freezeColumnCssClass: "", // String
-//                freezeFooterCssClass : "", // String
-//                freezeHeaderRowCount : 5, // Integer
-//                freezeColumnCount : 2 // Integer
-//                //onscroll: function (scrollTop, scrollLeft) // onscroll event callback
-//            });
-//            gridViewScroll.enhance();
-//        }
-    
         function StartCount() {
             var t = 300 * 1000;
             var x = setInterval(function() {
@@ -216,14 +197,6 @@
         {
             margin-bottom: 0px;
         }
-        .dvcolumns1
-        {
-        	width: 100px;
-        }
-        .dvcolumns2
-        {
-        	width: 300px;
-        }
     </style>
 </head>
 <body>
@@ -279,7 +252,7 @@
             </div>
             <div class="panel panel-body">
                 <div class="row">
-                    <div class="col-md-4" style="text-align: left;">
+                    <div class="col-md-2" style="text-align: left;">
                         <div class="row">
                             <div class="col-md-12">
                                 &nbsp;
@@ -291,11 +264,10 @@
                                 <asp:LinkButton ID="btnGuardar" runat="server" CssClass="btn btn-primary btn-sm" OnClientClick="return confirm('¿Desea guardar la información?');">
                                     <span><i class="fa fa-save"></i></span> Guardar
                                 </asp:LinkButton>
-                                <asp:LinkButton ID="btnExportar" runat="server" CssClass="btn btn-warning btn-sm" Text='<i class="fa fa-file-excel"></i> Exportar' />
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2" id="divEnviar" runat="server" style="display: none">
+                    <div class="col-md-4" id="divEnviar" runat="server" style="display: none">
                         <div class="row">
                             <div class="col-md-12" style="color: red; font-size: smaller;">
                                 *A continuación, un código se enviará por mensaje de texto(SMS) al:
@@ -408,19 +380,17 @@
                 <br />
                 <div class="row">
                     <div class="col-md-12">
-                        <%--<div id="gridContainer">--%>
-                        <div class="table-responsive"> 
-                        
+                        <div class="table-responsive">
                             <asp:UpdatePanel ID="updNotas" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
                                 <ContentTemplate>
                                     <asp:GridView ID="gvNotas" runat="server" AutoGenerateColumns="false" ShowHeader="true"
                                         DataKeyNames="codigo_Dma, nombre_alu, codigo_pso, inhabilitado_dma" OnRowDataBound="gvNotas_OnRowDataBound"
                                         OnRowCreated="gvNotas_OnRowCreated" CssClass="table table-bordered table-hover">
                                         <Columns>
-                                            <asp:BoundField DataField="codigoUniver_Alu" HeaderText="Código" HeaderStyle-Width="100px"
-                                                ItemStyle-Width="100px" FooterStyle-Width="100px" ItemStyle-CssClass="dvcolumns1"/>
-                                            <asp:BoundField DataField="nombre_alu" HeaderText="Apellidos y Nombres" HeaderStyle-Width="300px"
-                                                ItemStyle-Width="300px" FooterStyle-Width="300px" ItemStyle-Wrap="true" ItemStyle-CssClass="dvcolumns2" />
+                                            <asp:BoundField DataField="codigoUniver_Alu" HeaderText="Código" HeaderStyle-Width="4%"
+                                                ItemStyle-Width="4%" FooterStyle-Width="4%" />
+                                            <asp:BoundField DataField="nombre_alu" HeaderText="Apellidos y Nombres" HeaderStyle-Width="15%"
+                                                ItemStyle-Width="15%" FooterStyle-Width="15%" ItemStyle-Wrap="true" />
                                         </Columns>
                                         <EmptyDataTemplate>
                                             No se encontraron Datos
@@ -433,10 +403,8 @@
                                     </asp:GridView>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                            
                         </div>
-                      </div> 
-                    <%--</div>--%>   
+                    </div>
                 </div>
             </div>
         </div>
@@ -531,40 +499,6 @@
             }
         });
     </script>
-    
-    <%--<script type="text/javascript">
-        $(document).ready(function () {
-    
-            // here clone our gridview first
-            var tab = $("#<%=gvNotas.ClientID%>").clone(true);
-            // clone again for freeze
-            var tabFreeze = $("#<%=gvNotas.ClientID%>").clone(true);
-
-            // set width (for scroll)
-            var totalWidth = $("#<%=gvNotas.ClientID%>").outerWidth();
-            var firstColWidth = $("#<%=gvNotas.ClientID%> th:first-child").outerWidth();
-            tabFreeze.width(firstColWidth);
-            tab.width(totalWidth - firstColWidth);
-
-            // here make 2 table 1 for freeze column 2 for all remain column
-
-            tabFreeze.find("th:gt(0)").remove();
-            tabFreeze.find("td:not(:first-child)").remove();
-
-            tab.find("th:first-child").remove();
-            tab.find("td:first-child").remove();
-
-            // create a container for these 2 table and make 2nd table scrollable
-    
-            var container = $('<table border="0" cellpadding="0" cellspacing="0"><tr><td valign="top"><div id="FCol"></div></td><td valign="top"><div id="Col" style="width:900px; overflow:auto"></div></td></tr></table)');
-            $("#FCol", container).html($(tabFreeze));
-            $("#Col", container).html($(tab));
-
-            // clear all html
-            $("#gridContainer").html('');
-            $("#gridContainer").append(container);
-        });
-    </script>--%>
 
 </body>
 </html>

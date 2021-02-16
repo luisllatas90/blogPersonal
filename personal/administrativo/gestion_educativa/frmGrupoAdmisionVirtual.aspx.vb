@@ -13,6 +13,8 @@ Partial Class administrativo_gestion_educativa_frmGrupoAdmisionVirtual
     Private oeGruRes As e_GrupoAdmision_Responsable, odGruRes As d_GrupoAdmision_Responsable
     Dim oeAmbiente As e_Ambiente, odAmbiente As d_Ambiente
 
+    Private oeTipoGrupoEval As e_TipoGrupoEvaluacion, odTipoGrupoEval As d_TipoGrupoEvaluacion '20200914-ENevado
+
     Public Enum MessageType
         Success
         [Error]
@@ -34,13 +36,14 @@ Partial Class administrativo_gestion_educativa_frmGrupoAdmisionVirtual
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             If (Session("id_per") Is Nothing) Then
-                Response.Redirect("../../../sinacceso.html")
+                Response.Redirect("https://intranet.usat.edu.pe/campusvirtual/sinacceso.html")
             End If
             cod_user = Session("id_per")
             cod_ctf = Request.QueryString("ctf")
             cod_test = Request.QueryString("mod")
             If Not IsPostBack Then
                 mt_CargarCentroCosto()
+                mt_CargarTipoGrupoEval() '20200914-ENevado
                 Me.btnAgregar.visible = False
             End If
         Catch ex As Exception
@@ -48,18 +51,31 @@ Partial Class administrativo_gestion_educativa_frmGrupoAdmisionVirtual
         End Try
     End Sub
 
-    'Protected Sub cboCentroCosto_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboCentroCosto.SelectedIndexChanged
-    '    Try
-    '        mt_CargarDatos(IIf(Me.cboCentroCosto.SelectedValue = -1, 0, Me.cboCentroCosto.SelectedValue))
-    '        'Me.btnAgregar.visible = IIf(Me.cboCentroCosto.SelectedValue = -1, 0, Me.cboCentroCosto.SelectedValue)
-    '    Catch ex As Exception
-    '        mt_ShowMessage(ex.Message.Replace("'", ""), MessageType.Error)
-    '    End Try
-    'End Sub
+    ''' <summary>
+    ''' Evento de Combo Tipo Grupo Evaluacion
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks>20200914-ENevado</remarks>
+    Protected Sub cboFiltroTipoEva_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboFiltroTipoEva.SelectedIndexChanged
+        Try
+            cboCentroCosto2_SelectedIndexChanged(Nothing, Nothing)
+        Catch ex As Exception
+            mt_ShowMessage(ex.Message.Replace("'", ""), MessageType.Error)
+        End Try
+    End Sub
 
     Protected Sub cboCentroCosto2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboCentroCosto2.SelectedIndexChanged
+        Dim codigosCco As String = ""
+        Dim codigo_tge As Integer = -1 '20200914-ENevado
         Try
-            Dim codigosCco As String = ""
+            '20200914-ENevado -----------------------------------------
+            If Me.cboFiltroTipoEva.selectedvalue = "-1" Then
+                codigo_tge = 0
+            Else
+                codigo_tge = Me.cboFiltroTipoEva.selectedvalue
+            End If
+            '-----------------------------------------------------------
             For Each _Item As ListItem In Me.cboCentroCosto2.Items
                 If _Item.Selected AndAlso _Item.Value <> "-1" Then
                     If codigosCco.Length > 0 Then codigosCco &= ","
@@ -68,7 +84,7 @@ Partial Class administrativo_gestion_educativa_frmGrupoAdmisionVirtual
             Next
             Me.btnAgregar.visible = IIf(codigosCco.Length > 0, True, False)
             Session("adm_codigo_cco") = codigosCco
-            mt_CargarDatos(codigosCco)
+            mt_CargarDatos(codigosCco, codigo_tge) '20200914-ENevado
         Catch ex As Exception
             mt_ShowMessage(ex.Message.Replace("'", ""), MessageType.Error)
         End Try
@@ -90,10 +106,68 @@ Partial Class administrativo_gestion_educativa_frmGrupoAdmisionVirtual
             Dim _codigo_gru As Integer
             Dim dt As New System.Data.DataTable
             oeGrupo = New e_GrupoAdmisionVirtual : odGrupo = New d_GrupoAdmisionVirtual
+
+            Dim datosValidos As Boolean = True, mensajeError As String = ""
+
+            Dim fechaHoraInicio As Object = DBNull.Value
+            Dim fechaHoraFin As Object = DBNull.Value
+
+            Dim fecha As Date, nFecha As Nullable(Of Date)
+            If txtFecha.Value.Trim <> "" Then
+                If Not Date.TryParse(txtFecha.Value.Trim, fecha) Then
+                    mensajeError = "La fecha ingresada no es válida" : datosValidos = False
+                End If
+                nFecha = fecha
+            End If
+
+            Dim horaInicio As TimeSpan, nHoraInicio As Nullable(Of TimeSpan)
+            If txtHoraInicio.Value.Trim <> "" Then
+                If txtFecha.Value.Trim = "" Then
+                    mensajeError = "Para registrar la hora de inicio debe ingresar también la fecha" : datosValidos = False
+                End If
+                If Not TimeSpan.TryParse(txtHoraInicio.Value.Trim, horaInicio) Then
+                    mensajeError = "La hora de inicio ingresada no es válida" : datosValidos = False
+                End If
+                nHoraInicio = horaInicio
+            End If
+
+            Dim horaFin As TimeSpan, nHoraFin As Nullable(Of TimeSpan)
+            If txtHoraFin.Value.Trim <> "" Then
+                If txtFecha.Value.Trim = "" Then
+                    mensajeError = "Para registrar la hora de térmito debe ingresar también la fecha" : datosValidos = False
+                End If
+                If Not TimeSpan.TryParse(txtHoraFin.Value.Trim, horaFin) Then
+                    mensajeError = "La hora de término ingresada no es válida" : datosValidos = False
+                End If
+                nHoraFin = horaFin
+            End If
+
+            If nFecha.HasValue Then
+                fechaHoraInicio = nFecha.Value
+
+                If nHoraInicio.HasValue Then
+                    fechaHoraInicio = nFecha.Value.Add(nHoraInicio)
+                End If
+                If nHoraFin.HasValue Then
+                    fechaHoraFin = nFecha.Value.Add(nHoraFin)
+                    If fechaHoraFin < fechaHoraInicio Then
+                        mensajeError = "La hora de término no puede ser menor a la hora de inicio" : datosValidos = False
+                    End If
+                End If
+            End If
+
+            If Not datosValidos Then
+                mt_ShowMessage(mensajeError, MessageType.Error)
+                Page.RegisterStartupScript("Pop", "<script>openModal('" & "gru" & "','" & "Editar" & "', 750);</script>")
+                Exit Sub
+            End If
+
             With oeGrupo
                 .codigo_cco = Session("adm_codigo_cco") : .codigo = Me.txtcodigo.text.trim : .nombre = Me.txtnombre.text.trim
+                .fechaHoraInicio_gru = fechaHoraInicio : .fechaHoraFin_gru = fechaHoraFin
                 .codigo_amb = Me.cboAmbiente.selectedvalue : .capacidad = CInt(Me.txtcapacidad.text)
                 .aulaactiva = False : .estado = 1 : .codigo_per = cod_user
+                .codigo_tge = Me.cboTipoGrupoEval.selectedvalue
             End With
             If String.IsNullOrEmpty(Session("adm_codigo_gru")) Then
                 dt = odGrupo.fc_RegistrarGrupoAdmisionVirtual(oeGrupo)
@@ -121,7 +195,7 @@ Partial Class administrativo_gestion_educativa_frmGrupoAdmisionVirtual
     End Sub
 
     Protected Sub gvGrupo_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles gvGrupo.RowCommand
-        Dim index As Integer, _codigo_gru, _virtual, _codigo_amb As Integer
+        Dim index As Integer, _codigo_gru, _virtual, _codigo_amb, _codigo_tge As Integer
         Dim dt As New System.Data.DataTable
         Try
             index = CInt(e.CommandArgument)
@@ -140,10 +214,33 @@ Partial Class administrativo_gestion_educativa_frmGrupoAdmisionVirtual
                         Me.rbTipo.selectedvalue = 0
                         Me.txtcapacidad.enabled = False
                     End If
+                    
+                    Dim fecha As Object = Me.gvGrupo.DataKeys(index).Values("fechaHoraInicio_gru")
+                    If fecha IsNot DBNull.Value Then fecha = Date.Parse(fecha).ToString("dd/MM/yyyy") Else fecha = ""
+
+                    Dim horaInicio As Object = Me.gvGrupo.DataKeys(index).Values("fechaHoraInicio_gru")
+                    If horaInicio IsNot DBNull.Value Then
+                        If Date.Parse(horaInicio).Hour = 0 And Date.Parse(horaInicio).Minute = 0 Then
+                            horaInicio = ""
+                        Else
+                            horaInicio = Date.Parse(horaInicio).ToString("hh:mm")
+                        End If
+                    Else
+                        horaInicio = ""
+                    End If
+
+                    Dim horaFin As Object = Me.gvGrupo.DataKeys(index).Values("fechaHoraFin_gru")
+                    If horaFin IsNot DBNull.Value Then horaFin = Date.Parse(horaFin).ToString("hh:mm") Else horaFin = ""
+
                     _codigo_amb = Me.gvgrupo.datakeys(index).values("codigo_amb")
+                    _codigo_tge = Me.gvgrupo.datakeys(index).values("codigo_tge")
                     Me.txtcapacidad.text = CInt(Me.gvgrupo.datakeys(index).values("capacidad"))
                     mt_CargarAmbiente(_virtual)
                     Me.cboAmbiente.selectedvalue = _codigo_amb
+                    Me.cboTipoGrupoEval.selectedvalue = _codigo_tge
+                    Me.txtFecha.Value = fecha
+                    Me.txtHoraInicio.Value = horaInicio
+                    Me.txtHoraFin.Value = horaFin
                     'mt_ShowMessage("virtual: " & Me.gvgrupo.datakeys(index).values("virtual_amb"), MessageType.Warning)
                     Page.RegisterStartupScript("Pop", "<script>openModal('" & "gru" & "','" & "Editar" & "');</script>")
                 ElseIf e.CommandName = "Eliminar" Then
@@ -411,14 +508,20 @@ Partial Class administrativo_gestion_educativa_frmGrupoAdmisionVirtual
 
     Private Sub mt_CargarCentroCosto()
         'ClsFunciones.LlenarListas(Me.cboCentroCosto, mo_RepoAdmision.ListarCentroCosto(cod_ctf, cod_user, cod_test), "codigo_Cco", "Nombre", "-- Seleccione --")
-        ClsFunciones.LlenarListas(Me.cboCentroCosto2, mo_RepoAdmision.ListarCentroCosto(cod_ctf, cod_user, cod_test), "codigo_Cco", "Nombre")
+        ' 20200205ENevado ---------------------- \
+        Dim _ctf As Integer = cod_ctf
+        If _ctf = 26 Or _ctf = 168 Then
+            _ctf = 1
+        End If
+        '---------------------------------------/
+        ClsFunciones.LlenarListas(Me.cboCentroCosto2, mo_RepoAdmision.ListarCentroCosto(_ctf, cod_user, cod_test), "codigo_Cco", "Nombre")
     End Sub
 
-    Private Sub mt_CargarDatos(ByVal _codigo_cco As String)
+    Private Sub mt_CargarDatos(ByVal _codigo_cco As String, ByVal _codigo_tge As Integer)
+        Dim dt As New System.Data.DataTable
         Try
-            Dim dt As New System.Data.DataTable
             oeGrupo = New e_GrupoAdmisionVirtual : odGrupo = New d_GrupoAdmisionVirtual
-            oeGrupo.codigo_cco = _codigo_cco
+            oeGrupo.codigo_cco = _codigo_cco : oeGrupo.codigo_tge = _codigo_tge '20200914-ENevado
             dt = odGrupo.fc_ListarGrupoAdmisionVirtual(oeGrupo)
             gvGrupo.datasource = dt
             gvGrupo.databind()
@@ -432,6 +535,7 @@ Partial Class administrativo_gestion_educativa_frmGrupoAdmisionVirtual
         Me.txtnombre.text = ""
         Me.rbTipo.selectedvalue = 0
         Me.cboAmbiente.selectedvalue = -1
+        Me.cboTipoGrupoEval.selectedvalue = -1
         Me.txtcapacidad.text = ""
         Me.txtcapacidad.enabled = False
         Session("adm_codigo_gru") = ""
@@ -540,6 +644,16 @@ Partial Class administrativo_gestion_educativa_frmGrupoAdmisionVirtual
         dt = dv.ToTable
         Session("adm_dtCbo") = dt
         ClsFunciones.LlenarListas(Me.cboCentro, CType(Session("adm_dtCbo"), Data.DataTable), "codigo_Cco", "Nombre", "-- Seleccione --")
+    End Sub
+
+    ''' <summary>
+    ''' Metodo para llenar los combos de Tipo Grupo Evaluacion
+    ''' </summary>
+    ''' <remarks>20200914-ENevado</remarks>
+    Private Sub mt_CargarTipoGrupoEval()
+        oeTipoGrupoEval = New e_TipoGrupoEvaluacion : odTipoGrupoEval = New d_TipoGrupoEvaluacion
+        ClsFunciones.LlenarListas(Me.cboFiltroTipoEva, odTipoGrupoEval.fc_Listar(oeTipoGrupoEval), "codigo_tge", "nombre_tge", "TODOS")
+        ClsFunciones.LlenarListas(Me.cboTipoGrupoEval, odTipoGrupoEval.fc_Listar(oeTipoGrupoEval), "codigo_tge", "nombre_tge", "-- Seleccionar --")
     End Sub
 
 #End Region

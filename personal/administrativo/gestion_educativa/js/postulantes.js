@@ -372,6 +372,16 @@ function CargarModalRequisitosAdmision(btnCallerId, btnIdForTriggerClick) {
     LoadModal(modalProperties, btnCallerId, btnIdForTriggerClick);
 }
 
+function CargarModalActivarOnline(btnCallerId, btnIdForTriggerClick) {
+    $mdlActive = $('#mdlActivarOnline');
+    var modalProperties = {
+        backdrop: 'static',
+        show: false,
+        keyboard: false,
+    };
+    LoadModal(modalProperties, btnCallerId, btnIdForTriggerClick);
+}
+
 function CargarModalGenerarCargo(btnCallerId, btnIdForTriggerClick) {
     $mdlActive = $('#mdlGenerarCargo');
     var modalProperties = {
@@ -604,6 +614,15 @@ function VerificarRespuestaFichaInscripcion() {
     });
 }
 
+function VerificarRespuestaActivarOnline() {
+    var rpta = $mdlActive.find('#hddRptaActivarOnline').val();
+    var msg = $mdlActive.find('#hddMsgActivarOnline').val();
+    if (rpta == '1') {
+        $mdlActive.modal('hide');
+    }
+    MostrarToastr(rpta, msg);
+}
+
 function ExportarGrilla(btnId, metodo) {
     AtenuarBoton(btnId, false);
     AlternarLoadingGif('interno', false);
@@ -666,5 +685,28 @@ function VerificarMdlValidacionServidor() {
             }
             $mdlValServ.modal('hide');
         }
+    }
+}
+
+function MostrarToastr(tipo, mensaje) {
+    switch (tipo) {
+        case '1':
+            toastr.success(mensaje);
+            break;
+        case '0':
+            toastr.warning(mensaje);
+            break;
+        case '-1':
+            toastr.error(mensaje);
+            break;
+    }
+}
+
+function configRadioNames(tipo, $modal) {
+    if (tipo == 'AO') {
+        $('#udpActivarOnline').find('input[type="radio"]').each(function (i, e) {
+            $(this).attr('name', 'rbtPrincipal');
+            $(this).closest('.custom-control').find('label').attr('for', $(this).attr('id'));
+        });
     }
 }

@@ -282,7 +282,7 @@ Partial Class DataJson_CertificadoQta_CertificadoQta_ajax
             'list.Add("FechaIni", tb.Rows(0)("FechaIni"))
             'list.Add("FechaFin", tb.Rows(0)("FechaFin"))
             'list.Add("nromemo_dvac", tb.Rows(0)("nromemo_dvac"))
-            list.Add("TablaId", 16)                                     'Vacaciones (verificar si el correlativo es este)
+            list.Add("TablaId", 3)                                     'Boletas de Pago
             list.Add("Usuario", Session("perlogin").ToString().Trim)
             list.Add("param8", Session("perlogin").ToString().Trim)
             'Response.Write("Codigo_dvac : " & Codigo_dvac.ToString & " CodigoPer: " & tb.Rows(0)("Codigo_per").ToString & " usuario : " & Session("perlogin").ToString().Trim)

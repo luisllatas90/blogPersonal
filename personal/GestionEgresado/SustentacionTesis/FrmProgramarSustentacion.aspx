@@ -14,9 +14,10 @@
     <link href="../../assets/css/material.css" rel="stylesheet" type="text/css" />
     <link rel='stylesheet' href='../../assets/css/style.css?x=1' />
     <%-- ======================= Fecha y Hora =============================================--%>
-    <link href="../../assets/css/font-awesome-datetimepicker.min.css" rel="stylesheet"
+    <%--<link href="../../assets/css/font-awesome-datetimepicker.min.css" rel="stylesheet"
         type="text/css" />
-    <link href="../../assets/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />--%>
+     <link rel="stylesheet" href="../../assets/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />
     <%-- ======================================================================================--%>
 
     <script src="../../assets/js/jquery.js" type="text/javascript"></script>
@@ -30,12 +31,13 @@
     <link href="../../assets/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet"
         type="text/css" />
     <%-- ======================= Lista desplegable con busqueda =============================================--%>
-    <link href="../../assets/bootstrap-select-1.13.1/css/bootstrap-select.css" rel="stylesheet"
+  <%--  <link href="../../assets/bootstrap-select-1.13.1/css/bootstrap-select.css" rel="stylesheet"
         type="text/css" />
 
     <script type="text/javascript" src='../../assets/js/jquery.js'></script>
 
-    <script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script>--%>
+    <script src="../../assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
     <%-- ======================= Inicio Notificaciones =============================================--%>
 
@@ -59,48 +61,56 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+
+            fnLoading(false);
+            $("#btnGuardar").click(function() {
+                ValidarProgramar();
+            })
+            LoadingEstado();
             Calendario();
         });
         function Calendario() {
             $('#datetimepicker1').datetimepicker({
                 locale: 'es'
             });
-            /*$('#datetimepicker1').on("dp.change", function(e) {
-                if (e.olDate != undefined) {
-                    if (e.date != e.olDate) {
-                        
-                        __doPostBack('<%=updDatosAmbiente.ClientID%>', '');
-                   
-                    }
-                }
-            });*/
+        }
+        function LoadingEstado() {
+            $("#ddlEstado").change(function() {
+                fnLoading(true);
+            });
+        }
+        function fnLoading(sw) {
+            if (sw) {
+                $('.piluku-preloader').removeClass('hidden');
+            } else {
+                $('.piluku-preloader').addClass('hidden');
+            }
         }
 
-
-        //        function fnMensaje(typ, msje) {
-        //            var n = noty({
-        //                text: msje,
-        //                type: typ,
-        //                timeout: 3000,
-        //                modal: false,
-        //                dismissQueue: true,
-        //                theme: 'defaultTheme'
-
-        //            });
-        //        }
-        //        function fnLoading(sw) {
-        //            if (sw) {
-        //                $('.piluku-preloader').removeClass('hidden');
-        //            } else {
-        //                $('.piluku-preloader').addClass('hidden');
-        //            }
-        //            //console.log(sw);
-        //        }
-
-        //        function fnDescargar(id_ar) {
-        //            var d = new Date();
-        //            window.open("../../Descargar.aspx?Id=" + id_ar + "&h=" + d.getHours().toString() + d.getMinutes().toString() + d.getSeconds().toString());
-        //        }
+        function ValidarProgramar() {
+            if ($("#txtFecha").val() == "") {
+                fnMensaje('error', 'Seleccione una fecha')
+                return false;
+            }
+            if ($("#ddlTipoAmbiente").val() == "") {
+                fnMensaje('error', 'Seleccione el tipo de ambiente')
+                return false;
+            }
+            if ($("#ddlTipoAmbiente").val() == "FÍSICO" && $("#ddlAmbiente").val() == "0") {
+                fnMensaje('error', 'Seleccione el ambiente')
+                return false;
+            }
+            if ($("#ddlTipoAmbiente").val() == "VIRTUAL" && $("#txtAmbienteVirtual").val() == "") {
+                fnMensaje('error', 'Ingrese link de ambiente virtual')
+                return false;
+            }
+            if (!confirm("¿Está seguro que desea programar sustentación de tesis?")) {
+                return false
+            }
+            fnLoading(true);
+            return true;
+        }
+        
     </script>
 
     <style type="text/css">
@@ -168,6 +178,20 @@
         <form id="form1" runat="server" enctype="multipart/form-data">
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
+        <asp:UpdatePanel runat="server" ID="updLoading" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="piluku-preloader text-center">
+                    <div class="loader">
+                        Loading...</div>
+                </div>
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="gvTesis" EventName="RowCommand" />
+                <asp:AsyncPostBackTrigger ControlID="ddlEstado" EventName="selectedindexchanged" />
+                <asp:AsyncPostBackTrigger ControlID="btnCerrar" />
+                <asp:AsyncPostBackTrigger ControlID="btnGuardar" />
+            </Triggers>
+        </asp:UpdatePanel>
         <div class="panel panel-default">
             <div class="panel-heading" style="background-color: #E33439; color: White; font-weight: bold;
                 font-size: 14px;">
@@ -195,7 +219,7 @@
                             <div class="form-group">
                                 <div runat="server" id="lblmensaje">
                                 </div>
-                                <asp:GridView runat="server" ID="gvTesis" CssClass="table table-condensed" DataKeyNames="codigo_dta,codigo_Tes,codigo_pst,fecha,tipo,tipoambiente,codigo_amb,link,detalle,archivoresolucion,codigo_fac"
+                                <asp:GridView runat="server" ID="gvTesis" CssClass="table table-condensed" DataKeyNames="codigo_dta,codigo_Tes,codigo_pst,fecha,tipo,tipoambiente,codigo_amb,link,detalle,archivoresolucion,codigo_fac,tipoprogramacion"
                                     AutoGenerateColumns="false">
                                     <Columns>
                                         <%--<asp:TemplateField HeaderText="#" HeaderStyle-Width="3%">
@@ -209,7 +233,7 @@
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnProgramar" runat="server" Text='<span class="fa fa-pencil-square-o"></span>'
                                                     CssClass="btn btn-info btn-sm btn-radius" ToolTip="Programar Sustentación" CommandName="Programar"
-                                                    CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
+                                                    CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>' OnClientClick="fnLoading(true);">
                                                 </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -246,6 +270,7 @@
                                     <asp:HiddenField runat="server" ID="hdpst" Visible="false" Value="0" />
                                     <asp:HiddenField runat="server" ID="hdtes" Visible="false" Value="0" />
                                     <asp:HiddenField runat="server" ID="hdfac" Visible="false" Value="0" />
+                                    <asp:HiddenField runat="server" ID="hdTipoProg" Visible="false" Value="NORMAL" />
                                     <asp:HiddenField runat="server" ID="hddta" Visible="false" Value="0" />
                                     <div runat="server" id="alumnos">
                                     </div>
@@ -322,7 +347,7 @@
                                                 <div id="DivVirtual" runat="server" visible="false">
                                                     <asp:Label ID="Label7" runat="server" CssClass="col-md-3 col-sm-3 control-label">Ambiente</asp:Label>
                                                     <div class="col-md-6 col-sm-6">
-                                                        <asp:TextBox runat="server" ID="txtAmbienteVirtual" CssClass="form-control" placeholder="Ingrese link de reunión virtual(Zoom)"></asp:TextBox>
+                                                        <asp:TextBox runat="server" ID="txtAmbienteVirtual" CssClass="form-control" placeholder="Ingrese link de ambiente virtual"></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -347,8 +372,10 @@
                                 <center>
                                     <%-- <asp:UpdatePanel runat="server" ID="updbotones" UpdateMode="conditional">
                                                     <ContentTemplate>--%>
-                                    <asp:Button runat="server" ID="btnGuardar" CssClass="btn btn-primary" Text="Guardar" />
-                                    <asp:Button runat="server" ID="btnCerrar" CssClass="btn btn-danger" Text="Cerrar" />
+                                    <asp:Button runat="server" ID="btnGuardar" CssClass="btn btn-primary" Text="Guardar"
+                                        OnClientClick="return ValidarProgramar();" />
+                                    <asp:Button runat="server" ID="btnCerrar" CssClass="btn btn-danger" Text="Cerrar"
+                                        OnClientClick="fnLoading(true);" />
                                     <%-- <triggers>
                                                    </ContentTemplate>
                                                     <Triggers>

@@ -62,6 +62,18 @@ Partial Class operaciones
                 Case "ConsultarCargosxTest"
                     Dim codigo_test As Integer = obj.DecrytedString64(Request("param"))
                     ConsultarCargosxTest(codigo_test)
+
+                    '*********************************************************************************
+                    '*********************** GESTIÓN DEL EGRESADO ************************************
+                    '*********************************************************************************
+                    '*********************** Inicio HCANO 19/08/2020 *********************************
+
+                Case "ConsultarGradoxTipo"
+                    Dim cod_cpf As Integer = obj.DecrytedString64(Request("cod"))
+                    Dim tipo As String = Request("vig")
+                    ListarGrados("GXT", cod_cpf, tipo)
+                    '************************************ FIN HCANO 19/08/2020 ************************
+
             End Select
 
         Catch ex As Exception
@@ -124,6 +136,24 @@ Partial Class operaciones
             data.Add("leg", obj.EncrytedString64("ListaEgresadoAsignaGrupo")) ' Lista para Asignar correlativos Egresado
             data.Add("age", obj.EncrytedString64("ActualizarGrupo")) ' ACtualizar Grupo de Egresados
             data.Add("cfa", obj.EncrytedString64("ConsultarFechaActo")) ' ConsultaFecha de Acto Academico Original solo para Duplicados
+            '*********************************************************************************
+            '*********************** GESTIÓN DEL EGRESADO ************************************
+            '*********************************************************************************
+            '*********************** Inicio HCANO 19/08/2020 *********************************
+
+            data.Add("ctr", obj.EncrytedString64("ConsultarTramites")) ' Consultar tramites de grado/titulo
+            data.Add("crt", obj.EncrytedString64("ConsultarRequisitos")) ' Consultar tramites de grado/titulo
+            data.Add("srcu", obj.EncrytedString64("SolicitarResolucionConsejoUniv")) ' Consultar tramites de grado/titulo
+            data.Add("otr", obj.EncrytedString64("ObservarTramite")) ' Consultar tramites de grado/titulo
+            data.Add("epc", obj.EncrytedString64("ExpedientesPendientesCorrelativos")) ' Listar pendientes de asignación de correlativo
+            data.Add("lat", obj.EncrytedString64("ListarArchivosTramite")) ' Lista los archivos de trámite
+            '*********************** Fin HCANO 19/08/2020 *********************************
+
+            '*********************** Inicio OLLUEN 10/09/2020 *********************************
+            data.Add("cent", obj.EncrytedString64("ConsultarEntregaDiplomas")) ' Consultar entregas diplomas de grado/titulo
+            data.Add("entd", obj.EncrytedString64("EntregaDiplomaNew")) ' Actualiza Entrega de Diplomas
+            '*********************** Fin OLLUEN 19/08/2020 *********************************
+
             JSONresult = serializer.Serialize(data)
             Response.Write(JSONresult)
 

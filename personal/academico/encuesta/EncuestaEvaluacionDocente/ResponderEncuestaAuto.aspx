@@ -193,23 +193,26 @@
                   <div class="table-responsive">
                           <asp:GridView GridLines="Horizontal" ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered" Width="30%">
                           <Columns>
-                                <asp:BoundField DataField="1" HeaderText="(1) NO LOGRADO">                            
+                                <asp:BoundField DataField="1" HeaderText="NUNCA">                            
                                 <HeaderStyle BackColor="#FF6666" HorizontalAlign="Center" 
                                     VerticalAlign="Middle" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="2" HeaderText="(2) EN DESARROLLO">                            
+                                <asp:BoundField DataField="2" HeaderText="LA MAYORÍA DE VECES NO">                            
                                 <HeaderStyle BackColor="#FFFF66" HorizontalAlign="Center" 
                                     VerticalAlign="Middle" />
                                 </asp:BoundField>
-                               <asp:BoundField DataField="3" HeaderText="(3) LOGRADO">                            
+                               <asp:BoundField DataField="3" HeaderText="ALGUNAS VECES SÍ, ALGUNAS VECES NO">                            
                                 <HeaderStyle BackColor="#009900" HorizontalAlign="Center" 
                                     VerticalAlign="Middle" ForeColor="White" />
                                 </asp:BoundField>
-                               <asp:BoundField DataField="4" HeaderText="(4) SATISFACTORIO">                            
+                               <asp:BoundField DataField="4" HeaderText="LA MAYORÍA DE VECES SÍ">                            
                                 <HeaderStyle BackColor="#0066FF" HorizontalAlign="Center" 
                                     VerticalAlign="Middle" ForeColor="White" />
                                 </asp:BoundField>
-                               
+                               <asp:BoundField DataField="5" HeaderText="SIEMPRE">                            
+                                <HeaderStyle BackColor="#CC3300" HorizontalAlign="Center" 
+                                    VerticalAlign="Middle" ForeColor="White" />
+                                </asp:BoundField>
                           </Columns>
                           <HeaderStyle BackColor="#C3C3C3" ForeColor="Black" VerticalAlign="Middle" HorizontalAlign="Center" Font-Size="11px" />
                           <RowStyle Font-Size="11px"  VerticalAlign="Middle" HorizontalAlign="Center"  />                                            
@@ -280,9 +283,17 @@
                                         <asp:RadioButton ID="rbCuatro"  GroupName="opciones" runat="server" CssClass="radiorespuesta" />
                                       
                                     </center>
-                                </ItemTemplate>
+                                </ItemTemplate> 
                                 </asp:TemplateField>
+                                <asp:TemplateField HeaderText="">
+                                <ItemTemplate>
+                                    <center>
                                 
+                                        <asp:RadioButton ID="rbCinco" GroupName="opciones" runat="server" CssClass="radiorespuesta" />
+                                      
+                                    </center>
+                                </ItemTemplate> 
+                                </asp:TemplateField>
                                 
                                 
                                 </Columns>

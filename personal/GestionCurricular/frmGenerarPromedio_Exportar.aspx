@@ -116,7 +116,7 @@
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <asp:GridView ID="gvNotas" runat="server" AutoGenerateColumns="false" ShowHeader="true"
-                                DataKeyNames="codigo_Dma, codigoUniver_Alu, codigo_mat, nombre_alu, codigo_pso, inhabilitado_dma"
+                                DataKeyNames="codigo_Dma, codigoUniver_Alu, codigo_mat, nombre_alu, codigo_pso, inhabilitado_dma, codigo_alu"
                                 OnRowDataBound="gvNotas_OnRowDataBound" OnRowCreated="gvNotas_OnRowCreated" CssClass="table table-bordered table-hover">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Código" HeaderStyle-Width="7%" ItemStyle-Width="7%" ItemStyle-HorizontalAlign="Left">

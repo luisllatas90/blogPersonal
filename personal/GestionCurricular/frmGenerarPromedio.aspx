@@ -223,6 +223,8 @@
                     <div class="col-md-5" style="text-align: left;">
                         <div class="row">
                             <div class="col-md-12" style="text-align: left;" runat="server" id="divPromedio">
+                                <asp:CheckBox ID="chkConfirmarPublicacion" runat="server" Text="Confirmo generación de Actas de Notas" 
+                                OnCheckedChanged="chkConfirmarPublicacion_ChekedChanged" AutoPostBack="true"/>
                                 <asp:LinkButton ID="btnPublicar" runat="server" CssClass="btn btn-primary" Text='<i class="fa fa-save"></i> Publicación de promedios finales' />
                                 <label ID="lblAviso" runat="server" style="background-color: Yellow; color: Blue;"></label>
                             </div>
@@ -252,6 +254,7 @@
                         </div>
                     </div>
                     <div class="col-md-6" style="text-align: right; float: right">
+                        <asp:LinkButton ID="btnDescargarActa" runat="server" CssClass="btn btn-warning" Text='<i class="fa fa-download""></i> Descargar Acta de Notas' />
                         <asp:LinkButton ID="btnExportar" runat="server" CssClass="btn btn-success" Text='<i class="fa fa-file-excel"></i> Exportar' />
                         <div class="form-group" id="divLeyenda" runat="server" style="float: right;">
                         </div>
@@ -262,7 +265,7 @@
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <asp:GridView ID="gvNotas" runat="server" AutoGenerateColumns="false" ShowHeader="true"
-                                DataKeyNames="codigo_Dma, codigoUniver_Alu, codigo_mat, nombre_alu, codigo_pso, inhabilitado_dma"
+                                DataKeyNames="codigo_Dma, codigoUniver_Alu, codigo_mat, nombre_alu, codigo_pso, inhabilitado_dma, codigo_alu"
                                 OnRowDataBound="gvNotas_OnRowDataBound" OnRowCreated="gvNotas_OnRowCreated" CssClass="table table-bordered table-hover">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Código" HeaderStyle-Width="7%" ItemStyle-Width="7%" ItemStyle-HorizontalAlign="Left">

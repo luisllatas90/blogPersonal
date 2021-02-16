@@ -1,0 +1,56 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="frm_InscripcionInteresadoCampus.aspx.vb" Inherits="Admision_frm_InscripcionInteresadoCampus" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Página sin título</title>
+</head>
+<body>
+    <!--Inicio USATURDAY-->
+    <div style="-webkit-border-radius: 20px 20px; -moz-border-radius: 10px 10px; background-color: #f9b457; padding-top: 20px; padding-bottom: 15px;">
+        <iframe id="frmInscripcion" name="frmInscripcion" width="100%" style="border: none"></iframe>
+       <form action="../../librerianet/admision/frm_InscripcionInteresado.aspx" id="formParametros" target="frmInscripcion" method="post">
+        <%-- <form action="http://serverdev/campusvirtual/librerianet/admision/frm_InscripcionInteresado.aspx" id="formParametros" target="frmInscripcion" method="post">--%>
+             <input type="hidden" name="tipo" value="0" />
+            <input type="hidden" name="tokenCco" value="" />
+            <input type="hidden" name="nombreEve" value="USATURDAY 2019" />
+            <input type="hidden" name="descripcionCac" value="2020-I" />
+            <input type="hidden" name="codigoMin" value="" />
+            <input type="hidden" name="preferente" value="0" />
+            <input type="hidden" name="nivelesEstudio" value="" />
+            <input type="hidden" name="codigosIed" value="" />
+            <input type="hidden" name="codigosCpf" value="1,2,3,4,5,6,11,14,20,21,22,24,26,27,28,31,32,33,34,124" />
+            <input type="hidden" name="datosApod" value="0" />
+            <input type="hidden" name="datosProf" value="0" />
+            <input type="hidden" name="consultas" value="0" />
+            <input type="hidden" name="fechaHoraLimiteInscripcion" value="31/20/2020 16:40:59" /><!--¿Es obligatorio?-->
+            <input type="hidden" name="titulo" value="Inscríbete en el USATURDAY - ¡Ingreso Libre!" />
+            <input type="hidden" name="textoBtnInformacion" value="Inscríbete Aquí" />
+            <input type="hidden" name="textoBtnInscripcion" value="Inscríbete" />
+            <input type="hidden" name="msgExitoInformacion" value="PHN0eWxlPgogICAgLm1lbnNhamVmb3JtIHsKICAgICAgICBoZWlnaHQ6IDQ4MHB4OwogICAgICAgIHdpZHRoOiAxMDAlOwogICAgICAgIGJhY2tncm91bmQtY29sb3I6ICNmZmY7CiAgICAgICAgY29sb3I6ICMzMzM7CiAgICAgICAgZm9udC1zaXplOiAxOHB4OwogICAgICAgIHBhZGRpbmctdG9wOiAxMDBweDsKICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7CiAgICAgICAgbGluZS1oZWlnaHQ6IDI0cHg7CiAgICAgICAgbWFyZ2luLXRvcDogMTBweDsKICAgICAgICBtYXJnaW4tYm90dG9tOiAxMHB4OwogICAgfQoKICAgIC50ZXh0byB7CiAgICAgICAgZm9udC1zaXplOiAyNHB4OwogICAgICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsKICAgICAgICBjdXJzb3I6IHBvaW50ZXI7CiAgICAgICAgY3Vyc29yOiBoYW5kOwogICAgfQo8L3N0eWxlPgo8ZGl2IGNsYXNzPSJtZW5zYWplZm9ybSI+IDxpbWcgc3JjPSJodHRwOi8vc3RvcmFnZS5nb29nbGVhcGlzLmNvbS91c2F0L2VzcGVjaWFsaXphdGUvaW1nL29rLnBuZyIKICAgICAgICBhbHQ9IkZvcm1tdWxhcmlvIGVudmlhZG8iPiA8YnI+IDxicj7CoVR1cyBkYXRvcyBmdWVyb24gcmVnaXN0cmFkb3MgZXhpdG9zYW1lbnRlISA8YnI+CiAgICA8YnI+wr9UaWVuZXMgYWxndW5hIGNvbnN1bHRhIGFkaWNpb25hbD8gPGJyPjxicj4gPGEgaHJlZj0iaHR0cDovL3R1cHJveWVjdG9kZXZpZGEucGUvY2hhdCIgY2xhc3M9InRleHRvIj4gPGkKICAgICAgICAgICAgY2xhc3M9ImZhIGZhLWNvbW1lbnRzIj48L2k+IENoYXQgZW4gbMOtbmVhPC9hPiA8YnI+PGJyPiA8YSBocmVmPSJ0ZWw6Ly8wNzQ2MDYyMTciIGNsYXNzPSJ0ZXh0byI+IDxpCiAgICAgICAgICAgIGNsYXNzPSJmYSBmYS1waG9uZSI+PC9pPiAwNzQ2MDYyMTc8L2E+CgogICAgPGJyPiA8YnI+CjwvZGl2Pg==" />
+            <input type="hidden" name="msgConfInscripcion" value="PGRpdiBjbGFzcz0iY2FyZCI+CiAgICAgICAgPGg2IGNsYXNzPSJjYXJkLWhlYWRlciI+TWVuc2FqZSBkZSBjb25maXJtYWNpw7NuPC9oNj4KICAgICAgICA8ZGl2IGNsYXNzPSJjYXJkLWJvZHkiPgogICAgICAgICAgICA8YiBzdHlsZT0icGFkZGluZzogMTBweDsgZm9udC1zaXplOiAwLjlyZW07Ij7Cv0VzdMOhcyBzZWd1cm8gcXVlIGRlc2VhcyBpbnNjcmliaXJ0ZSBwYXJhIHBvc3R1bGFyIGEgbGEgVVNBVD88L2I+ICAKICAgICAgICA8L2Rpdj4KICAgIDwvZGl2Pg==" />
+            <input type="hidden" name="msgExitoInscripcion" value="PHN0eWxlPgogICAgICAgICNtc2ctcmVzcHVlc3RhIHsKICAgICAgICAgICAgcGFkZGluZzogMTVweDsKICAgICAgICB9CiAgICAgICAgI21zZy1yZXNwdWVzdGEgaDUgewogICAgICAgICAgICBjb2xvcjogcmVkOwogICAgICAgIH0KICAgIDwvc3R5bGU+CiAgICA8ZGl2IGlkPSJtc2ctcmVzcHVlc3RhIj4KICAgICAgICA8aDU+RkVMSUNJVEFDSU9ORVMgWUEgRVNUQVMgSU5TQ1JJVE8gUEFSQSBFTCBFWEFNRU4gREUgQURNSVNJw5NOPC9oNT4KICAgICAgICA8Yj5SRUNVRVJEQSBxdWU6PC9iPgogICAgICAgIDx1bD4KICAgICAgICAgICAgPGxpPlRpZW5lcyA0OCBob3JhcyBwYXJhIHBhZ2FyIHR1IGRlcmVjaG8gZGUgZXhhbWVuIGRlIFMvIDE1MCBlbiBjdWFscXVpZXIgYWdlbnRlIEJDUCBvIEJCVkEsIGNvbiBzb2xvIGluZGljYXIgdHUgbsO6bWVybyBkZSBETkkuIAogICAgICAgICAgICAgICAgPGI+UGFzYWRvIGVsIHRpZW1wbyBpbmRpY2FkbyB0dSBpbnNjcmlwY2nDs24gc2Vyw6EgZWxpbWluYWRhLjwvYj48L2xpPgogICAgICAgICAgICA8bGk+RWwgZXhhbWVuIHNlcsOhIGVuIENhbXB1cyBVU0FUIOKAkyBDaGljbGF5bywgc29sbyBkZWJlcyB0cmFlcjogRE5JLCBsw6FwaXosIGJvcnJhZG9yIHkgdGFqYWRvci48L2xpPgogICAgICAgICAgICA8bGk+RWwgRVhBTUVOIGluaWNpYSBhIGxhcyA3OjMwIGFtLiB0aWVuZSB1bmEgZHVyYWNpw7NuIGRlIDIgaG9yYXMgeSBzb2xvIGluZ3Jlc2FuIGFsIENhbXB1cyBsb3MgcG9zdHVsYW50ZXMuPC9saT4KICAgICAgICA8L3VsPgogICAgICAgIDxwPgogICAgICAgICAgICBEZSBsb2dyYXIgZWwgaW5ncmVzbyBhIHRyYXbDqXMgZGVsIGV4YW1lbiwgdGllbmVzIHVuYSBzZW1hbmEgcGFyYSBwcmVzZW50YXIgZW4gT2ZpY2luYSBkZSBBZG1pc2nDs24gVVNBVCwgbG8gc2lndWllbnRlcyBkb2N1bWVudG9zOgogICAgICAgIDwvcD4KICAgICAgICA8dWw+CiAgICAgICAgICAgIDxsaT48Yj5FZ3Jlc2Fkb3M6PC9iPiBDZXJ0aWZpY2FkbyBkZSBlc3R1ZGlvcyBkZSAxcm8uIGEgNXRvLiBzZWN1bmRhcmlhLjwvbGk+CiAgICAgICAgICAgIDxsaT48Yj5Fc3R1ZGlhbnRlcyBkZSA1dG8uIHNlY3VuZGFyaWE6PC9iPiBDb25zdGFuY2lhIGZpcm1hZGEgcG9yIGVsIGRpcmVjdG9yIGRlIGxhIEluc3RpdHVjacOzbiBFZHVjYXRpdmEgbyBjb3BpYSBkZSBsaWJyZXRhIGRlIG5vdGFzIGRlbCDDumx0aW1vIGJpbWVzdHJlIGN1cnNhZG8uPC9saT4KICAgICAgICAgICAgPGxpPkNvcGlhIGRlIEROSTwvbGk+CiAgICAgICAgICAgIDxsaT5Db3BpYSBkZSByZWNpYm8gZGUgbHV6IG8gYWd1YSBkZSBkb25kZSByZXNpZGUuPC9saT4KICAgICAgICA8L3VsPgogICAgICAgIDxwPgogICAgICAgICAgICBTaSBlcmVzIG1lbm9yIGRlIGVkYWQgYXNpc3RpciBhIFJFR1VMQVJJWkFSIFRVIE1BVFJJQ1VMQSBlbiBjb21wYcOxw61hIGRlIHR1IGFwb2RlcmFkby4KICAgICAgICA8L3A+CiAgICA8L2Rpdj4=" />
+            <input type="hidden" name="campoAdicional1" value="id_template_email" /><!--colocal el id de template a enviar-->
+            <input type="hidden" name="campoAdicional2" value="USAT: Ya estas inscrito en el USATURDAY. Te esperamos este 21 de setiembre a las 08:30 - Campus USAT. Traer DNI para el ingreso" /><!-- sms_envio_info_si, sms_envio_info_no, personalizado -->
+            <input type="hidden" name="campoAdicional3" value="EVENTO" /><!-- Categoria -->
+            <input type="hidden" name="campoAdicional4" value="USATURDAY 2019" /> <!-- Tipo -->
+            <input type="hidden" name="campoAdicional5" value="WEB USAT" /> <!-- Fuente: WEB USAT -->
+            <input type="hidden" name="campoAdicional6" value="campoAdicional6" />
+            <input type="hidden" name="inscripcionCampus" value="1" />
+        </form>
+        <script type="text/javascript" src="../assets/js/iframeresizer/iframeResizer.min.js"></script>
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function(event) {
+                iFrameResize({ 
+                   checkOrigin: false,
+                    minHeight: 500,
+                }, '#frmInscripcion')
+
+                document.getElementById('formParametros').submit();
+            });
+        </script>
+    </div>
+    <!--FIN USATURDAY-->
+</body>
+</html>

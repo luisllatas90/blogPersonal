@@ -12,6 +12,7 @@ Partial Class GestionCurricular_FrmSilaboGeneral
     Private uni_aux As String = ""
     Private tot_uni As Integer = 1
     Private odCursoProgramado As d_CursoProgramado, oeCursoProgramado As e_CursoProgramado ' 20191230 - ENevado
+    Private orden_col As Integer = 13
 
     Public Enum MessageType
         Success
@@ -36,6 +37,7 @@ Partial Class GestionCurricular_FrmSilaboGeneral
                 cod_ctf = Session("cod_ctf")
             Else
                 cod_ctf = Request.QueryString("ctf")
+                Session("cod_ctf") = cod_ctf
             End If
 
             If IsPostBack = False Then
@@ -50,7 +52,7 @@ Partial Class GestionCurricular_FrmSilaboGeneral
                 Session("gc_dtResultados") = Nothing
                 Call mt_CargarSemestre()
                 Call mt_CargarCarreraProf()
-
+               
                 Me.txtBuscar.Attributes.Add("onKeyPress", "txtBuscar_onKeyPress('" & Me.btnBuscar.ClientID & "', event)")
                 Me.txtBuscar.Visible = False
                 Me.btnBuscar.Visible = False
@@ -196,8 +198,14 @@ Partial Class GestionCurricular_FrmSilaboGeneral
                 mt_AgregarCabecera(objgridviewrow, objtablecell, 1, 1, "Evaluaciones")
                 mt_AgregarCabecera(objgridviewrow, objtablecell, 1, 1, "Sesiones")
                 mt_AgregarCabecera(objgridviewrow, objtablecell, 1, 1, "Fechas")
-                mt_AgregarCabecera(objgridviewrow, objtablecell, 6, 1, "Acciones")
+                'mt_AgregarCabecera(objgridviewrow, objtablecell, 6, 1, "Acciones") 'Adicionado por Luis Q.T. | 31AGO2020
+                mt_AgregarCabecera(objgridviewrow, objtablecell, 5, 1, "Acciones") 'Adicionado por Luis Q.T. | 31AGO2020
                 objGridView.Controls(0).Controls.AddAt(0, objgridviewrow)
+
+                If Session("cod_ctf") <> 249 Then
+                    Me.gvResultados.Columns(14).Visible = False
+                End If
+
             End If
         Catch ex As Exception
             mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.Error)
@@ -228,7 +236,7 @@ Partial Class GestionCurricular_FrmSilaboGeneral
 
                 Session("codigo_cac") = codigo_cac
                 Session("codigo_cup") = codigo_cup
-                Session("cod_ctf") = cod_ctf
+                'Session("cod_ctf") = cod_ctf
 
                 If e.CommandName.Equals("RegistrarFechas") Then
                     If modular_pcu Then
@@ -333,11 +341,53 @@ Partial Class GestionCurricular_FrmSilaboGeneral
                         Throw New System.Exception("¡ No se pudo realizar la operación !")
                     End If
                     ' ------------------------------------------------------------------------------------------------/
+                ElseIf e.CommandName.Equals("AulaVirtual") Then
+                    Dim obj As New ClsConectarDatos
+                    Dim dtUsr As New Data.DataTable
+                    obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+                    obj.AbrirConexion()
+                    dtUsr = obj.TraerDataTable("MOODLE_ConsultarCodigoAcceso", "PE", cod_user)
+                    obj.CerrarConexion()
+
+                    If dtUsr.Rows.Count > 0 Then
+                        'Dim _url = "//10.10.14.69/aulavirtual/login/index.php"
+                        Dim _url As String
+                        Dim _user = dtUsr.Rows(0).Item("codigo_pso").ToString
+                        Dim _pass = dtUsr.Rows(0).Item("ClaveInterna_Pso").ToString
+                        Dim _curso = "grades"
+                        Dim _idcurso = Me.gvResultados.DataKeys(index).Values("idcurso_mdl")
+                        _idcurso = IIf(String.IsNullOrEmpty(_idcurso), "-1", _idcurso)
+
+                        If _idcurso <> "-1" Then
+                            _url = "//intranet.usat.edu.pe/aulavirtual/course/view.php?id=" & _idcurso
+                            '_url = "//intranet.usat.edu.pe/aulavirtual/login/index.php"
+
+                            Response.Clear()
+                            Dim sb = New System.Text.StringBuilder()
+                            sb.Append("<html>")
+                            sb.AppendFormat("<body onload='document.forms[0].submit()'>")
+                            sb.AppendFormat("<form action='{0}' method='post' target='_blank'>", _url)
+                            sb.AppendFormat("<input type='hidden' name='avm7' value='{0}'>", _user) ' Response.write (pso) - cifrado de siuasivo2 y disuasivo3
+                            sb.AppendFormat("<input type='hidden' name='avm8' value='{0}'>", _pass) ' Response.write (PassPer) - cifrado de siuasivo2 y disuasivo3
+                            sb.AppendFormat("<input type='hidden' name='curso' value='{0}'>", _curso) ' no
+                            sb.AppendFormat("<input type='hidden' name='idcurso' value='{0}'>", _idcurso) ' no
+                            sb.Append("</form>")
+                            sb.Append("</body>")
+                            sb.Append("</html>")
+                            Response.Write(sb.ToString())
+
+                            'mt_ShowMessage(codigo_cup & " - " & _idcurso & " - " & _url, MessageType.Info)
+                        Else
+                            mt_ShowMessage("¡ No se puede acceder al Aula Virtual porque aún no ha sido creada !", MessageType.Info)
+                        End If
+                    Else
+                        mt_ShowMessage("¡ Ocurrió un Error para iniciar sesión en el Aula Virtual !", MessageType.Warning)
+                    End If
                 End If
 
             End If
         Catch ex As Exception
-            Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.Error)
+            Call mt_ShowMessage(ex.Message.Replace("'", " ").Replace(vbCr, "").Replace(vbLf, ""), MessageType.Error)
         End Try
     End Sub
 
@@ -346,6 +396,8 @@ Partial Class GestionCurricular_FrmSilaboGeneral
             If e.Row.RowType = DataControlRowType.DataRow AndAlso e.Row.RowIndex >= 0 Then
                 Dim i As Integer = e.Row.RowIndex
                 Dim ins_total, ins_asign, ins_pend, ses_total, ses_asign, ses_pend, fec_total, fec_asign, fec_pend As String
+                Dim aux_ins, aux_ses, pend_ins, pend_ses, pend_fec As Integer ' Por Luis Q.T. | 26OCT2020
+                Dim aux_fec As String ' Por Luis Q.T. | 26OCT2020
 
                 ins_total = Me.gvResultados.DataKeys(i).Values("instr_total")
                 ins_asign = Me.gvResultados.DataKeys(i).Values("instr_asign")
@@ -359,16 +411,25 @@ Partial Class GestionCurricular_FrmSilaboGeneral
                 fec_asign = Me.gvResultados.DataKeys(i).Values("fechas_asign")
                 fec_pend = Me.gvResultados.DataKeys(i).Values("fechas_pend")
 
-                e.Row.Cells(6).Text = ins_total & "     |     " & ins_asign & "     |     " & CStr(ins_pend.Length - ins_pend.Replace("|", "").Length)
-                e.Row.Cells(6).ToolTip = ins_pend.Replace("|", vbCr).Replace("|", vbLf)
+                ' Por Luis Q.T. | 26OCT2020
+                pend_ins = CInt(ins_total) - CInt(ins_asign)
+                pend_ses = CInt(ses_total) - CInt(ses_asign)
+                pend_fec = CInt(fec_total) - CInt(fec_asign)
+
+                aux_ins = (ins_pend.Length - ins_pend.Replace("|", "").Length)
+                aux_ses = (ses_pend.Length - ses_pend.Replace("|", "").Length)
+                aux_fec = Left(fec_pend, 55)
+               
+                e.Row.Cells(6).Text = ins_total & "     |     " & ins_asign & "     |     " & CStr(pend_ins) 'CStr(ins_pend.Length - ins_pend.Replace("|", "").Length) ' Por Luis Q.T. | 26OCT2020
+                e.Row.Cells(6).ToolTip = ins_pend.Replace("|", vbCr).Replace("|", vbLf) & IIf((pend_ins - aux_ins) > 0, "... Y " & CStr(pend_ins - aux_ins) & " más", "")
                 e.Row.Cells(6).HorizontalAlign = HorizontalAlign.Center
 
-                e.Row.Cells(7).Text = ses_total & "     |     " & ses_asign & "     |     " & CStr(ses_pend.Length - ses_pend.Replace("|", "").Length)
-                e.Row.Cells(7).ToolTip = ses_pend.Replace("|", vbCr).Replace("|", vbLf)
+                e.Row.Cells(7).Text = ses_total & "     |     " & ses_asign & "     |     " & CStr(pend_ses) 'CStr(ses_pend.Length - ses_pend.Replace("|", "").Length) ' Por Luis Q.T. | 26OCT2020
+                e.Row.Cells(7).ToolTip = ses_pend.Replace("|", vbCr).Replace("|", vbLf) & IIf((pend_ses - aux_ses) > 0, "... Y " & CStr(pend_ses - aux_ses) & " más", "")
                 e.Row.Cells(7).HorizontalAlign = HorizontalAlign.Center
-                
-                e.Row.Cells(8).Text = fec_total & "     |     " & fec_asign & "     |     " & CStr(CInt(Len(fec_pend) / 11))
-                e.Row.Cells(8).ToolTip = fec_pend.Replace("|", vbCr).Replace("|", vbLf)
+
+                e.Row.Cells(8).Text = fec_total & "     |     " & fec_asign & "     |     " & CStr(pend_fec) 'CStr(CInt(Len(fec_pend) / 11)) ' Por Luis Q.T. | 26OCT2020
+                e.Row.Cells(8).ToolTip = aux_fec.Replace("|", vbCr).Replace("|", vbLf) & IIf((pend_fec - CInt(Len(aux_fec) / 11)) > 0, "... Y " & CStr(pend_fec - CInt(Len(aux_fec) / 11)) & " más", "")
                 e.Row.Cells(8).HorizontalAlign = HorizontalAlign.Center
             End If
         Catch ex As Exception
@@ -604,7 +665,7 @@ Partial Class GestionCurricular_FrmSilaboGeneral
 
         Try
             obj.AbrirConexion()
-            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DA", "")
+            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DAN", "")
             obj.CerrarConexion()
 
             Call mt_CargarCombo(Me.ddlSemestre, dt, "codigo_Cac", "descripcion_Cac")
@@ -831,13 +892,19 @@ Partial Class GestionCurricular_FrmSilaboGeneral
             pdfTable.AddCell(fc_CeldaTexto("N°", 7.0F, 1, 15, 1, 1, 1, 1, "WhiteSmoke"))
             pdfTable.AddCell(fc_CeldaTexto("APELLIDOS Y NOMBRES", 7.0F, 1, 15, 3, 1, 1, 1, "WhiteSmoke"))
             pdfTable.AddCell(fc_CeldaTexto("CÓDIGO", 7.0F, 1, 15, 1, 1, 1, 1, "WhiteSmoke"))
-            pdfTable.AddCell(fc_CeldaTexto("FIRMA", 7.0F, 1, 15, 1, 1, 1, 1, "WhiteSmoke"))
+            'pdfTable.AddCell(fc_CeldaTexto("FIRMA", 7.0F, 1, 15, 1, 1, 1, 1, "WhiteSmoke"))
+            pdfTable.AddCell(fc_CeldaTexto("CONFIRMACIÓN", 7.0F, 1, 15, 1, 1, 1, 1, "WhiteSmoke")) 'Adicionado por Luis Q.T. | 31AGO2020
 
             For index As Integer = 0 To dtDet.Rows.Count - 1
                 pdfTable.AddCell(fc_CeldaTexto((index + 1).ToString, 7.0F, 0, 15, 1, 1, 0))
                 pdfTable.AddCell(fc_CeldaTexto(dtDet.Rows(index).Item("estudiante").ToString, 7.0F, 0, 15, 3, 1, 0))
                 pdfTable.AddCell(fc_CeldaTexto(dtDet.Rows(index).Item("codigoUniver_Alu").ToString, 7.0F, 0, 15, 1, 1, 1))
-                pdfTable.AddCell(fc_CeldaTexto("", 7.0F, 0, 15, 1, 1, 0))
+
+                If dtDet.Rows(index).Item("confirmasilabo") Then 'Adicionado por Luis Q.T. | 31AGO2020
+                    pdfTable.AddCell(fc_CeldaTexto(dtDet.Rows(index).Item("fechaconfirma").ToString, 7.0F, 0, 15, 1, 1, 0)) 'Adicionado por Luis Q.T. | 31AGO2020
+                Else
+                    pdfTable.AddCell(fc_CeldaTexto("", 7.0F, 0, 15, 1, 1, 0))
+                End If
             Next
 
             pdfTable.AddCell(fc_CeldaTexto(Environment.NewLine & " " & Environment.NewLine & " " & Environment.NewLine, 7.0F, 0, 0, 6, 1, 1)) 'Salto de línea

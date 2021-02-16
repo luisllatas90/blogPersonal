@@ -37,6 +37,57 @@
                 $('#alert_container').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span>' + message + '</span></div>');
             }
         }
+        function ShowMessage2(message, messagetype) {
+            var cssclass;
+            switch (messagetype) {
+                case '0':
+                    cssclass = 'alert-success'
+                    break;
+                case "1":
+                    cssclass = 'alert-danger'
+                    break;
+                case '3':
+                    cssclass = 'alert-warning'
+                    break;
+                default:
+                    cssclass = 'alert-info'
+            }
+            if (cssclass == 'alert-success') {
+                $('#alert_procesado').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span>' + message + '</span></div>');
+            } else if (cssclass == 'alert-danger') {
+            $('#alert_procesado').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span>' + message + '</span></div>');
+            } else if (cssclass == 'alert-warning') {
+            $('#alert_procesado').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span>' + message + '</span></div>');
+            } else {
+            $('#alert_procesado').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span>' + message + '</span></div>');
+            }
+        }
+        
+        function ShowMessage3(message, messagetype) {
+            var cssclass;
+            switch (messagetype) {
+                case '0':
+                    cssclass = 'alert-success'
+                    break;
+                case "1":
+                    cssclass = 'alert-danger'
+                    break;
+                case '3':
+                    cssclass = 'alert-warning'
+                    break;
+                default:
+                    cssclass = 'alert-info'
+            }
+            if (cssclass == 'alert-success') {
+                $('#alert_noprocesado').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span>' + message + '</span></div>');
+            } else if (cssclass == 'alert-danger') {
+                $('#alert_noprocesado').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span>' + message + '</span></div>');
+            } else if (cssclass == 'alert-warning') {
+                $('#alert_noprocesado').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span>' + message + '</span></div>');
+            } else {
+                $('#alert_noprocesado').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span>' + message + '</span></div>');
+            }
+        }
     </script>
     <style>
         #drop {
@@ -63,6 +114,9 @@
     <form id="form1" runat="server">
         <div class="messagealert" id="alert_container"></div>
         <br />
+        <div class="messagealert" id="alert_noprocesado"></div>
+        <div class="messagealert" id="alert_procesado"></div>
+          <br />
         <div class="container-fluid">
             <div class="panel panel-default" id="pnlLista" runat="server">
                 <div class="panel-heading">

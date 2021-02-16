@@ -858,6 +858,19 @@ Public Class ClsLogistica
     End Sub
     Public Sub CambiarItemCompras(ByVal codigo_ecc As Integer, ByVal codigo_ped As Integer, ByVal codigo_per As Integer)
         cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+
+
+
+        'cambio 25/11/2020   --- este es solo para el obtener el estado antes del cambio------------------
+        Dim estadoOrig As String
+        Dim dtEst As New Data.DataTable
+        cnx.AbrirConexion()
+        dtEst = cnx.TraerDataTable("LOG_InsertaBitacoraCambio", "CECC", codigo_per, codigo_ecc, "")
+        cnx.CerrarConexion()
+        estadoOrig = dtEst.Rows(0).Item("estado_ecc")
+        '--------------------------------------------------------------------------------------------------
+
+
         cnx.AbrirConexion()
         cnx.Ejecutar("LOG_PasarEjecucionCompras", codigo_ecc)
         cnx.CerrarConexion()
@@ -871,10 +884,11 @@ Public Class ClsLogistica
         Dim coreeoRevisor As String
 
         Dim dt, dt2 As New Data.DataTable
-        Dim dtEst As New Data.DataTable
-
+        
         'Si el pedido es enviado a COmpras se envía una notificación a TYONG: dflores 26/07/16
 
+
+       
         cnx.AbrirConexion()
         dt = cnx.TraerDataTable("LOG_ConsultarDatosSolicitante", codigo_ped, codigo_per)
         cnx.CerrarConexion()
@@ -916,7 +930,15 @@ Public Class ClsLogistica
 
 
         ObjMailNet.EnviarMailAd("campusvirtual@usat.edu.pe", "Sistema de Pedidos - Logística", "tyong@usat.edu.pe", asunto, mensaje, True)
+        'ObjMailNet.EnviarMailAd("campusvirtual@usat.edu.pe", "Sistema de Pedidos - Logística", "olluen@usat.edu.pe", asunto, mensaje, True)
         'ObjMailNet.EnviarMailAd("campusvirtual@usat.edu.pe", "Sistema de Logística", "dflores@usat.edu.pe", asunto, mensaje, True)
+
+        'cambio 25/11/2020 ---------------------------------insertar en bitacoralogistica --------------------------------------------------------
+        Dim dt3 As New Data.DataTable
+        cnx.AbrirConexion()
+        dt3 = cnx.TraerDataTable("LOG_InsertaBitacoraCambio", "ECC", codigo_per, codigo_ecc, estadoOrig)
+        cnx.CerrarConexion()
+        '-------------------------------------------------------------------------------------------------------------------------------------------
 
     End Sub
     Public Function ConsultarPedidosPorItem(ByVal codigo_ped As Integer, ByVal codigo_Cco As Integer, ByVal trabajador As String, ByVal descripcionItem As String) As Data.DataTable

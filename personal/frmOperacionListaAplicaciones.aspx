@@ -1,0 +1,1 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="frmOperacionListaAplicaciones.aspx.vb" Inherits="frmOperacionListaAplicaciones" %>

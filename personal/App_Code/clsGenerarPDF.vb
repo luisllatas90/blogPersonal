@@ -38,6 +38,7 @@ Public Class clsGenerarPDF
         Dim dtDis, dtCup, dtHor, dtFer As New Data.DataTable
         Dim codigo_dis, codigo_pes, codigo_cur, codigo_cac As Integer
         Dim transversal As Boolean
+        Dim errorGrupoSesion As String = "no"
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
         Try
 
@@ -102,7 +103,7 @@ Public Class clsGenerarPDF
             cellTable0.AddCell(cellIcon)
             cellTable0.AddCell(fc_CeldaTexto("SISTEMA DE GESTIÓN DE LA CALIDAD" & Environment.NewLine & " " & Environment.NewLine & _
                                "CÓDIGO: USAT-PM0401-D-01" & Environment.NewLine & " " & Environment.NewLine & _
-                               "VERSIÓN: 03", 8.0F, 1, 0, 1, 1, 2))
+                               "VERSIÓN: 04", 8.0F, 1, 0, 1, 1, 2))
 
             pdfTable.AddCell(cellTable0)
 
@@ -207,8 +208,13 @@ Public Class clsGenerarPDF
             If dtDoc.Rows.Count = 0 Then
                 cellTable11.AddCell(fc_CeldaTexto("1.12 Docente(s):", 10.0F, 1, 15, 1, 1, 0, 5, 8, "WhiteSmoke"))
                 cellTable11.AddCell(fc_CeldaTexto(" No Definido ", 10.0F, 0, 15, 4, 1, 0, 5, 8))
+                ' 13NOV2020 - JQuepuy =====================================================================================================
+                cellTable11.AddCell(fc_CeldaTexto("1.13 Modalidad:", 10.0F, 1, 15, 1, 1, 0, 5, 8, "WhiteSmoke"))
+                cellTable11.AddCell(fc_CeldaTexto("Educación Remota de Emergencia (ERE)" & Environment.NewLine & "(RCD 039-2020-SUNEDU / RVM 085-2020-MINEDU)", 10.0F, 0, 15, 4, 1, 0, 5, 8))
+                ' =========================================================================================================================
                 cellTable1.AddCell(cellTable11)
                 pdfTable.AddCell(cellTable1)
+                
             ElseIf dtDoc.Rows.Count < 4 Then
                 cellTable11.AddCell(fc_CeldaTexto("1.12 Docente(s):", 10.0F, 1, 15, 1, 1, 0, 5, 8, "WhiteSmoke"))
                 Dim _textDocente As New iTextSharp.text.Phrase
@@ -217,16 +223,23 @@ Public Class clsGenerarPDF
                     _textDocente.Add(fc_textFrase(dtDoc.Rows(x).Item("email_Per").ToString & Environment.NewLine, 5, 10.0F, 4, iTextSharp.text.BaseColor.BLUE))
                 Next
                 cellTable11.AddCell(fc_CeldaTexto(_textDocente, 15, 4, 1, 0, 5, 8))
+                ' 13NOV2020 - JQuepuy =====================================================================================================
+                cellTable11.AddCell(fc_CeldaTexto("1.13 Modalidad:", 10.0F, 1, 15, 1, 1, 0, 5, 8, "WhiteSmoke"))
+                cellTable11.AddCell(fc_CeldaTexto("Educación Remota de Emergencia (ERE)" & Environment.NewLine & "(RCD 039-2020-SUNEDU / RVM 085-2020-MINEDU)", 10.0F, 0, 15, 4, 1, 0, 5, 8))
+                ' =========================================================================================================================
                 cellTable1.AddCell(cellTable11)
                 pdfTable.AddCell(cellTable1)
+
             Else
                 cellTable1.AddCell(cellTable11)
                 pdfTable.AddCell(cellTable1)
+
                 Dim cellTablex As iTextSharp.text.pdf.PdfPTable = New iTextSharp.text.pdf.PdfPTable(2)
                 cellTablex.WidthPercentage = 100.0F
                 cellTablex.SetWidths(New Single() {6.0F, 94.0F})
                 cellTablex.DefaultCell.Border = 0
                 cellTablex.AddCell(fc_CeldaTexto("" & Environment.NewLine, 10.0F, 1, 0, 1, 1, 1))
+
                 Dim cellTablexx As iTextSharp.text.pdf.PdfPTable = New iTextSharp.text.pdf.PdfPTable(5)
                 cellTablexx.WidthPercentage = 100.0F
                 cellTablexx.SetWidths(New Single() {40.0F, 8.5F, 24.0F, 7.5F, 20.0F})
@@ -240,11 +253,18 @@ Public Class clsGenerarPDF
                     _textDocente.Add(fc_textFrase(" " & Environment.NewLine, 5, 5.0F, 0, iTextSharp.text.BaseColor.BLACK))
                 Next
                 cellTablexx.AddCell(fc_CeldaTexto(_textDocente, 15, 4, 1, 0, 5, 8))
+                ' 13NOV2020 - JQuepuy =====================================================================================================
+                cellTablexx.AddCell(fc_CeldaTexto("1.13 Modalidad:", 10.0F, 1, 15, 1, 1, 0, 5, 8, "WhiteSmoke"))
+                cellTablexx.AddCell(fc_CeldaTexto("Educación Remota de Emergencia (ERE)" & Environment.NewLine & "(RCD 039-2020-SUNEDU / RVM 085-2020-MINEDU)", 10.0F, 0, 15, 4, 1, 0, 5, 8))
+                ' =========================================================================================================================
                 cellTablex.AddCell(cellTablexx)
                 pdfTable.AddCell(cellTablex)
+
+               
             End If
             ' =========================================================================================================================
 
+          
             'cellTable1.AddCell(cellTable11)
 
             'pdfTable.AddCell(cellTable1)
@@ -311,7 +331,7 @@ Public Class clsGenerarPDF
                                             ", que corresponde al área de estudios " & dtCom.Rows(0).Item("nombre_cat").ToString & _
                                             ", contribuye al logro del perfil de egreso, específicamente a la(s) competencia(s): " & Environment.NewLine & _
                                             strCom, 10.0F, 0, 15, 1, 1, 0))
-            pdfTable2.AddCell(fc_CeldaTexto("3.2 Competencia de la asignatura", 10.0F, 1, 15, 1, 1, 0, -1, 6, "WhiteSmoke"))
+            pdfTable2.AddCell(fc_CeldaTexto("3.2 Logro(s) de la asignatura", 10.0F, 1, 15, 1, 1, 0, -1, 6, "WhiteSmoke"))
             pdfTable2.AddCell(fc_CeldaTexto(dtSum.Rows(0).Item("competencia_sum").ToString, 10.0F, 0, 15, 1, 1, 0))
 
             pdfTable2.AddCell(fc_CeldaTexto("" & Environment.NewLine, 10.0F, 1, 0, 2, 1, 0))
@@ -669,7 +689,7 @@ Public Class clsGenerarPDF
             pdfTable2.AddCell(fc_CeldaTexto(strRef2, 10.0F, 0, 15, 1, 1, 0))
 
             If dtRef4.Rows.Count > 0 Then
-                pdfTable2.AddCell(fc_CeldaTexto("Enlaces de Internet", 10.0F, 1, 15, 1, 1, 0, -1, 6))
+                'pdfTable2.AddCell(fc_CeldaTexto("Enlaces de Internet", 10.0F, 1, 15, 1, 1, 0, -1, 6)) 'Comentado por Luis Q.T. | 27AGO2020 | GLPI 38371
                 pdfTable2.AddCell(fc_CeldaTexto(_textRefCompUrl, 15, 1, 1, 0, 5, 8))
             End If
 
@@ -714,6 +734,8 @@ Public Class clsGenerarPDF
                 Dim dtGrux, dtCony, dtActx, dtSesx, dtEvax As Data.DataTable
                 Dim strCony, strActx, strFecx, strMes, strEvax As String
                 Dim strFec As String()
+
+                strCony = "" : strActx = "" : strFecx = "" : strMes = "" : strEvax = ""
                 dtGrux = New Data.DataView(dtGru, "codigo_uni = " & dtUni.Rows(x).Item("codigo_uni"), "", Data.DataViewRowState.CurrentRows).ToTable
 
                 corCont = 0
@@ -731,15 +753,15 @@ Public Class clsGenerarPDF
                     Else
                         For z = 0 To (dtCony.Rows.Count - 1)
                             corCont = corCont + 1
-                            strCony = strCony & (x + 1) & "." & corCont & " " & dtCony.Rows(z).Item("descripcion").ToString & Environment.NewLine
+                            strCony = strCony & (x + 1) & "." & corCont & " " & dtCony.Rows(z).Item("descripcion").ToString.Replace("'", "").Replace(vbCr, " ").Replace(vbLf, "") & Environment.NewLine
                         Next
                     End If
                     For z = 0 To (dtActx.Rows.Count - 1)
-                        strActx = strActx & "• " & dtActx.Rows(z).Item("descripcion").ToString & Environment.NewLine
+                        strActx = strActx & "• " & dtActx.Rows(z).Item("descripcion").ToString.Replace("'", "").Replace(vbCr, " ").Replace(vbLf, "") & Environment.NewLine
                     Next
                     For z = 0 To (dtEvax.Rows.Count - 1)
                         'strEvax = strEvax & "• " & dtEvax.Rows(z).Item("descripcion_ins").ToString & Environment.NewLine
-                        strEvax = strEvax & "• " & dtEvax.Rows(z).Item("descripcion_evi").ToString & " (" & dtEvax.Rows(z).Item("descripcion_ins").ToString & ")" & Environment.NewLine
+                        strEvax = strEvax & "• " & dtEvax.Rows(z).Item("descripcion_evi").ToString.Replace("'", "").Replace(vbCr, " ").Replace(vbLf, "") & " (" & dtEvax.Rows(z).Item("descripcion_ins").ToString.Replace("'", "").Replace(vbCr, " ").Replace(vbLf, "") & ")" & Environment.NewLine
                     Next
                     If dtSesx.Rows.Count = 1 Then
 
@@ -1104,12 +1126,21 @@ Public Class clsGenerarPDF
 
             Next
 
+
+            errorGrupoSesion = "si" 'Por Luis Q.T. | 28AGO2020 | Controlar error 
+
             pdfDoc.Add(pdfTable2)
 
             pdfDoc.Close()
 
         Catch ex As Exception
-            Throw ex
+
+            If errorGrupoSesion.Equals("si") Then
+                Throw New Exception("Se encontraron sesiones que comparten actividades y contenidos pero no están agrupadas. Por favor, proceda a hacerlo en el diseño de asignatura antes de publicar el silabo.")
+            Else
+                Throw ex
+            End If
+
             'Return ex.Message.ToString
         End Try
     End Sub
@@ -1182,7 +1213,7 @@ Public Class clsGenerarPDF
             cellTable0.AddCell(cellIcon)
             cellTable0.AddCell(fc_CeldaTexto("SISTEMA DE GESTIÓN DE LA CALIDAD" & Environment.NewLine & " " & Environment.NewLine & _
                                "CÓDIGO: USAT-PM0401-D-01" & Environment.NewLine & " " & Environment.NewLine & _
-                               "VERSIÓN: 03", 8.0F, 1, 0, 1, 1, 2))
+                               "VERSIÓN: 04", 8.0F, 1, 0, 1, 1, 2))
 
             pdfTable.AddCell(cellTable0)
 
@@ -1278,8 +1309,13 @@ Public Class clsGenerarPDF
             If dtDoc.Rows.Count = 0 Then
                 cellTable11.AddCell(fc_CeldaTexto("1.12 Docente(s):", 10.0F, 1, 15, 1, 1, 0, 5, 8, "WhiteSmoke"))
                 cellTable11.AddCell(fc_CeldaTexto(" No Definido ", 10.0F, 0, 15, 4, 1, 0, 5, 8))
+                ' 13NOV2020 - JQuepuy =====================================================================================================
+                cellTable11.AddCell(fc_CeldaTexto("1.13 Modalidad:", 10.0F, 1, 15, 1, 1, 0, 5, 8, "WhiteSmoke"))
+                cellTable11.AddCell(fc_CeldaTexto("Educación Remota de Emergencia (ERE)" & Environment.NewLine & "(RCD 039-2020-SUNEDU / RVM 085-2020-MINEDU)", 10.0F, 0, 15, 4, 1, 0, 5, 8))
+                ' =========================================================================================================================
                 cellTable1.AddCell(cellTable11)
                 pdfTable.AddCell(cellTable1)
+
             ElseIf dtDoc.Rows.Count < 4 Then
                 cellTable11.AddCell(fc_CeldaTexto("1.12 Docente(s):", 10.0F, 1, 15, 1, 1, 0, 5, 8, "WhiteSmoke"))
                 Dim _textDocente As New iTextSharp.text.Phrase
@@ -1288,16 +1324,23 @@ Public Class clsGenerarPDF
                     _textDocente.Add(fc_textFrase(dtDoc.Rows(x).Item("email_Per").ToString & Environment.NewLine, 5, 10.0F, 4, iTextSharp.text.BaseColor.BLUE))
                 Next
                 cellTable11.AddCell(fc_CeldaTexto(_textDocente, 15, 4, 1, 0, 5, 8))
+                ' 13NOV2020 - JQuepuy =====================================================================================================
+                cellTable11.AddCell(fc_CeldaTexto("1.13 Modalidad:", 10.0F, 1, 15, 1, 1, 0, 5, 8, "WhiteSmoke"))
+                cellTable11.AddCell(fc_CeldaTexto("Educación Remota de Emergencia (ERE)" & Environment.NewLine & "(RCD 039-2020-SUNEDU / RVM 085-2020-MINEDU)", 10.0F, 0, 15, 4, 1, 0, 5, 8))
+                ' =========================================================================================================================
                 cellTable1.AddCell(cellTable11)
                 pdfTable.AddCell(cellTable1)
+
             Else
                 cellTable1.AddCell(cellTable11)
                 pdfTable.AddCell(cellTable1)
+
                 Dim cellTablex As iTextSharp.text.pdf.PdfPTable = New iTextSharp.text.pdf.PdfPTable(2)
                 cellTablex.WidthPercentage = 100.0F
                 cellTablex.SetWidths(New Single() {6.0F, 94.0F})
                 cellTablex.DefaultCell.Border = 0
                 cellTablex.AddCell(fc_CeldaTexto("" & Environment.NewLine, 10.0F, 1, 0, 1, 1, 1))
+
                 Dim cellTablexx As iTextSharp.text.pdf.PdfPTable = New iTextSharp.text.pdf.PdfPTable(5)
                 cellTablexx.WidthPercentage = 100.0F
                 cellTablexx.SetWidths(New Single() {40.0F, 8.5F, 24.0F, 7.5F, 20.0F})
@@ -1311,8 +1354,13 @@ Public Class clsGenerarPDF
                     _textDocente.Add(fc_textFrase(" " & Environment.NewLine, 5, 5.0F, 0, iTextSharp.text.BaseColor.BLACK))
                 Next
                 cellTablexx.AddCell(fc_CeldaTexto(_textDocente, 15, 4, 1, 0, 5, 8))
+                ' 13NOV2020 - JQuepuy =====================================================================================================
+                cellTablexx.AddCell(fc_CeldaTexto("1.13 Modalidad:", 10.0F, 1, 15, 1, 1, 0, 5, 8, "WhiteSmoke"))
+                cellTablexx.AddCell(fc_CeldaTexto("Educación Remota de Emergencia (ERE)" & Environment.NewLine & "(RCD 039-2020-SUNEDU / RVM 085-2020-MINEDU)", 10.0F, 0, 15, 4, 1, 0, 5, 8))
+                ' =========================================================================================================================
                 cellTablex.AddCell(cellTablexx)
                 pdfTable.AddCell(cellTablex)
+
             End If
             ' =========================================================================================================================
 
@@ -1379,7 +1427,7 @@ Public Class clsGenerarPDF
                                             ", que corresponde al área de estudios " & dtCom.Rows(0).Item("nombre_cat").ToString & _
                                             ", contribuye al logro del perfil de egreso, específicamente a la(s) competencia(s): " & Environment.NewLine & _
                                             strCom, 10.0F, 0, 15, 1, 1, 0))
-            pdfTable2.AddCell(fc_CeldaTexto("3.2 Competencia de la asignatura", 10.0F, 1, 15, 1, 1, 0, -1, 6, "WhiteSmoke"))
+            pdfTable2.AddCell(fc_CeldaTexto("3.2 Logro(s) de la asignatura", 10.0F, 1, 15, 1, 1, 0, -1, 6, "WhiteSmoke"))
             pdfTable2.AddCell(fc_CeldaTexto(dtSum.Rows(0).Item("competencia_sum").ToString, 10.0F, 0, 15, 1, 1, 0))
 
             pdfTable2.AddCell(fc_CeldaTexto("" & Environment.NewLine, 10.0F, 1, 0, 2, 1, 0))
@@ -1679,7 +1727,7 @@ Public Class clsGenerarPDF
             pdfTable2.AddCell(fc_CeldaTexto(strRef2, 10.0F, 0, 15, 1, 1, 0))
 
             If dtRef4.Rows.Count > 0 Then
-                pdfTable2.AddCell(fc_CeldaTexto("Enlaces de Internet", 10.0F, 1, 15, 1, 1, 0, -1, 6))
+                'pdfTable2.AddCell(fc_CeldaTexto("Enlaces de Internet", 10.0F, 1, 15, 1, 1, 0, -1, 6)) 'Comentado por Luis Q.T. | 27AGO2020 | GLPI 38371
                 pdfTable2.AddCell(fc_CeldaTexto(_textRefCompUrl, 15, 1, 1, 0, 5, 8))
             End If
 
@@ -1724,6 +1772,8 @@ Public Class clsGenerarPDF
                 Dim dtGrux, dtCony, dtActx, dtSesx, dtEvax As Data.DataTable
                 Dim strCony, strActx, strFecx, strMes, strEvax As String
                 Dim strFec As String()
+
+                strCony = "" : strActx = "" : strFecx = "" : strMes = "" : strEvax = ""
                 dtGrux = New Data.DataView(dtGru, "codigo_uni = " & dtUni.Rows(x).Item("codigo_uni"), "", Data.DataViewRowState.CurrentRows).ToTable
 
                 corCont = 0
@@ -1741,14 +1791,14 @@ Public Class clsGenerarPDF
                     Else
                         For z = 0 To (dtCony.Rows.Count - 1)
                             corCont = corCont + 1
-                            strCony = strCony & (x + 1) & "." & corCont & " " & dtCony.Rows(z).Item("descripcion").ToString & Environment.NewLine
+                            strCony = strCony & (x + 1) & "." & corCont & " " & dtCony.Rows(z).Item("descripcion").ToString.Replace("'", "").Replace(vbCr, " ").Replace(vbLf, "") & Environment.NewLine
                         Next
                     End If
                     For z = 0 To (dtActx.Rows.Count - 1)
-                        strActx = strActx & "• " & dtActx.Rows(z).Item("descripcion").ToString & Environment.NewLine
+                        strActx = strActx & "• " & dtActx.Rows(z).Item("descripcion").ToString.Replace("'", "").Replace(vbCr, " ").Replace(vbLf, "") & Environment.NewLine
                     Next
                     For z = 0 To (dtEvax.Rows.Count - 1)
-                        strEvax = strEvax & "• " & dtEvax.Rows(z).Item("descripcion_evi").ToString & " (" & dtEvax.Rows(z).Item("descripcion_ins").ToString & ")" & Environment.NewLine
+                        strEvax = strEvax & "• " & dtEvax.Rows(z).Item("descripcion_evi").ToString.Replace("'", "").Replace(vbCr, " ").Replace(vbLf, "") & " (" & dtEvax.Rows(z).Item("descripcion_ins").ToString.Replace("'", "").Replace(vbCr, " ").Replace(vbLf, "") & ")" & Environment.NewLine
                     Next
                     If dtSesx.Rows.Count = 1 Then
 

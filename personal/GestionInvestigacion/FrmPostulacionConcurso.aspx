@@ -319,7 +319,7 @@
                                     <label class="col-sm-3 control-label">
                                         Estructura de la Propuesta</label>
                                     <div class="col-sm-8">
-                                        <a href='Archivos/Concursos/Estructura/FORMATO PROPUESTA - FONDO CONCURSABLE DOCENTE.docx'
+                                        <a href='Archivos/Concursos/Estructura/ANEXO 01 - ESTRUCTURA.docx'
                                             target='_blank' style='font-weight: bold;'>Estructura de La Propuesta</a>
                                     </div>
                                     <div class="row">

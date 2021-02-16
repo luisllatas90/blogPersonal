@@ -72,6 +72,10 @@ Partial Class DataJson_GradosYTitulos_SesionConsejoUniversitario
                     Dim fecha As String = Request("txtfecha")
                     Dim cod_per As Integer = Session("id_per")
                     Registrar(codigo, fecha, cod_per)
+                Case "SolicitarResolucionConsejoUniv"
+                    Dim codigo As Integer = objGyt.DecrytedString64(Request("hdcod"))
+                    Dim cod_per As Integer = Session("id_per")
+                    SolicitarResolucionConsejoUniversitario(codigo, cod_per)
 
             End Select
 
@@ -134,6 +138,7 @@ Partial Class DataJson_GradosYTitulos_SesionConsejoUniversitario
                 data.Add("Alumno", dt.Rows(i).Item("alumno"))
                 data.Add("NroExp", dt.Rows(i).Item("NroExpediente_egr"))
                 data.Add("nom_dgt", dt.Rows(i).Item("descripcion_dgt"))
+                data.Add("enviado", dt.Rows(i).Item("enviado"))
                 'data.Add("nom", dt.Rows(i).Item("descripcion_scu"))
                 'data.Add("fec", dt.Rows(i).Item("fecha_scu"))
                 list.Add(data)
@@ -208,6 +213,30 @@ Partial Class DataJson_GradosYTitulos_SesionConsejoUniversitario
 
             Dim dt As New Data.DataTable
             dt = obj.MoverAlumno(codigos, cod_Sesion, tipo)
+            Data.Add("rpta", dt.Rows(0).Item("Respuesta"))
+            Data.Add("msje", dt.Rows(0).Item("Mensaje").ToString)
+            list.Add(Data)
+            JSONresult = serializer.Serialize(list)
+            Response.Write(JSONresult)
+        Catch ex As Exception
+            Data.Add("rpta", "0 - REG")
+            Data.Add("msje", ex.Message)
+            list.Add(Data)
+            JSONresult = serializer.Serialize(list)
+            Response.Write(JSONresult)
+        End Try
+    End Sub
+
+    Private Sub SolicitarResolucionConsejoUniversitario(ByVal codigo As Integer, ByVal usuario As Integer)
+        Dim obj As New ClsGradosyTitulos
+        Dim Data As New Dictionary(Of String, Object)()
+        Dim serializer As System.Web.Script.Serialization.JavaScriptSerializer = New System.Web.Script.Serialization.JavaScriptSerializer()
+        Dim JSONresult As String = ""
+        Dim list As New List(Of Dictionary(Of String, Object))()
+        Try
+
+            Dim dt As New Data.DataTable
+            dt = obj.SolicitarResolucionConsejoUniv(codigo, usuario)
             Data.Add("rpta", dt.Rows(0).Item("Respuesta"))
             Data.Add("msje", dt.Rows(0).Item("Mensaje").ToString)
             list.Add(Data)

@@ -34,7 +34,7 @@ codigo_alu=request.querystring("codigo_alu")
 	<HEAD>
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 	<link rel="stylesheet" type="text/css" href="../../../private/estilo.css">	
-	<script type="text/javascript" language="JavaScript" src="../../../private/funciones.js"></script>
+	<script type="text/javascript" language="JavaScript" src="../../../private/funciones.js?y=1"></script>
 	<title>Horario de Estudiante</title>
 	<script type="text/javascript" language="javascript">
 		function ConsultarHorario()

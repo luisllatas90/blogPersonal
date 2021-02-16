@@ -373,9 +373,15 @@ Partial Class frmTestRevisaHorario
             Else
                 lblHorasAsesoria.Text = 0
             End If
-
         End If
 
+        'Recupera el total de horas de asesoria de tesis GO y PP
+        If codigo_Cac <> 0 Then
+            If (obj.ConsultarHorasAsesoria_GOPP(codigo_per, codigo_Cac)) > 0 Then
+                '#### Modificacion de horas de tesis, asigandas segun cantidad de tesis a cargo y que el alumno se encuentre matriculado ####
+                lblHorasAsesoriaGOPP.Text = obj.ConsultarHorasAsesoria_GOPP(codigo_per, codigo_Cac)
+            End If
+        End If
 
         dts = obj.ConsultarDatosPersonales(codigo_per)
         Me.lblCeco.Text = dts.Rows(0).Item("descripcion_cco").ToString
@@ -1146,7 +1152,7 @@ Partial Class frmTestRevisaHorario
 
                 'Validar registro horas tesis
                 Dim resultado As String
-                resultado = obj.ValidarRegistroHorasAsTesis(codigo_pel, codigo_per, lblHorasAsesoria.Text)
+                resultado = obj.ValidarRegistroHorasAsTesis(codigo_pel, codigo_per, CInt(lblHorasAsesoria.Text) + CInt(Me.lblHorasAsesoriaGOPP.Text))
                 If resultado <> "" Then
                     Dim myscript As String = "alert('" & resultado & "')"
                     Page.ClientScript.RegisterStartupScript(Me.GetType(), "myscript", myscript, True)
@@ -1341,7 +1347,18 @@ Partial Class frmTestRevisaHorario
                     e.Row.Cells(i).BackColor = System.Drawing.ColorTranslator.FromHtml(color)
                     'agregado 20.03.18 a solicitud de Rubén Asalde
                 Case "FP"
-                    dts = obj.ConsultaTipoActividadPorAbreviatura("CA")
+                    dts = obj.ConsultaTipoActividadPorAbreviatura("FP")
+                    Dim color As String = dts.Rows(0).Item("color_td")
+                    e.Row.Cells(i).BackColor = System.Drawing.ColorTranslator.FromHtml(color)
+
+                    'agreagado 10.09.2020
+                Case "U"
+                    dts = obj.ConsultaTipoActividadPorAbreviatura("U") 'Tutoría académica
+                    Dim color As String = dts.Rows(0).Item("color_td")
+                    e.Row.Cells(i).BackColor = System.Drawing.ColorTranslator.FromHtml(color)
+
+                Case "TG"
+                    dts = obj.ConsultaTipoActividadPorAbreviatura("TG") 'Tutoría académica GO
                     Dim color As String = dts.Rows(0).Item("color_td")
                     e.Row.Cells(i).BackColor = System.Drawing.ColorTranslator.FromHtml(color)
             End Select
@@ -1408,15 +1425,22 @@ Partial Class frmTestRevisaHorario
         lblE.Text = dts.Rows(0).Item("descripcion_td").ToString
         lblE.BackColor = System.Drawing.ColorTranslator.FromHtml(dts.Rows(0).Item("color_td").ToString)
 
+        dts = obj.ConsultaTipoActividadPorAbreviatura("U") ' tutoría académica
+        lblU.Text = dts.Rows(0).Item("descripcion_td").ToString
+        lblU.BackColor = System.Drawing.ColorTranslator.FromHtml(dts.Rows(0).Item("color_td").ToString)
+
+        dts = obj.ConsultaTipoActividadPorAbreviatura("TG") ' tutoría académica GO
+        lblTG.Text = dts.Rows(0).Item("descripcion_td").ToString
+        lblTG.BackColor = System.Drawing.ColorTranslator.FromHtml(dts.Rows(0).Item("color_td").ToString)
+
+
 
         '==================================================================================================================
         '------------------------------------------------------Anulados ---------------------------------------------------
         '==================================================================================================================
 
         'comentado por esaavedra a solicitud de rasalde 20.03.18
-        'dts = obj.ConsultaTipoActividadPorAbreviatura("U")
-        'lblU.Text = dts.Rows(0).Item("descripcion_td").ToString
-        'lblU.BackColor = System.Drawing.ColorTranslator.FromHtml(dts.Rows(0).Item("color_td").ToString)
+
 
 
         'dts = obj.ConsultaTipoActividadPorAbreviatura("G")
@@ -1435,6 +1459,7 @@ Partial Class frmTestRevisaHorario
         'dts = obj.ConsultaTipoActividadPorAbreviatura("GP")
         'lblGP.Text = dts.Rows(0).Item("descripcion_td").ToString
         'lblGP.BackColor = System.Drawing.ColorTranslator.FromHtml(dts.Rows(0).Item("color_td").ToString)
+
 
         '==================================================================================================================
 

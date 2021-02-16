@@ -87,12 +87,30 @@
             }
             $('#alert_container').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert ' + cssclss + '"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span>' + message + '</span></div>');
         }
+
+        function txtBuscar_onKeyPress(obj, e) {
+            var key;
+            if (window.event)
+                key = window.event.keyCode; //IE, Chrome
+            else
+                key = e.which; //firefox
+
+            if (key == 13) {
+                var btn = document.getElementById(obj);
+                if (btn != null) {
+                    //$('#btnBuscar').focus();
+                    //$('#btnBuscar').click();
+                    btn.click();
+                    event.keyCode = 0
+                }
+            }
+        }
     </script>
 
 </head>
 <body>
     <form id="form1" runat="server" method="post" autocomplete="off">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" ScriptMode="Release" AsyncPostBackTimeout="360000">
     </asp:ScriptManager>
     <busyboxdotnet:BusyBox ID="BusyBox1" runat="server" ShowBusyBox="OnLeavingPage" Image="Clock"
         Text="Su solicitud está siendo procesada..." Title="Por favor espere" />

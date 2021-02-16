@@ -1,0 +1,90 @@
+body {
+  background-color: transparent;
+  opacity: 0; }
+
+.container-fluid p {
+  font-family: "Dosis";
+  font-size: 1.1rem; }
+
+.rojo {
+  color: #E33439; }
+
+.titulo {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 1.9rem; }
+
+.contenedor-terminos-condiciones {
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  height: 100%;
+  padding-left: 15px;
+  border-radius: 6px; }
+  .contenedor-terminos-condiciones .custom-control-label {
+    font-family: "Dosis";
+    font-weight: 600;
+    font-size: 1rem;
+    color: #555555; }
+
+#rowCostos label {
+  font-family: "Dosis";
+  font-size: 1rem; }
+
+#rowCostos .badge {
+  width: 100%;
+  font-family: "Dosis";
+  font-size: 1.2rem; }
+
+#rowCostos #spnCostoMes, #rowCostos #spnCostoCiclo {
+  display: block;
+  font-size: 1rem;
+  font-family: "Dosis";
+  font-weight: bold;
+  color: #E33439; }
+
+.separador {
+  display: block;
+  padding: 5px 0px;
+  font-family: Dosis;
+  font-size: 0.95rem;
+  font-weight: 400;
+  background-color: #0000000d;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 15px; }
+
+#validacionCaptcha iframe {
+  width: 100%; }
+
+#btnFakeInformarme {
+  width: 40%; }
+
+#btnFakeInscribirme {
+  width: 40%; }
+
+.terminos-condiciones, .consideraciones-admision {
+  padding: 8px; }
+  .terminos-condiciones h1, .consideraciones-admision h1 {
+    font-size: 1.8rem;
+    font-family: "Dosis"; }
+  .terminos-condiciones p, .terminos-condiciones ul, .consideraciones-admision p, .consideraciones-admision ul {
+    font-size: 0.95rem;
+    color: #8c8c8c; }
+    .terminos-condiciones p:last-child, .terminos-condiciones ul:last-child, .consideraciones-admision p:last-child, .consideraciones-admision ul:last-child {
+      margin-bottom: 0; }
+
+textarea.form-control {
+  resize: none; }
+
+@media (max-width: 544px) {
+  div[class^="col-"]:not(:last-child) {
+    padding-bottom: 1rem; }
+  .form-control {
+    font-size: 1.2rem; }
+  select.form-control:not([size]):not([multiple]) {
+    height: 44px !important; }
+  .dropdown-menu .dropdown-item {
+    padding: 0.45rem 1.5rem;
+    font-size: 1.15rem; } }

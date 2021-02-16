@@ -47,6 +47,7 @@ Partial Class Alumni_frmOfertaLaboral
         AddHandler btnNuevaOferta.ServerClick, AddressOf btnNuevaOferta_Click
     End Sub
     Private Sub CargarGrillaOfertas(ByVal fechaIniReg As String, ByVal fechaFinReg As String)
+
         me_oferta = New e_Oferta : md_oferta = New d_Oferta : md_funciones = New d_Funciones
 
         me_oferta.fechaIniReg = Me.txtFechIni.Text.Trim
@@ -159,8 +160,8 @@ Partial Class Alumni_frmOfertaLaboral
                     Me.txtEmpresa.Text = .Item("nombrePro")
                     Me.ddlTipoTrabajo.Text = .Item("tipotrabajo_ofe")
                     Me.txtWebOfe.Text = .Item("web_ofe")
-                    Me.hf_codigo_emp.Value = .Item("codigo_emp")
-                    Me.hf_idPro.Value = .Item("idPro")
+                    Me.hf_codigo_emp.Value = .Item("codigo_emp") 'llama el código de la empresa nueva
+                    Me.hf_idPro.Value = .Item("idPro") 'llama el código de la empresa de la oferta antigua
                     Me.hf_estadoOfe.Value = .Item("estado_ofe")
                     'combo de tipo de oferta laboral
                     Select Case dtOferta.Rows(0).Item("tipo_oferta").ToString.Trim
@@ -237,7 +238,17 @@ Partial Class Alumni_frmOfertaLaboral
             me_CarreraProfesional.codigo_per = cod_user
             me_CarreraProfesional.codigo_tfu = codigo_tfu
             me_CarreraProfesional.codigo_test = codigo_test
+            ''Para que liste todas las carreras ojo: no se realizó el cambio se hizo por medio de acceso-----------------18/08/2020
+            'me_CarreraProfesional.operacion = "CMB"
+            'me_CarreraProfesional.codigo_Cpf = ""
+            'me_CarreraProfesional.vigencia_Cpf = ""
+            'me_CarreraProfesional.eliminado_cpf = "0"
+            'me_CarreraProfesional.codigo_Fac = ""
+            'me_CarreraProfesional.tiene_facultad = "S"
+            'me_CarreraProfesional.modalidad = ""
             dtCarreraProfesional = md_CarreraProfesional.ListarCarreraProfesionalByAcceso(me_CarreraProfesional)
+            'dtCarreraProfesional = md_CarreraProfesional.ListarCarreraProfesional(me_CarreraProfesional)
+            ''----------------------------------------------------------------------------------------------------------------------
             Call md_funciones.CargarCombo(Me.ddlCarrrera, dtCarreraProfesional, "codigo_cpf", "nombre_cpf", True, "[-- SELECCIONE --]", "")
 
             dtCarreraProfesional.Dispose()
@@ -313,6 +324,21 @@ Partial Class Alumni_frmOfertaLaboral
             With me_EgresadoAlumni
                 .operacion = "LIS"
                 .codigo_cpf = Me.ddlCarrProfEmail.SelectedValue.ToString
+
+
+
+                '.modalidad_ega = Me.cmbModalidadFiltro.Text.Trim
+                '.codigo_fac = Me.cmbFacultadFiltro.Text.Trim
+                '.codigo_cpf = Me.cmbCarreraFiltro.Text.Trim
+                '.sexo_ega = Me.cmbSexoFiltro.Text.Trim
+                .anio_egreso = Me.cmbAnioEgresoFiltro.Text.Trim
+                .anio_bachiller = Me.cmbAnioBachillerFiltro.Text.Trim
+                .anio_titulo = Me.cmbAnioTituloFiltro.Text.Trim
+                '.nombre_ega = Me.txtNombreFiltro.Text.Trim
+
+
+
+
             End With
 
             dt = md_EgresadoAlumni.ListarEgresadoAlumni(me_EgresadoAlumni)
@@ -723,13 +749,18 @@ Partial Class Alumni_frmOfertaLaboral
         Me.rbPostWeb.Checked = True
         Me.chkMostrarCorreo.Checked = True
         Me.hdCodigo_ofe.Value = String.Empty
+        Me.txtDescBanner.Text = String.Empty
+        ''-----07-08-2020
+        Me.hf_idPro.Value = String.Empty
+        Me.hf_codigo_emp.Value = String.Empty
+        Me.hf_estadoOfe.Value = String.Empty
 
     End Sub
     Private Sub mt_ListarEmpresas()
         Try
             me_Empresa = New e_Empresa : md_Empresa = New d_Empresa : md_funciones = New d_Funciones
             Dim dt As New Data.DataTable
-
+           
             If Me.grwListaEmpresa.Rows.Count > 0 Then Me.grwListaEmpresa.DataSource = Nothing : Me.grwListaEmpresa.DataBind()
 
             With me_Empresa
@@ -738,6 +769,11 @@ Partial Class Alumni_frmOfertaLaboral
             End With
 
             dt = md_Empresa.ListarEmpresa(me_Empresa)
+
+            If dt.Rows.Count = 0 Then
+                Call mt_ShowMessage("No se ubica la empresa", MessageType.warning)
+            End If
+
             Me.grwListaEmpresa.DataSource = dt
 
             Me.grwListaEmpresa.DataBind()
@@ -820,6 +856,7 @@ Partial Class Alumni_frmOfertaLaboral
                 Case "enviaEmail"
                     mt_traeOferta(codigo_ofe)
                     mt_CargarComboCarreraModal(codigo_ofe)
+                    mt_CargarComboAniosFiltro()
                     ScriptManager.RegisterStartupScript(Me, Me.Page.GetType, "flujoTabs", "flujoTabs('envio-tab');", True)
                     Me.udpEnviarMail.Update()
                 Case "AddCarr"
@@ -880,9 +917,15 @@ Partial Class Alumni_frmOfertaLaboral
             End Select
 
             With me_oferta
-
                 .codigo_ofe = Me.txtCodigo_ofe.Text
-                .idPro = 0 '---Me.hf_idPro.Value
+                '07-08-2020 a la hora de actualizar pone el campo a 0
+                If Me.hf_idPro.Value = "" Then
+                    .idPro = 0  'nuevo sistema
+                    '.idPro = 0 '---Me.hf_idPro.Value a la hora de actualizar actualiza el idPro a 0 
+                Else
+                    .idPro = Me.hf_idPro.Value 'antiguo sistema
+                End If
+
                 .codigo_dep = Me.ddlDepartamento.SelectedValue
                 .titulo_ofe = Me.txtTitulo.Text
                 .descripcion_ofe = Me.txtDescripcion.Text
@@ -897,12 +940,17 @@ Partial Class Alumni_frmOfertaLaboral
                 .fechaFinAnuncio = Me.txtFechFinPub.Text
                 .codigo_sec = Me.ddlSector.SelectedValue
                 .visible_ofe = True
+                .estado_ofe = Me.hf_estadoOfe.Value
 
-                If Me.hf_codigo_emp.Value = "0" Then
-                    .estado_ofe = Me.hf_estadoOfe.Value
-                Else
-                    .estado_ofe = "P"
-                End If
+                'If Me.hf_codigo_emp.Value = "0" Then
+                '    .estado_ofe = Me.hf_estadoOfe.Value
+                'Else
+                '    If Me.hf_idPro.Value = "0" Then
+                '        .estado_ofe = "P"
+                '    Else
+                '        .estado_ofe = Me.hf_estadoOfe.Value
+                '    End If
+                'End If
 
                 .web_ofe = Me.txtWebOfe.Text
                 .modopostular_ofe = IIf(Me.rbPostCorreo.Checked, "C", "W")
@@ -1176,6 +1224,7 @@ Partial Class Alumni_frmOfertaLaboral
     End Sub
     Private Sub btnNuevaOferta_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         mt_LimpiarControles()
+        Me.hf_estadoOfe.Value = "A"
         mt_CargarFormOferta("0")
 
         ScriptManager.RegisterStartupScript(Me, Me.Page.GetType, "flujoTabs", "flujoTabs('registro-tab');", True)
@@ -1326,31 +1375,52 @@ Partial Class Alumni_frmOfertaLaboral
         End If
     End Function
 
+    Private Sub mt_CargarComboAniosFiltro()
+        Try
+            Dim me_Anio As New e_Anio
+            Dim md_Anio As New d_Anio
+
+            Dim dt As New Data.DataTable
+
+            me_Anio.operacion = "GEN"
+            me_Anio.anio_inicio = "2004"
+            dt = md_Anio.ListarAnio(me_Anio)
+
+            Call md_funciones.CargarCombo(Me.cmbAnioEgresoFiltro, dt, "anio", "anio", True, "[-SELECCIONE-]", "")
+            Call md_funciones.CargarCombo(Me.cmbAnioBachillerFiltro, dt, "anio", "anio", True, "[-SELECCIONE-]", "")
+            Call md_funciones.CargarCombo(Me.cmbAnioTituloFiltro, dt, "anio", "anio", True, "[-SELECCIONE-]", "")
+            dt.Dispose()
+
+        Catch ex As Exception
+            Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
+        End Try
+    End Sub
+
 
 
 #End Region
 
    
-    Protected Sub lbResolPrueba_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lbResolPrueba.Click
+    'Protected Sub lbResolPrueba_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lbResolPrueba.Click
 
 
-        Dim arreglo As New Dictionary(Of String, String)
-        Dim nombreArchivo As String = "InformeDeAsesor"
-        Dim codigoDatos As String = "6980"
+    '    Dim arreglo As New Dictionary(Of String, String)
+    '    Dim nombreArchivo As String = "InformeDeAsesor"
+    '    Dim codigoDatos As String = "6980"
 
-        arreglo.Add("nombreArchivo", nombreArchivo)
-        arreglo.Add("sesionUsuario", Session("perlogin").ToString)
-        '-----------------                
-        arreglo.Add("codigo_tes", codigoDatos)
+    '    arreglo.Add("nombreArchivo", nombreArchivo)
+    '    arreglo.Add("sesionUsuario", Session("perlogin").ToString)
+    '    '-----------------                
+    '    arreglo.Add("codigo_tes", codigoDatos)
 
 
-        clsDocumentacion.PrevioDocumentopdf("", arreglo, memory)
-        Dim bytes() As Byte = memory.ToArray
-        memory.Close()
+    '    clsDocumentacion.PrevioDocumentopdf("", arreglo, memory)
+    '    Dim bytes() As Byte = memory.ToArray
+    '    memory.Close()
 
-        Response.Clear()
-        Response.ContentType = "application/pdf"
-        Response.AddHeader("content-length", bytes.Length.ToString())
-        Response.BinaryWrite(bytes)
-    End Sub
+    '    Response.Clear()
+    '    Response.ContentType = "application/pdf"
+    '    Response.AddHeader("content-length", bytes.Length.ToString())
+    '    Response.BinaryWrite(bytes)
+    'End Sub
 End Class

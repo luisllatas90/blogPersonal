@@ -82,7 +82,7 @@
 
     <script src="js/_General.js?x=2" type="text/javascript"></script>
 
-    <script src="js/Egresado.js?x=0" type="text/javascript"></script>
+    <script src="js/Egresado.js?x=8" type="text/javascript"></script>
 
     <%--<script src="js/ExportarCVS.js" type="text/javascript"></script>--%>
     <%--<script src="js/JqxTable.js" type="text/javascript"></script>--%>
@@ -628,6 +628,24 @@
                                     </select>
                                 </div>
                             </div>
+                            <!-- 31.07.2020 JBANDA Cuarta Autoridad -->
+                            <div class="row">
+                                <label class="col-md-1 control-label">
+                                    Cargo:</label>
+                                <div class="col-md-4">
+                                    <select id="cboCargo4" name="cboCargo4" class="form-control">
+                                        <option value="0">-- SELECCIONE --</option>
+                                    </select>
+                                </div>
+                                <label class="col-md-1 control-label">
+                                    Autoridad:</label>
+                                <div class="col-md-6">
+                                    <select id="cboAutoridad4" name="cboAutoridad4" class="form-control">
+                                        <option value="0">-- SELECCIONE --</option>
+                                    </select>
+                                </div>    
+                            </div>
+                            <!-- 31.07.2020 JBANDA Cuarta Autoridad -->
                         </div>
                         <!-- /panel -->
                     </div>

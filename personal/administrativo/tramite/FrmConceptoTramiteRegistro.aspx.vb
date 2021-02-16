@@ -593,14 +593,16 @@ Partial Class FrmConceptoTramiteRegistro
 
                     If .Item("accionUrl_ftr") = 1 Then
                         Me.chkProcesa_ft.Checked = True
-                        Me.txtproceso_ft.Text = ""
+                        Me.txtproceso_ft.Text = .Item("proceso")
                         Me.txtproceso_ft.Enabled = True
                         Me.txtproceso_ft.BackColor = Drawing.Color.White
+
                     Else
                         Me.chkProcesa_ft.Checked = False
                         Me.txtproceso_ft.Text = ""
                         Me.txtproceso_ft.Enabled = False
                         Me.txtproceso_ft.BackColor = Drawing.Color.LightGray
+
                     End If
 
                     If .Item("verDetAdm_ftr") = 1 Then

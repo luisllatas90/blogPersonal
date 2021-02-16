@@ -166,6 +166,49 @@ Public Class ClsConectarDatos
 
     End Function
 
+    Public Function EjecutarConTypes(ByVal nombreprocedimiento As String, ByVal dbType As String, ByVal ParamArray Parametros() As Object) As Object
+        Dim cmd As SqlCommand
+        Dim FilasAfectadas As Integer
+        Dim ValoresDevueltos() As Object
+
+        cmd = New SqlCommand
+        cmd.Connection = Cnx
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.CommandText = nombreprocedimiento
+        If EnTransaccion = True Then
+            cmd.Transaction = Trans
+        End If
+
+        SqlClient.SqlCommandBuilder.DeriveParameters(cmd)
+        For i As Integer = 0 To Parametros.GetUpperBound(0)
+            cmd.Parameters(i + 1).Value = Parametros(i)
+
+            If Parametros(i).GetType Is GetType(DataTable) Then
+                cmd.Parameters(i + 1).SqlDbType = SqlDbType.Structured
+                cmd.Parameters(i + 1).TypeName = dbType
+            End If
+        Next
+
+        FilasAfectadas = cmd.ExecuteNonQuery
+        Dim Par As System.Data.IDataParameter
+
+        Dim Contador As Integer = 0   'Cantidad de parametros de salida para el usuario
+        For Each Par In cmd.Parameters
+            If Par.Direction = ParameterDirection.Output Or Par.Direction = ParameterDirection.InputOutput Then
+                ReDim Preserve ValoresDevueltos(Contador)
+                ValoresDevueltos.SetValue(Par.Value, Contador)
+                Contador = Contador + 1
+            End If
+        Next
+
+        If ValoresDevueltos IsNot Nothing AndAlso ValoresDevueltos.Length > 0 Then
+            Return ValoresDevueltos   ' Si existen variables output devuelve el array
+        Else
+            Return FilasAfectadas     ' Si no devuelve el numero de filas afectadas
+        End If
+
+    End Function
+
 
     Public Function ImportarInteresados(ByVal nombre_tabla As String, ByVal datos As DataTable) As String
         Dim linea As String = "0"

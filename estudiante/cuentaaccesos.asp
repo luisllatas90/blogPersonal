@@ -15,7 +15,17 @@ on error resume next
  if tipo_usu="" then tipo_usu="P"
 
  session("tusu_biblioteca")= tipo_usu
-
+ 
+ '14/10/2020 Ceci
+ 'response.write (codigo_usu)
+ Dim email_per
+ Set obj=Server.CreateObject("PryUSAT.clsAccesoDatos")
+	    Obj.AbrirConexion
+		    set rsPer=obj.Consultar("PER_CorreoPersonal","FO", codigo_usu ) 'request.QueryString("id")
+		    email_Per = rsPer("email")		    
+		    'response.Write (email_Per)		 
+	    Obj.CerrarConexion
+    Set obj=nothing
 %>
 <%
 'response.Write (codigo_usu)
@@ -27,7 +37,7 @@ on error resume next
    'Motivo: Cambio de URL del servidor de la WebUSAT [www.usat.edu.pe->intranet.edu.pe]
    '----------------------------------------------------------------------
    
-   pagprev=https://intranet.usat.edu.pe/CAMPUSVIRTUAL/estudiante/bibilotecas.asp
+   pagprev=https://intranet.usat.edu.pe/CAMPUSVIRTUAL/estudiante/bibilotecas.asp 'https://intranet.usat.edu.pe/CAMPUSVIRTUAL
    referer=left(origen,68) 'intranet.usat.edu.pe
    
    'pagprev=http://server-test/CAMPUSVIRTUAL/estudiante/bibilotecas.asp
@@ -51,7 +61,7 @@ on error resume next
     <script type="text/javascript">
    function AccesoHinari(){
     //    document.getElementById("form1").submit()
-       document.location.href = "https://intranet.usat.edu.pe/campusvirtual/estudiante/hinari/hinari1.html";
+       document.location.href = "../estudiante/hinari/hinari1.html";
        //jQuery.post("https://intranet.usat.edu.pe/campusvirtual/estudiante/hinari/hinari.html");
        //setTimeout(document.location.href = "https://intranet.usat.edu.pe/campusvirtual/estudiante/hinari/hinari2.html", 1000);
      
@@ -64,8 +74,10 @@ on error resume next
     }
 	
 	if (caso==2){
-     document.getElementById("form1").action='http://search.proquest.com/pqcentral'
+	    //document.getElementById("form1").action='http://search.proquest.com/pqcentral'
+	    document.getElementById("form1").action = 'https://search.proquest.com/refurl?accountid=37610' //07-09-2020
 	 //document.getElementById("form1").action='http://search.proquest.com/refurl'//'http://proquest.umi.com/login/refurl'
+	    
      document.getElementById("form1").submit()
     }
     if (caso==3) {
@@ -145,7 +157,7 @@ on error resume next
 	    document.getElementById("form1").submit()
 	}
 	if (caso == 22) {
-	    document.getElementById("form1").action = '../images/357_educacion.pdf'//revista de educación
+	    document.getElementById("form1").action = '../images/357_educacion.pdf'//revista de educaciÓn
 	    document.getElementById("form1").submit()
 	}
 	if (caso == 23) {
@@ -175,23 +187,28 @@ on error resume next
 	    document.getElementById("form1").submit()
 	}
 	if (caso == 29) {
-	    //document.getElementById("form1").action = ''//Revista de educacion Nº 357 Ene/Abr 2012
-	    document.location = 'https://intranet.usat.edu.pe/CAMPUSVIRTUAL/Biblioteca/357_educacion.pdf'
+	    //document.getElementById("form1").action = ''//Revista de educacion N° 357 Ene/Abr 2012
+	    document.location = '../Biblioteca/357_educacion.pdf'
 	    //document.getElementById("form1").submit()
 	}
 	if (caso == 30) {
-	    document.location = 'https://intranet.usat.edu.pe/CAMPUSVIRTUAL/Biblioteca/358_educacion.pdf'
+	    document.location = '../Biblioteca/358_educacion.pdf'
 	}
 	if (caso == 31) {
-	    document.location = 'https://intranet.usat.edu.pe/CAMPUSVIRTUAL/Biblioteca/359_educacion.pdf'
+	    document.location = '../Biblioteca/359_educacion.pdf'
 	}
 	if (caso == 32) {
-	    document.location = 'https://intranet.usat.edu.pe/CAMPUSVIRTUAL/Biblioteca/360_educacion.pdf'
+	    document.location = '../Biblioteca/360_educacion.pdf'
 	}
 	if (caso == 33) {
-		document.getElementById("form1").action = 'remote_auth.asp'//velex
-	    document.getElementById("form1").submit()
-	//'document.location =remote_auth.asp'
+
+	    document.getElementById("form1").action = 'remote_auth.asp?email=' + document.getElementById("email_per").value  //velex Ceci 15/10/2020
+	   
+		document.getElementById("form1").submit()
+
+	    //document.location = 'remote_auth.asp'
+	    
+	    //'document.location =remote_auth.asp'
 	    //document.location = redirect_to_remote_auth('', '', 18916854, xJmWym22AeBRQ1dWzhkxO5di4qL46bnbzvwawnLNHsnHtAI5)
 	    //'http://www.vlex.com/account/login_ip'
 	}
@@ -219,7 +236,7 @@ on error resume next
 	    //document.location = 'https://intranet.usat.edu.pe/campusvirtual/estudiante/uptodatelink2.asp'
 		//document.location ='http://www.uptodate.com/online/content/search?unid=' + document.getElementById("codigo_per").value + '&srcsys=EZPX362375&search=%' 
 		//document.location ='http://www.uptodate.com/contents/search?unid=' + document.getElementById("codigo_per").value  + '&srcsys=HMGR292737'
-		document.location ='https://intranet.usat.edu.pe/campusvirtual/goto_uptodate.asp?unid=' + document.getElementById("codigo_per").value  + '&srcsys=HMGR292737'
+		document.location ='../goto_uptodate.asp?unid=' + document.getElementById("codigo_per").value  + '&srcsys=HMGR292737'
 		
 		
 		//document.location ='https://intranet.usat.edu.pe/campusvirtual/estudiante/goto_UpToDate.asp/contents/search?unid=' + document.getElementById("codigo_per").value + '&srcsys=HMGR362375' 
@@ -244,8 +261,14 @@ on error resume next
 	if (caso == 44) {
 	    document.location = 'http://www.tecnoaqua.es/kiosco-login'
 	}
+	/*
 	if (caso == 45) {
 	    document.location = 'http://www.index-f.com/new/cuiden/test.php'
+	}
+	*/
+	if (caso == 45) {
+	    /*document.location = 'http://fundacionindex.com/bootstrap/pages/login.php?url=https://intranet.usat.edu.pe/&plataforma=fab0c8e6152a8202206e4f952358ff15&seg=a5d95a464c6cc4c0ba5f6ea3cd368f5a'*/
+	    document.location = 'http://fundacionindex.com/bootstrap/pages/login.php?url=https://www.usat.edu.pe/&plataforma=fab0c8e6152a8202206e4f952358ff15&seg=a5d95a464c6cc4c0ba5f6ea3cd368f5a'
 	}
 	if (caso == 46) {
 	    document.location = 'https://www.dropbox.com/sh/9amjwyzls52flxw/AABi5q64UfA7BlTDawTGQj1ca?dl=0'
@@ -277,7 +300,7 @@ on error resume next
 	    document.location = 'https://www.unav.edu/publicaciones/revistas/index.php/anuario-filosofico'
 	}
 	if (caso == 55) {
-	    document.location = 'https://www.revistavirtualpro.com/index/index.php?page=index&email=rsortiz@usat.edu.pe&clave=AkSs7vzUZZXY'
+	    document.location = 'https://www.virtualpro.co/clientes/universidad_catolica_santo_toribio_de_mogrovejo?p=AkSs7vzUZZXY'
 	}
 	if (caso == 56) {
 	    document.location = 'https://www.unav.edu/publicaciones/revistas/index.php/persona-y-derecho'
@@ -287,7 +310,8 @@ on error resume next
 	    document.location = 'https://elcroquisdigital.com/catalogo'
 	}
 	if (caso == 60){
-     document.location ='https://www.sciencedirect.com/browse/journals-and-books?accessType=subscribed&accessType=openAccess'
+    //  document.location ='https://www.sciencedirect.com/browse/journals-and-books?accessType=subscribed&accessType=openAccess'
+     document.location ='http://www.sciencedirect.com'
     }
 	if (caso == 61){
 		document.getElementById("form1").action = 'http://iopscience.iop.org'//IOPscience
@@ -300,7 +324,7 @@ on error resume next
 	    document.location = 'https://search.proquest.com/coronavirus'
 	}
 	if (caso == 64) {
-	    document.location = 'https://www.jove.com/journal'
+	    document.location = 'https://www.jove.com/journal/neuroscience' //JOVE Neuroscience
 	}
 	if (caso == 65) {
 	    document.location = 'https://digitalespanol.summamasshop.com.ar/auth/login'
@@ -323,25 +347,45 @@ on error resume next
 	if (caso == 71) {
 	    document.location = 'https://www.architectural-review.com'
 	}
+	if (caso == 72) {
+	    document.location = 'https://semanaeconomica.com/login'
+	}
+	if (caso == 73) {
+	    document.location = 'http://search.ebscohost.com.etech.remotexs.co/login.aspx?profile=eds&custid=ns304391&groupid=main&authtype=ip'
+	}
+	if (caso == 74) {
+	    document.location = 'https://www.jove.com/education/psychology' //JOVE Psychology
+	}	
+	if (caso == 75) {
+	    document.location = 'https://www.bidi.la/usat'
+	}
+	if (caso == 76) {
+	    document.location = 'https://www.iagua.es'
+	}	
    }
    </script>
 
 </head>
 <body>
-    <form id="form1" name="form1" method="post" action="https://intranet.usat.edu.pe/campusvirtual/estudiante/hinari/hinari1.html">
+    <%'Se comenta la url del action https://intranet.usat.edu.pe/campusvirtual%>
+    <form id="form1" name="form1" method="post" action="../estudiante/hinari/hinari1.html">
     <input type="hidden" name="whoUsername" value="PER098" />
     <input type="hidden" name="whoPassword" value="62701" />
     <%
-'Registra la visita
+  
+'Registra la visita si tiene codigo_usu
+If CInt(codigo_usu) > 0 Then
+    response.write("<input type='hidden' id='email_per' name='email_per' value='" & email_Per & "'/>") 'Ceci 15/10/2020
+    response.write("<input type='hidden' id='codigo_per' name='codigo_per' value='" & codigo_usu & "'/>")
+    Set obj= Server.CreateObject("PryUSAT.clsAccesoDatos")
+        obj.AbrirConexion			
+        obj.Ejecutar "BIB_RegistrarVisita",false,tipo_usu,codigo_usu,cint(request.QueryString("bib"))
+        'obj.Ejecutar "BIB_RegistrarVisita",false,session("tipo_usu"),session("codigo_usu"),cint(request.QueryString("bib"))
+        'obj.Ejecutar "BIB_RegistrarVisita",false,session("tipo_usu"),session("codigo_usu"),cint(request.QueryString("bib"))
+        obj.CerrarConexion
+    Set obj=nothing
+End If
 
-response.write("<input type='hidden' id='codigo_per' name='codigo_per' value='" & codigo_usu & "'/>")
-Set obj= Server.CreateObject("PryUSAT.clsAccesoDatos")
-	obj.AbrirConexion			
-	obj.Ejecutar "BIB_RegistrarVisita",false,tipo_usu,codigo_usu,cint(request.QueryString("bib"))
-	'obj.Ejecutar "BIB_RegistrarVisita",false,session("tipo_usu"),session("codigo_usu"),cint(request.QueryString("bib"))
-	'obj.Ejecutar "BIB_RegistrarVisita",false,session("tipo_usu"),session("codigo_usu"),cint(request.QueryString("bib"))
-	obj.CerrarConexion
-Set obj=nothing
 
 'Direcciona a las páginas respectivas
 
@@ -383,10 +427,10 @@ select case cint(request.QueryString("bib"))
  case 26:response.Write("<script>direccionar(26)</script>")  'CIBERINDEX  - SUMMA CUIDEN
  case 27:response.Write("<script>direccionar(27)</script>")  'EMERALD
  case 28:response.Write("<script>direccionar(28)</script>")  'Harrison online
- case 29:response.Write("<script>direccionar(29)</script>")  'Revista de educacion Nº 357 Ene/Abr 2012
- case 30:response.Write("<script>direccionar(30)</script>")  'Revista de educacion Nº 358 May/Ago 2012
- case 31:response.Write("<script>direccionar(31)</script>")  'Revista de educacion Nº 359 Set/Dic 2012
- case 32:response.Write("<script>direccionar(32)</script>")  'Revista de educacion Nº 360 Ene/Abr 2013
+ case 29:response.Write("<script>direccionar(29)</script>")  'Revista de educacion N° 357 Ene/Abr 2012
+ case 30:response.Write("<script>direccionar(30)</script>")  'Revista de educacion N° 358 May/Ago 2012
+ case 31:response.Write("<script>direccionar(31)</script>")  'Revista de educacion N° 359 Set/Dic 2012
+ case 32:response.Write("<script>direccionar(32)</script>")  'Revista de educacion N° 360 Ene/Abr 2013
  case 33:response.Write("<script>direccionar(33)</script>")  'VLEX
  case 34:response.Write("<script>direccionar(34)</script>")  'VLEX busqueda avanzada
  case 35:response.Write("<script>direccionar(35)</script>")  'IOPscience
@@ -415,7 +459,7 @@ select case cint(request.QueryString("bib"))
  case 61:response.Write("<script>direccionar(61)</script>")  'IOP Science
  case 62:response.Write("<script>direccionar(62)</script>")  'Scripta Theologica 
  case 63:response.Write("<script>direccionar(63)</script>")  'Proquest Coronavirus
- case 64:response.Write("<script>direccionar(64)</script>")  'Jove
+ case 64:response.Write("<script>direccionar(64)</script>")  'JOVE Neuroscience 
  case 65:response.Write("<script>direccionar(65)</script>")  'summa
  case 66:response.Write("<script>direccionar(66)</script>")  'AmericaEco
  case 67:response.Write("<script>direccionar(67)</script>")  'Ganamas
@@ -423,6 +467,11 @@ select case cint(request.QueryString("bib"))
  case 69:response.Write("<script>direccionar(69)</script>")  'Foreign Affairs
  case 70:response.Write("<script>direccionar(70)</script>")  'Agronoticias
  case 71:response.Write("<script>direccionar(71)</script>")  'Architectural Review
+ case 72:response.Write("<script>direccionar(72)</script>")  'Semana Económica
+ case 73:response.Write("<script>direccionar(73)</script>")  'Altamira
+ case 74:response.Write("<script>direccionar(74)</script>")  'JOVE Psychology
+ case 75:response.Write("<script>direccionar(75)</script>")  'Bidi
+ case 76:response.Write("<script>direccionar(76)</script>")  'Iagua
  
 end select
 
@@ -453,7 +502,7 @@ End if
                 El Acceso a las Bibliotecas Virtuales deberá realizarse ingresando a:
                 <br />
                 <br />
-                - <a href="https://intranet.usat.edu.pe/campusvirtual/">Campus Virtual USAT</a>
+                - <a href="../">Campus Virtual USAT</a>  <!--https://intranet.usat.edu.pe/campusvirtual-->
                 -
             </td>
         </tr>

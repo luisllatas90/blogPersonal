@@ -67,7 +67,7 @@ Partial Class ListadoConsultas
             If IsPostBack = False Then
                 ListarTipoEstudio()
                 ListarCarreras()
-                If Request("ctf") = 1 Or Request("ctf") = 181 Then ' ADMINISTRADOR, DIR. ACADEMICA
+                If Request("ctf") = 1 Or Request("ctf") = 181 Or Request("ctf") = 19 Then ' ADMINISTRADOR, DIR. ACADEMICA, JEFE DE PENSIONES
                     Me.ddlEstado.Items.Add(New ListItem("PENDIENTES", "P"))
                     Me.ddlEstado.Items.Add(New ListItem("DERIVADOS", "D"))
                     Me.ddlEstado.Items.Add(New ListItem("FINALIZADOS", "F"))
@@ -115,13 +115,28 @@ Partial Class ListadoConsultas
         obj.AbrirConexion()
         Dim tb As New Data.DataTable
         tb = obj.TraerDataTable("MV_ListarDetalleIncidencia", codigo_inc)
+        Dim bandera As Integer = 0
         If tb.Rows.Count > 0 Then
             Me.gvDetalle.DataSource = tb
+            For i As Integer = 0 To tb.Rows.Count - 1
+                If tb.Rows(i).Item("estado") = "PENDIENTE" And tb.Rows(i).Item("codigo_tfu") = Request("ctf") Then
+                    bandera = bandera + 1
+                End If
+            Next
+            If bandera = 0 Then
+                Me.btnRespuesta.Visible = False
+            Else
+                Me.btnRespuesta.Visible = True
+            End If
         Else
             Me.gvDetalle.DataSource = ""
+            Me.btnRespuesta.Visible = False
         End If
         Me.gvDetalle.DataBind()
         obj.CerrarConexion()
+
+
+
     End Sub
 
     Protected Sub gvIncidencias_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles gvIncidencias.RowCommand
@@ -187,26 +202,26 @@ Partial Class ListadoConsultas
             Me.btnRespuesta.Attributes.Add("onclick", "return confirm('¿Está seguro que desea guardar la respuesta?')")
             Me.DivResponder.Visible = True
             Me.btnRespuesta.Text = "Enviar Respuesta"
-            If Request("ctf") = 1 Or Request("ctf") = 181 Then
+            If Request("ctf") = 1 Or Request("ctf") = 181 Or Request("ctf") = 19 Then
                 Me.btnDerivar.Visible = True
             Else
                 Me.btnDerivar.Visible = False
             End If
         Else
             If Me.txtRespuesta.Text <> "" And Me.txtRespuesta.Text.Length <= 5000 Then
-                GuardarRespuesta(Me.hdi.Value, Me.txtRespuesta.Text, "F", 0, Session("id_per"))
+                GuardarRespuesta(Me.hdi.Value, Me.txtRespuesta.Text, "F", 0, Session("id_per"), Request("ctf"))
             Else
                 Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('error','Ingrese correctamente respuesta máximo 5000 caracteres')", True)
             End If
         End If
     End Sub
 
-    Private Sub GuardarRespuesta(ByVal codigo_inc As Integer, ByVal descripcion As String, ByVal estado As String, ByVal codigo_iin As Integer, ByVal codigo_per As Integer)
+    Private Sub GuardarRespuesta(ByVal codigo_inc As Integer, ByVal descripcion As String, ByVal estado As String, ByVal codigo_iin As Integer, ByVal codigo_per As Integer, ByVal codigo_tfu As Integer)
         Dim obj As New ClsConectarDatos
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
         obj.AbrirConexion()
         Dim dt As New Data.DataTable
-        dt = obj.TraerDataTable("MV_GuardarRespuestaIncidencia", codigo_inc, descripcion, estado, codigo_iin, codigo_per)
+        dt = obj.TraerDataTable("MV_GuardarRespuestaIncidencia", codigo_inc, descripcion, estado, codigo_iin, codigo_per, codigo_tfu)
         If dt.Rows.Count > 0 Then
             If dt.Rows(0).Item("Respuesta") = "1" Then
                 Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('success','" + dt.Rows(0).Item("Mensaje").ToString + "')", True)
@@ -241,7 +256,7 @@ Partial Class ListadoConsultas
             Response.Redirect("../../sinacceso.html")
         End If
         If Me.ddlInstancia.SelectedValue <> "" Then
-            GuardarRespuesta(Me.hdi.Value, Me.txtRespuesta.Text, "D", Me.ddlInstancia.SelectedValue, Session("id_per"))
+            GuardarRespuesta(Me.hdi.Value, Me.txtRespuesta.Text, "D", Me.ddlInstancia.SelectedValue, Session("id_per"), Request("ctf"))
         Else
             Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('error','Seleccione la Instancia')", True)
         End If
@@ -320,10 +335,10 @@ Partial Class ListadoConsultas
         If e.Row.RowType = DataControlRowType.DataRow Then
             Dim estado As String = Me.gvIncidencias.DataKeys(e.Row.RowIndex).Values("estado_inc").ToString
 
-            If estado = "P" Or (estado = "D" And Request("ctf") <> 1 And Request("ctf") <> 181) Then
+            If estado = "P" Or (estado = "D" And Request("ctf") <> 1 And Request("ctf") <> 181 And Request("ctf") <> 19) Then
                 e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#f9d0d0")
             End If
-            If estado = "D" And (Request("ctf") = 1 Or Request("ctf") = 181) Then
+            If estado = "D" And (Request("ctf") = 1 Or Request("ctf") = 181 Or Request("ctf") = 19) Then
                 e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#fcffd0")
             End If
             If estado = "F" Then

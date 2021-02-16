@@ -130,7 +130,7 @@
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="Operaciones">
                                     <ItemTemplate>
                                         <asp:Button ID="btnDarBaja" runat="server" Text="Dar Baja" OnClick="btnDarBaja_Click" CommandName="DarBaja" 
-                                            CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" CssClass="btn btn-danger btn-sm" 
+                                            CommandArgument="<%# CType(Container, GridViewRow).RowIndex %>" CssClass="btn btn-danger btn-sm" 
                                             OnClientClick="return confirm('¿Desea dar de baja este Activo Fijo?');" />
                                     </ItemTemplate>
                                 </asp:TemplateField>

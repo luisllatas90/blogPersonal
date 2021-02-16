@@ -78,7 +78,7 @@ end if
 <script type="text/javascript" language="JavaScript" src="../../../../private/jq/lbox/thickbox.js"></script>
 <link rel="stylesheet" href="../../../../private/jq/lbox/thickbox.css" type="text/css" media="screen" /> 
 <script language="JavaScript" src="../../../../private/funciones.js"></script>
-<script language="JavaScript" src="private/validarfichamatricula.js"></script>
+<script language="JavaScript" src="private/validarfichamatricula.js?x=1"></script>
 
 <script>
 	function validarseleccion()

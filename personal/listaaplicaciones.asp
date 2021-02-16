@@ -45,12 +45,12 @@
 		response.write "<td height='30' class='MenuDescripcion'>" & ConvertirTitulo(dtfu) & "<br>" &  texto & "</td>" & vbcrlf & vbtab & vbtab
 		response.write "</tr>" & vbcrlf & vbtab & vbtab
 		response.write "</table>" & vbcrlf & vbtab & vbtab
-    End Sub
+    End Sub        
 %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
-    <title>Página Principal del Campus Virtual</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=8859-1"/>
+    <title>Pgina Principal del Campus Virtual</title>
     
     <link rel="stylesheet" type="text/css" href="assets/bootstrap-4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/smart-wizard/css/smart_wizard.min.css">
@@ -210,20 +210,45 @@
             color: #245269;
         }
         
-        .modal-lg {
-            max-width: 60% !important;
+        .modal-lg-70 {
+            max-width: 70% !important;
+        }
+        
+        /* Tabla Asistencia */        
+        .tbl_asistencia td 
+        {        	    
+        	font-size: 8pt;      
+        	padding: 5px;     
+        	font-weight: bold; 
+            text-align: center;              
+            border-top-style: solid; 
+            border-bottom-style: solid;  
+            border-color: Black;       
+            border-width: 2px;
+            vertical-align: middle; 
+            font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;              
+        }
+        
+        .tbl_asistencia .cabecera             
+        {        	
+            color: white;        	
+            background-color: #E33439;                
         }
     </style>
 
     <script type="text/javascript">
         /* Mostrar mensajes al usuario. */
-        function showMessage(message, messagetype) {              
-            swal({ 
-                title: message,
-                type: messagetype ,
-                confirmButtonText: "OK" ,
-                confirmButtonColor: "#45c1e6"
-            });
+        function showMessageRedirect(message, messagetype){
+            setTimeout(function() {
+                swal({ 
+                    title: message,
+                    type: messagetype ,
+                    confirmButtonText: "OK" ,
+                    confirmButtonColor: "#45c1e6"     
+                }).then(function() {
+                    window.top.location.href = "listaaplicaciones.asp";                                                     
+                }); 
+            }, 1000);            
         }
 
         function showMessagePage(message, messagetype, page) {                    
@@ -243,6 +268,50 @@
                     return false;
                 }
             });
+        }
+        
+        function refreshPage(){
+            window.top.location.href = "listaaplicaciones.asp";   
+        }
+        
+        function confirmarAsistencia(titulo, icono, cpe, nro_doc, tipo){
+            swal({
+                title: titulo,                
+                type: icono,
+                showCancelButton: true ,
+                confirmButtonText: "SI" ,
+                confirmButtonColor: "#45c1e6" ,
+                cancelButtonText: "NO"
+            }).then(function (isConfirm) {
+                if (isConfirm) {      
+                    registrarAsistencia(cpe, nro_doc, tipo);     
+                    return true;
+                } else {
+                    return false;
+                }
+            });            
+        }
+                
+        function registrarAsistencia(cpe, nro_doc, tipo){
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: "frmOperacionListaAplicaciones.aspx",
+                data: { "operacion": "REGISTRAR_ASISTENCIA", "codigo_cpe": cpe, "nro_documento": nro_doc, "tipo": tipo },
+                dataType: "json",
+                async: false,
+                success: function(data) {                
+                    if (data.length > 0) {
+                        showMessageRedirect(data[0].mensaje, data[0].tipo_mensaje);                    
+                    }else{
+                        showMessageRedirect("Ha ocurrido un error, por favor volver a intentar.", "error");
+                    }                                        
+                },
+                error: function(result) {     
+                    var msj = encodeURI("La sesin ha expirado. Debe iniciar sesin nuevamente para poder realizar la marcacin.");
+                    window.location.href = "frmSinAcceso.aspx?msj=" + msj;
+                }
+            });            
         }
         
         function ResaltarMenuElegido(op, fila) {
@@ -294,7 +363,7 @@
 
         function ReglamentoSST() {
             //AbrirPopUp('../avisos/progEsp/becas/universia/seg_confPER.asp', '600', '650', 'yes', 'yes', 'yes', 'beca')
-            window.open('../librerianet/reglamentos/PUBLICACIÓN RISST 2019.pdf', '_blank')
+            window.open('../librerianet/reglamentos/PUBLICACIN RISST 2019.pdf', '_blank')
         }
 
         function AceptarReglamento() {
@@ -306,26 +375,32 @@
                     window.open(pagina, '_blank')
                     window.location.reload();
                 } else {
-                    alert('Su sesión ha expirado, debe volver a ingresar para poder procesar la petición.')
+                    alert('Su sesin ha expirado, debe volver a ingresar para poder procesar la peticin.')
                 }
             } else {
-                alert('Debe Aceptar haber leído y conocer las actualizaciones del reglamento')
+                alert('Debe Aceptar haber ledo y conocer las actualizaciones del reglamento')
             }
         }
 
-        function cargarModal(titulo, pagina) {
+        function cargarModal(titulo, ancho_modal, pagina) {
             $('#lblTituloModal').html(titulo);
+            ancho_modal = 'modal-lg-' + ancho_modal;
+            $('#mddMostrarPagina').addClass(ancho_modal);
             var frame = $('#ifrmContenido');
             var url = pagina;
             frame.attr('src', url).show();
             $('#mdlMostrarPagina').modal('show');
-            resizeIframe();
+            resizeIframe();            
         }
 
         function resizeIframe() {
             $('#ifrmContenido').iFrameResize({
 
         });
+
+        function cargarAvisoPersonal() {
+            $('#mdlAvisoPersonal').modal('show');
+        }
     } 
     </script>        
 </head>
@@ -336,7 +411,7 @@
                 color: #FFFFFF; text-align: right;">
                 <b>Usuario:
                     <%=session("nombre_usu")%>&nbsp;<%=session("Usuario_bit")%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="cerrar.asp" style="font-weight: bold; color: yellow">[Cerrar sesión X]</a></b>
+                    <a href="cerrar.asp" style="font-weight: bold; color: yellow">[Cerrar sesin X]</a></b>
             </td>
         </tr>
     </table>
@@ -347,92 +422,248 @@
     </script>
 
     <table width="100%" border="0" cellpadding="4" cellspacing="0">
+        
+<% 
+    'COMUNICADO DE AUTOEVALUACIN
+    
+    Set ObjAutoevaluacion = Server.CreateObject("PryUSAT.clsAccesoDatos")
+    ObjAutoevaluacion.AbrirConexion
+    Set rsAutoevaluacion = ObjAutoevaluacion.consultar("PER_ComunicadoPersonalListar","FO","EVA","",session("codigo_usu"),"0","N")                        
+    
+    If rsAutoevaluacion.recordcount > 0 Then                
+        Response.Write("<script>showMessagePage('Usted tiene pendiente su encuesta de autoevaluacin. \n Desea realizarla en este momento?', 'warning', 'academico/encuesta/EncuestaEvaluacionDocente/ResponderEncuestaAuto.aspx')</script>")
+    End If
+    
+    ObjAutoevaluacion.CerrarConexion
+    Set ObjAutoevaluacion = Nothing                           
+%>        
+                                                                
+        <tr>
+            <td width="80%" valign="top" style="padding-left: 3px; padding-top: 3px">
+                <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                
+<% 
+    'VERIFICAR  QUE EL PERSONAL MARQUE ASISTENCIA
+    Set ObjMarcarAsistencia = Server.CreateObject("PryUSAT.clsAccesoDatos")
+    ObjMarcarAsistencia.AbrirConexion
+    Set rsMarcarAsistencia=ObjMarcarAsistencia.consultar("PER_ControlPersonalListar","FO", "NMA", "", session("codigo_usu"), "")  
+    
+    If (rsMarcarAsistencia.recordcount = 0  And Now() > cdate("05/10/2020")) Then
+%>                
+                
+        <!-- INICIO MARCACIN DE ASISTENCIA -->   
+                    <tr><td class="AC">Registro de Asistencia - <span style="font-size: 11px;">Última actualización: <% response.write Now() %></span></td></tr>
+                    <tr id="tbAsistencia">            
+                        <td valign="top">
+                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td valign="top">                                                                                                            
+                                        <tr><td>&nbsp;</td></tr>
+<% 
+        Set ObjAsistencia = Server.CreateObject("PryUSAT.clsAccesoDatos")
+        ObjAsistencia.AbrirConexion
+        Set rsAsistencia=ObjAsistencia.consultar("PER_ControlPersonalListar","FO", "ASI", "", session("codigo_usu"), "")
+
+        If rsAsistencia.recordcount > 0 Then    
+%>                            
+                                        <tr>
+                                            <td align="center">
+                                                <table class="tbl_asistencia" style="width: 80%;">                                                                
+                                                    <tr class="cabecera">
+                                                        <td>HORARIO</td>
+                                                        <td>INGRESO</td>
+                                                        <td>SALIDA</td>
+                                                    </tr>
+<% 
+                                    Do While Not rsAsistencia.EOF
+%>
+                                                    <tr>
+                                                        <td style="color: Black;"><% response.write rsAsistencia("descripcion_horario") %></td>                                                        
+<% 
+                                        If rsAsistencia("tipo_operacion") = "I" Then
+%>                                 
+                                                         <td>           
+                                                            <a class="btn btn-success active" onclick="return confirmarAsistencia('Realmente desea registrar su ingreso?', 'warning', '<%response.write rsAsistencia("codigo_cpe")%>', '<%response.write rsAsistencia("nroDocIdentidad_per")%>', 'I');" role="button">
+                                                                <span><i class="fa fa-toggle-on"></i></span>
+                                                            </a>
+                                                         </td>
+                                                         <td>
+                                                            <a class="btn btn-secondary active" role="button">
+                                                                <span><i class="fa fa-toggle-off"></i></span>
+                                                            </a>                                                                                                                                                                         
+                                                         </td>   
+<% 
+                                        ElseIf rsAsistencia("tipo_operacion") = "F" Then
+%>                                                                    
+                                                        <td>        
+                                                            <a class="btn btn-secondary active" role="button">
+                                                                <span><i class="fa fa-toggle-on"></i></span>
+                                                            </a>
+                                                        </td>
+                                                        <td>                                                                                                                                                                                                           
+                                                            <a class="btn btn-danger active" onclick="return confirmarAsistencia('Realmente desea registrar su salida?', 'warning', '<%response.write rsAsistencia("codigo_cpe")%>', '<%response.write rsAsistencia("nroDocIdentidad_per")%>', 'F');" role="button">
+                                                                <span><i class="fa fa-toggle-off"></i></span>
+                                                            </a>                                                                                                            
+                                                        </td>   
+<% 
+                                        ElseIf rsAsistencia("tipo_operacion") = "N" Then
+%>                                                                    
+                                                        <td>        
+                                                            <a class="btn btn-secondary active" role="button">
+                                                                <span><i class="fa fa-toggle-on"></i></span>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-secondary active" role="button">
+                                                                <span><i class="fa fa-toggle-off"></i></span>
+                                                            </a>                                                                                                                                                                         
+                                                        </td>                                                                                                                                                                
+<%                
+                                        End If
+%>
+                                                    </tr>
+<%                                        
+                                        rsAsistencia.movenext
+                                    Loop                
+%>                                     
+                                                </table>
+                                            </td>
+                                        </tr>
+<% 
+        End If
+        
+        ObjAsistencia.CerrarConexion
+        Set ObjAsistencia = Nothing
+%>                            
+                                        <tr><td>&nbsp;</td></tr>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>    
+        <!-- FIN MARCACIN DE ASISTENCIA -->                   
+<% 
+    End If
+    
+    ObjMarcarAsistencia.CerrarConexion
+    Set ObjMarcarAsistencia = Nothing
+%>    
+                
 <%
+    'REGLAMENTO INTERNO DE SEGURIDAD Y SALUD EN EL TRABAJO
     Set ObjUsuario = Server.CreateObject("PryUSAT.clsAccesoDatos")		
     objUsuario.AbrirConexion
     Set rsRpta = ObjUsuario.consultar("ConsultarAceptacionReglamento","FO","1",session("codigo_usu"))
 	
 	If rsRpta("nro") = "0" Then
 %>
-        <tr id="tbReglamento">
-            <td width="80%" valign="top" style="padding-left: 3px; padding-top: 0px">
-                <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td valign="top">
-                            <div class="alert alert-danger" style="padding-top: 0px">
-                                <h3>
-                                    Reglamento Interno de Seguridad y Salud en el Trabajo(RISST) V.02 &nbsp;
-                                    <button onclick="ReglamentoSST()">
-                                        <img src="images/descargar_reglamento.png" height="30" width="30" />
-                                    </button>
-                                </h3>
-                                <input type="checkbox" id="chkTerminos" checked="checked" />
-                                <label style="font-weight: bold;">
-                                    He leído y conozco las actualizaciones del reglamento</label>
-                                <br />
-                                <br />
-                                <input type="button" style="align: right" value="Aceptar" onclick="AceptarReglamento()"
-                                    class="btn btn-primary" />
-                            </div>
+                    <tr id="tbReglamento">
+                        <td width="80%" valign="top" style="padding-left: 3px; padding-top: 0px">
+                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td valign="top">
+                                        <div class="alert alert-danger" style="padding-top: 0px">
+                                            <h3>
+                                                Reglamento Interno de Seguridad y Salud en el Trabajo(RISST) V.02 &nbsp;
+                                                <button onclick="ReglamentoSST()">
+                                                    <img src="images/descargar_reglamento.png" height="30" width="30" />
+                                                </button>
+                                            </h3>
+                                            <input type="checkbox" id="chkTerminos" checked="checked" />
+                                            <label style="font-weight: bold;">
+                                                He ledo y conozco las actualizaciones del reglamento</label>
+                                            <br />
+                                            <br />
+                                            <input type="button" style="align: right" value="Aceptar" onclick="AceptarReglamento()"
+                                                class="btn btn-primary" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
-                </table>
-            </td>
-        </tr>
 <%
     End If
 
 	objUsuario.CerrarConexion
 	Set ObjUsuario=nothing
-%>
-        
+%>                
+                
 <% 
-    Set ObjAutoevaluacion = Server.CreateObject("PryUSAT.clsAccesoDatos")
-    ObjAutoevaluacion.AbrirConexion
-    Set rsAutoevaluacion = ObjAutoevaluacion.consultar("PER_ComunicadoPersonalListar","FO","EVA","",session("codigo_usu"))                        
+    'COMUNICADO DE TRABAJO REMOTO
     
-    If rsAutoevaluacion.recordcount > 0 Then                
-        Response.Write("<script>showMessagePage('Usted tiene pendiente su encuesta de autoevaluación. \n ¿Desea realizarla en este momento?', 'warning', 'academico/encuesta/EncuestaEvaluacionDocente/ResponderEncuestaAuto.aspx')</script>")
-    End If
-    
-    ObjAutoevaluacion.CerrarConexion
-    Set ObjAutoevaluacion = Nothing                           
-%>        
-        
-<% 
     Set ObjComunicado = Server.CreateObject("PryUSAT.clsAccesoDatos")
     ObjComunicado.AbrirConexion
-    Set rsComunicado=ObjComunicado.consultar("PER_ComunicadoPersonalListar","FO","CP1","",session("codigo_usu"))                        
+    Set rsComunicado=ObjComunicado.consultar("PER_ComunicadoPersonalListar","FO","CP1","",session("codigo_usu"),"3","S")                        
     
     If rsComunicado.recordcount > 0 Then                    
 %>                        
-        <tr id="tbComunicadoPersonal">
-            <td width="80%" valign="top" style="padding-left: 3px; padding-top: 0px">
-                <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td valign="top">
-                            <div class="alert alert-danger" style="padding-top: 0px">
-                                <h3>
-                                    Condiciones de Trabajo Remoto &nbsp;
-                                    <button onclick="window.open('ComunicadoPersonal/frmComunicadoPersonalPDF.aspx?codigo_usu=<%response.write session("codigo_usu")%>');">
-                                        <img src="images/descargar_reglamento.png" height="30" width="30" />
-                                    </button>
-                                </h3>
-                            </div>
+                    <tr id="tbComunicadoPersonal">
+                        <td width="80%" valign="top" style="padding-left: 3px; padding-top: 0px">
+                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td valign="top">
+                                        <div class="alert alert-danger" style="padding-top: 0px">
+                                            <h3>
+                                                Condiciones de Trabajo Remoto &nbsp;
+                                                <button onclick="window.open('ComunicadoPersonal/frmComunicadoPersonalPDF.aspx?codigo_usu=<%response.write session("codigo_usu")%>&num_comunicado=3&tipo_comunicado=TRABAJO_REMOTO');">
+                                                    <img src="images/descargar_reglamento.png" height="30" width="30" />
+                                                </button>
+                                            </h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>        
+                    </tr>        
 <% 
     End If
     
     ObjComunicado.CerrarConexion
     Set ObjComunicado = Nothing
-%>        
-        <tr>
-            <td width="80%" valign="top" style="padding-left: 3px; padding-top: 3px">
-                <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+%>                
+                
+<% 
+    'COMUNICADO DE REGLAMENTO INTERNO DE TRABAJO
+    
+    Set ObjComunicado = Server.CreateObject("PryUSAT.clsAccesoDatos")
+    ObjComunicado.AbrirConexion
+    Set rsComunicado=ObjComunicado.consultar("PER_ComunicadoPersonalListar","FO","RIT","",session("codigo_usu"),"4","N")                        
+    
+    If rsComunicado.recordcount = 0 Then                    
+%>  
+                    <tr id="tbComunicadoRIT">
+                        <td width="80%" valign="top" style="padding-left: 3px; padding-top: 0px">
+                            <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td valign="top">
+                                        <div class="alert alert-danger" style="padding-top: 0px">
+                                            <h2 style="text-align: justify;"><strong>Reglamento Interno de Trabajo</strong></h2>
+                                            <p style="text-align: justify; padding: 0px; font-size: small;">
+                                                Se les comunica que se encuentra disponible en el Campus la ltima versin del Reglamento Interno de Trabajo aprobada y registrada por la Autoridad Administrativa de Trabajo. 
+                                                <br/>Asimismo, este Reglamento ha sido publicado en el portal de transparencia USAT.
+                                                <br/>Agradecer se sirvan revisarlo a fin de que conozcan las nuevas disposiciones contenidas en esta Normativa.
+                                            </p>                                                                
+                                            <p style="text-align: justify; padding: 0px; font-size: small;">Atentamente,</p>
+                                            <p style="text-align: justify; padding: 0px; font-size: small;">
+                                                <strong>Maria Cecilia Mendoza Diaz</strong>
+                                                <br/>Directora de Personal
+                                            </p>                                
+                                            <button onclick="window.open('ComunicadoPersonal/frmComunicadoPersonalPDF.aspx?codigo_usu=<%response.write session("codigo_usu")%>&num_comunicado=4&tipo_comunicado=RIT');">
+                                                <img src="images/descargar_reglamento.png" height="30" width="30" />
+                                            </button>                                
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr> 
+<% 
+    End If
+    
+    ObjComunicado.CerrarConexion
+    Set ObjComunicado = Nothing
+%>                                                                  
                     <tr>
                         <td valign="top">
                             <table style="width: 100%;">                                                                                        
@@ -578,12 +809,12 @@
                                 <div class="alert alert-<%=strCSS%>">
                                     Te quedan
                                     <%=session("dias")%>
-                                    días para cambiar tu contraseña.
+                                    das para cambiar tu contrasea.
                                     <br />
-                                    <a href="servicios/GuiaCambioPassword.pdf" target="_blank" class="alert-link" title="¿Cómo lo hago?">
+                                    <a href="servicios/GuiaCambioPassword.pdf" target="_blank" class="alert-link" title="Cmo lo hago?">
                                         <span style="color: #d21d22; text-decoration: underline; margin-top: 3px; display: inline-block;
                                             cursor: pointer" onmouseover="this.style.color='#900206';" onmouseout="this.style.color='#d21d22';">
-                                            ¿Cómo cambiar mi contraseña?</span></a>
+                                            Cmo cambiar mi contrasea?</span></a>
                                 </div>
                             </td>
                         </tr>
@@ -594,8 +825,57 @@
     <!--<tr><td><b><br />Encuesta RED ODUCAL</td></tr>
     <tr><td><a href="https://drive.google.com/open?id=1HBLxyLupeB9R5xbcqv8csW_JHth_q22xM4EUiYE_adY">Para Personal Docente</a></td></tr>
     <tr><td><a href="https://drive.google.com/open?id=1wT4ZzLeB9CRgFilW41gvUkCwk-7f2IZ9LMppPTdUTxA">Para Personal Administrativo / Servicios<br /><br /></a></td></tr>-->
-                        <tr>
+						<!--<tr style="border-top: 1px solid #2c2a2a;">
+							<td>
+								<a href="https://intranet.usat.edu.pe/encuestas/index.php/175489?newtest=Y&lang=es" target="_blank" title="Clic aqu&iacute; para ingresar a la encuesta">
+									<img style="border-color: red;" src="Images/anuncio_identidad_catolica.jpeg"
+										alt="Clic aqu&iacute; para ingresar a la encuesta" width="370" height="425" border="1" /></a>
+							</td>
+						</tr>-->						
+						
+						<!-- Encuesta por Luis Q.T. | 14AGO2020 
+						<tr style="border-top: 1px solid #2c2a2a;background-color: #ccdbdf;"><td><b>Encuesta de satisfaccin de Servicios</b><br /></td></tr>
+						<tr>
+							<td>
+								<a href="https://docs.google.com/forms/d/1o_rxAFd4M1BgcVt7xDvy0a3hI0GdNh1nKyOe7TUO_b4" target="_blank" title="Clic aqu&iacute; para llenar la encuesta">
+									<img style="border-color: red;" src="https://lh4.googleusercontent.com/JxBT_vU_YYZSEbenAp5dYH7BS43KdSOomaJpQ50RQtmYchv2dPDgQRS589yzQY8Y9a80LSrDXa3TdywunjczHcgqf0ODzbfgpNlQETH75m-GKVupxVD70rj2naio"
+										alt="Clic aqu&iacute; para llenar la encuesta" width="370" height="92" border="1" /></a>
+							</td>
+						</tr>
+						<tr>
                             <td>
+							<br /><br />
+                            </td>
+                        </tr> 
+                        -->
+						<!-- Encuesta por Luis Q.T. | 14SEP2020 -->
+						<tr style="border-top: 1px solid #2c2a2a;background-color: #ccdbdf;"><td><b>Encuesta a docentes sobre conexin a Internet</b><br /></td></tr>
+						<tr>
+							<td>
+								<a href="https://forms.gle/Napmxt5FZKjKBNu66" target="_blank" title="Clic aqu&iacute; para llenar la encuesta">
+									<img style="border-color: red;" src="https://lh4.googleusercontent.com/MKRrMXs725u7XWqNCW-MoQuPP_oARVVUjqwW0w2QYpQL_wlREpyugCyCdSkUI-syr0ue1XdFiBPgO1ddQfZpdtsf9XNVlmj7sv8cIonrDDDeYMUAG9wpIB-HIxwH"
+										alt="Clic aqu&iacute; para llenar la encuesta" width="370" height="92" border="1" /></a>
+							</td>
+						</tr>
+						<!-- Encuesta por Luis Q.T. | 21SEP2020 -->
+						<tr><td><br /></td></tr>
+						<tr style="border-top: 1px solid #2c2a2a;">
+							<td>
+								<a href="GestionEgresado/SustentacionTesis/Explicacin_del_proceso_Sustentacin_v5.pdf" target="_blank" title="Clic aqu&iacute; para ver el nuevo proceso">
+									<img style="border-color: red;" src="Images/pasoSustentacion.jpg"
+										alt="Clic aqu&iacute; para ver el nuevo proceso" width="370" height="98" border="1" /></a>
+							</td>
+						</tr>
+						<tr style="border-top: 1px solid #2c2a2a;">
+							<td>
+								<a href="administrativo/PROTOCOLO_PVPC_COVID_USAT.pdf" target="_blank" title="Clic aqu&iacute; para ver el plan para la vigilancia, prevencin y control contra el Covid">
+									<img style="border-color: red;" src="Images/IMAGEN_DIFUSION_PLAN.jpg"
+										alt="Clic aqu&iacute; para ver el plan para la vigilancia, prevencin y control contra el Covid" width="370" height="370" border="1" /></a>
+							</td>
+						</tr>						
+						<tr>
+                            <td>
+							<br /><br />
                             <!--
                                 <div class="alert alert-warning">            
                                     <a href="https://intranet.usat.edu.pe/encuestas/index.php/781851?lang=es"><b>[BIBLIOTECA] - ENCUESTA DE SATISFACCION DEL SERVICIO - 2018</b><br/><i>Ingresar aqu&iacute;</i></a>
@@ -606,7 +886,7 @@
                         <tr>
                             <td width="94%" align="left" valign="middle" class="style3">
                                 <div>
-                                    <iframe src="http://www.usat.edu.pe/anuncios/index2.php" width="100%" height="100%"
+                                    <iframe src="https://www.usat.edu.pe/anuncios/index2.php" width="100%" height="100%"
                                         style="position: relative; overflow: hidden; height: 470px;"></iframe>
                                     <!--<OBJECT id="anuncio" type="text/html" data="http://www.usat.edu.pe/anuncios/index.php" width=100% height=200% style="position: relative; overflow: hidden; height: 800px;"></OBJECT>-->
                                 </div>
@@ -997,7 +1277,7 @@
 
     <div class="modal fade" id="mdlMostrarPagina" tabindex="-1" role="dialog" aria-labelledby="lblTituloModal"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div id="mddMostrarPagina" class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="lblTituloModal">Titulo del Modal</h5>
@@ -1015,24 +1295,55 @@
         </div>
     </div>
 
+    <div class="modal fade" id="mdlAvisoPersonal" tabindex="-1" role="dialog" aria-labelledby="lblAvisoPersonal"
+            aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="color: white; background-color: #e33439;">
+                    <h5 class="modal-title" id="lblAvisoPersonal">Encuesta Clima Laboral</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">                                        
+                    <div class="form-group" style="font-size: 14px; text-align: justify;">
+                        A continuacin usted encontrar una serie de preguntas o afirmaciones en las cuales no hay respuestas buenas o malas, se busca conocer su opinin respecto al ambiente laboral actual que usted identifica como colaborador de la Universidad Catlica Santo Toribio de Mogrovejo.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-success" style="color: White !important;" href="https://intranet.usat.edu.pe/encuestas/index.php/965274?lang=es" target="_blank">Llenar Encuesta</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         var wSTI = document.getElementById("imgServiciosTI").width;
         var hSTI = document.getElementById("imgServiciosTI").height;
         var wSTI = document.getElementById("imgEncuestaBiblioteca").width = wSTI;
-        var hSTI = document.getElementById("imgEncuestaBiblioteca").height = hSTI;     
+        var hSTI = document.getElementById("imgEncuestaBiblioteca").height = hSTI;
+
+        var perdioFoco = 0;  
     </script>
     
 <% 
+    'CARGAR MODALES
+    
     Set ObjActualizarDatos = Server.CreateObject("PryUSAT.clsAccesoDatos")
     ObjActualizarDatos.AbrirConexion
     Set rsActualizarDatos = ObjActualizarDatos.consultar("PER_DatosPersonalListar","FO","GEN",session("codigo_usu"),"N")                        
     
     If rsActualizarDatos.recordcount > 0 Then                
-        Response.Write("<script>cargarModal('Actualización de Datos del Personal', 'personal/frmActualizarDatosPersonal.aspx?codigo_per=" & session("codigo_usu") & "')</script>")
+        Response.Write("<script>cargarModal('Actualizacin de Datos del Personal', '70', 'personal/frmActualizarDatosPersonal.aspx?codigo_per=" & session("codigo_usu") & "')</script>")
     End If
     
     ObjActualizarDatos.CerrarConexion
     Set ObjActualizarDatos = Nothing
+    
+    If (Now() < cdate("15/12/2020")) Then
+        Response.Write("<script>$('#mdlAvisoPersonal').modal('show');</script>")
+    End If
 %>
 </body>
 </html>

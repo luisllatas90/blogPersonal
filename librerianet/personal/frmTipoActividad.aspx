@@ -119,7 +119,7 @@
                             <HeaderStyle BackColor="#E49BD0" Font-Bold="True" ForeColor="#663300" />
                             <ItemStyle BackColor="#E49BD0" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="CentroPre" HeaderText="C.Pre">
+                            <asp:BoundField DataField="CentroPre" HeaderText="C.Pre" Visible="False">
                             <HeaderStyle BackColor="#CA7F4C" Font-Bold="True" ForeColor="#003366" />
                             <ItemStyle BackColor="#CA7F4C" />
                             </asp:BoundField>
@@ -127,7 +127,7 @@
                                 HeaderText="Coop.InterInstitucional" 
                                 SortExpression="CooperacionInterInstitucional">
                             <HeaderStyle BackColor="#CC6600" />
-                            <ItemStyle BackColor="#CC6600" />
+                            <ItemStyle BackColor="#CA7F4C" />
                             </asp:BoundField>
                             <asp:BoundField DataField="GestinAcademica" HeaderText="G.Academica">
                             <HeaderStyle BackColor="#B59B3C" Font-Bold="True" ForeColor="White" />
@@ -135,7 +135,7 @@
                             </asp:BoundField>
                             <asp:BoundField DataField="OtraGestionAcademicaPreGrado" 
                                 HeaderText="OtraGestiónAcad.PreGrado" 
-                                SortExpression="OtraGestionAcademicaPreGrado">
+                                SortExpression="OtraGestionAcademicaPreGrado" Visible="False">
                             <HeaderStyle BackColor="#B59B3C" />
                             <ItemStyle BackColor="#B59B3C" ForeColor="White" />
                             </asp:BoundField>
@@ -145,7 +145,7 @@
                             </asp:BoundField>
                             <asp:BoundField DataField="PracticasExternas" HeaderText="P.Externas">
                             <HeaderStyle BackColor="#FFFF66" Font-Bold="True" ForeColor="#663300" />
-                            <ItemStyle BackColor="Yellow" ForeColor="#990000" />
+                            <ItemStyle BackColor="#F9FF2E" ForeColor="#990000" />
                             </asp:BoundField>
                             <asp:BoundField DataField="SupervisionPracticasPreProfesionales" 
                                 HeaderText="Superv.Pract.PreProfesionales" 
@@ -153,7 +153,8 @@
                             <HeaderStyle BackColor="#CE06FA" />
                             <ItemStyle BackColor="#CE06FA" ForeColor="White" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="AsistencialesClinicaUsat" HeaderText="A.C.Usat">
+                            <asp:BoundField DataField="AsistencialesClinicaUsat" HeaderText="A.C.Usat" 
+                                Visible="False">
                             <HeaderStyle BackColor="#AE906B" Font-Bold="True" ForeColor="#003366" />
                             <ItemStyle BackColor="#AE906B" />
                             </asp:BoundField>
@@ -161,24 +162,34 @@
                             <HeaderStyle BackColor="#98E54B" Font-Bold="True" ForeColor="#003366" />
                             <ItemStyle BackColor="#98E54B" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Investigacion" HeaderText="Investigacion">
-                            <HeaderStyle BackColor="#226AE5" Font-Bold="True" ForeColor="White" />
-                            <ItemStyle BackColor="#226AE5" ForeColor="White" />
+                            <asp:BoundField DataField="Investigacion" HeaderText="G. Investigacion">
+                            <HeaderStyle BackColor="#99CCFF" Font-Bold="True" ForeColor="White" />
+                            <ItemStyle BackColor="#99CCFF" ForeColor="White" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="PlanFormacionDocente" 
-                                HeaderText="PlanFormacionDocente" SortExpression="PlanFormacionDocente" />
                             <asp:BoundField DataField="ResponsabilidadSocial" HeaderText="R.Social">
                             <HeaderStyle BackColor="#8C9286" HorizontalAlign="Center" 
-                                VerticalAlign="Middle" Font-Bold="True" ForeColor="#003366" />
+                                VerticalAlign="Middle" Font-Bold="True" />
                             <ItemStyle BackColor="#8C9286" Font-Bold="False" ForeColor="#003366" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="InvestigacioneInnovacion" 
+                                HeaderText="Inv. &amp; Innov" SortExpression="InvestigacioneInnovacion" >
+                                <HeaderStyle BackColor="#226AE5" />
+                                <ItemStyle BackColor="#226AE5" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="PlandeFormacionDocente" 
+                                HeaderText="Form. Docente" SortExpression="PlandeFormacionDocente" >
+                                <HeaderStyle BackColor="#009966" />
+                                <ItemStyle BackColor="#009966" />
                             </asp:BoundField>
                             <asp:BoundField DataField="Tutoria" HeaderText="Tutoria">
                             <HeaderStyle BackColor="#FC4450" HorizontalAlign="Center" 
                                 VerticalAlign="Middle" Font-Bold="True" ForeColor="White" />
                             <ItemStyle BackColor="#FC4450" Font-Bold="False" ForeColor="White" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="GestionEnInvestigacion" 
-                                HeaderText="GestionEnInvestigacion" SortExpression="GestionEnInvestigacion" />
+<asp:BoundField DataField="TutoriaGO" HeaderText="Tutoria GO">
+    <HeaderStyle BackColor="#FC4450" />
+    <ItemStyle BackColor="#FC4450" />
+</asp:BoundField>
                             <asp:BoundField DataField="codigo_per" HeaderText="id" />
                             <asp:BoundField DataField="DepAcadArea" HeaderText="Dep.Acad/Área" />
                             <asp:BoundField DataField="totalhorascar" HeaderText="CargaAcad" />

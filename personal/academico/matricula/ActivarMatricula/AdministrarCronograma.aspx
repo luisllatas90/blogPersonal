@@ -91,7 +91,7 @@
             <tr>
                 <td>
                     <asp:GridView ID="gvCronograma" runat="server" AutoGenerateColumns="False" 
-                        DataKeyNames="codigo_Cro,codigo_Act,codigo_Cac,Actividad,Ciclo Acad." 
+                        DataKeyNames="codigo_Cro,codigo_Act,codigo_Cac,Actividad,codigo_test,Ciclo Acad." 
                         DataSourceID="SqlDataSource1" Width="100%"> 
                         <Columns>
                             <asp:BoundField DataField="codigo_Cro" HeaderText="codigo_Cro" 

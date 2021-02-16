@@ -483,12 +483,12 @@
                                                 <i class="fa fa-plus-square"></i>
                                                 <span>Nuevo</span>
                                             </button>
-                                             <div class="col-sm-1">
+                                             <%--<div class="col-sm-1">
 	                                        <asp:LinkButton ID="lbResolPrueba" runat="server" CssClass="btn btn-info" ToolTip="Solicitar PDF" Visible = "true">
                                                 <span><i class="fa fa-file-pdf"></i></span> &nbsp; Resolucion 
 						                    </asp:LinkButton>
 	                                        </div>
-                                                                                                                                            
+                                                                --%>                                                                            
                                         </div>        
                                     </div>   
                                 </div>
@@ -556,7 +556,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">                                                
-                                        <label class="col-sm-1 col-form-label form-control-sm">Título: <span class="requerido">(*)</span> </label>
+                                        <label class="col-sm-1 col-form-label form-control-sm">Título:<span class="requerido">(*)</span> </label>
                                         <div class="col-sm-5">
                                             <asp:TextBox ID="txtTitulo" runat="server" 
                                                 CssClass="form-control form-control-sm"></asp:TextBox>
@@ -716,28 +716,47 @@
                                             </div>
                                             <div class="row">
                                                 <label class="col-sm-2 col-form-label form-control-sm">CARRRERA PROFESIONAL:</label>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-3">
                                                     <asp:DropDownList ID="ddlCarrProfEmail" runat="server" CssClass="form-control">
                                                     </asp:DropDownList>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <label for="cmbAnioEgresoFiltro" class="col-sm-1 col-form-label form-control-sm">EGRESO:</label>
+                                                    <div class="col-sm-1">
+                                                    <asp:DropDownList ID="cmbAnioEgresoFiltro" runat="server" AutoPostBack="true" CssClass="form-control form-control-sm" data-live-search="true" AutoComplete="off"/>                                    
+                                                    </div> 
+                                                <label for="cmbAnioBachillerFiltro" class="col-sm-1 col-form-label form-control-sm">BACHILLER:</label>
+                                                <div class="col-sm-1">
+                                                    <asp:DropDownList ID="cmbAnioBachillerFiltro" runat="server" AutoPostBack="true" CssClass="form-control form-control-sm" data-live-search="true" AutoComplete="off"/>                                    
+                                                </div>
+                                                <label for="cmbAnioTituloFiltro" class="col-sm-1 col-form-label form-control-sm">TÍTULO:</label>
+                                                <div class="col-sm-1">
+                                                    <asp:DropDownList ID="cmbAnioTituloFiltro" runat="server" AutoPostBack="true" CssClass="form-control form-control-sm" data-live-search="true" AutoComplete="off"/>                                    
+                                                </div>      
+                                                
+                                          
+                                            </div>  
+                                            <div class="row">
+                                                <div class="col-sm-12">
                                                     <asp:LinkButton ID="btnListarEgre" runat="server" class="btn btn-accion btn-celeste">
                                                         <i class="fa fa-sync-alt"></i>
                                                         <span class="text">Listar</span>
-                                                    </asp:LinkButton>                                              
+                                                    </asp:LinkButton> 
+                                                <%--</div>
+                                                <div class="col-sm-2">     --%>                                        
                                                     <asp:LinkButton ID="btnEnviarEmail" runat="server" class="btn btn-accion btn-azul"
                                                         OnClientClick="return alertConfirm(this, event, '¿Desea enviar un mensaje a los egresados seleccionados?', 'warning');">
                                                         <i class="fa fa-envelope-square"></i>
                                                         <span class="text">Enviar Mensaje</span>
                                                     </asp:LinkButton>         
-                                                </div>
-                                                <div class="col-sm-2" >
+                                               <%-- </div>
+                                                <div class="col-sm-1" >--%>
                                                     <asp:LinkButton ID="btnSalirListEgre" runat="server" class="btn btn-accion btn-rojo">
                                                         <i class="fa fa-sign-out-alt"></i>
                                                         <span class="text">Salir</span>
                                                     </asp:LinkButton> 
                                                 </div>
-                                            </div>                                                
+                                            </div>
+                                            <br />                                              
                                             <div class="row-sm-12">
                                                 <div id="sel-todos" class="oculto">
                                                     <asp:LinkButton ID="btnElegir" runat="server" CssClass="btn btn-accion btn-naranja"

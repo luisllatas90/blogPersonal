@@ -64,7 +64,7 @@ td           { font-size: 12pt }
 	  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" height="130">
 	  <tr>
 	    <th width="100%" colspan="2" height="80" align="center" valign="top">
-	    <em> <font style="font-size: 14pt">La Directora Académica  de la<br>
+	        <em> <font style="font-size: 14pt">El Director Académico  de la<br>
 		Universidad Católica Santo Toribio de Mogrovejo</font></em></th>
 	  </tr>
 	  <tr>
@@ -126,10 +126,10 @@ end if
 <p>&nbsp;</p>
 <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="30%" align="right" class="etiqueta">
   <tr>
-    <td width="100%" align="center">MSc. Martha Elina Tesén Arroyo</td>
+    <td width="100%" align="center">Ing. Willy Augusto Oliva Tong</td>
   </tr>
   <tr>
-    <td width="100%" align="center" class="style1">Directora Académica</td>
+    <td width="100%" align="center" class="style1">Director Académico</td>
   </tr>
 </table>
 </body>

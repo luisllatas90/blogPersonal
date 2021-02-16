@@ -17,20 +17,51 @@ Public Class clsComponenteTramiteVirtualCVE
     Private estadoAprobacion As String
     Private observacionEvaluacion As String
     Private codigo_tfu As Integer
-    Public tipoOperacion As String = "A"
+    'Public tipoOperacion As String = "A" 'HCANO 16/07/2020
+    Public tipoOperacion As String = "1" 'HCANO 16/07/2020
     Private procesoEmailAprobacion As String
     Private procesoEmailRechazo As String
+
+    Private procesoEmailObservado As String
+
+
     Private orden_ftr As Integer
     Private descripcion_tfu As String
 
     Private tieneEmailAprobacion As Integer
     Private tieneEmailRechazo As String
     Private nombre_ctr As String
+    Private numeroinstanciareversa_dft As Integer
+
+    Private listaRequisitosObservados As String
+
+    Private idArchivoCompartido As Integer
+ 
+
+    Private copiarEmailDestinatario As String
+ 
+
 
 
 #End Region
 
 #Region "propiedades"
+    Public Property _copiarEmailDestinatario() As String
+        Get
+            Return copiarEmailDestinatario
+        End Get
+        Set(ByVal value As String)
+            copiarEmailDestinatario = value
+        End Set
+    End Property
+    Public Property _listaRequisitosObservados() As String
+        Get
+            Return listaRequisitosObservados
+        End Get
+        Set(ByVal value As String)
+            listaRequisitosObservados = value
+        End Set
+    End Property
     Public Property _nombre_ctr() As String
         Get
             Return nombre_ctr
@@ -39,7 +70,14 @@ Public Class clsComponenteTramiteVirtualCVE
             nombre_ctr = value
         End Set
     End Property
-
+    Public Property _procesoEmailObservado() As String
+        Get
+            Return procesoEmailObservado
+        End Get
+        Set(ByVal value As String)
+            procesoEmailObservado = value
+        End Set
+    End Property
     Public Property _tieneEmailRechazo() As String
         Get
             Return tieneEmailRechazo
@@ -171,14 +209,36 @@ Public Class clsComponenteTramiteVirtualCVE
         End Set
     End Property
 
+
+
+    Public Property _numeroinstanciareversa_dft() As Integer
+        Get
+            Return numeroinstanciareversa_dft
+        End Get
+        Set(ByVal value As Integer)
+            numeroinstanciareversa_dft = value
+        End Set
+    End Property
+
+    Public Property _idArchivoCompartido() As Integer
+        Get
+            Return idArchivoCompartido
+        End Get
+        Set(ByVal value As Integer)
+            idArchivoCompartido = value
+        End Set
+    End Property
 #End Region
 
 
     Sub New()
         C = New ClsConectarDatos
         C.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
-        estadoFlujo = "" '"F"
+        estadoFlujo = "F" '"F"
         estadoAprobacion = "" '"A"
+        numeroinstanciareversa_dft = 0
+        idArchivoCompartido = 0
+        copiarEmailDestinatario = ""
     End Sub
 
 
@@ -202,9 +262,10 @@ Public Class clsComponenteTramiteVirtualCVE
             C.IniciarTransaccion()
             dt = C.TraerDataTable("TRL_CMP_datostramite", tipoOperacion, codigo_trl, codigo_dta, codigo_tfu)
             'dict.Add("filas", dt.Rows.Count)
-            If dt.Rows.Count = 1 Then
+            If dt.Rows.Count > 0 Then
                 'dict.Add("tieneRequisito", dt.Rows(0).Item("tieneRequisito"))
                 'dict.Add("tieneFlujo", dt.Rows(0).Item("tieneFlujo"))
+
                 If dt.Rows(0).Item("tieneRequisito") Then
                     dtReq = mt_ObtenerRequisitos()
 
@@ -212,7 +273,8 @@ Public Class clsComponenteTramiteVirtualCVE
                         For i As Integer = 0 To dtReq.Rows.Count - 1
 
                             If codigo_tfu = dtReq.Rows(i).Item("codigo_tfu_req") Then
-                                rptaReq = C.Ejecutar("TRL_TramiteRequisito_Registrar", "A", codigo_dta, dtReq.Rows(i).Item("codigo_dre"), dtReq.Rows(i).Item("codigo_dft"), 1, "F", codigo_per)
+                                '                                rptaReq = C.Ejecutar("TRL_TramiteRequisito_Registrar", "A", codigo_dta, dtReq.Rows(i).Item("codigo_dre"), dtReq.Rows(i).Item("codigo_dft"), 1, "F", codigo_per)
+                                rptaReq = C.Ejecutar("TRL_TramiteRequisito_Registrar", "A", codigo_dta, dtReq.Rows(i).Item("codigo_dre"), dtReq.Rows(i).Item("codigo_dft"), 1, estadoFlujo, codigo_per)
 
                                 If rptaReq = 0 Then
                                     C.AbortarTransaccion()
@@ -247,72 +309,113 @@ Public Class clsComponenteTramiteVirtualCVE
 
 
                 If dt.Rows(0).Item("tieneFlujo") Then
-                    'dict.Add("tieneFlujo2", dt.Rows(0).Item("tieneFlujo"))
-                    dtFlujo = mt_ObtenerEvaluacionFlujo()
-                    ' dict.Add("dtFlujo", dtFlujo.Rows.Count)
+                    If numeroinstanciareversa_dft = 0 Then
+                        'dict.Add("tieneFlujo2", dt.Rows(0).Item("tieneFlujo"))
+                        dtFlujo = mt_ObtenerEvaluacionFlujo()
+                        ' dict.Add("dtFlujo", dtFlujo.Rows.Count)
+                        If dtFlujo.Rows.Count > 0 Then
+                            For i As Integer = 0 To dtFlujo.Rows.Count - 1
+                                ' dict.Add("if " & i, codigo_tfu.ToString & "=" & dtFlujo.Rows(i).Item("codigo_tfu"))
+                                If codigo_tfu = dtFlujo.Rows(i).Item("codigo_tfu") And dtFlujo.Rows(i).Item("estado_dft") = "P" Then
 
-                    If dtFlujo.Rows.Count > 0 Then
-                        For i As Integer = 0 To dtFlujo.Rows.Count - 1
-                            ' dict.Add("if " & i, codigo_tfu.ToString & "=" & dtFlujo.Rows(i).Item("codigo_tfu"))
-                            If codigo_tfu = dtFlujo.Rows(i).Item("codigo_tfu") Then
+                                    'rptaFlujo = C.Ejecutar("TRL_DetalleFlujoTramite_Registrar", "A", codigo_dta, dtFlujo.Rows(i).Item("codigo_dft"), "F", codigo_per, estadoAprobacion, observacionEvaluacion)
+                                    rptaFlujo = C.Ejecutar("TRL_DetalleFlujoTramite_Registrar", "A", codigo_dta, dtFlujo.Rows(i).Item("codigo_dft"), estadoFlujo, codigo_per, estadoAprobacion, observacionEvaluacion)
+                                    'dict.Add("rptaFlujo", rptaFlujo)
 
-                                rptaFlujo = C.Ejecutar("TRL_DetalleFlujoTramite_Registrar", "A", codigo_dta, dtFlujo.Rows(i).Item("codigo_dft"), "F", codigo_per, estadoAprobacion, observacionEvaluacion)
-                                'dict.Add("rptaFlujo", rptaFlujo)
+                                    If rptaFlujo = 0 Then
+                                        C.AbortarTransaccion()
+                                        C.CerrarConexion()
+                                        'dict.Add("error1", "Error al evaluar flujo")
+                                        list.Add(dict)
+                                        Return list
+                                    End If
 
-                                If rptaFlujo = 0 Then
-                                    C.AbortarTransaccion()
-                                    C.CerrarConexion()
-                                    'dict.Add("error1", "Error al evaluar flujo")
-                                    list.Add(dict)
-                                    Return list
+                                    If idArchivoCompartido > 0 Then
+
+                                        rptaFlujo = C.Ejecutar("TRL_ArchivoCompartido_Registrar", "1", codigo_dta, idArchivoCompartido)
+                                        If rptaFlujo = 0 Then
+                                            C.AbortarTransaccion()
+                                            C.CerrarConexion()
+                                            'dict.Add("error1", "Error al evaluar flujo")
+                                            list.Add(dict)
+                                            Return list
+                                        End If
+                                    End If
+
+
+                                    orden_ftr = dtFlujo.Rows(i).Item("orden_ftr")
+                                    descripcion_tfu = dtFlujo.Rows(i).Item("descripcion_Tfu")
+                                    tieneEmailAprobacion = dtFlujo.Rows(i).Item("tieneEmailAprobacion")
+                                    tieneEmailRechazo = dtFlujo.Rows(i).Item("tieneEmailRechazo")
+                                    procesoEmailAprobacion = dtFlujo.Rows(i).Item("procesoEmailAprobacion")
+                                    procesoEmailRechazo = dtFlujo.Rows(i).Item("procesoEmailRechazo")
+                                    procesoEmailObservado = dtFlujo.Rows(i).Item("procesoEmailObservado")
+                                    nombre_ctr = dtFlujo.Rows(i).Item("descripcion_ctr")
+                                    'dict.Add("orden_ftr", orden_ftr)
+                                    'dict.Add("descripcion_tfu", descripcion_tfu)
+                                    'dict.Add("procesoEmailAprobacion", procesoEmailAprobacion)
+                                    'dict.Add("procesoEmailRechazo", procesoEmailRechazo)
+                                    Exit For
                                 End If
-                                orden_ftr = dtFlujo.Rows(i).Item("orden_ftr")
-                                descripcion_tfu = dtFlujo.Rows(i).Item("descripcion_Tfu")
-                                tieneEmailAprobacion = dtFlujo.Rows(i).Item("tieneEmailAprobacion")
-                                tieneEmailRechazo = dtFlujo.Rows(i).Item("tieneEmailRechazo")
-                                procesoEmailAprobacion = dtFlujo.Rows(i).Item("procesoEmailAprobacion")
-                                procesoEmailRechazo = dtFlujo.Rows(i).Item("procesoEmailRechazo")
-                                nombre_ctr = dtFlujo.Rows(i).Item("descripcion_ctr")
-                                'dict.Add("orden_ftr", orden_ftr)
-                                'dict.Add("descripcion_tfu", descripcion_tfu)
-                                'dict.Add("procesoEmailAprobacion", procesoEmailAprobacion)
-                                'dict.Add("procesoEmailRechazo", procesoEmailRechazo)
-                            End If
-                        Next
+                            Next
 
-                    End If
-
-                    If rptaFlujo > 0 Then
-                        dict.Add("evaluacion", True)
-                        dict.Add("registos evaluados", "Se evaluaron " & rptaFlujo.ToString & " registros")
-                    End If
-                    'dict.Add("tieneEmailAprobacion", CBool(tieneEmailRechazo))
-                    'dict.Add("tieneEmailRechazo", CBool(tieneEmailAprobacion))
-                    If estadoAprobacion = "A" Then
-                        If CBool(tieneEmailAprobacion) Then
-                            'dict.Add("EmailAprobacion", "enviando...")
-
-                            clsMail = New clsComponenteTramiteVirtualEmailCVE
-                            clsMail.codigo_per = codigo_per
-                            clsMail.codigo_dta = codigo_dta
-                            clsMail.codigo_tfu = codigo_tfu
-                            clsMail.orden_ftr = orden_ftr
-                            clsMail.descripcion_tfu = descripcion_tfu
-                            clsMail.codigo_apl = 64
-                            clsMail.nombre_ctr = nombre_ctr
-                            clsMail.cin_abreviatura = procesoEmailAprobacion
-                            rEmailAprob = clsMail.mt_EnviarCorreoEvaluacionPasos()
-
-                            'rEmailAprob = EnviaCorreo("E")
-                            If rEmailAprob Then
-                                dict.Add("email", True)
-                            Else
-                                dict.Add("email", False)
-                            End If
                         End If
 
-                    ElseIf estadoAprobacion = "R" Then
-                        If CBool(tieneEmailRechazo) Then
+                        If rptaFlujo > 0 Then
+                            dict.Add("evaluacion", True)
+                            dict.Add("registos evaluados", "Se evaluaron " & rptaFlujo.ToString & " registros")
+                        End If
+                        'dict.Add("tieneEmailAprobacion", CBool(tieneEmailRechazo))
+                        'dict.Add("tieneEmailRechazo", CBool(tieneEmailAprobacion))
+                        If estadoAprobacion = "A" Then
+                            If CBool(tieneEmailAprobacion) Then
+                                'dict.Add("EmailAprobacion", "enviando...")
+
+                                clsMail = New clsComponenteTramiteVirtualEmailCVE
+                                clsMail.codigo_per = codigo_per
+                                clsMail.codigo_dta = codigo_dta
+                                clsMail.codigo_tfu = codigo_tfu
+                                clsMail.orden_ftr = orden_ftr
+                                clsMail.descripcion_tfu = descripcion_tfu
+                                clsMail.codigo_apl = 64
+                                clsMail.nombre_ctr = nombre_ctr
+                                clsMail.cin_abreviatura = procesoEmailAprobacion
+                                clsMail._copiarEmailDestinatario = _copiarEmailDestinatario
+                                rEmailAprob = clsMail.mt_EnviarCorreoEvaluacionPasos()
+
+                                'rEmailAprob = EnviaCorreo("E")
+                                If rEmailAprob Then
+                                    dict.Add("email", True)
+                                Else
+                                    dict.Add("email", False)
+                                End If
+                            End If
+
+                        ElseIf estadoAprobacion = "R" Then
+                            If CBool(tieneEmailRechazo) Then
+                                'dict.Add("EmailRechazo", "enviando...")
+
+                                clsMail = New clsComponenteTramiteVirtualEmailCVE
+                                clsMail.codigo_per = codigo_per
+                                clsMail.codigo_dta = codigo_dta
+                                clsMail.codigo_tfu = codigo_tfu
+                                clsMail.orden_ftr = orden_ftr
+                                clsMail.descripcion_tfu = descripcion_tfu
+                                clsMail.codigo_apl = 64
+                                clsMail.nombre_ctr = nombre_ctr
+                                clsMail.cin_abreviatura = procesoEmailRechazo
+                                clsMail._copiarEmailDestinatario = _copiarEmailDestinatario
+                                rEmailAprob = clsMail.mt_EnviarCorreoEvaluacionPasos()
+
+                                'rEmailAprob = EnviaCorreo("E")
+                                If rEmailAprob Then
+                                    dict.Add("email", True)
+                                Else
+                                    dict.Add("email", False)
+                                End If
+                            End If
+                        ElseIf estadoAprobacion = "O" Then
+
                             'dict.Add("EmailRechazo", "enviando...")
 
                             clsMail = New clsComponenteTramiteVirtualEmailCVE
@@ -323,8 +426,12 @@ Public Class clsComponenteTramiteVirtualCVE
                             clsMail.descripcion_tfu = descripcion_tfu
                             clsMail.codigo_apl = 64
                             clsMail.nombre_ctr = nombre_ctr
-                            clsMail.cin_abreviatura = procesoEmailRechazo
+                            clsMail.listaRequisitos = listaRequisitosObservados
+                            clsMail.observacionEvaluacion = observacionEvaluacion
+                            clsMail._copiarEmailDestinatario = _copiarEmailDestinatario
+                            clsMail.cin_abreviatura = procesoEmailObservado '"OTRL"
                             rEmailAprob = clsMail.mt_EnviarCorreoEvaluacionPasos()
+
 
                             'rEmailAprob = EnviaCorreo("E")
                             If rEmailAprob Then
@@ -332,12 +439,40 @@ Public Class clsComponenteTramiteVirtualCVE
                             Else
                                 dict.Add("email", False)
                             End If
+
+
                         End If
+                    Else
+
+                        rptaFlujo = C.Ejecutar("TRL_CMP_EvaluarReversa", numeroinstanciareversa_dft, codigo_dta, codigo_tfu)
+                        'dict.Add("rptaFlujo", rptaFlujo)
+
+                        If rptaFlujo = 0 Then
+                            C.AbortarTransaccion()
+                            C.CerrarConexion()
+                            dict.Add("error1", "Error al evaluar flujo en reversa")
+                            list.Add(dict)
+                            Return list
+                        Else
+
+                            dict.Add("evaluacion", True)
+                            dict.Add("registos evaluados", "Se evaluaron " & rptaFlujo.ToString & " registros")
+                            dict.Add("email", "")
+                        End If
+
+
 
                     End If
 
 
+
                 End If
+
+
+
+
+
+
 
             End If
 
@@ -425,7 +560,7 @@ Public Class clsComponenteTramiteVirtualCVE
                 EmailGYT = "pdiaz@usat.edu.pe;vtaboada@usat.edu.pe"
                 EmailVarios = EmailDestino & ";" & EmailDestino2 & ";" & EmailGYT
             Else
-                EmailVarios = "epena@usat.edu.pe;fatima.vasquez@usat.edu.pe"
+                EmailVarios = "hcano@usat.edu.pe;epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;olluen@usat.edu.pe"
             End If
 
             De = "campusvirtual@usat.edu.pe"
@@ -555,7 +690,7 @@ Public Class clsComponenteTramiteVirtualCVE
             If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
                 EmailVarios = EmailDestino & ";" & EmailDestino2
             Else
-                EmailVarios = "epena@usat.edu.pe;fatima.vasquez@usat.edu.pe"
+                EmailVarios = "hcano@usat.edu.pe;epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;olluen@usat.edu.pe"
             End If
 
             De = ""
@@ -659,6 +794,9 @@ Public Class clsComponenteTramiteVirtualCVE
 
 #End Region
 #Region "Funciones"
+
+
+
     Private Function fnObtenerRespuestaEmail(ByVal tipo As Int16, ByVal respuesta As String) As String
         Try
             Dim Respuestas() As String
@@ -690,16 +828,45 @@ Public Class clsComponenteTramiteVirtualEmailCVE
     Private _cin_abreviatura As String
     Private _orden_ftr As Integer
     Private _descripcion_tfu As String
-
-
+    Private _listaRequisitos As String
     Private _nombre_ctr As String
+
+    Private _observacionEvaluacion As String
+
+
+    Private copiarEmailDestinatario As String
+
 
 
 
 #End Region
 
 #Region "propiedades"
+    Public Property _copiarEmailDestinatario() As String
+        Get
+            Return copiarEmailDestinatario
+        End Get
+        Set(ByVal value As String)
+            copiarEmailDestinatario = value
+        End Set
+    End Property
 
+    Public Property observacionEvaluacion() As String
+        Get
+            Return _observacionEvaluacion
+        End Get
+        Set(ByVal value As String)
+            _observacionEvaluacion = value
+        End Set
+    End Property
+    Public Property listaRequisitos() As String
+        Get
+            Return _listaRequisitos
+        End Get
+        Set(ByVal value As String)
+            _listaRequisitos = value
+        End Set
+    End Property
     Public Property nombre_ctr() As String
         Get
             Return _nombre_ctr
@@ -854,7 +1021,7 @@ Public Class clsComponenteTramiteVirtualEmailCVE
             If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
                 EmailVarios = EmailDestino & ";" & EmailDestino2
             Else
-                EmailVarios = "epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;hcano@usat.edu.pe"
+                EmailVarios = "epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;hcano@usat.edu.pe;olluen@usat.edu.pe"
             End If
 
             Dim codigo_envio As Integer = ClsComunicacionInstitucional.ObtenerCodigoEnvio(_codigo_per, _codigo_tfu, _codigo_apl)
@@ -913,15 +1080,33 @@ Public Class clsComponenteTramiteVirtualEmailCVE
             End If
 
             If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
-                EmailVarios = EmailDestino & ";" & EmailDestino2
+                If _copiarEmailDestinatario <> "" Then
+                    EmailVarios = EmailDestino & ";" & EmailDestino2 & ";" & _copiarEmailDestinatario
+                Else
+                    EmailVarios = EmailDestino & ";" & EmailDestino2
+                End If
+
+
             Else
-                EmailVarios = "epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;hcano@usat.edu.pe"
+                If _copiarEmailDestinatario <> "" Then
+                    EmailVarios = "olluen@usat.edu.pe;epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;hcano@usat.edu.pe" & ";" & _copiarEmailDestinatario
+                Else
+                    EmailVarios = "olluen@usat.edu.pe;epena@usat.edu.pe;fatima.vasquez@usat.edu.pe;hcano@usat.edu.pe"
+                End If
+
+
             End If
 
             Dim codigo_envio As Integer = ClsComunicacionInstitucional.ObtenerCodigoEnvio(_codigo_per, _codigo_tfu, _codigo_apl)
 
 
-            rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "TRVE", _cin_abreviatura, 1, _codigo_per, "codigo_alu", _codigo_alu, _codigo_apl, EmailVarios, "epena@usat.edu.pe", "", "", escuela, alumno, _orden_ftr, _descripcion_tfu, _nombre_ctr)
+            If _cin_abreviatura = "GFO1" Then
+                rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "GRAD", _cin_abreviatura, 1, _codigo_per, "codigo_alu", _codigo_alu, _codigo_apl, EmailVarios, "epena@usat.edu.pe", "", "", alumno, listaRequisitos, observacionEvaluacion)
+            Else
+                rpta = ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "TRVE", _cin_abreviatura, 1, _codigo_per, "codigo_alu", _codigo_alu, _codigo_apl, EmailVarios, "epena@usat.edu.pe", "", "", escuela, alumno, _orden_ftr, _descripcion_tfu, _nombre_ctr)
+            End If
+
+
 
 
 

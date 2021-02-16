@@ -49,8 +49,15 @@ function AbrirCurso(codigo_cur)
 
 function pintafilamarcada(idcheck)
 {
-    var fila=event.srcElement.parentElement.parentElement
-    var curso=document.all.item("curso_padre" + idcheck.cc)
+    var fila = event.srcElement.parentElement.parentElement
+    var curso 
+    
+    if (idcheck.cc == null || idcheck.cc == undefined) {
+        curso = ""
+    } else {
+        curso = document.all.item("curso_padre" + idcheck.cc)
+    }
+    
 	var claseAnterior=curso.clase
       
     if(idcheck.checked==true){

@@ -211,6 +211,12 @@ select.form-control:not([size]):not([multiple]) {
     font-family: Verdana, Geneva, Tahoma, sans-serif;  
 }
 
+.note-toolbar{
+    position: relative !important;
+    top: auto !important;
+    width: auto !important;
+}
+
 .card .card-body {
     padding: 0.5rem; 
     /*padding: 0.8rem; */

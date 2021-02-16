@@ -1,5 +1,6 @@
 <!--#include file="../../../../funciones.asp"-->
 <%
+on error resume next
 codigo_cac=request.querystring("codigo_cac")
 codigo_cpf=request.querystring("codigo_cpf")
 estadonota=request.querystring("estadonota")
@@ -34,13 +35,14 @@ Set obj=Server.CreateObject("PryUSAT.clsAccesoDatos")
 
 	if codigo_cac<>"-2" and codigo_cpf<>"-2" then
 		Set rsProfesor= obj.Consultar("ConsultarNotas","FO","EN",codigo_cac,codigo_cpf,estadonota,request.QueryString("mod"))
+		'Set rsProfesor= obj.Consultar("ConsultarNotas","FO","EN",codigo_cac,codigo_cpf,estadonota)
 		if Not(rsProfesor.BOF and rsProfesor.EOF) then
 			Dim ArrCampos,ArrEncabezados,ArrCeldas,ArrCamposEnvio
 			
 			ArrEncabezados=Array("ID","Profesor","Asignatura (*)","Grupo horario","N° Matriculados","Escuela Profesional","Departamento Académico")
 			ArrCampos=Array("codigo_cup","docente","nombre_cur","grupohor_cup","nro_mat","nombre_cpf","nombre_Dac")
 			ArrCeldas=Array("0%","25%","30%","5%","5%","15%","20%")
-			ArrCamposEnvio=Array("codigo_cup")
+			ArrCamposEnvio=Array("codigo_cup","codigo_cpf")
 			pagina="detalleregistro.asp?tipo=" & codigo_cac
 			alto="height=""98%"""
 			activo=true
@@ -48,6 +50,7 @@ Set obj=Server.CreateObject("PryUSAT.clsAccesoDatos")
 			titulorpte = "Listado de Docentes"
 			call ValoresExportacion(titulorpte,ArrEncabezados,rsProfesor,Arrcampos,ArrCeldas)
 			'HCano Fin
+			
 		end if
 	end if
 
@@ -103,7 +106,8 @@ Set obj=nothing
   <%if activo=true then%>  
   <tr>
     <td width="100%" colspan="4" height="50%">
-    <%call CrearRpteTabla(ArrEncabezados,rsProfesor,"",ArrCampos,ArrCeldas,"S","I",pagina,"S",ArrCamposEnvio,"")
+    <%
+    call CrearRpteTabla(ArrEncabezados,rsProfesor,"",ArrCampos,ArrCeldas,"S","I",pagina,"S",ArrCamposEnvio,"")
     
     'HCano inicio
     response.write "<script>document.all.exportar.style.display=''</script>"
@@ -125,6 +129,12 @@ Set obj=nothing
 	</td>
 	</tr>
   <%end if%>
+  <%
+  if Err.number <> 0 then    
+    response.Write (Err.Description& "  -  " &   Err.Source & " - " & Err.number)
+        end if
+  
+   %>
 </table>
 </body>
 </html>

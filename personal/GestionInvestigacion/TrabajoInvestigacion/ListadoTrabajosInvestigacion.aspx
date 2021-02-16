@@ -5,6 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Trabajos de investigación/Artículos científicos para obtención de Bachiller
+    
+    
+    
+    
     </title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv='X-UA-Compatible' content='IE=8' />
@@ -78,7 +82,7 @@
                 archivo = $("#archivorubrica").val();
                 //Extensiones Permitidas
                 //        extensiones_permitidas = new Array(".pdf", ".doc", ".docx");
-                extensiones_permitidas = new Array(".pdf");
+                extensiones_permitidas = new Array(".pdf", ".doc", ".docx");
                 //recupero la extensión de este nombre de archivo
                 // recorto el nombre desde la derecha 4 posiciones atras (Ubicación de la Extensión)
                 archivo = archivo.substring(archivo.length - 5, archivo.length);
@@ -94,17 +98,18 @@
                 }
                 if (permitida == false) {
 
-                    fnMensaje("error", "Solo puede adjuntar archivos de proyecto en formato .pdf");
+                    fnMensaje("error", "Solo puede adjuntar archivos de proyecto en formato .pdf, .doc, .docx");
 
                     return false;
                 }
             }
-            if (!confirm('¿Está segúro que desea Guardar rúbrica?')) {
+            if (!confirm('¿Está seguro que desea guardar rúbrica?')) {
                 return false;
             }
 
             return true;
         }
+        /*
         function ValidarActa() {
             if ($("#archivoacta").val() == '') {
                 fnMensaje("error", "seleccione un archivo de acta");
@@ -119,7 +124,7 @@
                 archivo = $("#archivoacta").val();
                 //Extensiones Permitidas
                 //        extensiones_permitidas = new Array(".pdf", ".doc", ".docx");
-                extensiones_permitidas = new Array(".pdf");
+                extensiones_permitidas = new Array(".pdf", ".doc", ".docx");
                 //recupero la extensión de este nombre de archivo
                 // recorto el nombre desde la derecha 4 posiciones atras (Ubicación de la Extensión)
                 archivo = archivo.substring(archivo.length - 5, archivo.length);
@@ -135,7 +140,7 @@
                 }
                 if (permitida == false) {
 
-                    fnMensaje("error", "Solo puede adjuntar archivos de proyecto en formato .pdf");
+                    fnMensaje("error", "Solo puede adjuntar archivos de proyecto en formato .pdf, .doc, .docx");
 
                     return false;
                 }
@@ -150,10 +155,20 @@
 
             return true;
 
-        }
+        }*/
         function fnDescargar(id_ar) {
             var d = new Date();
             window.open("../../Descargar.aspx?Id=" + id_ar + "&h=" + d.getHours().toString() + d.getMinutes().toString() + d.getSeconds().toString());
+        }
+        function Validar() {
+            if ($("#ddlCondicion").val() == "") {
+                fnMensaje("error", "Debe seleccionar condición de Trabajo de investigación");            
+                return false;
+            }
+            if (!confirm("¿Está seguro que desea guardar y generar acta con la condición seleccionada?")) {
+                return false;
+            }
+            return true;
         }
     </script>
 
@@ -251,6 +266,36 @@
                                 CssClass="btn btn-primary" ToolTip="Buscar"></asp:LinkButton>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-md-4">
+                            <table>
+                                <tr>
+                                    <td style="width: 15%; padding: 4px;">
+                                        <asp:LinkButton ID="btnDescargar1" runat="server" Text='' CssClass="btn btn-warning btn-sm btn-radius"
+                                            Font-Size="11px" ToolTip="Descargar" OnClientClick="return false;">
+                                        </asp:LinkButton>
+                                    </td>
+                                    <td style="width: 85%;">
+                                        <asp:Label ID="Label11" runat="server" CssClass="control-label">PENDIENTE</asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <table>
+                                <tr>
+                                    <td style="width: 15%; padding: 4px;">
+                                        <asp:LinkButton ID="LinkButton2" runat="server" Text='' CssClass="btn btn-sm btn-success btn-radius"
+                                            Font-Size="11px" ToolTip="ATENDIDO" OnClientClick="return false;">
+                                        </asp:LinkButton>
+                                    </td>
+                                    <td style="width: 85%;">
+                                        <asp:Label ID="Label19" runat="server" CssClass="control-label">ATENDIDO</asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <br />
                 <asp:UpdatePanel runat="server" ID="updGeneral" UpdateMode="Conditional" ChildrenAsTriggers="false">
@@ -264,7 +309,7 @@
                                 <div class="form-group">
                                     <div runat="server" id="lblmensaje">
                                     </div>
-                                    <asp:GridView runat="server" ID="gvAlumnos" CssClass="table table-condensed" DataKeyNames="codigo_tba,codigo_cac,estado,codigo_tat,bloqueo,autoriza"
+                                    <asp:GridView runat="server" ID="gvAlumnos" CssClass="table table-condensed" DataKeyNames="codigo_tba,codigo_cac,estado,codigo_tat"
                                         AutoGenerateColumns="false">
                                         <Columns>
                                             <asp:TemplateField HeaderText="#" HeaderStyle-Width="3%">
@@ -282,7 +327,7 @@
                                                     </asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="" HeaderStyle-Width="3%" ShowHeader="false">
+                                            <%--<asp:TemplateField HeaderText="" HeaderStyle-Width="3%" ShowHeader="false">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="btnRevision" runat="server" Text='<span class="fa fa-comment"></span>'
                                                         CssClass="btn btn-danger btn-sm" ToolTip="Revision" CommandName="Revision" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
@@ -303,7 +348,7 @@
                                                         CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
                                                     </asp:LinkButton>
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>--%>
                                         </Columns>
                                         <HeaderStyle Font-Size="12px" Font-Bold="true" BackColor="#D9534F" ForeColor="white" />
                                         <RowStyle Font-Size="12px" />
@@ -358,7 +403,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <asp:Label ID="Label3" runat="server" CssClass="col-sm-3 col-md-3 control-label">Tipo</asp:Label>
+                                                    <asp:Label ID="Label3" runat="server" CssClass="col-sm-3 col-md-3 control-label">Tipo de trabajo</asp:Label>
                                                     <div class="col-sm-9 col-md-9">
                                                         <asp:TextBox runat="server" ID="txtTipo" ReadOnly="true" CssClass="form-control"></asp:TextBox>
                                                     </div>
@@ -395,26 +440,38 @@
                                                 <asp:UpdatePanel runat="server" ID="updarchivos" UpdateMode="conditional">
                                                     <ContentTemplate>
                                                         <div class="form-group">
-                                                            <asp:Label ID="lblRubricaTexto" runat="server" CssClass="col-sm-3 col-md-3 control-label">Rúbrica</asp:Label>
+                                                            <%--<asp:Label ID="lblRubricaTexto" runat="server" CssClass="col-sm-3 col-md-3 control-label">Rúbrica</asp:Label>--%>
                                                             <div runat="server" id="DivRubrica">
-                                                                <div class="col-sm-2 col-md-2">
+                                                                <%--<div class="col-sm-2 col-md-2">
                                                                     <asp:LinkButton runat="server" ID="LinkButton1">Formato</asp:LinkButton>
-                                                                </div>
-                                                                <asp:Label ID="Label12" runat="server" CssClass="col-sm-2 col-md-2 control-label">Adjuntar Rúbrica</asp:Label>
-                                                                <div class="col-sm-5 col-md-5">
+                                                                </div>--%>
+                                                                <asp:Label ID="Label12" runat="server" CssClass="col-sm-3 col-md-3 control-label">Adjuntar Rúbrica</asp:Label>
+                                                                <div class="col-sm-8 col-md-8">
                                                                     <asp:FileUpload runat="server" ID="archivorubrica" CssClass="form-control" />
                                                                     <ul>
-                                                                        <li>Archivos permitidos: <span style="color: Red">.pdf</span></li>
+                                                                        <li>Archivos permitidos: <span style="color: Red">.pdf, .doc, .docx</span></li>
                                                                         <li>Tamaño Máximo: <span style="color: Red">20 Mb</span></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-sm-3 col-md-3">
+                                                            </div>
                                                             <div class="col-sm-2 col-md-2" runat="server" id="divArchivoRubrica">
                                                             </div>
                                                         </div>
+                                                        <div class="form-group" runat="server" id="condicion">
+                                                            <asp:Label ID="Label2" runat="server" CssClass="col-sm-3 col-md-3 control-label">Condición</asp:Label>
+                                                            <div class="col-sm-4 col-md-4">
+                                                                <asp:DropDownList runat="server" ID="ddlCondicion" CssClass="form-control">
+                                                                    <asp:ListItem Value="">[-- SELECCIONE --]</asp:ListItem>
+                                                                    <asp:ListItem Value="A">APROBADO</asp:ListItem>
+                                                                    <asp:ListItem Value="D">DESAPROBADO</asp:ListItem>
+                                                                </asp:DropDownList>
+                                                            </div>
+                                                        </div>
                                                         <div class="form-group">
-                                                            <asp:Label ID="lblacta" runat="server" CssClass="col-sm-3 col-md-3 control-label">Acta</asp:Label>
-                                                            <div runat="server" id="DivActa">
+                                                            <%--<asp:Label ID="lblacta" runat="server" CssClass="col-sm-3 col-md-3 control-label">Acta</asp:Label>--%>
+                                                            <%--<div runat="server" id="DivActa">
                                                                 <div class="col-sm-2 col-md-2">
                                                                     <asp:LinkButton runat="server" ID="LinkButton3">Formato</asp:LinkButton>
                                                                 </div>
@@ -426,18 +483,10 @@
                                                                         <li>Tamaño Máximo: <span style="color: Red">20 Mb</span></li>
                                                                     </ul>
                                                                 </div>
+                                                            </div>--%>
+                                                            <div class="col-sm-3 col-md-3">
                                                             </div>
                                                             <div class="col-sm-2 col-md-2" runat="server" id="DivArchivoActa">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group" runat="server" id="condicion">
-                                                            <asp:Label ID="Label2" runat="server" CssClass="col-sm-3 col-md-3 control-label">Condición</asp:Label>
-                                                            <div class="col-sm-4 col-md-4">
-                                                                <asp:DropDownList runat="server" ID="ddlCondicion" CssClass="form-control">
-                                                                    <asp:ListItem Value="">[-- SELECCIONE --]</asp:ListItem>
-                                                                    <asp:ListItem Value="A">APROBADO</asp:ListItem>
-                                                                    <asp:ListItem Value="D">DESAPROBADO</asp:ListItem>
-                                                                </asp:DropDownList>
                                                             </div>
                                                         </div>
                                                     </ContentTemplate>
@@ -451,7 +500,8 @@
                                             <center>
                                                 <asp:UpdatePanel runat="server" ID="updbotones" UpdateMode="conditional">
                                                     <ContentTemplate>
-                                                        <asp:Button runat="server" ID="btnGuardar" CssClass="btn btn-primary" Text="Guardar" />
+                                                        <asp:Button runat="server" ID="btnGuardar" CssClass="btn btn-primary" Text="Guardar"
+                                                            OnClientClick="return Validar();" />
                                                         <asp:Button runat="server" ID="btnCerrar" CssClass="btn btn-danger" Text="Cerrar" />
                                                         <triggers>
                                                     </ContentTemplate>
@@ -473,6 +523,7 @@
                     </Triggers>
                 </asp:UpdatePanel>
             </div>
+        </div>
         </form>
     </div>
 </body>

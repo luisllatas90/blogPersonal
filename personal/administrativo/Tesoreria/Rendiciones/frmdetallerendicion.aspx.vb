@@ -17,24 +17,48 @@ Partial Class frmdetallerendicion
     End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Exit Sub
-        If Me.IsPostBack = False Then
+        Try
+            'Exit Sub
+            If Me.IsPostBack = False Then
 
-            Dim dtsestadorendicion As System.Data.DataSet, EstadoFinalizar As String
-            cn.cerrarconexion()
-            EstadoFinalizar = dtsestadorendicion.Tables("consulta").Rows(0).Item("estado_rend")
-            If EstadoFinalizar = "P" Then
-                Mostrarfinalizar = True
-            Else
-                Mostrarfinalizar = False
+                Dim dtsestadorendicion As System.Data.DataSet, EstadoFinalizar As String
+
+                cn.abrirconexion()
+                dtsestadorendicion = cn.consultar("TES_ObtenerEstadoRendicion", Request.QueryString("codigo_rend"))
+                cn.cerrarconexion()
+
+                EstadoFinalizar = dtsestadorendicion.Tables("consulta").Rows(0).Item("estado_rend")
+                If EstadoFinalizar = "P" Then
+                    'Response.Write("P")
+                    'cmdcancelar.Text = "cerrar 1"
+
+                    Mostrarfinalizar = True
+                Else
+
+                    'Response.Write("ok")
+                    'cmdcancelar.Text = "cerrar 2"
+                    Mostrarfinalizar = False
+
+                    ''Deshabilitar Controles
+                    OcultarBoton()
+                    '<input id="cmdagregar" style="width: 112px; background-repeat: no-repeat; background-color: lemonchiffon"
+                    '    type="button" value="Agregar" language="javascript" onclick="RegistrarDetallerendicion()"
+                    '    onclick="return cmdReactivar_onclick()" onclick="return cmdagregar_onclick()" />
+                    'ShowMessage("fnAgruparTramitesSelect(): " & ex.Message.Replace("'", ""), MessageType.Error)
+                End If
+                estado_rendicion = EstadoFinalizar
+                mostrarinformacion()
             End If
-            estado_rendicion = EstadoFinalizar
-            mostrarinformacion()
-
-        End If
-
+        Catch ex As Exception
+            Response.Write("ERROR: " & ex.ToString)
+        End Try
 
     End Sub
+
+    Protected Sub OcultarBoton()
+        Page.RegisterStartupScript("Boton", "<script>OcultarBotones();</script>")
+    End Sub
+
 
     Protected Sub cmdagregar_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         ' ShowDialogModal("urlPopup",window,"Propiedades");

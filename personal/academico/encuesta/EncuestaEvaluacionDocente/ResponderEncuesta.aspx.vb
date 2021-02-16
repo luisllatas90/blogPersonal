@@ -29,10 +29,12 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuesta
         Dim tbEscla As New Data.DataTable
         tbEscla.Columns.Add("1")
         tbEscla.Columns.Add("2")
-        tbEscla.Columns.Add("3")
-        tbEscla.Columns.Add("4")
+        'tbEscla.Columns.Add("3")
+        'tbEscla.Columns.Add("4")
 
-        tbEscla.Rows.Add("NO LOGRADO", "EN DESARROLLO", "LOGRADO", "SATISFACTORIO")
+        'tbEscla.Rows.Add("NO LOGRADO", "EN DESARROLLO", "LOGRADO", "SATISFACTORIO")
+        tbEscla.Rows.Add("0", "1")
+
         Me.GridView1.DataSource = tbEscla
         Me.GridView1.DataBind()
     End Sub
@@ -68,6 +70,11 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuesta
                 End If
                 Me.gvPreguntas.DataBind()
 
+                If Session("eva_Tipo") <> "O" Then  '26-10 Observador
+                    lblpreg.visible = False
+                    Txtpreguntafinal.text = ""
+                    Txtpreguntafinal.visible = False
+                End If
             End If
         Catch ex As Exception
 
@@ -78,9 +85,11 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuesta
 
         Dim nropreguntas As Integer = 0
         If Session("eva_Tipo") = "S" Or Session("eva_Tipo") = "X" Then
-            nropreguntas = 22
+            '--nropreguntas = 18
+            nropreguntas = 17
         Else
-            nropreguntas = 22
+            '-nropreguntas = 18
+            nropreguntas = 17
         End If
 
         Dim respuesta_eva As Integer = 0
@@ -89,19 +98,18 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuesta
             respuesta_eva = 0
             Dim rbUno As Boolean = CType(row.FindControl("rbUno"), RadioButton).Checked
             Dim rbDos As Boolean = CType(row.FindControl("rbDos"), RadioButton).Checked
-            Dim rbTres As Boolean = CType(row.FindControl("rbTres"), RadioButton).Checked
-            Dim rbCuatro As Boolean = CType(row.FindControl("rbCuatro"), RadioButton).Checked
+            'Dim rbTres As Boolean = CType(row.FindControl("rbTres"), RadioButton).Checked
+            'Dim rbCuatro As Boolean = CType(row.FindControl("rbCuatro"), RadioButton).Checked
 
             If rbUno Then
                 respuesta_eva = 1
             ElseIf rbDos Then
                 respuesta_eva = 1
-            ElseIf rbTres Then
-                respuesta_eva = 1
-            ElseIf rbCuatro Then
-                respuesta_eva = 1
+                'ElseIf rbTres Then   '23-10-2020 Se comenta
+                '    respuesta_eva = 1
+                'ElseIf rbCuatro Then
+                '    respuesta_eva = 1
             End If
-
 
             If respuesta_eva > 0 Then
                 respondio += 1
@@ -139,9 +147,8 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuesta
                     Dim datos As New Data.DataTable
                     Dim rbUno As Boolean = False
                     Dim rbDos As Boolean = False
-                    Dim rbTres As Boolean = False
-                    Dim rbCuatro As Boolean = False
-
+                    'Dim rbTres As Boolean = False   '26-10 CGASTELO
+                    'Dim rbCuatro As Boolean = False
 
                     objcnx.IniciarTransaccion()
 
@@ -152,55 +159,70 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuesta
 
                         'registrar las demás preguntas
                         If codigo_eed > 0 Then
-
+                            
                             For Each row As GridViewRow In gvPreguntas.Rows
-
 
                                 rbUno = CType(row.FindControl("rbUno"), RadioButton).Checked
                                 rbDos = CType(row.FindControl("rbDos"), RadioButton).Checked
-                                rbTres = CType(row.FindControl("rbTres"), RadioButton).Checked
-                                rbCuatro = CType(row.FindControl("rbCuatro"), RadioButton).Checked
-
+                                '//Ahora se comentan los radio 3 y 4
+                                'rbTres = CType(row.FindControl("rbTres"), RadioButton).Checked
+                                'rbCuatro = CType(row.FindControl("rbCuatro"), RadioButton).Checked
 
                                 'PREPARACIÓN DE CLASE 
-                                If gvPreguntas.DataKeys.Item(row.RowIndex).Values("codigo_comp") = 5 Then
-                                    If rbUno Then
-                                        respuesta_eva = 0
-                                    ElseIf rbDos Then
-                                        respuesta_eva = 0
-                                    ElseIf rbTres Then
-                                        respuesta_eva = 0
-                                    ElseIf rbCuatro Then
-                                        respuesta_eva = 2.5
-                                    End If
+                                'If gvPreguntas.DataKeys.Item(row.RowIndex).Values("codigo_comp") = 5 Then
+                                'If rbUno Then
+                                'respuesta_eva = 0
+                                'ElseIf rbDos Then
+                                'respuesta_eva = 1 ' 0 23/10/2020
+                                'ElseIf rbTres Then
+                                '    respuesta_eva = 0
+                                'ElseIf rbCuatro Then
+                                '    respuesta_eva = 2.5
+                                'End If
 
-                                Else 'DESARROLLO DE CLASE 
-                                    If rbUno Then
-                                        respuesta_eva = 0
-                                    ElseIf rbDos Then
-                                        respuesta_eva = 0.5
-                                    ElseIf rbTres Then
-                                        respuesta_eva = 0.75
-                                    ElseIf rbCuatro Then
-                                        respuesta_eva = 1
-                                    End If
+                                'Else 'DESARROLLO DE CLASE 
+                                'If rbUno Then
+                                '    respuesta_eva = 0
+                                'ElseIf rbDos Then
+                                '    respuesta_eva = 0.5
+                                'ElseIf rbTres Then
+                                '    respuesta_eva = 0.75
+                                'ElseIf rbCuatro Then
+                                '    respuesta_eva = 1
+                                'End If
 
+                                'End If
+
+                                If rbUno Then   '28/10
+                                    respuesta_eva = 0
+                                ElseIf rbDos Then
+                                    respuesta_eva = 1
                                 End If
+
                                 codigo_eva = gvPreguntas.DataKeys.Item(row.RowIndex).Values("codigo_eva")
 
-                                objcnx.Ejecutar("EAD_AgregarRespuestaEvaluacionV2", codigo_eva, respuesta_eva, Session("eva_codigocev"), Session("eva_codigoper"), cod_per)
+                                objcnx.Ejecutar("EAD_AgregarRespuestaEvaluacionV2", codigo_eva, respuesta_eva, Session("eva_codigocev"), Session("eva_codigoper"), cod_per, "")
 
                             Next
+
+                            If Txtpreguntafinal.visible = True Then
+                                'pregunta abierta,la 19 solo para Observador
+                                objcnx.Ejecutar("EAD_AgregarRespuestaEvaluacionV2", val(codigo_eva + 1), 0, Session("eva_codigocev"), Session("eva_codigoper"), cod_per, trim(Me.Txtpreguntafinal.text))
+                            End If                            
+
                             objcnx.TerminarTransaccion()
+                            'ShowMessage("Se registraron las respuestas correctamente.", MessageType.Success) '27/10 Ceci
+
                         Else
                             objcnx.AbortarTransaccion()
                         End If
-                    End If                  
+                    End If
+
                     objcnx.CerrarConexion()
                     objcnx = Nothing
 
                     Session("eva_codigoper") = "0"
-                    Response.Redirect("EncuestaDirector.aspx?tipoEval=" & Session("eva_Tipo"))
+                    Response.Redirect("EncuestaDirector.aspx?tipoEval=" & Session("eva_Tipo") & "&resp=si")
 
                 Catch ex As Exception
                     objcnx.AbortarTransaccion()
@@ -239,46 +261,47 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuesta
             Dim codigo_comp As Integer = 0
 
             If e.Row.RowType = DataControlRowType.DataRow Then
-                codigo_comp = gvPreguntas.DataKeys.Item(e.Row.RowIndex).Values("codigo_comp")
+
+                'codigo_comp = gvPreguntas.DataKeys.Item(e.Row.RowIndex).Values("codigo_comp") 'Se comenta 27/10 Ceci
 
 
                 Dim ddlUno As RadioButton, ddlDos As RadioButton, ddlTres As RadioButton, ddlCuatro As RadioButton, ddlCinco As RadioButton
 
                 ddlUno = TryCast(e.Row.FindControl("rbUno"), RadioButton)
                 ddlDos = TryCast(e.Row.FindControl("rbDos"), RadioButton)
-                ddlTres = TryCast(e.Row.FindControl("rbTres"), RadioButton)
-                ddlCuatro = TryCast(e.Row.FindControl("rbCuatro"), RadioButton)
+                'ddlTres = TryCast(e.Row.FindControl("rbTres"), RadioButton)
+                'ddlCuatro = TryCast(e.Row.FindControl("rbCuatro"), RadioButton)
 
       
                 If Request.Browser.IsMobileDevice Then
                     ddlUno.CssClass = "radiorespuesta"
                     ddlDos.CssClass = "radiorespuesta"
-                    ddlTres.CssClass = "radiorespuesta"
-                    ddlCuatro.CssClass = "radiorespuesta"
+                    'ddlTres.CssClass = "radiorespuesta"
+                    'ddlCuatro.CssClass = "radiorespuesta"
                     Session("origen") = 1
                 Else
                     ddlUno.CssClass = "radionormal"
                     ddlDos.CssClass = "radionormal"
-                    ddlTres.CssClass = "radionormal"
-                    ddlCuatro.CssClass = "radionormal"
+                    'ddlTres.CssClass = "radionormal"
+                    'ddlCuatro.CssClass = "radionormal"
 
                     Session("origen") = 0
                 End If
 
-                If codigo_comp = 5 Then
-                    ddlUno.text = "NO"
-                    ddlDos.text = "-"
-                    ddlTres.text = "-"
-                    ddlCuatro.text = "SÍ"
+                'If codigo_comp = 5 Then   '// Se comenta 27/10 Ceci
+                '    ddlUno.text = "NO"
+                '    ddlDos.text = "-"
+                '    ddlTres.text = "-"
+                '    ddlCuatro.text = "SÍ"
 
-                    ddlDos.enabled = False
-                    ddlTres.enabled = False
-                Else
-                    ddlUno.text = "NO LOGRADO"
-                    ddlDos.text = "EN DESARROLLO"
-                    ddlTres.text = "LOGRADO"
-                    ddlCuatro.text = "SATISFACTORIO"
-                End If
+                '    ddlDos.enabled = False
+                '    ddlTres.enabled = False
+                'Else
+                '    ddlUno.text = "NO LOGRADO"
+                '    ddlDos.text = "EN DESARROLLO"
+                '    ddlTres.text = "LOGRADO"
+                '    ddlCuatro.text = "SATISFACTORIO"
+                'End If
 
 
 

@@ -1,15 +1,12 @@
 <!--#include file="../../../../../funciones.asp"-->
 <%
 if(session("codigo_usu") = "") then
-    Response.Redirect("../../../../../sinacceso.html")
+    Response.Redirect("https://intranet.usat.edu.pe/campusvirtual/sinacceso.html")
 end if
 'response.write (session("Usuario_bit"))
 
 dim pagina
 
-session("codigo_cac") = "74"
-session("descripcion_cac") = "2020-I"
-session("tipo_cac") = "N"
 codigo_cac = session("codigo_cac")
 descripcion_cac = session("descripcion_cac")
 accion=request.querystring("accion")
@@ -95,7 +92,7 @@ end if
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
 <title>Mantenimiento de matrículas del estudiante</title>
-<script type="text/javascript" language="JavaScript" src="../../../matricula/administrarGO/private/jquery.js"/>
+<script type="text/javascript" language="JavaScript" src="../../../matricula/administrarGO/private/jquery.js"/></script>
 <link rel="stylesheet" type="text/css" href="../../../../../private/estilo.css"/>
 <script type="text/javascript" language="JavaScript" src="../../../../../private/funciones.js"></script>
 <script type="text/javascript" language="JavaScript" src="private/validarfichamatricula2015.js?v=<% response.Write DateDiff("s", "12/31/1969 00:00:00", Now) %>"></script>

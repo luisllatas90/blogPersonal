@@ -13,6 +13,7 @@
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../../assets/css/material.css" rel="stylesheet" type="text/css" />
     <link rel='stylesheet' href='../../assets/css/style.css?x=1' />
+    <link href="../../assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
     <script src="../../assets/js/jquery.js" type="text/javascript"></script>
 
@@ -46,7 +47,30 @@
 
     <script src="../../assets/bootstrap-select-1.13.1/js/bootstrap-select.js" type="text/javascript"></script>
 
+    <script src="../../assets/js/sweetalert2.all.min.js" type="text/javascript"></script>
+
+    <script src="../../assets/js/promise.min.js" type="text/javascript"></script>
+
     <script type="text/javascript">
+        $(document).ready(function() {
+            LoadingEstado();
+            fnLoading(false);
+            $(".swal2-confirm swal2-styled").click(function() {
+                fnLoading(true);
+            })
+        });
+        function LoadingEstado() {
+            $("#ddlEstado").change(function() {
+                fnLoading(true);
+            });
+        }
+        function fnLoading(sw) {
+            if (sw) {
+                $('.piluku-preloader').removeClass('hidden');
+            } else {
+                $('.piluku-preloader').addClass('hidden');
+            }
+        }
         function fnMensaje(typ, msje) {
             var n = noty({
                 text: msje,
@@ -61,6 +85,31 @@
         function fnDescargar(url) {
             var d = new Date();
             window.open(url + "&h=" + d.getHours().toString() + d.getMinutes().toString() + d.getSeconds().toString());
+        }
+        function fnConfirmacion(ctrl) {
+
+            var defaultAction = $(ctrl).prop("href");
+            Swal.fire({
+                title: '¿Está seguro que desea dar conformidad a la tesis?',
+                text: "Luego no podrá revertir la conformidad",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No'
+            }).then(function(result) {
+                if (result.value == true) {
+                    fnLoading(true);
+                    eval(defaultAction);
+                }
+            })
+            /*
+            if (confirm('¿Está seguro que desea dar conformidad a tesis?')) {
+            return true;
+            } else {
+            return false;
+            }*/
         }
     </script>
 
@@ -123,6 +172,19 @@
         <form enctype="multipart/form-data" id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
+        <asp:UpdatePanel runat="server" ID="updLoading" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="piluku-preloader text-center">
+                    <div class="loader">
+                        Loading...</div>
+                </div>
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="ddlEstado" EventName="SelectedIndexChanged" />
+                <asp:AsyncPostBackTrigger ControlID="gvTesis" EventName="RowCommand" />
+                <asp:AsyncPostBackTrigger ControlID="btnAtras" />
+            </Triggers>
+        </asp:UpdatePanel>
         <div class="panel panel-default">
             <div class="panel-heading" style="background-color: #E33439; color: White; font-weight: bold;
                 font-size: 14px;">
@@ -131,6 +193,9 @@
             <div class="panel-body">
                 <asp:UpdatePanel runat="server" ID="updLista" UpdateMode="Conditional" ChildrenAsTriggers="false">
                     <ContentTemplate>
+
+                        <script src="../../assets/js/tooltip-custom.js" type="text/javascript"></script>
+
                         <div runat="server" id="Lista">
                             <div class="form-horizontal">
                                 <div class="form-group">
@@ -147,6 +212,11 @@
                             <asp:LinkButton ID="btnConsultar" runat="server" Text='<span class="fa fa-search"></span>'
                                 CssClass="btn btn-primary" ToolTip="Buscar"></asp:LinkButton>
                         </div>--%>
+                                    <div class="col-sm-8 col-md-9 text-right">
+                                        <asp:LinkButton ID="btnExportarExcel" runat="server" OnClick="btnExportExcel_Click"
+                                            CssClass="btn btn-sm btn-success btn-radius" Text='<span class="fa fa-file-excel-o"></span> Exportar a Excel'>
+                                        </asp:LinkButton>
+                                    </div>
                                 </div>
                             </div>
                             <br />
@@ -157,7 +227,7 @@
                             <div class="form-group">
                                 <div runat="server" id="lblmensaje">
                                 </div>
-                                <asp:GridView runat="server" ID="gvTesis" CssClass="table table-condensed" DataKeyNames="codigo_Tes,codigo_dta,archivofinal,codigo_jur,fechaconformidad,codigo_tfu"
+                                <asp:GridView runat="server" ID="gvTesis" CssClass="table table-condensed" DataKeyNames="codigo_Tes,codigo_dta,archivofinal,codigo_jur,fechaconformidad,codigo_tfu,bloqueaobservaciones_jur,diaspendientes,fechaarchivo,tipo_tpi"
                                     AutoGenerateColumns="false">
                                     <Columns>
                                         <%--<asp:TemplateField HeaderText="#" HeaderStyle-Width="3%">
@@ -165,30 +235,30 @@
                                         <%#Container.DataItemIndex + 1%>
                                     </ItemTemplate>
                                 </asp:TemplateField>--%>
-                                        <asp:BoundField DataField="titulo_tes" HeaderText="TÍTULO" HeaderStyle-Width="40%" />
-                                        <asp:BoundField DataField="alumno" HeaderText="BACHILLER(ES)" HeaderStyle-Width="28%" />
-                                        <asp:BoundField DataField="descripcion_tpi" HeaderText="TIPO" HeaderStyle-Width="20%" />
+                                        <asp:BoundField DataField="titulo_tes" HeaderText="TÍTULO" HeaderStyle-Width="35%" />
+                                        <asp:BoundField DataField="alumno" HeaderText="BACHILLER(ES)" HeaderStyle-Width="14%" />
+                                        <asp:BoundField DataField="nombre_cpf" HeaderText="PROGRAMA ESTUDIOS" HeaderStyle-Width="14%" />
+                                        <asp:BoundField DataField="descripcion_tpi" HeaderText="TIPO" HeaderStyle-Width="8%" />
+                                        <asp:BoundField DataField="diaspendientes" HeaderText="DIAS FALTANTES" HeaderStyle-Width="5%"
+                                            ItemStyle-HorizontalAlign="Center" ItemStyle-VerticalAlign="Middle" ItemStyle-ForeColor="Red"
+                                            ItemStyle-Font-Bold="true" />
+                                        <asp:BoundField DataField="fechaarchivo" HeaderText="FECHA ARCHIVO" HeaderStyle-Width="11%"
+                                            ItemStyle-HorizontalAlign="Center" />
+                                        <asp:BoundField DataField="ultimaobservacion" HeaderText="ÚLTIMA OBSERVACIÓN" HeaderStyle-Width="8%"
+                                            ItemStyle-HorizontalAlign="Center" />
                                         <asp:TemplateField HeaderText="" HeaderStyle-Width="3%" ShowHeader="false">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnDescargar" runat="server" Text='<span class="fa fa-download"></span>'
-                                                    CssClass="btn btn-info btn-sm btn-radius" ToolTip="Descargar" CommandName="Descargar"
-                                                    CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
+                                                    CssClass="btn btn-info btn-sm btn-radius primary-tooltip" data-toggle="tooltip"
+                                                    data-placement="top" CommandName="Descargar" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
                                                 </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <%-- <asp:TemplateField HeaderText="" HeaderStyle-Width="3%" ShowHeader="false">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnBloquear" runat="server" Text='<span class="fa fa-lock"></span>'
-                                                    CssClass="btn btn-sm btn-danger btn-radius" ToolTip="Bloquear" CommandName="Bloquear"
-                                                    OnClientClick="return confirm('¿Está seguro que desea bloquear la tesis?')" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
-                                                </asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>--%>
                                         <asp:TemplateField HeaderText="" HeaderStyle-Width="3%" ShowHeader="false">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnAsesorias" runat="server" Text='<span class="fa fa-comment"></span>'
-                                                    CssClass="btn btn-warning btn-sm btn-radius" ToolTip="Asesorias" CommandName="Asesorias"
-                                                    CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
+                                                    CssClass="btn btn-warning btn-sm btn-radius" ToolTip="Observaciones" CommandName="Asesorias"
+                                                    OnClientClick="fnLoading(true);" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
                                                 </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -196,8 +266,7 @@
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnConforme" runat="server" Text='<span class="fa fa-check"></span>'
                                                     CssClass="btn btn-success btn-sm btn-radius" ToolTip="Conformidad" CommandName="Conformidad"
-                                                    OnClientClick="return confirm('¿Está seguro que desea dar conformidad a tesis?')"
-                                                    CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'> 
+                                                    OnClientClick="fnConfirmacion(this); return false;" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'> 
                                                 </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -216,6 +285,7 @@
                         <asp:AsyncPostBackTrigger ControlID="gvTesis" EventName="RowCommand" />
                         <asp:AsyncPostBackTrigger ControlID="ddlEstado" EventName="selectedindexchanged" />
                         <asp:AsyncPostBackTrigger ControlID="btnAtras" />
+                        <asp:PostBackTrigger ControlID="btnExportarExcel" />
                     </Triggers>
                 </asp:UpdatePanel>
                 <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
@@ -223,7 +293,8 @@
                         <div class="form-group" id="DivAsesorias" runat="server" visible="false">
                             <div class="row">
                                 <div class="form-group text-center">
-                                    <asp:Button runat="server" ID="btnAtras" CssClass="btn btn-sm btn-danger" Text="Atrás" />
+                                    <asp:Button runat="server" ID="btnAtras" CssClass="btn btn-sm btn-danger" Text="Atrás"
+                                        OnClientClick="fnLoading(true);" />
                                 </div>
                             </div>
                             <div role="tabpanel">
@@ -351,13 +422,22 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group">
+                                                            <asp:Label ID="Label4" runat="server" CssClass="col-sm-2 col-md-2 control-label">Categoría</asp:Label>
+                                                            <div class="col-sm-3 col-md-2">
+                                                                <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-control">
+                                                                </asp:DropDownList>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group">
                                                             <asp:HiddenField runat="server" ID="hdjur" Value="0" />
                                                             <asp:HiddenField runat="server" ID="hdtes" Value="0" />
                                                             <asp:Label ID="Label16" runat="server" CssClass="col-sm-2 col-md-2 control-label"
                                                                 For="txtObservacion">Observaciones</asp:Label>
                                                             <div class="col-sm-7 col-md-8">
                                                                 <asp:TextBox runat="server" ID="txtObservacion" CssClass="form-control" TextMode="MultiLine"
-                                                                    Rows="4"></asp:TextBox>
+                                                                    Rows="4" MaxLength="1000"></asp:TextBox>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -382,9 +462,18 @@
                                                 </ContentTemplate>
                                                 <Triggers>
                                                     <asp:PostBackTrigger ControlID="btnGuardarObservacion" />
+                                                    <asp:PostBackTrigger ControlID="btnEnviar" />
                                                 </Triggers>
                                             </asp:UpdatePanel>
                                             <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <center>
+                                                            <asp:Button runat="server" ID="btnEnviar" CssClass="btn btn-sm btn-success" OnClientClick="return confirm('¿Está seguro que desea enviar observaciones a Bachiller?, no podrá registrar mas observaciones')"
+                                                                Text="Enviar observaciones" />
+                                                        </center>
+                                                    </div>
+                                                </div>
                                                 <div class="panel-body timeline-block">
                                                     <!--Timeline-->
                                                     <div id="LineaDeTiempo" runat="server">

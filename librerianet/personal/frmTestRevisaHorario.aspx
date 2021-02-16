@@ -219,6 +219,15 @@
                                                         <asp:Label ID="lblHorasAsesoria" runat="server" Text="0"></asp:Label>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:Label ID="Label41" runat="server" 
+                                                            Text="Nro.Horas Asesoría Tesis Go y Prof"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:Label ID="lblHorasAsesoriaGOPP" runat="server" Text="0"></asp:Label>
+                                                    </td>
+                                                </tr>
                                                 <tr>                                                
                                                 <td>
                                                     <asp:Label ID="Label3" runat="server" Text="Estado Horario"></asp:Label>
@@ -379,19 +388,27 @@
                                                                
                                                                 </td>
                                                                 <td class="style4" align = "center" valign="middle">
-                                                                    <asp:Label ID="lblGA" runat="server" Text="Label" Height="35px" Width="100px" 
-                                                                        Visible="False"></asp:Label>    
+                                                                    <asp:Label ID="lblTG" runat="server" Text="Label" Height="35px" Width="100px"></asp:Label>                                                                            
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="style4" align = "center" valign="middle">
+                                                                    <asp:Label ID="lblGA" runat="server" Text="Label" Height="35px" Width="100px" 
+                                                                        Visible="False"></asp:Label>    
+                                                                </td>
+                                                                <td class="style4" align = "center" valign="middle">
                                                                     <asp:Label ID="lblGP" runat="server" Text="Label" Height="35px" Width="100px" 
                                                                         Visible="False"></asp:Label>
                                                                 </td>
+                                                            </tr>
+                                                                                                                            
+                                                            <tr>
                                                                 <td class="style4" align = "center" valign="middle">
                                                                     <asp:Label ID="lblF" runat="server" Text="Label" Height="35px" Width="100px" 
                                                                         Visible="False"></asp:Label>    
                                                                 </td>
+                                                                <td class="style4" align = "center" valign="middle">
+                                                                    &nbsp;</td>
                                                             </tr>
                                                                                                                             
                                                         </table>

@@ -16,7 +16,7 @@ Partial Class _SolicitudTramite
     'Dim fecha_ini As Date
     Dim fecha_cumple As Date
     'Dim vale_check As Integer
-    Dim limite_vac As Integer = 15 '07/01/2020 /  29/11-19 Para definir el día límite del mes para solicitar Vacaciones
+    Dim limite_vac As Integer = 15 '07/08/2020 se cambia a 3 /  29/11-19 Para definir el día límite del mes para solicitar Vacaciones
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -449,9 +449,9 @@ Partial Class _SolicitudTramite
 
         calcula_dias()
 
-        If Me.lblNumero_Tramite.Text = "Nuevo" Then
-            oculta_dias() 'Se añade el 04-07 : cuando seleccione Vacaciones no se debe mostrar los días
-        End If
+        'If Me.lblNumero_Tramite.Text = "Nuevo" Then
+        '    oculta_dias() 'Se añade el 04-07 : cuando seleccione Vacaciones no se debe mostrar los días
+        'End If
 
         'valida_pendientes() ' SE AÑADE, se bloquea 30-05-19
 
@@ -493,11 +493,11 @@ Partial Class _SolicitudTramite
         Me.lblNum_dias.Text = Str(DateDiff("d", Me.txtDesde.Text, Me.txtHasta.Text) + 1)
     End Sub
 
-    Private Sub oculta_dias()
-        Me.lblNumDias.visible = True
-        Me.lblNum_dias.visible = True
-        Me.lblNum_dias.Text = "--"
-    End Sub
+    'Private Sub oculta_dias()
+    '    Me.lblNumDias.visible = True
+    '    Me.lblNum_dias.visible = True
+    '    'Me.lblNum_dias.Text = "--"
+    'End Sub
 
     Private Sub saldo_dias()
 
@@ -1714,9 +1714,9 @@ Partial Class _SolicitudTramite
         consulta_cumpleaños() '09/08/19
 
         If Me.ddlTipoSolicitud.SelectedValue = 3 Then 'Vacaciones
-            valida_mes_registro() '05-07 Se añade
+            'valida_mes_registro() '05-07 Se añade
             ConsultaVacaciones()
-            oculta_dias() '05-07
+            'oculta_dias() '05-07
             Me.txtmotivo.Text = "" '15/08 se limpia
         End If
 
@@ -2346,8 +2346,9 @@ Partial Class _SolicitudTramite
             Else
                 If ddlTipoSolicitud.SelectedValue = 3 Then
                     lblAvisoSubida.Text = "**Aviso: En Vacaciones no es necesario archivos adjuntos"
+                Else
+                    lblAvisoSubida.Text = "**Aviso: Todavía puede subir archivos"
                 End If
-                lblAvisoSubida.Text = "**Aviso: Todavía puede subir archivos"
             End If
 
         End If

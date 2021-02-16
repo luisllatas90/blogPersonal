@@ -81,7 +81,7 @@ end if
 	Set rsSeparacion=objSeparacion.Consultar("ACAD_ConsultarSeparacionVigente","FO",codigo_alu)	
 	objSeparacion.CerrarConexion
 	
-	response.write("ACAD_ConsultarSituacionAlumno " & codigo_alu & "," & session("codigo_cac"))
+	'response.write("ACAD_ConsultarSituacionAlumno " & codigo_alu & "," & session("codigo_cac"))
 	
 	objSeparacion.AbrirConexion
 	'Set rsCarta=objSeparacion.Consultar("ACAD_ConsultarSituacionAlumno","FO", codigo_alu, session("codigo_cac"))
@@ -95,11 +95,12 @@ end if
 	'}#EPENA 07/01/2020
 	
 	'Set objSeparacion=nothing
-    
+  
 	if Not(rsSeparacion.BOF and rsSeparacion.EOF) then	    
 	    if rsSeparacion("codigo_tse") = 2 then
 	        tieneSeparacion= 1	        
 	        motivoSeparacion = "<b>" & rsSeparacion("descripcion_tse") & "</b>" & " desde " & rsSeparacion("fechaIni_sep") & " hasta " & rsSeparacion("fechafin_sep") & " por motivo: " & "<b>" & rsSeparacion("motivo_sep") & "</b>"
+	        
 	        if session("codigo_tfu")=11 then 'SI ES COMPLEMENTARIO QUE NO BLOQUEE POR SEPARACION TEMPORAL
               tieneSeparacion= 0
             end if 	    
@@ -109,17 +110,20 @@ end if
 	end if 
 	
     if Not(rsCarta.BOF and rsCarta.EOF) then	        
-        if (rsCarta("CodTipo") = "2" OR (rsCarta("CodTipo") = "1" and session("codigo_tfu") <> "9")) then
+        'if (rsCarta("tipo") = "2" OR (rsCarta("tipo") = "1" and session("codigo_tfu") <> "9")) then  'EPENA 27/10/2020 ID 38643 
+        if rsCarta("tipo") = "2" OR rsCarta("tipo") = "1"  then  'EPENA 27/10/2020 ID 38643 
             tieneSeparacion= 1                    
-            if rsCarta("motivo") ="" then
-                motivoSeparacion = "Bloqueo por veces desaprobadas."
-            else
-                motivoSeparacion = "<b>" & rsCarta("motivo") & "</b>"         
-            end if            
+            'if rsCarta("motivo") ="1" then
+            '    motivoSeparacion = "Bloqueo por veces desaprobadas."
+            'else
+            '    motivoSeparacion = "<b>" & rsCarta("mensaje_blo") & "</b>"         
+            'end if    
+             motivoSeparacion = "<b>" & rsCarta("mensaje_blo") & "</b>"      
         end if        
       else
           tieneSeparacion= 0       
-    end if	 	    	       	
+    end if	
+     	       	
   if tieneSeparacion = 1 then  %>
     <br/>
 	<table align="center" bgcolor="#EEEEEE" style="width: 80%;height:10%" cellpadding="3" class="contornotabla_azul">
@@ -188,7 +192,7 @@ end if
 end if 
 
 if Err.number <> 0 then    
-    response.Write (Err.Description)
+    response.Write (Err.Description& "  -  " &   Err.Source)
 end if
 %>
 </body>

@@ -405,7 +405,7 @@
                                         Style="color: #CC0000">
                                     </asp:Label>
                                     <asp:Label ID="lblDPendi" runat="server" class="control-label">
-                                    </asp:Label>
+                                    </asp:Label>                                             
                                     <asp:Label ID="lblpendientes" runat="server" class="control-label" Text=" días pendientes"
                                         Style="color: #CC0000">
                                     </asp:Label>

@@ -1,0 +1,39 @@
+#btnListar {
+  margin-left: auto; }
+
+.custom-checkbox.no-label {
+  padding-left: 0;
+  padding-right: 0; }
+  .custom-checkbox.no-label .custom-control-label {
+    padding-left: 0;
+    padding-right: 0; }
+
+.o-switch.btn-group input[type="radio"] {
+  display: none; }
+
+.o-switch.btn-group > .btn {
+  font-size: 0.7rem;
+  padding-left: 16px;
+  padding-right: 16px; }
+  .o-switch.btn-group > .btn:not(.active) {
+    color: #212529;
+    background-color: #d7d6d6;
+    border-color: #d7d6d6; }
+    .o-switch.btn-group > .btn:not(.active):not(.disabled):hover {
+      background-color: #cccbcb;
+      border-color: #cccbcb; }
+    .o-switch.btn-group > .btn:not(.active).disabled {
+      background-color: white;
+      border-color: #bcbcbc;
+      color: #212529; }
+  .o-switch.btn-group > .btn.disabled {
+    cursor: not-allowed; }
+
+#grvAsistencia td:last-child {
+  min-width: 200px; }
+
+.title > .grupo-cerrado {
+  font-size: 0.75rem; }
+
+.dataTables_filter > label {
+  font-size: 0.9rem; }

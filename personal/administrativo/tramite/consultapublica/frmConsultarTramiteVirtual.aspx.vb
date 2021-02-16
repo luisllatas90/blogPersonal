@@ -64,7 +64,7 @@ Partial Class administrativo_tramite_consultapublica_frmConsultarTramiteVirtual
     Protected Sub OnRowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
         If e.Row.RowType = DataControlRowType.DataRow Then
 
-            If e.Row.Cells(2).Text.ToString.Trim.Contains("Pendiente") Then
+            If e.Row.Cells(2).Text.ToString.Trim.Contains("Pendiente") Or e.Row.Cells(2).Text.ToString.Trim.Contains("Observado") Then
 
                 e.Row.Cells(0).ForeColor = Drawing.Color.Red
                 e.Row.Cells(1).ForeColor = Drawing.Color.Red
@@ -72,7 +72,7 @@ Partial Class administrativo_tramite_consultapublica_frmConsultarTramiteVirtual
                 e.Row.Cells(3).ForeColor = Drawing.Color.Red
             Else
 
-               
+
             End If
         End If
     End Sub
@@ -145,7 +145,7 @@ Partial Class administrativo_tramite_consultapublica_frmConsultarTramiteVirtual
             e.Row.Cells(1).BackColor = Drawing.Color.Linen
             e.Row.Cells(2).Font.Size = 10
             e.Row.Cells(2).BackColor = Drawing.Color.Linen
-            If e.Row.Cells(0).Text = "ARCHIVO" Then
+            If e.Row.Cells(0).Text.Contains("ARCHIVO") Then
                 Dim myLink As HyperLink = New HyperLink()
                 myLink.NavigateUrl = "javascript:void(0)"
                 myLink.Text = "Descargar"

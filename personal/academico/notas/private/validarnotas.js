@@ -117,7 +117,7 @@ function HabilitarRegistro(nivel)
 /*Usado en miscursos.asp y todocurso.asp*/
 function AbrirRegistro(modo,cd,nd,nivel)
 {
-	
+
 	switch (modo){
 		case "A": //Abrir registro de notas
 			if (fila.cells[6].innerText=="0"){

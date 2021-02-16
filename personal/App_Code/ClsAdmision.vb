@@ -30,11 +30,26 @@ Public Class ClsAdmision
         Return mo_VariablesGlobales.Item(cadena)
     End Function
 
+    'Function GeneraClave(ByVal ls_ApePaterno As String, ByVal ls_Nombres As String) As String
+    '    Randomize()
+    '    Return Right(UCase(ls_ApePaterno), 1) & _
+    '        Left(UCase(ls_Nombres), 1) & _
+    '        CInt(Rnd() * 4) & CInt(Rnd() * 5) & CInt(Rnd() * 9) & CInt(Rnd() * 7)
+    'End Function
+
+    'andy.diaz 14/09/2020 - Utilizo la función EliminarTildes
     Function GeneraClave(ByVal ls_ApePaterno As String, ByVal ls_Nombres As String) As String
         Randomize()
-        Return Right(UCase(ls_ApePaterno), 1) & _
-            Left(UCase(ls_Nombres), 1) & _
+        Return Right(UCase(EliminarTildes(ls_ApePaterno)), 1) & _
+            Left(UCase(EliminarTildes(ls_Nombres)), 1) & _
             CInt(Rnd() * 4) & CInt(Rnd() * 5) & CInt(Rnd() * 9) & CInt(Rnd() * 7)
+    End Function
+
+    'andy.diaz 14/09/2020
+    Public Function EliminarTildes(ByVal accentedStr As String) As String
+        Dim tempBytes As Byte()
+        tempBytes = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(accentedStr)
+        Return System.Text.Encoding.UTF8.GetString(tempBytes)
     End Function
 
     Public Function ListarTipoEstudio(ByVal ls_Tipo As String) As Data.DataTable
@@ -871,14 +886,23 @@ Public Class ClsAdmision
         Return lo_Dts
     End Function
 
-    Public Function CargarExcelNotas(ByVal ruta As String, ByVal codigo_cco As Integer, ByVal idArchivoCompartido As Integer, ByVal activarEstado As Boolean, ByVal codigo_per As Integer) As Dictionary(Of String, String)
+    Public Function CargarExcelNotas(ByVal ruta As String, ByVal codigo_cco As Integer, ByVal idArchivoCompartido As Integer, ByVal activarEstado As Boolean, ByVal fechaIngreso As String, ByVal codigo_per As Integer) As Dictionary(Of String, String)
         Dim lo_Resultado As New Dictionary(Of String, String)
 
         Try
             mo_Cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSATIMPORT").ConnectionString
             mo_Cnx.AbrirConexion()
 
-            Dim lo_Salida As Object() = mo_Cnx.Ejecutar("ADM_CargarExcelNotas", ruta, codigo_cco, idArchivoCompartido, activarEstado, codigo_per, 0, "")
+            Dim oFechaIngreso As Object = IIf(String.IsNullOrEmpty(fechaIngreso.Trim), DBNull.Value, fechaIngreso)
+
+            Dim lo_Salida As Object() = mo_Cnx.Ejecutar("ADM_CargarExcelNotas" _
+                                                        , ruta _
+                                                        , codigo_cco _
+                                                        , idArchivoCompartido _
+                                                        , activarEstado _
+                                                        , oFechaIngreso _
+                                                        , codigo_per _
+                                                        , 0, "")
             lo_Resultado.Item("rpta") = lo_Salida(0)
             lo_Resultado.Item("msg") = lo_Salida(1)
 
@@ -1341,10 +1365,11 @@ Public Class ClsAdmision
                                     ByVal direccion As String, ByVal departamento As String, ByVal provincia As String, _
                                     ByVal distrito As String, ByVal fecNacimiento As String, ByVal sexo As String, _
                                     ByVal anioEstudio As String, ByVal centroLabores As String, ByVal cargo As String, _
-                                    ByVal ruc As String, ByVal departamentoInstEduc As String, ByVal institucionEducativa As String, _
-                                    ByVal carreraProfesional As String, ByVal consultas As String, ByVal tipo As String, _
-                                    ByVal campoAdicional1 As String, ByVal campoAdicional2 As String, ByVal campoAdicional3 As String, _
-                                    ByVal campoAdicional4 As String, ByVal campoAdicional5 As String, ByVal campoAdicional6 As String) As String
+                                    ByVal ruc As String, ByVal departamentoInstEduc As String, ByVal provinciaInstEduc As String, _
+                                    ByVal distritoInstEduc As String, ByVal institucionEducativa As String, ByVal carreraProfesional As String, _
+                                    ByVal consultas As String, ByVal tipo As String, ByVal campoAdicional1 As String, _
+                                    ByVal campoAdicional2 As String, ByVal campoAdicional3 As String, ByVal campoAdicional4 As String, _
+                                    ByVal campoAdicional5 As String, ByVal campoAdicional6 As String) As String
         Try
             Using _client As New Net.WebClient
                 Dim lo_Credentials As New NetworkCredential("marketing", "USAT2015")
@@ -1374,6 +1399,8 @@ Public Class ClsAdmision
                 lo_ReqParam.Item("cargo") = cargo
                 lo_ReqParam.Item("ruc") = ruc
                 lo_ReqParam.Item("departamentoInstEduc") = departamentoInstEduc
+                lo_ReqParam.Item("provinciaInstEduc") = provinciaInstEduc
+                lo_ReqParam.Item("distritoInstEduc") = distritoInstEduc
                 lo_ReqParam.Item("institucionEducativa") = institucionEducativa
                 lo_ReqParam.Item("carreraProfesional") = carreraProfesional
                 lo_ReqParam.Item("consultas") = consultas
@@ -1654,6 +1681,54 @@ Public Class ClsAdmision
             mo_Cnx.IniciarTransaccion()
 
             Dim lo_Salida As Object() = mo_Cnx.Ejecutar("ADM_InactivarNoIngresantesPorCentroCostos", operacion, codigoCco)
+
+            lo_Resultado.Item("rpta") = lo_Salida(0)
+            lo_Resultado.Item("msg") = lo_Salida(1)
+
+            mo_Cnx.TerminarTransaccion()
+        Catch ex As Exception
+            mo_Cnx.AbortarTransaccion()
+            lo_Resultado.Item("rpta") = "-1"
+            lo_Resultado.Item("msg") = ex.Message
+            Return lo_Resultado
+        End Try
+        Return lo_Resultado
+    End Function
+
+    Public Function ConsultarInstitucionEducativa(ByVal tipoConsulta As String, ByVal codigoIed As Integer) As Data.DataTable
+        Try
+            Dim lo_Dts As New Data.DataTable
+            mo_Cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+            mo_Cnx.AbrirConexion()
+            lo_Dts = mo_Cnx.TraerDataTable("WS_ConsultarInstitucionEducativa", tipoConsulta, codigoIed)
+            mo_Cnx.CerrarConexion()
+            Return lo_Dts
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ConsultarServicioCentroCosto(ByVal tipoConsulta As String, ByVal codigoCco As Integer) As Data.DataTable
+        Try
+            Dim lo_Dts As New Data.DataTable
+            mo_Cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+            mo_Cnx.AbrirConexion()
+            lo_Dts = mo_Cnx.TraerDataTable("ADM_ConsultarServicioCentroCosto", tipoConsulta, codigoCco)
+            mo_Cnx.CerrarConexion()
+            Return lo_Dts
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function ActivarServicioCentroCosto(ByVal operacion As String, ByVal codigoCco As Integer, ByVal codigoScc As Integer) As Dictionary(Of String, String)
+        Dim lo_Resultado As New Dictionary(Of String, String)
+
+        Try
+            mo_Cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+            mo_Cnx.IniciarTransaccion()
+
+            Dim lo_Salida As Object() = mo_Cnx.Ejecutar("ADM_ActivarServicioCentroCosto", operacion, codigoCco, codigoScc)
 
             lo_Resultado.Item("rpta") = lo_Salida(0)
             lo_Resultado.Item("msg") = lo_Salida(1)

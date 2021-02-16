@@ -35,7 +35,9 @@
         Dim Cadena As String
 
         If e.Row.RowType = DataControlRowType.DataRow Then
-            e.Row.Cells(0).Text = e.Row.RowIndex + 1
+            If Me.dpCiclo.SelectedValue < 69 Then
+                e.Row.Cells(1).Text = e.Row.RowIndex + 1
+            End If
             Cadena = "codigo_alu=" & GridView1.DataKeys(e.Row.RowIndex).Value & "&codigouniver_alu=" & e.Row.Cells(1).Text & "&alumno=" & e.Row.Cells(2).Text & "&nombre_cpf=" & Me.dpEscuela.SelectedItem.Text
 
             lbl = e.Row.FindControl("lblHistorial")
@@ -79,7 +81,7 @@
             obj.AbrirConexion()
 
             Dim cls As New ClsFunciones
-            cls.CargarListas(Me.dpIngreso, obj.TraerDataTable("ConsultarCicloAcademico", "CIF", Me.dpEscuela.SelectedValue), "cicloIng_Alu", "cicloIng_Alu", "--TODOS--")
+            cls.CargarListas(Me.dpIngreso, obj.TraerDataTable("ConsultarCicloAcademico", "CIF", Me.dpEscuela.SelectedValue), "cicloIng_Alu", "cicloIng_Alu")
             cls = Nothing
             obj.CerrarConexion()
             obj = Nothing

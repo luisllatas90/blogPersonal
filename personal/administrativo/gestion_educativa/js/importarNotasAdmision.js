@@ -31,19 +31,40 @@ $(document).ready(function () {
         $customFileLabel.text(fieldVal);
     });
 
+    $('body').on('change', '#chkActivarEstado', function (e) {
+        var $dtpFechaIngreso = $('#dtpFechaIngreso');
+
+        if ($(this).prop('checked')) {
+            $dtpFechaIngreso.val($dtpFechaIngreso.data('oldValue'));
+        } else {
+            $dtpFechaIngreso.data('oldValue', $dtpFechaIngreso.val());
+            $dtpFechaIngreso.val('');
+        }
+
+        $dtpFechaIngreso.prop('disabled', !$(this).prop('checked'));
+    });
+
     InicializarCombos();
+    InicializarDatepickers();
     InicializarProcesos();
 });
 
 var callbackMensajeClose = undefined;
 
-function InicializarCombos() {  
+function InicializarCombos() {
     $('#cmbTipoEstudio').selectpicker({
         'size': 10,
     });
 
     $('#cmbCentroCosto').selectpicker({
         'size': 10,
+    });
+}
+
+function InicializarDatepickers() {
+    $('#dtpFechaIngreso').datepicker({
+        language: 'es',
+        todayHighlight: true,
     });
 }
 

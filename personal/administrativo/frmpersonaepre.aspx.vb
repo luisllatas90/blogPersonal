@@ -221,7 +221,7 @@
                 End If
 
                 Me.dpPaisColegio.SelectedValue = tblalumno.Rows(0).Item("codigopaiscolegio").ToString
-                If (tblalumno.Rows(0).Item("añoEgresoSec_Dal").ToString <> "") Then
+                If (tblalumno.Rows(0).Item("añoEgresoSec_Dal").ToString.Trim() <> "") Then 'andy.diaz 20/08/2020
                     Me.dpPromocion.SelectedValue = tblalumno.Rows(0).Item("añoEgresoSec_Dal").ToString
                 End If
                 Me.chkCentroAplicacion.Checked = CDbl(tblalumno.Rows(0).Item("colegioAplicacion_Alu"))

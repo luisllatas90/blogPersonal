@@ -273,7 +273,8 @@ Partial Class academico_frmCicloAcademicoTipoEstudio
             Dim dt As New Data.DataTable("data")
 
             C.AbrirConexion()
-            dt = C.TraerDataTable("ConsultarCicloAcademico", "DA", "")
+            'dt = C.TraerDataTable("ConsultarCicloAcademico", "DA", "")
+            dt = C.TraerDataTable("ConsultarCicloAcademico", "SXA", "") 'andy.diaz 12/08/2020
             C.CerrarConexion()
 
             If dt.rows.count > 0 Then
@@ -281,8 +282,12 @@ Partial Class academico_frmCicloAcademicoTipoEstudio
             End If
 
             cboSemestre.DataSource = dt
-            cboSemestre.DataTextField = "descripcion_Cac"
-            cboSemestre.DataValueField = "codigo_Cac"
+            'andy.diaz 12/08/2020
+            'cboSemestre.DataTextField = "descripcion_Cac"
+            'cboSemestre.DataValueField = "codigo_Cac"
+            cboSemestre.DataTextField = "descripcion"
+            cboSemestre.DataValueField = "codigo"
+            '----------------------------------
             cboSemestre.DataBind()
 
             dt.Dispose()

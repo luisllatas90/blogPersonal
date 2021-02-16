@@ -1,6 +1,5 @@
 <!--#include file="../../../funciones.asp"-->
 <%
-
 'If session("codigo_usu")="" then response.redirect "../../../tiempofinalizado.asp"
 if session("codigo_tfu") = "" then
     Response.Redirect("../../../sinacceso.html")
@@ -38,15 +37,16 @@ end function
 	
 Public Function VerColorNota(ByVal TipoNota,ByVal Nota,ByVal Limite,ByVal AplicaDecimales)
 		Dim Color
-			Nota=cdbl(Nota)
-			If TipoNota="I" then 'Ponderado por curso
-				Color=IIF(Limite="D","#FF0000","#0000FF")
-			Else'Ponderado por semestre
-				Color=IIF(Nota<cdbl(Limite),"#FF0000","#0000FF")				
-			End if
-			Nota=IIF(AplicaDecimales=true,FormatNumber(Nota,2),Nota)
+		Nota=cdbl(Nota)
+		If TipoNota="I" then 'Ponderado por curso
+			Color=IIF(Limite="D","#FF0000","#0000FF")
+		Else'Ponderado por semestre
+			Color=IIF(Nota<cdbl(Limite),"#FF0000","#0000FF")				
+		End if
+		Nota=IIF(AplicaDecimales=true,FormatNumber(Nota,2),Nota)
 		VerColorNota="<font color=""" & Color & """>" & Nota & "</font>"
 End Function
+
 
 Public Function VerCursoConvalidado(ByVal Curso,ByVal tipomatricula_dma,ByRef RetornaNombre)
 		select case tipomatricula_dma
@@ -75,33 +75,45 @@ if codigo_alu="" and modo="E" then
 	modo="resultado"
 end if
 
+
 %>
 <html>
 <head>
-<meta http-equiv="Content-Language" content="es">
-<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
-<meta name="ProgId" content="FrontPage.Editor.Document">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<link rel="stylesheet" type="text/css" href="../../../private/estilo.css">
-<link rel="stylesheet" type="text/css" href="../../../private/estiloimpresion.css" media="print"/>
-<script language="JavaScript" src="../../../private/funciones.js"></script>
+    <meta http-equiv="Content-Language" content="es">
+    <meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+    <meta name="ProgId" content="FrontPage.Editor.Document">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <link rel="stylesheet" type="text/css" href="../../../private/estilo.css">
+    <link rel="stylesheet" type="text/css" href="../../../private/estiloimpresion.css"
+        media="print" />
+
+    <script language="JavaScript" src="../../../private/funciones.js"></script>
+    
 </head>
 <body onload="document.all.txtcodigouniver_alu.focus()">
-<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%">
-  <tr>
-    <td width="30%" height="30" class="usattitulo">Historial Académico</td>
-    <%if quitar="B" then%>
-    <td width="43%" height="30" class="usattitulo" class="NoImprimir" <%=boton%>>
-     <%call buscaralumno("estudiante/historial2.asp","../",-1)%>
-    </td>
-    <%end if
+    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse"
+        bordercolor="#111111" width="100%">
+        <tr>
+            <td width="30%" height="30" class="usattitulo">
+                Historial Académico
+            </td>
+            <%if quitar="B" then%>
+            <td width="43%" height="30" class="usattitulo" class="NoImprimir" <%=boton%>>
+                <%call buscaralumno("estudiante/historial2.asp","../",-1)%>
+            </td>
+            <%end if
     if modo="resultado" then%>
-    <td width="14%" height="30" class="NoImprimir" align="right">
-    <input onclick="imprimir('N')" type="button" value="    Imprimir" name="cmdImprimir" class="usatimprimir"></td>
-    <%end if%>
-  </tr>
-  </table>
-<%
+            <td width="14%" height="30" class="NoImprimir" align="right">
+                <input onclick="imprimir('N')" type="button" value="    Imprimir" name="cmdImprimir"
+                    class="usatimprimir" />
+            </td>
+            <td width="14%" height="30" class="NoImprimir" align="left">
+                <input type="button" value="    Exportar" name="cmdExportar" class="excel" onclick="window.open('../../../../reportServer/?/PRIVADOS/ACADEMICO/ACAD_HistorialNotas&id=<%=codigo_alu%>');" />                
+            </td>
+            <%end if%>
+        </tr>
+    </table>
+    <%    
 if modo="resultado" then
 	Dim Matricula
 	Dim TotalCreditos,NotaXcredito,Semestre
@@ -114,32 +126,53 @@ if modo="resultado" then
 		If rsHistorial.BOF and rsHistorial.EOF then
 				response.write "<p class=""usatsugerencia"">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No se han registrado Historial Académico para el estudiante.</p>"
 		ElseIf (session("estadodeuda_alu")=1 and session("codigo_tfu")<>1 and session("codigo_tfu")<>25 and session("codigo_tfu")<>9 and session("codigo_tfu")<>26 and session("codigo_tfu")<>30 and session("codigo_tfu")<>35 and session("codigo_tfu")<>16) then%>
-				<script>
-					var mensaje='Lo sentimos no se puede mostrar su historial académico del Estudiante, por favor '
-					mensaje=mensaje + '\n comuníquese con la Oficina de Pensiones para que se le indique el motivo.'
-					alert(mensaje)
-					history.back(-1)
-				</script>
-				<%
+
+    <script>
+        var mensaje = 'Lo sentimos no se puede mostrar su historial académico del Estudiante, por favor '
+        mensaje = mensaje + '\n comuníquese con la Oficina de Pensiones para que se le indique el motivo.'
+        alert(mensaje)
+        history.back(-1)
+    </script>
+
+    <%
 		Else%>
-		<br>
-		<!--#include file="../fradatos.asp"-->
-		<br>
-<table border="1" cellpadding="3" cellspacing="0" style="border-collapse: collapse" bordercolor="#808080" width="100%">
-  <THEAD>
-  <tr class="etabla">
-    <td height="14">Semestre</td>
-    <td height="14">Área</td>
-    <td height="14">Código</td>
-    <td height="14">Nombre del Curso</td>
-    <td height="14">Ciclo</td>
-    <td height="14">Créditos</td>
-    <td height="14">Grupo Horario</td>
-    <td height="14">Veces Desaprob.</td>
-    <td height="14">Promedio</td>
-  </tr>
-  </THEAD>
-  <%
+    <br>
+    <!--#include file="../fradatos.asp"-->
+    <br>
+    <table border="1" cellpadding="3" cellspacing="0" style="border-collapse: collapse"
+        bordercolor="#808080" width="100%">
+        <thead>
+            <tr class="etabla">
+                <td height="14">
+                    Semestre
+                </td>
+                <td height="14">
+                    Área
+                </td>
+                <td height="14">
+                    Código
+                </td>
+                <td height="14">
+                    Nombre del Curso
+                </td>
+                <td height="14">
+                    Ciclo
+                </td>
+                <td height="14">
+                    Créditos
+                </td>
+                <td height="14">
+                    Grupo Horario
+                </td>
+                <td height="14">
+                    Veces Desaprob.
+                </td>
+                <td height="14">
+                    Promedio
+                </td>
+            </tr>
+        </thead>
+        <%
    	Semestre=rsHistorial("descripcion_cac")
  	TotalCreditos=0:NotaXcredito=0
 	Dim TotalGral
@@ -147,7 +180,10 @@ if modo="resultado" then
 	
 	Dim sumaTotal_mat
 	dim creditosTotal_mat
-
+	
+    dim inHabilitado_dma '#EPENA GLPI: 41509 
+    DIM nominHabilitado '#EPENA GLPI: 41509 
+    
 	TotalGral=0
   
   	Do while not rsHistorial.eof
@@ -155,6 +191,7 @@ if modo="resultado" then
 	  	EsConvalidado=VerCursoConvalidado(rsHistorial("nombre_cur"),rsHistorial("tipomatricula_dma"),NombreCurso)
         
         'response.write rsHistorial.Fields("descripcion_cac").Value
+        inHabilitado_dma=rsHistorial("inhabilitado_dma")
         
 	  	If Semestre<>rsHistorial("descripcion_cac") then
 	  		Semestre=rsHistorial("descripcion_cac")
@@ -183,23 +220,48 @@ if modo="resultado" then
 		end if
 	  	
 	  	notaciclo="-"
-
+	  	nominHabilitado=""'#EPENA GLPI: 41509 
+        
 		if rsHistorial("estado_dma")<>"R" then
-			notaciclo=VerColorNota("I",rsHistorial("notafinal_dma"),rsHistorial("condicion_Dma"),False)
+		    if inHabilitado_dma=0 then'#EPENA GLPI: 41509 
+		   
+			  notaciclo=VerColorNota("I",rsHistorial("notafinal_dma"),rsHistorial("condicion_Dma"),False)
+			  else
+			   nominHabilitado=" - <font style='font-weight:bold;'>INHABILITADO</fotn>"'#EPENA GLPI: 41509 
+		    end if 
 		end if
-	  	%>
-  <tr>
-    <td height="14"><%=rsHistorial("descripcion_cac")%></td>
-    <td height="14"><%=rsHistorial("tipoCurso_Dma")%></td>
-    <td height="14"><%=rsHistorial("identificador_Cur")%></td>
-    <td height="14"><%=NombreCurso%></td>
-    <td align="center" height="14"><%=ConvRomano(rsHistorial("ciclo_cur"))%></td>
-    <td align="center" height="14"><%=rsHistorial("creditocur_dma")%></td>
-    <td align="center" height="14"><%=rsHistorial("grupohor_cup")%></td>
-    <td align="center" height="14" class="rojo"><%=mensajevd(rsHistorial("vecesCurso_Dma"))%></td>
-    <td align="center" height="14"><%=notaciclo%></td>
-  </tr>
-  		<%
+        %>
+        <tr>
+            <td height="14">
+                <%=rsHistorial("descripcion_cac")%>
+            </td>
+            <td height="14">
+                <%=rsHistorial("tipoCurso_Dma")%>
+            </td>
+            <td height="14">
+                <%=rsHistorial("identificador_Cur")%>
+            </td>
+            <td height="14">
+                <%=NombreCurso%><%=nominHabilitado%>
+            </td>
+            <% '#EPENA GLPI: 41509  %>
+            <td align="center" height="14">
+                <%=ConvRomano(rsHistorial("ciclo_cur"))%>
+            </td>
+            <td align="center" height="14">
+                <%=rsHistorial("creditocur_dma")%>
+            </td>
+            <td align="center" height="14">
+                <%=rsHistorial("grupohor_cup")%>
+            </td>
+            <td align="center" height="14" class="rojo">
+                <%=mensajevd(rsHistorial("vecesCurso_Dma"))%>
+            </td>
+            <td align="center" height="14">
+                <%=notaciclo%>
+            </td>
+        </tr>
+        <%
 	  	If i=rsHistorial.recordcount then
 	  	
   			'Call PonderadoCAC(cdbl(NotaXcredito),cdbl(TotalCreditos),cdbl(rsHistorial("notaminima_cac")))
@@ -211,13 +273,18 @@ if modo="resultado" then
   	
   		rsHistorial.movenext
 	Loop%>
-  </table>
-  		<%end if
+    </table>
+
+    <%end if
 end if%>
-	<h5>Total de Créditos Matriculados sin Convalidaciones: <%=TotalGral%></h5>
-	<h5>Total de Créditos Aprobados (incluye convalidación): <%=TotalAprobados%></h5>
+    <h5>
+        Total de Créditos Matriculados sin Convalidaciones:
+        <%=TotalGral%></h5>
+    <h5>
+        Total de Créditos Aprobados (incluye convalidación):
+        <%=TotalAprobados%></h5>
 </body>
 </html>
-		<%
+<%
 Set rsHistorial=nothing
 %>

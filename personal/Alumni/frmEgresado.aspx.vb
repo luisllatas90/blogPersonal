@@ -274,6 +274,27 @@
         End Try
     End Sub
 
+    Protected Sub btnExportar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExportar.Click
+        Try            
+            Session("frmDescargarExcel.formulario") = "frmEgresado"
+            Session("frmDescargarExcel.nombre_archivo") = "Listado de Egresados"
+            Session("frmDescargarExcel.param01") = Me.cmbNivelFiltro.SelectedValue
+            Session("frmDescargarExcel.param02") = Me.cmbModalidadFiltro.SelectedValue
+            Session("frmDescargarExcel.param03") = Me.cmbFacultadFiltro.SelectedValue
+            Session("frmDescargarExcel.param04") = Me.cmbCarreraFiltro.SelectedValue
+            Session("frmDescargarExcel.param05") = Me.cmbSexoFiltro.SelectedValue
+            Session("frmDescargarExcel.param06") = Me.cmbAnioEgresoFiltro.SelectedValue
+            Session("frmDescargarExcel.param07") = Me.cmbAnioBachillerFiltro.SelectedValue
+            Session("frmDescargarExcel.param08") = Me.cmbAnioTituloFiltro.SelectedValue
+            Session("frmDescargarExcel.param09") = Me.txtNombreFiltro.Text.Trim
+
+            Me.udpScripts.Update()
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "openwindows", "window.open('../frmDescargarExcel.aspx')", True)
+        Catch ex As Exception
+            Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
+        End Try
+    End Sub
+
 #End Region
 
 #Region "Metodos"
@@ -477,6 +498,8 @@
             me_CarreraProfesional.codigo_Fac = cmbFacultadFiltro.SelectedValue
             me_CarreraProfesional.modalidad = cmbModalidadFiltro.SelectedValue
             me_CarreraProfesional.codigo_per = Request.QueryString("ID")
+            me_CarreraProfesional.vigencia_Cpf = 1
+            me_CarreraProfesional.eliminado_cpf = 0
 
             If Me.cmbNivelFiltro.SelectedValue.ToString = g_VariablesGlobales.NivelEstudioPreGrado Then
                 me_CarreraProfesional.codigo_test = g_VariablesGlobales.CodigoTestPreGrado
@@ -589,13 +612,13 @@
                                 g_VariablesGlobales.CodigoTestPostTitulo
                 End If
 
-                .modalidad_ega = Me.cmbModalidadFiltro.Text.Trim
-                .codigo_fac = Me.cmbFacultadFiltro.Text.Trim
-                .codigo_cpf = Me.cmbCarreraFiltro.Text.Trim
-                .sexo_ega = Me.cmbSexoFiltro.Text.Trim
-                .anio_egreso = Me.cmbAnioEgresoFiltro.Text.Trim
-                .anio_bachiller = Me.cmbAnioBachillerFiltro.Text.Trim
-                .anio_titulo = Me.cmbAnioTituloFiltro.Text.Trim
+                .modalidad_ega = Me.cmbModalidadFiltro.SelectedValue
+                .codigo_fac = Me.cmbFacultadFiltro.SelectedValue
+                .codigo_cpf = Me.cmbCarreraFiltro.SelectedValue
+                .sexo_ega = Me.cmbSexoFiltro.SelectedValue
+                .anio_egreso = Me.cmbAnioEgresoFiltro.SelectedValue
+                .anio_bachiller = Me.cmbAnioBachillerFiltro.SelectedValue
+                .anio_titulo = Me.cmbAnioTituloFiltro.SelectedValue
                 .nombre_ega = Me.txtNombreFiltro.Text.Trim
             End With
 
@@ -887,7 +910,7 @@
             If Session("frmEgresado-cod_ctf") = g_VariablesGlobales.TipoFuncionCoordinadorAlumni Then ls_replyTo = dt.Rows(0).Item("usuario_per").ToString + "@usat.edu.pe"
             If Not (ConfigurationManager.AppSettings("CorreoUsatActivo") = 1) Then ls_replyTo = g_VariablesGlobales.CorreoPrueba
 
-            'Archivo adjunto File Shared
+            'Archivo adjunto File Shared           
             If Me.txtArchivo.HasFile Then
                 dt = New Data.DataTable
                 me_ArchivoCompartido = md_ArchivoCompartido.GetArchivoCompartido(0)
@@ -913,7 +936,7 @@
 
                     ls_ruta = .ruta_archivo
                     ls_nombreArchivo = .nombre_archivo
-                End With                
+                End With
             End If
 
             If Me.grwLista.Rows.Count > 0 Then

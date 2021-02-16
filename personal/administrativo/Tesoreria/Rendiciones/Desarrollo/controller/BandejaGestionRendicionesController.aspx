@@ -1,0 +1,1 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="BandejaGestionRendicionesController.aspx.vb" Inherits="administrativo_Tesoreria_Rendiciones_Desarrollo_controller_BandejaGestionRendicionesController" %>

@@ -425,7 +425,7 @@ Partial Class GestionDocumentaria_frmConstanciasNotMat
         Try
             If Me.ddlCodigo_doc.SelectedValue <> "" Then
 
-                dt = md_solicitaDocumento.ListarSolicitaDocumentacion("SXD", 0, Me.ddlCodigo_doc.SelectedValue, "")
+                dt = md_solicitaDocumento.ListarSolicitaDocumentacion("SXD", 0, Me.ddlCodigo_doc.SelectedValue, "", 0)
                 If dt.Rows.Count > 0 Then
                     Me.gvListaSolicitudes.DataSource = dt
                     Me.gvListaSolicitudes.DataBind()

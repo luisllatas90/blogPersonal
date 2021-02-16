@@ -397,11 +397,19 @@ Partial Class frmTestHorario
             'Recuperar ciclo vigente actual        
             Dim codigo_Cac As Integer = obj.ConsultarCicloAcademicoVigente()
 
-            'Recupera el total de horas de asesoria de tesis
+            'Recupera el total de horas de asesoria de tesis pre grado regular
             If codigo_Cac <> 0 Then
                 If (obj.ConsultarHorasAsesoria_V2(codigo_per, codigo_Cac)) > 0 Then
                     '#### Modificacion de horas de tesis, asigandas segun cantidad de tesis a cargo y que el alumno se encuentre matriculado ####
                     lblHorasAsesoria.Text = obj.ConsultarHorasAsesoria_V2(codigo_per, codigo_Cac)
+                End If
+            End If
+
+            'Recupera el total de horas de asesoria de tesis GO y PP
+            If codigo_Cac <> 0 Then
+                If (obj.ConsultarHorasAsesoria_GOPP(codigo_per, codigo_Cac)) > 0 Then
+                    '#### Modificacion de horas de tesis, asigandas segun cantidad de tesis a cargo y que el alumno se encuentre matriculado ####
+                    lblHorasAsesoriaGOPP.Text = obj.ConsultarHorasAsesoria_GOPP(codigo_per, codigo_Cac)
                 End If
             End If
 
@@ -425,7 +433,7 @@ Partial Class frmTestHorario
 
             If dts.Rows(0).Item("foto").ToString <> "" Then
                 'Me.imgFoto.ImageUrl = "http://www.usat.edu.pe/campusvirtual/personal/imgpersonal/" & dts.Rows(0).Item("foto").ToString
-                Me.imgFoto.ImageUrl = "../../personal/imgpersonal/" & dts.Rows(0).Item("foto").ToString
+                Me.imgFoto.ImageUrl = "https://intranet.usat.edu.pe/campusvirtual/personal/imgpersonal/" & dts.Rows(0).Item("foto").ToString
             Else
                 Me.imgFoto.BackColor = Drawing.Color.Red
                 imgFoto.AlternateText = "ATENCIÓN:    Suba su foto en el módulo de HOJA DE VIDA"
@@ -863,11 +871,12 @@ Partial Class frmTestHorario
             '--------------------------------------------------------------------------------------------------------------------------------------------------------
             'EN ESTE BLOQUE REALIZA LA INSERCION DEL HORARIO ->[HorarioPersonal]
             If (obj.VerificarLimiteHoras("", ddlHoraInicio.Text, ddlHoraFin.Text, codigo_per, 0, abreviatura_td, 0, 0, "", "", 0, 0, 0, LugarPracticasExternas, 0, "n")) = True Then
-                vMensaje = vMensaje & "Las Actividades:\n 1.Horas Lectivas\n 2.Asesoría de Tesis (Sólo para tipo: Tiempo Parcial <20 Horas)\n 3.Practica Externa\n 4.Centro Pre\n  pueden estar fuera del Horario Administrativo actual."
+                vMensaje = vMensaje & "Las Actividades:\n 1. Gestión Apoyo Institucional\n 2.Carga(Académico - Administrativa)\n 3.Plan de Formación Docente \n NO pueden estar fuera del Horario Administrativo actual."
                 Dim myscript As String = "alert('" & vMensaje.Trim & "')"
                 Page.ClientScript.RegisterStartupScript(Me.GetType(), "myscript", myscript, True)
                 Exit Sub
             End If
+
             '--------------------------------------------------------------------------------------------------------------------------------------------------------
 
             'Verificamos si está Exceptuado del Horario Administrativo
@@ -1253,7 +1262,7 @@ Partial Class frmTestHorario
 
             '##############  Validar registro horas tesis #############################################################
             Dim resultado As String
-            resultado = obj.ValidarRegistroHorasAsTesis(codigo_pel, codigo_per, lblHorasAsesoria.Text)
+            resultado = obj.ValidarRegistroHorasAsTesis(codigo_pel, codigo_per, CInt(lblHorasAsesoria.Text) + CInt(Me.lblHorasAsesoriaGOPP.Text))
             'resultado = ""
             If resultado <> "" Then
                 Dim myscript As String = "alert('" & resultado & "')"
@@ -1445,6 +1454,11 @@ Partial Class frmTestHorario
                     dts = obj.ConsultaTipoActividadPorAbreviatura("FP")
                     Dim color As String = dts.Rows(0).Item("color_td")
                     e.Row.Cells(i).BackColor = System.Drawing.ColorTranslator.FromHtml(color)
+                    'Agregado 04.09.20 esaavedra Tutoría GO
+                Case "TG"
+                    dts = obj.ConsultaTipoActividadPorAbreviatura("TG")
+                    Dim color As String = dts.Rows(0).Item("color_td")
+                    e.Row.Cells(i).BackColor = System.Drawing.ColorTranslator.FromHtml(color)
             End Select
         Next
 
@@ -1512,6 +1526,10 @@ Partial Class frmTestHorario
         dts = obj.ConsultaTipoActividadPorAbreviatura("FP") ' formación permanente
         lblE.Text = dts.Rows(0).Item("descripcion_td").ToString
         lblE.BackColor = System.Drawing.ColorTranslator.FromHtml(dts.Rows(0).Item("color_td").ToString)
+
+        dts = obj.ConsultaTipoActividadPorAbreviatura("TG") ' Tutoría académica GO
+        lblTG.Text = dts.Rows(0).Item("descripcion_td").ToString
+        lblTG.BackColor = System.Drawing.ColorTranslator.FromHtml(dts.Rows(0).Item("color_td").ToString)
 
         '==================================================================================================================
         '------------------------------------------------------Anulados ---------------------------------------------------

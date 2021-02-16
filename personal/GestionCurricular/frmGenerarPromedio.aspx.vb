@@ -1,4 +1,5 @@
-﻿
+﻿Imports System.Collections.Generic
+
 Partial Class GestionCurricular_frmGenerarPromedio
     Inherits System.Web.UI.Page
 
@@ -7,6 +8,8 @@ Partial Class GestionCurricular_frmGenerarPromedio
     Private cod_user As Integer
     Private cod_ctf As Integer
     Private nro_col As Integer = 2
+    Private estaPublicado As Boolean = False
+    Private ruta As String = ConfigurationManager.AppSettings("SharedFiles")
 
     Public Enum MessageType
         Success
@@ -32,7 +35,7 @@ Partial Class GestionCurricular_frmGenerarPromedio
                 Session("isTextValid") = 1 'Cambiar a "cero" para proceder al registro por SMS
                 Session("isValidated") = 2
 
-                Call mt_CargarNotas(Session("gc_codigo_cup"))
+                Call mt_CargarNotas(Session("gc_codigo_cup"), Session("gc_codigo_cac"))
 
                 Call mt_CrearColumns(Session("gc_codigo_cup"), Session("gc_fecha_ini"), Session("gc_fecha_fin"))
                 Call mt_CargarDatos(Session("gc_codigo_cac"), Session("gc_codigo_cup"))
@@ -42,8 +45,12 @@ Partial Class GestionCurricular_frmGenerarPromedio
                 If Session("gc_visualizar") IsNot Nothing AndAlso Session("gc_visualizar") = "1" Then
                     btnPublicar.Visible = False
                     btnPublicar.Enabled = False
+                    chkConfirmarPublicacion.visible = False
+                    chkConfirmarPublicacion.Enabled = False
                 Else
                     'Call mt_MostrarLeyenda()
+                    chkConfirmarPublicacion.checked = False
+                    btnPublicar.Enabled = False
                 End If
 
                 divEnviar.Style.Item("display") = "none"
@@ -53,6 +60,8 @@ Partial Class GestionCurricular_frmGenerarPromedio
                 'Descomentar para proceder al registro por SMS
                 'Call mt_ObtenerCelular()
 
+                'Session("estaPublicado") = 
+                fc_VerificarPublicacion(Session("gc_codigo_cac"), Session("gc_codigo_cup")) 'Por Luis Q.T. | 12ENE2021
             Else
                 'Descomentar para proceder al registro por SMS
                 'If Session("isValidated") IsNot Nothing AndAlso Session("isValidated") = 1 Then
@@ -73,16 +82,22 @@ Partial Class GestionCurricular_frmGenerarPromedio
             lblAviso.InnerText = ""
             If Not fc_PublicarNotas(Session("gc_codigo_cac")) Then
                 btnPublicar.Visible = False
+                chkConfirmarPublicacion.checked = False
+                chkConfirmarPublicacion.visible = False
                 lblAviso.InnerText = "El cronograma académico para registro de notas NO SE ENCUENTRA HABILITADO. Coordinar con Dirección Académica."
                 lblAviso.Style("background-color") = "#F5F902"
             Else
                 If fc_VerificarDiferenciaNotas(Session("gc_codigo_cac"), Session("gc_codigo_cup")) Then
                     btnPublicar.Visible = False
+                    chkConfirmarPublicacion.checked = False
+                    chkConfirmarPublicacion.visible = False
                     lblAviso.InnerText = "Estimado docente, se ha encontrado CALIFICACIONES CONFIRMADOS(fondo gris) diferentes al aula virtual. Por favor solicitar autorización de cambio de nota con Dirección de Escuela"
                     lblAviso.Style("background-color") = "#F5F902"
                 Else
                     If fc_VerificarPublicacion(Session("gc_codigo_cac"), Session("gc_codigo_cup")) Then
                         btnPublicar.Visible = False
+                        chkConfirmarPublicacion.checked = False
+                        chkConfirmarPublicacion.visible = False
                         'lblAviso.InnerText = "Los promedios finales ya han sido publicados."
                         lblAviso.InnerText = "Estimado(a) docente debe acercarse a Dirección Académica a realizar la firma de Actas de Notas."
                         lblAviso.Style("background-color") = "#BFFFBB"
@@ -98,14 +113,10 @@ Partial Class GestionCurricular_frmGenerarPromedio
 
     Protected Sub gvNotas_OnRowDataBound(ByVal sender As Object, ByVal e As GridViewRowEventArgs)
         Dim dt, dtA As New Data.DataTable
-        Dim _codigo_dma, _codigo_eva, _codigo_ins, _codigo_emd, _tipo_prom, _cant_ins, _codigo_res, _cont_res, _cont_eva As Integer
-        Dim _codigo_ind, _tipo_prom_ind, _cant_ind, _cant_rs, _cant_ins_aux, _codigo_cup As Integer '20191115-ENEVADO
-        Dim _descripcion_eva, _nota As String
-        Dim _sumatoria, _peso_res, _promedio_final As Double
-        Dim _calificacion, _sum_ind, _peso_ins, _peso_ind As Double '20191115-ENEVADO
-        Dim _codigo_pso, _cant_alu, _codigo_res_aux, _cont_res_aux As Integer
-        Dim _inhabilitado As Integer
-        Dim _cant_notas_cambios As Integer = 0 '20191212-ENEVADO
+        Dim _codigo_dma, _codigo_ins, _codigo_emd, _codigo_res, _cont_res, _cont_eva, _codigo_cup As Integer
+        Dim _cant_alu, _codigo_res_aux, _cont_res_aux, _inhabilitado As Integer
+        Dim _codigo_alu As String
+        Dim i_aux As Integer
 
         Try
             If e.Row.RowType = DataControlRowType.DataRow Then
@@ -114,20 +125,17 @@ Partial Class GestionCurricular_frmGenerarPromedio
                 _cant_alu = (dtA.Rows.Count - 1)
 
                 _codigo_dma = CInt(Me.gvNotas.DataKeys(e.Row.RowIndex).Values("codigo_Dma"))
-                _codigo_pso = CInt(Me.gvNotas.DataKeys(e.Row.RowIndex).Values("codigo_pso"))
-
+                _codigo_alu = CInt(Me.gvNotas.DataKeys(e.Row.RowIndex).Values("codigo_alu"))
                 _inhabilitado = CInt(Me.gvNotas.DataKeys(e.Row.RowIndex).Values("inhabilitado_dma"))
 
-                _sumatoria = 0 : _peso_res = 0 : _promedio_final = 0
                 _codigo_res = -1 : _cont_eva = 0 : _cont_res = 0 : _codigo_res_aux = 0 : _cont_res_aux = -1
 
-                _codigo_cup = Session("gc_codigo_cup") '20190919-ENEVADO
+                _codigo_cup = Session("gc_codigo_cup")
 
                 If dt.Rows.Count > 0 Then
+
                     For i As Integer = 0 To dt.Rows.Count - 1
-                        _codigo_eva = CInt(dt.Rows(i).Item("codigo_eva"))
                         _codigo_ins = CInt(dt.Rows(i).Item("codigo_ins"))
-                        _descripcion_eva = dt.Rows(i).Item("descripcion_eva")
                         _codigo_emd = dt.Rows(i).Item("codigo_emd")
 
                         'Por JQuepuy | 26NOV2019 | Solo si quiero visualizar notas, entonces también obtener datos de moodle
@@ -135,67 +143,14 @@ Partial Class GestionCurricular_frmGenerarPromedio
                             _codigo_emd = -1
                         End If
 
-                        '_tipo_prom = dt.Rows(i).Item("promedio_indicador")
-                        '_cant_ins = dt.Rows(i).Item("cant_ins")
-
                         If _codigo_dma <> -1 Then
-
-                            If _codigo_ind <> CInt(dt.Rows(i).Item("codigo_ind")) Then
-                                _codigo_ind = CInt(dt.Rows(i).Item("codigo_ind"))
-                                _cant_ind += 1
-
-                                If i > 0 Then
-                                    If _tipo_prom = 2 Then
-                                        If _tipo_prom_ind = 2 Then
-                                            _sumatoria += (_sum_ind * _peso_ind)
-                                        Else
-                                            _sumatoria += (_sum_ind / _cant_ins_aux) * _peso_ind
-                                        End If
-                                    Else
-                                        If _tipo_prom_ind = 2 Then
-                                            _sumatoria += _sum_ind
-                                        Else
-                                            _sumatoria += (_sum_ind / _cant_ins_aux)
-                                        End If
-                                    End If
-
-                                    _sum_ind = 0
-                                    _cant_ins_aux = 0
-                                End If
-
-                                _tipo_prom_ind = CInt(dt.Rows(i).Item("promedio_instrumento"))
-                                _peso_ind = CDbl(dt.Rows(i).Item("peso_ind"))
-                                '_sum_ind = 0
-                            End If
-
-                            _cant_ins_aux += 1
-                            _peso_ins = CDbl(dt.Rows(i).Item("peso_ins"))
-
                             If _codigo_res <> CInt(dt.Rows(i).Item("codigo_res")) Then
-                                _codigo_res = CInt(dt.Rows(i).Item("codigo_res"))
-
-                                '_cant_ins += CInt(dt.Rows(i).Item("cant_ins"))
-
                                 If i > 0 Then
-                                    Dim _prom_und As Double = 0
+                                    Dim _prom_und As Decimal = fc_getPromedio(_codigo_alu, _codigo_res)
+
                                     Dim lblProm As New Label()
                                     lblProm.ID = "lblProm" & (_cont_res + 1)
-
-                                    If _tipo_prom = 2 Then
-                                        'lblProm.Text = Math.Round(_sumatoria, 2, MidpointRounding.AwayFromZero).ToString("00.00")
-                                        _prom_und = _sumatoria
-                                    Else
-                                        'lblProm.Text = Math.Round((_sumatoria / _cant_ind), 2, MidpointRounding.AwayFromZero).ToString("00.00")
-                                        _prom_und = (_sumatoria / _cant_ind)
-                                    End If
-                                    lblProm.Text = Math.Round(_prom_und, 2, MidpointRounding.AwayFromZero).ToString("00.00")
-
-                                    _peso_res = Math.Round(CDbl(dt.Rows(i - 1).Item("peso_res")), 2, MidpointRounding.AwayFromZero)
-                                    '_promedio_final += (CDbl(lblProm.Text.Trim) * _peso_res)
-                                    _promedio_final += (_prom_und * _peso_res)
-
-                                    'lblProm.Text = "RA > 1"
-
+                                    lblProm.Text = _prom_und
                                     If lblProm.Text.Trim <> "" Then lblProm.ForeColor = IIf(CDbl(lblProm.Text.Trim) < CDbl("13.5"), Drawing.Color.Red, Drawing.Color.Blue)
 
                                     e.Row.Cells(nro_col + i + _cont_res).Controls.Add(lblProm)
@@ -204,46 +159,24 @@ Partial Class GestionCurricular_frmGenerarPromedio
                                     _cont_res += 1
                                 End If
 
-                                _tipo_prom = CInt(dt.Rows(i).Item("promedio_indicador"))
-
-                                _sumatoria = 0
-                                _cant_ind = 0
-                                _cont_eva = 0
-                                _cant_rs += 1
+                                _codigo_res = CInt(dt.Rows(i).Item("codigo_res"))
                             End If
 
                             Dim lbl As New Label()
                             lbl.ID = "lblNota" & (i + 1)
 
-
                             If _codigo_emd = -1 Then
-                                Dim aux2 As String = "0"
-                                aux2 = fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup)
+                                Dim aux2 As String = fc_getNota(_codigo_alu, _codigo_ins, _codigo_cup)
+
                                 lbl.Text = CDbl(aux2).ToString("00.00")
                             Else
-                                Dim aux As String = "0"
-                                aux = fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup)
+                                Dim aux As String = fc_getNota(_codigo_alu, _codigo_ins, _codigo_cup)
 
                                 If String.IsNullOrEmpty(aux) Or aux.Equals("0") Then
-                                    aux = fc_getNotaMoodle(_codigo_pso, _codigo_ins)
+                                    aux = fc_getNotaMoodle(_codigo_alu, _codigo_ins)
                                 End If
 
                                 If String.IsNullOrEmpty(aux) Or aux.Equals("0") Then
-                                    'If _codigo_dma = 1868560 Then
-                                    '    If _codigo_ins = 2990 Then
-                                    '        aux = "14.00"
-                                    '    ElseIf _codigo_ins = 2991 Then
-                                    '        aux = "12.00"
-                                    '    ElseIf _codigo_ins = 2993 Then
-                                    '        aux = "16.00"
-                                    '    ElseIf _codigo_ins = 2994 Then
-                                    '        aux = "14.00"
-                                    '    ElseIf _codigo_ins = 2996 Then
-                                    '        aux = "17.00"
-                                    '    ElseIf _codigo_ins = 2995 Then
-                                    '        aux = "15.00"
-                                    '    End If
-                                    'End If
                                     lbl.Text = aux
                                 Else
                                     lbl.Text = CDbl(aux).ToString("00.00")
@@ -255,46 +188,18 @@ Partial Class GestionCurricular_frmGenerarPromedio
                             If lbl.Text = "--" Then lbl.ToolTip = "Alumno no ha sido calificado en Moodle"
                             e.Row.Cells(nro_col + i + _cont_res).Controls.Add(lbl)
 
-                            ' 20191212-ENEVADO ----------------------------------------------------------------------\
                             Dim _nota_aux As String
+
                             If lbl.Text <> "--" Then
-                                _nota_aux = fc_getNotaMoodle(_codigo_pso, _codigo_ins)
-                                If _nota_aux.Trim <> "" Then
+                                _nota_aux = fc_getNotaMoodle(_codigo_alu, _codigo_ins)
+
+                                If _nota_aux.Trim <> "" And Session("estaPublicado") = False Then  'Por Luis Q.T. | 12ENE2021: Validar por estado de publicación 
                                     If lbl.Text <> CDbl(_nota_aux).ToString("00.00") Then
                                         e.Row.Cells(nro_col + i + _cont_res).BackColor = Drawing.Color.LightGray
                                         e.Row.Cells(nro_col + i + _cont_res).ToolTip = "Aviso: La nota de esta evaluación ha sido modificado por: " & CDbl(_nota_aux).ToString("00.00")
-                                        _cant_notas_cambios += 1
                                     End If
                                 End If
                             End If
-                            ' ---------------------------------------------------------------------------------------/
-
-                            If _codigo_emd = -1 Then
-                                If _tipo_prom_ind = 2 Then
-                                    _sum_ind += (fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup) * _peso_ins)
-                                Else
-                                    _sum_ind += fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup) '20191009-ENEVADO
-                                End If
-                            Else
-                                Dim aux As String = "0"
-                                aux = fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup)
-
-                                If String.IsNullOrEmpty(aux) Or aux.Equals("0") Then
-                                    aux = fc_getNotaMoodle(_codigo_pso, _codigo_ins)
-                                End If
-
-                                If String.IsNullOrEmpty(aux) Or aux.Equals("0") Then
-                                    aux = "0"
-                                End If
-
-                                If _tipo_prom_ind = 2 Then
-                                    _sum_ind += (aux * _peso_ins)
-                                Else
-                                    _sum_ind += aux
-                                End If
-                            End If
-
-                            _cont_eva += 1
 
                         Else
                             If Session("gc_visualizar") IsNot Nothing AndAlso Session("gc_visualizar") = "1" Then
@@ -327,52 +232,31 @@ Partial Class GestionCurricular_frmGenerarPromedio
                                 End If
                             End If
                         End If
+
+                        i_aux = i
                     Next
 
                     If _codigo_dma <> -1 Then
-                        If _tipo_prom = 2 Then
-                            If _tipo_prom_ind = 2 Then
-                                _sumatoria += (_sum_ind * _peso_ind)
-                            Else
-                                _sumatoria += (_sum_ind / _cant_ins_aux) * _peso_ind
-                            End If
-                        Else
-                            If _tipo_prom_ind = 2 Then
-                                _sumatoria += _sum_ind
-                            Else
-                                _sumatoria += (_sum_ind / _cant_ins_aux)
-                            End If
-                        End If
+                        '_codigo_res = CInt(dt.Rows(dt.Rows.Count() - 1).Item("codigo_res"))
 
-                        'If _cant_rs > 1 Then
-                        _cant_ind += 1
+                        Dim _prom_und2 As Decimal = fc_getPromedio(_codigo_alu, _codigo_res)
 
-                        Dim _prom_und2 As Double = 0
                         Dim lblProm2 As New Label()
                         lblProm2.ID = "lblProm" & (_cont_res + 1)
-
-                        If _tipo_prom = 2 Then
-                            'lblProm2.Text = Math.Round(_sumatoria, 2, MidpointRounding.AwayFromZero).ToString("00.00")
-                            _prom_und2 = _sumatoria
-                        Else
-                            'lblProm2.Text = Math.Round((_sumatoria / _cant_ind), 2, MidpointRounding.AwayFromZero).ToString("00.00")
-                            _prom_und2 = (_sumatoria / _cant_ind)
-                        End If
-                        lblProm2.Text = Math.Round(_prom_und2, 2, MidpointRounding.AwayFromZero).ToString("00.00")
-
-                        _peso_res = Math.Round(CDbl(dt.Rows(dt.Rows.Count - 1).Item("peso_res")), 2, MidpointRounding.AwayFromZero)
-                        '_promedio_final += (CDbl(lblProm2.Text.Trim) * _peso_res)
-                        _promedio_final += (_prom_und2 * _peso_res)
+                        lblProm2.Text = _prom_und2
 
                         If lblProm2.Text.Trim <> "" Then lblProm2.ForeColor = IIf(CDbl(lblProm2.Text.Trim) < CDbl("13.5"), Drawing.Color.Red, Drawing.Color.Blue)
                         e.Row.Cells(nro_col + dt.Rows.Count + _cont_res).Controls.Add(lblProm2)
                         e.Row.Cells(nro_col + dt.Rows.Count + _cont_res).BackColor = Drawing.Color.GreenYellow
 
+                        Dim _promedio_final As Decimal = fc_getPromedio(_codigo_alu, 0, 0)
+
                         Dim lblPromFinal As New Label()
                         lblPromFinal.ID = "lblPromFinal"
                         lblPromFinal.Text = _promedio_final.ToString("00.00")
-                        lblPromFinal.ToolTip = "P.F. = " & _promedio_final.ToString
+                        'lblPromFinal.ToolTip = "P.F. = " & _promedio_final.ToString
                         lblPromFinal.Font.Bold = True
+
                         If lblPromFinal.Text.Trim <> "" Then lblPromFinal.ForeColor = IIf(CDbl(lblPromFinal.Text.Trim) < CDbl("13.5"), Drawing.Color.Red, Drawing.Color.Blue)
                         e.Row.Cells(nro_col + dt.Rows.Count + _cont_res + 1).Controls.Add(lblPromFinal)
                         e.Row.Cells(nro_col + dt.Rows.Count + _cont_res + 1).BackColor = Drawing.Color.LightSteelBlue
@@ -385,14 +269,14 @@ Partial Class GestionCurricular_frmGenerarPromedio
                         If _inhabilitado = 1 Then
                             lblPromUP.Text = "INHABILITADO"
                         Else
-                            lblPromUP.Text = Math.Round(_promedio_final, 0, MidpointRounding.AwayFromZero).ToString("00")
+                            lblPromUP.Text = fc_getPromedio(_codigo_alu, 0, 1)
+
                             If lblPromUP.Text.Trim <> "" Then lblPromUP.ForeColor = IIf(CDbl(lblPromUP.Text.Trim) < CDbl("13.5"), Drawing.Color.Red, Drawing.Color.Blue)
                         End If
 
                         e.Row.Cells(nro_col + dt.Rows.Count + _cont_res + 2).Controls.Add(lblPromUP)
                         e.Row.Cells(nro_col + dt.Rows.Count + _cont_res + 2).BackColor = Drawing.Color.LightYellow
                         e.Row.Cells(nro_col + dt.Rows.Count + _cont_res + 2).ID = "colFinal"
-
                     End If
                 End If
 
@@ -542,8 +426,10 @@ Partial Class GestionCurricular_frmGenerarPromedio
                     dt = CType(Session("gc_dtEvaluacion"), Data.DataTable)
                     dv = New Data.DataView(dt, "codigo_emd = -1", "", Data.DataViewRowState.CurrentRows)
 
-                    If dt.Rows.Count = 0 Or dv.ToTable.Rows.Count > 0 Then
+                    'If dt.Rows.Count = 0 Or dv.ToTable.Rows.Count > 0 Then
+                    If dt.Rows.Count = 0 Then
                         mt_ShowMessage("No se puede proceder porque se encontraron " & CStr(dv.ToTable.Rows.Count) & "/" & dt.Rows.Count & " evaluaciones que hace falta enviar", MessageType.Warning)
+                        'mt_ShowMessage(Session("gc_fecha_ini") & ", " & Session("gc_fecha_fin"), MessageType.Warning)
                         Exit Sub
                     End If
 
@@ -563,7 +449,7 @@ Partial Class GestionCurricular_frmGenerarPromedio
                 Else
                     Session("isValidated") = 0
                     btnPublicar.Visible = False
-                    mt_ShowMessage("Estas calificaciones ya fueron publicadas anteriormente.", MessageType.Warning)
+                    mt_ShowMessage("Éstas calificaciones ya fueron publicadas anteriormente.", MessageType.Warning)
                 End If
             End If
         Catch ex As Exception
@@ -579,14 +465,15 @@ Partial Class GestionCurricular_frmGenerarPromedio
             Dim dv As Data.DataView
             Dim obj As New ClsConectarDatos
             Dim _codigo_dma, _codigo_res, _codigo_niv, _cont_res, _inhabilitado As Integer
-            Dim _promedio_final As Double
+            Dim _promedio_final As Decimal
             obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
 
             Try
                 dt = CType(Session("gc_dtEvaluacion"), Data.DataTable)
                 dv = New Data.DataView(dt, "codigo_emd = -1", "", Data.DataViewRowState.CurrentRows)
 
-                If dt.Rows.Count = 0 Or dv.ToTable.Rows.Count > 0 Then
+                'If dt.Rows.Count = 0 Or dv.ToTable.Rows.Count > 0 Then
+                If dt.Rows.Count = 0 Then
                     mt_ShowMessage("No se puede proceder porque se encontraron " & CStr(dv.ToTable.Rows.Count) & "/" & dt.Rows.Count & " evaluaciones que hace falta enviar", MessageType.Success)
                     Exit Sub
                 End If
@@ -616,23 +503,51 @@ Partial Class GestionCurricular_frmGenerarPromedio
                             lblFinal = Me.gvNotas.Rows(x).FindControl("lblPromUP")
                             _codigo_niv = fc_getCodNivelLogro(CDbl(lblFinal.Text.Trim))
 
-                            obj.Ejecutar("DEA_DetalleMatricula_PromedioFinal", "1", _codigo_dma, CDbl(lblFinal.Text.Trim), _codigo_niv, cod_user)
+                            'obj.Ejecutar("DEA_DetalleMatricula_PromedioFinal", "1", _codigo_dma, CDbl(lblFinal.Text.Trim), _codigo_niv, cod_user)
+                            obj.Ejecutar("DEA_DetalleMatricula_PromedioFinal", "1", _codigo_dma, CDbl(lblFinal.Text.Trim), _codigo_niv, cod_user, 0) '20200727-ENevado
                             'Else
                             '    mt_ShowMessage("¡ Mensaje de Pruebita !", MessageType.Success)
                         End If
 
                     Next
 
-                    obj.Ejecutar("DEA_DetalleMatricula_PromedioFinal", "2", Session("gc_codigo_cup"), 0, -1, cod_user)
+                    '20200727-ENevado --------------------------------------------------------------------------------------------------
+                    Dim _idRegistroNota As Integer = 0
+                    'Dim codigo_dot As Integer      '' es lo que se va obtener a invocar el metododo generarDocumentoPdf y va servir para descargar doucmento luego
+                    Dim codigo_cda As Integer = 8  ''-- Configuracion del documento obligatorio en este caso es 8
+                    Dim serieCorrelativoDoc As String ''--- Este es el correlativo o la numeración del documento a utilizar
+                    ''''**** 1. GENERA CORRELATIVO DEL DOCUMNETO CONFIGURADO *******************************************************
+                    serieCorrelativoDoc = clsDocumentacion.ObtenerSerieCorrelativoDocPorCda(codigo_cda, Year(Now), cod_user) '' Se obtiene el correlativo
+                    ''''******* GENERA DOCUMENTO PDF *****************************************************************************
+                    If serieCorrelativoDoc <> "" Then
+                        '--------necesarios
+                        Dim arreglo As New Dictionary(Of String, String)
+                        arreglo.Add("nombreArchivo", "ActaEvaluacion") '' nombre del documento tal como está
+                        arreglo.Add("sesionUsuario", Session("perlogin").ToString) '---- ejemplo: USAT\LLLONTOP
+                        '-----------------                
+                        arreglo.Add("codigo_cup", Session("gc_codigo_cup"))  ''Aqui se debe enviar el codigo del curso programado codigo_cup en ese caso
+                        '********2. GENERA DOCUMENTO PDF **************************************************************
+                        _idRegistroNota = clsDocumentacion.generarDocumentoPdf(serieCorrelativoDoc, arreglo) '' aqui se obtiene el codigo_dot para usarlo despues en la descarga del documento
+                        '**********************************************************************************************
+                    End If
+
+                    'obj.Ejecutar("DEA_DetalleMatricula_PromedioFinal", "2", Session("gc_codigo_cup"), 0, -1, cod_user)
+                    obj.Ejecutar("DEA_DetalleMatricula_PromedioFinal", "2", Session("gc_codigo_cup"), 0, -1, cod_user, _idRegistroNota)
+                    '------------------------------------------------------------------------------------------------------------------
 
                     obj.TerminarTransaccion()
                     mt_ShowMessage("¡ Se publicaron correctamente los promedios finales !", MessageType.Success)
                     btnPublicar.Visible = False
+                    chkConfirmarPublicacion.checked = False
+                    chkConfirmarPublicacion.visible = False
                     lblAviso.InnerText = "Estimado(a) docente debe acercarse a Dirección Académica a realizar la firma de Actas de Notas."
                     lblAviso.Style("background-color") = "#BFFFBB"
+                    Session("estaPublicado") = True 'Por Luis Q.T. | 12ENE2021
                     Page.RegisterStartupScript("Pop", "<script>showDivs('hide');</script>")
+
                 End If
             Catch ex As Exception
+                Session("estaPublicado") = False 'Por Luis Q.T. | 12ENE2021
                 obj.AbortarTransaccion()
                 mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.Error)
             End Try
@@ -667,6 +582,38 @@ Partial Class GestionCurricular_frmGenerarPromedio
             'Response.Write(sw.ToString())
             'Response.[End]()
             Response.Redirect("frmGenerarPromedio_Exportar.aspx")
+        Catch ex As Exception
+            mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.Error)
+        End Try
+    End Sub
+
+    Protected Sub chkConfirmarPublicacion_ChekedChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        Try
+            btnPublicar.Enabled = chkConfirmarPublicacion.checked
+        Catch ex As Exception
+            mt_ShowMessage(ex.Message.Replace("'", ""), MessageType.Error)
+        End Try
+    End Sub
+
+    Protected Sub btnDescargarActa_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDescargarActa.Click
+        Dim obj As New ClsConectarDatos
+        Dim dt As New Data.DataTable
+        obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+        Try
+            Dim _idRegistroNota As Integer = -1
+            obj.AbrirConexion()
+            dt = obj.TraerDataTable("CursoProgramado_Listar", "AN", Session("gc_codigo_cup"), -1, -1, -1)
+            obj.CerrarConexion()
+
+            If dt.rows.count > 0 Then
+                _idRegistroNota = dt.rows(0).item(0)
+            End If
+
+            If _idRegistroNota <> -1 Then
+                mt_DescargarArchivo(_idRegistroNota, 30, "3N23G777FS")
+            Else
+                Throw New exception("¡ No se encontró registro de Acta de Notas !")
+            End If
         Catch ex As Exception
             mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.Error)
         End Try
@@ -939,17 +886,43 @@ Partial Class GestionCurricular_frmGenerarPromedio
         End Try
     End Sub
 
-    Private Sub mt_CargarNotas(ByVal codigo_cup As Integer)
+    Private Sub mt_CargarNotas(ByVal codigo_cup As Integer, Optional ByVal codigo_cac As Integer = 0)
         Dim obj As New ClsConectarDatos
         Dim dt, dtNM As New Data.DataTable
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
         Try
+            ' Por Luis QT|08ENE2021 : Unificar consulta de notas almacenadas con notas que se traen del aula virtual
+            ' 
+            '         obj.AbrirConexion()
+            '         dt = obj.TraerDataTable("DEA_NotasParciales_listar", "", -1, -1, "P", codigo_cup, 99) 'Por Luis QT|04DIC2019: Uso 99 para obtener notas del último corte
+
+            '         Dim publicado As String = ""
+
+            '         If dt.Rows.Count > 0 Then
+            '             publicado = dt.Rows(0)("publicado").ToString()
+            '         End If
+
+            '         If Not publicado.Equals("R") Then
+            '             dtNM = obj.TraerDataTable("DEA_NotasParciales_listar", "CE", -1, -1, "P", codigo_cup)
+            '         Else
+            '             dtNM.Columns.Add("shortname") 'no
+            '             dtNM.Columns.Add("codigo_ins")
+            '             dtNM.Columns.Add("scaleid") 'no
+            '             dtNM.Columns.Add("username")
+            '             dtNM.Columns.Add("finalgrade") 'no
+            '             dtNM.Columns.Add("nota_mdl")
+            '         End If
+
+            '         obj.CerrarConexion()
+            '         Session("gc_dtNotas") = dt
+            '         Session("gc_dtNotasMoodle") = dtNM
+
+            ' Por Luis QT|08ENE2021
             obj.AbrirConexion()
-            dt = obj.TraerDataTable("DEA_NotasParciales_listar", "", -1, -1, "P", codigo_cup, 99) 'Por Luis QT|04DIC2019: Uso 99 para obtener notas del último corte
-            dtNM = obj.TraerDataTable("DEA_NotasParciales_listar", "CE", -1, -1, "P", codigo_cup)
+            dt = obj.TraerDataTable("DEA_CalificadorEstudianteGeneral", codigo_cac, codigo_cup)
             obj.CerrarConexion()
+
             Session("gc_dtNotas") = dt
-            Session("gc_dtNotasMoodle") = dtNM
         Catch ex As Exception
             Throw ex
         End Try
@@ -1048,6 +1021,76 @@ Partial Class GestionCurricular_frmGenerarPromedio
         End Try
     End Sub
 
+    Private Sub mt_DescargarArchivo(ByVal IdArchivo As Long, ByVal idTabla As Integer, ByVal token As String)
+        Try
+            Dim wsCloud As New ClsArchivosCompartidosV2
+            Dim list As New Dictionary(Of String, String)
+            Dim obj As New ClsConectarDatos
+            Dim tb As New Data.DataTable
+            Dim usuario As String = Session("perlogin")
+
+            obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+            obj.AbrirConexion()
+            tb = obj.TraerDataTable("ArchivosCompartidos_Listar2", 1, idTabla, IdArchivo, token)
+            obj.CerrarConexion()
+            If tb.Rows.Count = 0 Then Throw New Exception("¡ Archivo no encontrado !")
+
+            list.Add("IdArchivo", tb.Rows(0).Item("IdArchivo").ToString)
+            list.Add("Usuario", usuario)
+            list.Add("Token", token)
+
+            Dim envelope As String = wsCloud.SoapEnvelopeDescarga(list)
+            Dim result As String = wsCloud.PeticionRequestSoap(ruta, envelope, "http://usat.edu.pe/DownloadFile", usuario)
+            Dim imagen As String = fc_ResultFile(result)
+
+            If tb.Rows.Count > 0 Then
+                Dim extencion As String
+                extencion = tb.Rows(0).Item("Extencion")
+                Select Case tb.Rows(0).Item("Extencion")
+                    Case ".txt"
+                        extencion = "text/plain"
+                    Case ".doc"
+                        extencion = "application/ms-word"
+                    Case ".xls"
+                        extencion = "application/vnd.ms-excel"
+                    Case ".gif"
+                        extencion = "image/gif"
+                    Case ".jpg"
+                    Case ".jpeg"
+                    Case "jpeg"
+                        extencion = "image/jpeg"
+                    Case "png"
+                        extencion = "image/png"
+                    Case ".bmp"
+                        extencion = "image/bmp"
+                    Case ".wav"
+                        extencion = "audio/wav"
+                    Case ".ppt"
+                        extencion = "application/mspowerpoint"
+                    Case ".dwg"
+                        extencion = "image/vnd.dwg"
+                    Case ".pdf"
+                        extencion = "application/pdf"
+                    Case Else
+                        extencion = "application/octet-stream"
+                End Select
+
+                Dim bytes As Byte() = Convert.FromBase64String(imagen)
+                Response.Clear()
+                Response.Buffer = False
+                Response.Charset = ""
+                Response.Cache.SetCacheability(HttpCacheability.NoCache)
+                Response.ContentType = extencion
+                Response.AddHeader("content-disposition", "attachment;filename=" & tb.Rows(0).Item("NombreArchivo").ToString.Replace(",", ""))
+                Response.AppendHeader("Content-Length", bytes.Length.ToString())
+                Response.BinaryWrite(bytes)
+                Response.End()
+            End If
+            'Response.Write(envelope)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
 
 #End Region
 
@@ -1061,6 +1104,7 @@ Partial Class GestionCurricular_frmGenerarPromedio
         Dim dvM As Data.DataView
         Dim _codigo_pso As String = ""
         Dim _codigo_dma As String = ""
+        Dim _codigo_alu As String = "" ' Por Luis QT|08ENE2021
 
         Try
             dtA = CType(Session("gc_dtAlumnos"), Data.DataTable)
@@ -1076,7 +1120,7 @@ Partial Class GestionCurricular_frmGenerarPromedio
                 'If isMoodle.Equals("2") Then
                 '    dvN = New Data.DataView(dtN, "codigo_cup = " & codigo_cup & " AND codigo_ins = " & codigo_ins & " AND estado_nop = 'E'" & " AND codigo_dma NOT IN ( " & _codigo_dma & ")", "", Data.DataViewRowState.CurrentRows)
                 'Else
-                dvN = New Data.DataView(dtN, "codigo_cup = " & codigo_cup & " AND codigo_ins = " & codigo_ins & " AND estado_nop = 'E'", "", Data.DataViewRowState.CurrentRows)
+                dvN = New Data.DataView(dtN, "codigo_cup = " & codigo_cup & " AND codigo_ins_res = " & codigo_ins & " AND moodle = 0 AND not nota is null", "", Data.DataViewRowState.CurrentRows)
                 'End If
 
                 dtN = dvN.ToTable
@@ -1084,12 +1128,18 @@ Partial Class GestionCurricular_frmGenerarPromedio
 
             If isMoodle.Equals("1") Or isMoodle.Equals("2") Then
                 For i As Integer = 1 To dtA.Rows.Count - 1
-                    _codigo_pso += IIf(i = 1, "", ",") & dtA.Rows(i).Item("codigo_pso").ToString()
+                    '_codigo_pso += IIf(i = 1, "", ",") & dtA.Rows(i).Item("codigo_pso").ToString()
+                    _codigo_alu += IIf(i = 1, "", ",") & dtA.Rows(i).Item("codigo_alu").ToString()
                 Next
 
-                dtM = CType(Session("gc_dtNotasMoodle"), Data.DataTable)
+                ' Por Luis QT|08ENE2021
+                'dtM = CType(Session("gc_dtNotasMoodle"), Data.DataTable)
+                'dvM = New Data.DataView(dtM, "codigo_ins = " & codigo_ins & " AND username IN ( " & _codigo_pso & " ) AND NOT nota_mdl IS NULL", "", Data.DataViewRowState.CurrentRows)
 
-                dvM = New Data.DataView(dtM, "codigo_ins = " & codigo_ins & " AND username IN ( " & _codigo_pso & " ) AND NOT nota_mdl IS NULL", "", Data.DataViewRowState.CurrentRows)
+                ' Por Luis QT|08ENE2021
+                dtM = CType(Session("gc_dtNotas"), Data.DataTable)
+                dvM = New Data.DataView(dtM, "codigo_cup = " & codigo_cup & " AND codigo_ins_res = " & codigo_ins & " AND codigo_alu IN ( " & _codigo_alu & " ) AND moodle = 1 AND not nota_moodle is null", "", Data.DataViewRowState.CurrentRows)
+
                 dtM = dvM.ToTable
             End If
 
@@ -1109,10 +1159,12 @@ Partial Class GestionCurricular_frmGenerarPromedio
         dt = CType(Session("gc_dtNotas"), Data.DataTable)
 
         If dt.Rows.Count > 0 Then
-            dv = New Data.DataView(dt, "codigo_Dma = " & codigo_dma & " AND codigo_ins = " & codigo_ins & " AND codigo_cup = " & codigo_cup, "", Data.DataViewRowState.CurrentRows)
+            dv = New Data.DataView(dt, "codigo_cup = " & codigo_cup & " AND codigo_ins_res = " & codigo_ins & " AND codigo_alu = " & codigo_dma & " AND moodle = 0", "", Data.DataViewRowState.CurrentRows)
             dt = dv.ToTable
             If dt.Rows.Count > 0 Then
-                Return dt.Rows(0).Item("nota_nop").ToString
+                'Return dt.Rows(0).Item("nota_nop").ToString
+                Return dt.Rows(0).Item("nota").ToString
+
                 'Else
                 '    If codigo_dma = 1868560 Then
                 '        If codigo_ins = 2990 Then
@@ -1142,13 +1194,17 @@ Partial Class GestionCurricular_frmGenerarPromedio
     Private Function fc_getNotaMoodle(ByVal codigo_pso As Integer, ByVal codigo_ins As Integer) As String
         Dim dv As Data.DataView
         Dim dt As New Data.DataTable
-        dt = CType(Session("gc_dtNotasMoodle"), Data.DataTable)
-
+        'dt = CType(Session("gc_dtNotasMoodle"), Data.DataTable)' Por Luis QT|08ENE2021
+        dt = CType(Session("gc_dtNotas"), Data.DataTable) ' Por Luis QT|08ENE2021
+       
         If dt.Rows.Count > 0 Then
-            dv = New Data.DataView(dt, "codigo_ins = " & codigo_ins & " AND username = " & codigo_pso, "", Data.DataViewRowState.CurrentRows)
+            'dv = New Data.DataView(dt, "codigo_ins = " & codigo_ins & " AND username = " & codigo_pso, "", Data.DataViewRowState.CurrentRows) ' Por Luis QT|08ENE2021
+            dv = New Data.DataView(dt, "codigo_ins_res = " & codigo_ins & " AND codigo_alu = " & codigo_pso & " AND moodle = 1", "", Data.DataViewRowState.CurrentRows) ' Por Luis QT|08ENE2021
             dt = dv.ToTable
+
             If dt.Rows.Count > 0 Then
-                Return dt.Rows(0).Item("nota_mdl").ToString
+                'Return dt.Rows(0).Item("nota_mdl").ToString ' Por Luis QT|08ENE2021
+                Return dt.Rows(0).Item("nota_moodle").ToString ' Por Luis QT|08ENE2021
             End If
         End If
 
@@ -1159,7 +1215,7 @@ Partial Class GestionCurricular_frmGenerarPromedio
         Return String.Empty
     End Function
 
-    Private Function fc_getCodNivelLogro(ByVal nota As Double) As Integer
+    Private Function fc_getCodNivelLogro(ByVal nota As Decimal) As Integer
         Dim dv As Data.DataView
         Dim dt As New Data.DataTable
         dt = CType(Session("gc_dtNivelLogro"), Data.DataTable)
@@ -1175,7 +1231,7 @@ Partial Class GestionCurricular_frmGenerarPromedio
         Return -1
     End Function
 
-    Private Function fc_getColorNivelLogro(ByVal nota As Double) As String
+    Private Function fc_getColorNivelLogro(ByVal nota As Decimal) As String
         Dim dv As Data.DataView
         Dim dt As New Data.DataTable
         dt = CType(Session("gc_dtNivelLogro"), Data.DataTable)
@@ -1197,38 +1253,51 @@ Partial Class GestionCurricular_frmGenerarPromedio
         Dim color As String = ""
         Dim msje As String = ""
 
-        Dim dvM As Data.DataView
+        'Dim dvM As Data.DataView
         Dim dvN As Data.DataView
-        Dim dtM As New Data.DataTable
+        'Dim dtM As New Data.DataTable
         Dim dtN As New Data.DataTable
         Dim dtA As New Data.DataTable
         Dim _codigo_pso As String = ""
         Dim _codigo_dma As String = ""
+        Dim _codigo_alu As String = "" ' Por Luis QT|08ENE2021
 
         dtN = CType(Session("gc_dtNotas"), Data.DataTable)
-        dtM = CType(Session("gc_dtNotasMoodle"), Data.DataTable)
+        ' dtM = CType(Session("gc_dtNotasMoodle"), Data.DataTable) ' Por Luis QT|08ENE2021
         dtA = CType(Session("gc_dtAlumnos"), Data.DataTable)
         inf = CStr(dtA.Rows.Count - 1)
 
         '--> Contar los alumnos que cuentan con calificación
-        If (dtN.Rows.Count + dtM.Rows.Count) > 0 Then
+        'If (dtN.Rows.Count + dtM.Rows.Count) > 0 Then ' Por Luis QT|08ENE2021
+        If dtN.Rows.Count > 0 Then ' Por Luis QT|08ENE2021
             For i As Integer = 1 To dtA.Rows.Count - 1
-                _codigo_pso += IIf(i = 1, "", ",") & dtA.Rows(i).Item("codigo_pso").ToString()
-                _codigo_dma += IIf(i = 1, "", ",") & dtA.Rows(i).Item("codigo_dma").ToString()
+                '_codigo_pso += IIf(i = 1, "", ",") & dtA.Rows(i).Item("codigo_pso").ToString()
+                '_codigo_dma += IIf(i = 1, "", ",") & dtA.Rows(i).Item("codigo_dma").ToString()
+                _codigo_alu += IIf(i = 1, "", ",") & dtA.Rows(i).Item("codigo_alu").ToString() ' Por Luis QT|08ENE2021
             Next
 
-            dvN = New Data.DataView(dtN, "codigo_ins = " & codigo_ins & " AND codigo_dma NOT IN ( " & _codigo_dma & ")", "", Data.DataViewRowState.CurrentRows)
+            ' Por Luis QT|08ENE2021
+            'dvN = New Data.DataView(dtN, "codigo_ins = " & codigo_ins & " AND codigo_dma NOT IN ( " & _codigo_dma & ")", "", Data.DataViewRowState.CurrentRows)
+            'dtN = dvN.ToTable
+
+            'dvM = New Data.DataView(dtM, "codigo_ins = " & codigo_ins & " AND username IN ( " & _codigo_pso & " ) AND NOT nota_mdl IS NULL", "", Data.DataViewRowState.CurrentRows)
+            'dtM = dvM.ToTable
+
+            'If (dtN.Rows.Count + dtM.Rows.Count) > 0 Then
+            '    sup = CStr(dtN.Rows.Count + dtM.Rows.Count)
+            'End If
+
+            ' Por Luis QT|08ENE2021
+            dvN = New Data.DataView(dtN, "codigo_ins_res = " & codigo_ins & " AND codigo_alu IN ( " & _codigo_alu & ") AND (NOT nota IS NULL OR NOT nota_moodle IS NULL)", "", Data.DataViewRowState.CurrentRows)
             dtN = dvN.ToTable
 
-            dvM = New Data.DataView(dtM, "codigo_ins = " & codigo_ins & " AND username IN ( " & _codigo_pso & " ) AND NOT nota_mdl IS NULL", "", Data.DataViewRowState.CurrentRows)
-            dtM = dvM.ToTable
-
-            If (dtN.Rows.Count + dtM.Rows.Count) > 0 Then
-                sup = CStr(dtN.Rows.Count + dtM.Rows.Count)
+            If dtN.Rows.Count > 0 Then
+                sup = CStr(dtN.Rows.Count)
             End If
+
         End If
         dtN.Dispose()
-        dtM.Dispose()
+        'dtM.Dispose()
 
         '--> Definir el color del mensaje
         If sup.Equals("0") Or inf.Equals("0") Then
@@ -1270,10 +1339,12 @@ Partial Class GestionCurricular_frmGenerarPromedio
             dt = obj.TraerDataTable("DEA_DetalleMatricula_Listar", "VP", codigo_cac, codigo_cup)
             obj.CerrarConexion()
             If dt.Rows.Count > 0 Then
-                If dt.Rows(0).Item(0) > 1 Then
+                If dt.Rows(0).Item(0) >= 1 Then
+                    Session("estaPublicado") = True 'Por Luis Q.T. | 12ENE2021
                     Return True
                 End If
             End If
+            Session("estaPublicado") = False 'Por Luis Q.T. | 12ENE2021
             Return False
         Catch ex As Exception
             Throw ex
@@ -1297,6 +1368,53 @@ Partial Class GestionCurricular_frmGenerarPromedio
         Catch ex As Exception
             Throw ex
         End Try
+    End Function
+
+    Function fc_ResultFile(ByVal cadXml As String) As String
+        Try
+            Dim xError As String()
+            Dim nsMgr As System.Xml.XmlNamespaceManager
+            Dim xml As System.Xml.XmlDocument = New System.Xml.XmlDocument()
+            xml.LoadXml(cadXml)
+            nsMgr = New System.Xml.XmlNamespaceManager(xml.NameTable)
+            nsMgr.AddNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/")
+            Dim res As System.Xml.XmlNode = xml.DocumentElement.SelectSingleNode("/soap:Envelope/soap:Body", nsMgr)
+            xError = res.InnerText.Split(":")
+
+            If xError.Length = 2 Then
+                Throw New Exception(res.InnerText)
+            End If
+
+            Return res.InnerText
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Private Function fc_getPromedio(ByVal codigo_alu As Integer, ByVal codigo_ins As Integer, Optional ByVal calculado As Integer = 1) As String
+        Dim dv As Data.DataView
+        Dim dt As New Data.DataTable
+
+        dt = CType(Session("gc_dtNotas"), Data.DataTable)
+
+        If dt.Rows.Count > 0 Then
+            dv = New Data.DataView(dt, "codigo_ins_res = " & codigo_ins & " AND codigo_alu = " & codigo_alu, "", Data.DataViewRowState.CurrentRows)
+            dt = dv.ToTable
+
+            If dt.Rows.Count > 0 Then
+                If calculado = 1 Then
+                    Return dt.Rows(0).Item("nota").ToString
+                Else
+                    Return dt.Rows(0).Item("nota_moodle").ToString
+                End If
+            End If
+        End If
+
+        If Session("gc_visualizar") IsNot Nothing AndAlso Session("gc_visualizar") = "1" Then
+            Return "0"
+        End If
+
+        Return String.Empty
     End Function
 
 #End Region

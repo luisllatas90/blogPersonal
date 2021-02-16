@@ -223,7 +223,7 @@
                                                     <div class="col-md-12">
                                                         <asp:Label ID="Label1" runat="server" CssClass="col-md-2 control-label">Observación</asp:Label>
                                                         <div class="col-md-10">
-                                                            <asp:TextBox CssClass="form-control" ID="txtObservacion" runat="server" TextMode="MultiLine"
+                                                            <asp:TextBox CssClass="form-control" ID="txtObservacion" runat="server" TextMode="MultiLine" MaxLength="500"
                                                                 Rows="3"></asp:TextBox>
                                                         </div>
                                                     </div>

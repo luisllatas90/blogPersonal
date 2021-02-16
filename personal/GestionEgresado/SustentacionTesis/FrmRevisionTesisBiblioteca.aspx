@@ -1,0 +1,450 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="FrmRevisionTesisBiblioteca.aspx.vb"
+    Inherits="FrmRevisionTesisBiblioteca" Title="Untitled Page" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Revisión de Tesis post sustentación </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv='X-UA-Compatible' content='IE=8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=10' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/material.css" rel="stylesheet" type="text/css" />
+    <link rel='stylesheet' href='../../assets/css/style.css?x=1' />
+
+    <script src="../../assets/js/jquery.js" type="text/javascript"></script>
+
+    <script src="../../assets/js/app.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src='../../assets/js/jquery-ui-1.10.3.custom.min.js'></script>
+
+    <script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <link href="../../assets/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet"
+        type="text/css" />
+    <%-- ======================= Lista desplegable con busqueda =============================================--%>
+    <link href="../../assets/bootstrap-select-1.13.1/css/bootstrap-select.css" rel="stylesheet"
+        type="text/css" />
+
+    <script type="text/javascript" src='../../assets/js/jquery.js'></script>
+
+    <script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <%-- ======================= Inicio Notificaciones =============================================--%>
+
+    <script type="text/javascript" src="../../assets/js/noty/jquery.noty.js"></script>
+
+    <script type="text/javascript" src='../../assets/js/noty/layouts/top.js'></script>
+
+    <script type="text/javascript" src='../../assets/js/noty/layouts/default.js'></script>
+
+    <script type="text/javascript" src="../../assets/js/noty/notifications-custom.js"></script>
+
+    <%-- ======================= Lista desplegable con busqueda =============================================--%>
+
+    <script src="../../assets/bootstrap-select-1.13.1/js/bootstrap-select.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            LoadingEstado();
+            fnLoading(false);
+        });
+        function LoadingEstado() {
+            $("#ddlEstado").change(function() {
+                fnLoading(true);
+            });
+        }
+
+
+        function fnMensaje(typ, msje) {
+            var n = noty({
+                text: msje,
+                type: typ,
+                timeout: 5000,
+                modal: false,
+                dismissQueue: true,
+                theme: 'defaultTheme'
+
+            });
+        }
+        function fnLoading(sw) {
+            if (sw) {
+                $('.piluku-preloader').removeClass('hidden');
+            } else {
+                $('.piluku-preloader').addClass('hidden');
+            }
+        }
+        function fnDescargar(url) {
+            var d = new Date();
+            window.open(url + "&h=" + d.getHours().toString() + d.getMinutes().toString() + d.getSeconds().toString());
+        }
+        function ConfirmaConformidad() {
+            if (!confirm('¿Está seguro que desea dar conformidad a tesis?')) {
+                return false;
+            }
+            fnLoading(true);
+            return true;
+        }
+        function fnConfirmarAnulacion() {
+            if (confirm("¿Está seguro que desea quitar conformidad?")) {
+                fnLoading("true");
+            } else {
+                return false;
+            }
+        }  
+    </script>
+
+    <style type="text/css">
+        body
+        {
+            padding-right: 0 !important;
+        }
+        .modal-open
+        {
+            overflow: inherit;
+        }
+        .form table th
+        {
+            text-align: center;
+        }
+        .form-group
+        {
+            margin: 6px;
+        }
+        .form-control
+        {
+            color: Black;
+        }
+        .bootstrap-select .dropdown-toggle .filter-option
+        {
+            position: relative;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-left: 0px;
+        }
+        .dropdown-menu open
+        {
+            min-width: 0px;
+            max-width: 500px;
+        }
+        .table > thead > tr > th
+        {
+            color: White;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .table > tbody > tr > td
+        {
+            color: black;
+            vertical-align: middle;
+        }
+        .table tbody tr th
+        {
+            color: White;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="">
+    <div class="container-fluid">
+        <form enctype="multipart/form-data" id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <asp:UpdatePanel runat="server" ID="updLoading" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="piluku-preloader text-center">
+                    <div class="loader">
+                        Loading...</div>
+                </div>
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="ddlEstado" EventName="SelectedIndexChanged" />
+                <asp:AsyncPostBackTrigger ControlID="gvTesis" EventName="RowCommand" />
+                <asp:AsyncPostBackTrigger ControlID="btnAtras" />
+                <asp:AsyncPostBackTrigger ControlID="btnGuardarObservacion" />
+            </Triggers>
+        </asp:UpdatePanel>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: #E33439; color: White; font-weight: bold;
+                font-size: 14px;">
+                <b>Revisión de Tesis post Sustentación</b>
+            </div>
+            <div class="panel-body">
+                <asp:UpdatePanel runat="server" ID="updLista" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div runat="server" id="Lista">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <asp:Label ID="Label1" runat="server" CssClass="col-sm-1 col-md-1 control-label">Estado</asp:Label>
+                                    <div class="col-sm-3 col-md-2">
+                                        <asp:DropDownList runat="server" ID="ddlEstado" CssClass="form-control" AutoPostBack="true">
+                                            <asp:ListItem Value="P" Selected="True">PENDIENTES</asp:ListItem>
+                                            <asp:ListItem Value="NR">NO REVISADOS</asp:ListItem>
+                                            <asp:ListItem Value="O">OBSERVADOS</asp:ListItem>
+                                            <asp:ListItem Value="A">APROBADOS</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div class="col-sm-8 col-md-9 text-right">
+                                        <asp:LinkButton ID="btnExportarExcel" runat="server" OnClick="btnExportExcel_Click"
+                                            CssClass="btn btn-sm btn-success btn-radius" Text='<span class="fa fa-file-excel-o"></span> Exportar a Excel'>
+                                        </asp:LinkButton>
+                                    </div>
+                                    <%--      <div class="col-sm-1 col-md-1">
+                            <asp:LinkButton ID="btnConsultar" runat="server" Text='<span class="fa fa-search"></span>'
+                                CssClass="btn btn-primary" ToolTip="Buscar"></asp:LinkButton>
+                        </div>--%>
+                                </div>
+                            </div>
+                            <br />
+                            <%--<asp:UpdatePanel runat="server" ID="updGeneral" UpdateMode="Conditional" ChildrenAsTriggers="false">
+                    <ContentTemplate>
+                        <asp:UpdatePanel runat="server" ID="updGrilla" UpdateMode="Conditional" ChildrenAsTriggers="false">
+                            <ContentTemplate>--%>
+                            <div class="form-group">
+                                <div runat="server" id="lblmensaje">
+                                </div>
+                                <asp:HiddenField runat="server" ID="hdjur" Value="0" />
+                                <asp:HiddenField runat="server" ID="hdtes" Value="0" />
+                                <asp:GridView runat="server" ID="gvTesis" CssClass="table table-condensed" DataKeyNames="codigo_ctb,codigo_pst,codigo_Tes,codigo_dta,codigo_jur,informe,estado_trl"
+                                    AutoGenerateColumns="false">
+                                    <Columns>
+                                        <%--<asp:TemplateField HeaderText="#" HeaderStyle-Width="3%">
+                                    <ItemTemplate>
+                                        <%#Container.DataItemIndex + 1%>
+                                    </ItemTemplate>
+                                </asp:TemplateField>--%>
+                                        <asp:BoundField DataField="titulo_tes" HeaderText="TÍTULO" HeaderStyle-Width="30%" />
+                                        <asp:BoundField DataField="autores" HeaderText="BACHILLER(ES)" HeaderStyle-Width="18%" />
+                                        <asp:BoundField DataField="nombre_cpf" HeaderText="PROGRAMA ESTUDIOS" HeaderStyle-Width="14%" />
+                                        <asp:BoundField DataField="fechasustentacion" HeaderText="FECHA SUSTENTACIÓN" HeaderStyle-Width="10%" />
+                                        <asp:BoundField DataField="fechaarchivo" HeaderText="FECHA ARCHIVO" HeaderStyle-Width="11%"
+                                            ItemStyle-HorizontalAlign="Center" />
+                                        <asp:BoundField DataField="ultimaobservacion" HeaderText="ÚLTIMA OBSERVACIÓN" HeaderStyle-Width="8%"
+                                            ItemStyle-HorizontalAlign="Center" />
+                                        <asp:TemplateField HeaderText="" HeaderStyle-Width="3%" ShowHeader="false">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnDescargar" runat="server" Text='<span class="fa fa-download"></span>'
+                                                    CssClass="btn btn-info btn-sm btn-radius" ToolTip="Descargar" CommandName="Descargar"
+                                                    CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="" HeaderStyle-Width="3%" ShowHeader="false">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnAsesorias" runat="server" Text='<span class="fa fa-comment"></span>'
+                                                    CssClass="btn btn-warning btn-sm btn-radius" ToolTip="Observaciones" CommandName="Asesorias"
+                                                    CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>' OnClientClick="fnLoading(true);">
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="" HeaderStyle-Width="3%" ShowHeader="false">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnConforme" runat="server" Text='<span class="fa fa-check"></span>'
+                                                    CssClass="btn btn-success btn-sm btn-radius" ToolTip="Conformidad" CommandName="Conformidad"
+                                                    OnClientClick="return ConfirmaConformidad();" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'> 
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                         <asp:TemplateField HeaderText="" HeaderStyle-Width="3%" ShowHeader="false">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="btnAnular" runat="server" Text='<span class="fa fa-close"></span>'
+                                                    CssClass="btn btn-danger btn-sm btn-radius" ToolTip="Quitar conformidad" CommandName="Anular"
+                                                    CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>' OnClientClick="return fnConfirmarAnulacion();">
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <HeaderStyle Font-Size="11px" Font-Bold="true" BackColor="#D9534F" ForeColor="white" />
+                                    <RowStyle Font-Size="12px" />
+                                    <EmptyDataTemplate>
+                                        <b>No se encontraron tesis</b>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
+                            </div>
+                        </div>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="gvTesis" EventName="RowCommand" />
+                        <asp:AsyncPostBackTrigger ControlID="ddlEstado" EventName="selectedindexchanged" />
+                        <asp:AsyncPostBackTrigger ControlID="btnAtras" />
+                        <asp:PostBackTrigger ControlID="btnExportarExcel" />
+                    </Triggers>
+                </asp:UpdatePanel>
+                <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="form-group" id="DivAsesorias" runat="server" visible="false">
+                            <div class="row">
+                                <div class="form-group text-center">
+                                    <asp:Button runat="server" ID="btnAtras" CssClass="btn btn-sm btn-danger" Text="Atrás"
+                                        OnClientClick="fnLoading(true);" />
+                                </div>
+                            </div>
+                            <div role="tabpanel">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs nav-justified piluku-tabs piluku-noborder" role="tablist">
+                                    <li role="presentation" id="Li1" runat="server"><a href="#Datos" aria-controls="datos"
+                                        role="tab" data-toggle="tab" id="A1">Datos de Tesis</a></li>
+                                    <li role="presentation" class="active" id="TabAsesorias" runat="server"><a href="#Asesorias"
+                                        aria-controls="asesorias" role="tab" data-toggle="tab" id="tab4">Revisiones</a></li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content piluku-tab-content">
+                                    <div role="tabpanel" class="tab-pane" id="Datos" runat="server">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label ID="Label2" runat="server" CssClass="col-sm-3 col-md-3 control-label"
+                                                    For="txtAutores">Bachiller(es)</asp:Label>
+                                                <div class="col-sm-9 col-md-9">
+                                                    <asp:TextBox runat="server" ID="txtAutor" CssClass="form-control" TextMode="MultiLine"
+                                                        Rows="3" ReadOnly="true" Text=""></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label ID="Label3" runat="server" CssClass="col-sm-3 col-md-3 control-label"
+                                                    For="txtFacultad">Facultad</asp:Label>
+                                                <div class="col-sm-3 col-md-3">
+                                                    <asp:TextBox runat="server" ID="txtFacultad" CssClass="form-control" ReadOnly="true"
+                                                        Text=""></asp:TextBox>
+                                                </div>
+                                                <asp:Label ID="Label5" runat="server" CssClass="col-sm-2 col-md-2 control-label"
+                                                    For="txtCarrera">Carrera Profesional</asp:Label>
+                                                <div class="col-sm-4 col-md-4">
+                                                    <asp:TextBox runat="server" ID="txtcarrera" CssClass="form-control" ReadOnly="true"
+                                                        Text=""></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label ID="Label6" runat="server" CssClass="col-sm-3 col-md-3 control-label"
+                                                    For="txtLinea">Linea de Investigación USAT:</asp:Label>
+                                                <div class="col-sm-9 col-md-9">
+                                                    <asp:TextBox runat="server" ID="txtlinea" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label ID="Label11" runat="server" CssClass="col-sm-3 col-md-3 control-label"
+                                                    For="txtArea">Área OCDE</asp:Label>
+                                                <div class="col-sm-3 col-md-3">
+                                                    <asp:TextBox runat="server" ID="txtarea" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                                </div>
+                                                <asp:Label ID="Label12" runat="server" CssClass="col-sm-2 col-md-2 control-label"
+                                                    For="txtSubArea">Sub Área OCDE</asp:Label>
+                                                <div class="col-sm-4 col-md-4">
+                                                    <asp:TextBox runat="server" ID="txtsubarea" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label ID="Label19" runat="server" CssClass="col-sm-3 col-md-3 control-label"
+                                                    For="txtDisciplina">Disciplina OCDE:</asp:Label>
+                                                <div class="col-sm-9 col-md-9">
+                                                    <asp:TextBox runat="server" ID="txtdisciplina" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label ID="Label20" runat="server" CssClass="col-sm-3 col-md-3 control-label"
+                                                    For="txtPresupuesto">Presupuesto</asp:Label>
+                                                <div class="col-sm-2 col-md-3">
+                                                    <asp:TextBox runat="server" ID="txtPresupuesto" CssClass="form-control" ReadOnly="true"
+                                                        Text=""></asp:TextBox>
+                                                </div>
+                                                <asp:Label ID="Label21" runat="server" CssClass="col-sm-2 col-md-2 control-label"
+                                                    For="txtFinanciamiento">Financiamiento</asp:Label>
+                                                <div class="col-sm-5 col-md-4">
+                                                    <asp:TextBox runat="server" ID="txtFinanciamiento" CssClass="form-control" ReadOnly="true"
+                                                        Text=""></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label ID="Label22" runat="server" CssClass="col-sm-3 col-md-3 control-label"
+                                                    For="txtTitulo">Título</asp:Label>
+                                                <div class="col-sm-9 col-md-9">
+                                                    <asp:TextBox runat="server" ID="txttitulo" CssClass="form-control" TextMode="MultiLine"
+                                                        Text="" Rows="3" ReadOnly="true"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label ID="Label23" runat="server" CssClass="col-sm-3 col-md-3 control-label"
+                                                    For="txtObjetivoG">Objetivo General</asp:Label>
+                                                <div class="col-sm-9 col-md-9">
+                                                    <asp:TextBox runat="server" ID="txtObjetivoG" CssClass="form-control" TextMode="MultiLine"
+                                                        Text="" Rows="3" ReadOnly="true"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label ID="Label24" runat="server" CssClass="col-sm-3 col-md-3 control-label"
+                                                    For="txtObjetivoE">Objetivos Específicos</asp:Label>
+                                                <div class="col-sm-9 col-md-9">
+                                                    <asp:TextBox runat="server" ID="txtObjetivoE" CssClass="form-control" TextMode="MultiLine"
+                                                        Text="" Rows="5" ReadOnly="true"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane active" id="Asesorias">
+                                        <div class="panel panel-piluku">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <asp:Label ID="Label16" runat="server" CssClass="col-sm-2 col-md-2 control-label"
+                                                        For="txtObservacion">Observaciones</asp:Label>
+                                                    <div class="col-sm-7 col-md-8">
+                                                        <asp:TextBox runat="server" ID="txtObservacion" CssClass="form-control" TextMode="MultiLine"
+                                                            Rows="4" MaxLength="1000"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <center>
+                                                            <asp:Button runat="server" ID="btnGuardarObservacion" CssClass="btn btn-sm btn-primary"
+                                                                OnClientClick="return confirm('¿Está seguro que desea registrar observación?')"
+                                                                Text="Guardar" />
+                                                        </center>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="panel-body timeline-block">
+                                                    <!--Timeline-->
+                                                    <div id="LineaDeTiempo" runat="server">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="gvTesis" EventName="RowCommand" />
+                        <asp:AsyncPostBackTrigger ControlID="btnAtras" />
+                        <asp:AsyncPostBackTrigger ControlID="btnGuardarObservacion" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

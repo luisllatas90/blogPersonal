@@ -75,6 +75,21 @@
             }
         }
     </script>
+    
+    <style type="text/css">
+        .panel {
+        	margin-bottom: 0px;
+        }
+        .panel-heading {
+            padding: 5px 7.5px;
+        }
+        .panel-body {
+            padding: 7.5px;
+        }
+        .badge-success{
+        	background-color: #5cb85c;
+        }
+    </style>
 
 </head>
 <body>
@@ -94,7 +109,7 @@
             </div>
             <div class="panel panel-body">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="col-md-4">
                                 Semestre:</label>
@@ -105,13 +120,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label class="col-md-4">
-                                Carrera Profesional:</label>
+                                Carrera Prof:</label>
                             <div class="col-md-8">
                                 <asp:DropDownList ID="cboCarrProf" runat="server" CssClass="form-control input-sm"
                                     AutoPostBack="true">
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-4">
+                                Estado:</label>
+                            <div class="col-md-8">
+                                <asp:DropDownList ID="cboEstado" runat="server" CssClass="form-control input-sm"
+                                    AutoPostBack="true">
+                                    <asp:ListItem Value="" Selected="True">TODOS</asp:ListItem>
+                                    <asp:ListItem Value="P">SIN PUBLICAR</asp:ListItem>
+                                    <asp:ListItem Value="E">PUBLICADOS</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -136,7 +165,7 @@
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <asp:GridView ID="gvAsignatura" runat="server" AutoGenerateColumns="false" ShowHeader="true"
-                                AllowPaging="True" PageSize="20" DataKeyNames="codigo_cup, codigo_cur, codigo_pes, nombre_Cur, codigo_dis, grupoHor_Cup, idcurso_mdl, modular_pcu,cicloRom"
+                                AllowPaging="True" PageSize="20" DataKeyNames="codigo_cup, codigo_cur, codigo_pes, nombre_Cur, codigo_dis, grupoHor_Cup, idcurso_mdl, modular_pcu, cicloRom, estado_sil"
                                 OnRowCreated="gvAsignatura_OnRowCreated" OnRowDataBound="gvAsignatura_OnRowDataBound"
                                 CssClass="table table-bordered table-hover">
                                 <Columns>

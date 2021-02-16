@@ -22,7 +22,7 @@ Partial Class GestionCurricular_frmCalificadorCurso
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             If (Session("id_per") Is Nothing) Then
-                Response.Redirect("../../sinacceso.html")
+                Response.Redirect("https://intranet.usat.edu.pe/campusvirtual/sinacceso.html")
             End If
 
             cod_user = Session("id_per")
@@ -196,13 +196,32 @@ Partial Class GestionCurricular_frmCalificadorCurso
                                         _nota_aux = fc_getNotaMoodle(_codigo_pso, _codigo_ins)
                                     End If
 
-                                    If _nota_aux.Trim <> "" Then
+                                    If Not String.IsNullOrEmpty(_nota_aux) Then 'Por Luis Q.T | 10072020
                                         lblNotaMdl.Text = CDbl(_nota_aux).ToString("00.00")
                                     End If
+
                                     If lblNotaMdl.Text.Trim <> "" Then lblNotaMdl.ForeColor = IIf(CDbl(lblNotaMdl.Text.Trim) < CDbl("13.5"), Drawing.Color.Red, Drawing.Color.Blue)
                                     e.Row.Cells(nro_col + i).Controls.Add(lblNotaMdl)
                                     ' ---------------------------------------------------------------------------------------/
                                 End If
+
+                                'Adicionador por Luis Q.T. | 10072020
+                                Dim _aux_nota As String = fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup)
+
+                                If String.IsNullOrEmpty(_aux_nota) Then
+                                    _aux_nota = fc_getNotaMoodle(_codigo_pso, _codigo_ins)
+
+                                    If String.IsNullOrEmpty(_aux_nota) Then
+                                        _aux_nota = "0"
+                                    End If
+                                End If
+
+                                If _tipo_prom_ind = 2 Then
+                                    _sum_ind += (CDbl(_aux_nota) * _peso_ins)
+                                Else
+                                    _sum_ind += CDbl(_aux_nota)
+                                End If
+
                             Else
                                 Dim lblNotaReg As New Label()
                                 Dim _nota_aux As String
@@ -223,10 +242,16 @@ Partial Class GestionCurricular_frmCalificadorCurso
                                     End If
                                 End If
 
+                                Dim _aux_nota As String = fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup) 'por Luis Q.T. | 10072020
+
+                                If String.IsNullOrEmpty(_aux_nota) Then 'por Luis Q.T. | 10072020
+                                    _aux_nota = "0"
+                                End If
+
                                 If _tipo_prom_ind = 2 Then
-                                    _sum_ind += (fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup) * _peso_ins)
+                                    _sum_ind += (_aux_nota * _peso_ins)
                                 Else
-                                    _sum_ind += fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup) '20191009-ENEVADO
+                                    _sum_ind += _aux_nota '20191009-ENEVADO
                                 End If
 
                                 ' 20191015-ENEVADO ----------------------------------------------------------------------\
@@ -304,7 +329,8 @@ Partial Class GestionCurricular_frmCalificadorCurso
                         End If
                     Next
 
-                    If _codigo_dma <> -1 AndAlso (Session("gc_enviar")) Then
+                    'If _codigo_dma <> -1 AndAlso (Session("gc_enviar")) Then 'Comentado por Luis Q.T. | 10072020
+                    If _codigo_dma <> -1 Then
                         Dim lblProm As New Label()
                         lblProm.ID = "lblCalificacion"
                         'If i > 0 Then
@@ -336,7 +362,20 @@ Partial Class GestionCurricular_frmCalificadorCurso
                             End If
                         Else
                             '_calificacion = fc_getNota(_codigo_dma, _codigo_eva)
-                            _calificacion = fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup) '20190919-ENEVADO
+                            Dim _aux_nota As String = fc_getNota(_codigo_dma, _codigo_ins, _codigo_cup)
+
+                            If String.IsNullOrEmpty(_aux_nota) Then 'Por Luis Q.T. | 10072020
+                                _aux_nota = fc_getNotaMoodle(_codigo_pso, _codigo_ins)
+
+                                If String.IsNullOrEmpty(_aux_nota) Then
+                                    _calificacion = 0
+                                Else
+                                    _calificacion = _aux_nota
+                                End If
+
+                            Else
+                                _calificacion = _aux_nota '20190919-ENEVADO
+                            End If
                         End If
                         lblProm.Text = _calificacion.ToString("00.00")
                         lblProm.ForeColor = IIf(CDbl(lblProm.Text.Trim) < CDbl("13.5"), Drawing.Color.Red, Drawing.Color.Blue)
@@ -353,7 +392,7 @@ Partial Class GestionCurricular_frmCalificadorCurso
                         lblProm.Style.Add("background-color", fc_getColorNivelLogro(_calificacion))
                         e.Row.Cells(nro_col + dt.Rows.Count).Controls.Add(lblProm)
                         'e.Row.Cells(nro_col + dt.Rows.Count).Style.Add("background-color", fc_getColorNivelLogro(CDbl(lbl.Text.Trim)))
-                        If _calificacion < CDbl("13.5") Then
+                        If _calificacion < CDbl("13.5") AndAlso (Session("gc_enviar")) Then '"AndAlso" adicionado por Luis Q.T. | 10072020
                             Dim cbo As New DropDownList()
                             cbo.ID = "cboInterno"
                             cbo.CssClass = "form-control input-sm"
@@ -550,7 +589,9 @@ Partial Class GestionCurricular_frmCalificadorCurso
                     _cant_ind += 1
                     mt_AgregarCabecera(objgridviewrow3, objtablecell, _nro_ind, 1, "IND " & _cant_ind & ": " & _nombre_ind, _tooltip_ind)
                     If Session("gc_enviar") Then
-                        mt_AgregarCabecera(objgridviewrow, objtablecell, 3, 3, "Condiciones", "En el caso que el corte se realize antes de la finalizar un resultado de aprendizaje, se tomara la última calificación como promedio")
+                        mt_AgregarCabecera(objgridviewrow, objtablecell, 3, 3, "Condiciones", "En caso el corte se realice antes de finalizar un resultado de aprendizaje, se tomará la última calificación como promedio")
+                    Else 'Por Luis Q.T. | 09072020
+                        mt_AgregarCabecera(objgridviewrow, objtablecell, 1, 3, " ", "En caso el corte se realice antes de finalizar un resultado de aprendizaje, se tomará la última calificación como promedio")
                     End If
                     objGridView.Controls(0).Controls.AddAt(0, objgridviewrow)
                     objGridView.Controls(0).Controls.AddAt(1, objgridviewrow2)
@@ -784,10 +825,14 @@ Partial Class GestionCurricular_frmCalificadorCurso
         Dim obj As New ClsConectarDatos
         Dim _codigo_dma, _codigo_ccd, _codigo_coa, _codigo_con_int, _codigo_con_ext, _codigo_niv As Integer
         Dim _observacion_int, _observacion_ext As String
+        Dim _codigo_cor, _codigo_cup As Integer
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
         Try
             If fc_ValidarCondicion() Then
                 obj.IniciarTransaccion()
+                _codigo_cor = Session("gc_codigo_cor")
+                _codigo_cup = Session("gc_codigo_cup")
+
                 For x As Integer = 1 To Me.gvNotas.Rows.Count - 1
                     Dim lbl As Label = CType(Me.gvNotas.Rows(x).FindControl("lblCalificacion"), Label)
                     _codigo_dma = CInt(Me.gvNotas.DataKeys(x).Values("codigo_Dma"))
@@ -821,7 +866,7 @@ Partial Class GestionCurricular_frmCalificadorCurso
                     End If
 
                     If _codigo_ccd = -1 Then
-                        obj.Ejecutar("DEA_CortesCurso_Condicion_insertar", _codigo_coa, _codigo_dma, _codigo_con_int, _codigo_con_ext, CDbl(lbl.Text.Trim), _observacion_int, _observacion_ext, _codigo_niv, cod_user)
+                        obj.Ejecutar("DEA_CortesCurso_Condicion_insertar", _codigo_coa, _codigo_dma, _codigo_con_int, _codigo_con_ext, CDbl(lbl.Text.Trim), _observacion_int, _observacion_ext, _codigo_niv, cod_user, _codigo_cor, _codigo_cup)
                     Else
                         obj.Ejecutar("DEA_CortesCurso_Condicion_actualizar", _codigo_ccd, _codigo_con_int, _codigo_con_ext, _observacion_int, _observacion_ext, _codigo_niv, cod_user, CDbl(lbl.Text.Trim))
                     End If
@@ -843,7 +888,7 @@ Partial Class GestionCurricular_frmCalificadorCurso
             Dim lbl As Label
             Dim obj As New ClsConectarDatos
             Dim dt, dtX As New Data.DataTable
-            Dim _codigo_Dma, _codigo_nop, _codigo_coa, _codigo_niv As Integer
+            Dim _codigo_Dma, _codigo_nop, _codigo_coa, _codigo_niv, _codigo_cor As Integer
             Dim _codigo_emd, _codigo_ins, _codigo_pso, _codigo_cup As Integer '20190919-ENEVADO
             obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
             Try
@@ -854,6 +899,7 @@ Partial Class GestionCurricular_frmCalificadorCurso
                         Exit Sub
                     End If
                     _codigo_cup = Session("gc_codigo_cup")
+                    _codigo_cor = Session("gc_codigo_cor") 'por Luis Q.T. | 10072020
                     For x As Integer = 0 To dt.Rows.Count - 1
                         _codigo_emd = dt.Rows(x).Item("codigo_emd") '20190919-ENEVADO
                         'If _codigo_emd = -1 Then '20190919-ENEVADO
@@ -868,87 +914,62 @@ Partial Class GestionCurricular_frmCalificadorCurso
                     If dtX.Rows.Count > 0 Then
                         _codigo_coa = CInt(dtX.Rows(0).Item(0))
 
-                        'POR LUIS Q.T. | 17FEB2020
-                        'Dim argumentos As String = ""
-                        'Dim parametros As String = ""
-                        'Dim instrumentos As Integer = 0
+                        For i As Integer = 0 To dt.Rows.Count - 1
+                            _codigo_emd = dt.Rows(i).Item("codigo_emd") '20190919-ENEVADO
+                            If _codigo_emd = -1 Then '20190919-ENEVADO
+                                '_codigo_eva = CInt(dt.Rows(i).Item("codigo_eva"))
+                                _codigo_ins = CInt(dt.Rows(i).Item("codigo_ins"))
+                                For j As Integer = 1 To Me.gvNotas.Rows.Count - 1
+                                    txt = Me.gvNotas.Rows(j).FindControl("txtNota" & (i + 1))
+                                    _codigo_Dma = CInt(Me.gvNotas.DataKeys(j).Values("codigo_Dma"))
+                                    '_codigo_nop = fc_getCodNota(_codigo_Dma, _codigo_eva)
+                                    _codigo_nop = fc_getCodNota(_codigo_Dma, _codigo_ins)
+                                    '_codigo_niv = fc_getCodNivelLogro(fc_getNota(_codigo_Dma, _codigo_eva))
+                                    _codigo_niv = fc_getCodNivelLogro(fc_getNota(_codigo_Dma, _codigo_ins, _codigo_cup)) '20190919-ENEVADO
+                                    'If _codigo_nop <> -1 Then
+                                    obj.Ejecutar("DEA_DetalleCortesCurso_insertar", _codigo_coa, _codigo_nop, _codigo_niv, cod_user)
+                                    'Else
+                                    'Throw New Exception("¡ No se encontro nota !" & _codigo_coa & " - " & _codigo_nop & " - " & cod_user & " - " & i & " - " & j)
+                                    'End If
+                                Next
+                            Else
+                                '20190919-ENEVADO -----------------------------------------------------------------------------------------------------------------\
+                                Dim dtNotaAux As Data.DataTable
+                                _codigo_ins = CInt(dt.Rows(i).Item("codigo_ins"))
+                                For j As Integer = 1 To Me.gvNotas.Rows.Count - 1
+                                    Dim _nota_aux As Double = 0
+                                    Dim _sin_calificar As Integer = 0
+                                    Dim _nota_mdl, _nota_cor_ant As String
+                                    lbl = Me.gvNotas.Rows(j).FindControl("lblNota" & (i + 1))
+                                    _codigo_Dma = CInt(Me.gvNotas.DataKeys(j).Values("codigo_Dma"))
+                                    _codigo_pso = CInt(Me.gvNotas.DataKeys(j).Values("codigo_pso")) '20190919-ENEVADO
+                                    'If lbl.Text.Trim <> "" Then _nota_aux = CDbl(lbl.Text.Trim) : _sin_calificar = 1
+                                    _nota_cor_ant = fc_getNota(_codigo_Dma, _codigo_ins, _codigo_cup)
+                                    If _nota_cor_ant <> "" Then
+                                        _nota_mdl = _nota_cor_ant
+                                    Else
+                                        _nota_mdl = fc_getNotaMoodle(_codigo_pso, _codigo_ins)
+                                    End If
+                                    If _nota_mdl <> "" Then _nota_aux = Math.Round(CDbl(_nota_mdl), 2) : _sin_calificar = 1
+                                    dtNotaAux = obj.TraerDataTable("DEA_NotasParciales_insertar", _codigo_Dma, -1, _nota_aux, _codigo_cup, _codigo_ins, _codigo_emd, cod_user, _sin_calificar)
+                                    If dtNotaAux.Rows.Count > 0 Then
+                                        _codigo_nop = dtNotaAux.Rows(0).Item(0)
+                                        '_codigo_niv = fc_getCodNivelLogro(fc_getNotaMoodle(_codigo_pso, _codigo_ins))
+                                        _codigo_niv = fc_getCodNivelLogro(_nota_aux)
+                                        obj.Ejecutar("DEA_DetalleCortesCurso_insertar", _codigo_coa, _codigo_nop, _codigo_niv, cod_user)
+                                    End If
+                                Next
+                                '-----------------------------------------------------------------------------------------------------------------------------------/
+                            End If
+                        Next
 
-                        'For i As Integer = 0 To dt.Rows.Count - 1
-                        '    _codigo_emd = dt.Rows(i).Item("codigo_emd") '20190919-ENEVADO
-
-                        '    If _codigo_emd = -1 Then '20190919-ENEVADO
-                        '        _codigo_ins = CInt(dt.Rows(i).Item("codigo_ins"))
-                        '        For j As Integer = 1 To Me.gvNotas.Rows.Count - 1
-                        '            txt = Me.gvNotas.Rows(j).FindControl("txtNota" & (i + 1))
-                        '            _codigo_Dma = CInt(Me.gvNotas.DataKeys(j).Values("codigo_Dma"))
-                        '            _codigo_nop = fc_getCodNota(_codigo_Dma, _codigo_ins)
-                        '            _codigo_niv = fc_getCodNivelLogro(fc_getNota(_codigo_Dma, _codigo_ins, _codigo_cup)) '20190919-ENEVADO
-                        '            'If _codigo_nop <> -1 Then
-                        '            obj.Ejecutar("DEA_DetalleCortesCurso_insertar", _codigo_coa, _codigo_nop, _codigo_niv, cod_user)
-                        '            'Else
-                        '            'Throw New Exception("¡ No se encontro nota !" & _codigo_coa & " - " & _codigo_nop & " - " & cod_user & " - " & i & " - " & j)
-                        '            'End If
-                        '        Next
-                        '    Else
-                        '        '20190919-ENEVADO -----------------------------------------------------------------------------------------------------------------\
-                        '        'Dim dtNotaAux As Data.DataTable
-                        '        _codigo_ins = CInt(dt.Rows(i).Item("codigo_ins"))
-                        '        parametros = ""
-
-                        '        For j As Integer = 1 To Me.gvNotas.Rows.Count - 1
-                        '            Dim _nota_aux As Double = 0
-                        '            Dim _sin_calificar As Integer = 0
-                        '            Dim _nota_mdl, _nota_cor_ant As String
-                        '            lbl = Me.gvNotas.Rows(j).FindControl("lblNota" & (i + 1))
-                        '            _codigo_Dma = CInt(Me.gvNotas.DataKeys(j).Values("codigo_Dma"))
-                        '            _codigo_pso = CInt(Me.gvNotas.DataKeys(j).Values("codigo_pso")) '20190919-ENEVADO
-                        '            'If lbl.Text.Trim <> "" Then _nota_aux = CDbl(lbl.Text.Trim) : _sin_calificar = 1
-                        '            _nota_cor_ant = fc_getNota(_codigo_Dma, _codigo_ins, _codigo_cup)
-
-                        '            If _nota_cor_ant <> "" Then
-                        '                _nota_mdl = _nota_cor_ant
-                        '            Else
-                        '                _nota_mdl = fc_getNotaMoodle(_codigo_pso, _codigo_ins)
-                        '            End If
-
-                        '            If _nota_mdl <> "" Then _nota_aux = Math.Round(CDbl(_nota_mdl), 2) : _sin_calificar = 1
-
-                        '            'Adicionado Por Luis Q.T. | 13FEB2020
-                        '            parametros = parametros & _codigo_Dma & "|" & _nota_aux & "|" & _codigo_ins & "|" & _codigo_emd & "|" & _sin_calificar & "@"
-
-                        '            'Comentado Por Luis Q.T. | 13FEB2020
-                        '            'dtNotaAux = obj.TraerDataTable("DEA_NotasParciales_insertar", _codigo_Dma, -1, _nota_aux, _codigo_cup, _codigo_ins, _codigo_emd, cod_user, _sin_calificar)
-                        '            'If dtNotaAux.Rows.Count > 0 Then
-                        '            '    _codigo_nop = dtNotaAux.Rows(0).Item(0)
-                        '            '    _codigo_niv = fc_getCodNivelLogro(_nota_aux) '_codigo_niv = fc_getCodNivelLogro(fc_getNotaMoodle(_codigo_pso, _codigo_ins))
-                        '            '    obj.Ejecutar("DEA_DetalleCortesCurso_insertar", _codigo_coa, _codigo_nop, _codigo_niv, cod_user)
-                        '            'End If
-                        '        Next
-
-                        '        'Adicionado Por Luis Q.T. | 13FEB2020
-                        '        parametros = parametros.Trim().Substring(0, parametros.Trim().Length() - 1)
-                        '        '-----------------------------------------------------------------------------------------------------------------------------------/
-                        '    End If
-
-                        '    'Adicionado Por Luis Q.T. | 13FEB2020
-                        '    argumentos = argumentos & parametros.Trim() & ";"
-                        '    instrumentos = instrumentos + 1
-
-                        '    If instrumentos >= 1 Then
-                        '        argumentos = argumentos.Trim().Substring(0, argumentos.Trim().Length() - 1)
-                        '        obj.Ejecutar("DEA_NotasParciales_insertar_split", _codigo_cup, _codigo_coa, cod_user, argumentos)
-                        '        argumentos = ""
-                        '        instrumentos = 0
-                        '    End If
-                        'Next
-
-                        'If instrumentos > 0 Then
-                        '    'Adicionado Por Luis Q.T. | 13FEB2020
-                        '    argumentos = argumentos.Trim().Substring(0, argumentos.Trim().Length() - 1)
-                        '    obj.Ejecutar("DEA_NotasParciales_insertar_split", _codigo_cup, _codigo_coa, cod_user, argumentos)
-                        'End If
-
-                        obj.Ejecutar("DEA_NotasParciales_insertar_fix", _codigo_cup, _codigo_coa, Session("gc_codigo_cor"), cod_user)
+                        'Inicia: por Luis Q.T. | 10072020
+                        For x As Integer = 1 To Me.gvNotas.Rows.Count - 1
+                            lbl = CType(Me.gvNotas.Rows(x).FindControl("lblCalificacion"), Label)
+                            _codigo_Dma = CInt(Me.gvNotas.DataKeys(x).Values("codigo_Dma"))
+                            obj.Ejecutar("DEA_CortesCurso_Condicion_insertar", _codigo_coa, _codigo_Dma, -1, -1, CDbl(lbl.Text.Trim), "", "", DBNull.Value, cod_user, _codigo_cor, _codigo_cup)
+                        Next
+                        'Termina: por Luis Q.T. | 10072020
 
                         Call mt_CargarNotas(Session("gc_codigo_cup"))
                         Call mt_CargarDatos(Session("gc_codigo_cac"), Session("gc_codigo_cup"))
@@ -956,7 +977,6 @@ Partial Class GestionCurricular_frmCalificadorCurso
                         mt_ShowMessage("¡ Se enviaron Correctamente las calificaciones !", MessageType.Success)
                         btnEnviar.Visible = False
                     End If
-
                     obj.TerminarTransaccion()
                 Else
                     mt_ShowMessage("¡Ocurrió un problema en el envío!. Las calificaciones ya han sido enviadas", MessageType.Warning)
@@ -1061,14 +1081,6 @@ Partial Class GestionCurricular_frmCalificadorCurso
             mt_CargarDatos(Session("gc_codigo_cac"), Session("gc_codigo_cup"))
             mt_MostrarLeyendaNotas()
             mt_ShowMessage("¡ Se actualizo la nota correctamente !", MessageType.Success)
-        Catch ex As Exception
-            mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.Error)
-        End Try
-    End Sub
-
-    Protected Sub btnExportar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExportar.Click
-        Try
-            Response.Redirect("frmCalificadorCurso_exportar.aspx")
         Catch ex As Exception
             mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.Error)
         End Try
@@ -1436,6 +1448,11 @@ Partial Class GestionCurricular_frmCalificadorCurso
                 tfield.ItemStyle.Width = New Unit("130px")
                 tfield.FooterStyle.Width = New Unit("130px")
                 Me.gvNotas.Columns.Add(tfield)
+            Else 'Por Luis Q.T. | 09072020
+                tfield = New TemplateField()
+                tfield.HeaderText = "Calificación referencial de corte"
+                tfield.ItemStyle.HorizontalAlign = HorizontalAlign.Center
+                Me.gvNotas.Columns.Add(tfield)
             End If
         Catch ex As Exception
             Throw ex
@@ -1476,7 +1493,24 @@ Partial Class GestionCurricular_frmCalificadorCurso
 
             obj.AbrirConexion()
             dt = obj.TraerDataTable("DEA_NotasParciales_listar", "", -1, -1, "P", codigo_cup, codigo_cor) 'Por Luis Q.T | 10DIC2019: Obtener las notas del corte
-            dtNM = obj.TraerDataTable("DEA_NotasParciales_listar", "CE", -1, -1, "P", codigo_cup)
+
+            Dim publicado As String = ""
+
+            If dt.Rows.Count > 0 Then
+                publicado = dt.Rows(0)("publicado").ToString()
+            End If
+
+            If Not publicado.Equals("R") Then
+                dtNM = obj.TraerDataTable("DEA_NotasParciales_listar", "CE", -1, -1, "P", codigo_cup)
+            Else
+                dtNM.Columns.Add("shortname")
+                dtNM.Columns.Add("codigo_ins")
+                dtNM.Columns.Add("scaleid")
+                dtNM.Columns.Add("username")
+                dtNM.Columns.Add("finalgrade")
+                dtNM.Columns.Add("nota_mdl")
+            End If
+			
             obj.CerrarConexion()
             Session("gc_dtNotas") = dt
             Session("gc_dtNotasMoodle") = dtNM
@@ -1680,6 +1714,13 @@ Partial Class GestionCurricular_frmCalificadorCurso
                     If totEval - totEnv = 0 Then
                         btnEnviar.Enabled = Not flag
                         btnEnviar.Visible = Not flag
+
+                        'Por Luis Q.T. 27JUL2020: Si el curso no tiene corte enviado en la semana actual, pero todas sus evaluaciones están
+                        ' calificadas, entonces mostrar el botón para que cierre y continúe con la siguiente semana activa:
+                        If Not fc_CorteEnviado(Session("gc_codigo_cor"), Session("gc_codigo_cup"), cod_user, cod_ctf) Then
+                            btnEnviar.Enabled = True
+                            btnEnviar.Visible = True
+                        End If
                     End If
                 Else
                     Session("isValidated") = 2
@@ -1690,25 +1731,6 @@ Partial Class GestionCurricular_frmCalificadorCurso
         Catch ex As Exception
             Throw ex
         End Try
-    End Sub
-
-    Private Sub mt_ExportToExcel(ByVal nameReport As String, ByVal wControl As GridView)
-        Dim responsePage As HttpResponse = Response
-        Dim sw As New IO.StringWriter()
-        Dim htw As New HtmlTextWriter(sw)
-        Dim pageToRender As New Page()
-        Dim form As New HtmlForm()
-        form.Controls.Add(wControl)
-        pageToRender.Controls.Add(form)
-        responsePage.Clear()
-        responsePage.Buffer = True
-        responsePage.ContentType = "application/vnd.ms-excel"
-        responsePage.AddHeader("Content-Disposition", "attachment;filename=" & nameReport)
-        responsePage.Charset = "UTF-8"
-        responsePage.ContentEncoding = Encoding.Default
-        pageToRender.RenderControl(htw)
-        responsePage.Write(sw.ToString())
-        responsePage.End()
     End Sub
 
 #End Region
@@ -2122,7 +2144,7 @@ Partial Class GestionCurricular_frmCalificadorCurso
         Try
             If ctf = 1 Or ctf = 232 Then user = -1
             obj.AbrirConexion()
-            dt = obj.TraerDataTable("DEA_CortesCurso_listar", "CE", user, -1, -1) ' codigo_cac
+            dt = obj.TraerDataTable("DEA_CortesCurso_listar", "CE", user, -1, -1)
             obj.CerrarConexion()
             If dt.Rows.Count > 0 Then
                 dv = New Data.DataView(CType(Session("gc_dtCorteEnviados"), Data.DataTable), "codigo_cor = " & codigo_cor & " AND codigo_cup = " & codigo_cup, "", Data.DataViewRowState.CurrentRows)

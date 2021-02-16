@@ -6,6 +6,7 @@ Partial Class GestionCurricular_FrmConfigurarVRA
     Private obj As ClsConectarDatos
     Private oeCANormas As e_CicloAcademico_Norma, odCANormas As d_CicloAcademico_Norma '20200224 ENevado
     Private oeCAConf As e_CicloAcademico_Conf, odCAConf As d_CicloAcademico_Conf  '20200225 ENevado
+    Private oeCAFecha As e_CicloAcademicoFechas, odCAFecha As d_CicloAcademicoFechas  '20200706 JQuepuy
 
     Public Enum MessageType
         Success
@@ -57,6 +58,7 @@ Partial Class GestionCurricular_FrmConfigurarVRA
     Protected Sub ddlSemestre_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlSemestre.SelectedIndexChanged
         Call mt_GetLastWeek()
         Call mt_CargarCortes(Me.ddlSemestre.SelectedValue, Me.ddlTipoCorte.SelectedValue)
+        Call mt_CargarFechaSemestre()
     End Sub
 
     Protected Sub ddlTipoCorte_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlTipoCorte.SelectedIndexChanged
@@ -672,7 +674,7 @@ Partial Class GestionCurricular_FrmConfigurarVRA
         Dim dt As New Data.DataTable
         Try
             obj.AbrirConexion()
-            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DA", "")
+            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DAN", "")
             obj.CerrarConexion()
             Call mt_CargarCombo(Me.ddlSemestre, dt, "codigo_Cac", "descripcion_Cac")
         Catch ex As Exception
@@ -927,6 +929,94 @@ Partial Class GestionCurricular_FrmConfigurarVRA
         updCorte.Update()
 
         Return alerta
+    End Function
+
+#End Region
+
+#Region "Editar fechas clases"
+    '20200706 JQuepuy
+
+    Protected Sub btnEdit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEdit.Click
+        mt_EdicionFechaSemestre(txtFecIni.ReadOnly)
+    End Sub
+
+    Protected Sub btnSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        Try
+            If fc_ValidarFechaSemestre() Then
+                oeCAFecha = New e_CicloAcademicoFechas : odCAFecha = New d_CicloAcademicoFechas
+                oeCAFecha.codigo_cac = ddlSemestre.SelectedValue
+                oeCAFecha.fecha_ini = txtFecIni.Text
+                oeCAFecha.fecha_fin = txtFecFin.Text
+                odCAFecha.fc_GuardarCicloAcademico_Fechas(oeCAFecha)
+                mt_ShowMessage("Las fechas de inicio y fin de clases han sido actualizadas con éxito", MessageType.Success)
+                mt_EdicionFechaSemestre(False)
+            End If
+        Catch ex As Exception
+            mt_ShowMessage("Error al actualizar las fechas de clases. Revise el formato de fecha.", MessageType.Error)
+        End Try
+    End Sub
+
+    Private Sub mt_EdicionFechaSemestre(ByVal editar As Boolean)
+        If editar Then
+            btnEdit.CssClass() = "btn btn-danger btn-sm"
+            btnEdit.Text = "<i class='fa fa-times'></i>"
+            txtFecIni.Enabled = True : txtFecFin.Enabled = True
+            txtFecIni.ReadOnly = False : txtFecFin.ReadOnly = False : btnSave.Enabled = True
+            btnEdit.ToolTip = "Cancelar"
+        Else
+            btnEdit.CssClass() = "btn btn-primary btn-sm"
+            btnEdit.Text = "<i class='fa fa-pen'></i>"
+            txtFecIni.Enabled = False : txtFecFin.Enabled = False
+            txtFecIni.ReadOnly = True : txtFecFin.ReadOnly = True : btnSave.Enabled = False
+            btnEdit.ToolTip = "Editar"
+            Call mt_CargarFechaSemestre()
+        End If
+        Call mt_EliminarFilaVacia()
+    End Sub
+
+    Private Sub mt_CargarFechaSemestre()
+        Dim dt As New Data.DataTable
+        Try
+            oeCAFecha = New e_CicloAcademicoFechas : odCAFecha = New d_CicloAcademicoFechas
+            oeCAFecha.codigo_cac = ddlSemestre.SelectedValue
+            dt = odCAFecha.fc_ListarCicloAcademico_Fechas(oeCAFecha)
+
+            If dt.Rows.Count > 0 Then
+                txtFecIni.Text = dt.Rows(0)(0).ToString
+                txtFecFin.Text = dt.Rows(0)(1).ToString
+            Else
+                txtFecIni.Text = ""
+                txtFecFin.Text = ""
+            End If
+
+            dt.Dispose()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Function fc_ValidarFechaSemestre() As Boolean
+        If ddlSemestre.SelectedIndex = 0 Then
+            mt_ShowMessage("Seleccione un valor válido de semestre", MessageType.Error)
+            Return False
+        Else
+            If String.IsNullOrEmpty(txtFecIni.Text) Or String.IsNullOrEmpty(txtFecFin.Text) Then
+                mt_ShowMessage("Antes de proceder ingrese un valor correcto a las fechas de inicio y fin de clases", MessageType.Error)
+                Return False
+            Else
+                If Not IsDate(txtFecIni.Text) Or Not IsDate(txtFecFin.Text) Then
+                    mt_ShowMessage("El formato de fecha ingresado no es válido", MessageType.Error)
+                    Return False
+                Else
+                    If DateDiff(DateInterval.Day, CDate(txtFecIni.Text), CDate(txtFecFin.Text)) < 30 Then
+                        mt_ShowMessage("La fecha final de clases debe ser mayor a la fecha de inicio por al menos 30 días", MessageType.Error)
+                        Return False
+                    End If
+                End If
+            End If
+        End If
+
+        Return True
     End Function
 
 #End Region

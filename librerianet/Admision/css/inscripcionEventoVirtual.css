@@ -1,0 +1,7 @@
+input[type="text"] {
+  text-transform: uppercase; }
+
+#loadingGif {
+  display: none;
+  width: 37px;
+  margin-right: 20px; }

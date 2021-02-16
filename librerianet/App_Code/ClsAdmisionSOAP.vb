@@ -93,109 +93,114 @@ Public Class ClsAdmisionSOAP
         Dim lo_SoapBody As New StringBuilder
         lo_SoapBody.AppendLine(lr_GenerarBodySOAP(lo_Datos))
 
-        Select Case ls_Accion
-            Case "ConsultarSituacionAcademicaPersona"
-                With lo_SoapBody
-                    .Insert(0, "<ConsultarSituacionAcademicaPersona xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</ConsultarSituacionAcademicaPersona>")
-                End With
+        With lo_SoapBody
+            .Insert(0, "<" & ls_Accion & " xmlns=""http://tempuri.org/"">")
+            .AppendLine("</" & ls_Accion & ">")
+        End With
 
-            Case "ConsultarDeudasPersona"
-                With lo_SoapBody
-                    .Insert(0, "<ConsultarDeudasPersona xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</ConsultarDeudasPersona>")
-                End With
-            Case "ConsultarPrecioInscripcion"
-                With lo_SoapBody
-                    .Insert(0, "<ConsultarPrecioInscripcion xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</ConsultarPrecioInscripcion>")
-                End With
-            Case "ConsultarRequisitosAdmision"
-                With lo_SoapBody
-                    .Insert(0, "<ConsultarRequisitosAdmision xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</ConsultarRequisitosAdmision>")
-                End With
-            Case "ListarTipoDocumentoIdentidad"
-                With lo_SoapBody
-                    .Insert(0, "<ListarTipoDocumentoIdentidad xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</ListarTipoDocumentoIdentidad>")
-                End With
-            Case "ListarDepartamento"
-                With lo_SoapBody
-                    .Insert(0, "<ListarDepartamento xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</ListarDepartamento>")
-                End With
-            Case "ListarProvincia"
-                With lo_SoapBody
-                    .Insert(0, "<ListarProvincia xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</ListarProvincia>")
-                End With
-            Case "ListarDistrito"
-                With lo_SoapBody
-                    .Insert(0, "<ListarDistrito xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</ListarDistrito>")
-                End With
-            Case "ListarInstitucionEducativa"
-                With lo_SoapBody
-                    .Insert(0, "<ListarInstitucionEducativa xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</ListarInstitucionEducativa>")
-                End With
-            Case "CalcularCategoriaEstudiante"
-                With lo_SoapBody
-                    .Insert(0, "<CalcularCategoriaEstudiante xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</CalcularCategoriaEstudiante>")
-                End With
-            Case "GuardarInteresado"
-                With lo_SoapBody
-                    .Insert(0, "<GuardarInteresado xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</GuardarInteresado>")
-                End With
-            Case "GuardarInteresadoCampus"
-                With lo_SoapBody
-                    .Insert(0, "<GuardarInteresadoCampus xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</GuardarInteresadoCampus>")
-                End With
-            Case "GenerarCelularTokenInscripcion"
-                With lo_SoapBody
-                    .Insert(0, "<GenerarCelularTokenInscripcion xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</GenerarCelularTokenInscripcion>")
-                End With
-            Case "CompararCelularTokenInscripcion"
-                With lo_SoapBody
-                    .Insert(0, "<CompararCelularTokenInscripcion xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</CompararCelularTokenInscripcion>")
-                End With
-            Case "InscribirInteresado"
-                With lo_SoapBody
-                    .Insert(0, "<InscribirInteresado xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</InscribirInteresado>")
-                End With
-            Case "InscribirAlumno"
-                With lo_SoapBody
-                    .Insert(0, "<InscribirAlumno xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</InscribirAlumno>")
-                End With
-            Case "BuscarEmailCoincidente"
-                With lo_SoapBody
-                    .Insert(0, "<BuscarEmailCoincidente xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</BuscarEmailCoincidente>")
-                End With
-            Case "ListarTipoParticipante"
-                With lo_SoapBody
-                    .Insert(0, "<ListarTipoParticipante xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</ListarTipoParticipante>")
-                End With
-            Case "InscripcionEventoVirtual"
-                With lo_SoapBody
-                    .Insert(0, "<InscripcionEventoVirtual xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</InscripcionEventoVirtual>")
-                End With
-            Case "ConsultarEventoVirtual"
-                With lo_SoapBody
-                    .Insert(0, "<ConsultarEventoVirtual xmlns=""http://tempuri.org/"">")
-                    .AppendLine("</ConsultarEventoVirtual>")
-                End With
-        End Select
+        'Select Case ls_Accion
+        '    Case "ConsultarSituacionAcademicaPersona"
+        '        With lo_SoapBody
+        '            .Insert(0, "<ConsultarSituacionAcademicaPersona xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</ConsultarSituacionAcademicaPersona>")
+        '        End With
+
+        '    Case "ConsultarDeudasPersona"
+        '        With lo_SoapBody
+        '            .Insert(0, "<ConsultarDeudasPersona xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</ConsultarDeudasPersona>")
+        '        End With
+        '    Case "ConsultarPrecioInscripcion"
+        '        With lo_SoapBody
+        '            .Insert(0, "<ConsultarPrecioInscripcion xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</ConsultarPrecioInscripcion>")
+        '        End With
+        '    Case "ConsultarRequisitosAdmision"
+        '        With lo_SoapBody
+        '            .Insert(0, "<ConsultarRequisitosAdmision xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</ConsultarRequisitosAdmision>")
+        '        End With
+        '    Case "ListarTipoDocumentoIdentidad"
+        '        With lo_SoapBody
+        '            .Insert(0, "<ListarTipoDocumentoIdentidad xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</ListarTipoDocumentoIdentidad>")
+        '        End With
+        '    Case "ListarDepartamento"
+        '        With lo_SoapBody
+        '            .Insert(0, "<ListarDepartamento xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</ListarDepartamento>")
+        '        End With
+        '    Case "ListarProvincia"
+        '        With lo_SoapBody
+        '            .Insert(0, "<ListarProvincia xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</ListarProvincia>")
+        '        End With
+        '    Case "ListarDistrito"
+        '        With lo_SoapBody
+        '            .Insert(0, "<ListarDistrito xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</ListarDistrito>")
+        '        End With
+        '    Case "ListarInstitucionEducativa"
+        '        With lo_SoapBody
+        '            .Insert(0, "<ListarInstitucionEducativa xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</ListarInstitucionEducativa>")
+        '        End With
+        '    Case "CalcularCategoriaEstudiante"
+        '        With lo_SoapBody
+        '            .Insert(0, "<CalcularCategoriaEstudiante xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</CalcularCategoriaEstudiante>")
+        '        End With
+        '    Case "GuardarInteresado"
+        '        With lo_SoapBody
+        '            .Insert(0, "<GuardarInteresado xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</GuardarInteresado>")
+        '        End With
+        '    Case "GuardarInteresadoCampus"
+        '        With lo_SoapBody
+        '            .Insert(0, "<GuardarInteresadoCampus xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</GuardarInteresadoCampus>")
+        '        End With
+        '    Case "GenerarCelularTokenInscripcion"
+        '        With lo_SoapBody
+        '            .Insert(0, "<GenerarCelularTokenInscripcion xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</GenerarCelularTokenInscripcion>")
+        '        End With
+        '    Case "CompararCelularTokenInscripcion"
+        '        With lo_SoapBody
+        '            .Insert(0, "<CompararCelularTokenInscripcion xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</CompararCelularTokenInscripcion>")
+        '        End With
+        '    Case "InscribirInteresado"
+        '        With lo_SoapBody
+        '            .Insert(0, "<InscribirInteresado xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</InscribirInteresado>")
+        '        End With
+        '    Case "InscribirAlumno"
+        '        With lo_SoapBody
+        '            .Insert(0, "<InscribirAlumno xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</InscribirAlumno>")
+        '        End With
+        '    Case "BuscarEmailCoincidente"
+        '        With lo_SoapBody
+        '            .Insert(0, "<BuscarEmailCoincidente xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</BuscarEmailCoincidente>")
+        '        End With
+        '    Case "ListarTipoParticipante"
+        '        With lo_SoapBody
+        '            .Insert(0, "<ListarTipoParticipante xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</ListarTipoParticipante>")
+        '        End With
+        '    Case "InscripcionEventoVirtual"
+        '        With lo_SoapBody
+        '            .Insert(0, "<InscripcionEventoVirtual xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</InscripcionEventoVirtual>")
+        '        End With
+        '    Case "ConsultarEventoVirtual"
+        '        With lo_SoapBody
+        '            .Insert(0, "<ConsultarEventoVirtual xmlns=""http://tempuri.org/"">")
+        '            .AppendLine("</ConsultarEventoVirtual>")
+        '        End With
+        'End Select
 
         Return lr_GenerarTemplateSOAP(lo_SoapHeader, lo_SoapBody)
     End Function

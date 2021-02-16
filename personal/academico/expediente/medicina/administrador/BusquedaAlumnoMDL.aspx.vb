@@ -20,9 +20,14 @@ Partial Class medicina_administrador_BusquedaAlumno
         obj.AbrirConexion()
         'If Me.DdlBusqueda.SelectedValue = 1 Then
         If Me.TxtBusqueda.Text.Trim <> "" Then
-            'Me.GridAlumnos.DataSource = obj.TraerDataTable("ConsultarAlumnoRptAsistenciasNotas", Me.TxtBusqueda.Text.Trim, CInt(Request.QueryString("mod").ToString.Substring(0, 1)))
+			dim _mod() as string
+			_mod = Request.QueryString("mod").ToString.split("?")
+			'Response.Write(_mod.length)
+			if _mod.length > 0 then
+				Me.GridAlumnos.DataSource = obj.TraerDataTable("ConsultarAlumnoRptAsistenciasNotas", Me.TxtBusqueda.Text.Trim, CInt(_mod(0)))
+			end if
             'Response.Write("ConsultarAlumnoRptAsistenciasNotas '" & Me.TxtBusqueda.Text.Trim & "'," & Request.QueryString("mod"))
-            Me.GridAlumnos.DataSource = obj.TraerDataTable("ConsultarAlumnoRptAsistenciasNotas", Me.TxtBusqueda.Text.Trim, Request.QueryString("mod"))
+            'Me.GridAlumnos.DataSource = obj.TraerDataTable("ConsultarAlumnoRptAsistenciasNotas", Me.TxtBusqueda.Text.Trim, Request.QueryString("mod"))
         End If
         obj.CerrarConexion()
         Me.GridAlumnos.DataBind()
@@ -55,8 +60,18 @@ Partial Class medicina_administrador_BusquedaAlumno
             End If
 
             'Cambiado xDguevara 02.10.2012            
-            e.Row.Cells(6).Text = "<a href='//intranet.usat.edu.pe/rptusat/?/PRIVADOS/ACADEMICO/ACAD_RepAsistConsoliAlumnoMDL&mod=" & Request.QueryString("mod") & "&codigo_cac=" & Me.DdlCicloAcad.SelectedValue & "&codigo_alu=" & cod_alu & "' title='Clic aquí para mostrar el registro de asistencias'>Ver</a>"
-            e.Row.Cells(7).Text = "<a href='//intranet.usat.edu.pe/rptusat/?/PRIVADOS/ACADEMICO/ACAD_RepNotasConsoliAlumnoMDL&mod=" & Request.QueryString("mod") & "&codigo_cac=" & Me.DdlCicloAcad.SelectedValue & "&codigo_alu=" & cod_alu & "' title='Clic aquí para mostrar las notas parciales'>Ver</a>"
+            'e.Row.Cells(6).Text = "<a href='//intranet.usat.edu.pe/rptusat/?/PRIVADOS/ACADEMICO/ACAD_RepAsistConsoliAlumnoMDL&mod=" & Request.QueryString("mod") & "&codigo_cac=" & Me.DdlCicloAcad.SelectedValue & "&codigo_alu=" & cod_alu & "' title='Clic aquí para mostrar el registro de asistencias'>Ver</a>"
+            'e.Row.Cells(7).Text = "<a href='//intranet.usat.edu.pe/rptusat/?/PRIVADOS/ACADEMICO/ACAD_RepNotasConsoliAlumnoMDL&mod=" & Request.QueryString("mod") & "&codigo_cac=" & Me.DdlCicloAcad.SelectedValue & "&codigo_alu=" & cod_alu & "' title='Clic aquí para mostrar las notas parciales'>Ver</a>"
+
+            Dim ruta As String = ConfigurationManager.AppSettings("RutaReporte").ToString
+            
+			dim _mod() as string
+            _mod = Request.QueryString("mod").ToString.Split("?")
+
+			if _mod.length > 0 then
+                e.Row.Cells(6).Text = "<a href='" & ruta & "PRIVADOS/ACADEMICO/ACAD_RepAsistConsoliAlumnoMDL&mod=" & CInt(_mod(0)) & "&codigo_cac=" & Me.DdlCicloAcad.SelectedValue & "&codigo_alu=" & cod_alu & "' title='Clic aquí para mostrar el registro de asistencias'>Ver</a>"
+                e.Row.Cells(7).Text = "<a href='" & ruta & "PPRIVADOS/ACADEMICO/ACAD_RepNotasConsoliAlumnoMDL&mod=" & CInt(_mod(0)) & "&codigo_cac=" & Me.DdlCicloAcad.SelectedValue & "&codigo_alu=" & cod_alu & "' title='Clic aquí para mostrar las notas parciales'>Ver</a>"
+			end if
             
             'Response.Redirect("ReptConsolidadoWeb.aspx?codal=" & CInt(Me.GridAlumnos.DataKeys.Item(Me.GridAlumnos.SelectedIndex).Values(0)) & "&cac=" & Me.DdlCicloAcad.SelectedValue)
             'e.Row.Cells(6).Text = "<a href='ReptConsolidadoWebAsistenciasMDL.aspx?codal=" & cod_alu & "&cac=" & Me.DdlCicloAcad.SelectedValue & "' title='Clic aquí para mostrar el registro de asistencias'>Ver</a>"

@@ -557,16 +557,23 @@ Partial Class academico_cargalectiva_consultapublica_estimarvacantesgw
                 e.Row.Cells(6).Text = CDbl(e.Row.Cells(3).Text) * CDbl(e.Row.Cells(5).Text)
                 'e.Row.Cells(7).Attributes.Add("data-toggle", "modal")
                 'e.Row.Cells(7).Attributes.Add("href", "#EditModal")
+                If e.Row.Cells(7).Text = e.Row.Cells(8).Text Then
+                    e.Row.Cells(10).Text = (CDec(e.Row.Cells(8).Text) * CDec(e.Row.Cells(9).Text)) 'e.Row.Cells(9).Text = CDec(e.Row.Cells(7).Text) * CDec(e.Row.Cells(8).Text)
+                Else
+                    e.Row.Cells(10).Text = (CDec(e.Row.Cells(7).Text) + CDec(e.Row.Cells(8).Text)) * CDec(e.Row.Cells(9).Text) 'e.Row.Cells(9).Text = CDec(e.Row.Cells(7).Text) * CDec(e.Row.Cells(8).Text)
+                End If
 
-                e.Row.Cells(10).Text = CDec(e.Row.Cells(8).Text) * CDec(e.Row.Cells(9).Text) 'e.Row.Cells(9).Text = CDec(e.Row.Cells(7).Text) * CDec(e.Row.Cells(8).Text)
                 e.Row.Cells(11).Text = CDec(e.Row.Cells(6).Text) + CDec(e.Row.Cells(10).Text) 'e.Row.Cells(10).Text = CDec(e.Row.Cells(6).Text) + CDec(e.Row.Cells(9).Text)
 
                 'e.Row.Cells(11).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + (CDec(e.Row.Cells(7).Text) - (CDec(e.Row.Cells(7).Text) * CDec(e.Row.Cells(8).Text))) + CDec(e.Row.Cells(10).Text)
-                e.Row.Cells(13).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + ((CDec(e.Row.Cells(8).Text) * CDec(e.Row.Cells(9).Text))) + CDec(e.Row.Cells(12).Text) 'e.Row.Cells(12).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + ((CDec(e.Row.Cells(7).Text) * CDec(e.Row.Cells(8).Text))) + CDec(e.Row.Cells(11).Text)
-
+                If e.Row.Cells(7).Text = e.Row.Cells(8).Text Then
+                    e.Row.Cells(13).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + (((CDec(e.Row.Cells(8).Text)) * CDec(e.Row.Cells(9).Text))) + CDec(e.Row.Cells(12).Text) 'e.Row.Cells(12).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + ((CDec(e.Row.Cells(7).Text) * CDec(e.Row.Cells(8).Text))) + CDec(e.Row.Cells(11).Text)
+                Else
+                    e.Row.Cells(13).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + (((CDec(e.Row.Cells(7).Text) + CDec(e.Row.Cells(8).Text)) * CDec(e.Row.Cells(9).Text))) + CDec(e.Row.Cells(12).Text) 'e.Row.Cells(12).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + ((CDec(e.Row.Cells(7).Text) * CDec(e.Row.Cells(8).Text))) + CDec(e.Row.Cells(11).Text)
+                End If
                 'e.Row.Cells(13).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + (CDec(e.Row.Cells(7).Text) - (CDec(e.Row.Cells(7).Text) * CDec(e.Row.Cells(8).Text))) + CDec(e.Row.Cells(10).Text) + CDec(e.Row.Cells(12).Text)
 
-                e.Row.Cells(15).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + ((CDec(e.Row.Cells(8).Text) * CDec(e.Row.Cells(9).Text))) + CDec(e.Row.Cells(12).Text) + CDec(e.Row.Cells(14).Text) 'e.Row.Cells(14).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + ((CDec(e.Row.Cells(7).Text) * CDec(e.Row.Cells(8).Text))) + CDec(e.Row.Cells(11).Text) + CDec(e.Row.Cells(13).Text)
+                e.Row.Cells(15).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + (((CDec(e.Row.Cells(7).Text) + CDec(e.Row.Cells(8).Text)) * CDec(e.Row.Cells(9).Text))) + CDec(e.Row.Cells(12).Text) + CDec(e.Row.Cells(14).Text) 'e.Row.Cells(14).Text = CDec(e.Row.Cells(3).Text) * CDec(e.Row.Cells(5).Text) + ((CDec(e.Row.Cells(7).Text) * CDec(e.Row.Cells(8).Text))) + CDec(e.Row.Cells(11).Text) + CDec(e.Row.Cells(13).Text)
 
 
                 e.Row.Cells(11).BackColor = Drawing.Color.FromArgb(164, 218, 252) 'e.Row.Cells(10).BackColor = Drawing.Color.FromArgb(164, 218, 252)
@@ -590,12 +597,14 @@ Partial Class academico_cargalectiva_consultapublica_estimarvacantesgw
                 e.Row.Cells(11).Text = Math.Round(CDec(e.Row.Cells(11).Text), 0) 'e.Row.Cells(10).Text = Math.Round(CDec(e.Row.Cells(10).Text), 0)
 
                 If e.Row.Cells(7).Text = e.Row.Cells(8).Text Then
-
                     e.Row.Cells(7).Text = "-"
+                Else
+                    e.Row.Font.Bold = True
                 End If
 
+
             End If
-        
+
         Catch ex As Exception
 
         End Try

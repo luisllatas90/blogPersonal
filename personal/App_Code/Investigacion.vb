@@ -4,7 +4,7 @@ Imports System.Data.SqlClient
 Imports System.Collections
 
 Public Class Investigacion
-    Private _strCadena As String = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+    Private _strCadena As String = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
     Private _strNombreDIrInv As String = "Victor Alvitres Castillo"
     Private _strMailDirInv As String = "valvitres@usat.edu.pe"
 

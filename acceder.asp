@@ -1,4 +1,4 @@
-﻿<% 
+﻿<%
  'tipo_uap=request.querystring("cbxtipo")
 
 ' Dado que el usuario siempre se loguea como personal a una autenticaci�n, entonces le asignamos
@@ -6,32 +6,76 @@
 on error resume next
 
 tipo_uap = "P"
-   
+
 Session.Contents.RemoveAll    
 if tipo_uap="" then response.redirect "../tiempofinalizado.asp"
 
 'Sirve para recuperar logeo de windows
 Login=Request.ServerVariables("LOGON_USER")
-  'Login="USAT\" & Login 
-'Para verificar por usuario  
+
+ 
+'Login="USAT\" & Login 
+'Para verificar por usuario   
+ 
+  
+Login=  UCASE(Login)  
+'response.write "<script>alert('" & Login & "')</script>" 
+    
+     
+' serverdev      
+'Login = "USAT\scastro"
+'Login = "USAT\HMERA"
+'Login = "USAT\MCRUZ"  
+'Login = "USAT\DOJEDA"  
+'Login = "USAT\JFUPUY" 
+'Login = "USAT\MVILCHEZ"
+'Login = "USAT\MMELENDEZ"  
+'LOGIN = "USAT\ovargas"
+'Login = "USAT\andy.diaz"
+'Login = "USAT\rtimana"
+Login = "USAT\nelly.becerra"
+Login = "USAT\MGAMARRA"
+'Login = "USAT\RSYORENTE"
+'Login = "USAT\CCHAVEZ"
+Login = "USAT\esther.vasquez"
+'Login = "USAT\mticliahuanca"
+login = "USAT\ALLATAS"
+'Login = "USAT\CCAMA"
+'Login = "USAT\ALLATAS"
+'Login = "USAT\rasalde" 
+'Login = "USAT\wgarcia"
+'Login = "USAT\ehernandez"
+Login = "USAT\eurpeque"
+'Login = "USAT\fmanay"
+Login = "USAT\ESAAVEDRA"
+'Login = "USAT\arivasplata" 
+'Login = "USAT\PDIAZ"
+'Login = "USAT\rnunez "
+'Login = "USAT\jcampodonico"
+'Login = "USAT\pcampos"
+'Login = "USAT\cmundaca"
+'Login = "USAT\msalas"
+'Login = "USAT\ftuesta"
+'Login = "USAT\MSALAS"
+'Login = "USAT\MFHUIDOBRO"
+'Login = "USAT\AGUTIERREZ"
+Login = "USAT\JOLIVOS"
+'Login = "USAT\GLEON"
+'Login = "USAT\CACOSTA"
+'Login = "USAT\HZAPATA"
+'Login = "USAT\MCUADRA"
+Login = "USAT\PDIAZ"  
 
 
-Login=  UCASE(Login) 
-'response.write "<script>alert('" & Login & "')</script>"
+IF LOGIN = "USAT\MNECIOSUP" THEN    
+   LOGIN = "USAT\JOLIVA" 
+END IF
 
-LOGIN = "USAT\ESAAVEDRA"
-
-IF LOGIN = "USAT\CGASTELO"  THEN    		
-	LOGIN = "USAT\AANDRIANZEN"
-END IF   
-
-IF LOGIN = "USAT\FATIMA.VASQUEZ"  THEN   		
-	LOGIN = "USAT\ESAAVEDRA"
-END IF  
 
 if Login="USAT\cmasias" or Login="USAT\fguerrero"  then
 else 
 Clave="0"
+   
 
 'Buscar en la base de datos el id del usuario,seg�n el tipo
 Set ObjUsuario= Server.CreateObject("PryUSAT.clsAccesoDatos")
@@ -84,7 +128,7 @@ If Not(rsPersonal.BOF and rsPersonal.EOF) then
 	'end if
 Else%>
 	<script type="text/javascript" language="javascript">
-	    alert('Lo sentimos, Ud. no tiene acceso al Campus Virtual\n\Para cualquier consulta cont�ctese con el Administrador del Sistema')
+	    alert('Lo sentimos, Ud. no tiene acceso al Campus Virtual\n\Para cualquier consulta contactese con Direccion de Personal o con su Director de Departamento')
 	    top.window.close()
 	    //top.location.href="../index.asp"
 	</script>

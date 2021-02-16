@@ -18,6 +18,7 @@
     <%-- ======================= Lista desplegable con busqueda =============================================--%>
     <link href="../../assets/bootstrap-select-1.13.1/css/bootstrap-select.css" rel="stylesheet"
         type="text/css" />
+    <link href="../../assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src='../../assets/js/jquery.js'></script>
 
@@ -32,6 +33,10 @@
     <script type="text/javascript" src='../../assets/js/noty/layouts/default.js'></script>
 
     <script type="text/javascript" src="../../assets/js/noty/notifications-custom.js"></script>
+
+    <script src="../../assets/js/sweetalert2.all.min.js" type="text/javascript"></script>
+
+    <script src="../../assets/js/promise.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
 
@@ -60,6 +65,10 @@
                 $("#ArchivoRespuesta").val("");
 
             });
+            $(".swal2-confirm").click(function() {
+                console.log("click");
+                fnLoading(true);
+            })
         });
 
         function ValidarRespuesta() {
@@ -122,6 +131,7 @@
         //            });
         //        }
         function fnLoading(sw) {
+            console.log(sw);
             if (sw) {
                 $('.piluku-preloader').removeClass('hidden');
             } else {
@@ -134,6 +144,7 @@
             var d = new Date();
             window.open(url + "&h=" + d.getHours().toString() + d.getMinutes().toString() + d.getSeconds().toString());
         }
+        
         function fnMensaje(typ, msje) {
             var n = noty({
                 text: msje,
@@ -144,6 +155,40 @@
                 theme: 'defaultTheme'
 
             });
+        }
+
+        function fnConfirmacion(ctrl) {
+
+            var defaultAction = $(ctrl).prop("href");
+            Swal.fire({
+                title: '¿Está seguro que desea dar conformidad a la tesis?',
+                text: "Luego no podrá revertir la conformidad",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No'
+            }).then(function(result) {
+                if (result.value == true) {
+                    eval(defaultAction);
+                }
+            })
+            /*
+            if (confirm('¿Está seguro que desea dar conformidad a tesis?')) {
+            return true;
+            } else {
+            return false;
+            }*/
+        }
+
+        function MensajeValidacion(texto) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Validación ORCID',
+                html: texto,
+                footer: '<span>Para registrar su ORCID debe ingresar al módulo de <span style="color:red;font-weight:bold;">GESTIÓN DE INVESTIGACIÓN</span> en la Opción: Movimientos > Colaboradores y Grupos de investigación > Registro Colaborador con actividad investigadora</span>'
+            })
         }
 
     </script>
@@ -219,7 +264,7 @@
                             <div class="form-horizontal">
                                 <div class="form-group">
                                     <asp:Label ID="Label1" runat="server" CssClass="col-sm-1 col-md-1 control-label">Estado</asp:Label>
-                                    <div class="col-sm-3 col-md-2">
+                                    <div class="col-sm-5 col-md-5">
                                         <asp:DropDownList runat="server" ID="ddlEstado" CssClass="form-control" AutoPostBack="true">
                                             <asp:ListItem Value="P">PENDIENTES</asp:ListItem>
                                             <asp:ListItem Value="N">NO REVISADOS</asp:ListItem>
@@ -231,6 +276,86 @@
                             <asp:LinkButton ID="btnConsultar" runat="server" Text='<span class="fa fa-search"></span>'
                                 CssClass="btn btn-primary" ToolTip="Buscar"></asp:LinkButton>
                         </div>--%>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-md-4">
+                                        <table>
+                                            <tr>
+                                                <td style="width: 15%; padding: 4px;">
+                                                    <asp:LinkButton ID="btnDescargar1" runat="server" Text='<span class="fa fa-download"></span>'
+                                                        CssClass="btn btn-info btn-sm btn-radius" Font-Size="11px" ToolTip="Descargar"
+                                                        OnClientClick="return false;">
+                                                    </asp:LinkButton>
+                                                </td>
+                                                <td style="width: 85%;">
+                                                    <asp:Label ID="Label7" runat="server" CssClass="control-label">Descargar Archivo de Tesis</asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 15%; padding: 4px;">
+                                                    <asp:LinkButton ID="btnBloquear1" runat="server" Text='<span class="fa fa-lock"></span>'
+                                                        CssClass="btn btn-sm btn-danger btn-radius" Font-Size="11px" ToolTip="Bloquear"
+                                                        OnClientClick="return false;">
+                                                    </asp:LinkButton>
+                                                </td>
+                                                <td style="width: 85%;">
+                                                    <asp:Label ID="Label8" runat="server" CssClass="control-label">Bloquear actualización de archivo de Tesis a egresado</asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <table>
+                                            <tr>
+                                                <td style="width: 15%; padding: 4px;">
+                                                    <asp:LinkButton ID="LinkButton4" runat="server" Text='<span class="fa fa-unlock"></span>'
+                                                        CssClass="btn btn-sm btn-primary btn-radius" Font-Size="11px" ToolTip="Desbloquear"
+                                                        OnClientClick="return false;">
+                                                    </asp:LinkButton>
+                                                </td>
+                                                <td style="width: 85%;">
+                                                    <asp:Label ID="Label18" runat="server" CssClass="control-label">Desloquear actualización de archivo de Tesis a egresado</asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 15%; padding: 4px;">
+                                                    <asp:LinkButton ID="LinkButton5" runat="server" Text='<span class="fa fa-comment"></span>'
+                                                        CssClass="btn btn-warning btn-sm btn-radius" Font-Size="11px" ToolTip="Observaciones"
+                                                        OnClientClick="return false;">
+                                                    </asp:LinkButton>
+                                                </td>
+                                                <td style="width: 85%;">
+                                                    <asp:Label ID="Label25" runat="server" CssClass="control-label">Registro de observaciones</asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4">
+                                        <table>
+                                            <tr>
+                                                <td style="width: 15%; padding: 4px;">
+                                                    <asp:LinkButton ID="LinkButton3" runat="server" Text='<span class="fa fa-check"></span>'
+                                                        CssClass="btn btn-success btn-sm btn-radius" Font-Size="11px" ToolTip="Conformidad"
+                                                        OnClientClick="return false;"> 
+                                                    </asp:LinkButton>
+                                                </td>
+                                                <td style="width: 85%;">
+                                                    <asp:Label ID="Label14" runat="server" CssClass="control-label">Dar conformidad a tesis</asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 15%; padding: 4px;">
+                                                    <asp:LinkButton ID="LinkButton1" runat="server" Text='<span class="fa fa-download"></span>'
+                                                        CssClass="btn btn-danger btn-sm btn-radius" Font-Size="11px" ToolTip="Descargar"
+                                                        OnClientClick="return false;">
+                                                    </asp:LinkButton>
+                                                </td>
+                                                <td style="width: 85%;">
+                                                    <asp:Label ID="Label9" runat="server" CssClass="control-label">Descargar informe de asesor</asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             <br />
@@ -287,7 +412,7 @@
                             <div class="form-group">
                                 <div runat="server" id="lblmensaje">
                                 </div>
-                                <asp:GridView runat="server" ID="gvAlumnos" CssClass="table table-condensed" DataKeyNames="codigo_Tes,codigo_RTes,codigo_per,archivofinal,BloqueadoxAsesor,fechaconformidad,informeasesor"
+                                <asp:GridView runat="server" ID="gvAlumnos" CssClass="table table-condensed" DataKeyNames="codigo_Tes,codigo_RTes,codigo_per,archivofinal,BloqueadoxAsesor,fechaconformidad,informeasesor,codigo_test"
                                     AutoGenerateColumns="false">
                                     <Columns>
                                         <%--<asp:TemplateField HeaderText="#" HeaderStyle-Width="3%">
@@ -316,7 +441,7 @@
                                         <asp:TemplateField HeaderText="" HeaderStyle-Width="3%" ShowHeader="false">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnAsesorias" runat="server" Text='<span class="fa fa-comment"></span>'
-                                                    CssClass="btn btn-warning btn-sm btn-radius" ToolTip="Asesorias" CommandName="Asesorias"
+                                                    CssClass="btn btn-warning btn-sm btn-radius" ToolTip="Observaciones" CommandName="Asesorias"
                                                     CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
                                                 </asp:LinkButton>
                                             </ItemTemplate>
@@ -325,8 +450,7 @@
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnConforme" runat="server" Text='<span class="fa fa-check"></span>'
                                                     CssClass="btn btn-success btn-sm btn-radius" ToolTip="Conformidad" CommandName="Conformidad"
-                                                    OnClientClick="return confirm('¿Está seguro que desea dar conformidad a tesis?')"
-                                                    CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'> 
+                                                    OnClientClick="fnConfirmacion(this); return false;" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'> 
                                                 </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -491,7 +615,7 @@
                                                                 For="txtObservacion">Observaciones</asp:Label>
                                                             <div class="col-sm-7 col-md-8">
                                                                 <asp:TextBox runat="server" ID="txtObservacion" CssClass="form-control" TextMode="MultiLine"
-                                                                    Rows="4"></asp:TextBox>
+                                                                    MaxLength="1000" Rows="4"></asp:TextBox>
                                                             </div>
                                                         </div>
                                                     </div>

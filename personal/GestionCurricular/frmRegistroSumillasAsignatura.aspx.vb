@@ -187,10 +187,10 @@ Partial Class GestionCurricular_frmRegistroSumillasAsignatura
                         Else
                             obj.Ejecutar("PlanCursoSumilla_actualizar", cod_aux, codigo_pes, codigo_cur, Me.txtSumilla.Text.Trim, Me.txtCompetencia.Text, 1, cod_user)
                         End If
-                    Else
-                        If cod_aux <> -1 Then
-                            obj.Ejecutar("PlanCursoSumilla_actualizar", cod_aux, codigo_pes, codigo_cur, Me.txtSumilla.Text.Trim, Me.txtCompetencia.Text, 0, cod_user)
-                        End If
+                        'Else
+                        '    If cod_aux <> -1 Then
+                        '        obj.Ejecutar("PlanCursoSumilla_actualizar", cod_aux, codigo_pes, codigo_cur, Me.txtSumilla.Text.Trim, Me.txtCompetencia.Text, 1, cod_user)
+                        '    End If
                     End If
                 Next
                 obj.TerminarTransaccion()
@@ -215,16 +215,26 @@ Partial Class GestionCurricular_frmRegistroSumillasAsignatura
                         Else
                             obj.Ejecutar("PlanCursoSumilla_actualizar", cod_aux, codigo_pes, codigo_cur, Me.txtSumilla.Text.Trim, Me.txtCompetencia.Text, 1, cod_user)
                         End If
-                    Else
-                        If cod_aux <> -1 Then
-                            obj.Ejecutar("PlanCursoSumilla_actualizar", cod_aux, codigo_pes, codigo_cur, Me.txtSumilla.Text.Trim, Me.txtCompetencia.Text, 0, cod_user)
-                        End If
+                        'Else
+                        '    If cod_aux <> -1 Then
+                        '        obj.Ejecutar("PlanCursoSumilla_actualizar", cod_aux, codigo_pes, codigo_cur, Me.txtSumilla.Text.Trim, Me.txtCompetencia.Text, 0, cod_user)
+                        '    End If
                     End If
                 Next
                 obj.TerminarTransaccion()
             End If
             mt_ShowMessage(msj, MessageType.Success)
-            mt_CargarDatos(Me.cboPlanEst.SelectedValue, Me.cboEstado.SelectedValue)
+
+            'Comentado por Luis Q.T. | 08FEB2021
+            'mt_CargarDatos(Me.cboPlanEst.SelectedValue, Me.cboEstado.SelectedValue)
+
+            'Por Luis Q.T. | 08FEB2021: Validar transversales
+            If Me.cboCarProf.SelectedValue <> -2 Then
+                mt_CargarDatos(IIf(Me.cboPlanEst.SelectedValue = -1, 0, Me.cboPlanEst.SelectedValue), Me.cboEstado.SelectedValue)
+            Else
+                Call mt_CargarDatos(-2, Me.cboEstado.SelectedValue)
+            End If
+
         Catch ex As Exception
             'obj.AbortarTransaccion()
             mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.Error)

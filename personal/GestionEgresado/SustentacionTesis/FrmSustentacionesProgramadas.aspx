@@ -61,17 +61,19 @@
         $(document).ready(function() {
             fnLoading(false);
 
-            $("#ddlEstado").change(function() {
-                fnLoading(true);
-            })
+            //            $("#ddlEstado").change(function() {
+            //                fnLoading(true);
+            //            })
+            /*var d = new Date();
 
-            $('#datetimepicker1').datetimepicker({
-                locale: 'es'
-            });
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            var anio = d.getFullYear();
             $('#datetimepicker2').datetimepicker({
-                locale: 'es',
-                format: 'L'
-            });
+            locale: 'es',
+            format: 'L',
+            defaultDate: month + "/" + day + "/" + anio
+            });*/
             $("#ddlTipoAmbiente").change(function() {
                 $("#DivFisico").hide();
                 $("#DivVirtual").hide();
@@ -87,16 +89,20 @@
             var d = new Date();
             window.open(url + "&h=" + d.getHours().toString() + d.getMinutes().toString() + d.getSeconds().toString());
         }
-        function fnLoading(sw) {
 
+        function Calendario() {
+            $('#datetimepicker2').datetimepicker({
+                locale: 'es',
+                format: 'L'
+            });
+        }
+
+        function fnLoading(sw) {
             if (sw) {
                 $('.piluku-preloader').removeClass('hidden');
-                console.log("mostrar");
             } else {
                 $('.piluku-preloader').addClass('hidden');
-                console.log("ocultar");
             }
-
         }
 
         //        function fnMensaje(typ, msje) {
@@ -193,7 +199,7 @@
     </style>
 </head>
 <body class="">
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" enctype="multipart/form-data">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <asp:UpdatePanel runat="server" ID="updLoading" UpdateMode="Conditional">
@@ -207,8 +213,8 @@
             <asp:AsyncPostBackTrigger ControlID="ddlEstado" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="gvTesis" EventName="RowCommand" />
             <asp:AsyncPostBackTrigger ControlID="btnAtras" />
-            <asp:AsyncPostBackTrigger ControlID="btnCerrar" />
-            <asp:AsyncPostBackTrigger ControlID="btnGuardar" />
+            <asp:PostBackTrigger ControlID="btnCerrar" />
+            <asp:PostBackTrigger ControlID="btnGuardar" />
         </Triggers>
     </asp:UpdatePanel>
     <div class="container-fluid">
@@ -232,13 +238,19 @@
                                             <asp:ListItem Value="SC">SUSTENTADAS CALIFICADAS</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
-                                    <asp:Label ID="Label1" runat="server" CssClass="col-sm-1 col-md-1 control-label">Fecha</asp:Label>
-                                    <div class="col-sm-3 col-md-3">
+                                    <%--<asp:Label ID="Label1" runat="server" CssClass="col-sm-1 col-md-1 control-label">Fecha</asp:Label>
+                                     <div class="col-sm-3 col-md-3">
                                         <div class="input-group date" id="datetimepicker2">
                                             <asp:TextBox runat="server" ID="txtFecha" CssClass="form-control"></asp:TextBox>
                                             <span class="input-group-addon"><span class="ion ion-calendar"></span></span>
                                         </div>
                                     </div>
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="input-group date" id="Div3">
+                                            <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-sm btn-primary btn-radius"
+                                                Text="<span class='fa fa-pencil'></span>&nbsp;Buscar" OnClientClick="fnLoading(true);"></asp:LinkButton>
+                                        </div>
+                                    </div>--%>
                                     <%--      <div class="col-sm-1 col-md-1">
                             <asp:LinkButton ID="btnConsultar" runat="server" Text='<span class="fa fa-search"></span>'
                                 CssClass="btn btn-primary" ToolTip="Buscar"></asp:LinkButton>
@@ -256,7 +268,12 @@
                                 <asp:HiddenField runat="server" ID="hdjur" Value="0" />
                                 <asp:HiddenField runat="server" ID="hdPst" Value="0" />
                                 <asp:HiddenField runat="server" ID="hdtes" Value="0" />
-                                <asp:GridView runat="server" ID="gvTesis" CssClass="table table-condensed" DataKeyNames="codigo_Tes,titulo_tes,codigo_pst,codigo_jur,archivofinal,resolucion,codigo_cst,observado"
+                                <asp:HiddenField runat="server" ID="hdtest" Value="0" />
+                                <asp:HiddenField runat="server" ID="hdfac" Value="0" />
+                                <asp:HiddenField runat="server" ID="hddta" Value="0" />
+                                <div runat="server" id="lblmensaje">
+                                </div>
+                                <asp:GridView runat="server" ID="gvTesis" CssClass="table table-condensed" DataKeyNames="codigo_Tes,titulo_tes,codigo_dta,codigo_pst,codigo_jur,archivofinal,resolucion,codigo_cst,observado,conformidad,archivoacta,condicion,archivorubrica,codigo_test,codigo_fac"
                                     AutoGenerateColumns="false">
                                     <Columns>
                                         <%--<asp:TemplateField HeaderText="#" HeaderStyle-Width="3%">
@@ -287,9 +304,15 @@
                                                     CssClass="btn btn-warning btn-sm btn-radius" ToolTip="Observaciones" CommandName="Observaciones"
                                                     OnClientClick="fnLoading(true);" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
                                                 </asp:LinkButton>
+                                                <asp:LinkButton ID="btnActa" runat="server" Text='<span class="fa fa-download"></span>'
+                                                    CssClass="btn btn-primary btn-sm btn-radius" ToolTip="Descargar Acta de sustentación"
+                                                    CommandName="DescargarActa" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'>
+                                                </asp:LinkButton>
+                                                <asp:LinkButton ID="btnRubrica" runat="server" Text='<span class="fa fa-download"></span>'
+                                                    CssClass="btn btn-danger btn-sm btn-radius" ToolTip="Descargar rúbrica" CommandName="DescargarRubrica">
+                                                </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                       
                                     </Columns>
                                     <HeaderStyle Font-Size="11px" Font-Bold="true" BackColor="#D9534F" ForeColor="white" />
                                     <RowStyle Font-Size="12px" />
@@ -298,128 +321,16 @@
                                     </EmptyDataTemplate>
                                 </asp:GridView>
                             </div>
-<%--                            <div class="form-group">
-                                <table id="tbTest" class="table table-condensed" style="width: 100%; font-size: 12px;"
-                                    cellspacing="0" border="1">
-                                    <thead style="background: #E33439; color: White; font-weight: bold;">
-                                        <tr>
-                                            <th style="width: 3%;">
-                                                #
-                                            </th>
-                                            <th style="width: 37%;">
-                                                Título
-                                            </th>
-                                            <th style="width: 23%;">
-                                                Bachiller(es)
-                                            </th>
-                                            <th style="width: 8%;">
-                                                Promedio
-                                            </th>
-                                            <th style="width: 15%;">
-                                                Escala
-                                            </th>
-                                            <th style="width: 12;">
-                                                Opciones
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                LA POSIBILIDAD DE ABRIR NUEVOS PROCEDIMIENTOS SANCIONADORES CONCLUIDOS POR CADUCIDAD
-                                                Y LA POSIBLE LESIÓN AL PRINCIPIO DE INTERDICCIÓN DE LA ARBITRARIEDAD.
-                                            </td>
-                                            <td>
-                                                DEL VALLE MERINO RONNY JEANPIERRE
-                                            </td>
-                                            <td>
-                                                18
-                                            </td>
-                                            <td>
-                                                Sobresaliente (18-19)
-                                            </td>
-                                            <td>
-                                                <asp:LinkButton ID="btnDescargar" runat="server" Text='<span class="fa fa-download"></span>'
-                                                    CssClass="btn btn-info btn-sm btn-radius" ToolTip="Descargar Resolución">
-                                                </asp:LinkButton>
-                                                <asp:LinkButton ID="LinkButton8" runat="server" Text='<span class="fa fa-download"></span>'
-                                                    CssClass="btn btn-danger btn-sm btn-radius" ToolTip="Descargar Acta">
-                                                </asp:LinkButton>
-                                     
-                                                <asp:LinkButton ID="LinkButton15" runat="server" Text='<span class="fa fa-comment"></span>'
-                                                    CssClass="btn btn-warning btn-sm btn-radius" ToolTip="Observaciones" OnClientClick="MostrarAsesoria();return false;">
-                                                </asp:LinkButton>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                2
-                                            </td>
-                                            <td>
-                                                Título de prueba 2
-                                            </td>
-                                            <td>
-                                                Guevara Cieza Fernanda
-                                            </td>
-                                            <td>
-                                                Pendiente
-                                            </td>
-                                            <td>
-                                                Pendiente
-                                            </td>
-                                            <td>
-                                                <asp:LinkButton ID="LinkButton1" runat="server" Text='<span class="fa fa-download"></span>'
-                                                    CssClass="btn btn-info btn-sm btn-radius" ToolTip="Descargar Resolución">
-                                                </asp:LinkButton>
-                                       
-                                                <asp:LinkButton ID="LinkButton12" runat="server" Text='<span class="fa fa-pencil"></span>'
-                                                    CssClass="btn btn-success btn-sm btn-radius" ToolTip="Calificar" OnClientClick="MostrarCalificar();return false;">
-                                                </asp:LinkButton>
-                                    
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                3
-                                            </td>
-                                            <td>
-                                                Título de prueba 3
-                                            </td>
-                                            <td>
-                                                Castro Saavedra Carlos
-                                            </td>
-                                            <td>
-                                                Pendiente
-                                            </td>
-                                            <td>
-                                                Pendiente
-                                            </td>
-                                            <td>
-                                                <asp:LinkButton ID="LinkButton2" runat="server" Text='<span class="fa fa-download"></span>'
-                                                    CssClass="btn btn-info btn-sm btn-radius" ToolTip="Descargar Resolución">
-                                                </asp:LinkButton>
-                                    
-                                                <asp:LinkButton ID="LinkButton3" runat="server" Text='<span class="fa fa-pencil"></span>'
-                                                    CssClass="btn btn-success btn-sm btn-radius" ToolTip="Calificar" OnClientClick="MostrarCalificar();return false;">
-                                                </asp:LinkButton>
-                                      
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>--%>
                             <br />
                         </div>
                     </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="gvTesis" EventName="RowCommand" />
-                        <asp:AsyncPostBackTrigger ControlID="ddlEstado" EventName="selectedindexchanged" />
+                        <asp:AsyncPostBackTrigger ControlID="ddlEstado" EventName="SelectedIndexChanged" />
                         <asp:AsyncPostBackTrigger ControlID="btnAtras" />
-                        <asp:AsyncPostBackTrigger ControlID="btnCerrar" />
-                        <asp:AsyncPostBackTrigger ControlID="btnGuardar" />
+                        <asp:PostBackTrigger ControlID="btnCerrar" />
+                        <asp:PostBackTrigger ControlID="btnGuardar" />
+                        <asp:AsyncPostBackTrigger ControlID="btnConformidad" />
                     </Triggers>
                 </asp:UpdatePanel>
             </div>
@@ -458,8 +369,8 @@
                                     <div class="form-group">
                                         <asp:Label ID="Label19" runat="server" CssClass="col-md-2 col-sm-3 control-label">Conformidad de Tesis</asp:Label>
                                         <div class="col-sm-3 col-md-3">
-                                            <asp:LinkButton ID="btnConformidad" runat="server" Text='<span class="fa fa-check"></span> Conformidad'
-                                                CssClass="btn btn-success btn-sm btn-radius" ToolTip="Conformidad" OnClientClick="return false;">
+                                            <asp:LinkButton ID="btnConformidad" runat="server" Text='<span class="fa fa-check" ></span> Dar Conformidad'
+                                                CssClass="btn btn-success btn-sm btn-radius" ToolTip="Conformidad" OnClientClick="return confirm('¿Está seguro que desea dar conformidad a tesis?')">
                                             </asp:LinkButton>
                                         </div>
                                     </div>
@@ -495,6 +406,7 @@
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="gvTesis" EventName="RowCommand" />
                     <asp:AsyncPostBackTrigger ControlID="btnAtras" />
+                    
                 </Triggers>
             </asp:UpdatePanel>
             <asp:UpdatePanel runat="server" ID="UpdatePanel2" UpdateMode="Conditional">
@@ -623,23 +535,43 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <asp:Label ID="Label8" runat="server" CssClass="col-sm-3 col-md-3 control-label">Observaciones</asp:Label>
-                                    <div class="col-sm-9 col-md-9">
-                                        <asp:CheckBox runat="server" ID="chkobservaciones" Checked="true" />
+                                    <asp:Label ID="Label1" runat="server" CssClass="col-sm-3 col-md-3 control-label"
+                                        For="txtObservacion">Adjuntar rúbrica</asp:Label>
+                                    <div class="col-sm-7 col-md-8">
+                                        <asp:FileUpload runat="server" ID="archivo" CssClass="form-control" />
+                                        <ul>
+                                            <li>Archivos permitidos: <span style="color: Red">.doc,.docx,.pdf,.zip,.rar,.xls,.xlsx</span></li>
+                                            <li>Tamaño Máximo: <span style="color: Red">20 Mb</span></li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <asp:Label ID="Label5" runat="server" CssClass="col-sm-3 col-md-3 control-label">Descripción de Observacion</asp:Label>
+                                    <asp:Label ID="Label8" runat="server" CssClass="col-sm-3 col-md-3 control-label">Observaciones</asp:Label>
                                     <div class="col-sm-9 col-md-9">
-                                        <asp:TextBox runat="server" ID="txtObservacionSustentacion" TextMode="MultiLine"
-                                            Rows="3" CssClass="form-control" Text=""></asp:TextBox>
+                                        <asp:CheckBox runat="server" ID="chkobservaciones" AutoPostBack="true" />
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <asp:Label ID="Label5" runat="server" CssClass="col-sm-3 col-md-3 control-label">Descripción de Observación</asp:Label>
+                                    <div class="col-sm-9 col-md-9">
+                                        <asp:UpdatePanel ID="updCajaObservaciones" runat="server" UpdateMode="Conditional">
+                                            <ContentTemplate>
+                                                <asp:TextBox runat="server" ID="txtObservacionSustentacion" TextMode="MultiLine"
+                                                    Enabled="false" Rows="3" CssClass="form-control" Text=""></asp:TextBox>
+                                            </ContentTemplate>
+                                            <Triggers>
+                                                <asp:AsyncPostBackTrigger ControlID="chkobservaciones" EventName="CheckedChanged" />
+                                            </Triggers>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                                <div runat="server" id="lblMensajeObservación">
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <center>
                                     <asp:Button runat="server" ID="btnGuardar" CssClass="btn btn-primary" Text="Guardar"
-                                        OnClientClick="return confirm('¿Está seguro que desea guardar la calificación, luego no podra ser cambiada?');" />
+                                        OnClientClick="return confirm('¿Está seguro que desea guardar la calificación? Luego no podrá ser cambiada');" />
                                     <asp:Button runat="server" ID="btnCerrar" CssClass="btn btn-danger" Text="Cerrar"
                                         OnClientClick="fnLoading(true);" />
                                 </center>
@@ -649,8 +581,8 @@
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="gvTesis" EventName="RowCommand" />
-                    <asp:AsyncPostBackTrigger ControlID="btnCerrar" />
-                    <asp:AsyncPostBackTrigger ControlID="btnGuardar" />
+                    <asp:PostBackTrigger ControlID="btnCerrar" />
+                    <asp:PostBackTrigger ControlID="btnGuardar" />
                 </Triggers>
             </asp:UpdatePanel>
         </div>

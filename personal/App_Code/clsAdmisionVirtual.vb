@@ -18,6 +18,9 @@ Public Class e_GrupoAdmisionVirtual
     Public codigo_amb As Integer = -1
     Public capacidad As Integer = 0
     Public codigo_per As Integer = -1
+    Public fechaHoraInicio_gru As Object = DBNull.Value
+    Public fechaHoraFin_gru As Object = DBNull.Value
+    Public codigo_tge As Integer = -1 '20200914-ENevado
 
 End Class
 
@@ -28,6 +31,7 @@ Public Class e_GrupoAdmisionVirtual_Alumno
     Public codigo_gru As Integer = -1
     Public codigo_alu As String = ""
     Public codigo_per As Integer = -1
+    Public mostrar_con_deuda As Boolean = False
 
 End Class
 
@@ -53,6 +57,19 @@ Public Class e_GrupoAdmision_Responsable
 
 End Class
 
+''' <summary>
+''' Clase Entidad para Tipo de Grupo de Evaluación
+''' </summary>
+''' <remarks>20200914-ENevado</remarks>
+Public Class e_TipoGrupoEvaluacion
+
+    Public tipoOpe As String = ""
+    Public codigo_tge As Integer = -1
+    Public nombre_tge As String = ""
+    Public codigo_per As Integer = -1
+
+End Class
+
 #End Region
 
 #Region "Datos"
@@ -69,7 +86,7 @@ Public Class d_GrupoAdmisionVirtual
             cnx.CadenaConexion = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
             cnx.AbrirConexion()
             With obj
-                dt = cnx.TraerDataTable("ADM_GrupoAdmisionVirtual_Listar", .tipoOperacion, .codigo_gru, .codigo_cco)
+                dt = cnx.TraerDataTable("ADM_GrupoAdmisionVirtual_Listar", .tipoOperacion, .codigo_gru, .codigo_cco, .codigo_tge)
             End With
             cnx.CerrarConexion()
             Return dt
@@ -88,7 +105,7 @@ Public Class d_GrupoAdmisionVirtual
             cnx.CadenaConexion = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
             cnx.AbrirConexion()
             With obj
-                dt = cnx.TraerDataTable("ADM_GrupoAdmisionVirtual_insertar", -1, .codigo, .nombre, .aulaactiva, .estado, .codigo_amb, .capacidad, .codigo_per)
+                dt = cnx.TraerDataTable("ADM_GrupoAdmisionVirtual_insertar", -1, .codigo, .nombre, .aulaactiva, .estado, .codigo_amb, .capacidad, .codigo_per, .codigo_tge, .fechaHoraInicio_gru, .fechaHoraFin_gru)
                 If dt.Rows.Count > 0 Then
                     '_codigo_cup = obj.codigo_cco.Split(",")
                     'For i As Integer = 0 To _codigo_cup.Length - 1
@@ -115,7 +132,7 @@ Public Class d_GrupoAdmisionVirtual
             cnx.CadenaConexion = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
             cnx.AbrirConexion()
             With obj
-                dt = cnx.TraerDataTable("ADM_GrupoAdmisionVirtual_actualizar", .codigo_gru, .codigo_cco, .codigo, .nombre, .aulaactiva, .estado, .codigo_amb, .capacidad, .codigo_per)
+                dt = cnx.TraerDataTable("ADM_GrupoAdmisionVirtual_actualizar", .codigo_gru, .codigo_cco, .codigo, .nombre, .aulaactiva, .estado, .codigo_amb, .capacidad, .codigo_per, .codigo_tge, .fechaHoraInicio_gru, .fechaHoraFin_gru)
             End With
             cnx.CerrarConexion()
             Return dt
@@ -154,7 +171,7 @@ Public Class d_GrupoAdmisionVirtual_Alumno
             cnx.CadenaConexion = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
             cnx.AbrirConexion()
             With obj
-                dt = cnx.TraerDataTable("ADM_GrupoAdmisionVirtual_Alumno_Listar", .tipoOperacion, .codigo_gru, .codigo_alu)
+                dt = cnx.TraerDataTable("ADM_GrupoAdmisionVirtual_Alumno_Listar", .tipoOperacion, .codigo_gru, .codigo_alu, .mostrar_con_deuda)
             End With
             cnx.CerrarConexion()
             Return dt
@@ -191,6 +208,30 @@ Public Class d_GrupoAdmisionVirtual_Alumno
             cnx.AbrirConexion()
             With obj
                 dt = cnx.TraerDataTable("ADM_GrupoAdmisionVirtual_Alumno_quitar", .codigo_gva, .codigo_per)
+            End With
+            cnx.CerrarConexion()
+            Return dt
+        Catch ex As System.Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Function fc_QuitarTodos(ByVal obj As e_GrupoAdmisionVirtual_Alumno) As System.Data.DataTable
+        Dim oeGruAlumno As e_GrupoAdmisionVirtual_Alumno
+        Try
+            Dim _codigo_alu() As String
+            dt = New System.Data.DataTable
+            cnx = New ClsConectarDatos
+            cnx.CadenaConexion = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.AbrirConexion()
+            With obj
+                _codigo_alu = .codigo_alu.Split(",")
+                For i As Integer = 0 To _codigo_alu.Length - 1
+                    oeGruAlumno = New e_GrupoAdmisionVirtual_Alumno
+                    oeGruAlumno.codigo_gva = _codigo_alu(i)
+                    oeGruAlumno.codigo_per = .codigo_per
+                    dt = fc_QuitarGrupoAdmisionVirtual_Alumno(oeGruAlumno)
+                Next
             End With
             cnx.CerrarConexion()
             Return dt
@@ -318,6 +359,34 @@ Public Class d_GrupoAdmision_Responsable
             Throw ex
         End Try
     End Function
+
+End Class
+
+''' <summary>
+''' Clase de Datos para Tipo de Grupo de Evaluación
+''' </summary>
+''' <remarks>20200914-ENevado</remarks>
+Public Class d_TipoGrupoEvaluacion
+
+    Private cnx As ClsConectarDatos
+    Private dt As System.Data.DataTable
+
+    Public Function fc_Listar(ByVal obj As e_TipoGrupoEvaluacion) As System.Data.DataTable
+        Try
+            dt = New System.Data.DataTable
+            cnx = New ClsConectarDatos
+            cnx.CadenaConexion = System.Configuration.ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.AbrirConexion()
+            With obj
+                dt = cnx.TraerDataTable("ADM_TipoGrupoEvaluacion_Listar", .tipoOpe, .codigo_tge)
+            End With
+            cnx.CerrarConexion()
+            Return dt
+        Catch ex As System.Exception
+            Throw ex
+        End Try
+    End Function
+
 
 End Class
 

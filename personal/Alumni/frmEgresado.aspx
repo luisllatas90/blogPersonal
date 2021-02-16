@@ -480,7 +480,12 @@
                                                     OnClientClick="return alertConfirm(this, event, '¿Desea enviar un mensaje a los egresados seleccionados?', 'warning');">
                                                     <i class="fa fa-envelope-square"></i>
                                                     <span class="text">Enviar Mensaje</span>
-                                                </asp:LinkButton>                                                                                              
+                                                </asp:LinkButton>   
+                                                <asp:LinkButton ID="btnExportar" runat="server" CssClass="btn btn-accion btn-verde"
+                                                    OnClientClick="return alertConfirm(this, event, '¿Desea exportar la lista de egresados?', 'warning');">
+                                                    <i class="fa fa-envelope-square"></i>
+                                                    <span class="text">Exportar</span>
+                                                </asp:LinkButton>                                                                                                                                            
                                             </div>                                 
                                         </div>                                     
                                     </div>                                 
@@ -960,7 +965,7 @@
                 case 'btnGuardarEmpresa':
                     AlternarLoading(false, 'RegistroEmpresa');                    
                     break;     
-                case 'btnListar':          
+                      
             }
         });
 

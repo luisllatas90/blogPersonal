@@ -21,16 +21,37 @@
     <link href="../../assets/css/bootstrap-datepicker3.css" rel="Stylesheet" type="text/css" />
     <link href="../../assets/fontawesome-5.2/css/all.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../../assets/bootstrap-select-1.13.1/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../../assets/tempusdominus-bootstrap-3/css/tempusdominus-bootstrap-3.min.css">
     
     <script src="../../scripts/js/jquery-1.12.3.min.js" type="text/javascript"></script>
     <script src="../../assets/js/popper.js" type="text/javascript"></script>
     <script src="../../scripts/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../../assets/bootstrap-select-1.13.1/js/bootstrap-select.min.js"></script>
+    <script src="../../assets/moment/moment-with-locales.js"></script>
+    <script src="../../assets/tempusdominus-bootstrap-3/js/tempusdominus-bootstrap-3.js"></script>
 
     <style>
-        .dropdown-toggle .filter-option {
+        .dropdown-toggle .filter-option 
+        {
             margin-top: -2px;
             position: relative !important;
+        }
+        .no-gutters {
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        .no-gutters > [class*="col-"] {
+            padding-right: 0;
+            padding-left: 0;
+        }
+        .usat-div
+        {
+            margin: 0px;	
+        }
+        .usat-col
+        {
+            padding: 5px;	
         }
     </style>
     
@@ -56,6 +77,12 @@
                     $('#txtNombre').focus();
                     return false;
                 }
+                var cboTip = document.getElementById('<%=cboTipoGrupoEval.ClientID%>');
+                if (cboTip.selectedIndex < 1) {
+                    alert('¡ Seleccione un Tipo de Evaluación !');
+                    cboTip.focus();
+                    return false;
+                }
                 var cbo = document.getElementById('<%=cboAmbiente.ClientID%>');
                 if (cbo.selectedIndex < 1) {
                     alert('¡ Seleccione Ambiente !');
@@ -70,17 +97,46 @@
                     return false;
                 }
             });
+
+            $('#btnFakeGrabar').on('click', function (e) {  
+                $('#btnGrabar').trigger('click');
+            });
+
+            initDateTimePickers();
         });
 
-        function openModal(id, accion) {
+        function initDateTimePickers() {  
+            $('#pkFecha').datetimepicker({
+                format: 'DD/MM/YYYY',
+            });
+
+            $('#pkHoraInicio').datetimepicker({
+                format: 'HH:mm',
+            });
+
+            $('#pkHoraFin').datetimepicker({
+                format: 'HH:mm',
+            });
+        }
+
+        function openModal(id, accion, timeout) {
             switch (id) {
                 case "gru":
-                    $('#myModal').modal('show');
                     var nombre = $('#txtCodigo').val();
                     if (nombre.trim() == '') {
                         $('#txtCodigo').val(' ');
+                        $('#txtFecha').val('');
+                        $('#txtHoraInicio').val('');
+                        $('#txtHoraFin').val('');
                     }
                     document.getElementById('txtCodigo').select();
+
+                    if (timeout == undefined) {
+                        timeout = 0;
+                    }
+                    setTimeout(function () {  
+                        $('#myModal').modal('show');
+                    }, timeout);
                     break;
                 case "cco":
                     $('#myModalCco').modal('show');
@@ -127,7 +183,6 @@
             var key = window.Event ? e.which : e.keyCode
             return (key >= 48 && key <= 57)
         }
-        
     </script>
     
 </head>
@@ -139,25 +194,26 @@
         </div>
         <br />
         <div class="panel panel-default" id="pnlLista" runat="server">
-            <div class="panel panel-heading">
+            <div class="panel panel-heading usat-div">
                 <h4>Registro de Grupo Evaluación</h4>
             </div>
-            <div class="panel panel-body">
+            <div class="panel panel-body usat-div">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-xs-12">
                         <div class="form-group">
-                            <label class="col-sm-2 col-form-label form-control-sm">Centro de Costo:</label>
-                            <%--<div class="col-sm-4">
-                                <asp:DropDownList ID="cboCentroCosto" runat="server" CssClass="form-control input-sm" 
-                                AutoPostBack="true" data-live-search="true">
+                            <label class="col-xs-2 form-control-sm usat-col">Tipo Evaluación: </label>
+                            <div class="col-xs-2 usat-col">
+                                <asp:DropDownList ID="cboFiltroTipoEva" runat="server" CssClass="form-control input-sm" 
+                                    AutoPostBack="true" data-live-search="true">
                                 </asp:DropDownList>
-                            </div>--%>
-                            <div class="col-sm-4">
+                            </div>
+                            <label class="col-xs-2 form-control-sm usat-col">Centro de Costo:</label>
+                            <div class="col-xs-4 usat-col">
                                 <asp:ListBox ID="cboCentroCosto2" runat="server" AutoPostBack="true" SelectionMode="Multiple" 
                                     CssClass="form-control form-control-sm selectpicker">
                                 </asp:ListBox>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-xs-2 usat-col">
                                 <asp:LinkButton ID="btnAgregar" runat="server" Text='<i class="fa fa-plus"></i> Nuevo Grupo'
                                     CssClass="btn btn-success btn-sm" OnClick="btnAgregar_Click"></asp:LinkButton>
                             </div>
@@ -170,11 +226,12 @@
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <asp:GridView ID="gvGrupo" runat="server" AutoGenerateColumns="false" 
-                            DataKeyNames="codigo_gru, codigo_cco, codigo, nombre, codigo_amb, virtual_amb, capacidad"
+                            DataKeyNames="codigo_gru, codigo_cco, codigo, nombre, codigo_amb, virtual_amb, capacidad, codigo_tge, fechaHoraInicio_gru, fechaHoraFin_gru"
                             CssClass="table table-sm table-bordered table-hover" GridLines="None">
                                 <Columns>
                                     <asp:BoundField DataField="codigo" HeaderText="Código"/>
                                     <asp:BoundField DataField="nombre" HeaderText="Nombre"/>
+                                    <asp:BoundField DataField="nombre_tge" HeaderText="Tipo Evaluación"/>
                                     <asp:BoundField DataField="nombre_amb" HeaderText="Ambiente"/>
                                     <asp:TemplateField HeaderText="Virtual" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate><asp:CheckBox ID="chkVirtual" runat="server" Checked='<%# Eval("virtual_amb") %>' Enabled ="false" /></ItemTemplate>
@@ -218,7 +275,7 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
-                                <EmptyDataTemplate> No se encontró ningun registro </EmptyDataTemplate>
+                                <EmptyDataTemplate> No se encontró ningún registro </EmptyDataTemplate>
                                 <HeaderStyle BackColor="#E33439" ForeColor="White" VerticalAlign="Middle" HorizontalAlign="Center" Font-Size="12px" />
                                 <RowStyle Font-Size="11px" />
                                 <EditRowStyle BackColor="#FFFFCC" />
@@ -243,30 +300,30 @@
                     <asp:UpdatePanel ID="panModal" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
                         <ContentTemplate>
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-xs-12">
                                     <div class="form-group">
-                                        <label class="col-sm-3">Código:</label>
-                                        <div class="col-sm-6">
+                                        <label class="col-xs-4">Código:</label>
+                                        <div class="col-xs-6">
                                             <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-xs-12">
                                     <div class="form-group">
-                                        <label class="col-sm-3">Nombre:</label>
-                                        <div class="col-sm-6">
+                                        <label class="col-xs-4">Nombre:</label>
+                                        <div class="col-xs-6">
                                             <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-xs-12">
                                     <div class="form-group">
-                                        <label class="col-sm-3">Tipo:</label>
-                                        <div class="col-sm-6">
+                                        <label class="col-xs-4">Tipo:</label>
+                                        <div class="col-xs-6">
                                             <asp:RadioButtonList ID="rbTipo" runat="server" OnSelectedIndexChanged="rbTipo_SelectedIndexChanged" AutoPostBack="true">
                                                 <asp:ListItem class="radio-inline" Value="0" Text="Físico" Selected="True"></asp:ListItem>
                                                 <asp:ListItem class="radio-inline" Value="1" Text="Virtual"></asp:ListItem>
@@ -276,10 +333,63 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-xs-12">
                                     <div class="form-group">
-                                        <label class="col-sm-3">Ambiente:</label>
+                                        <label class="col-xs-4">Tipo Evaluación:</label>
+                                        <div class="col-xs-6">
+                                            <asp:DropDownList ID="cboTipoGrupoEval" runat="server" CssClass="form-control input-sm" data-live-search="true"> 
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label class="col-xs-4">Fecha:</label>
                                         <div class="col-sm-6">
+                                            <div class="input-group date" id="pkFecha" data-target-input="nearest">
+                                                <input type="text" id="txtFecha" runat="server" class="form-control input-sm datetimepicker-input" data-target="#pkFecha"/>
+                                                <span class="input-group-addon" data-target="#pkFecha" data-toggle="datetimepicker">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="col-xs-4">Hora:</label>
+                                        <div class="col-sm-6">
+                                            <div class="row no-gutters">
+                                                <div class="col-sm-6">
+                                                    <div class="input-group date" id="pkHoraInicio" data-target-input="nearest">
+                                                        <input type="text" id="txtHoraInicio" runat="server" class="form-control input-sm datetimepicker-input" data-target="#pkHoraInicio"/>
+                                                        <span class="input-group-addon" data-target="#pkHoraInicio" data-toggle="datetimepicker">
+                                                            <span class="glyphicon glyphicon-time"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group date" id="pkHoraFin" data-target-input="nearest">
+                                                        <input type="text" id="txtHoraFin" runat="server" class="form-control input-sm datetimepicker-input" data-target="#pkHoraFin"/>
+                                                        <span class="input-group-addon" data-target="#pkHoraFin" data-toggle="datetimepicker">
+                                                            <span class="glyphicon glyphicon-time"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label class="col-xs-4">Ambiente:</label>
+                                        <div class="col-xs-6">
                                             <asp:DropDownList ID="cboAmbiente" runat="server" CssClass="form-control input-sm" AutoPostBack="true" data-live-search="true"> 
                                             </asp:DropDownList>
                                         </div>
@@ -287,10 +397,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-xs-12">
                                     <div class="form-group">
-                                        <label class="col-sm-3">Capacidad:</label>
-                                        <div class="col-sm-6">
+                                        <label class="col-xs-4">Capacidad:</label>
+                                        <div class="col-xs-6">
                                             <asp:TextBox ID="txtCapacidad" runat="server" CssClass="form-control input-sm" onKeyPress="return soloNumeros(event)"></asp:TextBox>
                                         </div>
                                     </div>
@@ -301,7 +411,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="btnsalir" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <asp:Button ID="btnGrabar" runat="server" Text="Guardar" class="btn btn-success" />
+                    <button type="button" id="btnFakeGrabar" class="btn btn-success">Guardar</button>
+                    <asp:Button ID="btnGrabar" runat="server" Text="Guardar" class="btn btn-success hide" />
                 </div>
             </div>
         </div>
@@ -352,7 +463,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
-                                            <EmptyDataTemplate> No se encontró ningun registro </EmptyDataTemplate>
+                                            <EmptyDataTemplate> No se encontró ningún registro </EmptyDataTemplate>
                                             <HeaderStyle BackColor="#E33439" ForeColor="White" VerticalAlign="Middle" HorizontalAlign="Center" Font-Size="12px" />
                                             <RowStyle Font-Size="11px" />
                                             <EditRowStyle BackColor="#FFFFCC" />
@@ -417,7 +528,7 @@
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
-                                            <EmptyDataTemplate> No se encontró ningun registro </EmptyDataTemplate>
+                                            <EmptyDataTemplate> No se encontró ningún registro </EmptyDataTemplate>
                                             <HeaderStyle BackColor="#E33439" ForeColor="White" VerticalAlign="Middle" HorizontalAlign="Center" Font-Size="12px" />
                                             <RowStyle Font-Size="11px" />
                                             <EditRowStyle BackColor="#FFFFCC" />
@@ -436,7 +547,22 @@
             </div>
         </div>
     </div>
-    
     </form>
+
+    <script>
+        // Detecto actualizaciones en paneles (UpdatePanel)
+        Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function (sender, args) {
+            var updatedPanels = args.get_panelsUpdated();
+
+            for (var i = 0; i < updatedPanels.length; i++) {
+                var udpPanelId = updatedPanels[i].id;
+                switch (udpPanelId) {
+                    case 'panModal': 
+                        initDateTimePickers();
+                        break;
+                }
+            }
+        });
+    </script>
 </body>
 </html>

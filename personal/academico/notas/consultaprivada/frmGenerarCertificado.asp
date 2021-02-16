@@ -50,6 +50,10 @@ modo=request.querystring("modo")
 			tipoOrden="ciclo_cur"
 		}
 	    
+	    if (tipo==25){
+			pagina="doccertificadofc.asp"
+		}
+		
 		location.href=pagina + "?tipo=" + tipo + "&codigo_alu=<%=codigo_alu%>&codigo_pes=<%=session("codigo_pes")%>&tipoOrden=" + tipoOrden	
 	}
 </script>
@@ -236,13 +240,19 @@ modo=request.querystring("modo")
 		<td width="95%">Todas las asignaturas del plan <b>aprobados</b> omitiendo 
             Idiomas y Computación ordenados por <b>semestre</b> académico y sólo de la <b>ESCUELA 
             PROFESIONAL Y PLAN ACTUAL</b></tr> 
-
+            <!-- EPENA 05/10/2020 {-->
+	<tr>
+		<td class="style1">
+		<input name="optTipo" type="radio" style="height: 20px" value="25" /></td>
+		<td width="95%">Todas los talleres <b>aprobados</b> ordenados por <b>semestre</b> académico</tr> 
+	<!-- }EPENA 05/10/2020 -->
 	<tr>
 		<td style="width: 5%">&nbsp;</td>
 		<td width="95%">
 		<input name="cmdDescargar" type="button" value="Generar" onClick="DescargarCertificados()" class="word">
 		</td>
 	</tr>
+	
 	</table>
 <%end if%>
 </body>

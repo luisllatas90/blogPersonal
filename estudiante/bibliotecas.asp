@@ -52,10 +52,6 @@ if codigo_usu<>"" then
             width: 71%;
             height: 109px;
         }
-        .style2
-        {
-            width: 71%;
-        }
         .style3
         {
             width: 247px;
@@ -98,11 +94,11 @@ if codigo_usu<>"" then
    </tr>-->
         <!-- CIBERINDEX 23,24,25,26 -->
         <br />
-        <tr class="azul">
+        <tr class="rojo">
             <td colspan="2">
-                <h3>
+                <h5>
                     <br />
-                    Multidisciplinaria</h3>
+                Multidisciplinaria</h3>
             </td>
         </tr>
         <!-- ProQuest 2 -->
@@ -110,7 +106,7 @@ if codigo_usu<>"" then
             <td align="center" class="style3">
                 <a href="cuentaaccesos.asp?bib=2" target="_blank" class="Estilo2">
                     <img src="../images/proquest_logo-186.jpg" alt="ProQuest" width="280" height="95"
-                        border="1" /></a>
+                        border="1" /></a>          
             </td>
             <td align="left" valign="top" class="Estilo5">
                 <p align="justify" class="Estilo2">
@@ -130,9 +126,8 @@ if codigo_usu<>"" then
                         más sobre la pandemia. <a class="usatenlace" href="cuentaaccesos.asp?bib=63" target="_blank">
                             <b class="rojo">&nbsp;&gt;&gt; Ingrese aquí</b></a></span></p>
                 <br />
-                <!--<a class="usatenlace" href="http://www.etechwebsite.com/proquest1/Tutorial/pq_userguide_spanish.pdf" target="_blank">-->
-                <a class="usatenlace" href="https://intranet.usat.edu.pe/CAMPUSVIRTUAL/Biblioteca/userguide_np_en_es (2).pdf"
-                    target="_blank"><b class="rojo">&nbsp;&gt;&gt; Descargar Manual de Usuario</b></a></span></p>
+                <a class="usatenlace" href="../Biblioteca/userguide_np_en_es (2).pdf" target="_blank">
+                    <b class="rojo">&nbsp;&gt;&gt; Descargar Manual de Usuario</b></a></span></p>
                 <a class="usatenlace" href="https://youtu.be/FPbAsS41bRA" target="_blank"><b class="rojo">
                     &nbsp;&gt;&gt; Ver video tutorial - Búsqueda básica</b></a></span></p> <a class="usatenlace"
                         href="https://www.youtube.com/watch?v=6p2eJqJT0SI" target="_blank"><b class="rojo">&nbsp;&gt;&gt;
@@ -156,8 +151,8 @@ if codigo_usu<>"" then
                         Asimismo, brinda acceso a ScienceDirect Book Collection, que es una colección de
                         libros de ediciones del 2010 al 2018.<br>
                         <br>
-                        <a class="usatenlace" href="https://intranet.usat.edu.pe/CAMPUSVIRTUAL/Biblioteca/Manual_ScienceDirect2019.pdf"
-                            target="_blank"><b class="rojo">&nbsp;&gt;&gt; Descargar Manual de Usuario</b></a></span></p>
+                        <a class="usatenlace" href="../Biblioteca/Manual_ScienceDirect2019.pdf" target="_blank">
+                            <b class="rojo">&nbsp;&gt;&gt; Descargar Manual de Usuario</b></a></span></p>
             </td>
         </tr>
         <!--IOPscience-->
@@ -176,9 +171,15 @@ if codigo_usu<>"" then
                         y enseñanza. Dentro de su colección cuenta con doce revistas vinculadas a ciencias
                         de la salud, área del conocimiento al que se dedica más del 25% de artículos científicos
                         en todo el mundo.<br>
-                        <br>
-                        <a class="usatenlace" href="https://intranet.usat.edu.pe/CAMPUSVIRTUAL/Biblioteca/IOP_Science2019.pdf"
-                            target="_blank"><b class="rojo">&nbsp;&gt;&gt; Descargar Manual de Usuario</b></a></span></p>
+                        <br />
+                        <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b> <a
+                            style="font-weight: bold">mogrovejo</a>
+                        <br />
+                        <b><a class="rojo">Contraseña&nbsp;:</a></b> <a style="font-weight: bold">iopscience</a>
+                        <br />
+                        <br />
+                        <a class="usatenlace" href="../Biblioteca/IOP_Science2019.pdf" target="_blank"><b
+                            class="rojo">&nbsp;&gt;&gt; Descargar Manual de Usuario</b></a></span></p>
                 <a class="usatenlace" href="https://iopscience.iop.org/page/tutorials-spanish" target="_blank">
                     <b class="rojo">&nbsp;&gt;&gt; Ver video tutorial</b></a></span></p>
             </td>
@@ -186,21 +187,50 @@ if codigo_usu<>"" then
         <!-- JOVE -->
         <tr valign="top">
             <td align="center" class="style3">
-                <a href="cuentaaccesos.asp?bib=64" target="_blank" class="Estilo2">
+                <a class="Estilo2">
                     <img src="../images/JoVE.jpg" alt="JOVE" width="280" height="95" border="1" /></a>
             </td>
             <td align="left" valign="top" class="Estilo5">
                 <p align="justify" class="Estilo2">
-                    <span class="Estilo3"><strong class="azul">JOVE</strong> es una biblioteca innovadora
-                        de video-colecciones que enseñan conceptos claves y técnicas fundamentales. Simples
-                        y fáciles de comprender cubren temas en ciencias, medicina, ingeniería, neurociencias
-                        y psicología (ciencias del comportamiento, psicología experimental, psicología cognitiva,
-                        psicología del desarrollo, neuropsicología, sensación y percepción y psicología
-                        social). Cuenta con subtítulos en Español.<br />
-                        <b>
+                    <span class="Estilo3">
+                        <strong class="azul">JoVE  Psychology</strong> es una colección de videos que enseñan conceptos claves y técnicas fundamentales de ciencias del comportamiento, psicología experimental, psicología cognitiva, psicología del desarrollo, neuropsicología, sensación y percepción y psicología social. Cuenta con subtítulos en Español.<br/>
+                        <a class="usatenlace" href="cuentaaccesos.asp?bib=74" target="_blank"><b class="rojo">&nbsp;&gt;&gt; Ingresar a JoVE  Psychology</b></a><br/><br/>
+                        <strong class="azul">JoVE  Neuroscience</strong> incluye videos de métodos y técnicas para estudiar el cerebro y el sistema nervioso; además combina tratamientos para condiciones neurológicas y enfermedades. Cuenta con subtítulos en Español.<br/>
+                        <a class="usatenlace" href="cuentaaccesos.asp?bib=64" target="_blank"><b class="rojo">&nbsp;&gt;&gt; Ingresar a JoVE  Neuroscience</b></a><br/><br/>
+                    </span>
                 </p>
             </td>
         </tr>
+        <!-- ALTAMIRA -->
+        <!-- Se solicitó dar de baja GLPI 39683 -->
+        <!--
+        <tr valign="top">
+            <td align="center" class="style3">
+                <a href="cuentaaccesos.asp?bib=73" target="_blank" class="Estilo2">
+                    <img src="../images/altamira-logo.jpg" alt="ALTAMIRA" width="280" height="95" border="1" /></a>
+            </td>
+            <td align="left" valign="top" class="Estilo5">
+                <p align="justify" class="Estilo2">
+                    <span class="Estilo3"><strong class="azul">ALTAMIRA</strong> en alianza con Mashkay
+                        Perú, EBSCO, KARGER, SAGE y WILLEY ponen a disposición un portal de recursos de
+                        información en línea que incluye: - EBSCO ACADEMIC SEARCH ULTIMATE - MEDLINE COMPLETE
+                        - SAGE PREMIER - DYNAMED - KARGER EJOURNAL COLLECTION - EBSCO FUENTE ACADÉMICA PLUS
+                        - EBSCO DISCOVERY SERVICE (EDS).<br />
+                      <br />
+                            <br />
+                            <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b>
+                        
+                            <a style="font-weight: bold">usat@altamira.pe</a>
+                           
+                            <br />
+                            <b><a class="rojo">Contraseña&nbsp;:</a></b>
+                       
+                            <a style="font-weight: bold">Remoto#20</a>
+                        
+                </p>
+            </td>
+        </tr>
+        -->
         <!--
 	  <tr valign="top">
        <td align="center" class="style3">
@@ -225,6 +255,32 @@ if codigo_usu<>"" then
            </td>
       </tr>
 	  -->
+        <!-- Se solicitó dar de alta GLPI 39683 -->
+        <tr class="rojo">
+            <td colspan="2">
+                <h5>
+                    <br />
+                    Ingeniería y Administración</h5>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td align="center" class="style3">
+                <a href="cuentaaccesos.asp?bib=55" target="_blank" class="Estilo2">
+                    <img src="../images/biblioteca/VirtualPro.png" alt="Virtual PRO Online" width="280"
+                        height="95" border="1" style="cursor: hand" /></a>
+                <td align="left" valign="top" class="Estilo5">
+                    <p align="justify" class="Estilo2">
+                        <span class="Estilo3"><strong style="color: azul">Virtual PRO</strong> es un portal
+                            especializado en procesos industriales, ciencias administrativas y negocios que
+                            permite consultar, buscar y descargar información: revistas virtuales, infografías,
+                            videos, procesos industriales para docentes, investigadores y estudiantes.
+                            <br />
+                            <br />
+                            <span class="name" style="text-align: justify; font-weight: bold">Activo hasta el 31
+                                de diciembre de 2020
+                                <br />
+                </td>
+        </tr>
         <tr class="rojo">
             <td colspan="2">
                 <h5>
@@ -245,13 +301,19 @@ if codigo_usu<>"" then
                             materiales, productos y sistemas constructivos.
                             <br />
                             <br />
-                            <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b><a style="font-weight: bold">
-                                biblioservicios-remoto@usat.edu.pe</a>
+                            <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b>
+                            <!-- <a style="font-weight: bold">biblioservicios-remoto@usat.edu.pe</a> -->
+                            <a style="font-weight: bold">usat.edu.pe@tectonica.archi</a>
+                            <!-- andy.diaz 29/07/2020 -->
                             <br />
-                            <b><a class="rojo">Contraseña&nbsp;:</a></b><a style="font-weight: bold"> biblioteca</a>
+                            <b><a class="rojo">Contraseña&nbsp;:</a></b>
+                            <!-- <a style="font-weight: bold"> biblioteca</a> -->
+                            <!-- andy.diaz 29/07/2020 -->
+                            <a style="font-weight: bold">Tectonica1243</a>
+                            <!-- andy.diaz 29/07/2020 -->
                             <br />
                             <br />
-                            <a class="usatenlace" href="https://intranet.usat.edu.pe/campusvirtual/images/biblioteca/Revista-de%20Tectonica-online.pdf"
+                            <a class="usatenlace" href="../images/biblioteca/Revista-de%20Tectonica-online.pdf"
                                 target="_blank"><b class="rojo">&nbsp;&gt;&gt; Descargar Manual de Usuario</b></a><br />
                 </td>
         </tr>
@@ -310,14 +372,14 @@ if codigo_usu<>"" then
                         <br />
                         <br />
                         <!--<a class="usatenlace" href="remote_auth.asp" target="_blank"><b class="rojo">&nbsp;&gt;&gt; Búsqueda Avanzada</b></a>-->
-                        <a class="usatenlace" href="https://intranet.usat.edu.pe/campusvirtual/Biblioteca/Manual-de-uso-vLex-2019.pdf"
-                            target="_blank"><b class="rojo">&nbsp;&gt;&gt; Descargar manual de usuario</b></a><br />
+                        <a class="usatenlace" href="../Biblioteca/Manual-de-uso-vLex-2019.pdf" target="_blank">
+                            <b class="rojo">&nbsp;&gt;&gt; Descargar manual de usuario</b></a><br />
                         <br />
-                        <a class="usatenlace" href="https://kb.vlex.com/es/article-categories/features/" target="_blank">                            
-                            <b class="rojo">&nbsp;&gt;&gt; Ver Guía funcionalidades VLEX</b></a><br />
+                        <a class="usatenlace" href="https://kb.vlex.com/es/article-categories/features/"
+                            target="_blank"><b class="rojo">&nbsp;&gt;&gt; Ver Guía funcionalidades VLEX</b></a><br />
                         <br />
-                        <a class="usatenlace" href="https://kb.vlex.com/es/knowledge-base/guia-uso-vlex-mobile/" target="_blank">
-                            <b class="rojo">&nbsp;&gt;&gt; Ver Guía de uso vLex Mobile</b></a><br />
+                        <a class="usatenlace" href="https://kb.vlex.com/es/knowledge-base/guia-uso-vlex-mobile/"
+                            target="_blank"><b class="rojo">&nbsp;&gt;&gt; Ver Guía de uso vLex Mobile</b></a><br />
                         <br />
                     </span>
                 </p>
@@ -349,7 +411,9 @@ if codigo_usu<>"" then
         </tr>
         <tr valign="top">
             <td align="center" class="style3">
-                <img src="../images/CIBERINDEX.jpg" alt="ciberindex" width="280" border="1" style="cursor: hand;" />
+                <a href="cuentaaccesos.asp?bib=45" target="_blank" class="Estilo2">
+                    <img src="../images/CIBERINDEX.jpg" alt="ciberindex" width="280" border="1" style="cursor: hand;" />
+                </a>                              
             </td>
             <td align="left" valign="top" class="Estilo5">
                 <p align="justify">
@@ -359,6 +423,7 @@ if codigo_usu<>"" then
                         para la ayuda en la toma de decisiones fundamentadas en el conocimiento científico.<br />
                     </span>
                     <p align="justify">
+                        <!--
                         Consultas dentro del campus universitario:<span class="Estilo3"><u><li><a href="cuentaaccesos.asp?bib=23"
                             target="_blank">HEMEROTECA CANTÁRIDA (Dentro del Campus Universitario)</a></li>
                             <li><a href="cuentaaccesos.asp?bib=24" target="_blank">CUIDEN EVIDENCIA (Dentro del
@@ -370,6 +435,7 @@ if codigo_usu<>"" then
                         </u>
                             <br>
                             <br>
+                         -->
                             <a class="usatenlace" href="http://www.index-f.com/new/cuiden/guia.pdf" target="_blank">
                                 <b class="rojo">&nbsp;&gt;&gt; Descargar manual de usuario</b></a><br />
                             <br />
@@ -942,9 +1008,9 @@ if codigo_usu<>"" then
                         <br />
                         <br />
                         <b><a class="rojo">&nbsp;&nbsp;Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b>
-                        usat20
+                        usat2020
                         <br />
-                        <b><a class="rojo">&nbsp;&nbsp;Contraseña&nbsp;:</a></b> ebsco18
+                        <b><a class="rojo">&nbsp;&nbsp;Contraseña&nbsp;:</a></b> Peru2020_
                         <br />
                         ___________________________________<br />
                         <br />

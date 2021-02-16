@@ -11,7 +11,7 @@
 			OR session("codigo_apl") = 11 OR session("codigo_apl") = 69   OR session("codigo_apl") = 53 or session("codigo_apl") =21 _
 			or session("codigo_apl") = 67 or session("codigo_apl") =66  or session("codigo_apl") = 64  _
 			or session("codigo_apl") = 25 or session("descripcion_apl") = "GESTIÓN DE INVESTIGACIÓN" _
-			or session("codigo_apl")=70 or session("codigo_apl")=22 or session("codigo_apl")=75 or session("codigo_apl")=32 _
+			or session("codigo_apl")=70 or session("codigo_apl")=22 or session("codigo_apl")=75 or session("codigo_apl")=32 or session("codigo_apl")=37 _
 			or session("codigo_apl")=19 or session("codigo_apl")=35 or session("codigo_apl")=76  or session("codigo_apl")=47 or session("codigo_apl")=77 then    
         response.Write("<meta http-equiv='X-UA-Compatible' content='IE=edge'>")
     end if

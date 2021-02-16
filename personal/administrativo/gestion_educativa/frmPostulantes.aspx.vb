@@ -39,6 +39,7 @@ Partial Class administrativo_pec_test_frmPostulantes
         InicializarControles()
         LimpiarMensajeServidor()
         LimpiarMensajeValServ()
+        LimpiarOtros()
 
         If Not IsPostBack Then
             CargarCombos()
@@ -136,6 +137,7 @@ Partial Class administrativo_pec_test_frmPostulantes
             Dim _cellsRow As TableCellCollection = e.Row.Cells
             Dim ls_codigoPso As String = grwPostulantes.DataKeys(e.Row.RowIndex).Values.Item("codigo_pso")
             Dim ls_codigoAlu As String = grwPostulantes.DataKeys(e.Row.RowIndex).Values.Item("cli")
+            Dim ls_codUniversitario As String = grwPostulantes.DataKeys(e.Row.RowIndex).Values.Item("codigoUniver_Alu")
             Dim ln_Index As Integer = e.Row.RowIndex + 1
             Dim ln_Columnas As Integer = grwPostulantes.Columns.Count
 
@@ -151,7 +153,7 @@ Partial Class administrativo_pec_test_frmPostulantes
                 .InnerHtml = "<i class='fa fa-search-plus'></i>"
                 AddHandler .ServerClick, AddressOf btnInfoPostulante_Click
             End With
-            _cellsRow(ln_Columnas - 7).Controls.Add(lo_btnInfo)
+            _cellsRow(ln_Columnas - 8).Controls.Add(lo_btnInfo)
 
             'Editar postulante
             Dim lo_btnEditar As New HtmlButton
@@ -163,7 +165,7 @@ Partial Class administrativo_pec_test_frmPostulantes
                 .InnerHtml = "<i class='fa fa-edit'></i>"
                 AddHandler .ServerClick, AddressOf btnEditarPostulante_Click
             End With
-            _cellsRow(ln_Columnas - 6).Controls.Add(lo_btnEditar)
+            _cellsRow(ln_Columnas - 7).Controls.Add(lo_btnEditar)
 
             'Imprimir ficha
             Dim lo_btnImprimir As New HtmlButton
@@ -174,19 +176,19 @@ Partial Class administrativo_pec_test_frmPostulantes
                 .Attributes.Add("type", "button")
                 .InnerHtml = "<i class='fa fa-print'></i>"
             End With
-            _cellsRow(ln_Columnas - 5).Controls.Add(lo_btnImprimir)
+            _cellsRow(ln_Columnas - 6).Controls.Add(lo_btnImprimir)
 
             'Requisitos
             Dim lo_btnRequisitos As New HtmlButton
             With lo_btnRequisitos
                 .ID = "btnRequisitosAdmision" & ln_Index
                 .Attributes.Add("data-alu", ls_codigoAlu)
-                .Attributes.Add("class", "btn btn-primary btn-sm")
+                .Attributes.Add("class", "btn btn-warning btn-sm")
                 .Attributes.Add("type", "button")
                 .InnerHtml = "<i class='fa fa-check-square'></i>"
                 AddHandler .ServerClick, AddressOf btnRequisitosAdmision_Click
             End With
-            _cellsRow(ln_Columnas - 4).Controls.Add(lo_btnRequisitos)
+            _cellsRow(ln_Columnas - 5).Controls.Add(lo_btnRequisitos)
 
             'Reporte convenio
             Dim lo_BtnConvenio As New HtmlButton
@@ -200,7 +202,7 @@ Partial Class administrativo_pec_test_frmPostulantes
                 .Attributes.Item("onClick") = "window.open('" & ls_Path & "')"
                 .InnerHtml = "<i class='fa fa-file-pdf'></i>"
             End With
-            _cellsRow(ln_Columnas - 3).Controls.Add(lo_BtnConvenio)
+            _cellsRow(ln_Columnas - 4).Controls.Add(lo_BtnConvenio)
 
             'Generar Cargo 
             Dim lo_btnGenerarCargo As New HtmlButton
@@ -212,7 +214,7 @@ Partial Class administrativo_pec_test_frmPostulantes
                 .InnerHtml = "<i class='fa fa-coins'></i>"
                 AddHandler .ServerClick, AddressOf btnGenerarCargo_Click
             End With
-            _cellsRow(ln_Columnas - 2).Controls.Add(lo_btnGenerarCargo)
+            _cellsRow(ln_Columnas - 3).Controls.Add(lo_btnGenerarCargo)
 
             'Anular Cargo 
             Dim lo_btnAnularCargo As New HtmlButton
@@ -224,10 +226,36 @@ Partial Class administrativo_pec_test_frmPostulantes
                 .InnerHtml = "<i class='fa fa-minus-circle'></i>"
                 AddHandler .ServerClick, AddressOf btnAnularCargo_Click
             End With
-            _cellsRow(ln_Columnas - 1).Controls.Add(lo_btnAnularCargo)
+            _cellsRow(ln_Columnas - 2).Controls.Add(lo_btnAnularCargo)
+
+            'Correo
+            Dim lo_btnEnviarCorreo As New HtmlButton
+            With lo_btnEnviarCorreo
+                .ID = "btnEnviarCorreoAdmision" & ln_Index
+                .Attributes.Add("data-cod-uni", ls_codUniversitario)
+                .Attributes.Add("data-cco", cmbCentroCosto.SelectedValue)
+                .Attributes.Add("class", "btn btn-primary btn-sm")
+                .Attributes.Add("type", "button")
+                .Attributes.Add("title", "Enviar accesos")
+                .InnerHtml = "<i class='fa fa-envelope'></i>"
+                AddHandler .ServerClick, AddressOf btnEnviarCorreoAdmision_Click
+            End With
+            _cellsRow(ln_Columnas - 1).Controls.Add(lo_btnEnviarCorreo)
 
             grwPostulantes.HeaderRow.TableSection = TableRowSection.TableHeader
         End If
+    End Sub
+
+    Protected Sub grwServicioCentroCosto_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grwServicioCentroCosto.RowDataBound
+        Try
+            If e.Row.RowType = DataControlRowType.DataRow Then
+                Dim lb_Principal As Boolean = e.Row.DataItem("principal_Sco")
+                Dim lo_RbtPrincipal As HtmlInputRadioButton = e.Row.FindControl("rbtPrincipal")
+                lo_RbtPrincipal.Checked = lb_Principal
+            End If
+        Catch ex As Exception
+            GenerarMensajeServidor("Error", -1, ex.Message)
+        End Try
     End Sub
 
     'Eventos delegados
@@ -321,6 +349,50 @@ Partial Class administrativo_pec_test_frmPostulantes
         udpRequisitosAdmision.Update()
     End Sub
 
+    Protected Sub btnActivarOnline_ServerClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnActivarOnline.ServerClick
+        Try
+            Dim ls_TipoConsulta As String = "GEN"
+            Dim ln_CodigoCco As Integer = cmbCentroCosto.SelectedValue
+            If ln_CodigoCco = -1 Then
+                GenerarMensajeServidor("Error", -1, "Seleccione un centro de costo")
+                Exit Sub
+            End If
+
+            Dim lo_DtScc As New Data.DataTable
+            lo_DtScc = mo_RepoAdmision.ConsultarServicioCentroCosto(ls_TipoConsulta, ln_CodigoCco)
+            grwServicioCentroCosto.DataSource = lo_DtScc
+            grwServicioCentroCosto.DataBind()
+
+            udpActivarOnline.Update()
+
+        Catch ex As Exception
+            GenerarMensajeServidor("Error", -1, ex.Message)
+        End Try
+    End Sub
+
+    Protected Sub btnGuardarActivarOnline_ServerClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGuardarActivarOnline.ServerClick
+        Try
+            Dim ln_CodigoScc As Integer = Request("rbtPrincipal")
+            If ln_CodigoScc = 0 Then
+                hddRptaActivarOnline.Value = "0"
+                hddMsgActivarOnline.Value = "Debe seleccionar un servicio"
+                udpActivarOnline.Update()
+                Exit Sub
+            End If
+
+            Dim ls_Operacion As String = "GEN"
+            Dim ln_CodigoCco As Integer = cmbCentroCosto.SelectedValue
+            Dim lo_Res As Dictionary(Of String, String) = mo_RepoAdmision.ActivarServicioCentroCosto(ls_Operacion, ln_CodigoCco, ln_CodigoScc)
+
+            hddRptaActivarOnline.Value = lo_Res.Item("rpta")
+            hddMsgActivarOnline.Value = lo_Res.Item("msg")
+            udpActivarOnline.Update()
+
+        Catch ex As Exception
+            GenerarMensajeServidor("Error", -1, ex.Message)
+        End Try
+    End Sub
+
     Private Sub btnImprimirConvenio_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim button As HtmlButton = DirectCast(sender, HtmlButton)
         Dim ls_CodigoCco As String = button.Attributes("data-cco")
@@ -372,6 +444,7 @@ Partial Class administrativo_pec_test_frmPostulantes
                 .Attributes.Add("data-cco", cmbCentroCosto.SelectedValue)
                 .Attributes.Add("class", "btn btn-primary btn-sm")
                 .Attributes.Add("type", "button")
+                .Attributes.Add("title", "Enviar accesos")
                 .InnerHtml = "<i class='fa fa-envelope'></i>"
                 AddHandler .ServerClick, AddressOf btnEnviarCorreoAdmision_Click
             End With
@@ -408,7 +481,7 @@ Partial Class administrativo_pec_test_frmPostulantes
         Try
             Dim codigoCco As Integer = cmbCentroCosto.SelectedValue
             If codigoCco = -1 Then
-                GenerarMensajeServidor("Error", -1, "Seleccione un centro de costso")
+                GenerarMensajeServidor("Error", -1, "Seleccione un centro de costo")
                 Exit Sub
             End If
 
@@ -447,7 +520,7 @@ Partial Class administrativo_pec_test_frmPostulantes
         Try
             Dim codigoCco As Integer = cmbCentroCosto.SelectedValue
             If codigoCco = -1 Then
-                GenerarMensajeServidor("Error", -1, "Seleccione un centro de costso")
+                GenerarMensajeServidor("Error", -1, "Seleccione un centro de costo")
                 Exit Sub
             End If
 
@@ -523,6 +596,12 @@ Partial Class administrativo_pec_test_frmPostulantes
         divValServParametros.Attributes.Item("data-mostrar") = ""
         divValServParametros.Attributes.Item("data-rpta") = "0"
         udpValServ.Update()
+    End Sub
+
+    Private Sub LimpiarOtros()
+        hddRptaActivarOnline.Value = ""
+        hddMsgActivarOnline.Value = ""
+        udpActivarOnline.Update()
     End Sub
 
     Private Sub DevolverRespuestaValServ(ByVal rpta As Integer, ByVal msg As String)
@@ -763,6 +842,7 @@ Partial Class administrativo_pec_test_frmPostulantes
 
                 btnAnularCargosEvento.Attributes.Remove("disabled")
                 btnInactivarInscritosEvento.Attributes.Remove("disabled")
+                btnActivarOnline.Attributes.Remove("disabled")
                 udpOpcionesEvento.Update()
             End If
         Catch ex As Exception
@@ -787,6 +867,7 @@ Partial Class administrativo_pec_test_frmPostulantes
 
         btnAnularCargosEvento.Attributes.Item("disabled") = "disabled"
         btnInactivarInscritosEvento.Attributes.Item("disabled") = "disabled"
+        btnActivarOnline.Attributes.Item("disabled") = "disabled"
         udpOpcionesEvento.Update()
     End Sub
 

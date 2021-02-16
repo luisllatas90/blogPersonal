@@ -1,0 +1,1 @@
+GRANT EXECUTE ON [dbo].[CONF_PersonalListar] TO usuariogeneral

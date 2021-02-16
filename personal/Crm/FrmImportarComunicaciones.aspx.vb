@@ -1,0 +1,228 @@
+﻿Imports System.Data.OleDb
+Imports Microsoft.SqlServer
+Imports System.Data.SqlClient
+Imports System.IO
+Imports System.Collections.Generic
+
+Partial Class Crm_FrmImportarComunicaciones
+    Inherits System.Web.UI.Page
+
+    Private cnx As New ClsConectarDatos
+    Private ruta As String = ConfigurationManager.AppSettings("SharedFiles")
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Try
+            If IsPostBack = False Then
+                'CargarTipoEstudio()
+            End If
+        Catch ex As Exception
+            Response.Write(ex.Message)
+        End Try
+    End Sub
+
+    'Private Sub CargarTipoEstudio()
+    '    Dim obj As New ClsCRM
+    '    Dim dt As New Data.DataTable
+    '    dt = obj.ListaTipoEstudio("TO", 0)
+    '    Me.ddlTipoEstudio.Items.Clear()
+    '    Me.ddlTipoEstudio.Items.Add(New ListItem("--Seleccione--", ""))
+    '    If dt.Rows.Count > 0 Then
+    '        For i As Integer = 0 To dt.Rows.Count - 1
+    '            Dim Lista As New ListItem(dt.Rows(i).Item("descripcion_test").ToString, dt.Rows(i).Item("codigo_test").ToString)
+    '            Me.ddlTipoEstudio.Items.Add(Lista)
+    '        Next
+    '    End If
+    'End Sub
+
+    'Private Sub CargarConvocatorias()
+    '    Dim obj As New ClsCRM
+    '    Dim dt As New Data.DataTable
+    '    dt = obj.ListaConvocatorias("C", 0, Me.ddlTipoEstudio.SelectedValue)
+    '    Me.ddlConvocatoria.Items.Clear()
+    '    Me.ddlConvocatoria.Items.Add(New ListItem("--Seleccione--", ""))
+    '    If dt.Rows.Count > 0 Then
+    '        For i As Integer = 0 To dt.Rows.Count - 1
+    '            Dim Lista As New ListItem(dt.Rows(i).Item("descripcion").ToString, dt.Rows(i).Item("codigo").ToString)
+    '            Me.ddlConvocatoria.Items.Add(Lista)
+    '        Next
+    '    End If
+    'End Sub
+
+    'Private Sub CargarEventos()
+    '    Dim obj As New ClsCRM
+    '    Dim dt As New Data.DataTable
+    '    dt = obj.ListaEventos("C", 0, Me.ddlTipoEstudio.SelectedValue, Me.ddlConvocatoria.SelectedValue)
+    '    Me.ddlEvento.Items.Clear()
+    '    Me.ddlEvento.Items.Add(New ListItem("--Seleccione--", ""))
+    '    If dt.Rows.Count > 0 Then
+    '        For i As Integer = 0 To dt.Rows.Count - 1
+    '            Dim Lista As New ListItem(dt.Rows(i).Item("descripcion").ToString, dt.Rows(i).Item("codigo").ToString)
+    '            Me.ddlEvento.Items.Add(Lista)
+    '        Next
+    '    End If
+    'End Sub
+
+    'Protected Sub ddlTipoEstudio_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlTipoEstudio.SelectedIndexChanged
+    '    Me.ddlEvento.Items.Clear()
+    '    Me.ddlEvento.Items.Add(New ListItem("--Seleccione--", ""))
+    '    If Me.ddlTipoEstudio.SelectedValue <> "" Then
+    '        CargarConvocatorias()
+    '    Else
+    '        Me.ddlConvocatoria.Items.Clear()
+    '        Me.ddlConvocatoria.Items.Add(New ListItem("--Seleccione--", ""))
+    '    End If
+    'End Sub
+
+    'Protected Sub ddlConvocatoria_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlConvocatoria.SelectedIndexChanged
+    '    If Me.ddlConvocatoria.SelectedValue <> "" Then
+    '        CargarEventos()
+    '    Else
+    '        Me.ddlEvento.Items.Clear()
+    '        Me.ddlEvento.Items.Add(New ListItem("--Seleccione--", ""))
+    '    End If
+    'End Sub
+
+    Protected Sub ButtonImportar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnImportar.Click
+        If Session("id_per") = "" Or Request.QueryString("id") = "" Then
+            Response.Redirect("../../sinacceso.html")
+        End If
+
+        If Validar() = True Then
+            Dim obj As New ClsCRM
+
+            Dim fileOK As Boolean = False
+            If ArchivoASubir.HasFile Then
+                Dim fileExtension As String
+                fileExtension = System.IO.Path.GetExtension(ArchivoASubir.FileName).ToLower()
+                Dim ExtensionesPermitidas As String() = {".csv"}
+
+                For i As Integer = 0 To ExtensionesPermitidas.Length - 1
+                    If fileExtension = ExtensionesPermitidas(i) Then
+                        fileOK = True
+                    End If
+                Next
+
+                If fileOK Then
+                    Try
+                        'Guardar Archivo
+                        Dim RutaArchivo As String = ""
+                        Dim nombrefinal As String = ""
+                        'Dim idarchivocompartido As Integer
+                        Dim extension As String = ""
+                        Dim idtabla As Integer = 25 ' ID DE TABLAARCHIVO
+                        Dim idtransaccion As Integer = 0 ' ID DE TABLA RELACIONADA (EN ESTE CASO NO TENEMOS UN SOLO REGISTRO SINO VARIOS SE CONSIDERA 0)
+                        Dim nrooperacion As Integer = 0 ' ID DE TABLA RELACIONADA OPCIONAL (EN ESTE CASO NO TENEMOS UN SOLO REGISTRO SINO VARIOS SE CONSIDERA 0)
+                        Dim archivo As HttpPostedFile = HttpContext.Current.Request.Files("ArchivoASubir")
+                        Dim codigo_per As Integer = Session("id_per")
+                        SubirArchivo(idtabla, 0, archivo, 0, codigo_per)
+
+                        Dim dta As New Data.DataTable
+                        dta = obj.ObtenerUltimoIDArchivoCompartiod(idtabla, idtransaccion, nrooperacion)
+                        RutaArchivo = dta.Rows(0).Item("ruta").ToString
+                        nombrefinal = dta.Rows(0).Item("NombreArchivo").ToString
+                        'idarchivocompartido = dta.Rows(0).Item("idarchivo")
+                        extension = dta.Rows(0).Item("Extension")
+
+                        'Obtenemos Respuesta de Migración en una tabla
+                        Dim dt As New Data.DataTable
+                        dt = obj.MigrarExcelComunicaciones(RutaArchivo, codigo_per)
+
+                        'Mensaje de Confirmación o error
+                        If dt.Rows(0).Item("Respuesta") = 1 Then
+                            FnMensaje(dt.Rows(0).Item("Mensaje").ToString, "success")
+                        Else
+                            FnMensaje(dt.Rows(0).Item("Mensaje").ToString, "danger")
+                        End If
+                    Catch ex As Exception
+                        FnMensaje(ex.Message.ToString, "danger")
+                    End Try
+                Else
+                    FnMensaje("Solo se aceptan Archivos de Excel (.xls ó .xlsx)", "danger")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub FnMensaje(ByVal mensaje As String, ByVal tipo As String)
+        Me.Mensaje.InnerText = mensaje
+        Me.Mensaje.Attributes.Add("class", "alert alert-" + tipo + "")
+    End Sub
+
+    Private Function Validar() As Boolean
+        Me.Mensaje.InnerText = ""
+        Me.Mensaje.Attributes.Remove("class")
+        'If Me.ddlTipoEstudio.SelectedValue = "" Then
+        '    FnMensaje("Seleccione un Tipo de Estudio", "danger")
+        '    Return False
+        'End If
+        'If Me.ddlConvocatoria.SelectedValue = "" Then
+        '    FnMensaje("Seleccione una Convocatoria", "danger")
+
+        '    Return False
+        'End If
+        'If Me.ddlEvento.SelectedValue = "" Then
+        '    FnMensaje("Seleccione un Evento", "danger")
+        '    Return False
+        'End If
+
+        If Me.ArchivoASubir.HasFile = False Then
+            FnMensaje("Adjuntar Archivo a Importar", "danger")
+            Return False
+        End If
+
+        If System.IO.Path.GetExtension(Me.ArchivoASubir.FileName) <> ".csv" Then
+            FnMensaje("Solo se aceptan Archivos de formato de la plantilla (.csv)", "danger")
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Sub SubirArchivo(ByVal id_tabla As Integer, ByVal nro_transaccion As String, ByVal ArchivoaSubir As HttpPostedFile, ByVal tipo As String, ByVal usuario_per As Integer)
+        Try
+            Dim codigo_tablaArchivo As String = id_tabla ' ID de tablaArchivo
+            Dim archivo As HttpPostedFile = ArchivoaSubir
+            Dim nro_operacion As String = ""
+            Dim id_tablaProviene As String = nro_transaccion
+
+            Dim Fecha As String = Date.Now.ToString("dd/MM/yyyy")
+            Dim Usuario As String = Session("perlogin").ToString
+            Dim Input(archivo.ContentLength) As Byte
+
+            Dim b As New BinaryReader(archivo.InputStream)
+            Dim binData As Byte() = b.ReadBytes(archivo.InputStream.Length)
+            Dim base64 = System.Convert.ToBase64String(binData)
+
+            Dim wsCloud As New ClsArchivosCompartidos
+            Dim list As New Dictionary(Of String, String)
+
+            Dim nombre_archivo As String = System.IO.Path.GetFileName(archivo.FileName.Replace("&", "_").Replace("'", "_").Replace("*", "_"))
+
+            list.Add("Fecha", Fecha)
+            list.Add("Extencion", System.IO.Path.GetExtension(archivo.FileName))
+            list.Add("Nombre", nombre_archivo)
+            list.Add("TransaccionId", id_tablaProviene)
+            list.Add("TablaId", codigo_tablaArchivo)
+            list.Add("NroOperacion", nro_operacion)
+            list.Add("Archivo", System.Convert.ToBase64String(binData, 0, binData.Length))
+            list.Add("Usuario", Usuario)
+            list.Add("Equipo", "")
+            list.Add("Ip", "")
+            list.Add("param8", Usuario)
+
+            Dim envelope As String = wsCloud.SoapEnvelope(list)
+            Dim result As String = wsCloud.PeticionRequestSoap(ruta, envelope, "https://usat.edu.pe/UploadFile", Session("perlogin").ToString)
+        Catch ex As Exception
+            Dim Data1 As New Dictionary(Of String, Object)()
+            Dim serializer As System.Web.Script.Serialization.JavaScriptSerializer = New System.Web.Script.Serialization.JavaScriptSerializer()
+            Dim JSONresult As String = ""
+            Dim list As New List(Of Dictionary(Of String, Object))()
+            Data1.Add("rpta", "1 - SUBIR ARCHIVO")
+            Data1.Add("msje", ex.Message)
+            list.Add(Data1)
+            JSONresult = serializer.Serialize(list)
+            Response.Write(JSONresult)
+        End Try
+    End Sub
+
+End Class

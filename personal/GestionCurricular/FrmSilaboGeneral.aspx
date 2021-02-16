@@ -219,30 +219,33 @@
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <asp:GridView ID="gvResultados" runat="server" Width="99%" AutoGenerateColumns="False"
-                                ShowHeader="true" AllowPaging="True" PageSize="20" DataKeyNames="codigo_cur,nombre_cur,codigo_dis,fecha_apr,codigo_cup,descripcion_Cac,nombre_Cpf,codigo_Pes,codigo_Cac,codigo_Cpf,grupoHor_Cup,modular_pcu,estado_sil,instr_total,instr_asign,instr_pend,sesion_total,sesion_asign,sesion_pend,fechas_total,fechas_asign,fechas_pend"
+                                ShowHeader="true" AllowPaging="True" PageSize="20" DataKeyNames="codigo_cur,nombre_cur,codigo_dis,fecha_apr,codigo_cup,descripcion_Cac,nombre_Cpf,codigo_Pes,codigo_Cac,codigo_Cpf,grupoHor_Cup,modular_pcu,estado_sil,instr_total,instr_asign,instr_pend,sesion_total,sesion_asign,sesion_pend,fechas_total,fechas_asign,fechas_pend,idcurso_mdl"
                                 OnRowCreated="gvResultados_OnRowCreated" OnRowCommand="gvResultados_RowCommand"
                                 CellPadding="0" ForeColor="#333333" CssClass="table table-bordered">
                                 <Columns>
                                     <asp:BoundField DataField="nombre_Cpf" HeaderText="Carrera Profesional" HeaderStyle-Width="10%" />
-                                    <asp:BoundField DataField="cicloRom" HeaderText="Ciclo" HeaderStyle-Width="3%" />
+                                    <asp:BoundField DataField="cicloRom" HeaderText="Ciclo" HeaderStyle-Width="3%" ItemStyle-HorizontalAlign="Center"
+                                        HeaderStyle-HorizontalAlign="Center" />
                                     <asp:BoundField DataField="nombre_Cur" HeaderText="Asignatura" HeaderStyle-Width="14%" />
                                     <asp:BoundField DataField="creditos_Cur" HeaderText="Créditos" HeaderStyle-Width="0%"
                                         Visible="false" />
-                                    <asp:BoundField DataField="grupoHor_Cup" HeaderText="Grupo" HeaderStyle-Width="3%" />
-                                    <asp:BoundField DataField="estado" HeaderText="Estado" HeaderStyle-Width="5%" />
+                                    <asp:BoundField DataField="grupoHor_Cup" HeaderText="Grupo" HeaderStyle-Width="3%"
+                                        ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
+                                    <asp:BoundField DataField="estado" HeaderText="Estado" HeaderStyle-Width="5%" ItemStyle-HorizontalAlign="Center"
+                                        HeaderStyle-HorizontalAlign="Center" />
                                     <asp:BoundField HtmlEncode="false" DataField="instr_total" HeaderText="Tot.|Asig.|Pend"
-                                        HeaderStyle-Width="12%" />
+                                        HeaderStyle-Width="12%" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
                                     <asp:BoundField HtmlEncode="false" DataField="sesion_total" HeaderText="Tot.|Asig.|Pend"
-                                        HeaderStyle-Width="12%" />
+                                        HeaderStyle-Width="12%" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
                                     <asp:BoundField HtmlEncode="false" DataField="fechas_total" HeaderText="Tot.|Asig.|Pend"
-                                        HeaderStyle-Width="12%" />
+                                        HeaderStyle-Width="12%" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" />
                                     <asp:TemplateField HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
                                         HeaderText="Registra Fechas" HeaderStyle-Width="5%">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnRegFechas" runat="server" CausesValidation="False" CssClass="btn btn-success btn-sm"
                                                 CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" CommandName="RegistrarFechas"
                                                 Text="<i class='fa fa-calendar-alt'></i>" ToolTip="Registrar Fechas de Sesiones"
-                                                Enabled='<%# IIF(Eval("aprobado") = "0", "true", "false") %>'>
+                                                Enabled='<%# IIF(Eval("aprobado") = "0" AND Request.QueryString("ctf") <> "249", "true", "false") %>'>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
@@ -253,7 +256,7 @@
                                             <asp:LinkButton ID="btnInstrumentos" runat="server" CausesValidation="False" CssClass="btn btn-default btn-sm"
                                                 CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" CommandName="Instrumentos"
                                                 Text="<i class='fa fa-tasks'></i>" ToolTip="Agregar Instrumentos de Evaluación"
-                                                Enabled='<%# IIF(Eval("aprobado") = "0", "true", "false") %>'>
+                                                Enabled='<%# IIF(Eval("aprobado") = "0" AND Request.QueryString("ctf") <> "249", "true", "false") %>'>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
@@ -264,7 +267,7 @@
                                             <asp:LinkButton ID="btnConfirmar" runat="server" CausesValidation="False" CssClass="btn btn-danger btn-sm"
                                                 CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" CommandName="Confirmar"
                                                 Text="<i class='fa fa-check-circle'></i>" ToolTip="Confirmar el envio del Sílabo para su publicación"
-                                                Enabled='<%# IIF(Eval("estado_sil") = "P", IIF(Len(Eval("instr_pend")) = 0 and Len(Eval("sesion_pend")) = 0 and Len(Eval("fechas_pend")) = 0, "true", "false"), "false") %>'>
+                                                Enabled='<%# IIF(Eval("estado_sil") = "P" AND Request.QueryString("ctf") <> "249", IIF(Len(Eval("instr_pend")) = 0 and Len(Eval("sesion_pend")) = 0 and Len(Eval("fechas_pend")) = 0, "true", "false"), "false") %>'>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
@@ -279,14 +282,26 @@
                                         <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
-                                        HeaderText="Formato de Acta" HeaderStyle-Width="5%">
+                                        HeaderText="Acta de sílabo" HeaderStyle-Width="9%">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnBajarActa" runat="server" CausesValidation="False" CssClass="btn btn-info btn-sm"
                                                 CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" CommandName="BajarActa"
                                                 Text="<i class='fa fa-download'></i>" ToolTip="Descargar Formato de Acta" Enabled='<%# IIF(Eval("aprobado") = "0", "false", "true") %>'></asp:LinkButton>
+                                            <asp:Label ID="lblPorcentaje" runat="server" Text='<%#Eval("porcentaje")%>' Visible='<%# IIF(Request.QueryString("ctf") <> "249", "false", "true") %>'>
+                                            </asp:Label>
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle"></ItemStyle>
                                     </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="Aula Virtual">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="btnIrAula" runat="server" CausesValidation="False" CssClass="btn btn-default btn-sm"
+                                                CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" CommandName="AulaVirtual"
+                                                Text="<i class='fa fa-share-square'></i>" ToolTip="Ir a Aula Virtual" OnClientClick="return confirm('¿Desea ir al aula virtual?');"
+                                                Visible='<%# IIF(Request.QueryString("ctf") <> "249", "false", "true") %>'>
+                                            </asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <%--
                                     <asp:TemplateField HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left"
                                         HeaderText="Acta Firmada" HeaderStyle-Width="9%">
                                         <ItemTemplate>
@@ -303,6 +318,7 @@
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle"></ItemStyle>
                                     </asp:TemplateField>
+                                    --%>
                                 </Columns>
                                 <EmptyDataTemplate>
                                     No se encontraron asignaturas

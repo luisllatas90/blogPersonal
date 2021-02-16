@@ -54,7 +54,7 @@
             </tr>
         <tr>
         <td width="20%">
-            Ciclo Academico:</td>
+            Semestre Academico:</td>
         <td width="75%">
             
             <asp:DropDownList ID="cboCac" runat="server" AutoPostBack="True" Width="125px" ValidationGroup="grupo1">
@@ -74,7 +74,7 @@
       </tr>
       <tr>
         <td width="20%">
-            Carrera Profesional:</td>
+            Programa de Estudio:</td>
         <td width="75%">
             <asp:DropDownList ID="cboCpf" runat="server" AutoPostBack="True" Width="300px">
             </asp:DropDownList>
@@ -192,7 +192,7 @@
             </tr>
         <tr>
         <td width="20%">
-            Ciclo Academico:</td>
+            Semestre Academico:</td>
         <td width="75%">
             
             <asp:DropDownList ID="cboCac2" runat="server" AutoPostBack="True" Width="125px" ValidationGroup="grupo2">
@@ -212,7 +212,7 @@
       </tr>
       <tr>
         <td width="20%">
-            Carrera Profesional:</td>
+            Programa de Estudio:</td>
         <td width="75%">
             <asp:DropDownList ID="cboCpf2" runat="server" AutoPostBack="True" Width="300px">
             </asp:DropDownList>

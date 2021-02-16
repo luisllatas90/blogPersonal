@@ -238,9 +238,16 @@ Partial Class academico_frmActualizaDatoAlumno
                             'Eliminado - andy.diaz 29-10-2019
                             chkEliminado.Checked = dt.Rows(0).Item("eliminado_Alu").ToString.Trim
 
+                            'Fecha de ingreso - andy.diaz 23/11/2020
+                            txtFechaIngreso.Text = dt.Rows(0).Item("fecha_ing").ToString.Trim
+                            txtFechaIngreso.Enabled = False
+
                             ViewState("origEliminadoAlu") = chkEliminado.Checked
                             ViewState("origNombreCpf") = cboCarreraProf.SelectedItem.Text
                             ViewState("origNombreMin") = cboModalidadIng.SelectedItem.Text
+                            ViewState("origCondicion") = dt.Rows(0).Item("condicion_Alu").ToString.Trim
+                            ViewState("origAlcanzoVacante") = chkAlcanzoVacante.Checked
+                            ViewState("origFechaIngreso") = txtFechaIngreso.Text
 
                             Dim codigoAlu As Integer = dt.Rows(0).Item("codigo_alu")
                             Dim tipoConsulta As String = "F"
@@ -347,6 +354,27 @@ Partial Class academico_frmActualizaDatoAlumno
             'End If
 
             'obj = Nothing
+
+
+            'Verifico si ha habido cambio de condición a ingresante
+            If cboCondicion.SelectedValue = "INGRESANTE" AndAlso chkAlcanzoVacante.Checked AndAlso Not ViewState("origAlcanzoVacante") Then
+                'En ese caso la fecha de ingreso debe ser obligatoria
+                If String.IsNullOrEmpty(txtFechaIngreso.Text.Trim) Then
+                    Response.Write("<script>alert('Para dar condición de ingreso debe indicar la fecha de ingreso')</script>")
+                    txtFechaIngreso.Focus()
+                    Return False
+                End If
+            End If
+
+            If Not String.IsNullOrEmpty(txtFechaIngreso.Text.Trim) Then
+                Dim dFechaIngreso As Date
+                If Not Date.TryParse(txtFechaIngreso.Text.Trim, dFechaIngreso) Then
+                    Response.Write("<script>alert('La fecha de ingreso enviada no es una fecha válida')</script>")
+                    txtFechaIngreso.Focus()
+                    Return False
+                End If
+            End If
+
         Catch ex As Exception
             Response.Write(ex.Message)
             Response.Write("<script>alert('Error al verificar los datos del formulario')</script>")
@@ -375,6 +403,9 @@ Partial Class academico_frmActualizaDatoAlumno
                         estadoActual = -1
                 End Select
 
+                Dim fechaIngreso As String = txtFechaIngreso.Text.Trim
+                Dim oFechaIngreso As Object = IIf(String.IsNullOrEmpty(fechaIngreso), DBNull.Value, fechaIngreso)
+
                 Resultado = obj.Ejecutar("CAJ_ModificarAlumno_v5" _
                             , hfCodAlu.Value _
                             , txtApellidoPat.Text.ToUpper _
@@ -399,7 +430,8 @@ Partial Class academico_frmActualizaDatoAlumno
                             , txtTelefonoCasa.Text _
                             , txtTelefonoMovil.Text _
                             , chkAlcanzoVacante.Checked _
-                            , chkEliminado.Checked) 'Eliminado - andy.diaz 29/10/2019
+                            , chkEliminado.Checked _
+                            , oFechaIngreso)
 
 
                 '========================================================================================
@@ -516,6 +548,7 @@ Partial Class academico_frmActualizaDatoAlumno
 
         chkAlcanzoVacante.Checked = False
         chkEliminado.Checked = False
+        txtFechaIngreso.Text = ""
     End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -688,6 +721,25 @@ Partial Class academico_frmActualizaDatoAlumno
             chkAlcanzoVacante.Checked = False
         End If
         udpAlcanzoVacante.Update()
+
+        chkAlcanzoVacante_CheckedChanged(Nothing, Nothing)
+    End Sub
+
+    Protected Sub chkAlcanzoVacante_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkAlcanzoVacante.CheckedChanged
+        If Not chkAlcanzoVacante.Checked Then
+            txtFechaIngreso.Text = ""
+        Else
+            txtFechaIngreso.Text = ViewState("origFechaIngreso")
+        End If
+
+        If Not (ViewState("origCondicion") = "I" AndAlso ViewState("origAlcanzoVacante")) Then 'Solo es posible editar cuando no es ingresante
+            If chkAlcanzoVacante.Checked Then
+                txtFechaIngreso.Enabled = True
+            Else
+                txtFechaIngreso.Enabled = False
+            End If
+        End If
+        udpFechaIngreso.Update()
     End Sub
 
     Private Sub LimpiarDatosOrig()
@@ -696,6 +748,9 @@ Partial Class academico_frmActualizaDatoAlumno
         ViewState.Remove("origEliminadoAlu")
         ViewState.Remove("origNombreCpf")
         ViewState.Remove("origNombreMin")
+        ViewState.Remove("origCondicion")
+        ViewState.Remove("origAlcanzoVacante")
+        ViewState.Remove("origFechaIngreso")
     End Sub
 
     Private Sub EnviarCorreoPensiones(ByVal codigoAlu As Integer)
@@ -797,4 +852,5 @@ Partial Class academico_frmActualizaDatoAlumno
         End If
         mo_Cnx.CerrarConexion()
     End Sub
+
 End Class

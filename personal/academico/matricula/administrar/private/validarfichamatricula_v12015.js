@@ -299,9 +299,10 @@ function Actualizar(idCheck, maxCreditos)
     
 	cantCursosMat = $("#cantCursos").val();
 	credMat = $("#credMat").val();
-	var NroVeces = 0;  
+	var NroVeces = 0;
+	//var Curso3Veces = 0; /*ID:38643 */
 	var size = parseInt($("input:checkbox[name=" + idCheck.name + "]").size());
-
+    
     if(funcion != 9){
         /* Verificamos si no adelante cursos */
 	    if (DebeCursosAnteriores(idCheck) == true) {
@@ -382,6 +383,10 @@ function Actualizar(idCheck, maxCreditos)
 	                    NroVeces = 1;
 	                }
 
+	                if (parseInt($(this).attr("vd")) >= 3) {
+	                    Curso3Veces = 1;
+	                }
+	                
 	                switch (parseInt($(this).attr("vd"))) {
 	                    case 1: CreditosPension = parseFloat(CreditosPension) + parseFloat(redondear(parseFloat($(this).val()) * 1.3, 2)); //parseFloat(Control.vd)
 	                        break;
@@ -515,6 +520,14 @@ function Actualizar(idCheck, maxCreditos)
 	    });
 	}
 
+	/*ID:38643 {*/
+	if (Curso3Veces == 1 && cursos > 1) {
+	$("#AvisoBloqueo").html("No puede matricularse en este curso ya que esta llevando un curso por 3era vez");
+	alert("Tiene un curso por 3era vez, no puede matricularse en otro");
+	$(idCheck).attr('checked', false);
+	return false;
+	}
+	/*}ID:38643*/
 	if (cursos > 0 || totalcur > 0) {
 	    $("#cmdAgregar").attr('disabled', false)
 	}

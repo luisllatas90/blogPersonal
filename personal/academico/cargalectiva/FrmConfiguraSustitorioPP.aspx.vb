@@ -104,15 +104,31 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorioPP
         Dim dt As New Data.DataTable
         Try            
             dt = obj.TraerDataTable("ACAD_VerificaCronogramaExamenPP_v3", Me.cboCiclo.SelectedValue, Request.QueryString("mod"))
-            If (dt.Rows.Count = 0) Then
-                Me.btnBuscar.Enabled = False
-                Me.btnGenerar.Enabled = False
-                Me.lblMensaje.Text = "El cronograma no permite registrar examenes sustitutorios."
-            Else
+            'andy.diaz 23/12/2020: Habilito las operaciones para COORD. DIRECCIÓN ACADÉMICA y DIRECCIÓN ACADÉMICA
+            'If (dt.Rows.Count = 0) Then
+            '    Me.btnBuscar.Enabled = False
+            '    Me.btnGenerar.Enabled = False
+            '    Me.lblMensaje.Text = "El cronograma no permite registrar examenes sustitutorios."
+            'Else
+            '    Me.btnBuscar.Enabled = True
+            '    Me.btnGenerar.Enabled = True
+            '    Me.lblMensaje.Text = ""
+            'End If
+
+            Dim tfuCoordinadorDirAcad As Integer = 85
+            Dim tfuAdmin As Integer = 1
+            Dim tienePermiso As Boolean = (Request.QueryString("ctf") = tfuCoordinadorDirAcad _
+                                           OrElse Request.QueryString("ctf") = tfuAdmin)
+            If dt.Rows.Count > 0 OrElse tienePermiso Then
                 Me.btnBuscar.Enabled = True
                 Me.btnGenerar.Enabled = True
                 Me.lblMensaje.Text = ""
+            Else
+                Me.btnBuscar.Enabled = False
+                Me.btnGenerar.Enabled = False
+                Me.lblMensaje.Text = "El cronograma no permite registrar examenes sustitutorios."
             End If
+            '/andy.diaz 23/12/2020
         Catch ex As Exception
             Response.Write(ex)
             Me.lblMensaje.Text = "Error al verificar el cronograma: " & ex.Message

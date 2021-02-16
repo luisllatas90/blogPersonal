@@ -313,7 +313,23 @@
                 <div style="display: inline-block">
                     <asp:UpdatePanel ID="udpAlcanzoVacante" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
                         <ContentTemplate>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¿Alcanzó Vacante? <asp:CheckBox ID="chkAlcanzoVacante" runat="server" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="chkAlcanzoVacante" style="cursor: pointer;">¿Alcanzó Vacante?</label>
+                            <asp:CheckBox ID="chkAlcanzoVacante" AutoPostBack="True" runat="server" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </td>
+        </tr>
+        <!-- Fecha de ingreso - andy.diaz 23/11/2020 -->
+        <tr>
+            <td class="style6">
+                Fecha de Ingreso:
+            </td>
+            <td colspan="2">
+                <div style="display: inline-block">
+                    <asp:UpdatePanel ID="udpFechaIngreso" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+                        <ContentTemplate>
+                            <asp:TextBox ID="txtFechaIngreso" runat="server" Width="168px" Enabled="False"></asp:TextBox>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

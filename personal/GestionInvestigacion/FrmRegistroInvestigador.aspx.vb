@@ -64,7 +64,7 @@ Partial Class GestionInvestigacion_FrmRegistroInvestigador
             Me.cboLinea.SelectedValue = dt.Rows(0).Item("codigo_lin")
         End If
 
-        If dt.Rows(0).Item("regina") <> "" Then
+        If dt.Rows(0).Item("regina") <> "" And dt.Rows(0).Item("regina") <> "0" Then
             Me.chkRegina.Checked = True
             Me.DivRenacyt.Visible = True
             Me.txtRenacyt.Text = dt.Rows(0).Item("regina")
@@ -245,10 +245,10 @@ Partial Class GestionInvestigacion_FrmRegistroInvestigador
             Me.DivMensaje.InnerHtml = "Debe Seleccionar una área Disciplina"
             Return False
         End If
-        If Me.chkRegina.Checked = False Then
-            Me.DivMensaje.InnerHtml = "Debe Seleccionar e Ingresar Código RENACYT(REGINA)"
-            Return False
-        End If
+        'If Me.chkRegina.Checked = False Then
+        '    Me.DivMensaje.InnerHtml = "Debe Seleccionar e Ingresar Código RENACYT(REGINA)"
+        '    Return False
+        'End If
         If Me.chkRegina.Checked = True Then
             If Me.txtRenacyt.Text = "" Then
                 Me.DivMensaje.InnerHtml = "Debe Ingresar código RENACYT(REGINA)"

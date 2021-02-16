@@ -14,6 +14,7 @@
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/css/material.css" rel="stylesheet" type="text/css" />
     <link rel='stylesheet' href='../assets/css/style.css?x=1' />
+    <link href="../assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
     <script src="../assets/js/jquery.js" type="text/javascript"></script>
 
@@ -33,9 +34,13 @@
 
     <script type="text/javascript" src="../assets/js/noty/notifications-custom.js"></script>
 
+    <script src="../assets/js/sweetalert2.all.min.js" type="text/javascript"></script>
+
+    <script src="../assets/js/promise.min.js" type="text/javascript"></script>
+
     <script type="text/javascript">
         function fnDescargar(id_ar) {
-            window.open("DescargarArchivoTesis.aspx?Id=" + id_ar);
+            window.open("../Descargar.aspx?Id=" + id_ar);
         }
         function ValidarRespuesta() {
             $("#lblMensajeRespuesta").text("");
@@ -94,6 +99,32 @@
                 $("#ArchivoRespuesta").val("");
             });
         })
+
+        function fnConfirmacion(ctrl) {
+
+            var defaultAction = $(ctrl).prop("href");
+            Swal.fire({
+                width: 600,
+                title: '¿Usted se compromete a asesorar este proyecto de tesis, cumpliendo con lo establecido en el Reglamento de elaboración de trabajos de investigación para optar el grado académico de Bachiller y Título profesional?',
+                html: "<h4 style='color:red'>Luego no podrá revertir la acción</h4>",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No'
+            }).then(function(result) {
+                if (result.value == true) {
+                    eval(defaultAction);
+                }
+            })
+            /*
+            if (confirm('¿Está seguro que desea dar conformidad a tesis?')) {
+            return true;
+            } else {
+            return false;
+            }*/
+        }
        
     </script>
 
@@ -223,7 +254,7 @@
                             <div class="row" id="Asesorados" runat="server">
                                 <div runat="server" id="lblmensaje">
                                 </div>
-                                <asp:GridView runat="server" ID="gvAsesorias" DataKeyNames="codigo_tes,codigo_cac,codigo_RTes,codigo_Eti,porcentaje,nota,PermiteCalificar,fechaIni_Cro,fechaFin_Cro"
+                                <asp:GridView runat="server" ID="gvAsesorias" DataKeyNames="codigo_tes,codigo_cac,codigo_RTes,codigo_Eti,porcentaje,nota,PermiteCalificar,fechaIni_Cro,fechaFin_Cro,compromiso,generacompromiso"
                                     AutoGenerateColumns="False" CssClass="table table-responsive">
                                     <Columns>
                                         <asp:TemplateField HeaderText="N°" HeaderStyle-Width="2%">
@@ -231,10 +262,10 @@
                                                 <%#Container.DataItemIndex + 1%>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField HeaderText="ALUMNO" DataField="alumno" HeaderStyle-Width="18%"></asp:BoundField>
-                                        <asp:BoundField HeaderText="TESIS" DataField="titulo_tes" HeaderStyle-Width="37%">
+                                        <asp:BoundField HeaderText="ALUMNO" DataField="alumno" HeaderStyle-Width="17%"></asp:BoundField>
+                                        <asp:BoundField HeaderText="TESIS" DataField="titulo_tes" HeaderStyle-Width="36%">
                                         </asp:BoundField>
-                                        <asp:BoundField HeaderText="ETAPA" DataField="nombre_Eti" HeaderStyle-Width="10%">
+                                        <asp:BoundField HeaderText="ETAPA" DataField="nombre_Eti" HeaderStyle-Width="9%">
                                         </asp:BoundField>
                                         <%--<asp:BoundField HeaderText="ASESOR" DataField="asesor" HeaderStyle-Width="15%"></asp:BoundField>--%>
                                         <asp:BoundField HeaderText="ASIGNADO" DataField="FechaAsignacíon" HeaderStyle-Width="7%">
@@ -250,16 +281,19 @@
                                                 </div>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="OPCIONES" HeaderStyle-Width="11%" ItemStyle-HorizontalAlign="Center"
+                                        <asp:TemplateField HeaderText="OPCIONES" HeaderStyle-Width="15%" ItemStyle-HorizontalAlign="Center"
                                             ItemStyle-VerticalAlign="Middle">
                                             <ItemTemplate>
-                                                <div class="row">
+                                                <div class="row" style="padding-left: 0px;padding-right: 0px;">
                                                     <asp:LinkButton runat="server" ID="Guardar" CommandName="Actualizar" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'
-                                                        CssClass="btn btn-sm btn-orange" Text="<span class='ion-android-open'></span>"
+                                                        CssClass="btn btn-sm btn-orange btn-radius" Text="<span class='ion-android-open'></span>"
                                                         ToolTip="Guardar" OnClientClick="return confirm('¿Desea guardar puntaje y nota?, una vez colocada la nota y el porcentaje ya no podrá registrar asesorias, se recomienda registrar al finalizar el curso.')"></asp:LinkButton>
                                                     <asp:LinkButton runat="server" ID="lbAsesoria" CommandName="Asesorias" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'
-                                                        CssClass="btn btn-sm btn-primary" Text="<span class='ion-chatbox-working'></span>"
+                                                        CssClass="btn btn-sm btn-primary btn-radius" Text="<span class='ion-chatbox-working'></span>"
                                                         ToolTip="Asesorias"></asp:LinkButton>
+                                                    <asp:LinkButton runat="server" ID="lbCompromiso" CommandName="Compromiso" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'
+                                                        CssClass="btn btn-sm btn-info btn-radius" Text="<span class='ion-ios-list'></span>"
+                                                        OnClientClick="fnConfirmacion(this); return false;" ToolTip="Aceptar compromiso de asesor"></asp:LinkButton>
                                                 </div>
                                             </ItemTemplate>
                                             <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />

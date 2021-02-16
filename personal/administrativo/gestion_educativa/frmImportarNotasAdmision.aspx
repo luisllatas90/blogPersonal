@@ -64,6 +64,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="dtpFechaIngreso" class="col-sm-2 col-form-label form-control-sm">Fec. Ingreso:</label>
+                    <div class="col-sm-2">
+                        <asp:TextBox ID="dtpFechaIngreso" runat="server" CssClass="form-control form-control-sm" placeholder="Fec. Ingreso (*)" />
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="fluNotas" class="col-sm-2 col-form-label form-control-sm">Archivo:</label>
                     <div class="col-sm-6">
                         <div class="custom-file">
@@ -122,7 +128,7 @@
     <script src="../../assets/iframeresizer/iframeResizer.min.js"></script>
     <!-- Scripts propios -->
     <script src="js/funciones.js"></script>
-    <script src="js/importarNotasAdmision.js?1"></script>
+    <script src="js/importarNotasAdmision.js?x=2"></script>
     <script type="text/javascript">
         var controlId = ''
         Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(function (sender, args) {

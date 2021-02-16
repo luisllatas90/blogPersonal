@@ -277,14 +277,45 @@ Partial Class GestionCurricular_frmConfigurarAsignatura
                         Response.BinaryWrite(bytes_pdf)
                     Else
                         ' 20200331-ENevado ================================================
-                        mt_CopiarPdf(bytes, memory_pdf)
-                        Dim bytes_adenda() As Byte = memory_pdf.ToArray
-                        memory_pdf.Close()
+                        'mt_CopiarPdf(bytes, memory_pdf)
+                        'Dim bytes_adenda() As Byte = memory_pdf.ToArray
+                        'memory_pdf.Close()
                         '==================================================================
                         Response.Clear()
                         Response.ContentType = "application/pdf"
-                        Response.AddHeader("content-length", bytes_adenda.Length.ToString())
-                        Response.BinaryWrite(bytes_adenda)
+                        'Response.AddHeader("content-length", bytes_adenda.Length.ToString())
+                        'Response.BinaryWrite(bytes_adenda)
+                        Response.AddHeader("content-length", bytes.Length.ToString())
+                        Response.BinaryWrite(bytes)
+                    End If
+                Case "Anular" '--> Por Luis Q.T. | 15DIC2020
+                    If cod_ctf = "1" Or cod_ctf = "9" Or cod_ctf = "41" Then
+                        If fc_tieneCronograma() Then
+                            odDiseñoAsignatura = New d_DiseñoAsignatura : oeDiseñoAsignatura = New e_DiseñoAsignatura
+                            oeDiseñoAsignatura.codigo_dis = codigo_dis
+                            oeDiseñoAsignatura.codigo_cac = Session("gc_codigo_cac")
+                            oeDiseñoAsignatura.codigo_per = cod_user
+
+                            Dim dtA As New Data.DataTable("anular")
+                            dtA = odDiseñoAsignatura.fc_AnularDiseñoAsignatura(oeDiseñoAsignatura)
+
+                            If dtA.Rows.Count > 0 Then
+                                If dtA.Rows(0).Item(0).ToString().Equals("1") Then
+                                    Call mt_ShowMessage(dtA.Rows(0).Item(1).ToString(), MessageType.Success)
+                                    'Call mt_CargarDatos
+                                    'Call btnBuscar_Click(sender, Nothing)
+                                    Call cboEstado_SelectedIndexChanged(sender, Nothing)
+                                Else
+                                    Call mt_ShowMessage(dtA.Rows(0).Item(1).ToString(), MessageType.Info)
+                                End If
+                            Else
+                                Call mt_ShowMessage("El diseño de asignatura ya no existe. Vuelva a refrescar la página", MessageType.Info)
+                            End If
+
+                            dtA.Dispose()
+                        End If
+                    Else
+                        Call mt_ShowMessage("Usted no tiene el nivel de acceso necesario para realizar esta acción", MessageType.Info)
                     End If
             End Select
         Catch ex As Exception
@@ -429,7 +460,7 @@ Partial Class GestionCurricular_frmConfigurarAsignatura
                 Dim objtablecell As TableCell = New TableCell()
                 mt_AgregarCabecera(objgridviewrow, objtablecell, 2, 1, "Mis Asignaturas")
                 mt_AgregarCabecera(objgridviewrow, objtablecell, 12, 1, "Diseño de la Asignatura")
-                mt_AgregarCabecera(objgridviewrow, objtablecell, 4, 1, "Acciones")
+                mt_AgregarCabecera(objgridviewrow, objtablecell, 5, 1, "Acciones")
                 objGridView.Controls(0).Controls.AddAt(0, objgridviewrow)
             End If
         Catch ex As Exception
@@ -450,7 +481,7 @@ Partial Class GestionCurricular_frmConfigurarAsignatura
             obj.AbrirConexion()
             If Me.rb1.Checked Then
                 'Throw New Exception("DEA_DiseñoAsignatura_clonar " & codigo_dis)
-                obj.Ejecutar("DEA_DiseñoAsignatura_clonar", codigo_dis, Me.cboSemestre.SelectedValue, cod_user)
+                obj.Ejecutar("DEA_DiseñoAsignatura_clonar", codigo_dis, Me.cboSemestre.SelectedValue, cod_user, Session("gc_codigo_pes")) '--> Enviar codigo_pes | Por Luis QT | 06AGO2020
             Else
                 'Throw New Exception("DEA_DiseñoAsignatura_Importar " & codigo_dis)
                 obj.Ejecutar("DEA_DiseñoAsignatura_Importar", codigo_dis, Me.cboSemestre.SelectedValue, Session("gc_codigo_pes"), Session("gc_codigo_cur"), cod_user)
@@ -678,7 +709,7 @@ Partial Class GestionCurricular_frmConfigurarAsignatura
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
         Try
             obj.AbrirConexion()
-            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DA", "")
+            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DAN", "")
             obj.CerrarConexion()
             mt_CargarCombo(Me.cboSemestre, dt, "codigo_Cac", "descripcion_Cac")
         Catch ex As Exception
@@ -693,7 +724,7 @@ Partial Class GestionCurricular_frmConfigurarAsignatura
         Try
             obj.AbrirConexion()
 
-            If ctf = 1 Or ctf = 232 Or ctf = 236 Then user = -1
+            If ctf = 1 Or ctf = 232 Or ctf = 236 Or ctf = 41 Then user = -1
             dt = obj.TraerDataTable("DiseñoAsignatura_Listar", "CD", ctf, -1, -1, codigo_cac, user, ctf)
             obj.CerrarConexion()
             mt_CargarCombo(Me.cboCarrProf, dt, "codigo_Cpf", "nombre_Cpf")
@@ -708,7 +739,7 @@ Partial Class GestionCurricular_frmConfigurarAsignatura
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
 
         Try
-            If ctf = 1 Or ctf = 232 Then user = -1
+            If ctf = 1 Or ctf = 8 Or ctf = 232 Or ctf = 41 Or ctf = 9 Or ctf = 218 Then user = -1
 
             obj.AbrirConexion()
             dt = obj.TraerDataTable("DiseñoAsignatura_Listar", "AD", codigo_est, codigo_cpf, ctf, codigo_cac, user, ctf) 'ctf: nuevo parámetro, por Luis Q.T | 19DIC2019
@@ -898,8 +929,14 @@ Partial Class GestionCurricular_frmConfigurarAsignatura
         Dim dtUni, dtRes, dtCon, dtEst, dtRef As Data.DataTable
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
         Try
+            Dim cod_pes As Integer = Session("gc_codigo_pes")
+
+            If cod_pes <> -2 Then '--> Solo basta el codigo_dis para listar la unidad y resultado de aprendizaje | Por Luis QT | 06AGO2020
+                cod_pes = -1
+            End If
+
             obj.AbrirConexion()
-            dtUni = obj.TraerDataTable("COM_ListarResultadoAprendizaje", codigo_dis, iif(_tipo = 2, -1, Session("gc_codigo_pes")), -1, -1, -1)
+            dtUni = obj.TraerDataTable("COM_ListarResultadoAprendizaje", codigo_dis, IIf(_tipo = 2, -1, cod_pes), -1, -1, -1)
             dtRes = obj.TraerDataTable("ResultadoAprendizaje_Listar", "", -1, codigo_dis, "")
             dtCon = obj.TraerDataTable("COM_ListarContenidoAsignatura", codigo_dis, -1, 0)
             dtEst = obj.TraerDataTable("EstrategiaDidactica_Listar", -1, codigo_dis, "")

@@ -29,6 +29,9 @@ Partial Class GestionInvestigacion_FrmListaAsesorias
         dt = obj.ConsultarCicloAcademico("CVP", "")
         For i As Integer = 0 To dt.Rows.Count - 1
             Me.ddlSemestre.Items.Add(New ListItem(dt.Rows(i).Item("descripcion_cac"), dt.Rows(i).Item("codigo_cac")))
+            If dt.Rows(i).Item("vigencia_cac") Then
+                Me.ddlSemestre.SelectedValue = dt.Rows(i).Item("codigo_cac").ToString
+            End If
         Next
     End Sub
 
@@ -92,16 +95,36 @@ Partial Class GestionInvestigacion_FrmListaAsesorias
             'Dim porcentaje As String = Me.gvAsesorias.DataKeys(e.Row.RowIndex).Values("porcentaje").ToString
             'Dim nota As String = Me.gvAsesorias.DataKeys(e.Row.RowIndex).Values("nota").ToString
             Dim permisocalificar As String = Me.gvAsesorias.DataKeys(e.Row.RowIndex).Values("PermiteCalificar").ToString
+            Dim compromiso As String = Me.gvAsesorias.DataKeys(e.Row.RowIndex).Values("compromiso").ToString
+            Dim generacompromiso As String = Me.gvAsesorias.DataKeys(e.Row.RowIndex).Values("generacompromiso").ToString
             'If porcentaje <> "" And nota <> "" Then
-            If permisocalificar = "0" Then
+            If compromiso = "" And generacompromiso = "SI" Then
                 e.Row.Cells(5).Enabled = False
-                Dim btn As LinkButton = e.Row.Cells(6).FindControl("Guardar")
-                btn.Visible = False
+                Dim btn1 As LinkButton = e.Row.Cells(6).FindControl("Guardar")
+                Dim btn2 As LinkButton = e.Row.Cells(6).FindControl("lbAsesoria")
+                btn1.Visible = False
+                btn2.Visible = False
+            Else
+                Dim btnCompromiso As LinkButton = e.Row.Cells(6).FindControl("lbCompromiso")
+                If compromiso <> "" Then
+                    btnCompromiso.Text = "<span class='ion ion-android-download'></span>"
+                    btnCompromiso.ToolTip = "Descargar compromiso"
+                    btnCompromiso.OnClientClick = "fnDescargar('" + compromiso + "'); return false;"
+                Else
+                    btnCompromiso.Visible = False
+                End If
 
-                'e.Row.Cells(6).Text = "Evaluado"
-                'e.Row.Cells(6).ForeColor = Drawing.Color.Green
-                'e.Row.Cells(6).Font.Bold = True
+                If permisocalificar = "0" Then
+                    e.Row.Cells(5).Enabled = False
+                    Dim btn As LinkButton = e.Row.Cells(6).FindControl("Guardar")
+                    btn.Visible = False
+
+                    'e.Row.Cells(6).Text = "Evaluado"
+                    'e.Row.Cells(6).ForeColor = Drawing.Color.Green
+                    'e.Row.Cells(6).Font.Bold = True
+                End If
             End If
+           
         End If
     End Sub
 
@@ -177,8 +200,82 @@ Partial Class GestionInvestigacion_FrmListaAsesorias
             Me.txtObservacion.Text = ""
             CargarLineaTiempo(Me.gvAsesorias.DataKeys(seleccion.RowIndex).Values("codigo_tes"))
         End If
+
+        If e.CommandName = "Compromiso" Then
+            Dim seleccion As GridViewRow = gvAsesorias.Rows(e.CommandArgument)
+            Dim codigo_tes As Integer = Me.gvAsesorias.DataKeys(seleccion.RowIndex).Values("codigo_tes")
+            Dim codigo_rtes As Integer = Me.gvAsesorias.DataKeys(seleccion.RowIndex).Values("codigo_RTes")
+            Dim codigo_cac As Integer = Me.gvAsesorias.DataKeys(seleccion.RowIndex).Values("codigo_cac")
+            Dim codigo_dot As Integer = 0
+            codigo_dot = Generarcompromiso(codigo_tes, codigo_cac, Session("id_per"), Session("perlogin"))
+            If codigo_dot <> 0 Then
+                Dim dt As New Data.DataTable
+                dt = ActualizarCompromiso(codigo_rtes, codigo_cac, codigo_dot, Session("id_per"))
+                If dt.Rows.Count > 0 Then
+                    If dt.Rows(0).Item("Respuesta").ToString = "1" Then
+                        Me.lblmensaje.InnerText = dt.Rows(0).Item("Mensaje").ToString
+                        Me.lblmensaje.Attributes.Add("class", "alert alert-success")
+                        ListarAsesorias(Me.ddlSemestre.SelectedValue, Me.ddlEtapa.SelectedValue, Me.ddlDocente.SelectedValue)
+                    Else
+                        Me.lblmensaje.InnerText = dt.Rows(0).Item("Mensaje").ToString
+                        Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
+                    End If
+
+                Else
+                    Me.lblmensaje.InnerText = "No se pudo generar documento de compromiso"
+                    Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
+                End If
+            Else
+                Me.lblmensaje.InnerText = "No se pudo generar documento de compromiso"
+                Me.lblmensaje.Attributes.Add("class", "alert alert-danger")
+            End If
+        End If
+
         mt_RefreshGrid()
     End Sub
+
+    Public Function Generarcompromiso(ByVal codigo_Tes As Integer, ByVal codigo_cac As Integer, ByVal codigo_usu As Integer, ByVal usuario As String) As Integer
+        ' '' ------------------------------ nuevo por abreviaturas
+        Dim serieCorrelativoDoc As String
+        Dim codigo_dot As Integer = 0
+        Dim abreviatura_tid As String = "CART" '---fijo 
+        Dim abreviatura_doc As String = "CCAT" '---fijo
+        Dim abreviatura_are As String = "USAT" '---fijo 
+
+        ''-------------------------------genera el correlativo
+        serieCorrelativoDoc = clsDocumentacion.ObtenerSerieCorrelativoDocPorAbreviatura(abreviatura_tid, abreviatura_doc, abreviatura_are, Year(Now), codigo_usu)
+
+        ''-------------------------------genera el documento
+        ''''******* GENERA DOCUMENTO PDF *****************************************************************************
+
+        If serieCorrelativoDoc <> "" Then
+            '--------necesarios
+            Dim arreglo As New Dictionary(Of String, String)
+            arreglo.Add("nombreArchivo", "CartaCompromisoAsesoramientoTesis")
+            arreglo.Add("sesionUsuario", usuario)
+            '-----------------                
+            arreglo.Add("codigo_tes", codigo_Tes) '' codigo_tes
+            arreglo.Add("codigo_cac", codigo_cac) ''--- codigo_test de la tabla tipo estudio no el que viene de la url si no el del alumno 
+
+            '********2. GENERA DOCUMENTO PDF **************************************************************
+            codigo_dot = clsDocumentacion.generarDocumentoPdf(serieCorrelativoDoc, arreglo)
+            'codigo_dot = clsDocumentacion.generarDocumentoPdf(serieCorrelativoDoc, arreglo)
+            '**********************************************************************************************
+
+            'Call mt_ShowMessage(codigo_dot, MessageType.success)
+
+            'Else
+            'Call mt_ShowMessage("correlativo no generado", MessageType.error)
+        End If
+        Return codigo_dot
+    End Function
+
+    Public Function ActualizarCompromiso(ByVal codigo_Rtes As Integer, ByVal codigo_cac As Integer, ByVal codigo_Dot As Integer, ByVal usuario As Integer) As Data.DataTable
+        Dim obj As New ClsGestionInvestigacion
+        Dim dt As New Data.DataTable
+        dt = obj.ActualizarCompromisoAsesor(codigo_Rtes, codigo_cac, codigo_Dot, usuario)
+        Return dt
+    End Function
 
     Function ValidaSoloNumeros0a100(ByVal cadena As String) As Boolean
         Try
@@ -493,8 +590,6 @@ Partial Class GestionInvestigacion_FrmListaAsesorias
 
     End Sub
 
-
-
     Function validarRespuesta() As Boolean
         Me.lblMensajeRespuesta.InnerText = ""
         Me.lblMensajeRespuesta.Attributes.Remove("class")
@@ -542,4 +637,6 @@ Partial Class GestionInvestigacion_FrmListaAsesorias
             Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('error','" + ex.Message.ToString + "')", True)
         End Try
     End Sub
+
+
 End Class

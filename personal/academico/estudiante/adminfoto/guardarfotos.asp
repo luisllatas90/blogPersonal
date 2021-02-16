@@ -8,10 +8,12 @@ function CrearCarpeta(ByVal ruta)
 	dim ObFile
 
 	'ruta=server.MapPath("../../../../../imgestudiantes/" & ruta)
-	ruta="C:\Aplicaciones WEB\Aplicaciones\imgestudiantes\imgestudiantes\" & ruta & "\"
+	ruta=server.MapPath("../../../../imgestudiantes/" & ruta)
+	'ruta="C:\Aplicaciones WEB\Aplicaciones\imgestudiantes\imgestudiantes\" & ruta & "\"
 	
 	set obFile=server.createObject("Scripting.FileSystemObject")
 	if obFile.FolderExists(ruta)=false then
+	    response.Write(ruta)
 		obFile.CreateFolder ruta
 	end if
 	set obFile=nothing
@@ -67,6 +69,7 @@ response.write "<ol>"
 				'Quitar 069 para buscar en BDatos de sistema
 				'****************************************************				
 				codigoreal=right(codigouniversitario,len(codigouniversitario)-3)
+				'response.write "<script>alert('"& codigoreal & "')</script>"
 					
 				'****************************************************
 				'Validar si el archivo es alumno en la BDatos

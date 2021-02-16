@@ -195,7 +195,7 @@
         </asp:Panel>
         <asp:GridView ID="gvProgramado" runat="server" Width="100%" 
             AutoGenerateColumns="False" 
-            DataKeyNames="codigo_cup,nombre_Cur,grupoHor_Cup,ambiente, nombre_cpf, codigo_Per" CellPadding="4" 
+            DataKeyNames="codigo_cup,nombre_Cur,grupoHor_Cup,ambiente, nombre_cpf, codigo_Per, codigo_lho" CellPadding="4" 
             ForeColor="#333333">
             <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
             <Columns>

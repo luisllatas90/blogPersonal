@@ -239,6 +239,48 @@ Public Class e_BloquesCursoProgramado
 
 End Class
 
+Public Class e_AdscripcionDocente
+
+#Region "Constructor"
+
+    Public Sub New()
+        Inicializar()
+    End Sub
+
+#End Region
+
+#Region "Propiedades"
+
+    Public codigo_ecs As String
+    Public codigo_per As String
+    Public codigo_cac As String
+    Public codigo_dac As String
+    Public codigo_cpf As String
+    Public opcion_todos As String
+
+    Public cod_user As String
+    Public operacion As String
+
+#End Region
+
+#Region "Metodos"
+
+    Private Sub Inicializar()
+        codigo_ecs = String.Empty
+        codigo_per = String.Empty
+        codigo_cac = String.Empty
+        codigo_dac = String.Empty
+        codigo_cpf = String.Empty
+        opcion_todos = String.Empty
+
+        cod_user = String.Empty
+        operacion = String.Empty
+    End Sub
+
+#End Region
+
+End Class
+
 #End Region
 
 #Region "DATOS"
@@ -644,6 +686,35 @@ Public Class d_BloquesCursoProgramado
 
             Return me_BloquesCursoProgramado
         Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+End Class
+
+Public Class d_AdscripcionDocente
+    Private cnx As ClsConectarDatos
+    Private dt As Data.DataTable
+
+
+    Public Function ListarPersonalDocente(ByVal le_AdscripcionDocente As e_AdscripcionDocente) As Data.DataTable
+        Try
+            cnx = New ClsConectarDatos : dt = New Data.DataTable
+            cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
+            cnx.IniciarTransaccion()
+
+            'Ejecutar Procedimiento
+            dt = cnx.TraerDataTable("ACAD_PersonalDocenteListar", le_AdscripcionDocente.operacion, _
+                                    le_AdscripcionDocente.codigo_per, _
+                                    le_AdscripcionDocente.codigo_cac, _
+                                    le_AdscripcionDocente.codigo_dac, _
+                                    le_AdscripcionDocente.codigo_cpf, _
+                                    le_AdscripcionDocente.opcion_todos)
+
+            cnx.TerminarTransaccion()
+            Return dt
+        Catch ex As Exception
+            cnx.AbortarTransaccion()
             Throw ex
         End Try
     End Function

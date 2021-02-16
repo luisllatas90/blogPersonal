@@ -30,6 +30,7 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
 
         End If
     End Sub
+
     Sub llenarEscala()
         Me.GridView1.DataSource = Nothing
         Dim tbEscla As New Data.DataTable
@@ -37,11 +38,16 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
         tbEscla.Columns.Add("2")
         tbEscla.Columns.Add("3")
         tbEscla.Columns.Add("4")
+        tbEscla.Columns.Add("5") '26/10 Ceci
 
-        tbEscla.Rows.Add("NO LOGRADO", "EN DESARROLLO", "LOGRADO", "SATISFACTORIO")
+        '"NO LOGRADO", "EN DESARROLLO", "LOGRADO", "SATISFACTORIO"
+        'tbEscla.Rows.Add("NUNCA", "LA MAYORIA DE VECES NO", "ALGUNAS VECES SÍ, ALGUNAS VECES NO", "LA MAYORIA DE VECES SI", "SIEMPRE") 'Se comenta 26/10 Ceci
+        tbEscla.Rows.Add("1", "2", "3", "4", "5")
+
         Me.GridView1.DataSource = tbEscla
         Me.GridView1.DataBind()
     End Sub
+
     Sub ConsultarAcceso()
         Try
             Dim dt As New Data.DataTable
@@ -146,7 +152,7 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
 
         Dim nropreguntas As Integer = 0
         
-        nropreguntas = 22
+        nropreguntas = 23 '27/10 Ceci
 
 
         Dim respuesta_eva As Integer = 0
@@ -158,8 +164,7 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
             Dim rbDos As Boolean = CType(row.FindControl("rbDos"), RadioButton).Checked
             Dim rbTres As Boolean = CType(row.FindControl("rbTres"), RadioButton).Checked
             Dim rbCuatro As Boolean = CType(row.FindControl("rbCuatro"), RadioButton).Checked
-
-
+            Dim rbCinco As Boolean = CType(row.FindControl("rbCinco"), RadioButton).Checked '26-10 CECI
 
 
             If rbUno Then
@@ -169,6 +174,8 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
             ElseIf rbTres Then
                 respuesta_eva = 1
             ElseIf rbCuatro Then
+                respuesta_eva = 1
+            ElseIf rbCinco Then '26-10 CECI
                 respuesta_eva = 1
             End If
 
@@ -184,6 +191,7 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
             Return False
         End If
     End Function
+
     Protected Sub ShowMessage(ByVal Message As String, ByVal type As MessageType)
         Page.RegisterStartupScript("Mensaje", "<script>ShowMessage('" & Message & "','" & type & "');</script>")
     End Sub
@@ -216,7 +224,7 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
                     Dim rbDos As Boolean = False
                     Dim rbTres As Boolean = False
                     Dim rbCuatro As Boolean = False
-
+                    Dim rbCinco As Boolean = False
 
 
                     objcnx.IniciarTransaccion()
@@ -236,34 +244,46 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
                                 rbDos = CType(row.FindControl("rbDos"), RadioButton).Checked
                                 rbTres = CType(row.FindControl("rbTres"), RadioButton).Checked
                                 rbCuatro = CType(row.FindControl("rbCuatro"), RadioButton).Checked
+                                rbCinco = CType(row.FindControl("rbCinco"), RadioButton).Checked '27/10 Ceci
 
 
-                                'PREPARACIÓN DE CLASE 
-                                If gvPreguntas.DataKeys.Item(row.RowIndex).Values("codigo_comp") = 5 Then
-                                    If rbUno Then
-                                        respuesta_eva = 0
-                                    ElseIf rbDos Then
-                                        respuesta_eva = 0
-                                    ElseIf rbTres Then
-                                        respuesta_eva = 0
-                                    ElseIf rbCuatro Then
-                                        respuesta_eva = 2.5
-                                    End If
+                                'PREPARACIÓN DE CLASE  //se comenta 27/10
+                                'If gvPreguntas.DataKeys.Item(row.RowIndex).Values("codigo_comp") = 5 Then
+                                '    If rbUno Then
+                                '        respuesta_eva = 0
+                                '    ElseIf rbDos Then
+                                '        respuesta_eva = 0
+                                '    ElseIf rbTres Then
+                                '        respuesta_eva = 0
+                                '    ElseIf rbCuatro Then
+                                '        respuesta_eva = 2.5
+                                '    End If
 
-                                Else 'DESARROLLO DE CLASE 
-                                    If rbUno Then
-                                        respuesta_eva = 0
-                                    ElseIf rbDos Then
-                                        respuesta_eva = 0.5
-                                    ElseIf rbTres Then
-                                        respuesta_eva = 0.75
-                                    ElseIf rbCuatro Then
-                                        respuesta_eva = 1
-                                    End If
+                                'Else 'DESARROLLO DE CLASE 
+                                '    If rbUno Then
+                                '        respuesta_eva = 0
+                                '    ElseIf rbDos Then
+                                '        respuesta_eva = 0.5
+                                '    ElseIf rbTres Then
+                                '        respuesta_eva = 0.75
+                                '    ElseIf rbCuatro Then
+                                '        respuesta_eva = 1
+                                '    End If
 
+                                'End If
+
+                                '27/10/2020
+                                If rbUno Then
+                                    respuesta_eva = 1
+                                ElseIf rbDos Then
+                                    respuesta_eva = 2
+                                ElseIf rbTres Then
+                                    respuesta_eva = 3
+                                ElseIf rbCuatro Then
+                                    respuesta_eva = 4
+                                ElseIf rbCinco Then
+                                    respuesta_eva = 5
                                 End If
-                                
-
 
                                 objcnx.Ejecutar("EAD_AgregarRespuestaEvaluacion", codigo_eva, respuesta_eva, codigo_eed)
 
@@ -271,11 +291,14 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
                         Next
                         objcnx.TerminarTransaccion()
                     End If
+
                     If codigo_eed = 0 Then
                         objcnx.AbortarTransaccion()
                     Else
                         ShowMessage("Se registraron las respuestas correctamente.", MessageType.Success)
                     End If
+
+                    objcnx.CerrarConexion() '27/10 Ceci
                     objcnx = Nothing
 
                     CargarCursos()
@@ -319,6 +342,7 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
                 ddlDos = TryCast(e.Row.FindControl("rbDos"), RadioButton)
                 ddlTres = TryCast(e.Row.FindControl("rbTres"), RadioButton)
                 ddlCuatro = TryCast(e.Row.FindControl("rbCuatro"), RadioButton)
+                ddlCinco = TryCast(e.Row.FindControl("rbCinco"), RadioButton) '27/10 Ceci
 
 
                 If Request.Browser.IsMobileDevice Then
@@ -326,13 +350,14 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
                     ddlDos.CssClass = "radiorespuesta"
                     ddlTres.CssClass = "radiorespuesta"
                     ddlCuatro.CssClass = "radiorespuesta"
+                    ddlCinco.CssClass = "radiorespuesta" '27/10 Ceci
                     Session("origen") = 1
                 Else
                     ddlUno.CssClass = "radionormal"
                     ddlDos.CssClass = "radionormal"
                     ddlTres.CssClass = "radionormal"
                     ddlCuatro.CssClass = "radionormal"
-
+                    ddlCinco.CssClass = "radionormal" '27/10 Ceci
                     Session("origen") = 0
                 End If
 
@@ -346,10 +371,11 @@ Partial Class academico_encuesta_EncuestaEvaluacionDocente_ResponderEncuestaAuto
                     ddlDos.enabled = False
                     ddlTres.enabled = False
                 Else
-                    ddlUno.text = "NO LOGRADO"
-                    ddlDos.text = "EN DESARROLLO"
-                    ddlTres.text = "LOGRADO"
-                    ddlCuatro.text = "SATISFACTORIO"
+                    ddlUno.text = "1" '"NUNCA"
+                    ddlDos.text = "2" '"LA MAYORÍA DE VECES NO"
+                    ddlTres.text = "3" '"ALGUNAS VECES SÍ, ALGUNAS VECES NO"
+                    ddlCuatro.text = "4" '"LA MAYORÍA DE VECES SÍ"
+                    ddlCinco.text = "5" '"SIEMPRE"
                 End If
             End If
 

@@ -100,12 +100,12 @@
                                     </tr>
                                     <tr>
                                         <td align="center">
-                                            <asp:TextBox ID="TxtPerfil" runat="server" MaxLength="700" Rows="18" TextMode="MultiLine"
+                                            <asp:TextBox ID="TxtPerfil" runat="server" MaxLength="1000" Rows="18" TextMode="MultiLine"
                                                 Width="97%" BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial" Font-Size="9pt"></asp:TextBox></td>
                                     </tr>
                                     <tr>
                                         <td align="left" style="font-size: 8pt; color: black; font-family: verdana">
-                                            &nbsp; Max. 700 caracteres.</td>
+                                            &nbsp; Max. 1000 caracteres.</td>
                                     </tr>
                                 </table>
                                             <br />

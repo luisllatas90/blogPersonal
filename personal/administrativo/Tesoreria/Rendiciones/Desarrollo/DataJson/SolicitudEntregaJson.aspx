@@ -1,0 +1,1 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="SolicitudEntregaJson.aspx.vb" Inherits="administrativo_Tesoreria_Rendiciones_Desarrollo_DataJson_SolicitudEntregaJson" %>

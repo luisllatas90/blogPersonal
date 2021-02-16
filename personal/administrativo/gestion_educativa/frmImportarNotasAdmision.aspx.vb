@@ -25,6 +25,8 @@ Partial Class administrativo_pec_test_frmImportarNotasAdmision
         respuestaPostback.Attributes.Item("data-enviado") = "false" : udpMensajeServidor.Update()
         AddHandler btnValidar.ServerClick, AddressOf btnValidar_Click
 
+        dtpFechaIngreso.Enabled = chkActivarEstado.Checked
+
         If Not IsPostBack Then 'La pagina se carga por primera vez
             CargarCombos()
         End If
@@ -97,6 +99,7 @@ Partial Class administrativo_pec_test_frmImportarNotasAdmision
                 If lb_Resultado Then
                     Dim ln_CodigoCco As Integer = cmbCentroCosto.SelectedValue
                     Dim activarEstado As Boolean = chkActivarEstado.Checked
+                    Dim fechaIngreso As String = dtpFechaIngreso.Text
 
                     Dim dta As New Data.DataTable
                     dta = mo_RepoAdmision.ObtenerUltimoIDArchivoCompartido(ln_IdTabla, ln_IdTransaccion, ln_NroOperacion)
@@ -107,13 +110,13 @@ Partial Class administrativo_pec_test_frmImportarNotasAdmision
 
                     'Obtenemos Respuesta de Migración en una tabla
                     Dim lo_Resultado As New Dictionary(Of String, String)
-                    lo_Resultado = mo_RepoAdmision.CargarExcelNotas(ls_RutaArchivo, ln_CodigoCco, ln_IdArchivoCompartido, activarEstado, ln_CodigoPer)
+                    lo_Resultado = mo_RepoAdmision.CargarExcelNotas(ls_RutaArchivo, ln_CodigoCco, ln_IdArchivoCompartido, activarEstado, fechaIngreso, ln_CodigoPer)
 
                     With respuestaPostback.Attributes
                         .Item("data-enviado") = "true"
                         .Item("data-rpta") = lo_Resultado.Item("rpta")
                         If lo_Resultado.Item("rpta") = "-1" Then
-                            .Item("data-msg") = "Se ha producido un error al cargar el archivo"
+                            .Item("data-msg") = lo_Resultado.Item("msg")
                             divErrorMessage.InnerHtml = lo_Resultado.Item("msg")
                         Else
                             .Item("data-msg") = lo_Resultado.Item("msg")
@@ -138,8 +141,14 @@ Partial Class administrativo_pec_test_frmImportarNotasAdmision
             End If
 
         Catch ex As Exception
-            Response.Write(ex.Message)
-            Throw ex
+            'Response.Write(ex.Message)
+            'Throw ex
+            With respuestaPostback.Attributes
+                .Item("data-enviado") = "true"
+                .Item("data-rpta") = -1
+                .Item("data-msg") = ex.Message
+                .Item("data-control") = ""
+            End With
         End Try
     End Sub
 
@@ -154,6 +163,18 @@ Partial Class administrativo_pec_test_frmImportarNotasAdmision
             lo_Validacion.Item("msg") = "Debe seleccionar un centro de costo"
             lo_Validacion.Item("control") = "cmbCentroCosto"
             Return lo_Validacion
+        End If
+
+        If chkActivarEstado.Checked Then
+            'Validar fecha de ingreso
+            Dim fechaIngreso As String = dtpFechaIngreso.Text
+            Dim dFechaIngreso As Date
+            If Not Date.TryParse(fechaIngreso, dFechaIngreso) Then
+                lo_Validacion.Item("rpta") = 0
+                lo_Validacion.Item("msg") = "Debe asignar una fecha de ingreso v&aacute;lida"
+                lo_Validacion.Item("control") = "dtpFechaIngreso"
+                Return lo_Validacion
+            End If
         End If
 
         If Not ScriptManager.GetCurrent(Page).IsInAsyncPostBack Then 'Solo en full request
@@ -220,7 +241,7 @@ Partial Class administrativo_pec_test_frmImportarNotasAdmision
             End If
 
         Catch ex As Exception
-            Response.Write(ex.Message)
+            'Response.Write(ex.Message)
             Throw ex
         End Try
 

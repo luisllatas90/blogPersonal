@@ -1,0 +1,1 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="LogicaWS.aspx.vb" Inherits="administrativo_Tesoreria_Rendiciones_nuevavista_LogicaWS" %>

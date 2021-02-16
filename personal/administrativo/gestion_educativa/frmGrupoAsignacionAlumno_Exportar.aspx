@@ -68,19 +68,22 @@
                                 DataKeyNames="codigo_gva, codigo_gru, codigo_alu"
                                 CssClass="table table-sm table-bordered table-hover" GridLines="None">
                                 <Columns>
-                                    <asp:TemplateField HeaderText="Selec" ItemStyle-HorizontalAlign="Center">
+                                   <%-- <asp:TemplateField HeaderText="Selec" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <asp:CheckBox ID="chkSelect" runat="server" Visible='<%# IIF(Eval("codigo_gva")<>-1,"False","True") %>' />
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:BoundField DataField="codigoUniver_Alu" HeaderText="Codigo"/>
+                                    </asp:TemplateField>--%>
+                                    <asp:BoundField DataField="codigoUniver_Alu" HeaderText="Código"/>
                                     <asp:BoundField DataField="nroDocIdent_Alu" HeaderText="DNI"/>
-                                    <asp:BoundField DataField="Alumno" HeaderText="Postulante"/>
+                                    <asp:BoundField DataField="apellidos_alu" HeaderText="Apellidos"/>
+                                    <asp:BoundField DataField="nombres_Alu" HeaderText="Nombres"/>
                                     <asp:BoundField DataField="CentroCosto" HeaderText="Centro Costo"/>
                                     <asp:BoundField DataField="escuela" HeaderText="Car. Prof."/>
                                     <asp:BoundField DataField="nombre_gru" HeaderText="Grupo Admisión"/>
+                                    <asp:BoundField DataField="estadoAdmision" HeaderText="Estado"/>
+                                    <asp:BoundField DataField="deuda" HeaderText="Tiene Deuda"/>
                                     <asp:BoundField DataField="password_Alu" HeaderText="Clave"/>
-                                    <asp:TemplateField HeaderText="Acciones" ItemStyle-HorizontalAlign="Center">
+                                    <%--<asp:TemplateField HeaderText="Acciones" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnQuitar" runat="server" CommandName="Quitar" 
                                                 CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 
@@ -89,7 +92,7 @@
                                                 <span><i class="fa fa-trash"></i></span>
                                             </asp:LinkButton>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>--%>
                                 </Columns>
                                 <EmptyDataTemplate> No se encontró ningun registro </EmptyDataTemplate>
                                 <HeaderStyle BackColor="#E33439" ForeColor="White" VerticalAlign="Middle" HorizontalAlign="Center" Font-Size="12px" />

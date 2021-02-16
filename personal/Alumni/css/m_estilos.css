@@ -1,0 +1,13 @@
+﻿.label-radio {
+    padding: 0rem;
+}
+
+.table thead th{
+	background-color: #E33439;
+    text-align: center;
+    color: white;
+}
+
+.form-check-input{
+	position:static;
+}

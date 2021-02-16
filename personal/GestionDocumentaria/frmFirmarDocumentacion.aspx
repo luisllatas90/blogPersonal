@@ -39,8 +39,9 @@
     <script src="../Alumni/js/sweetalert/sweetalert2.js" type="text/javascript"></script>
     
     <script type="text/javascript">
-        
-    /* Mostrar mensajes al usuario. */
+      
+    
+      /* Mostrar mensajes al usuario. */
         function showMessage(message, messagetype) {              
             swal({ 
                 title: message,
@@ -89,6 +90,21 @@
              
        
     </script>
+     <style type="text/css">            
+        
+        .fu
+        {
+        background-color:white;
+        color: gray;
+        border: 1px solid;
+        /*font: Verdana 10px;*/
+        padding: 4px 4px;
+        /*font-family: Palatino Linotype, Arial, Helvetica, sans-serif;*/
+        border-radius:4px;
+        }
+                
+      
+    </style>
     
 </head>
 <body>
@@ -101,8 +117,12 @@
                     <div class="card-header">FIRMAR DOCUMENTOS</div>      
                     <div class="card-body">
                         <div class="row">
-                            <label class="col-sm-1 col-form-label form-control-sm" for="lblDocumento">Documento:</label>
+                            <label class="col-sm-1 col-form-label form-control-sm" for="lblEstado">Estado:</label>
                             <div class="col-sm-3">
+                                <asp:DropDownList ID="ddlCodigo_est" runat="server" class="form-control" Enabled ="true" AutoPostBack = "true"></asp:DropDownList>
+                            </div> 
+                            <label class="col-sm-1 col-form-label form-control-sm" for="lblDocumento">Documento:</label>
+                            <div class="col-sm-5">
                                 <asp:DropDownList ID="ddlCodigo_doc" runat="server" class="form-control" Enabled ="true" AutoPostBack = "true"></asp:DropDownList>
                             </div> 
                          </div>
@@ -110,7 +130,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <asp:GridView ID="gvListaDocByFirmar" runat="server" CssClass="table table-striped table-bordered" 
-                                    AutoGenerateColumns="False" DataKeyNames="codigo_dot, codigo_dofm, descripcion_est, codigo_cda, codigo_sol, codigo_doa">
+                                    AutoGenerateColumns="False" DataKeyNames="codigo_dot, codigo_dofm, descripcion_est, codigo_cda, codigo_sol, codigo_doa, nombreArchivo,serieCorrelativo_dot, referencia01, finEtapaTramiteFir, adjuntaFileFir, enviaEmailFir, observaDocFir, orden_fma ">
                                     <RowStyle Font-Size="12px" /> 
                                     <Columns>
                                         <asp:BoundField DataField="descripcion_doc" HeaderText="DOCUMENTO" /> 
@@ -119,9 +139,9 @@
                                          <asp:BoundField DataField="descripcion_est" HeaderText="ESTADO" /> 
                                          <asp:BoundField DataField="serieCorrelativo_dot" HeaderText="SERIE/DOC" />
                                                                                
-                                        <asp:TemplateField HeaderText="OPCION">            
+                                        <asp:TemplateField HeaderText="OPCIÓN">            
 			                                <ItemTemplate>
-			                                    <asp:LinkButton ID="btnVer" ToolTip="Vista Previa" runat="server" 
+			                                    <asp:LinkButton ID="btnVer" ToolTip="Vista Previa" runat="server"  Visible = "false"
 					                                CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 
 					                                CommandName="ver" CssClass="btn btn-success btn-sm">
                                                     <span><i class="fa fa-eye"></i></span> Ver
@@ -130,13 +150,17 @@
 					                                CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 
 					                                CommandName="descargar" CssClass="btn btn-info btn-sm">
                                                     <span><i class="fa fa-file-download"></i></span> Descargar
-						                        </asp:LinkButton> 
-                                                <asp:LinkButton ID="btnFirmar" ToolTip="Generar" runat="server" 
+						                        </asp:LinkButton>
+						                      
+						                        <asp:FileUpload ID="fuArchivoPdf" runat="server" EnableViewState="true" CssClass="fu" accept=".pdf"/>
+						                        
+						                         
+                                                <asp:LinkButton ID="btnFirmar" ToolTip="Firmar" runat="server" 
 					                                CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" 
 					                                CommandName="firmar" CssClass="btn btn-warning btn-sm">
-                                                    <span><i class="fa fa-cog"></i></span> Firmar                                                      
+                                                    <span><i class="fa fa-barcode"></i></span> Firmar                                                      
 						                        </asp:LinkButton>
-						                        <asp:FileUpload ID="fuArchivoPdf" runat="server" EnableViewState="true" />&nbsp; &nbsp;
+						                        
                                             </ItemTemplate>                                            
                                         </asp:TemplateField>
                                                                                 

@@ -6,7 +6,6 @@ Partial Class administrativo_Tesoreria_Rendiciones_AppRendiciones_ListarRendicio
         Dim codigo_per As String
         codigo_per = Session("id_per")
         Session("codigo_per") = Request.QueryString("id")
-        '  Response.Write("Hola:"+codigo_per)
         Dim strTbody As New StringBuilder
         Dim obj As New ClsConectarDatos
         Dim tb As New Data.Datatable

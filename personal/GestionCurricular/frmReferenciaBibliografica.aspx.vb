@@ -208,7 +208,7 @@ Partial Class GestionCurricular_frmReferenciaBibliografica
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
         Try
             obj.AbrirConexion()
-            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DA", "")
+            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DAN", "")
             obj.CerrarConexion()
             mt_CargarCombo(Me.cboSemestre, dt, "codigo_Cac", "descripcion_Cac")
         Catch ex As Exception

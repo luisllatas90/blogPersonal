@@ -27,7 +27,40 @@
     <script src="../../scripts/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="../../assets/bootstrap-select-1.13.1/js/bootstrap-select.min.js"></script>
     
+    <style>
+        .dropdown-toggle .filter-option {
+            margin-top: -2px;
+            position: relative !important;
+        }
+        .usat-div
+        {
+            margin: 0px;
+            padding: 10px;	
+        }
+        .usat-col
+        {
+            padding: 5px;	
+        }
+        label[for="chkConDeuda"]
+        {
+            margin-left: 5px;
+        }
+    </style>
+    
     <script type="text/javascript">
+        $(document).ready(function () {
+            $('#cboCentroCosto').selectpicker({
+                liveSearch: true,
+                size: 10,
+                noneSelectedText: 'Nada seleccionado'
+            });
+            $('#cboGrupo').selectpicker({
+                liveSearch: true,
+                size: 10,
+                noneSelectedText: 'Nada seleccionado'
+            });
+        });
+        
         function ShowMessage(message, messagetype) {
             var cssclss;
             switch (messagetype) {
@@ -55,27 +88,48 @@
         </div>
         <br />
         <div class="panel panel-default" id="pnlLista" runat="server">
-            <div class="panel panel-heading">
+            <div class="panel panel-heading usat-div">
                 <h4>Asignación de Postulantes a Grupo de Evaluación</h4>
             </div>
-            <div class="panel panel-body">
-                <div class="row">
-                    <div class="col-sm-12">
+            <div class="panel panel-body usat-div">
+				<div class="row">
+                    <div class="col-xs-12">
                         <div class="form-group">
-                            <label class="col-sm-1 col-form-label form-control-sm">Grupo:</label>
-                            <div class="col-sm-4">
-                                <asp:DropDownList ID="cboGrupo" runat="server" CssClass="form-control input-sm" AutoPostBack="true">
+                            <label class="col-xs-1 col-form-label form-control-sm usat-col">C. Costo</label>
+                            <div class="col-sm-6 usat-col">
+                                <asp:ListBox ID="cboCentroCosto" runat="server" CssClass="form-control form-control-sm selectpicker" 
+                                    AutoPostBack="true" SelectionMode="Multiple" data-live-search="true">
+                                </asp:ListBox>
+                            </div>
+                            <label class="col-xs-2 col-form-label form-control-sm usat-col">Tipo Grupo Evaluación</label>
+                            <div class="col-xs-3 usat-col">
+                                <asp:DropDownList ID="cboTipoGrupo" runat="server" CssClass="form-control form-control-sm input-sm" AutoPostBack="true">
                                 </asp:DropDownList>
                             </div>
-                            <label class="col-sm-1 col-form-label form-control-sm">Postulante:</label>
-                            <div class="col-sm-2">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label class="col-xs-1 col-form-label form-control-sm usat-col">Grupo:</label>
+                            <div class="col-xs-3 usat-col">
+                                <asp:DropDownList ID="cboGrupo" runat="server" CssClass="form-control form-control-sm input-sm" AutoPostBack="true">
+                                </asp:DropDownList>
+                            </div>
+                            <label class="col-xs-1 col-form-label form-control-sm usat-col">Postulante:</label>
+                            <div class="col-xs-2 usat-col">
                                 <asp:DropDownList ID="cboEstado" runat="server" CssClass="form-control input-sm" AutoPostBack="true">
                                     <asp:ListItem Value="-1" Selected="True">TODOS</asp:ListItem>
                                     <asp:ListItem Value="0">SIN ASIGNAR</asp:ListItem>
                                     <asp:ListItem Value="1">ASIGNADOS</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-xs-2 usat-col">
+                                <asp:CheckBox ID="chkConDeuda" runat="server" Text="Mostrar deudores" ToolTip = "Mostrar los postulantes con deuda pendiente" 
+                                    OnCheckedChanged="chkDisponible_ChekedChanged" AutoPostBack="true" />
+                            </div>
+                            <div class="col-xs-3 usat-col text-right">
                                 <asp:LinkButton ID="btnAgregar" runat="server" Text='<i class="fa fa-plus"></i> Asignar'
                                     CssClass="btn btn-success btn-sm" OnClick="btnAgregar_Click"></asp:LinkButton>
                                 <asp:LinkButton ID="btnGenerarDoc" runat="server" Text='<i class="fa fa-file-pdf"></i> Generar Doc'
@@ -86,38 +140,38 @@
                         </div>
                     </div>
                 </div>
-                <br />
+                
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-xs-12">
                         <div class="form-group">
-                            <label class="col-sm-1 col-form-label form-control-sm">Ambiente:</label>
-                            <div class="col-sm-4">
+                            <label class="col-xs-1 col-form-label form-control-sm usat-col">Ambiente:</label>
+                            <div class="col-xs-4 usat-col">
                                 <asp:TextBox ID="txtAmbiente" runat="server" CssClass="form-control input-sm" ReadOnly="true"></asp:TextBox>
                             </div>
-                            <label class="col-sm-1 col-form-label form-control-sm">Capacidad:</label>
-                            <div class="col-sm-1">
+                            <label class="col-xs-1 col-form-label form-control-sm usat-col">Capacidad:</label>
+                            <div class="col-xs-1 usat-col">
                                 <asp:TextBox ID="txtCapacidad" runat="server" CssClass="form-control input-sm" ReadOnly="true"></asp:TextBox>
                             </div>
-                            <label class="col-sm-1 col-form-label form-control-sm">Disponible:</label>
-                            <div class="col-sm-1">
+                            <label class="col-xs-1 col-form-label form-control-sm usat-col">Disponible:</label>
+                            <div class="col-xs-1 usat-col">
                                 <asp:TextBox ID="txtDisponible" runat="server" CssClass="form-control input-sm" ReadOnly="true"></asp:TextBox>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-xs-3 usat-col">
                                 <asp:CheckBox ID="chkDisponible" runat="server" Text="Seleccionar Disponibles" 
                                 ToolTip = "Selecionar los primeros postulantes" OnCheckedChanged="chkDisponible_ChekedChanged" AutoPostBack="true" />
                                 <asp:LinkButton ID="btnQuitarTodos" runat="server" Text='<i class="fa fa-trash"></i> Quitar Todos'
-                                    CssClass="btn btn-danger btn-sm" OnClick="btnQuitarTodos_Click"></asp:LinkButton>
+                                    CssClass="btn btn-danger btn-sm pull-right" OnClick="btnQuitarTodos_Click"></asp:LinkButton>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="panel panel-body">
+            <div class="panel panel-body usat-div">
                 <div class="row" id="divBusqueda" runat="server">
-                    <div class="col-md-12">
+                    <div class="col-xs-12">
                         <div class="form-group">
-                            <label id="lblEscuela" runat="server" class="col-sm-2 col-form-label form-control-sm">Carrera Profesional:</label>
-                            <div class="col-sm-4">
+                            <label id="lblEscuela" runat="server" class="col-xs-1 col-form-label form-control-sm usat-col">Programa de Estudios:</label>
+                            <div class="col-xs-5 usat-col">
                                 <asp:DropDownList ID="cboEscuela" runat="server" CssClass="form-control input-sm" AutoPostBack="true">
                                 </asp:DropDownList>
                             </div>
@@ -136,12 +190,14 @@
                                             <asp:CheckBox ID="chkSelect" runat="server" Visible='<%# IIF(Eval("codigo_gva")<>-1,"False","True") %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:BoundField DataField="codigoUniver_Alu" HeaderText="Codigo"/>
+                                    <asp:BoundField DataField="codigoUniver_Alu" HeaderText="Código"/>
                                     <asp:BoundField DataField="nroDocIdent_Alu" HeaderText="DNI"/>
                                     <asp:BoundField DataField="Alumno" HeaderText="Postulante"/>
                                     <asp:BoundField DataField="CentroCosto" HeaderText="Centro Costo"/>
                                     <asp:BoundField DataField="escuela" HeaderText="Car. Prof."/>
                                     <asp:BoundField DataField="nombre_gru" HeaderText="Grupo Admisión"/>
+                                    <asp:BoundField DataField="estadoAdmision" HeaderText="Estado"/>
+                                    <asp:BoundField DataField="deuda" HeaderText="Tiene Deuda"/>
                                     <asp:BoundField DataField="password_Alu" HeaderText="Clave" Visible="false"/>
                                     <asp:TemplateField HeaderText="Acciones" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
@@ -160,7 +216,7 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
-                                <EmptyDataTemplate> No se encontró ningun registro </EmptyDataTemplate>
+                                <EmptyDataTemplate> No se encontró ningún registro </EmptyDataTemplate>
                                 <HeaderStyle BackColor="#E33439" ForeColor="White" VerticalAlign="Middle" HorizontalAlign="Center" Font-Size="12px" />
                                 <RowStyle Font-Size="11px" />
                                 <EditRowStyle BackColor="#FFFFCC" />

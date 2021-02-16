@@ -154,6 +154,7 @@
                                 <label for="lblMotivo" class="col-md-5">Nro Trámite</label>
                                 <div class="col-md-7">
                                 <asp:Label ID="LblEstado" runat="server"></asp:Label>
+                                <asp:HiddenField ID="lbldta" runat="server" /></asp:label>
                                 </div>
                                 </div>
                             </div>

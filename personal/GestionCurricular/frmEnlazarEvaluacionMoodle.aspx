@@ -47,8 +47,8 @@
         function closeModal() {
             $('#myModal').modal('hide');
         }
-    
-    
+
+
         function ShowMessage(message, messagetype) {
             var cssclss;
             switch (messagetype) {
@@ -124,7 +124,8 @@
                                     <asp:BoundField DataField="descripcion_evi" HeaderText="Evidencias" />
                                     <asp:BoundField DataField="descripcion_ins" HeaderText="Intrumentos" />
                                     <%--<asp:BoundField DataField="descripcion_eva" HeaderText="Evaluaciones" />--%>
-                                    <asp:BoundField DataField="fecha_gru" HeaderText="Fecha" DataFormatString="{0:dd/MM/yyyy}" />
+                                    <asp:BoundField HtmlEncode="false" DataField="fecha_gru" HeaderText="Fecha" HeaderStyle-Width="7%"
+                                        ItemStyle-Width="7%" FooterStyle-Width="7%" />
                                     <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="Alineado con Aula Virtual">
                                         <ItemTemplate>
                                             <%--<asp:RadioButtonList ID="rdModoCalifica" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rdModoCalifica_SelectedIndexChanged">
@@ -146,12 +147,14 @@
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnEnlazar" runat="server" OnClick="btnEnlazar_Click" CommandName="Enlazar"
                                                 CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" Visible='<%# IIF(Eval("codigo_mod")=-1,True,False)%>'
-                                                CssClass="btn btn-warning btn-sm" OnClientClick="return confirm('¿Desea alinear con aula virtual?');" ToolTip="Enlazar tarea">
+                                                CssClass="btn btn-warning btn-sm" OnClientClick="return confirm('¿Desea alinear con aula virtual?');"
+                                                ToolTip="Enlazar tarea">
                                                 <span><i class="fa fa-link"></i></span>
                                             </asp:LinkButton>
                                             <asp:LinkButton ID="btnDesenlazar" runat="server" CommandName="Desenlazar" CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
-                                                Visible='<%# IIF(Eval("codigo_mod")<>-1, IIF(Eval("estadoNota_Cup") <> "R", True, False), False) %>' CssClass="btn btn-danger btn-sm"
-                                                OnClientClick="return confirm('¿Está seguro de desalinear la tarea?');" ToolTip="Desenlazar tarea">
+                                                Visible='<%# IIF(Eval("codigo_mod")<>-1, IIF(Eval("estadoNota_Cup") <> "R", True, False), False) %>'
+                                                CssClass="btn btn-danger btn-sm" OnClientClick="return confirm('¿Está seguro de desalinear la tarea?');"
+                                                ToolTip="Desenlazar tarea">
                                                 <span><i class="fa fa-unlink"></i></span>
                                             </asp:LinkButton>
                                         </ItemTemplate>

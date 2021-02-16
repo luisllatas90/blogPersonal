@@ -105,7 +105,8 @@ Partial Class administrativo_doccartacategorizacion
 
                 If tbl.Rows(0).Item("codigo_min") = 33 Then 'BECA 18
                     textohtml = textohtml & "<p style='text-align:justify'>"
-                    textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Su hijo (a) podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, adjunto encontrará su carné y el Reglamento de  Pensiones " & cicloingreso & " para su  atenta lectura. "
+                    'textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Su hijo (a) podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, adjunto encontrará su carné y el Reglamento de  Pensiones " & cicloingreso & " para su  atenta lectura. "
+                    textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Su hijo (a) podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, <b>en su campus virtual, en Reglamentos</b>, encontrará la <b>Cartilla Informativa de Pensiones " & cicloingreso & "</b>, para su atenta lectura. " '20200725-ENevado
                     textohtml = textohtml & "</p><br />"
                     textohtml = textohtml & "<p style='text-align:justify'>"
                     textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reciban nuestro agradecimiento por la confianza depositada en nuestra Universidad."
@@ -119,7 +120,8 @@ Partial Class administrativo_doccartacategorizacion
                         textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;En la evaluación de acuerdo al colegio de procedencia la Comisión de Pensiones ha determinado asignarle un <b> costo de crédito por ciclo académico de S/. " & credito_alu & "  soles. </b> La pensión académica está en función del costo por crédito asignado y de la carga académica; la misma que podrá ser cancelada en 5 cuotas los días 30 de cada mes. Esta categorización será supervisada periódicamente y podrá suspenderse o extinguirse de conformidad con el ítem IV (k) del  Reglamento de  Pensiones " & cicloingreso & "."
                         textohtml = textohtml & "</p><br />"
                         textohtml = textohtml & "<p style='text-align:justify'>"
-                        textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Su hijo (a) podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, adjunto encontrará su carné y el Reglamento de  Pensiones " & cicloingreso & " para su  atenta lectura. "
+                        'textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Su hijo (a) podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, adjunto encontrará su carné y el Reglamento de  Pensiones " & cicloingreso & " para su  atenta lectura. "
+                        textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Su hijo (a) podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, <b>en su campus virtual, en Reglamentos</b>, encontrará la <b>Cartilla Informativa de Pensiones " & cicloingreso & "</b>, para su  atenta lectura. "
                         textohtml = textohtml & "</p><br />"
                         textohtml = textohtml & "<p style='text-align:justify'>"
                         textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reciban nuestro agradecimiento por la confianza depositada en nuestra Universidad."
@@ -130,7 +132,8 @@ Partial Class administrativo_doccartacategorizacion
                         textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;En la evaluación de acuerdo a los <b>Programa GO</b> la Comisión de Pensiones ha determinado asignarle un <b> costo de crédito por ciclo académico de S/. " & credito_alu & "  soles. </b> La pensión académica está en función del costo por crédito asignado y de la carga académica; la misma que podrá ser cancelada en 5 cuotas los días 30 de cada mes. "
                         textohtml = textohtml & "</p><br />"
                         textohtml = textohtml & "<p style='text-align:justify'>"
-                        textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usted podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, adjunto encontrará su carné y el Reglamento de  Pensiones " & cicloingreso & " para su  atenta lectura. "
+                        'textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usted podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, adjunto encontrará su carné y el Reglamento de  Pensiones " & cicloingreso & " para su  atenta lectura. "
+                        textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usted podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, <b>en su campus virtual, en Reglamentos</b>, encontrará la <b>Cartilla Informativa de Pensiones " & cicloingreso & "</b>, para su  atenta lectura. "
                         textohtml = textohtml & "</p><br />"
                         textohtml = textohtml & "<p style='text-align:justify'>"
                         textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reciban nuestro agradecimiento por la confianza depositada en nuestra Universidad."
@@ -143,7 +146,8 @@ Partial Class administrativo_doccartacategorizacion
                 Else
                     textohtml = textohtml & "<p style='text-align:justify'>"
                     'textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Su hijo (a) podrá realizar su matrícula a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, adjunto encontrará el Reglamento de  Pensiones " & cicloingreso & " para su  atenta lectura. "
-                    textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Su hijo (a) podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, adjunto encontrará su carné y el Reglamento de  Pensiones " & cicloingreso & " para su  atenta lectura. "
+                    'textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Su hijo (a) podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, adjunto encontrará su carné y el Reglamento de  Pensiones " & cicloingreso & " para su  atenta lectura. "
+                    textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Su hijo (a) podrá verificar sus asignaturas matriculadas a través de nuestra página web: <span style='text-decoration: underline'>www.usat.edu.pe/campusvirtual</span>, ingresando su código universitario <b>" & codigouniver_alu & "</b>, cuya clave es <b>" & password_alu & "</b>. Asimismo, <b>en su campus virtual, en Reglamentos</b>, encontrará la <b>Cartilla Informativa de Pensiones " & cicloingreso & "</b>, para su  atenta lectura. "
                     textohtml = textohtml & "</p><br />"
                     textohtml = textohtml & "<p style='text-align:justify'>"
                     textohtml = textohtml & "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reciban nuestro agradecimiento por la confianza depositada en nuestra Universidad."
@@ -184,7 +188,8 @@ Partial Class administrativo_doccartacategorizacion
 
                 'parrafo.Font = FontFactory.GetFont("Belwe", 13, iTextSharp.text.Font.BOLD)                
                 'parrafo.IndentationLeft
-                parrafo.Add("Luis Enrique Bermudez Malca") 'Texto que se insertara
+                'parrafo.Add("Luis Enrique Bermudez Malca") 'Texto que se insertara
+                parrafo.Add("Jimena Campodónico Bustíos") 'Texto que se insertara 20200724-ENevado
                 parrafo2.Add("Administrador General") 'Texto que se insertara
 
                 'Apertura del documento

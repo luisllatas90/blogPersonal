@@ -1,0 +1,1 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Acuerdo.aspx.vb" Inherits="DataJson_crm_Acuerdo" %>

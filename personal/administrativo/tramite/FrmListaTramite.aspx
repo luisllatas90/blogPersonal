@@ -406,7 +406,9 @@
         <div class="messagealert" id="alert_container"></div>
         <div class="messagealert" id="alert_container_email"></div>       
         <div class="messagealert" id="alert_container_email_destino"></div> 
-        <div class="messagealert" id="alert_container_sms"></div> 
+        <div class="messagealert" id="alert_container_sms">
+                     
+                </div> 
         <div class="panel panel-default" id="pnlLista" runat="server">
             <div class="panel-heading">
                 Listado de Tr&aacute;mites
@@ -491,7 +493,7 @@
                                 </asp:GridView>
                                 <asp:HiddenField ID="hdFecha_Mail" runat="server"  />
                                 <asp:HiddenField ID="nroTramite" runat="server"  />
-                                <asp:GridView ID="gvDatos" runat="server" Width="100%" DataKeyNames="codigo_dta,tieneRequisito,nInstancia,codigo_tfu,_admin,sco,descripcion_Sco,glosaCorrelativo_trl,nTieneEvaluacionPersonal,valor"
+                                <asp:GridView ID="gvDatos" runat="server" Width="100%" DataKeyNames="codigo_dta,tieneRequisito,nInstancia,codigo_tfu,_admin,sco,descripcion_Sco,glosaCorrelativo_trl,nTieneEvaluacionPersonal,valor,fecha_Cin,fecharegistro"
                                     CssClass="table table-bordered bs-table datatable" AutoGenerateColumns="False" ShowHeader="true">
                                     <Columns>
                                         <asp:BoundField DataField="codigo_dta" HeaderText="ID"  ItemStyle-Width=10 />
@@ -612,6 +614,7 @@
                         <asp:HiddenField ID="hdtimelineactive" runat="server" />
                         <asp:HiddenField ID="hdtimelinechk" runat="server" />
                         <asp:HiddenField ID="hddtareq" runat="server" />
+						<asp:HiddenField ID="hddtaindex" runat="server" />
                     </div>
                 </div>
             </div>
@@ -970,6 +973,28 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" style="margin-left:10px;">
+                                    Fecha Tr&aacute;mite:</label>
+                                <div class="col-md-12">
+                                    <asp:Label ID="lblFechaTramite" runat="server" CssClass="form-control" Enabled=false></asp:Label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                         <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" style="margin-left:10px;">
+                                    Fecha Pago Tr&aacute;mite:</label>
+                                <div class="col-md-12">
+                                    <asp:Label ID="lblFechaPago" runat="server" CssClass="form-control" Enabled=false></asp:Label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row" id="trcicloacad" runat="server" >
                         <div class="col-md-12">
                             <div class="form-group">
@@ -1130,6 +1155,7 @@
         </div>
                                 
         </div>
+        
         <div class="row">
         <div class="col-md-12 panel" id="ifrGeneraDeudaPorSemestre" runat="server">
             <div id="Div4" class="panel panel-default" runat="server">
@@ -1174,6 +1200,7 @@
             </div>
         </div>
         </div>
+        
         <div class="row">
         <div class="col-md-12">
         <div class="col-md-12 panel" id="ifrHistorial" runat="server">
@@ -1366,7 +1393,7 @@
                 </div>
                 <div class="row">
                 <div class="col-md-12">
-                      <asp:GridView ID="gdDeudaTramite" runat="server" AutoGenerateColumns="False" DataKeyNames="codigo_dta"
+                 <asp:GridView ID="gdDeudaTramite" runat="server" AutoGenerateColumns="False" DataKeyNames="codigo_dta"
                                                             class="table table-bordered bs-table" Width="100%" Font-Size=X-Small>
                                                             <Columns>
                                                                 <asp:BoundField HeaderText="Trámite" DataField="descripcion_ctr" />
@@ -1383,6 +1410,7 @@
                     <button type="button" id="Button2" class="btn btn-danger" data-dismiss="modal">
                         Salir</button>
                 </div>
+                
             </div>
         </div>
     </div>

@@ -5,9 +5,6 @@ if(session("codigo_usu") = "") then
     Response.Redirect("../../../../sinacceso.html")
 end if
 
-session("codigo_cac") = "74"
-session("descripcion_cac") = "2020-I"
-session("tipo_cac") = "N"
 descripcion_cac = session("descripcion_cac")
 codigo_alu=request.querystring("codigo_alu")
 modo=request.querystring("modo")

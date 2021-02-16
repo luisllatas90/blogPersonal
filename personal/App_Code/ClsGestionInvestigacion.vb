@@ -910,6 +910,22 @@ Public Class ClsGestionInvestigacion
         Return dts
     End Function
 
+    Public Function ActualizarCompromisoAsesor(ByVal codigo_Rtes As Integer, ByVal codigo_Cac As Integer, ByVal codigo_dot As Integer, ByVal usuario As Integer) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("TES_ActualizarCompromisoAsesor", codigo_Rtes, codigo_Cac, codigo_dot, usuario)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
 
+    Public Function AnularNotaAsesor(ByVal codigo_tes As Integer, ByVal codigo_Cac As Integer, ByVal etapa As String, ByVal usuario As Integer) As Data.DataTable
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("TES_AnularNotaAsesor", codigo_tes, codigo_Cac, etapa, usuario)
+        cnx.CerrarConexion()
+        Return dts
+    End Function
 
 End Class

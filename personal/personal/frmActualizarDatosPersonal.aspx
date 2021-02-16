@@ -104,48 +104,58 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <label for="txtEmailPrincipal" class="col-sm-3 offset-sm-1 col-form-label form-control-sm">EMAIL PRINCIPAL:</label>
-                                <div class="col-sm-6">
+                                <label for="txtEmailPrincipal" class="col-sm-2 col-form-label form-control-sm">Email 1:</label>
+                                <div class="col-sm-4">
                                     <asp:TextBox ID="txtEmailPrincipal" runat="server" MaxLength="50" CssClass="form-control form-control-sm" AutoComplete="off"/>
                                 </div> 
-                            </div>
-                            <div class="row">
-                                <label for="txtEmailAlternativo" class="col-sm-3 offset-sm-1 col-form-label form-control-sm">EMAIL ALTERNATIVO:</label>
-                                <div class="col-sm-6">
+                                <label for="txtEmailAlternativo" class="col-sm-1 col-form-label form-control-sm">Email 2:</label>
+                                <div class="col-sm-5">
                                     <asp:TextBox ID="txtEmailAlternativo" runat="server" MaxLength="400" CssClass="form-control form-control-sm" AutoComplete="off"/>
                                 </div> 
                             </div>
                             <div class="row">
-                                <label for="cmbOperadorInternet" class="col-sm-3 offset-sm-1 col-form-label form-control-sm">OPERADOR INTERNET:</label>
+                                <label for="txtTelefono" class="col-sm-2 col-form-label form-control-sm">Teléfono:</label>
+                                <div class="col-sm-2">
+                                    <asp:TextBox ID="txtTelefono" runat="server" MaxLength="100" CssClass="form-control form-control-sm" onkeypress="javascript:return soloNumeros(event)" AutoComplete="off"/>
+                                </div>                                
+                                <label for="cmbOperadorInternet" class="col-sm-2 col-form-label form-control-sm">Operador Internet:</label>
                                 <div class="col-sm-3">
                                     <asp:DropDownList ID="cmbOperadorInternet" runat="server" AutoPostBack="true" CssClass="form-control form-control-sm combo_filtro" data-live-search="true" AutoComplete="off"/>
                                 </div>   
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtOperadorInternet" runat="server" MaxLength="200" CssClass="form-control form-control-sm" AutoComplete="off" ReadOnly="true"/>
+                                    <asp:TextBox ID="txtOperadorInternet" runat="server" MaxLength="200" CssClass="form-control form-control-sm uppercase" AutoComplete="off"/>
                                 </div>                              
                             </div>                              
                             <div class="row">
-                                <label for="cmbOperadorMovil" class="col-sm-3 offset-sm-1 col-form-label form-control-sm">OPERADOR MÓVIL:</label>
+                                <label for="txtCelular" class="col-sm-2 col-form-label form-control-sm">Móvil:</label>
+                                <div class="col-sm-2">
+                                    <asp:TextBox ID="txtCelular" runat="server" MaxLength="100" CssClass="form-control form-control-sm" onkeypress="javascript:return soloNumeros(event)" AutoComplete="off"/>
+                                </div>                                 
+                                <label for="cmbOperadorMovil" class="col-sm-2 col-form-label form-control-sm">Operador Móvil:</label>
                                 <div class="col-sm-3">
                                     <asp:DropDownList ID="cmbOperadorMovil" runat="server" AutoPostBack="true" CssClass="form-control form-control-sm combo_filtro" data-live-search="true" AutoComplete="off"/>
                                 </div>   
                                 <div class="col-sm-3">
-                                    <asp:TextBox ID="txtOperadorMovil" runat="server" MaxLength="200" CssClass="form-control form-control-sm" AutoComplete="off" ReadOnly="true"/>
+                                    <asp:TextBox ID="txtOperadorMovil" runat="server" MaxLength="200" CssClass="form-control form-control-sm uppercase" AutoComplete="off"/>
                                 </div>                              
-                            </div>
+                            </div>   
                             <div class="row">
-                                <label for="txtCelular" class="col-sm-3 offset-sm-1 col-form-label form-control-sm">CELULAR:</label>
+                                <label for="cmbDepartamento" class="col-sm-2 col-form-label form-control-sm">Departamento:</label>
                                 <div class="col-sm-2">
-                                    <asp:TextBox ID="txtCelular" runat="server" MaxLength="100" CssClass="form-control form-control-sm" onkeypress="javascript:return soloNumeros(event)" AutoComplete="off"/>
-                                </div> 
-                                <label for="txtTelefono" class="col-sm-2 col-form-label form-control-sm">TELÉFONO:</label>
-                                <div class="col-sm-2">
-                                    <asp:TextBox ID="txtTelefono" runat="server" MaxLength="100" CssClass="form-control form-control-sm" onkeypress="javascript:return soloNumeros(event)" AutoComplete="off"/>
+                                    <asp:DropDownList ID="cmbDepartamento" runat="server" AutoPostBack="true" CssClass="form-control form-control-sm combo_filtro" data-live-search="true" AutoComplete="off"/>                                    
                                 </div>
-                            </div>                          
+                                <label for="cmbProvincia" class="col-sm-1 col-form-label form-control-sm">Provincia:</label>
+                                <div class="col-sm-3">
+                                    <asp:DropDownList ID="cmbProvincia" runat="server" AutoPostBack="true" CssClass="form-control form-control-sm combo_filtro" data-live-search="true" AutoComplete="off"/>                                    
+                                </div>
+                                <label for="cmbDistrito" class="col-sm-1 col-form-label form-control-sm">Distrito:</label>
+                                <div class="col-sm-3">
+                                    <asp:DropDownList ID="cmbDistrito" runat="server" AutoPostBack="true" CssClass="form-control form-control-sm combo_filtro" data-live-search="true" AutoComplete="off"/>                                    
+                                </div>
+                            </div>                                                  
                             <div class="row">
-                                <label for="txtDireccion" class="col-sm-3 offset-sm-1 col-form-label form-control-sm">DIRECCIÓN:</label>
-                                <div class="col-sm-6">
+                                <label for="txtDireccion" class="col-sm-2 col-form-label form-control-sm">Dirección:</label>
+                                <div class="col-sm-10">
                                     <asp:TextBox ID="txtDireccion" runat="server" TextMode="MultiLine" Rows="2" MaxLength="80" CssClass="form-control form-control-sm uppercase" AutoComplete="off"/>
                                 </div> 
                             </div>

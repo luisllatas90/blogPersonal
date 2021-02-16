@@ -35,7 +35,7 @@
         'response.Write (session("tkn") & "</BR>")
        ' response.Write ("Sesion:" & Session.SessionID)
     if(Err.number <> 0) then
-        response.Write "Error al cargar página"
+        response.Write "Error al cargar pï¿½gina"
     end if
 		
 		
@@ -60,13 +60,13 @@
 %>
 <html>
 <head>
-<title>Campus Virtual</title>
+<title>Campus Virtual LUIS LLATAS</title>
 <META HTTP-EQUIV="Cache-Control" CONTENT ="no-cache">
 <link href="../private/estilo.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" type="text/JavaScript">
 
 var ancho = 400 // especifica la anchura a mostrar
-var alto = 120 // especifica la altura a mostrar (alto de las imágenes)
+var alto = 120 // especifica la altura a mostrar (alto de las imï¿½genes)
 var velo = 10 // velocidad 
 var dis = 2 //cantidad de pixels que desplaza por movimiento
 

@@ -5,7 +5,7 @@
 	codigo_pes=request.querystring("codigo_pes")
 	tipoOrden=request.querystring("tipoOrden")
     %>
-    <script type="text/javascript" language="javascript">alert(<% response.write (codigo_pes) %>)</script>
+    <!--<script type="text/javascript" language="javascript">alert(<% response.write (codigo_pes) %>)</script>-->
     <%
     
 	Set Obj=Server.CreateObject("PryUSAT.clsAccesoDatos")
@@ -208,10 +208,10 @@ td           { font-size: 9pt }
 <p>&nbsp;</p>
 <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="30%" align="right" class="etiqueta">
   <tr>
-    <td width="100%" align="center">MSc. Martha Elina Tesén Arroyo</td>
+    <td width="100%" align="center">Ing. Willy Augusto Oliva Tong</td>
   </tr>
   <tr>
-    <td width="100%" align="center">Directora Académica</td>
+    <td width="100%" align="center">Director Académico</td>
   </tr>
 </table>
 </body>

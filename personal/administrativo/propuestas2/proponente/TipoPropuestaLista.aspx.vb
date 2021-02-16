@@ -51,7 +51,7 @@ Partial Class administrativo_propuestas2_proponente_TipoPropuestaLista
             Dim ls_CentroCosto As String = IIf(ddlCentroCostos.SelectedItem.ToString.Trim = "<<TODOS>>", "%", ddlCentroCostos.SelectedValue)
             Dim ls_estado As String = IIf(ddlEstado.SelectedIndex = 0, "1", "0")
 
-            Response.Write("PRP_ConsultaTipoPropuestaCentroCostos " + ls_TipoPropuesta + "," + ls_CentroCosto + "," + ls_estado)
+            'Response.Write("PRP_ConsultaTipoPropuestaCentroCostos " + ls_TipoPropuesta + "," + ls_CentroCosto + "," + ls_estado)
 
             dtConsultar = obj.TraerDataTable("PRP_ConsultaTipoPropuestaCentroCostos", ls_TipoPropuesta, ls_CentroCosto, ls_estado)
             obj.CerrarConexion()

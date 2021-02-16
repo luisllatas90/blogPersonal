@@ -41,6 +41,13 @@
                 $(this).datepicker('hide');
             });
 
+            $('#txtFecIni').on('change', function(ev) {
+                $(this).datepicker('hide');
+            });
+            $('#txtFecFin').on('change', function(ev) {
+                $(this).datepicker('hide');
+            });
+
             $("#<%=gvNivelLogro.ClientID%> tr .colorpicker-component").each(function(index) {
                 $(this).colorpicker({
                     colorSelectors: {
@@ -80,6 +87,12 @@
             }
             $('#alert_container').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert ' + cssclss + '"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><span>' + message + '</span></div>');
         }
+
+        function MostrarAlert() {
+            if (!$("#btnSave").prop('disabled')) {
+                //return confirm('¿Está seguro de guardar estas fechas de clases?');
+            }
+        }
     </script>
 
 </head>
@@ -117,19 +130,16 @@
                                         <div class="form-group">
                                             <label class="col-md-2">
                                                 Semestre:</label>
-                                            <div class="col-md-4">
+                                            <div class="col-md-4" style="border-right: 1px solid #F5D5D3;">
                                                 <asp:DropDownList ID="ddlSemestre" runat="server" CssClass="form-control input-sm"
                                                     AutoPostBack="true">
                                                 </asp:DropDownList>
                                             </div>
-                                            <label class="col-md-2">
-                                                Tipo de Corte:</label>
+                                            <label class="col-md-2" title="Fecha de inicio de clases">
+                                                Fec. Inicio:</label>
                                             <div class="col-md-4">
-                                                <asp:DropDownList ID="ddlTipoCorte" runat="server" CssClass="form-control input-sm"
-                                                    AutoPostBack="true">
-                                                    <asp:ListItem Value="P">PARA DOCENTES</asp:ListItem>
-                                                    <asp:ListItem Value="D">PARA DIRECTORES</asp:ListItem>
-                                                </asp:DropDownList>
+                                                <asp:TextBox ID="txtFecIni" runat="server" CssClass="form-control input-sm" data-provide="datepicker"
+                                                    ToolTip="Fecha de inicio de clases" ReadOnly="true" Enabled="false" style="font-size: smaller"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -137,23 +147,26 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-md-2" title="Fecha de inicio del ciclo académico">
-                                                Fec. Inicio:</label>
-                                            <div class="col-md-3">
-                                                <asp:TextBox ID="txtFecIni" runat="server" CssClass="form-control input-sm" data-provide="datepicker"
-                                                    ToolTip="Fecha de inicio del ciclo académico"></asp:TextBox>
+                                            <label class="col-md-2" title="Tipo de Corte">
+                                                T. Corte:</label>
+                                            <div class="col-md-4" style="border-right: 1px solid #F5D5D3;">
+                                                <asp:DropDownList ID="ddlTipoCorte" runat="server" CssClass="form-control input-sm"
+                                                    AutoPostBack="true" ToolTip="Tipo de Corte">
+                                                    <asp:ListItem Value="P">PARA DOCENTES</asp:ListItem>
+                                                    <asp:ListItem Value="D">PARA DIRECTORES</asp:ListItem>
+                                                </asp:DropDownList>
                                             </div>
-                                            <label class="col-md-2" title="Fecha de término del ciclo académico">
+                                            <label class="col-md-2" title="Fecha final de clases">
                                                 Fec. Fin:</label>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <asp:TextBox ID="txtFecFin" runat="server" CssClass="form-control input-sm" data-provide="datepicker"
-                                                    ToolTip="Fecha de término del ciclo académico"></asp:TextBox>
+                                                    ToolTip="Fecha final de clases" ReadOnly="true" Enabled="false" style="font-size: smaller"></asp:TextBox>
                                             </div>
                                             <div class="col-md-2">
                                                 <asp:LinkButton ID="btnEdit" Text='<i class="fa fa-pen"></i>' ToolTip="Editar" runat="server"
                                                     CssClass="btn btn-primary btn-sm" />
                                                 <asp:LinkButton ID="btnSave" Text='<i class="fa fa-save"></i>' ToolTip="Guardar"
-                                                    runat="server" CssClass="btn btn-info btn-sm" />
+                                                    runat="server" CssClass="btn btn-info btn-sm" Enabled="false" OnClientClick="MostrarAlert();" />
                                             </div>
                                         </div>
                                     </div>

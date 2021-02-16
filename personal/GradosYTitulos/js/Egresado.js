@@ -36,6 +36,11 @@
     $("#cboFacultad").change(function() {
         cAutoridad($("#cboCargo3").val(), $(this).val(), 1, 3) // MAA= : 0
     })
+    //31.07.2020 JBANDA
+    $("#cboCargo4").change(function() {
+        cAutoridad($(this).val(), 'MAA=', '%', 4) // MAA= : 0
+    })
+    
     /*
     $("#txtbusqueda").keyup(function(e) {
     if (e.keyCode == 13) {
@@ -121,6 +126,8 @@ function cCargo() {
     $('#cboCargo1').html(str);
     $('#cboCargo2').html(str);
     $('#cboCargo3').html(str);
+    //31.07.2020 JBANDA
+    $('#cboCargo4').html(str);
 }
 
 
@@ -142,6 +149,10 @@ function cAutoridad(cod_cgo, cod_fac, vig, cbo) {
     }
     if (cbo == 3) {
         $('#cboAutoridad3').html(str);
+    }
+    //31.07.2020 JBANDA
+    if (cbo == 4) {
+        $('#cboAutoridad4').html(str);
     }
 }
 
@@ -309,13 +320,29 @@ function CargaDatosEgresado(cod) {
                 $("#cboCargo1").val(arr[0].cod_cgo)
                 $("#cboCargo2").val(arr[1].cod_cgo)
                 $("#cboCargo3").val(arr[2].cod_cgo)
+                //31.07.2020 JBANDA
+                if (arr.length > 3) {
+                    $("#cboCargo4").val(arr[3].cod_cgo)
+                } else {
+                    $("#cboCargo4").val("")
+                }
 
                 cAutoridad($("#cboCargo1").val(), 'MAA=', '%', 1) // MAA= : 0
                 cAutoridad($("#cboCargo2").val(), 'MAA=', '%', 2) // MAA= : 0
                 cAutoridad($("#cboCargo3").val(), $("#cboFacultad").val(), '%', 3);
+                //31.07.2020 JBANDA
+                cAutoridad($("#cboCargo4").val(), 'MAA=', '%', 4)
+
                 $("#cboAutoridad1").val(arr[0].cod_ccp)
                 $("#cboAutoridad2").val(arr[1].cod_ccp)
                 $("#cboAutoridad3").val(arr[2].cod_ccp)
+                //31.07.2020 JBANDA
+                if (arr.length > 3) {
+                    $("#cboAutoridad4").val(arr[3].cod_ccp)                    
+                } else {
+                    $("#cboAutoridad4").val("")
+                }
+
                 //$('#datos1').html(tb);
                 $('#DatosPersonales1').html(tb1);
                 $('#DatosPersonales2').html(tb2);
@@ -641,6 +668,22 @@ function fnValidar() {
         fnMensaje("error", "Seleccione El Personal de la Tercera Autoridad.")
         return false;
     }
+    //31.07.2020 JBANDA
+    /*
+    if ($("#cboCargo4").val() == "") {
+        $("#cboCargo4").focus();
+        fnMensaje("error", "Seleccione El Cargo de La Cuarta Autoridad.")
+        return false;
+    }
+    */
+    //31.07.2020 JBANDA
+    /*
+    if ($("#cboAutoridad4").val() == "") {
+        $("#cboAutoridad4").focus();
+        fnMensaje("error", "Seleccione El Personal de la Cuarta Autoridad.")
+        return false;
+    }
+    */
     return true;
 
 }
@@ -676,6 +719,9 @@ function fnLimpiar() {
     $("#cboAutoridad2").val("")
     $("#cboCargo3").val("")
     $("#cboAutoridad3").val("")
+    //31.07.2020 JBANDA
+    $("#cboCargo4").val("")
+    $("#cboAutoridad4").val("")
 
     $("#txtFechaResolucionFac").jqxDateTimeInput('setDate', '');
     $("#txtNroResolucionFac").val("")

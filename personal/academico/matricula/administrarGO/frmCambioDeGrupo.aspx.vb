@@ -15,7 +15,7 @@ Partial Class academico_matricula_administrar_frmCambioDeGrupo
         '### Si la fecha de cronograma ya venció no se permitirá cambio de grupos ###
         If hddDisponible.Value = False Then
             Me.cmdGuardar.Enabled = hddDisponible.Value
-            lblMensaje.Text = "La fecha para cambio de grupos a finalizado, verifique el cronograma académico"
+            lblMensaje.Text = "La fecha para cambio de grupos ha finalizado, verifique el cronograma académico"
             lblMensaje.ForeColor = Drawing.Color.Red
             lblMensaje.Font.Bold = True
             cmdGuardar.Enabled = False

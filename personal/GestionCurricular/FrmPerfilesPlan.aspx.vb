@@ -27,7 +27,13 @@ Partial Class GestionCurricular_FrmPerfilesPlan
             End If
 
             cod_user = Session("id_per")
-            cod_ctf = Request.QueryString("ctf")
+
+            If Not String.IsNullOrEmpty(Session("cod_ctf")) Then
+                cod_ctf = Session("cod_ctf")
+            Else
+                cod_ctf = Request.QueryString("ctf")
+                Session("cod_ctf") = cod_ctf
+            End If
 
             If IsPostBack = False Then
                 Call mt_CargarCarreraProfesional()
@@ -256,7 +262,7 @@ Partial Class GestionCurricular_FrmPerfilesPlan
             lblCompetenciaIng.Visible = True
             ddlCompetenciaIng.Visible = True
             ddlCompetenciaIng.Enabled = True
-            chkCompetenciaIng.Visible = True
+            chkCompetenciaIng.Visible = IIf(cod_ctf = 1 Or cod_ctf = 41, True, False) '--> Por Luis Q.T. | GLPI 45696
             txtDescripcionIng.Visible = False
             lblDescripcionIng.Visible = False
         Else
@@ -281,7 +287,7 @@ Partial Class GestionCurricular_FrmPerfilesPlan
             lblCompetenciaEgr.Visible = True
             ddlCompetenciaEgr.Visible = True
             ddlCompetenciaEgr.Enabled = True
-            chkCompetenciaEgr.Visible = True
+            chkCompetenciaEgr.Visible = IIf(cod_ctf = 1 Or cod_ctf = 41, True, False) '--> Por Luis Q.T. | GLPI 45696
             txtDescripcionEgr.Visible = False
             lblDescripcionEgr.Visible = False
         Else
@@ -482,7 +488,7 @@ Partial Class GestionCurricular_FrmPerfilesPlan
 
         Try
             obj.AbrirConexion()
-            If cod_ctf = 1 Or cod_ctf = 232 Then
+            If cod_ctf = 1 Or cod_ctf = 232 Or cod_ctf = 41 Then
                 dt = obj.TraerDataTable("ConsultarCarreraProfesionalV2", "CF", "2", cod_user)
             Else
                 dt = obj.TraerDataTable("ConsultarCarreraProfesionalV2", "UX", "2", cod_user)

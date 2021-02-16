@@ -196,19 +196,21 @@ Public Class clsPersonal
                                                       ByVal estado_hop As String, _
                                                       ByVal operador As Integer) As Data.DataTable
         Dim dts As New Data.DataTable
-        Dim mensaje As String
-        Dim correo As String
+        Dim mensaje As String = ""
+        Dim correo As String = ""
         Dim objMail As New ClsMail
         cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
         cnx.AbrirConexion()
         cnx.Ejecutar("PER_HabilitarModificarHorarioPersonal", codigo_per, 0, 0, estado_hop, operador)
-        correo = cnx.TraerDataTable("ConsultarPersonal", "CO", codigo_per).Rows(0).Item("emailUSAT")
+        'correo = cnx.TraerDataTable("ConsultarPersonal", "CO", codigo_per).Rows(0).Item("emailUSAT")
         cnx.CerrarConexion()
-        'enviar el correo
-        If Trim(LCase(correo)) <> "@usat.edu.pe" Then
-            mensaje = "<br><br>Su registro de horario ha sido activado.<br><br> Ante una consulta sírvase comunicar con la Sra. Claudia Laos en Dirección de Personal. e-mail: claos@usat.edu.pe.<br><br>Atte.<br><br>Campus Virtual - USAT."
-            objMail.EnviarMail("campusvirtual@usat.edu.pe", "Dirección de Personal", correo, "Registro de Horario Activado", mensaje, True)
-        End If
+        ''enviar el correo
+        'Dim codigo_envio As Integer = ClsComunicacionInstitucional.ObtenerCodigoEnvio(684, 1, 81)
+
+        'If Trim(LCase(correo)) <> "@usat.edu.pe" Then
+        '    mensaje = "<br><br>Su registro de horario ha sido activado.<br><br> Ante una consulta sírvase comunicar con la Sra. Claudia Laos en Dirección de Personal. e-mail: claos@usat.edu.pe.<br><br>Atte.<br><br>Campus Virtual - USAT."
+        '    objMail.EnviarMail("campusvirtual@usat.edu.pe", "Dirección de Personal", correo, "Registro de Horario Activado", mensaje, True)
+        'End If
         Return dts
     End Function
 
@@ -638,6 +640,21 @@ Public Class clsPersonal
         Return 0
     End Function
 
+    Public Function ConsultarHorasAsesoria_GOPP(ByVal codigo_per As Integer, ByVal codigo_Cac As Integer) As Integer
+        Dim dts As New Data.DataTable
+        cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        cnx.AbrirConexion()
+        dts = cnx.TraerDataTable("PER_HorasAsesoriaTesisMatriculadosCicloAcademico_GOPP", codigo_per, codigo_Cac)
+        cnx.CerrarConexion()
+
+        If Not IsNumeric(dts.Rows(0).Item("TotalHorasTesisCac")) Then
+            Return 0
+        Else
+            Return dts.Rows(0).Item("TotalHorasTesisCac")
+        End If
+
+        Return 0
+    End Function
     '#######################################################################################################################
 
     '--
@@ -1872,7 +1889,7 @@ Public Class clsPersonal
         Dim dts As New Data.DataTable
         cnx.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
         cnx.AbrirConexion()
-        dts = cnx.TraerDataTable("PER_lstTrabajadoresTipoActividad_v1", codigo_pel, codigo_per, codigo_ctf, formato, area)
+        dts = cnx.TraerDataTable("PER_lstTrabajadoresTipoActividad_v4", codigo_pel, codigo_per, codigo_ctf, formato, area)
         cnx.CerrarConexion()
         Return dts
     End Function

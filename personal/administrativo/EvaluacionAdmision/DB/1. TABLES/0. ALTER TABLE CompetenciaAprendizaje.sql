@@ -1,0 +1,1 @@
+alter table CompetenciaAprendizaje add nombre_corto_com varchar(500)

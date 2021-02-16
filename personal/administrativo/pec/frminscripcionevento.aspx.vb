@@ -42,6 +42,7 @@
             End Select
         End If
     End Sub
+
     Protected Sub gvCecos_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles gvCecos.SelectedIndexChanged
         cboCecos.SelectedValue = Me.gvCecos.DataKeys.Item(Me.gvCecos.SelectedIndex).Values(0)
         MostrarBusquedaCeCos(False)
@@ -49,12 +50,14 @@
         lnkBusquedaAvanzada.Text = "Búsqueda Avanzada"
         MostrarPanelesTab()
     End Sub
+
     Private Sub MostrarBusquedaCeCos(ByVal valor As Boolean)
         Me.txtBuscaCecos.Visible = valor
         Me.cmdBuscar.Visible = valor
         Me.cboCecos.Visible = Not (valor)
         'trResultados.Visible = (valor)
     End Sub
+
     Protected Sub lnkBusquedaAvanzada_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkBusquedaAvanzada.Click
         Me.tabs.Visible = False
         Me.lblMensaje.Visible = False
@@ -67,9 +70,11 @@
         End If
         Me.txtBuscaCecos.Focus()
     End Sub
+
     Protected Sub cboCecos_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboCecos.SelectedIndexChanged
         MostrarPanelesTab()
     End Sub
+
     Private Sub MostrarPanelesTab()
         Me.tabs.Visible = False
         Me.lblMensaje.Visible = False
@@ -122,12 +127,15 @@
             EnviarAPagina("frmListaPreInscritos.aspx?mod=" & Request.QueryString("mod"))
         End If
     End Sub
+
     Private Sub EnviarAPagina(ByVal pagina As String)
         Me.fradetalle.Attributes("src") = pagina & "&id=" & Request.QueryString("id") & "&ctf=" & Request.QueryString("ctf") & "&cco=" & Me.cboCecos.SelectedValue
     End Sub
+
     Protected Sub lnkDatosEvento_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkDatosEvento.Click
         EnviarAPagina("detalleevento.aspx?mod=" & Request.QueryString("mod"))
     End Sub
+
     Protected Sub lnkInscripciones_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lnkInscripciones.Click
         IrAListaInscritos()
         Select Case Request.QueryString("mod")
@@ -141,6 +149,7 @@
     Private Sub IrAListaInscritos()
 
     End Sub
+
     Protected Sub cmdBuscar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmdBuscar.Click
         trResultados.Visible = False
         Dim objfun As New ClsFunciones

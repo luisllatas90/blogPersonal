@@ -328,7 +328,7 @@
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnVer" runat="server" CommandName="Ver" CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
                                                 CssClass="btn btn-info btn-sm" Visible='<%# IIF(Eval("codigo_dis")<>-1, True, False) %>'
-                                                OnClientClick="return confirm('¿Desea visualizar el silabo?');">
+                                                OnClientClick="return confirm('¿Desea visualizar el sílabo?');">
                                                 <span><i class="fa fa-eye"></i></span>
                                             </asp:LinkButton>
                                         </ItemTemplate>
@@ -346,7 +346,7 @@
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnEnviar" runat="server" CommandName="Enviar" CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
                                                 CssClass="btn btn-warning btn-sm" Visible='<%# IIf(Eval("avance")=100,IIF(Eval("estado_dis")="P",True,False),False) %>'
-                                                OnClientClick="return confirm('¿Desea ir a enviar el Diseño de Asignatura?');">
+                                                OnClientClick="return confirm('¿Desea enviar el Diseño de Asignatura?');">
                                                 <span><i class="fa fa-share"></i></span>
                                             </asp:LinkButton>
                                         </ItemTemplate>
@@ -357,6 +357,15 @@
                                                 CssClass="btn btn-success btn-sm" Visible='<%# IIF(Eval("tieneCronograma") = 0, False, IIf(Eval("avance")=0, True, False)) %>'
                                                 OnClientClick="return confirm('¿Desea importar el Diseño de Asignatura?');">
                                                 <span><i class="fa fa-object-group"></i></span>
+                                            </asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="Anular">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="btnAnular" runat="server" CommandName="Anular" CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
+                                                CssClass="btn btn-danger btn-sm" Visible='<%# IIF(Eval("tieneCronograma") = 0, False,  IIf(Eval("avance")=0, False, IIF(Request.QueryString("ctf") = "1" or Request.QueryString("ctf") = "9" or Request.QueryString("ctf") = "41", True, False))) %>'
+                                                OnClientClick="return confirm('¿Desea anular el Diseño de Asignatura actual? Este proceso es irreversible');">
+                                                <span><i class="fa fa-trash"></i></span>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>

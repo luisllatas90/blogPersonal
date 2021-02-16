@@ -7,7 +7,9 @@
     <title></title>    
     <script src="../../../scripts/js/jquery-1.12.3.min.js" type="text/javascript"></script>
     <script src="../../../scripts/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../../assets/bootstrap-toggle/js/bootstrap-toggle.min.js" type="text/javascript"></script>
     <link href="../../../scripts/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
+    <link href="../../../assets/bootstrap-toggle/css/bootstrap-toggle.min.css" rel="stylesheet" type="text/css" />    
     <style>
         body .btn-danger2:active, body .btn-danger2:visited, body .btn-danger2:active:focus, body .btn-danger2:active:hover {
             border-color: #639d34;
@@ -102,13 +104,18 @@
         <br />
         
             <div class="panel panel-default">
-                <div class="panel-heading"><h4>REGISTRO DE NOTAS</h4></div>
+                <div class="panel-heading"><h4 id="hTitulo" runat="server">REGISTRO DE NOTAS</h4></div>
                 <div class="panel-body">
                     <div class="col-md-2">Curso: </div>
                     <div class="col-md-6">
                         <asp:Label ID="lblCurso" runat="server" Text="-"></asp:Label>
                     </div>
-                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <span class="pull-right">
+                            <asp:LinkButton ID="btnDescargarActa" runat="server" CssClass="btn btn-warning" Text='<i class="fa fa-download""></i> Descargar Acta de Notas' />
+                            <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-info"/>
+                        </span>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="col-md-2"> Docente: </div>
@@ -117,8 +124,9 @@
                     </div>
                     <div class="col-md-4">
                         <span class="pull-right">
-                        <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="btn btn-info"/>
-                        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" OnClientClick="return confirm('¿Desea guardar las notas?');"/> 
+                            <asp:CheckBox ID="chkConfirmarPublicacion" runat="server" Text="Confirmo generación de Actas de Notas" 
+                                    OnCheckedChanged="chkConfirmarPublicacion_ChekedChanged" AutoPostBack="true"/>
+                            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" OnClientClick="return confirm('¿Desea guardar las notas?');"/> 
                         </span>
                     </div>
                 </div>
@@ -134,9 +142,16 @@
                     <asp:BoundField DataField="alumno" HeaderText="ALUMNO" />
                     <%--<asp:BoundField DataField="notafinal_dma" HeaderText="NOTA FINAL" />--%>
                     
-                    <asp:TemplateField HeaderText="NOTA FINAL">
+                    <asp:TemplateField HeaderText=" NOTA FINAL" HeaderStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <asp:TextBox ID="txtNota" runat="server" Text='<%# Bind("notafinal_dma") %>' onkeypress="return SoloNotas(this)" onkeyUp="verificaDato(this)"  />
+                            <asp:TextBox ID="txtNota" runat="server" Text='<%# Bind("notafinal_dma") %>' onkeypress="return SoloNotas(this)" onkeyUp="verificaDato(this)" 
+                                Visible='<%# HdEsFormacionComplementaria.Value = "N" %>'  />
+                            <%--andy.daz 31/07/2020--%>
+                            <asp:Panel ID="divAcredita" runat="server" Visible='<%# HdEsFormacionComplementaria.Value = "S" %>'>
+                                <strong><asp:Label ID="lblAcredita" runat="server" /></strong>
+                                <input type="checkbox" data-toggle="toggle" data-on="Si" data-off="No" data-size="mini" data-onstyle="primary" data-offstyle="danger" id="chkAcredita" runat="server">
+                            </asp:Panel>
+                            
                         </ItemTemplate>
                         <ItemStyle Width="50px" />
                     </asp:TemplateField>
@@ -167,10 +182,10 @@
                 <div class="panel-body">
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
-                         <button type="button" class="btn btn-primary">Aprobados <span class="badge" runat="server" id="spAprobados">0</span></button>
-                         <button type="button" class="btn btn-danger">Desaprobados <span class="badge" runat="server" id="spDesaprobados">0</span></button>
+                         <button type="button" class="btn btn-primary"><span runat="server" id="spTextAprobados">Aprobados</span> <span class="badge" runat="server" id="spAprobados">0</span></button>
+                         <button type="button" class="btn btn-danger"><span runat="server" id="spTextDesaprobados">Desaprobados</span> <span class="badge" runat="server" id="spDesaprobados">0</span></button>
                          <button type="button" class="btn btn-default">Retirados <span class="badge" runat="server" id="spRetirados">0</span></button>
-                         <button type="button" class="btn btn-warning">Inhabilitados <span class="badge" runat="server" id="spInhabilitados">0</span></button>
+                         <button type="button" class="btn btn-warning" id="btnInhabilitados" runat="server">Inhabilitados <span class="badge" runat="server" id="spInhabilitados">0</span></button>
                     </div>                    
                     <div class="col-md-2"></div>
                 </div>
@@ -179,6 +194,7 @@
     <asp:HiddenField ID="HdCodigoCup" runat="server" />
     <asp:HiddenField ID="HdEstadoCurso" runat="server" />
     <asp:HiddenField ID="HdEsRecuperacion" runat="server" />
+    <asp:HiddenField ID="HdEsFormacionComplementaria" runat="server" />
 
   <!-- Modal -->
 <div id="myModal"  class="modal fade" role="dialog">

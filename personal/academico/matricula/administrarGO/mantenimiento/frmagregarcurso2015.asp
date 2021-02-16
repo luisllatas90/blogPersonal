@@ -1,6 +1,6 @@
 <!--#include file="../../../../funciones.asp"-->
 <%
-
+on error resume next
 accion=request.querystring("accion")
 codigo_pes=request.querystring("codigo_pes")
 codigo_cac=request.querystring("codigo_cac")
@@ -470,3 +470,6 @@ end if
 <script type="text/javascript" language="JavaScript" src="../private/analytics-personal.js"></script>
 </body>
 </html>
+<%
+
+%>

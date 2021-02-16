@@ -296,7 +296,7 @@ Partial Class GestionCurricular_FrmGrupoAsignatura
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ToString
         Try
             obj.AbrirConexion()
-            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DA", "")
+            dt = obj.TraerDataTable("ConsultarCicloAcademico", "DAN", "")
             obj.CerrarConexion()
 
             mt_CargarCombo(Me.cboSemestre, dt, "codigo_Cac", "descripcion_Cac")
@@ -319,7 +319,7 @@ Partial Class GestionCurricular_FrmGrupoAsignatura
             End If
 
             obj.AbrirConexion()
-            dt = obj.TraerDataTable("DEA_ListarCarrerasProfesionales", codigo_cac, user, 2, 1, codigo_dac)
+            dt = obj.TraerDataTable("DEA_ListarCarrerasProfesionales", codigo_cac, user, 2, 1, codigo_dac, cod_ctf)
             obj.CerrarConexion()
 
             mt_CargarCombo(Me.cboCarrProf, dt, "codigo_Cpf", "nombre_Cpf")

@@ -228,6 +228,11 @@ Partial Class DataJson_GestionInvestigacion_Tesis
                     k = obj.DecrytedString64(Request("hdcod")) ' Codigo de tesis 
                     Dim link As String = Request("link")
                     ActualizarLinkInforme(k, link)
+                Case "AnularNotaAsesor"
+                    k = obj.DecrytedString64(Request("tes")) ' Codigo de tesis 
+                    Dim codigo_Cac As Integer = obj.DecrytedString64(Request("cac")) ' Codigo de tesis 
+                    Dim etapa As String = Request("etapa")
+                    AnularNotaAsesor(k, codigo_Cac, etapa, Session("id_per"))
             End Select
         Catch ex As Exception
             Data.Add("idper", Session("id_per"))
@@ -354,6 +359,7 @@ Partial Class DataJson_GestionInvestigacion_Tesis
                     data.Add("notaI", dt.Rows(i).Item("notaI"))
                     data.Add("notaEjecucion", dt.Rows(i).Item("notaEjecucion"))
                     data.Add("notaInforme", dt.Rows(i).Item("notaInforme"))
+                    data.Add("cac", obj.EncrytedString64(dt.Rows(i).Item("codigo_cac")))
                     list.Add(data)
                 Next
             End If
@@ -553,6 +559,9 @@ Partial Class DataJson_GestionInvestigacion_Tesis
                             data.Add("asesor", obj.EncrytedString64(dt.Rows(i).Item("Asesor")))
 
                         End If
+
+                        data.Add("matTesis", dt.Rows(i).Item("MatriculadoTesis"))
+
                     End If
                     list.Add(data)
                 Next
@@ -1218,4 +1227,28 @@ Partial Class DataJson_GestionInvestigacion_Tesis
         End Try
     End Sub
 
+
+    Private Sub AnularNotaAsesor(ByVal codigo_tes As Integer, ByVal codigo_cac As Integer, ByVal etapa As String, ByVal usuario As Integer)
+        Dim obj As New ClsGestionInvestigacion
+        Dim Data2 As New Dictionary(Of String, Object)()
+        Dim serializer As System.Web.Script.Serialization.JavaScriptSerializer = New System.Web.Script.Serialization.JavaScriptSerializer()
+        Dim JSONresult As String = ""
+        Dim list As New List(Of Dictionary(Of String, Object))()
+        Try
+            Dim data As New Dictionary(Of String, Object)()
+            Dim dt As New Data.DataTable
+            dt = obj.AnularNotaAsesor(codigo_tes, codigo_cac, etapa, usuario)
+            data.Add("rpta", dt.Rows(0).Item("Respuesta"))
+            data.Add("msje", dt.Rows(0).Item("Mensaje").ToString)
+            list.Add(data)
+            JSONresult = serializer.Serialize(list)
+            Response.Write(JSONresult)
+        Catch ex As Exception
+            Data2.Add("rpta", "0 - elimin obs doc")
+            Data2.Add("msje", ex.Message)
+            list.Add(Data2)
+            JSONresult = serializer.Serialize(list)
+            Response.Write(JSONresult)
+        End Try
+    End Sub
 End Class

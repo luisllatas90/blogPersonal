@@ -46,7 +46,11 @@ Partial Class administrativo_tramite_DescargarArchivo
                 If tb.Rows.Count > 0 Then
                     Dim extencion As String
                     extencion = tb.Rows(0).Item("Extencion")
-                    Select Case tb.Rows(0).Item("Extencion")
+
+                    Select Case tb.Rows(0).Item("Extencion").ToString.ToLower.Trim
+                        Case ".pdf"
+                            extencion = "application/pdf"
+
                         Case ".txt"
                             extencion = "text/plain"
                         Case ".doc"
@@ -93,4 +97,5 @@ Partial Class administrativo_tramite_DescargarArchivo
         End If
 
     End Sub
+
 End Class

@@ -105,8 +105,8 @@
                         </div>
                         <asp:UpdatePanel runat="server" ID="updDepartamentoArea">
                             <ContentTemplate>
-                                <asp:Label ID="lblDepartamentoArea" runat="server" CssClass="col-sm-2 col-md-2 control-label">Área/Departamento</asp:Label>
-                                <div class="col-sm-4 col-md-5">
+                                <asp:Label ID="lblDepartamentoArea" runat="server" CssClass="col-sm-2 col-md-3 control-label">Área/Departamento</asp:Label>
+                                <div class="col-sm-6 col-md-6">
                                     <asp:DropDownList runat="server" ID="ddlDepartamentoArea" CssClass="form-control"
                                         AutoPostBack="true">
                                         <asp:ListItem Value="">[-- SELECCIONE --]</asp:ListItem>
@@ -122,7 +122,7 @@
                         <asp:UpdatePanel runat="server" ID="updListaPersonal">
                             <ContentTemplate>
                                 <asp:Label ID="lblPersonal" runat="server" CssClass="col-sm-2 col-md-1 control-label">Colaborador</asp:Label>
-                                <div class="col-sm-4 col-md-6">
+                                <div class="col-sm-8 col-md-8">
                                     <asp:DropDownList runat="server" ID="ddlPersonal" CssClass="form-control" AutoPostBack="true">
                                         <asp:ListItem Value="">[-- SELECCIONE --]</asp:ListItem>
                                     </asp:DropDownList>

@@ -404,20 +404,13 @@ function validarOperadorMovil(s, args) {
                             Ubigeo</td>
                         <td align="left" style="font-size: 10pt; color: darkred; font-family: Arial;
                             height: 21px">
-                            &nbsp;<asp:DropDownList ID="ddlDepartamento1" Width="130px" runat="server" 
-                                AutoPostBack="True" ToolTip="Departamento" CssClass="datos_combo" 
-                                Font-Size="Smaller">
-                            </asp:DropDownList>
-                            <asp:DropDownList ID="ddlProvincia1" Width="110px" runat="server" 
-                                ToolTip="Provincia" AutoPostBack="True" CssClass="datos_combo" 
-                                Font-Size="Smaller">
-                            </asp:DropDownList> 
-                            <asp:DropDownList ID="ddlDistrito1" runat="server" Width="110px" 
-                                CssClass="datos_combo" Font-Size="Smaller">
-                            </asp:DropDownList>
-                            <asp:CompareValidator ID="CompareValidator4" runat="server" ControlToValidate="DDLDistrito"
-                                ErrorMessage="Seleccione Lugar de residencia" Operator="NotEqual" SetFocusOnError="True"
-                                ValueToCompare="0">*</asp:CompareValidator></td>
+                            &nbsp;<asp:DropDownList ID="ddlDepartamento1" Width="130px" runat="server" AutoPostBack="True" ToolTip="Departamento" CssClass="datos_combo" Font-Size="Smaller"></asp:DropDownList>
+                            <asp:CompareValidator ID="CompareValidator9" runat="server" ControlToValidate="ddlDepartamento1" ErrorMessage="Seleccione el departamento de ubigeo" Operator="NotEqual" SetFocusOnError="True" ValueToCompare="0">*</asp:CompareValidator>
+                            <asp:DropDownList ID="ddlProvincia1" Width="110px" runat="server" ToolTip="Provincia" AutoPostBack="True" CssClass="datos_combo" Font-Size="Smaller"></asp:DropDownList> 
+                            <asp:CompareValidator ID="CompareValidator5" runat="server" ControlToValidate="ddlProvincia1" ErrorMessage="Seleccione la provincia de ubigeo" Operator="NotEqual" SetFocusOnError="True" ValueToCompare="0">*</asp:CompareValidator>
+                            <asp:DropDownList ID="ddlDistrito1" runat="server" Width="110px" CssClass="datos_combo" Font-Size="Smaller"></asp:DropDownList>
+                            <asp:CompareValidator ID="CompareValidator4" runat="server" ControlToValidate="ddlDistrito1" ErrorMessage="Seleccione el distrito de ubigeo" Operator="NotEqual" SetFocusOnError="True" ValueToCompare="0">*</asp:CompareValidator>
+                         </td>
                     </tr>
                     <tr>
                         <td align="left" style="width: 197px;" class="titulo_items">
@@ -513,9 +506,6 @@ function validarOperadorMovil(s, args) {
                             </asp:DropDownList> 
                             <asp:DropDownList ID="ddlDistrito2" runat="server" Width="110px" CssClass="datos_combo">
                             </asp:DropDownList>
-                            <asp:CompareValidator ID="CompareValidator5" runat="server" ControlToValidate="DDLDistrito"
-                                ErrorMessage="Seleccione Lugar de residencia" Operator="NotEqual" SetFocusOnError="True"
-                                ValueToCompare="0">*</asp:CompareValidator></td>
                     </tr>
                     <tr>
                         <td align="left" style="width: 197px;" class="titulo_items">
@@ -604,15 +594,13 @@ function validarOperadorMovil(s, args) {
                             Lugar de Residencia</td>
                         <td align="left" style="font-size: 10pt; color: darkred; font-family: Arial;
                             height: 21px">
-                            &nbsp;<asp:DropDownList ID="DDLDepartamento" runat="server" AutoPostBack="True" ToolTip="Departamento" CssClass="datos_combo">
-                            </asp:DropDownList>
-                                                       <asp:DropDownList ID="DDLProvincia" runat="server" ToolTip="Provincia" AutoPostBack="True" CssClass="datos_combo">
-                            </asp:DropDownList> 
-                            <asp:DropDownList ID="DDLDistrito" runat="server" CssClass="datos_combo">
-                            </asp:DropDownList>
-                            <asp:CompareValidator ID="CompareValidator3" runat="server" ControlToValidate="DDLDistrito"
-                                ErrorMessage="Seleccione Lugar de residencia" Operator="NotEqual" SetFocusOnError="True"
-                                ValueToCompare="0">*</asp:CompareValidator></td>
+                            &nbsp;<asp:DropDownList ID="DDLDepartamento" runat="server" AutoPostBack="True" ToolTip="Departamento" CssClass="datos_combo"></asp:DropDownList>
+                            <asp:CompareValidator ID="CompareValidator7" runat="server" ControlToValidate="DDLDepartamento" ErrorMessage="Seleccione el departamento del lugar de residencia" Operator="NotEqual" SetFocusOnError="True" ValueToCompare="0">*</asp:CompareValidator>
+                            <asp:DropDownList ID="DDLProvincia" runat="server" ToolTip="Provincia" AutoPostBack="True" CssClass="datos_combo"></asp:DropDownList> 
+                            <asp:CompareValidator ID="CompareValidator8" runat="server" ControlToValidate="DDLProvincia" ErrorMessage="Seleccione la provincia del lugar de residencia" Operator="NotEqual" SetFocusOnError="True" ValueToCompare="0">*</asp:CompareValidator>
+                            <asp:DropDownList ID="DDLDistrito" runat="server" CssClass="datos_combo"></asp:DropDownList>
+                            <asp:CompareValidator ID="CompareValidator3" runat="server" ControlToValidate="DDLDistrito" ErrorMessage="Seleccione el distrito del lugar de residencia" Operator="NotEqual" SetFocusOnError="True" ValueToCompare="0">*</asp:CompareValidator>
+                        </td>
                     </tr>
                     <tr>
                         <td align="left" style="width: 197px;" class="titulo_items">
@@ -626,7 +614,7 @@ function validarOperadorMovil(s, args) {
                         <td align="left" style="width: 197px;" class="titulo_items">Operador Internet</td>
                         <td align="left" class="titulo_items">                            
                             &nbsp;<asp:DropDownList ID="ddlOperadorInternet" runat="server" AutoPostBack="True" ToolTip="Operador de Internet" CssClass="datos_combo"></asp:DropDownList>
-                            <asp:TextBox ID="txtOperadorInternet" runat="server" ReadOnly="true" Width="112px" BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial" ForeColor="Navy" ToolTip="Operador de Internet" CssClass="datos_combo"></asp:TextBox>
+                            <asp:TextBox ID="txtOperadorInternet" runat="server" ReadOnly="true" Visible="false" Width="112px" BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial" ForeColor="Navy" ToolTip="Operador de Internet" CssClass="datos_combo"></asp:TextBox>
                             <asp:CustomValidator ID="cvOperadorInternet" runat="server" ErrorMessage="Operador de internet requerido" Text="*" ControlToValidate="txtOperadorInternet" ValidateEmptyText="True" ClientValidationFunction="validarOperadorInternet" />
                         </td>
                     </tr>
@@ -634,8 +622,8 @@ function validarOperadorMovil(s, args) {
                         <td align="left" style="width: 197px;" class="titulo_items">Operador Móvil</td>
                         <td align="left" class="titulo_items">                            
                             &nbsp;<asp:DropDownList ID="ddlOperadorMovil" runat="server" AutoPostBack="True" ToolTip="Operador Móvil" CssClass="datos_combo"></asp:DropDownList>
-                            <asp:TextBox ID="txtOperadorMovil" runat="server" ReadOnly="true" Width="112px" BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial" ForeColor="Navy" ToolTip="Operador Móvil" CssClass="datos_combo"></asp:TextBox>
-                            <asp:CustomValidator ID="cvOperadorMovil" runat="server" ErrorMessage="Operador movil requerido" Text="*" ControlToValidate="txtOperadorMovil" ValidateEmptyText="True" ClientValidationFunction="validarOperadorMovil" />
+                            <asp:TextBox ID="txtOperadorMovil" runat="server" ReadOnly="true" Visible="false" Width="112px" BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial" ForeColor="Navy" ToolTip="Operador Móvil" CssClass="datos_combo"></asp:TextBox>
+                            <asp:CustomValidator ID="cvOperadorMovil" runat="server" ErrorMessage="Operador móvil requerido" Text="*" ControlToValidate="txtOperadorMovil" ValidateEmptyText="True" ClientValidationFunction="validarOperadorMovil" />
                         </td>
                     </tr>                    
                     <tr>

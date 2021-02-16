@@ -119,6 +119,10 @@ Partial Class educacionuniversitaria
 
         Me.DDLAEgreso.Items.Add("Pendiente")
         Me.DDLAEgreso.Items(0).Value = "3000"  'staba 3000
+
+        Me.DDlAIngreso.Items.Add("Pendiente")
+        Me.DDlAIngreso.Items(0).Value = "3000"  'staba 3000
+
         For i As Int16 = Year(Now) To 1940 Step -1
             Me.DDlAIngreso.Items.Add(i)
             Me.DDLAEgreso.Items.Add(i)
@@ -232,7 +236,11 @@ Partial Class educacionuniversitaria
                 Me.DDLTitulo.SelectedValue = .Item("codigo_tpf").ToString
                 Me.DDLInstitucion.SelectedValue = .Item("codigo_tis").ToString
                 Me.DDLSituacion.SelectedValue = .Item("codigo_sit").ToString
-                Me.DDlAIngreso.SelectedValue = .Item("anioingreso_tpr").ToString
+                If .Item("anioingreso_tpr").ToString = "0" Then
+                    Me.DDlAIngreso.SelectedValue = "3000"
+                Else
+                    Me.DDlAIngreso.SelectedValue = .Item("anioingreso_tpr").ToString
+                End If
 
 
                 'xDguevara para subsanar la programacion encontrada.
@@ -426,7 +434,12 @@ Partial Class educacionuniversitaria
                 Me.DDLGrado.SelectedValue = .Item("codigo_gra")
                 Me.TxtOtrosGrados.Text = .Item("desgrado_gpr")
                 Me.TxtMención.Text = .Item("mencion_gpr")
-                Me.DDLAIngGrado.SelectedValue = .Item("anioingreso_gpr")
+                If .Item("anioingreso_gpr").ToString = "0" Then
+                    Me.DDLAIngGrado.SelectedValue = "3000"
+                Else
+                    Me.DDLAIngGrado.SelectedValue = .Item("anioingreso_gpr")
+                End If
+
 
                 If .Item("anioegreso_gpr").ToString = "0" Then
                     Me.DDLAEgrGrado.SelectedValue = "3000"

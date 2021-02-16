@@ -40,8 +40,8 @@ Partial Class academico_estudiante_separacion_frmSeparacionDefinitiva
                     If (tipo = 1) Then
                         Me.DivTemporal.Visible = True
                         Me.DivDefinitivo.Visible = False
-                        Me.lblArticulo.Text = "artículo Nº 43"
-                        Me.lblArticulo2.Text = "artículo Nº 43"
+                        Me.lblArticulo.Text = "artículo Nº 60"      '"artículo Nº 43"
+                        Me.lblArticulo2.Text = "artículo Nº 60"      '"artículo Nº 43"
                         Me.lblTipoSeparacion.Text = "Separar temporalmente, por un año "
                         'Me.lblTipoSeparacion2.Text = "separación temporal"
                         Me.lblTitulo.Text = "SEPARACION TEMPORAL"
@@ -50,8 +50,8 @@ Partial Class academico_estudiante_separacion_frmSeparacionDefinitiva
                     Else
                         Me.DivTemporal.Visible = False
                         Me.DivDefinitivo.Visible = True
-                        Me.lblArticulo.Text = "artículo Nº 44"
-                        Me.lblArticulo2.Text = "artículo Nº 44"
+                        Me.lblArticulo.Text = "artículo Nº 60" '"artículo Nº 44"
+                        Me.lblArticulo2.Text = "artículo Nº 60" '"artículo Nº 44"
                         Me.lblTipoSeparacion.Text = "Separar definitivamente"
                         Me.lblTipoSeparacion2.Text = "separación definitiva"
                         Me.lblTitulo.Text = "SEPARACION DEFINITIVA"

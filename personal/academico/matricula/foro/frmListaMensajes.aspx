@@ -114,7 +114,7 @@
             <tr>
                 <td class="style1">
                     <asp:CheckBox ID="chkFecha" runat="server" Text="Fecha de Registro" 
-                        Checked="True" /> 
+                        Checked="False" /> 
                 </td>
                 <td class="style1">
                     <input type="text" runat="server" id="txtHasta"/></td>

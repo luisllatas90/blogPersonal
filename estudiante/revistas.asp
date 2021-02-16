@@ -166,9 +166,10 @@ if codigo_usu<>"" then
                     <br />
                     <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b> biblioservicios@usat.edu.pe<br />
                     <b><a class="rojo">Contraseña&nbsp;:</a></b> biblioteca</p>
-                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual Revista_RbDigital_GanaMas.pdf" target="_blank"> <!-- andy.diaz 23/06/2020 -->
-                        <b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b>
-                    </a>
+                <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual Revista_RbDigital_GanaMas.pdf"
+                    target="_blank">
+                    <!-- andy.diaz 23/06/2020 -->
+                    <b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b> </a>
             </td>
         </tr>
         <tr valign="top">
@@ -187,10 +188,12 @@ if codigo_usu<>"" then
                     <br />
                     <br />
                     <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b> biblioservicios@usat.edu.pe<br />
-                    <b><a class="rojo">Contraseña&nbsp;:</a></b> UMogrovejo1!<br /></p>
-                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual Revista_RbDigital_HarvardBusinessReview.pdf" target="_blank"> <!-- andy.diaz 23/06/2020 -->
-                        <b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b>
-                    </a>
+                    <b><a class="rojo">Contraseña&nbsp;:</a></b> UMogrovejo1!<br />
+                </p>
+                <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual Revista_RbDigital_HarvardBusinessReview.pdf"
+                    target="_blank">
+                    <!-- andy.diaz 23/06/2020 -->
+                    <b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b> </a>
             </td>
         </tr>
         <tr class="rojo">
@@ -226,9 +229,8 @@ if codigo_usu<>"" then
                         <br />
                         Para Consultas fuera del campus universitario:</span><br />
                     <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b> USAT<br />
-                    <b><a class="rojo">Contraseña&nbsp;:</a></b> USAT                  
-                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual Revista_RbDigital_El_Croquis.pdf"
-                        target="_blank">                        
+                    <b><a class="rojo">Contraseña&nbsp;:</a></b> elcroquis08 <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual Revista_El_Croquis.pdf"
+                        target="_blank">
                         <br />
                         <br />
                         <b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b></a></p>
@@ -252,7 +254,7 @@ if codigo_usu<>"" then
                     <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b> biblioservicios@usat.edu.pe<br />
                     <b><a class="rojo">Contraseña&nbsp;:</a></b>&nbsp;12345678<br />
                     <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual_Revista_RbDigital_Summa.pdf"
-                        target="_blank">                        
+                        target="_blank">
                         <br />
                         <b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b></a>
                 </p>
@@ -261,18 +263,23 @@ if codigo_usu<>"" then
         <tr valign="top">
             <td align="center" class="style3">
                 <a href="cuentaaccesos.asp?bib=71" target="_blank" class="Estilo2">
-                    <img src="../images/biblioteca/AR-logo.jpg" alt="Architectural Review" width="280" height="120" border="1" /></a>
+                    <img src="../images/biblioteca/AR-logo.jpg" alt="Architectural Review" width="280"
+                        height="120" border="1" /></a>
             </td>
             <td align="left" valign="top" class="Estilo5">
                 <p align="justify" class="Estilo2">
-                    <span class="Estilo3"><strong class="azul">Architectural Review</strong> es la revista de arquitectura verdaderamente global, que ofrece una
-                        cobertura diversa e incisiva, que abarca todas las partes del mundo. Con una historia de 120 años como la publicación de arquitectura favorita del mundo, es líder
-                        de debates y una herramienta imprescindible para las comunidades de arquitectura y diseño de todo el mundo.</span>.
+                    <span class="Estilo3"><strong class="azul">Architectural Review</strong> es la revista
+                        de arquitectura verdaderamente global, que ofrece una cobertura diversa e incisiva,
+                        que abarca todas las partes del mundo. Con una historia de 120 años como la publicación
+                        de arquitectura favorita del mundo, es líder de debates y una herramienta imprescindible
+                        para las comunidades de arquitectura y diseño de todo el mundo.</span>.
                     <br />
                     <br />
                     <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b> biblioservicios@usat.edu.pe<br />
                     <b><a class="rojo">Contraseña&nbsp;:</a></b>&nbsp;bibliotecausat<br />
-                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual Revista_RbDigital_ArchitecturalReview.pdf" target="_blank"> <!-- andy.diaz 25/06/2020 -->                        
+                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual Revista_RbDigital_ArchitecturalReview.pdf"
+                        target="_blank">
+                        <!-- andy.diaz 25/06/2020 -->
                         <br />
                         <b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b></a>
                 </p>
@@ -326,6 +333,24 @@ if codigo_usu<>"" then
         </tr>
         <tr valign="top">
             <td align="center" class="style3">
+                <a href="cuentaaccesos.asp?bib=72" target="_blank" class="Estilo2">
+                    <img src="../images/biblioteca/semanaeconomica-logo.jpg" alt="Semana Económica" width="280"
+                        height="95" border="1" /></a>
+            </td>
+            <td align="left" valign="top" class="Estilo5">
+                <p align="justify" class="Estilo2">
+                    <span class="Estilo3"><strong class="azul">Semana Económica</strong> es una publicación
+                        semanal que ofrece a sus lectores las más exclusivas primicias empresariales y el
+                        análisis del mundo económico más calificado del medio, provisto por un equipo de
+                        expertos.</span>
+                    <br />
+                    <br />
+                    <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b>biblioservicios@usat.edu.pe<br />
+                    <b><a class="rojo">Contraseña&nbsp;:</a></b>Usat2020<br />
+            </td>
+        </tr>
+        <tr valign="top">
+            <td align="center" class="style3">
                 <a href="cuentaaccesos.asp?bib=66" target="_blank" class="Estilo2">
                     <img src="../images/biblioteca/americaeco-logo.png" alt="America Economia" width="280"
                         height="95" border="1" /></a>
@@ -343,7 +368,7 @@ if codigo_usu<>"" then
                     <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b> biblioservicios@usat.edu.pe<br />
                     <b><a class="rojo">Contraseña&nbsp;:</a></b> biblioservicios@usat.edu.pe<br />
                     <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual_Revista_RbDigital_AmericaEconomia.pdf"
-                        target="_blank">                        
+                        target="_blank">
                         <br />
                         <b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b></a>
             </td>
@@ -367,9 +392,10 @@ if codigo_usu<>"" then
                     <br />
                     <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b> unicato42<br />
                     <b><a class="rojo">Contraseña&nbsp;:</a></b> dacabio03</p>
-                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual Revista_RbDigital_ForeignAffairs.pdf" target="_blank"> <!-- andy.diaz 23/06/2020 -->
-                        <b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b>
-                    </a>
+                <a class="usatenlace" href="../../campusvirtual/Biblioteca/Manual Revista_RbDigital_ForeignAffairs.pdf"
+                    target="_blank">
+                    <!-- andy.diaz 23/06/2020 -->
+                    <b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b> </a>
             </td>
         </tr>
         <!--<tr valign="top">
@@ -587,9 +613,9 @@ if codigo_usu<>"" then
                         <br />
                         Para Consultas fuera del campus universitario:</span>
                     <br />
-                    <a style="font-weight: bold">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a>&nbsp;facha200
+                    <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b> facha200
                     <br />
-                    <a style="font-weight: bold">Contraseña :</a> 325527100
+                    <b><a class="rojo">Contraseña :</a></b> 325527100
                 </p>
                 <a class="usatenlace" href="../../campusvirtual/Biblioteca/MAnual Revista DYNA.pdf"
                     target="_blank"><b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b></a>
@@ -597,7 +623,8 @@ if codigo_usu<>"" then
         </tr>
         <tr valign="top">
             <td align="center" class="style3">
-                <a href="cuentaaccesos.asp?bib=70" target="_blank" class="Estilo2">
+                <!-- <a href="cuentaaccesos.asp?bib=70" target="_blank" class="Estilo2"> -->
+                <a class="Estilo2">
                     <img src="../images/biblioteca/agronoticias-logo.png" alt="Agronoticias" width="280"
                         border="1" style="cursor: hand; height: 128px;" /></a>
                 <!--<a class="rojo"><b>Modo de acceso :</b></a><br />Dentro del Campus Universitario-->
@@ -606,14 +633,39 @@ if codigo_usu<>"" then
                 <p align="justify" class="Estilo2">
                     <span class="Estilo3"><strong class="azul">Agronoticias</strong> es la primera revista
                         peruana especializada en agricultura, ganadería, forestación, medio ambiente y desarrollo
-                        rural.
-                        <br />
-                        <br />
-                        Descargar las revistas de marzo, abril y mayo:</span>
+                        rural. </span>
                     <br />
+                    <br />
+                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/AGRONOTICIAS-475-AGOSTO-2020.pdf"
+                        target="_blank"><b class="rojo">&nbsp;&gt;&gt;Agronoticias No. 475 Agosto 2020</b>
+                    </a>
+                    <br />
+                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/AGRONOTICIAS-474-JULIO-2020.pdf"
+                        target="_blank"><b class="rojo">&nbsp;&gt;&gt;Agronoticias No. 474 Julio 2020</b>
+                    </a>
+                    <br />
+                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/AGRONOTICIAS-473-JUNIO-2020.pdf"
+                        target="_blank"><b class="rojo">&nbsp;&gt;&gt;Agronoticias No. 473 Junio 2020</b>
+                    </a>
+                    <br />
+                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/AGRONOTICIAS-472-MAYO-2020.pdf"
+                        target="_blank"><b class="rojo">&nbsp;&gt;&gt;Agronoticias No. 472 Mayo 2020</b>
+                    </a>
+                    <br />
+                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/AGRONOTICIAS-471-ABRIL-2020.pdf"
+                        target="_blank"><b class="rojo">&nbsp;&gt;&gt;Agronoticias No. 471 Abril 2020</b>
+                    </a>
+                    <br />
+                    <a class="usatenlace" href="../../campusvirtual/Biblioteca/AGRONOTICIAS-470-MARZO-2020.pdf"
+                        target="_blank"><b class="rojo">&nbsp;&gt;&gt;Agronoticias No. 470 Marzo 2020</b>
+                    </a>
+                    <br />
+                    <!-- Descargar las revistas de marzo, abril y mayo:
+                    <br />
+                    <br />
+                    <a class="usatenlace" href="https://we.tl/t-tMkDc9RsYP" target="_blank"><b class="azul">
+                        &nbsp;&gt;&gt;https://we.tl/t-tMkDc9RsYP</b></a> -->
                 </p>
-                <a class="usatenlace" href="https://we.tl/t-tMkDc9RsYP" target="_blank"><b class="azul">
-                    &nbsp;&gt;&gt;https://we.tl/t-tMkDc9RsYP</b></a>
             </td>
         </tr>
         <!--<tr class="rojo">
@@ -658,6 +710,38 @@ if codigo_usu<>"" then
             <td colspan="2">
                 <h4>
                     <br />
+                    Ingeniería Civil</h4>
+            </td>
+        </tr>
+        <!--DYNA 19 -->
+        <tr valign="top">
+            <td align="center" class="style3">
+                <a href="cuentaaccesos.asp?bib=76" target="_blank" class="Estilo2">
+                    <img src="../images/iagua.jpg" alt="Revista DYNA" width="280" border="1" style="cursor: hand;
+                        height: 128px;" /></a>
+                <!--<a class="rojo"><b>Modo de acceso :</b></a><br />Dentro del Campus Universitario-->
+            </td>
+            <td align="left" valign="top" class="Estilo5">
+                <p align="justify" class="Estilo2">
+                    <span class="Estilo3"><strong class="azul">Iagua</strong> revista centrada en la gestión
+                        del agua, que pretende ofrecer información y promover el debate entre la gran comunidad
+                        de interesados del mundo hispano. Incluye noticias, entrevistas y artículos de opinión.
+                        <br />
+                        Para Consultas fuera del campus universitario:</span>
+                    <br />
+                    <b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b> biblioservicio@usat.edu.pe
+                    
+                    <br />
+                    <b><a class="rojo">Contraseña :</a></b> Publi1234
+                </p>
+                                
+            </td>
+        </tr>
+        
+        <tr class="rojo">
+            <td colspan="2">
+                <h4>
+                    <br />
                     Tecnologías de la Información</h4>
             </td>
         </tr>
@@ -677,7 +761,7 @@ if codigo_usu<>"" then
                         <!--<b><a class="rojo">Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</a></b> quiroztequen<br />
        <b><a class="rojo">Contraseña&nbsp;:</a></b> usat2011-->
                         <a class="usatenlace" href="../../campusvirtual/Biblioteca/MANUAL EL PROFESIONAL DE LA INFORMACION.pdf"
-                            target="_blank"><b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b></a></span></p>                
+                            target="_blank"><b class="rojo">&nbsp;&gt;&gt;Descargar Manual de Usuario</b></a></span></p>
             </td>
         </tr>
         <!--E-LIBRO 16 -->

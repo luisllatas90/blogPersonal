@@ -16,13 +16,86 @@
 
     <script src="../assets/js/jquery.js" type="text/javascript"></script>
 
+    <script src="../assets/js/app.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src='../assets/js/jquery-ui-1.10.3.custom.min.js'></script>
+
+    <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <%-- ======================= Inicio Notificaciones =============================================--%>
+
+    <script type="text/javascript" src="../assets/js/noty/jquery.noty.js"></script>
+
+    <script type="text/javascript" src='../assets/js/noty/layouts/top.js'></script>
+
+    <script type="text/javascript" src='../assets/js/noty/layouts/default.js'></script>
+
+    <script type="text/javascript" src="../assets/js/noty/notifications-custom.js"></script>
+
     <script type="text/javascript">
+        $(document).ready(function() {
+            fnLoading(false);
+            $("#ddlSemestre").change(function() {
+                fnLoading(true);
+            })
+            $("#ddlEtapa").change(function() {
+                fnLoading(true);
+            })
+        });
+        function fnMensaje(typ, msje) {
+            var n = noty({
+                text: msje,
+                type: typ,
+                timeout: 3000,
+                modal: false,
+                dismissQueue: true,
+                theme: 'defaultTheme'
+
+            });
+        }
         function SelectAllCheckboxes(chk) {
             $('#<%=gvJurados.ClientID %>').find("input:checkbox").each(function() {
                 if (this != chk) {
                     this.checked = chk.checked;
                 }
             });
+        }
+        function ConfirmarAprobar() {
+            var contar = 0;
+            $('#<%=gvJurados.ClientID %>').find("input:checkbox").each(function() {
+                if (this.checked == true) {
+                    contar = contar + 1;
+                }
+            });
+            console.log(contar);
+            if (contar == 0) {
+                fnMensaje("error", "Debe Seleccionar al menos un jurado");
+                return false;
+            }
+            if (confirm("Está seguro que desea aprobar jurados seleccionados?") == true) {
+                fnLoading(true);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function ConfirmarActualizar() {
+            if (confirm("Está seguro que desea actualizar jurado?") == true) {
+                fnLoading(true);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function fnLoading(sw) {
+            if (sw) {
+                $('.piluku-preloader').removeClass('hidden');
+                //console.log("mostrar");
+            } else {
+                $('.piluku-preloader').addClass('hidden');
+                //console.log("ocultar");
+            }
+
         }
     </script>
 
@@ -82,6 +155,22 @@
             <form id="form1" runat="server">
             <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>
+            <asp:UpdatePanel runat="server" ID="updLoading" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="piluku-preloader text-center">
+                        <div class="loader">
+                            Loading...</div>
+                    </div>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="gvJurados" EventName="RowCommand" />
+                    <asp:AsyncPostBackTrigger ControlID="btnConsultar" />
+                    <asp:AsyncPostBackTrigger ControlID="btnAprobar" />
+                    <asp:AsyncPostBackTrigger ControlID="ddlSemestre" EventName="SelectedIndexChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="ddlEtapa" EventName="SelectedIndexChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="ddlCarrera" EventName="SelectedIndexChanged" />
+                </Triggers>
+            </asp:UpdatePanel>
             <div class="page_header">
                 <div class="pull-left">
                     <i class="icon ti-bookmark-alt page_header_icon"></i><span class="main-text">Listado
@@ -96,18 +185,18 @@
                 </div>--%>
                 <div class="panel-body">
                     <div class="row">
-                        <label class="col-md-1 control-label">
+                        <label class="col-sm-2 col-md-1 control-label">
                             Semestre
                         </label>
-                        <div class="col-md-3">
+                        <div class="col-sm-3 col-md-3">
                             <asp:DropDownList runat="server" class="form-control" ID="ddlSemestre" AutoPostBack="true">
                                 <asp:ListItem Value="">--Seleccione--</asp:ListItem>
                             </asp:DropDownList>
                         </div>
-                        <label class="col-md-1 control-label">
+                        <label class="col-sm-2 col-md-1 control-label">
                             Etapa
                         </label>
-                        <div class="col-md-3">
+                        <div class="col-sm-3 col-md-3">
                             <asp:DropDownList runat="server" class="form-control" ID="ddlEtapa" AutoPostBack="true">
                                 <asp:ListItem Value="">--Seleccione--</asp:ListItem>
                                 <asp:ListItem Value="P">PROYECTO</asp:ListItem>
@@ -116,9 +205,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-md-1 control-label ">
+                        <label class="col-sm-2 col-md-1 control-label ">
                             Escuela</label>
-                        <div class="col-md-7">
+                        <div class="col-sm-6 col-md-7">
                             <asp:UpdatePanel runat="server" ID="UpdatePanelAsesor">
                                 <ContentTemplate>
                                     <asp:DropDownList runat="server" class="form-control" ID="ddlCarrera" AutoPostBack="true">
@@ -131,21 +220,23 @@
                                 </Triggers>
                             </asp:UpdatePanel>
                         </div>
-                        <div class="col-md-2">
-                            <asp:Button runat="server" ID="btnConsultar" CssClass="btn btn-primary" Text="Consultar" />
+                        <div class="col-sm-2 col-md-2">
+                            <asp:Button runat="server" ID="btnConsultar" CssClass="btn btn-primary" Text="Consultar"
+                                OnClientClick="fnLoading(true)" />
                         </div>
                         <div class="col-md-1">
                         </div>
-                        <div class="col-md-1">
-                            <asp:Button runat="server" ID="btnAprobar" CssClass="btn btn-success" Text="Aprobar" OnClientClick="return confirm('¿Desea actualizar el Jurado?.')"  />
+                        <div class="col-sm-2 col-md-1">
+                            <asp:Button runat="server" ID="btnAprobar" CssClass="btn btn-success" Text="Aprobar"
+                                OnClientClick="return ConfirmarAprobar();" />
                         </div>
                     </div>
                     <div class="row">
-                        <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+                        <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <div runat="server" id="lblmensaje">
                                 </div>
-                                <asp:GridView runat="server" ID="gvJurados" DataKeyNames="codigo_Tes,codigo_jur,codigo_per,codigo_tpi"
+                                <asp:GridView runat="server" ID="gvJurados" DataKeyNames="codigo_Tes,codigo_jur,codigo_per,codigo_tpi,aprueba_dir,Jurado"
                                     AutoGenerateColumns="False" CssClass="table table-responsive">
                                     <Columns>
                                         <%--<asp:TemplateField HeaderText="N°" HeaderStyle-Width="3%">
@@ -200,7 +291,7 @@
                                             <ItemTemplate>
                                                 <div class="row">
                                                     <asp:Button runat="server" ID="btnActualizar" CommandName="Actualizar" CommandArgument='<%#Convert.ToString(Container.DataItemIndex)%>'
-                                                        CssClass="btn btn-sm btn-orange" Text="Actualizar" OnClientClick="return confirm('¿Desea actualizar el Jurado?.')" />
+                                                        CssClass="btn btn-sm btn-orange" Text="Actualizar" OnClientClick="return ConfirmarActualizar();" />
                                                 </div>
                                             </ItemTemplate>
                                             <HeaderStyle Width="9%" />
@@ -218,6 +309,9 @@
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="btnConsultar" />
                                 <asp:AsyncPostBackTrigger ControlID="btnAprobar" />
+                                <asp:AsyncPostBackTrigger ControlID="ddlSemestre" EventName="SelectedIndexChanged" />
+                                <asp:AsyncPostBackTrigger ControlID="ddlEtapa" EventName="SelectedIndexChanged" />
+                                <asp:AsyncPostBackTrigger ControlID="ddlCarrera" EventName="SelectedIndexChanged" />
                                 <%--           <asp:AsyncPostBackTrigger ControlID="cboAnio" EventName="SelectedIndexChanged" />
                                 <asp:AsyncPostBackTrigger ControlID="btnGuardar" />--%>
                             </Triggers>

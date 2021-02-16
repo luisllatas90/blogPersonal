@@ -118,7 +118,9 @@
                                         </tr>
                                         <tr>
                                             <td align="left">
-                                                &nbsp;</td>
+                                                 Semestre Académico:
+                    <asp:DropDownList ID="cboCicloAcademico" runat="server" AutoPostBack="True">
+                    </asp:DropDownList></td>
                                         </tr>
                                         <tr>
                                             <td align="left">

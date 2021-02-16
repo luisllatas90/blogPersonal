@@ -1623,7 +1623,13 @@ Partial Class frmTestRevisaDirPersonal
             Dim dts As New Data.DataTable
             Dim codigo_Cac As Integer = obj.ConsultarCicloAcademicoVigente()
             obj.ActualizarHorarioAcademico_Personal(codigo_per, codigo_pel, codigo_Cac, ddlSemana.SelectedValue)
+
+            Response.Write("ddlSemana.SelectedValue: " + ddlSemana.SelectedValue.ToString)
+
+
             dts = obj.ConsultarHorasDocencia(codigo_per, codigo_pel)
+
+
 
             'Tiene carga academica, validar cruces
             If dts.Rows.Count > 0 Then

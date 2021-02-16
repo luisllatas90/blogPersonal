@@ -107,9 +107,14 @@
                                                 <span><i class="fa fa-eye"></i></span> &nbsp; Visualizar
 						                    </asp:LinkButton>
 	                                    </div>  --%>
-	                                     <div class="col-sm-1">
+	                                    <div class="col-sm-1">
 	                                        <asp:LinkButton ID="lbGeneraSolicitud" runat="server" CssClass="btn btn-info" ToolTip="Solicitar PDF" Visible = "true">
                                                 <span><i class="fa fa-file-pdf"></i></span> &nbsp; Solicitar
+						                    </asp:LinkButton>
+	                                    </div>
+	                                    <div class="col-sm-1">
+	                                        <asp:LinkButton ID="lbNotas" runat="server" CssClass="btn btn-info" ToolTip="Solicitar PDF" Visible = "true">
+                                                <span><i class="fa fa-file-pdf"></i></span> &nbsp; Notas 
 						                    </asp:LinkButton>
 	                                    </div>
 	                                    <div class="col-sm-1">
@@ -129,6 +134,35 @@
                                                 <span><i class="fa fa-file-pdf"></i></span> &nbsp; Acta 
 						                    </asp:LinkButton>
 	                                    </div>
+	                                    
+	                                    <div class="col-sm-1">
+	                                        <asp:LinkButton ID="lbAutorRepos" runat="server" CssClass="btn btn-info" ToolTip="Solicitar PDF" Visible = "true">
+                                                <span><i class="fa fa-file-pdf"></i></span> &nbsp; Publicacion 
+						                    </asp:LinkButton>
+	                                    </div>	                                    
+	                                    <div class="col-sm-1">
+	                                        <asp:LinkButton ID="lbActaAprob" runat="server" CssClass="btn btn-info" ToolTip="Solicitar PDF" Visible = "true">
+                                                <span><i class="fa fa-file-pdf"></i></span> &nbsp; Aprobación 
+						                    </asp:LinkButton>
+	                                    </div>
+	                                    <div class="col-sm-1">
+	                                        <asp:LinkButton ID="lbEmail" runat="server" CssClass="btn btn-info" ToolTip="Email" Visible = "true">
+                                                <span><i class="fa fa-file-pdf"></i></span> &nbsp; Email 
+						                    </asp:LinkButton>
+	                                    </div>
+	                                    
+	                                    <div class="col-sm-1">
+	                                        <asp:LinkButton ID="lbCarta" runat="server" CssClass="btn btn-info" ToolTip="Email" Visible = "true">
+                                                <span><i class="fa fa-file-pdf"></i></span> &nbsp; Carta 
+						                    </asp:LinkButton>
+	                                    </div>
+	                                    <div class="col-sm-1">
+	                                        <asp:LinkButton ID="lbSaeta" runat="server" CssClass="btn btn-info" ToolTip="Saeta" Visible = "true">
+                                                <span><i class="fa fa-file-pdf"></i></span> &nbsp; saeta 
+						                    </asp:LinkButton>
+	                                    </div>
+	                                    
+	                                    
 	                                    
                                         <asp:TextBox ID="txtCodigo_cda" runat="server" Visible ="false" ></asp:TextBox>       
                                     </div>

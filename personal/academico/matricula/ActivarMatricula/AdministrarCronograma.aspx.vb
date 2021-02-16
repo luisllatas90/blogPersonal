@@ -91,7 +91,8 @@ Partial Class academico_matricula_administrar_AdministrarCronograma
             Dim codigo_crmat As Integer = 0
             Dim codigo_cac As Integer = 0
             Dim codigo_act As Integer = 0
-           
+            Dim codigo_test As Integer = 0
+
             If (e.CommandName = "configurar") Then
                 tableMat.Visible = True
                 Me.divCro.Visible = False
@@ -99,11 +100,13 @@ Partial Class academico_matricula_administrar_AdministrarCronograma
                 tituloMat.InnerHtml = "[" & cboTipoEstudio.SelectedItem.Text & "] " & gvCronograma.DataKeys(index).Values("Ciclo Acad.").ToString & " " & gvCronograma.DataKeys(index).Values("Actividad").ToString
                 codigo_cac = gvCronograma.DataKeys(index).Values("codigo_Cac")
                 codigo_act = gvCronograma.DataKeys(index).Values("codigo_Act")
+                codigo_test = gvCronograma.DataKeys(index).Values("codigo_test")
                 Session("selcodigo_Cac") = codigo_cac
                 Session("selcodigo_Act") = codigo_act
+                Session("selcodigo_Test") = codigo_test
 
-
-                consultarMatricula(codigo_crmat, codigo_cac, codigo_act)
+                'Response.Write(Session("selcodigo_Test"))
+                consultarMatricula(codigo_crmat, codigo_cac, codigo_act, codigo_test)
 
             End If
 
@@ -131,7 +134,7 @@ Partial Class academico_matricula_administrar_AdministrarCronograma
                 Dim tb As New Data.DataTable
                 obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
                 obj.AbrirConexion()
-                tb = obj.TraerDataTable("cronograma_matriculaListar", codigo_crmat, 0, 0)
+                tb = obj.TraerDataTable("cronograma_matriculaListar", codigo_crmat, 0, 0, 0)
                 obj.CerrarConexion()
                 obj = Nothing
                 nuevo()
@@ -157,7 +160,7 @@ Partial Class academico_matricula_administrar_AdministrarCronograma
                 obj.CerrarConexion()
 
                 If lblResultado Then
-                    consultarMatricula(0, CInt(Session("selcodigo_Cac")), CInt(Session("selcodigo_Act")))
+                    consultarMatricula(0, CInt(Session("selcodigo_Cac")), CInt(Session("selcodigo_Act")), CInt(Session("selcodigo_Test")))
                 Else
                     Response.Write("Error")
                 End If
@@ -256,7 +259,7 @@ Partial Class academico_matricula_administrar_AdministrarCronograma
 
     End Function
 
-    Private Sub consultarMatricula(ByVal codigo_crmat As Integer, ByVal codigo_Cac As Integer, ByVal codigo_Act As Integer)
+    Private Sub consultarMatricula(ByVal codigo_crmat As Integer, ByVal codigo_Cac As Integer, ByVal codigo_Act As Integer, ByVal codigo_Test As Integer)
         Try
             divLoad.Visible = True
 
@@ -264,7 +267,7 @@ Partial Class academico_matricula_administrar_AdministrarCronograma
             Dim tb As New Data.DataTable
             obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
             obj.AbrirConexion()
-            tb = obj.TraerDataTable("cronograma_matriculaListar", codigo_crmat, codigo_Cac, codigo_Act)
+            tb = obj.TraerDataTable("cronograma_matriculaListar", codigo_crmat, codigo_Cac, codigo_Act, codigo_Test)
             Me.lstGrupo.DataSource = tb
             Me.lstGrupo.DataBind()
             obj.CerrarConexion()
@@ -276,7 +279,7 @@ Partial Class academico_matricula_administrar_AdministrarCronograma
         Catch ex As Exception
 
         End Try
-        
+
     End Sub
 
     Protected Sub btnCancelar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelar.Click
@@ -335,9 +338,9 @@ Partial Class academico_matricula_administrar_AdministrarCronograma
 
 
                 If txtid.Value = "" Then
-                    lblResultado = obj.Ejecutar("cronograma_matriculaRegistro", "I", 0, CInt(Session("selcodigo_Cac")), CInt(Session("selcodigo_Act")), txtppsi.Value, txtppsf.Value, txtfi.Text, txtff.Text, 1, Session("perlogin"))
+                    lblResultado = obj.Ejecutar("cronograma_matriculaRegistro", "I", 0, CInt(Session("selcodigo_Cac")), CInt(Session("selcodigo_Act")), CInt(Session("selcodigo_Test")), txtppsi.Value, txtppsf.Value, txtfi.Text, txtff.Text, 1, Session("perlogin"))
                 Else
-                    lblResultado = obj.Ejecutar("cronograma_matriculaRegistro", "A", Desencriptar(txtid.Value), CInt(Session("selcodigo_Cac")), CInt(Session("selcodigo_Act")), txtppsi.Value, txtppsf.Value, txtfi.Text, txtff.Text, 1, Session("perlogin"))
+                    lblResultado = obj.Ejecutar("cronograma_matriculaRegistro", "A", Desencriptar(txtid.Value), CInt(Session("selcodigo_Cac")), CInt(Session("selcodigo_Act")), CInt(Session("selcodigo_Test")), txtppsi.Value, txtppsf.Value, txtfi.Text, txtff.Text, 1, Session("perlogin"))
                 End If
                 ' Response.Write(Session("selcodigo_Act"))
                 'Response.Write(Session("selcodigo_Cac"))
@@ -345,7 +348,7 @@ Partial Class academico_matricula_administrar_AdministrarCronograma
                 obj.CerrarConexion()
                 If lblResultado Then
                     ' Response.Write("V")
-                    consultarMatricula(0, CInt(Session("selcodigo_Cac")), CInt(Session("selcodigo_Act")))
+                    consultarMatricula(0, CInt(Session("selcodigo_Cac")), CInt(Session("selcodigo_Act")), CInt(Session("selcodigo_Test")))
                     cancelar()
                     consultar()
                 Else
@@ -398,7 +401,7 @@ Partial Class academico_matricula_administrar_AdministrarCronograma
 
     Protected Sub btnConsultar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConsultar.Click
 
-        consultarMatricula(0, CInt(Session("selcodigo_Cac")), CInt(Session("selcodigo_Act")))
+        consultarMatricula(0, CInt(Session("selcodigo_Cac")), CInt(Session("selcodigo_Act")), CInt(Session("selcodigo_Test")))
     End Sub
 
     Protected Sub gvCronograma_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles gvCronograma.RowDataBound
@@ -409,10 +412,11 @@ Partial Class academico_matricula_administrar_AdministrarCronograma
             index = e.Row.RowIndex
 
             btn.enabled = False
-            If Me.cboTipoEstudio.SelectedValue = 2 Then
+            If Me.cboTipoEstudio.SelectedValue = 2 Or Me.cboTipoEstudio.SelectedValue = 10 Then
                 If (gvCronograma.DataKeys(e.Row.RowIndex).Values("codigo_Act") = "1" Or gvCronograma.DataKeys(e.Row.RowIndex).Values("codigo_Act") = "9" _
                         Or gvCronograma.DataKeys(e.Row.RowIndex).Values("codigo_Act") = "12" _
-                        Or gvCronograma.DataKeys(e.Row.RowIndex).Values("codigo_Act") = "37") Then
+                        Or gvCronograma.DataKeys(e.Row.RowIndex).Values("codigo_Act") = "37" _
+                        Or gvCronograma.DataKeys(e.Row.RowIndex).Values("codigo_Act") = "55") Then
                     btn.Enabled = True
                     '9 MATRICULA VÍA CAMPUS ASESOR
                     '12 MATRICULA VIA CAMPUS COORD. ACADEMICA

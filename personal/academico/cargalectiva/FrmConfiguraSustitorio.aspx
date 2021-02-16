@@ -159,7 +159,7 @@
     </table>    
     </div>
     <br />
-    <asp:Button ID="btnGenerar" runat="server" Text="Generar Ex. Recuperacion" CssClass="btn"/>
+    <asp:Button ID="btnGenerar" runat="server" Text="Generar Ex. Recuperación" CssClass="btn"/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="btnCopiarHorario" runat="server" Text="Copiar Horario" 
         CssClass="btn"/>

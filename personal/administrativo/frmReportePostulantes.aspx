@@ -106,7 +106,7 @@
                 <asp:DropDownList ID="ddlProceso" runat="server" Width="100%">
                 </asp:DropDownList>
             </td>
-            <td style="width:10%">Postulacion</td>
+            <td style="width:10%">Postulación</td>
             <td style="width:15%">
                  <asp:DropDownList ID="ddlEstPostulacion" runat="server" Width="100%">
                     <asp:ListItem Selected="True" Value="%">&gt;&gt; Seleccione&lt;&lt;</asp:ListItem>
@@ -143,7 +143,7 @@
             </td>
         </tr>        
         <tr>
-            <td>Categorizacion</td>
+            <td>Categorización</td>
             <td>
                  <asp:DropDownList ID="ddlCategorizado" runat="server" Width="100%">
                      <asp:ListItem Value="1">Si</asp:ListItem>
@@ -199,7 +199,7 @@
                      <asp:ListItem Value="">TODOS</asp:ListItem>                     
                 </asp:DropDownList>
             </td>
-            <td>Pag&oacute; matricula</td>
+            <td>Pag&oacute; matrícula</td>
             <td>
                 <asp:CheckBox ID="chkMatCancelada" runat="server"  /></td>
             <td></td>
@@ -279,7 +279,7 @@
                   </ItemTemplate>        
             </asp:TemplateField>
                        
-            <asp:TemplateField HeaderText="Observacion">
+            <asp:TemplateField HeaderText="Observación">
                     <ItemTemplate>
                         <asp:TextBox ID="txtObservacion" runat="server" Style="position: static" Text='<%# Bind("observacion_Dal") %>'></asp:TextBox>
                     </ItemTemplate>

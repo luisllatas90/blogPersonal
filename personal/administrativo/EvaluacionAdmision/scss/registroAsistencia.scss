@@ -1,0 +1,67 @@
+$color: #d7d6d6;
+$disabledColor: white;
+
+#btnListar {
+    margin-left: auto;
+}
+
+.custom-checkbox {
+    &.no-label {
+        padding-left: 0;
+        padding-right: 0;
+        .custom-control-label {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
+
+.o-switch.btn-group {
+    input[type="radio"] {
+        display: none;
+    }
+    > .btn {
+        &:not(.active) {
+            color: #212529;
+            // background-color: #f8f9fa;
+            // border-color: #f8f9fa;
+            // color: #212529;
+            background-color: $color;
+            border-color: $color;
+            &:not(.disabled):hover {
+                background-color: $color * 0.95;
+                border-color: $color * 0.95;
+            }
+            &.disabled {
+                background-color: $disabledColor;
+                border-color: #bcbcbc;
+                color: #212529;
+            }
+        }
+        &.disabled {
+            cursor: not-allowed;
+        }
+        font-size: 0.7rem;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+#grvAsistencia {
+    td:last-child {
+        min-width: 200px;
+    }
+}
+
+.title {
+    > .grupo-cerrado {
+        font-size: 0.75rem;
+    }
+}
+
+.dataTables_filter {
+    > label {
+        font-size: 0.9rem;
+    }
+}
+

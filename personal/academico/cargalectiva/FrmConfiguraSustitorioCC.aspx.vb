@@ -5,7 +5,7 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorioCC
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load                
         If (Session("id_per") Is Nothing) Then
-            Response.Redirect("../../../sinacceso.html")
+            Response.Redirect("https://intranet.usat.edu.pe/campusvirtual/sinacceso.html")
         End If
 
         If (IsPostBack = False) Then
@@ -77,8 +77,8 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorioCC
 
     End Sub
 
-    Private Sub verificarFuncionesDirectorEscuela() ' #EPENA 26/11/2019
-        If fnEsDirectorCC() Or fnEsCoordinadorDA() Or fnEsDirectorAcademico() Or fnEsAdministradorSistema() Then
+    Private Sub verificarFuncionesDirectorEscuela() ' #EPENA 26/11/2019 
+        If fnEsDirectorCC() Or fnEsCoordinadorDA() Or fnEsDirectorAcademico() Or fnEsAdministradorSistema() Or fnEsCoordinadorCC() Then
             Me.btnGenerar.Enabled = True
             Me.btnCopiarHorario.Enabled = True
         Else
@@ -210,6 +210,30 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorioCC
 
     End Function
 
+    Private Function fnEsCoordinadorCC() As Boolean ' #EPENA 261/11/2019
+        Try
+
+            Dim rpta As Boolean = False
+            Dim tipo As String = ""
+
+            Dim ctf As Integer = 0
+
+            ctf = CInt(Desencriptar(Me.hdFn.Value.ToString))
+            If ctf = 237 Then
+                rpta = True
+            Else
+                rpta = False
+            End If
+
+            Return rpta
+
+        Catch ex As Exception
+            Return False
+
+        End Try
+
+    End Function
+
     Private Function fnEsAdministradorSistema() As Boolean ' #EPENA 261/11/2019
         Try
 
@@ -305,17 +329,32 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorioCC
         Dim dt As New Data.DataTable
         Try
             obj1.AbrirConexion()
-            dt = obj1.TraerDataTable("ACAD_VerificaCronogramaExamen")
+            dt = obj1.TraerDataTable("ACAD_VerificaCronogramaExamen", Request.QueryString("mod"))
             obj1.CerrarConexion()
-            If (dt.Rows.Count = 0) Then
-                Me.btnBuscar.Enabled = False
-                Me.btnGenerar.Enabled = False
-                Me.lblMensaje.Text = "El cronograma no permite registrar programación de examenes de recuperación."
-            Else
+            'andy.diaz 23/12/2020: Habilito las operaciones para COORD. DIRECCIÓN ACADÉMICA y DIRECCIÓN ACADÉMICA
+            'If (dt.Rows.Count = 0) Then
+            '    Me.btnBuscar.Enabled = False
+            '    Me.btnGenerar.Enabled = False
+            '    Me.lblMensaje.Text = "El cronograma no permite registrar programación de examenes de recuperación."
+            'Else
+            '    Me.btnBuscar.Enabled = True
+            '    Me.btnGenerar.Enabled = True
+            '    Me.lblMensaje.Text = ""
+            'End If
+            Dim tfuCoordinadorDirAcad As Integer = 85
+            Dim tfuAdmin As Integer = 1
+            Dim tienePermiso As Boolean = (Request.QueryString("ctf") = tfuCoordinadorDirAcad _
+                                           OrElse Request.QueryString("ctf") = tfuAdmin)
+            If dt.Rows.Count > 0 OrElse tienePermiso Then
                 Me.btnBuscar.Enabled = True
                 Me.btnGenerar.Enabled = True
                 Me.lblMensaje.Text = ""
+            Else
+                Me.btnBuscar.Enabled = False
+                Me.btnGenerar.Enabled = False
+                Me.lblMensaje.Text = "El cronograma no permite registrar programación de examenes de recuperación."
             End If
+            '/andy.diaz 23/12/2020
         Catch ex As Exception
             Me.lblMensaje.Text = "Error al verificar el cronograma: " & ex.Message
             Me.btnBuscar.Enabled = False
@@ -784,13 +823,19 @@ Partial Class academico_cargalectiva_FrmConfiguraSustitorioCC
             End If
 
             If (e.CommandName = "EliminarHorario") Then
-                Dim obj As New ClsConectarDatos
-                obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
-                obj.AbrirConexion()
-                obj.Ejecutar("HorarioPE_EliminarLH", gvProgramado.DataKeys(index).Values("codigo_lho"))
-                obj.CerrarConexion()
-                obj = Nothing
-                btnBuscar_Click(sender, e)
+                If Not String.IsNullOrEmpty(gvProgramado.DataKeys(index).Values("codigo_lho").ToString) Then
+                    Me.lblMensaje.Text = ""
+
+                    Dim obj As New ClsConectarDatos
+                    obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+                    obj.AbrirConexion()
+                    obj.Ejecutar("HorarioPE_EliminarLH", gvProgramado.DataKeys(index).Values("codigo_lho"))
+                    obj.CerrarConexion()
+                    obj = Nothing
+                    btnBuscar_Click(sender, e)
+                Else
+                    Me.lblMensaje.Text = "No presenta horario asignado a borrar"
+                End If
             End If
 
             '# EPENA 27/01/2019 INICIO

@@ -210,7 +210,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <asp:GridView ID="gvCoordinador" runat="server" AutoGenerateColumns="false" ShowHeader="true"
-                            AllowPaging="True" PageSize="20" DataKeyNames="codigo_coo, codigo_cur, codigo_per, codigo_pes, nombre_Cur, indicador_coo"
+                            AllowPaging="True" PageSize="20" DataKeyNames="codigo_coo, codigo_cur, codigo_per, codigo_pes, nombre_Cur, indicador_coo, creditos_Cur"
                             OnRowDataBound="gvCoordinador_RowDataBound" CssClass="table table-bordered table-hover">
                             <Columns>
                                 <asp:BoundField DataField="cicloRom" HeaderText="Ciclo" />

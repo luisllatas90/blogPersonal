@@ -33,9 +33,6 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
         If (Session("id_per") Is Nothing) Then
             Response.Redirect("../../sinacceso.html")
         End If
-
-
-
         codigo_tfu = Request.QueryString("ctf")
         'tipoestudio = Request.QueryString("mod")
         tipoestudio = "2"
@@ -46,75 +43,19 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
             Call mt_CargarComboEstado()
             Call mt_CargarComboArea()
             Call mt_CargarComboFuncion()
-            Call mt_CargarConfiguracionDocumentos()
+            Call mt_CargarConfiguracionDocumentos("GEN", 0)
             Call mt_CargarComboTipoDocumento()
             Call mt_CargarComboDocumento()
-
-            Me.lbAgregar.Enabled = True
-            Me.lbModificar.Enabled = False
+            Call mt_CargarComboDocumentoSel()
+            'Me.lbAgregar.Enabled = True
+            'Me.lbModificar.Enabled = False
             Me.ddlEstado_cda.Enabled = False
 
-            Me.imgIndicacion.ImageUrl = "../GestionDocumentaria/img/indicacion.png"
+
+            Me.imgIndicacion.ImageUrl = "../GestionDocumentaria/img/indicacion1.png"
         Else
-            mt_CargarConfiguracionDocumentos()
+            mt_CargarConfiguracionDocumentos("GEN", 0)
         End If
-    End Sub
-
-    Protected Sub lbAgregar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lbAgregar.Click
-        Try
-            Dim codigo_tid As Integer = 0
-            Dim dt As New Data.DataTable
-            Dim codigo_cda As Integer = 0
-            me_tipoDocumento = New e_TipoDocumentacion
-            me_confDocArea = New e_ConfigurarDocumentoArea
-
-
-            md_tipoDoc = New d_TipoDocumenntacion
-            md_confDocArea = New d_ConfigurarDocumentoArea
-
-            '************validaciones
-            If (Me.ddlCodigo_are.SelectedValue = "") Then
-                Call mt_ShowMessage("Debe Seleccionar un área", MessageType.warning)
-                Me.ddlCodigo_are.Focus()
-                Exit Sub
-            ElseIf (Me.ddlCodigo_tfu.SelectedValue = "") Then
-                Call mt_ShowMessage("Debe seleccionar una función", MessageType.warning)
-                Me.ddlCodigo_tfu.Focus()
-                Exit Sub
-            ElseIf (Me.ddlCodigo_tid.SelectedValue = "") Then
-                Call mt_ShowMessage("Seleccione tipo de documento", MessageType.warning)
-                Me.ddlCodigo_tid.Focus()
-                Exit Sub
-            ElseIf (Me.ddlDocumento.SelectedValue = "") Then
-                Call mt_ShowMessage("Seleccione documento ", MessageType.warning)
-                Me.ddlDocumento.Focus()
-                Exit Sub
-               
-            End If
-           
-            With me_confDocArea
-                .codigo_are = Me.ddlCodigo_are.SelectedValue
-                .codigo_cda = codigo_cda
-                .codigo_tid = Me.ddlCodigo_tid.SelectedValue
-                .codigo_tfu = Me.ddlCodigo_tfu.SelectedValue
-                .estado_cda = Me.ddlEstado_cda.SelectedValue
-                .codigo_doc = Me.ddlDocumento.SelectedValue
-                .indFirma = Me.chkIndFirma.Checked
-                .usuarioReg = codigo_usu
-            End With
-
-
-            codigo_cda = md_confDocArea.RegistrarActualizarConfigurarDocumentoArea(me_confDocArea)
-            Call mt_CargarConfiguracionDocumentos()
-            Me.udpListadoConf.Update()
-
-            Me.mt_limpiar()
-            Call mt_ShowMessage("Se registró con éxito la configuración del documento", MessageType.success)
-
-
-        Catch ex As Exception
-            Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
-        End Try
     End Sub
 
     Protected Sub gvListaConfiguraDocumnetos_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles gvListaConfiguraDocumnetos.RowCommand
@@ -129,8 +70,8 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
             Select Case e.CommandName
 
                 Case "editConfiDoc"
-                    Me.lbAgregar.Enabled = False
-                    Me.lbModificar.Enabled = True
+                    'Me.lbAgregar.Enabled = False
+                    'Me.lbModificar.Enabled = True
                     Me.ddlEstado_cda.Enabled = True
 
                     dt = md_confDocArea.ListarConfigurarDocumentoArea("COD", codigo_cda, "", 0, 0, 0, 0)
@@ -145,10 +86,10 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
                             Me.chkIndFirma.Checked = .Item("indFirma")
                         End With
                     End If
-                    Me.udpFiltros.Update()
+                    Call mt_ActivaActualiza()
 
                 Case "editFirmas"
-
+                    'Call mt_limpiarModFirma()
                     Me.txtCodigo_cda_modFma.Text = codigo_cda
                     dt = md_confDocArea.ListarConfigurarDocumentoArea("COD", codigo_cda, "", 0, 0, 0, 0)
                     If dt.Rows.Count > 0 Then
@@ -159,13 +100,13 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
                     End If
                     'Call mt_CargarComboUsuarioFirma(Me.txtCodigo_tfu_modFma.Text)
                     Call mt_CargarComboFuncionFirma()
-                    Call mt_CargarComboAlcance()
+                    Call mt_CargarComboAlcance(Me.ddlCodigo_tfu_modFma.SelectedValue)
                     Call mt_CargarGrillaConfiguraFirma()
                     ScriptManager.RegisterStartupScript(Me, Me.Page.GetType, "openModalFirmas", "openModalFirmas();", True)
                     Me.udpFirmas.Update()
 
             End Select
-            
+
 
         Catch ex As Exception
             Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
@@ -193,39 +134,6 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
 
 
             End If
-        Catch ex As Exception
-            Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
-        End Try
-    End Sub
-
-    Protected Sub lbModificar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lbModificar.Click
-        Try
-            'me_tipoDocumento = New e_TipoDocumentacion
-            me_confDocArea = New e_ConfigurarDocumentoArea
-
-            'md_tipoDoc = New d_TipoDocumenntacion
-            md_confDocArea = New d_ConfigurarDocumentoArea
-
-            With me_confDocArea
-                .codigo_are = Me.ddlCodigo_are.SelectedValue
-                .codigo_cda = Me.txtCodigo_cda.Text
-                .codigo_tid = Me.ddlCodigo_tid.SelectedValue
-                .codigo_tfu = Me.ddlCodigo_tfu.SelectedValue
-                .estado_cda = Me.ddlEstado_cda.SelectedValue
-                .codigo_doc = Me.ddlDocumento.SelectedValue
-                .usuarioReg = codigo_usu
-                .indFirma = Me.chkIndFirma.Checked
-            End With
-
-            md_confDocArea.RegistrarActualizarConfigurarDocumentoArea(me_confDocArea)
-
-            Call mt_CargarConfiguracionDocumentos()
-            Call mt_limpiar()
-
-            Call mt_ShowMessage("Registro Actualizado", MessageType.success)
-
-            Me.udpListadoConf.Update()
-
         Catch ex As Exception
             Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
         End Try
@@ -549,9 +457,11 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
                 .orden_fma = IIf(Me.txtOrden_fma.Text = "", "0", Me.txtOrden_fma.Text)
                 .fechaReg = Now()
                 .usarioReg = codigo_usu
+
             End With
 
             codigo_fma = md_configuraFirma.RegistraActualizarConfiguraFirma(me_configuraFirma)
+
             Call mt_limpiarModFirma()
             Call mt_CargarGrillaConfiguraFirma()
             Me.udpFirmas.Update()
@@ -562,6 +472,109 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
         End Try
         
     End Sub
+
+    Protected Sub gvConfiguraFirma_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCommandEventArgs) Handles gvConfiguraFirma.RowCommand
+        Try
+            Dim codigo_fma As Integer
+            Dim index As Integer = 0 : index = CInt(e.CommandArgument)
+            codigo_fma = Me.gvConfiguraFirma.DataKeys(index).Values("codigo_fma")
+
+            Select Case e.CommandName
+                Case "editFirma"
+                    Me.txtCodigo_fma.Text = codigo_fma
+                    Call mt_CargarFirmaBycodigoFirma(Me.txtCodigo_fma.Text)
+            End Select
+            Me.udpFirmas.Update()
+
+        Catch ex As Exception
+            Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
+        End Try
+    End Sub
+
+    Protected Sub lbAdd_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lbAdd.Click
+        Me.txtCodigo_cda.Text = "0"
+        Call mt_limpiar()
+        Call mt_ActivaActualiza()
+    End Sub
+
+    Protected Sub btnResgresar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnResgresar.Click
+        Call mt_ActivaLista()
+    End Sub
+
+    Protected Sub lbGuardarConf_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lbGuardarConf.Click
+        Try
+            '************validaciones
+            If (Me.ddlCodigo_are.SelectedValue = "") Then
+                Call mt_ShowMessage("Debe Seleccionar un área", MessageType.warning)
+                Me.ddlCodigo_are.Focus()
+                Exit Sub
+            ElseIf (Me.ddlCodigo_tfu.SelectedValue = "") Then
+                Call mt_ShowMessage("Debe seleccionar una función", MessageType.warning)
+                Me.ddlCodigo_tfu.Focus()
+                Exit Sub
+            ElseIf (Me.ddlCodigo_tid.SelectedValue = "") Then
+                Call mt_ShowMessage("Seleccione tipo de documento", MessageType.warning)
+                Me.ddlCodigo_tid.Focus()
+                Exit Sub
+            ElseIf (Me.ddlDocumento.SelectedValue = "") Then
+                Call mt_ShowMessage("Seleccione documento ", MessageType.warning)
+                Me.ddlDocumento.Focus()
+                Exit Sub
+            End If
+            '********* fin de validaciones
+
+            me_confDocArea = New e_ConfigurarDocumentoArea
+            md_confDocArea = New d_ConfigurarDocumentoArea
+
+            With me_confDocArea
+                .codigo_are = Me.ddlCodigo_are.SelectedValue
+                .codigo_cda = Me.txtCodigo_cda.Text
+                .codigo_tid = Me.ddlCodigo_tid.SelectedValue
+                .codigo_tfu = Me.ddlCodigo_tfu.SelectedValue
+                .estado_cda = Me.ddlEstado_cda.SelectedValue
+                .codigo_doc = Me.ddlDocumento.SelectedValue
+                .usuarioReg = codigo_usu
+                .indFirma = Me.chkIndFirma.Checked
+            End With
+
+
+            ' Call mt_ShowMessage(me_confDocArea.codigo_cda, MessageType.success)
+
+
+            md_confDocArea.RegistrarActualizarConfigurarDocumentoArea(me_confDocArea)
+            Call mt_limpiar()
+
+           
+
+            Call mt_ShowMessage("Configuración Guardada", MessageType.success)
+
+           
+        Catch ex As Exception
+            Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
+        End Try
+    End Sub
+
+    Protected Sub ddlDocumentoSel_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlDocumentoSel.SelectedIndexChanged
+        If Me.ddlDocumentoSel.SelectedValue = "-1" Then
+            Call mt_CargarConfiguracionDocumentos("GEN", 0)
+        Else
+            Call mt_CargarConfiguracionDocumentos("DOC", Me.ddlDocumentoSel.SelectedValue)
+        End If
+    End Sub
+
+    Protected Sub ddlCodigo_tfu_modFma_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlCodigo_tfu_modFma.SelectedIndexChanged
+        Try
+           
+            Call mt_CargarComboAlcance(Me.ddlCodigo_tfu_modFma.SelectedValue)
+
+
+
+        Catch ex As Exception
+            Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
+        End Try
+    End Sub
+
+
 
 #End Region
 
@@ -613,13 +626,13 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
         End Try
     End Sub
 
-    Private Sub mt_CargarConfiguracionDocumentos()
+    Private Sub mt_CargarConfiguracionDocumentos(ByVal opcion As String, ByVal codigo_doc As Integer)
         md_confDocArea = New d_ConfigurarDocumentoArea
         Dim dt As New Data.DataTable
 
         Try
 
-            dt = md_confDocArea.ListarConfigurarDocumentoArea("GEN", 0, "", 0, 0, 0, 0)
+            dt = md_confDocArea.ListarConfigurarDocumentoArea(opcion, 0, "", 0, codigo_doc, 0, 0)
 
             If dt.Rows.Count > 0 Then
                 Me.gvListaConfiguraDocumnetos.DataSource = dt
@@ -713,12 +726,14 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
         Me.ddlDocumento.SelectedValue = ""
         Me.ddlEstado_cda.SelectedValue = "1"
         'Me.txtAbreviatura_tid.Text = String.Empty
-        Me.txtCodigo_cda.Text = String.Empty
+        Me.txtCodigo_cda.Text = "0" 'String.Empty
         Me.ddlCodigo_tid.SelectedValue = ""
         'Me.txtDescripcion_tid.Text = String.Empty
-        Me.lbModificar.Enabled = False
-        Me.lbAgregar.Enabled = True
+        'Me.lbModificar.Enabled = False
+        'Me.lbAgregar.Enabled = True
         Me.ddlEstado_cda.Enabled = False
+        Me.ddlDocumentoSel.SelectedValue = -1
+
 
     End Sub
 
@@ -771,22 +786,6 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
             Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
         End Try
     End Sub
-
-    'Private Sub mt_CargarComboUsuarioFirma(ByVal codigo_tfu As Integer)
-    '    Try
-    '        md_Funciones = New d_Funciones
-    '        md_confDocArea = New d_ConfigurarDocumentoArea
-
-    '        Dim dt As New Data.DataTable
-
-    '        dt = md_confDocArea.ListarUsuarioFirma(codigo_tfu)
-
-    '        Call md_Funciones.CargarCombo(Me.ddlUsuarioFirma, dt, "codigo_per", "NombreUsuario", True, "[-- SELECCIONE --]", "")
-
-    '    Catch ex As Exception
-    '        Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
-    '    End Try
-    'End Sub
 
     Private Sub mt_limpiarModFirma()
         Me.txtCodigo_fma.Text = String.Empty
@@ -843,20 +842,77 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
         End Try
     End Sub
 
-    Private Sub mt_CargarComboAlcance()
-        '***** Tio de Reporte
-        Me.ddlAlcance_modFma.Items.Clear()
-        'Me.ddlTipoReporte.Items.Add("[--SELECCIONE--]")
-        'Me.ddlTipoReporte.Items.Add("CONSTANCIA DE MATRICULA")
-        'Me.ddlTipoReporte.Items.Add("CONSTANCIA DE NOTAS")
+    Private Sub mt_CargarComboAlcance(ByVal codigo_tfu As String)
+        Try
+            If codigo_tfu = "57" Then '' Consejo universitario
+                Me.ddlAlcance_modFma.Items.Clear()
+                Me.ddlAlcance_modFma.DataSource = Nothing
+                Me.ddlAlcance_modFma.DataBind()
+                md_Funciones = New d_Funciones
+                md_confDocArea = New d_ConfigurarDocumentoArea
+                Dim dt As New Data.DataTable
+                dt = md_confDocArea.ListarUsuarioFirma(codigo_tfu)
+                Call md_Funciones.CargarCombo(Me.ddlAlcance_modFma, dt, "codigo_cgo", "descripcion_Cgo", True, "[-- SELECCIONE --]", "")
+            Else
+                Me.ddlAlcance_modFma.Items.Clear()
+                Me.ddlAlcance_modFma.Items.Add(New ListItem("[--SELECCIONE--]", ""))
+                Me.ddlAlcance_modFma.Items.Add(New ListItem("ADMINISTRATIVO", "A"))
+                Me.ddlAlcance_modFma.Items.Add(New ListItem("DEPARTAMENTO ACADEMICO", "D"))
+                Me.ddlAlcance_modFma.Items.Add(New ListItem("ESCUELA", "E"))
+                Me.ddlAlcance_modFma.Items.Add(New ListItem("FACULTAD", "F"))
+            End If
+            Me.udpFirmas.Update()
+        Catch ex As Exception
+            Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
+        End Try
+    End Sub
 
-        Me.ddlAlcance_modFma.Items.Add(New System.Web.UI.WebControls.ListItem("[--SELECCIONE--]", ""))
-        Me.ddlAlcance_modFma.Items.Add(New System.Web.UI.WebControls.ListItem("ADMINISTRATIVO", "A"))
-        Me.ddlAlcance_modFma.Items.Add(New System.Web.UI.WebControls.ListItem("DEPARTAMENTO ACADEMICO", "D"))
-        Me.ddlAlcance_modFma.Items.Add(New System.Web.UI.WebControls.ListItem("ESCUELA", "E"))
-        Me.ddlAlcance_modFma.Items.Add(New System.Web.UI.WebControls.ListItem("FACULTAD", "F"))
+    Private Sub mt_CargarFirmaBycodigoFirma(ByVal codigo_fma As Integer)
+        Try
+            md_configuraFirma = New d_configuraFirma
+            Dim dt As New Data.DataTable
+            dt = md_configuraFirma.ListarConfiguraFirma("", codigo_fma, 0, 0, 0, 0, "")
+            If dt.Rows.Count > 0 Then
+                With dt.Rows(0)
+                    Me.ddlCodigo_tfu_modFma.SelectedValue = .Item("codigo_tfu")
+                    Me.ddlAlcance_modFma.SelectedValue = .Item("cod_alcance")
+                End With
+            End If
 
-        'Me.ddlTipoReporte.SelectedIndex = tipoPrint
+        Catch ex As Exception
+            Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
+        End Try
+        
+    End Sub
+
+    Private Sub mt_ActivaActualiza()
+        Me.divActualiza.Visible = True
+        Me.divLista.Visible = False
+        Me.udpFiltros.Update()
+    End Sub
+
+    Private Sub mt_ActivaLista()
+        Me.divActualiza.Visible = False
+        Me.divLista.Visible = True
+        'Call mt_CargarConfiguracionDocumentos("DOC", Me.ddlDocumentoSel.SelectedValue) 'lista por documento
+        Me.udpListadoConf.Update()
+        'Me.udpListadoConf.Update()
+    End Sub
+
+    Private Sub mt_CargarComboDocumentoSel()
+        Try
+            md_Funciones = New d_Funciones
+            md_documento = New d_Documento
+
+            Dim dt As New Data.DataTable
+
+            dt = md_documento.ListarDocumento("GEN", 0, 0)
+
+            Call md_Funciones.CargarCombo(Me.ddlDocumentoSel, dt, "codigo_doc", "descripcion_doc", True, "[-- TODOS --]", "-1")
+
+        Catch ex As Exception
+            Call mt_ShowMessage(ex.Message.Replace("'", " "), MessageType.error)
+        End Try
     End Sub
 
 #End Region
@@ -874,4 +930,10 @@ Partial Class GestionDocumentaria_frmConfiguracionDocumentaria
 
 
 
+    
+    
+   
+   
+    
+    
 End Class

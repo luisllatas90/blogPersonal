@@ -49,7 +49,7 @@ Set obj=nothing
 <title>Cursos Matriculados</title>
 <link rel="stylesheet" type="text/css" href="../../../../private/estilo.css">
 <script type="text/javascript" language="JavaScript" src="../../../../private/funciones.js"></script>
-<script type="text/javascript" language="JavaScript" src="private/validarfichamatricula_v1.js"></script>
+<script type="text/javascript" language="JavaScript" src="private/validarfichamatricula_v1.js?x=1"></script>
 </head>
 <body bgcolor="#EEEEEE">
 <%if HayReg=true then%>
@@ -127,9 +127,13 @@ Set obj=nothing
 	<%if codigoAcceso>1 then%>
 	<td width="5%" align="center" class="rojo">
 		<%if rsMatricula("PermitirRetiro")="S" then
-		    'if rsMatricula("vecescurso_dma") < 1 then   %>
+		    'if rsMatricula("vecescurso_dma") < 1 then  
+		    if  rsMatricula("estado_dma")<>"R" then %>
+		    
 		        <img alt="Retirar asignatura" src="../../../../images/eliminar.gif" onclick="modificarmatricula('R','<%=rsMatricula("codigo_dma")%>')" />
-		<%  'end if
+		        
+		<%   end if 
+		    'end if
 		else
 			response.write(rsMatricula("PermitirRetiro"))
 		end if

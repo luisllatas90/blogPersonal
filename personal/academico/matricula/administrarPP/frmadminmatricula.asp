@@ -67,6 +67,8 @@ if codigo_alu<>"" and trim(modo)="resultado" then
                     abr = ""
                 End If
                 
+               ' response.Write (abr)
+                
                 Set Obj= Server.CreateObject("PryUSAT.clsAccesoDatos") 
 		        Obj.AbrirConexion 
 		        Set rsFuncionPerCro=Obj.Consultar("ACAD_ConsultarCronograma","FO",abr,session("codigo_cac"),session("test_mod"))        		
@@ -133,7 +135,7 @@ if codigo_alu<>"" and trim(modo)="resultado" then
 		Set rsCronograma=Obj.Consultar("ACAD_ConsultarCronograma","FO", "MY", session("codigo_cac"), session("test_mod"))
 		Set rsSeparacion=Obj.Consultar("ACAD_ConsultarSeparacionVigente","FO",codigo_alu)		        
         'Set rsMensajes=obj.Consultar("VerificarAccesoMatriculaEstudiante_V2","FO","PRO",session("codigo_alu"),session("codigo_cac"))                     
-        Set rsMensajes=obj.Consultar("VerificarAccesoMatriculaEstudiantePP","FO","PRO",session("c odigo_alu"),session("codigo_cac"),session("codigo_tfu"))                             
+        Set rsMensajes=obj.Consultar("VerificarAccesoMatriculaEstudiantePP","FO","PRO",session("codigo_alu"),session("codigo_cac"),session("codigo_tfu"))                             
         set rsAlumno=Obj.Consultar("ConsultarAlumno", "FO", "AUN", codigo_alu)
 		Obj.CerrarConexion	 
 	Set obj=nothing
@@ -217,6 +219,8 @@ function ObjAplicacion(ciclo,cm,fecha,tipo,obs,crd,emat)
 <body onload="document.all.txtcodigouniver_alu.focus();<%if HayReg=true and tieneSeparacion = 0 then%>AbrirMatricula('0','detallematricula.asp')<%end if%>">
 <input type="hidden" id="txtestado_mat" value="P" />
 <input type="hidden" id="txtciclo_mat" />
+
+
 <table border="0" cellpadding="2" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" height="<%=alto%>">
 	<%if (codigo_alu="") then%>
     <tr>
@@ -290,7 +294,7 @@ function ObjAplicacion(ciclo,cm,fecha,tipo,obs,crd,emat)
 	                                        if session("Ultimamatricula")<>session("descripcion_cac") then%>
 												
 						                        <input onClick="modificarmatricula('N','<%=session("codigo_pes")%>', '<%=cod_cac%>', '<%=ciclo%>')" type="button" value="     Nueva Matrícula <%=ciclo%>" name="cmdAgregarMatricula" class="agregar2" style="width: 140px">
-										    else 
+										     
 												
 					                <%	    end if
                                         else

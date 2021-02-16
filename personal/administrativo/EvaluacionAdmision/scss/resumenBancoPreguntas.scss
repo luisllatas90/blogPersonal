@@ -1,0 +1,21 @@
+.md-preguntas {
+    .enunciado, .texto {
+        font-size: 0.85rem;
+    }
+    .list-group-item {
+        p {
+            margin: 0;
+        }
+    }
+}
+
+.modal {
+    .modal-custom-title {
+        text-align: left;
+        font-size: 0.9rem;
+        margin-bottom: 0.1rem;
+        & + hr {
+            margin: 8px 0px;
+        }
+    }
+}

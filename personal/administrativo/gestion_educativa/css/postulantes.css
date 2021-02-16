@@ -3,7 +3,7 @@
   margin: 8px 0px; }
   #udpCabecera .title {
     margin: 0px 6px 0px 6px;
-    color: #2F4F4F;
+    color: #2f4f4f;
     font-size: 0.9rem; }
   #udpCabecera hr {
     margin-top: 0.5rem;
@@ -46,3 +46,10 @@
 
 #udpDatosEvento .table .thead-dark {
   text-align-last: left; }
+
+#udpActivarOnline .custom-radio {
+  margin: 0; }
+  #udpActivarOnline .custom-radio input[type="radio"] {
+    display: none; }
+  #udpActivarOnline .custom-radio .custom-control-label {
+    padding: 0; }

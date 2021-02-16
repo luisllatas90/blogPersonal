@@ -262,14 +262,14 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">
                                             </label>
-                                            <div class="col-md-1">
+                                            <div class="col-sm-3 col-md-1">
                                                 <button type="button" id="btnObjetivos" name="btnObjetivos" class="btn btn-green">
                                                     Objetivos &nbsp;&nbsp;<i class="ion-ios-compose"></i>
                                                 </button>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-sm-1 col-md-1">
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-sm-5 col-md-1">
                                                 <button type="button" id="btnEquipo" name="btnEquipo" class="btn btn-info">
                                                     Grupo de Investigación &nbsp;&nbsp;<i class="ion-university"></i>
                                                 </button>
@@ -280,7 +280,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">
                                                 Linea de Investigación USAT:</label>
-                                            <div class="col-md-8">
+                                            <div class="col-sm-8 col-md-8">
                                                 <select id="cboLinea" name="cboLinea" class="form-control">
                                                     <option value="" selected="">-- Seleccione -- </option>
                                                 </select>
@@ -291,7 +291,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">
                                                 Asignar Linea OCDE</label>
-                                            <div class="col-md-8">
+                                            <div class="col-sm-8 col-md-8">
                                                 <input type="checkbox" value="0" id="chkOCDE" name="chkOCDE" />
                                             </div>
                                         </div>
@@ -301,7 +301,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">
                                                     Área Temática:</label>
-                                                <div class="col-md-8">
+                                                <div class="col-sm-8 col-md-8">
                                                     <select id="cboArea" name="cboArea" class="form-control">
                                                         <option value="" selected="">-- Seleccione -- </option>
                                                     </select>
@@ -312,7 +312,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">
                                                     Sub Área:</label>
-                                                <div class="col-md-8">
+                                                <div class="col-sm-8 col-md-8">
                                                     <select id="cboSubArea" name="cboSubArea" class="form-control">
                                                         <option value="" selected="">-- Seleccione -- </option>
                                                     </select>
@@ -323,7 +323,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">
                                                     Disciplina:</label>
-                                                <div class="col-md-8">
+                                                <div class="col-sm-8 col-md-8">
                                                     <select id="cboDisciplina" name="cboDisciplina" class="form-control">
                                                         <option value="" selected="">-- Seleccione -- </option>
                                                     </select>
@@ -372,14 +372,14 @@
                                     </div>--%>
                                     <div class="row">
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="cboFinanciamiento">
+                                            <label class="col-sm-3 col-md-3 control-label" for="cboFinanciamiento">
                                                 Financiamiento:</label>
-                                            <div class="col-md-2">
+                                            <div class="col-sm-4 col-md-2">
                                                 <input type="checkbox" name="chkPropio" id="chkPropio" style="display: inline-block">
                                                 <label for="chkPropio" style="color: Black; font-size: 13px" style="display: inline-block">
                                                     &nbsp; Propio</label>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-sm-4 col-md-2">
                                                 <input type="checkbox" name="chkUsat" id="chkUsat" style="display: inline-block">
                                                 <label for="chkUsat" style="color: Black; font-size: 13px" style="display: inline-block">
                                                     &nbsp; USAT</label>
@@ -388,14 +388,14 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
-                                            <div class="col-md-3">
+                                            <div class="col-sm-3 col-md-3">
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-sm-3 col-md-2">
                                                 <input type="checkbox" name="chkExterno" id="chkExterno" style="display: inline-block">
                                                 <label for="chkExterno" style="color: Black; font-size: 13px" style="display: inline-block">
                                                     &nbsp; Externo</label>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5 col-sm-6">
                                                 <input type="text" id="txtexterno" name="txtexterno" class="form-control" maxlength="200" />
                                             </div>
                                         </div>

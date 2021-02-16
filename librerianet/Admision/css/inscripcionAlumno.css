@@ -1,0 +1,1003 @@
+input[type="text"] {
+  text-transform: uppercase; }
+
+#toast-container {
+  margin-bottom: 100px; }
+
+.bootstrap-select {
+  background-color: transparent; }
+  .bootstrap-select .btn.dropdown-toggle {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px; }
+    .bootstrap-select .btn.dropdown-toggle .filter-option-inner {
+      color: #777777; }
+    .bootstrap-select .btn.dropdown-toggle:focus {
+      outline: none !important;
+      box-shadow: none !important; }
+  .bootstrap-select .dropdown-menu li:focus {
+    outline: none; }
+  .bootstrap-select .dropdown-menu .dropdown-item .text {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px; }
+    .bootstrap-select .dropdown-menu .dropdown-item .text .text-muted {
+      font-size: 12px; }
+  .bootstrap-select .dropdown-menu .dropdown-item.active small.text-muted {
+    color: white !important; }
+  .bootstrap-select .dropdown-menu .dropdown-item:focus {
+    outline: none; }
+    .bootstrap-select .dropdown-menu .dropdown-item:focus small.text-muted {
+      color: white !important; }
+  .bootstrap-select .dropdown-menu .no-results {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px; }
+  .bootstrap-select .bs-searchbox input[type="text"] {
+    padding: 3px 5px;
+    border-radius: 0;
+    font-family: "Roboto", sans-serif;
+    font-size: 13px; }
+  .bootstrap-select.is-valid .dropdown-toggle {
+    border: none; }
+  .bootstrap-select.is-invalid .dropdown-toggle {
+    border: 1px solid red !important; }
+  .bootstrap-select.is-invalid::focus {
+    box-shadow: 0 0 0 0.05rem red !important; }
+
+#spLoadingValidacionEmail {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  color: #575757;
+  font-weight: 500;
+  font-style: italic; }
+  #spLoadingValidacionEmail > img {
+    width: 25px;
+    margin-right: 10px; }
+
+.error-validation-email {
+  flex: 1 1 100%;
+  padding: 10px 40px; }
+  .error-validation-email li {
+    margin-top: 0;
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    font-style: italic;
+    color: green; }
+
+.error-validation {
+  flex: 1 1 100%;
+  padding: 10px 40px; }
+  .error-validation li {
+    margin-top: 0;
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    font-style: italic;
+    color: red; }
+
+.card {
+  border-radius: 0; }
+
+.form-control {
+  border-radius: 0px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #777777; }
+  .form-control::placeholder {
+    font-family: "Roboto", sans-serif;
+    color: #9b9b9b; }
+  .form-control:focus {
+    outline: none;
+    box-shadow: none; }
+
+.custom-radio {
+  font-size: 14px;
+  font-weight: 400;
+  color: #777777;
+  margin: 0px 5px; }
+  .custom-radio .custom-control-label::before {
+    top: 0.15rem; }
+  .custom-radio .custom-control-label::after {
+    top: 0.15rem; }
+
+.custom-checkbox {
+  font-size: 14px;
+  font-weight: 400;
+  color: #777777;
+  margin: 0px 5px; }
+  .custom-checkbox .custom-control-label::before {
+    top: 0.15rem; }
+  .custom-checkbox .custom-control-label::after {
+    top: 0.15rem; }
+
+.custom-control-input.is-valid ~ .custom-control-label::before {
+  background-color: #dee2e6; }
+
+.datepicker-dropdown {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px; }
+
+label {
+  margin: 0px 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #777777; }
+
+.custom-control-input.is-valid ~ .custom-control-label {
+  color: inherit; }
+
+.was-validated .custom-control-input:valid ~ .custom-control-label {
+  color: inherit; }
+  .was-validated .custom-control-input:valid ~ .custom-control-label::before {
+    color: inherit; }
+
+.modal-dialog .modal-content {
+  border-radius: 0; }
+
+.modal-dialog .modal-footer {
+  padding: 8px 10px; }
+  .modal-dialog .modal-footer button {
+    border-radius: 0; }
+
+.alert {
+  border-radius: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  margin: 0; }
+
+.groupbox {
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  padding: 5px 5px 5px 5px;
+  margin-top: 5px;
+  background-color: transparent; }
+  .groupbox .header-groupbox {
+    margin: -15px 10px -10px 10px;
+    padding: 2px 4px;
+    background-color: #eeeeee;
+    border: none;
+    color: #777777;
+    font-size: 11px;
+    font-weight: 400; }
+  .groupbox > .card-body {
+    display: flex;
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0px !important; }
+    .groupbox > .card-body > .form-control,
+    .groupbox > .card-body #udpCelular,
+    .groupbox > .card-body #udpEmail {
+      margin: 5px !important; }
+
+#pasos-tabs {
+  display: flex;
+  font-family: "Roboto", sans-serif; }
+  #pasos-tabs .nav-link {
+    display: flex;
+    align-items: stretch;
+    margin: 10px 10px;
+    padding: 2px 2px;
+    width: 25%;
+    border-radius: 10px;
+    font-family: "Roboto", sans-serif; }
+    #pasos-tabs .nav-link:not(.disabled) {
+      color: #fff; }
+    #pasos-tabs .nav-link.disabled {
+      color: #777777; }
+    #pasos-tabs .nav-link .numero {
+      display: flex;
+      flex-shrink: 0;
+      width: 60px;
+      height: 60px;
+      justify-content: center;
+      flex-direction: column;
+      margin: 4px 4px 4px 4px;
+      text-align: center;
+      background-color: #fff;
+      border-radius: 50%;
+      font-size: 2rem;
+      font-weight: bold; }
+    #pasos-tabs .nav-link .scope-texto {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center; }
+      #pasos-tabs .nav-link .scope-texto .texto {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 500; }
+  #pasos-tabs .nav-link[href="#modalidad-carrera"]:not(.disabled) {
+    background-color: #6f53c8; }
+    #pasos-tabs .nav-link[href="#modalidad-carrera"]:not(.disabled) .numero {
+      color: #6f53c8; }
+  #pasos-tabs .nav-link[href="#datos-personales"]:not(.disabled) {
+    background-color: #f7b35f; }
+    #pasos-tabs .nav-link[href="#datos-personales"]:not(.disabled) .numero {
+      color: #f7b35f; }
+  #pasos-tabs .nav-link[href="#datos-academicos"]:not(.disabled) {
+    background-color: #fc5b4e; }
+    #pasos-tabs .nav-link[href="#datos-academicos"]:not(.disabled) .numero {
+      color: #fc5b4e; }
+  #pasos-tabs .nav-link[href="#datos-padres"]:not(.disabled) {
+    background-color: #acc969; }
+    #pasos-tabs .nav-link[href="#datos-padres"]:not(.disabled) .numero {
+      color: #acc969; }
+  #pasos-tabs .nav-link.disabled {
+    background-color: #eeeeee;
+    cursor: not-allowed; }
+
+@media only screen and (min-width: 1224px) {
+  #contenido-tabs {
+    padding: 25px 30px; } }
+
+@media (min-width: 700px) {
+  .scope-texto {
+    max-width: 100% !important; } }
+
+.tab-pane > .card {
+  padding: 14px 10px;
+  background-color: #eeeeee; }
+  .tab-pane > .card .title-header {
+    padding: 8px 14px;
+    text-align: center;
+    color: #fff;
+    font-size: 19px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased; }
+
+.tab-pane .form-group:last-child {
+  margin-bottom: 0; }
+
+.tab-pane#modalidad-carrera .form-control:focus {
+  box-shadow: 0 0 0 0.05rem #6f53c8; }
+
+.tab-pane#modalidad-carrera .form-control.is-invalid:focus {
+  box-shadow: 0 0 0 0.05rem red; }
+
+.tab-pane#modalidad-carrera .custom-control-input:focus ~ .custom-control-label::before {
+  outline: none;
+  box-shadow: 0 0 0 0.05rem #6f53c8; }
+
+.tab-pane#modalidad-carrera .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #6f53c8; }
+
+.tab-pane#modalidad-carrera .dropdown-menu .dropdown-item.active {
+  background-color: #6f53c8; }
+
+.tab-pane#modalidad-carrera .dropdown-menu .dropdown-item:active {
+  background-color: #644bb4; }
+
+.tab-pane#modalidad-carrera .parent-card {
+  border: 1px solid #6f53c8; }
+  .tab-pane#modalidad-carrera .parent-card .title-header {
+    background-color: #6f53c8; }
+
+.tab-pane#modalidad-carrera .dropdown-toggle {
+  border: 1px solid #6f53c8; }
+
+.tab-pane#modalidad-carrera .card-body {
+  padding: 40px; }
+
+.tab-pane#modalidad-carrera .bootstrap-select .btn.dropdown-toggle .filter-option-inner {
+  text-align: center; }
+
+.tab-pane#modalidad-carrera #udpModalidades {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; }
+  .tab-pane#modalidad-carrera #udpModalidades #divContainerModalidades {
+    flex: 0 0 100%; }
+    .tab-pane#modalidad-carrera #udpModalidades #divContainerModalidades > .card-body {
+      display: flex;
+      justify-content: space-around; }
+  .tab-pane#modalidad-carrera #udpModalidades .modalidad {
+    display: flex;
+    flex-basis: 200px;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    padding: 20px;
+    background-color: #fff;
+    color: #777777;
+    border: 1px solid #6f53c8;
+    border-radius: 6px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    cursor: pointer; }
+    .tab-pane#modalidad-carrera #udpModalidades .modalidad.active {
+      background-color: #7a5bdc;
+      color: white;
+      font-weight: 500; }
+    .tab-pane#modalidad-carrera #udpModalidades .modalidad:hover {
+      text-decoration: none; }
+    .tab-pane#modalidad-carrera #udpModalidades .modalidad:focus {
+      outline: none; }
+    .tab-pane#modalidad-carrera #udpModalidades .modalidad.disabled {
+      background-color: #eeeeee;
+      cursor: not-allowed; }
+    .tab-pane#modalidad-carrera #udpModalidades .modalidad img {
+      width: 45px;
+      margin-right: 10px; }
+    .tab-pane#modalidad-carrera #udpModalidades .modalidad .texto {
+      text-align: center; }
+  .tab-pane#modalidad-carrera #udpModalidades.active {
+    background-color: #6f53c8;
+    color: #fff; }
+  .tab-pane#modalidad-carrera #udpModalidades #alertProcesoConcluido {
+    font-size: 1rem; }
+
+.tab-pane#datos-personales .form-control:not(.bootstrap-select) {
+  border: 1px solid red; }
+
+.tab-pane#datos-personales .form-control:focus {
+  box-shadow: 0 0 0 0.07rem #f7b35f; }
+
+.tab-pane#datos-personales .form-control.is-invalid:focus {
+  box-shadow: 0 0 0 0.05rem red; }
+
+.tab-pane#datos-personales .form-control:not(.is-invalid) {
+  border: 1px solid #f7b35f; }
+
+.tab-pane#datos-personales .custom-control-input:focus ~ .custom-control-label::before {
+  outline: none;
+  box-shadow: 0 0 0 0.05rem #f7b35f; }
+
+.tab-pane#datos-personales .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #f7b35f; }
+
+.tab-pane#datos-personales .dropdown-menu .dropdown-item.active {
+  background-color: #f7b35f; }
+
+.tab-pane#datos-personales .dropdown-menu .dropdown-item:active {
+  background-color: #dea156; }
+
+.tab-pane#datos-personales #tituloDatosPersonales {
+  display: block;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: #777777;
+  font-size: 22px;
+  font-weight: 400; }
+
+.tab-pane#datos-personales .parent-card {
+  border: 1px solid #f7b35f; }
+  .tab-pane#datos-personales .parent-card .title-header {
+    background-color: #f7b35f; }
+  .tab-pane#datos-personales .parent-card > .card-body {
+    padding: 15px 15px; }
+    @media only screen and (max-width: 768px) {
+      .tab-pane#datos-personales .parent-card > .card-body {
+        padding: 0; } }
+  .tab-pane#datos-personales .parent-card .groupbox {
+    border: 1px solid #f7b35f; }
+
+.tab-pane#datos-personales .groupbox {
+  margin: 10px; }
+  .tab-pane#datos-personales .groupbox.tipo-documento {
+    flex-grow: 2; }
+    .tab-pane#datos-personales .groupbox.tipo-documento .bootstrap-select {
+      flex-basis: 220px;
+      flex-grow: 1;
+      flex-shrink: 0; }
+    .tab-pane#datos-personales .groupbox.tipo-documento #txtNroDocIdentidad {
+      flex-basis: 150px;
+      flex-grow: 1;
+      flex-shrink: 1; }
+  .tab-pane#datos-personales .groupbox.nacionalidad {
+    flex-grow: 2; }
+    .tab-pane#datos-personales .groupbox.nacionalidad .custom-radio {
+      flex-basis: 100px;
+      flex-grow: 1; }
+    .tab-pane#datos-personales .groupbox.nacionalidad #udpPaisNacimiento {
+      flex-basis: 110px;
+      flex-grow: 1;
+      flex-shrink: 0; }
+    .tab-pane#datos-personales .groupbox.nacionalidad #udpBtnFakeNacionalidad {
+      display: none; }
+  .tab-pane#datos-personales .groupbox.sexo {
+    flex-grow: 1;
+    flex-basis: 120px; }
+  .tab-pane#datos-personales .groupbox.fecha-nacimiento {
+    flex-grow: 1;
+    flex-basis: 140px; }
+    .tab-pane#datos-personales .groupbox.fecha-nacimiento #dtpFecNacimiento {
+      flex-shrink: 1; }
+  .tab-pane#datos-personales .groupbox.nombre-completo {
+    flex-basis: 90%;
+    flex-grow: 1; }
+    .tab-pane#datos-personales .groupbox.nombre-completo #txtNombres {
+      flex: 1 0 200px; }
+    .tab-pane#datos-personales .groupbox.nombre-completo #txtApellidoPaterno {
+      flex: 1 0 160px; }
+    .tab-pane#datos-personales .groupbox.nombre-completo #txtApellidoMaterno {
+      flex: 1 0 160px; }
+  .tab-pane#datos-personales .groupbox.lugar-nacimiento #udpDepNacimiento {
+    flex: 1 1 280px;
+    margin: 5px 10px; }
+  .tab-pane#datos-personales .groupbox.lugar-nacimiento #udpProNacimiento {
+    flex: 1 1 280px;
+    margin: 5px 10px; }
+  .tab-pane#datos-personales .groupbox.lugar-nacimiento #udpDisNacimiento {
+    flex: 1 1 280px;
+    margin: 5px 10px; }
+  .tab-pane#datos-personales .groupbox.direccion-actual #txtDireccionActual {
+    flex: 1 1 320px; }
+  .tab-pane#datos-personales .groupbox.direccion-actual #udpDepActual {
+    flex: 1 1 200px;
+    margin: 5px 5px; }
+  .tab-pane#datos-personales .groupbox.direccion-actual #udpProActual {
+    flex: 1 1 200px;
+    margin: 5px 5px; }
+  .tab-pane#datos-personales .groupbox.direccion-actual #udpDisActual {
+    flex: 1 1 200px;
+    margin: 5px 5px; }
+  .tab-pane#datos-personales .groupbox.contacto #txtTelefono {
+    flex: 1 1 170px; }
+  .tab-pane#datos-personales .groupbox.contacto #udpCelular {
+    flex: 1 1 170px; }
+  .tab-pane#datos-personales .groupbox.contacto #udpEmail {
+    flex: 1 1 260px; }
+  .tab-pane#datos-personales .groupbox.contacto #txtFacebook {
+    flex: 1 1 400px; }
+  .tab-pane#datos-personales .groupbox.discapacidad {
+    flex: 0 1 50%;
+    align-items: center; }
+    .tab-pane#datos-personales .groupbox.discapacidad > .card-body {
+      flex: 1 1 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center; }
+    .tab-pane#datos-personales .groupbox.discapacidad .pregunta {
+      flex: 0 0 185px;
+      text-align: center; }
+    .tab-pane#datos-personales .groupbox.discapacidad .bootstrap-select {
+      flex: 0 0 150px; }
+    .tab-pane#datos-personales .groupbox.discapacidad #txtOtraDiscapacidad {
+      flex: 1 0 200px; }
+
+.tab-pane#datos-personales .pregunta-discapacidad {
+  flex: 0 0 200px;
+  align-items: center;
+  margin: 0px 5px 10px 5px;
+  padding: 4px 10px;
+  background-color: #fff;
+  color: #777777;
+  border: 1px solid #f7b35f;
+  font-size: 24px;
+  border-radius: 6px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer; }
+  .tab-pane#datos-personales .pregunta-discapacidad.active {
+    background-color: #f7b35f;
+    color: #fff; }
+  .tab-pane#datos-personales .pregunta-discapacidad:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.05rem #f7b35f; }
+
+.tab-pane#datos-personales .container-discapacidad {
+  display: flex;
+  justify-content: center; }
+
+.tab-pane#datos-personales .container-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .tab-pane#datos-personales .container-nav .botones {
+    display: flex;
+    width: 100%;
+    justify-content: center; }
+    .tab-pane#datos-personales .container-nav .botones .btn {
+      flex: 0 1 auto;
+      margin: 10px 0px 30px 0px;
+      padding: 6px 35px;
+      margin: 0px 10px;
+      font-family: "Roboto", sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      background-color: #f7b35f;
+      color: #fff; }
+      .tab-pane#datos-personales .container-nav .botones .btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.05rem #f7b35f; }
+
+.tab-pane#datos-academicos .form-control:not(.bootstrap-select) {
+  border: 1px solid red; }
+
+.tab-pane#datos-academicos .form-control:focus {
+  box-shadow: 0 0 0 0.07rem #ff9b85; }
+
+.tab-pane#datos-academicos .form-control.is-invalid:focus {
+  box-shadow: 0 0 0 0.05rem red; }
+
+.tab-pane#datos-academicos .form-control:not(.is-invalid) {
+  border: 1px solid #ff9b85; }
+
+.tab-pane#datos-academicos .custom-control-input:focus ~ .custom-control-label::before {
+  outline: none;
+  box-shadow: 0 0 0 0.05rem #ff9b85; }
+
+.tab-pane#datos-academicos .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #ff9b85; }
+
+.tab-pane#datos-academicos .dropdown-menu .dropdown-item.active {
+  background-color: #fc5b4e; }
+
+.tab-pane#datos-academicos .dropdown-menu .dropdown-item:active {
+  background-color: #e35246; }
+
+.tab-pane#datos-academicos .parent-card {
+  border: 1px solid #ff9b85; }
+  .tab-pane#datos-academicos .parent-card .title-header {
+    background-color: #fc5b4e; }
+  .tab-pane#datos-academicos .parent-card > .card-body {
+    padding: 15px 15px; }
+  .tab-pane#datos-academicos .parent-card .groupbox {
+    border: 1px solid #ff9b85; }
+
+.tab-pane#datos-academicos .groupbox.ubicacion-colegio > .card-body {
+  justify-content: space-around; }
+
+.tab-pane#datos-academicos .groupbox.ubicacion-colegio #udpDepInstitucionEducativa {
+  flex: 1 1 200px;
+  margin: 5px 5px; }
+
+.tab-pane#datos-academicos .groupbox.ubicacion-colegio #udpInstitucionEducativa {
+  flex: 1 1 500px;
+  margin: 5px 5px; }
+
+.tab-pane#datos-academicos .groupbox.condicion-estudiante {
+  flex: 0 1 400px; }
+  .tab-pane#datos-academicos .groupbox.condicion-estudiante #udpCondicionEstudiante {
+    flex: 1 1 100%;
+    margin: 5px 5px; }
+
+.tab-pane#datos-academicos .container-estudiante {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px; }
+  .tab-pane#datos-academicos .container-estudiante .container-condicion {
+    flex: 1 1 250px;
+    margin: 5px 0px;
+    padding: 0px 5px; }
+  .tab-pane#datos-academicos .container-estudiante #udpDatosCondicion {
+    flex: 1 1 350px;
+    margin: 5px 0px;
+    padding: 0px 5px; }
+    .tab-pane#datos-academicos .container-estudiante #udpDatosCondicion .bootstrap-select {
+      flex: 1 1 150px; }
+    .tab-pane#datos-academicos .container-estudiante #udpDatosCondicion #txtAnioEgreso {
+      flex: 1 0 150px; }
+    .tab-pane#datos-academicos .container-estudiante #udpDatosCondicion #txtOtroMerito {
+      flex: 1 0 200px; }
+
+.tab-pane#datos-academicos .container-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .tab-pane#datos-academicos .container-nav .botones {
+    display: flex;
+    width: 100%;
+    justify-content: center; }
+    .tab-pane#datos-academicos .container-nav .botones .btn {
+      flex: 0 1 auto;
+      margin: 10px 0px 30px 0px;
+      margin: 0px 10px;
+      padding: 6px 35px;
+      font-family: "Roboto", sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      background-color: #fc5b4e;
+      color: #fff; }
+      .tab-pane#datos-academicos .container-nav .botones .btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.05rem #fc5b4e; }
+
+.tab-pane#datos-padres.largo {
+  padding-bottom: 580px; }
+
+.tab-pane#datos-padres .form-control:not(.bootstrap-select) {
+  border: 1px solid red; }
+
+.tab-pane#datos-padres .form-control:focus {
+  box-shadow: 0 0 0 0.07rem #acc969; }
+
+.tab-pane#datos-padres .form-control.is-invalid:focus {
+  box-shadow: 0 0 0 0.05rem red; }
+
+.tab-pane#datos-padres .form-control:not(.is-invalid) {
+  border: 1px solid #acc969; }
+
+.tab-pane#datos-padres .custom-control-input:focus ~ .custom-control-label::before {
+  outline: none;
+  box-shadow: 0 0 0 0.05rem #acc969; }
+
+.tab-pane#datos-padres .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #acc969; }
+
+.tab-pane#datos-padres .dropdown-menu .dropdown-item.active {
+  background-color: #acc969; }
+
+.tab-pane#datos-padres .dropdown-menu .dropdown-item:active {
+  background-color: #9bb55f; }
+
+.tab-pane#datos-padres .parent-card {
+  border: 1px solid #acc969; }
+  .tab-pane#datos-padres .parent-card .title-header {
+    background-color: #acc969; }
+  .tab-pane#datos-padres .parent-card > .card-body {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 15px; }
+  .tab-pane#datos-padres .parent-card .groupbox {
+    border: 1px solid #acc969;
+    margin: 10px 5px; }
+    .tab-pane#datos-padres .parent-card .groupbox.nombres {
+      flex: 1 1 800px; }
+      .tab-pane#datos-padres .parent-card .groupbox.nombres input[id^="txtDni"] {
+        flex: 1 1 120px; }
+      .tab-pane#datos-padres .parent-card .groupbox.nombres input[id^="txtNombres"] {
+        flex: 1 1 250px; }
+      .tab-pane#datos-padres .parent-card .groupbox.nombres input[id^="txtApellidoPaterno"] {
+        flex: 1 1 150px; }
+      .tab-pane#datos-padres .parent-card .groupbox.nombres input[id^="txtApellidoMaterno"] {
+        flex: 1 1 150px; }
+    .tab-pane#datos-padres .parent-card .groupbox.fecha-nacimiento {
+      flex: 1 1 200px; }
+      .tab-pane#datos-padres .parent-card .groupbox.fecha-nacimiento input[id^="dtpFecNac"] {
+        flex: 1 1 200px; }
+    .tab-pane#datos-padres .parent-card .groupbox.direccion-actual {
+      flex: 1 1 100%; }
+      .tab-pane#datos-padres .parent-card .groupbox.direccion-actual input[id^="txtDireccion"] {
+        flex: 1 1 400px; }
+      .tab-pane#datos-padres .parent-card .groupbox.direccion-actual div[id^="udpDep"] {
+        flex: 1 1 200px;
+        margin: 5px; }
+      .tab-pane#datos-padres .parent-card .groupbox.direccion-actual div[id^="udpPro"] {
+        flex: 1 1 200px;
+        margin: 5px; }
+      .tab-pane#datos-padres .parent-card .groupbox.direccion-actual div[id^="udpDis"] {
+        flex: 1 1 200px;
+        margin: 5px; }
+    .tab-pane#datos-padres .parent-card .groupbox.datos-contacto {
+      flex: 1 1 100%; }
+      .tab-pane#datos-padres .parent-card .groupbox.datos-contacto input[id^="txtTelefono"] {
+        flex: 1 1 150px; }
+      .tab-pane#datos-padres .parent-card .groupbox.datos-contacto input[id^="txtCelular"] {
+        flex: 1 1 150px; }
+      .tab-pane#datos-padres .parent-card .groupbox.datos-contacto input[id^="txtEmail"] {
+        flex: 1 1 250px; }
+      .tab-pane#datos-padres .parent-card .groupbox.datos-contacto .custom-radio {
+        flex: 1 1 180px; }
+  .tab-pane#datos-padres .parent-card .collapse > .card-body {
+    display: flex;
+    flex-wrap: wrap; }
+
+.tab-pane#datos-padres .container-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .tab-pane#datos-padres .container-nav .botones {
+    display: flex;
+    width: 100%;
+    justify-content: center; }
+    .tab-pane#datos-padres .container-nav .botones .btn {
+      flex: 0 1 auto;
+      margin: 10px 0px 30px 0px;
+      margin: 0px 10px;
+      padding: 6px 35px;
+      font-family: "Roboto", sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      background-color: #acc969;
+      color: #fff; }
+      .tab-pane#datos-padres .container-nav .botones .btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.05rem #acc969; }
+
+#mdlConfirmarInscripcion .modal-content > .modal-header {
+  display: flex;
+  padding: 14px 0px;
+  background: #e33439;
+  margin: 10px;
+  border-radius: 0;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif; }
+  #mdlConfirmarInscripcion .modal-content > .modal-header h1 {
+    flex: 1 1 100%;
+    color: white;
+    font-size: 18px;
+    margin: 0;
+    text-align: center; }
+  #mdlConfirmarInscripcion .modal-content > .modal-header .close {
+    flex: 0 0 30px;
+    align-items: center;
+    margin: 0px;
+    padding: 0; }
+    #mdlConfirmarInscripcion .modal-content > .modal-header .close span {
+      display: flex;
+      font-size: 16px;
+      justify-content: center;
+      color: white; }
+
+#mdlConfirmarInscripcion .modal-content .instrucciones {
+  padding: 0px 15px; }
+  #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones {
+    flex: 0 0 100%;
+    flex-direction: column;
+    font-family: "Roboto", sans-serif; }
+    #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso {
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 18px;
+      font-weight: 400;
+      justify-content: space-around;
+      text-align: center;
+      margin-bottom: 10px; }
+      #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso .numero {
+        display: flex;
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        background-color: #e33439;
+        font-size: 25px;
+        font-weight: 400;
+        color: white; }
+      #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso .contenido {
+        flex: 0 1 650px; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso .contenido p {
+          margin: 0; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso .contenido #spnPrecioInscripcion {
+          display: inline-block;
+          margin: 5px 0px;
+          padding: 5px 10px;
+          background-color: #eeeeee;
+          color: #e33439;
+          font-size: 30px; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso .contenido .container-imagenes img {
+          margin: 5px 10px; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso .contenido .container-imagenes #imgBcp {
+          width: 116px; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso .contenido .container-imagenes #imgBbva {
+          width: 213px; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso .contenido span[id^="spnMensajeTiempoPago"] {
+          background: #eeeeee;
+          color: #e33439;
+          display: inline-block;
+          margin: 10px 0px; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso .contenido #spnMensajeAnulacionCargo {
+          background: #eeeeee;
+          color: #6f53c8;
+          display: inline-block;
+          margin: 10px 0px; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso .contenido #grwRequisitosAdmision {
+          width: 80%;
+          margin: 5px auto 10px auto;
+          font-size: 16px; }
+          #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .paso .contenido #grwRequisitosAdmision .thead-dark th {
+            background-color: #e33439;
+            border-color: transparent; }
+    #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .terminos-condiciones {
+      padding: 0px 20px; }
+      #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .terminos-condiciones h1 {
+        text-align: center;
+        font-size: 16px;
+        color: white;
+        background-color: #e33439;
+        padding: 10px 0px; }
+      #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .terminos-condiciones .custom-control-label {
+        color: black;
+        font-weight: 500; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones .terminos-condiciones .custom-control-label span.rojo a {
+          color: #e33439; }
+    #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones #collapseTerminosCondiciones {
+      padding: 15px; }
+      #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones #collapseTerminosCondiciones h1 {
+        padding: 5px 0px;
+        font-size: 15px; }
+      #mdlConfirmarInscripcion .modal-content .instrucciones #udpInstrucciones #collapseTerminosCondiciones p {
+        font-size: 14px; }
+  #mdlConfirmarInscripcion .modal-content .instrucciones .guia-token {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px; }
+  #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px 0px 0px; }
+    #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken .container-token {
+      display: flex;
+      justify-content: center; }
+      #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken .container-token > a {
+        flex-grow: 0;
+        flex-shrink: 1;
+        width: auto;
+        text-align: center;
+        margin: 0px 5px;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        color: #fff;
+        border-radius: 0; }
+      #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken .container-token #btnGenerarToken {
+        background-color: #f7b35f; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken .container-token #btnGenerarToken:hover {
+          text-decoration: none; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken .container-token #btnGenerarToken:focus {
+          outline: none;
+          box-shadow: 0 0 0 0.05rem #f7b35f; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken .container-token #btnGenerarToken.disabled {
+          background-color: #a7a7a7;
+          cursor: not-allowed; }
+      #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken .container-token #txtToken {
+        width: 150px;
+        margin: 0px 5px; }
+      #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken .container-token #btnValidarToken {
+        background-color: #acc969; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken .container-token #btnValidarToken:hover {
+          text-decoration: none; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken .container-token #btnValidarToken:focus {
+          outline: none;
+          box-shadow: 0 0 0 0.05rem #acc969; }
+        #mdlConfirmarInscripcion .modal-content .instrucciones #udpToken .container-token #btnValidarToken.disabled {
+          background-color: #a7a7a7;
+          cursor: not-allowed; }
+  #mdlConfirmarInscripcion .modal-content .instrucciones .container-celular-token {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px; }
+    #mdlConfirmarInscripcion .modal-content .instrucciones .container-celular-token .custom-control-label {
+      font-weight: 500; }
+    #mdlConfirmarInscripcion .modal-content .instrucciones .container-celular-token #txtCelularToken {
+      width: 150px; }
+
+#mdlConfirmarInscripcion .modal-content .container-nav {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px; }
+  #mdlConfirmarInscripcion .modal-content .container-nav #msg-paciencia {
+    font-size: 0.95rem;
+    font-weight: bold;
+    margin-top: 15px; }
+  #mdlConfirmarInscripcion .modal-content .container-nav #udpConfirmarInscripcion {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px 0px 0px; }
+  #mdlConfirmarInscripcion .modal-content .container-nav #btnVerificarDatos {
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin: 20px 0px;
+    padding: 6px 35px;
+    font-size: 15px;
+    line-height: initial;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    background-color: #9d9d9d;
+    color: #fff;
+    border-radius: 0;
+    border: none;
+    cursor: pointer; }
+    #mdlConfirmarInscripcion .modal-content .container-nav #btnVerificarDatos:hover {
+      text-decoration: none; }
+    #mdlConfirmarInscripcion .modal-content .container-nav #btnVerificarDatos:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.05rem #9d9d9d; }
+    #mdlConfirmarInscripcion .modal-content .container-nav #btnVerificarDatos.disabled {
+      background-color: #a7a7a7;
+      cursor: not-allowed; }
+  #mdlConfirmarInscripcion .modal-content .container-nav #btnConfirmarInscripcion {
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin: 20px 0px 20px 60px;
+    padding: 6px 35px;
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    background-color: #e33439;
+    color: #fff;
+    border-radius: 0; }
+    #mdlConfirmarInscripcion .modal-content .container-nav #btnConfirmarInscripcion:hover {
+      text-decoration: none; }
+    #mdlConfirmarInscripcion .modal-content .container-nav #btnConfirmarInscripcion:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.05rem #e33439; }
+    #mdlConfirmarInscripcion .modal-content .container-nav #btnConfirmarInscripcion.disabled {
+      background-color: #a7a7a7;
+      cursor: not-allowed; }
+
+#mdlMensajesServidor .modal-content > .modal-header {
+  display: flex;
+  padding: 10px 0px;
+  background: #e33439;
+  margin: 10px 10px 0px 10px;
+  border-radius: 0;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif; }
+  #mdlMensajesServidor .modal-content > .modal-header #udpMensajeServidorHeader {
+    flex: 1 1 100%;
+    color: white;
+    font-size: 15px;
+    margin: 0;
+    text-align: center; }
+  #mdlMensajesServidor .modal-content > .modal-header .close {
+    flex: 0 0 30px;
+    align-items: center;
+    margin: 0px;
+    padding: 0; }
+    #mdlMensajesServidor .modal-content > .modal-header .close span {
+      display: flex;
+      font-size: 16px;
+      justify-content: center;
+      color: white; }
+
+#mdlMensajeConfirmacion .modal-content > .modal-header {
+  display: flex;
+  padding: 10px 15px;
+  background: #6f53c8;
+  margin: 10px 10px 0px 10px;
+  border-radius: 0;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  color: white; }
+  #mdlMensajeConfirmacion .modal-content > .modal-header span {
+    width: 100%; }
+  #mdlMensajeConfirmacion .modal-content > .modal-header .close {
+    flex: 0 0 auto;
+    align-items: center;
+    margin: 0px;
+    padding: 0; }
+    #mdlMensajeConfirmacion .modal-content > .modal-header .close span {
+      display: flex;
+      font-size: 16px;
+      justify-content: center;
+      color: white; }
+
+#mdlMensajeConfirmacion .modal-content .container-descargar-ficha {
+  display: flex;
+  justify-content: center; }
+  #mdlMensajeConfirmacion .modal-content .container-descargar-ficha .btn {
+    flex-grow: 0;
+    flex-shrink: 1;
+    margin: 20px 0px;
+    padding: 6px 35px;
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    color: #fff;
+    border-radius: 0; }
+    #mdlMensajeConfirmacion .modal-content .container-descargar-ficha .btn.disabled {
+      cursor: not-allowed; }
+    #mdlMensajeConfirmacion .modal-content .container-descargar-ficha .btn#btnDescargarFicha {
+      background-color: #e33439; }
+      #mdlMensajeConfirmacion .modal-content .container-descargar-ficha .btn#btnDescargarFicha:hover {
+        text-decoration: none; }
+      #mdlMensajeConfirmacion .modal-content .container-descargar-ficha .btn#btnDescargarFicha:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.05rem #e33439; }
+      #mdlMensajeConfirmacion .modal-content .container-descargar-ficha .btn#btnDescargarFicha.disabled {
+        background-color: #a7a7a7; }
+    #mdlMensajeConfirmacion .modal-content .container-descargar-ficha .btn#btnEnviarFichaCorreo {
+      margin-left: 100px;
+      background-color: #1e97ec; }
+      #mdlMensajeConfirmacion .modal-content .container-descargar-ficha .btn#btnEnviarFichaCorreo:hover {
+        text-decoration: none; }
+      #mdlMensajeConfirmacion .modal-content .container-descargar-ficha .btn#btnEnviarFichaCorreo:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.05rem #1e97ec; }
+      #mdlMensajeConfirmacion .modal-content .container-descargar-ficha .btn#btnEnviarFichaCorreo.disabled {
+        background-color: #a7a7a7; }

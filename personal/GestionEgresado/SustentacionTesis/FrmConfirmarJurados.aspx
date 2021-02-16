@@ -57,15 +57,11 @@
         $('#' + id).selectpicker(options);
         }*/
         function fnLoading(sw) {
-            console.log(sw);
             if (sw) {
                 $('.piluku-preloader').removeClass('hidden');
-                console.log("mostrar");
             } else {
                 $('.piluku-preloader').addClass('hidden');
-                console.log("ocultar");
             }
-            //console.log(sw);
         }
 
         function fnMensaje(typ, msje) {
@@ -89,6 +85,7 @@
             }
         }
         function ValidarConformidad() {
+        
             if (confirm('¿Está seguro que desea dar conformidad a jurados de tesis?')) {
                 fnLoading(true);
                 return true;
@@ -192,6 +189,30 @@
                             <asp:LinkButton ID="btnConsultar" runat="server" Text='<span class="fa fa-search"></span>'
                                 CssClass="btn btn-primary" ToolTip="Buscar"></asp:LinkButton>
                         </div>--%>
+                        <div class="col-sm-6 col-md-6">
+                            <table>
+                                <tr>
+                                    <td style="width: 10%; padding: 4px;">
+                                        <asp:LinkButton ID="LinkButton1" runat="server" Text='<span class="fa fa-pencil-square-o"></span>'
+                                            CssClass="btn btn-info btn-sm btn-radius" Font-Size="11px" ToolTip="Actualizar"
+                                            OnClientClick="return false;">
+                                        </asp:LinkButton>
+                                    </td>
+                                    <td style="width: 40%;">
+                                        <asp:Label ID="Label9" runat="server" CssClass="control-label">Actualizar Jurados</asp:Label>
+                                    </td>
+                                    <td style="width: 10%; padding: 4px;">
+                                        <asp:LinkButton ID="LinkButton3" runat="server" Text='<span class="fa fa-check"></span>'
+                                            CssClass="btn btn-success btn-sm btn-radius" Font-Size="11px" ToolTip="Conformidad"
+                                            OnClientClick="return false;"> 
+                                        </asp:LinkButton>
+                                    </td>
+                                    <td style="width: 40%;">
+                                        <asp:Label ID="Label14" runat="server" CssClass="control-label">Dar conformidad a Jurados de tesis</asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <br />
@@ -200,7 +221,7 @@
                         <ContentTemplate>
                             <div runat="server" id="lblmensaje">
                             </div>
-                            <asp:GridView runat="server" ID="gvTesis" CssClass="table table-condensed" DataKeyNames="codigo_Tes,codigo_dta,codigo_trl,jpresidente,jsecretario,jvocal"
+                            <asp:GridView runat="server" ID="gvTesis" CssClass="table table-condensed" DataKeyNames="codigo_Tes,codigo_dta,codigo_trl,jpresidente,jsecretario,jvocal,njpresidente,njsecretario,njvocal,codigo_pst,codigo_test,estado,codigo_stest,jsegvocal,njsegvocal"
                                 AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField DataField="titulo_Tes" HeaderText="TÍTULO" HeaderStyle-Width="35%" />
@@ -234,6 +255,16 @@
                                                 </label>
                                                 <div class="col-xs-9 col-sm-9 col-md-9">
                                                     <asp:DropDownList runat="server" ID="ddlVocal" CssClass="form-control ">
+                                                        <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
+                                            </div>
+                                            <div class="row" runat="server" ID="DivVocalDoctor" >
+                                                <label class="col-xs-3 col-sm-3 col-md-3 control-label">
+                                                    2° Vocal:
+                                                </label>
+                                                <div class="col-xs-9 col-sm-9 col-md-9">
+                                                    <asp:DropDownList runat="server" ID="ddlVocal2" CssClass="form-control ">
                                                         <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>

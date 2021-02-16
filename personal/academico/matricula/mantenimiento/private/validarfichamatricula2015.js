@@ -14,8 +14,8 @@ arrMensajes[0] = "Debe elegir los cursos que Ud. se matriculará";
 arrMensajes[1] = "Ud. sólo puede elegir un Grupo de Horario del Curso a Matricularse";
 arrMensajes[2] = "¿Está completamente seguro que desea matricular en los cursos elegidos?"
 arrMensajes[3]="¿Está completamente seguro que desea retirar la asignatura seleccionada?"
-arrMensajes[4] = "¿ACCIÓN IRREVERSIBLE.\nEstá completamente seguro que desea ELIMINAR la asignatura seleccionada?"
-arrMensajes[5] = "¿ACCIÓN IRREVERSIBLE.\nEstá completamente seguro que desea restablecer la matrícula del estudiante?"
+arrMensajes[4] = "ACCIÓN IRREVERSIBLE\nEstá completamente seguro que desea ELIMINAR la asignatura seleccionada?"
+arrMensajes[5] = "ACCI\u00D3N IRREVERSIBLE \n\u00BF\Est\u00E1 completamente seguro que desea restablecer la matr\u00EDcula del estudiante?"
 
 function AbrirCurso(codigo_cur)
 {
@@ -92,6 +92,8 @@ function Actualizar(idCheck)
 	var size=parseInt($("input:checkbox[name="+idCheck.name+"]").size()) ;
 	var MaxCredPermitido = $("#hdMaxCredPermitidos").val();
 	var Curso2Veces = 0;
+	//var Curso3Veces = 0; /*ID:38643 */
+
     if (size== 0 && $(idCheck.id).is(':checked') == true) {		
         totalcur = 1
         totalcrd = $(idCheck).val()
@@ -110,10 +112,14 @@ function Actualizar(idCheck)
 	                $(this).removeAttr("disabled");
 	            }
 	            if ($(this).is(':checked')) {
-	                if (parseInt($(this).attr("vd")) >= 2) {	                    
+	                if (parseInt($(this).attr("vd")) >= 2) {
 	                    Curso2Veces = 1;
 	                }
-
+	               
+	                if (parseInt($(this).attr("vd")) >= 3) {
+	                    Curso3Veces = 1;
+	                }
+	              
 	                creditos = parseInt(creditos) + parseInt($(this).val())
 	                cursos = parseInt(cursos) + 1
 
@@ -135,8 +141,17 @@ function Actualizar(idCheck)
 	}
 	else{
 		$("#cmdAgregar").attr('disabled', true)
-    }
+}
 
+/*ID:38643 {*/
+/*if (Curso3Veces == 1 && cursos > 1) {
+    $("#AvisoBloqueo").html("No puede matricularse en este curso ya que esta llevando un curso por 3era vez");
+    alert("Tiene un curso por 3era vez, no puede matricularse en otro");
+    $(idCheck).attr('checked', false);
+    return false;
+}*/
+/*}ID:38643*/
+    
     if (Curso2Veces == 1) {
         if (parseInt(creditos) - parseInt(credMat) > 15) {
             //creditos = parseInt(creditos) - parseInt($(idCheck).val());
@@ -144,7 +159,7 @@ function Actualizar(idCheck)
             $("#AvisoBloqueo").html("No puede matricularse en m&aacute;s de 15 cr&eacute;ditos");
             alert("No puedes seleccionar mas de 15 creditos");
         }
-    } else {
+    }  else {
         $("#AvisoBloqueo").html("");	 
     }
 

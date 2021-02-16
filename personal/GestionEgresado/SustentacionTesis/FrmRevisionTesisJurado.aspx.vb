@@ -16,12 +16,35 @@ Partial Class FrmRevisionTesisJurado
         If dt.Rows.Count > 0 Then
             Me.gvTesis.DataSource = dt
             Me.gvTesis.DataBind()
+            Me.btnExportarExcel.Visible = True
         Else
             Me.gvTesis.DataSource = Nothing
             Me.gvTesis.DataBind()
+            Me.btnExportarExcel.Visible = False
         End If
+        Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "tooltp", "$('.btn').tooltip();", True)
+
         obj.CerrarConexion()
     End Sub
+
+    Private Sub ConsultarCategoria(ByVal tipojurado As String)
+        Dim obj As New ClsConectarDatos
+        obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        obj.AbrirConexion()
+        Dim dt As New Data.DataTable
+        dt = obj.TraerDataTable("SUST_ListarCategoriaObservacion", tipojurado)
+        obj.CerrarConexion()
+
+        Me.ddlCategoria.Items.Clear()
+        Me.ddlCategoria.Items.Add(New ListItem("[ -- Seleccione --]", "0"))
+        If dt.Rows.Count > 0 Then
+            For i As Integer = 0 To dt.Rows.Count - 1
+                Me.ddlCategoria.Items.Add(New ListItem(dt.Rows(i).Item("descripcion_cos"), dt.Rows(i).Item("codigo_cos")))
+            Next
+        End If
+    End Sub
+
+
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Session("id_per") Is Nothing) Then
@@ -47,19 +70,33 @@ Partial Class FrmRevisionTesisJurado
                 Me.DivAsesorias.Visible = True
                 Me.hdjur.Value = Me.gvTesis.DataKeys(e.CommandArgument).Values("codigo_jur")
                 Me.hdtes.Value = Me.gvTesis.DataKeys(e.CommandArgument).Values("codigo_Tes")
+
+                LimpiarDatos()
+                ConsultarCategoria(Me.gvTesis.DataKeys(e.CommandArgument).Values("tipo_tpi"))
                 ConsultarDatosTesis(Me.gvTesis.DataKeys(e.CommandArgument).Values("codigo_Tes"))
                 CargarLineaTiempo(Me.hdtes.Value, Me.hdjur.Value)
                 limpiarobservacion()
                 Me.lblMensajeObservación.InnerText = ""
                 Me.lblMensajeObservación.Attributes.Remove("class")
                 If Me.gvTesis.DataKeys(e.CommandArgument).Values("fechaconformidad") = "" Then
-                    Me.txtObservacion.Enabled = True
-                    Me.archivo.Enabled = True
-                    Me.btnGuardarObservacion.Visible = True
+                    If Me.gvTesis.DataKeys(e.CommandArgument).Values("bloqueaobservaciones_jur") = 0 Then
+                        Me.txtObservacion.Enabled = True
+                        Me.ddlCategoria.Enabled = True
+                        Me.archivo.Enabled = True
+                        Me.btnGuardarObservacion.Visible = True
+                    Else
+                        Me.txtObservacion.Enabled = False
+                        Me.ddlCategoria.Enabled = False
+                        Me.archivo.Enabled = False
+                        Me.btnGuardarObservacion.Visible = False
+                        Me.btnEnviar.Visible = False
+                    End If
                 Else
                     Me.txtObservacion.Enabled = False
+                    Me.ddlCategoria.Enabled = False
                     Me.archivo.Enabled = False
                     Me.btnGuardarObservacion.Visible = False
+                    Me.btnEnviar.Visible = False
                 End If
             End If
             If (e.CommandName = "Conformidad") Then
@@ -99,6 +136,10 @@ Partial Class FrmRevisionTesisJurado
                     End If
                 End If
             End If
+            Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "tooltipe", "$('.btn').tooltip();", True)
+            Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "Loading", "fnLoading(false)", True)
+            Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "LoadingEstado", "LoadingEstado();", True)
+
         Catch ex As Exception
 
             Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "alert", "fnMensaje('error','" + ex.Message.ToString + "')", True)
@@ -135,13 +176,31 @@ Partial Class FrmRevisionTesisJurado
     End Sub
 
 
+    Private Sub LimpiarDatos()
+        Me.txttitulo.Text = ""
+        Me.txtAutor.Text = ""
+        Me.txtarea.Text = ""
+        Me.txtcarrera.Text = ""
+        Me.txtFacultad.Text = ""
+        Me.txtFinanciamiento.Text = ""
+        Me.txtdisciplina.Text = ""
+        Me.txtlinea.Text = ""
+        Me.txtObjetivoE.Text = ""
+        Me.txtObjetivoG.Text = ""
+        Me.txtPresupuesto.Text = ""
+        Me.txtsubarea.Text = ""
+        Me.txtarea.Text = ""
+    End Sub
+
+
     Dim LastCategory As String = String.Empty
     Dim CurrentRow As Integer = -1
+    Dim UltimoDta As String = String.Empty
 
     Protected Sub gvTesis_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles gvTesis.RowDataBound
         If e.Row.RowType = DataControlRowType.DataRow Then
             Dim row As Data.DataRowView = CType(e.Row.DataItem, Data.DataRowView)
-            If LastCategory = row("codigo_tes").ToString Then
+            If LastCategory = row("codigo_tes").ToString And UltimoDta = row("codigo_dta").ToString Then
 
                 'If (gvAlumnos.Rows(CurrentRow).Cells(0).RowSpan = 0) Then
                 '    gvAlumnos.Rows(CurrentRow).Cells(0).RowSpan = 2
@@ -166,21 +225,30 @@ Partial Class FrmRevisionTesisJurado
             Else
                 e.Row.VerticalAlign = VerticalAlign.Middle
                 LastCategory = row("codigo_tes").ToString()
+                UltimoDta = row("codigo_dta").ToString()
                 CurrentRow = e.Row.RowIndex
             End If
+            'si los dias son negativos se pone 0
+
+            If CInt(Me.gvTesis.DataKeys(e.Row.RowIndex).Values("diaspendientes")) < 0 Or Me.gvTesis.DataKeys(e.Row.RowIndex).Values("fechaconformidad").ToString <> "" Then
+                e.Row.Cells(4).Text = "0"
+            End If
+
             'Boton descargar
             If Me.gvTesis.DataKeys(e.Row.RowIndex).Values("archivofinal") <> "" Then
-                Dim btn As LinkButton = DirectCast(e.Row.Cells(2).FindControl("btnDescargar"), LinkButton)
+                Dim btn As LinkButton = DirectCast(e.Row.Cells(4).FindControl("btnDescargar"), LinkButton)
                 btn.Text = "<span class='fa fa-download'></span>"
                 btn.OnClientClick = "fnDescargar('../../DescargarArchivo.aspx?Id=" + Me.gvTesis.DataKeys(e.Row.RowIndex).Values("archivofinal") + "&idt=23');return false;"
-                btn.CssClass = "btn btn-sm btn-info btn-radius"
+                btn.CssClass = "btn btn-sm btn-info btn-radius primary-tooltip"
+                btn.ToolTip = "Última actualización : " + Me.gvTesis.DataKeys(e.Row.RowIndex).Values("fechaarchivo")
+
             End If
             If Me.gvTesis.DataKeys(e.Row.RowIndex).Values("fechaconformidad").ToString <> "" Then
                 'Dim btn As LinkButton = DirectCast(e.Row.Cells(5).FindControl("btnConforme"), LinkButton)
                 'Me.gvTesis.Columns(3).Visible = False
-                Me.gvTesis.Columns(5).Visible = False
+                Me.gvTesis.Columns(9).Visible = False
             Else
-                Me.gvTesis.Columns(5).Visible = True
+                Me.gvTesis.Columns(9).Visible = True
             End If
         End If
 
@@ -197,8 +265,16 @@ Partial Class FrmRevisionTesisJurado
     End Function
 
     Protected Sub btnAtras_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAtras.Click
+        If (Session("id_per") Is Nothing) Then
+            Response.Redirect("../../sinacceso.html")
+        End If
+        ConsultarTesis(Session("id_per"), Request("ctf"), Me.ddlEstado.SelectedValue)
         Me.DivAsesorias.Visible = False
         Me.Lista.Visible = True
+        Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "tooltp", "$('.btn').tooltip();", True)
+        Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "Loading", "fnLoading(false)", True)
+        Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "LoadingEstado", "LoadingEstado();", True)
+
     End Sub
    
     Protected Sub btnGuardarObservacion_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnGuardarObservacion.Click
@@ -207,7 +283,7 @@ Partial Class FrmRevisionTesisJurado
         End If
         Try
             If validarRevision() = True Then
-                GuardarRevision(Me.hdtes.Value, Me.hdjur.Value, Me.txtObservacion.Text, Session("id_per"))
+                GuardarRevision(Me.hdtes.Value, Me.hdjur.Value, Me.ddlCategoria.SelectedValue, Me.txtObservacion.Text, Session("id_per"))
             End If
         Catch ex As Exception
             Me.lblMensajeObservación.InnerText = ex.Message.ToString
@@ -218,6 +294,11 @@ Partial Class FrmRevisionTesisJurado
     Public Function validarRevision() As Boolean
         Me.lblMensajeObservación.InnerText = ""
         Me.lblMensajeObservación.Attributes.Remove("class")
+        If Me.ddlCategoria.SelectedValue = 0 Then
+            Me.lblMensajeObservación.InnerText = "Seleccione una categoría de observación"
+            Me.lblMensajeObservación.Attributes.Add("class", "alert alert-danger")
+            Return False
+        End If
         If Me.txtObservacion.Text = "" Then
             Me.lblMensajeObservación.InnerText = "Ingrese observación"
             Me.lblMensajeObservación.Attributes.Add("class", "alert alert-danger")
@@ -242,15 +323,16 @@ Partial Class FrmRevisionTesisJurado
         Return True
     End Function
 
-    Private Sub GuardarRevision(ByVal codigo_Tes As Integer, ByVal codigo_jur As Integer, ByVal descripcion As String, ByVal codigo_per As Integer)
+    Private Sub GuardarRevision(ByVal codigo_Tes As Integer, ByVal codigo_jur As Integer, ByVal codigo_cos As Integer, ByVal descripcion As String, ByVal codigo_per As Integer)
+
         Dim dt As New Data.DataTable
         Dim obj As New ClsConectarDatos
         obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
         obj.AbrirConexion()
-        dt = obj.TraerDataTable("SUST_GuardarObservacionJuradoTesis", codigo_Tes, codigo_jur, descripcion, codigo_per)
+        dt = obj.TraerDataTable("SUST_GuardarObservacionJuradoTesis", codigo_Tes, codigo_jur, codigo_cos, descripcion, codigo_per)
         obj.CerrarConexion()
         If dt.Rows(0).Item("Respuesta") = "1" Then
-            Me.lblMensajeObservación.InnerText = dt.Rows(0).Item("Mensaje").ToString
+            Me.lblMensajeObservación.InnerText = dt.Rows(0).Item("Mensaje").ToString + ", deberá enviar la observación para poder ser visualizada por el bachiller."
             Me.lblMensajeObservación.Attributes.Add("class", "alert alert-success")
             If Me.archivo.HasFile = True Then
                 If Not (SubirArchivo(23, dt.Rows(0).Item("cod"), Me.archivo.PostedFile, 13)) Then
@@ -259,6 +341,7 @@ Partial Class FrmRevisionTesisJurado
                 End If
             End If
             'End If
+
             limpiarobservacion()
             CargarLineaTiempo(Me.hdtes.Value, Me.hdjur.Value)
         Else
@@ -266,6 +349,46 @@ Partial Class FrmRevisionTesisJurado
             Me.lblMensajeObservación.Attributes.Add("class", "alert alert-danger")
         End If
     End Sub
+
+
+    Private Sub EnviarNotificacionObservacion(ByVal codigo_per_emisor As Integer, ByVal codigo_tfu_emisor As Integer, ByVal codigo_apl As Integer, ByVal codigo_Tes As Integer, ByVal codigo_jur As Integer)
+        Try
+            Dim obj As New ClsConectarDatos
+            obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+            obj.AbrirConexion()
+            Dim dt As New Data.DataTable
+            dt = obj.TraerDataTable("SUST_DatosNotificacionObservacionJurado", codigo_Tes, codigo_jur, codigo_per_emisor)
+            obj.CerrarConexion()
+
+            If dt.Rows.Count > 0 Then
+
+                Dim codigo_envio As Integer = ClsComunicacionInstitucional.ObtenerCodigoEnvio(codigo_per_emisor, codigo_tfu_emisor, codigo_apl)
+                Dim correo_destino As String = ""
+                Dim mensaje As String = ""
+                Dim bandera As Integer = 0
+
+                For i As Integer = 0 To dt.Rows.Count - 1
+                    If ConfigurationManager.AppSettings("CorreoUsatActivo") = 1 Then
+                        correo_destino = dt.Rows(i).Item("correo")
+                    Else
+                        correo_destino = "hcano@usat.edu.pe,ravalos@usat.edu.pe,csenmache@usat.edu.pe,yperez@usat.edu.pe"
+                    End If
+                    If ClsComunicacionInstitucional.EnviarNotificacionEmail(codigo_envio, "SUST", "MOJT", "1", codigo_per_emisor, "codigo_alu", dt.Rows(i).Item("codigo_alu"), codigo_apl, correo_destino, "", "", "", dt.Rows(i).Item("estudiante"), dt.Rows(i).Item("tipojurado"), dt.Rows(i).Item("jurado"), dt.Rows(i).Item("Titulo_Tes")) Then
+                        mensaje += ", Notificación enviada al estudiante: " + dt.Rows(i).Item("estudiante")
+
+                    Else
+                        mensaje += ", No se pudo enviar notificación al estudiante: " + dt.Rows(i).Item("estudiante")
+                        bandera = bandera + 1
+                    End If
+                Next
+                Me.lblMensajeObservación.InnerText = Me.lblMensajeObservación.InnerText + mensaje
+            End If
+        Catch ex As Exception
+            'ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "valida3", "fnMensaje('error','Operación no se ejecuto correctamente');", True)
+        End Try
+
+    End Sub
+
 
 
     Function SubirArchivo(ByVal idtabla As Integer, ByVal codigo As String, ByVal ArchivoSubir As HttpPostedFile, ByVal nro_operacion As Integer) As Boolean
@@ -343,6 +466,7 @@ Partial Class FrmRevisionTesisJurado
 
     Private Sub limpiarobservacion()
         Me.txtObservacion.Text = ""
+        Me.ddlCategoria.SelectedValue = "0"
     End Sub
 
     Private Sub CargarLineaTiempo(ByVal codigo_tes As Integer, ByVal codigo_jur As Integer)
@@ -354,6 +478,7 @@ Partial Class FrmRevisionTesisJurado
         obj.CerrarConexion()
 
         Me.LineaDeTiempo.InnerHtml = ""
+        Dim validarPendientes As Integer = 0
         If dt.Rows.Count > 0 Then
             Dim verificar As Integer = 0
             Dim str As String = ""
@@ -425,11 +550,18 @@ Partial Class FrmRevisionTesisJurado
                 str += "</div>"
                 str += "</div>"
 
+                If dt.Rows(i).Item("enviado") = 0 And dt.Rows(i).Item("estado").ToString = "PENDIENTE" Then
+                    validarPendientes = validarPendientes + 1
+                End If
             Next
-
             Me.LineaDeTiempo.InnerHtml = str
+          
         End If
-
+        If validarPendientes = 0 Then
+            Me.btnEnviar.Visible = False
+        Else
+            Me.btnEnviar.Visible = True
+        End If
 
     End Sub
 
@@ -438,44 +570,113 @@ Partial Class FrmRevisionTesisJurado
             Response.Redirect("../../../sinacceso.html")
         End If
         ConsultarTesis(Session("id_per"), Request("ctf"), Me.ddlEstado.SelectedValue)
+        Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "Loading", "fnLoading(false)", True)
+        Me.ScriptManager1.RegisterStartupScript(Me.Page, Me.GetType(), "LoadingEstado", "LoadingEstado();", True)
     End Sub
 
     Private Function ActualizarEtapaTramite(ByVal codigo_dta As Integer, ByVal tipooperacion As String, ByVal estadoaprobacion As String, ByVal codigo_tfu As Integer) As Data.DataTable
+        Dim dt As New Data.DataTable
+        dt.Columns.Add("revision")
+        dt.Columns.Add("registros")
+        dt.Columns.Add("email")
         Try
-            Dim cmp As New clsComponenteTramiteVirtualCVE
-            Dim objcmp As New List(Of Dictionary(Of String, Object))()
-            cmp._codigo_dta = codigo_dta
-            'cmp.tipoOperacion = "1"
-            cmp.tipoOperacion = tipooperacion
-            cmp._codigo_per = Session("id_per")
-            'cmp._codigo_tfu = 249 ' tipo funcion jurado-biblioteca
-            cmp._codigo_tfu = codigo_tfu ' tipo funcion jurado-biblioteca
-            If estadoaprobacion = "A" Then
-                cmp._estadoAprobacion = "A" ' DA CONFORMIDAD OSEA APRUEBA
-                cmp._observacionEvaluacion = "Aprobar componente"
-            Else
-                cmp._estadoAprobacion = "R"
-                cmp._observacionEvaluacion = "Rechazar componente"
-            End If
-            objcmp = cmp.mt_EvaluarTramite()
-            Dim dt As New Data.DataTable
-            dt.Columns.Add("revision")
-            dt.Columns.Add("registros")
-            dt.Columns.Add("email")
-            For Each fila As Dictionary(Of String, Object) In objcmp
-                dt.Rows.Add(fila.Item("evaluacion"), fila.Item("registos evaluados").ToString, fila.Item("email"))
+            Dim obj As New ClsConectarDatos
+            obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+            obj.AbrirConexion()
+            Dim dtdatos As New Data.DataTable
+            dtdatos = obj.TraerDataTable("SUST_DatosTramitesAutores", codigo_dta)
+            obj.CerrarConexion()
+            For i As Integer = 0 To dtdatos.Rows.Count - 1
+                Dim cmp As New clsComponenteTramiteVirtualCVE
+                Dim objcmp As New List(Of Dictionary(Of String, Object))()
+                'cmp._codigo_dta = codigo_dta
+                cmp._codigo_dta = dtdatos.Rows(i).Item("codigo_dta")
+                'cmp.tipoOperacion = "1"
+                cmp.tipoOperacion = tipooperacion
+                cmp._codigo_per = Session("id_per")
+                'cmp._codigo_tfu = 249 ' tipo funcion jurado-biblioteca
+                cmp._codigo_tfu = codigo_tfu ' tipo funcion jurado-biblioteca
+                If estadoaprobacion = "A" Then
+                    cmp._estadoAprobacion = "A" ' DA CONFORMIDAD OSEA APRUEBA
+                    cmp._observacionEvaluacion = "Aprobar componente"
+                Else
+                    cmp._estadoAprobacion = "R"
+                    cmp._observacionEvaluacion = "Rechazar componente"
+                End If
+                objcmp = cmp.mt_EvaluarTramite()
+
+                For Each fila As Dictionary(Of String, Object) In objcmp
+                    dt.Rows.Add(fila.Item("evaluacion"), fila.Item("registos evaluados").ToString, fila.Item("email"))
+                Next
             Next
             Return dt
         Catch ex As Exception
-            Dim dt As New Data.DataTable
-            dt.Columns.Add("revision")
-            dt.Columns.Add("registros")
-            dt.Columns.Add("email")
 
             dt.Rows.Add(False, "", False)
 
             Return dt
         End Try
     End Function
+
+    Protected Sub btnEnviar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEnviar.Click
+        If (Session("id_per") Is Nothing) Then
+            Response.Redirect("../../../sinacceso.html")
+        End If
+        Try
+            enviarobservaciones(Me.hdtes.Value, Me.hdjur.Value)
+            EnviarNotificacionObservacion(Session("id_per"), Request("ctf"), 47, Me.hdtes.Value, Me.hdjur.Value)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub enviarobservaciones(ByVal codigo_Tes As Integer, ByVal codigo_jur As Integer)
+        Dim dt As New Data.DataTable
+        Dim obj As New ClsConectarDatos
+        obj.CadenaConexion = ConfigurationManager.ConnectionStrings("CNXBDUSAT").ConnectionString
+        obj.AbrirConexion()
+        dt = obj.TraerDataTable("SUST_EnviarObservacionesJurado", codigo_Tes, codigo_jur)
+        obj.CerrarConexion()
+        If dt.Rows(0).Item("Respuesta") = "1" Then
+            Me.lblMensajeObservación.InnerText = dt.Rows(0).Item("Mensaje").ToString
+            Me.lblMensajeObservación.Attributes.Add("class", "alert alert-success")
+            CargarLineaTiempo(Me.hdtes.Value, Me.hdjur.Value)
+            Me.ddlCategoria.Enabled = False
+            Me.txtObservacion.Enabled = False
+            Me.archivo.Enabled = False
+            Me.btnGuardarObservacion.Visible = False
+            Me.btnEnviar.Visible = False
+        Else
+            Me.lblMensajeObservación.InnerText = dt.Rows(0).Item("Mensaje").ToString
+            Me.lblMensajeObservación.Attributes.Add("class", "alert alert-danger")
+        End If
+    End Sub
+
+    Protected Sub btnExportExcel_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        GenerarExcel()
+    End Sub
+
+    Private Sub GenerarExcel()
+        Dim sb As StringBuilder = New StringBuilder()
+        Dim sw As StringWriter = New StringWriter(sb)
+        Dim htw As HtmlTextWriter = New HtmlTextWriter(sw)
+        Dim page As Page = New Page()
+        Dim form As HtmlForm = New HtmlForm()
+        ' Deshabilitar la validación de eventos, sólo asp.net 2
+        gvTesis.EnableViewState = False
+        page.EnableEventValidation = False
+        'Realiza las inicializaciones de la instancia de la clase Page que requieran los diseñadores RAD.
+        page.DesignerInitialize()
+        page.Controls.Add(form)
+        form.Controls.Add(gvTesis)
+        page.RenderControl(htw)
+        Response.Clear()
+        Response.Buffer = True
+        Response.ContentType = "application/vnd.ms-excel"
+        Response.AddHeader("Content-Disposition", "attachment;filename=Listado_revision_tesis_" + DateTime.Now.ToString("yyyy_MM_dd_H_mm_ss") + ".xls")
+        Response.Charset = "UTF-8"
+        Response.ContentEncoding = Encoding.[Default]
+        Response.Write(sb.ToString())
+        Response.End()
+    End Sub
 End Class
 

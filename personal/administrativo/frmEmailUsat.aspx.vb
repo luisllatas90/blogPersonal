@@ -17,7 +17,12 @@ Partial Class administrativo_frmEmailUsat
     Protected Sub ShowMessage(ByVal Message As String, ByVal type As MessageType)
         Page.RegisterStartupScript("Mensaje", "<script>ShowMessage('" & Message & "','" & type & "');</script>")
     End Sub
-
+    Protected Sub ShowMessage2(ByVal Message As String, ByVal type As MessageType)
+        Page.RegisterStartupScript("Mensaje2", "<script>ShowMessage2('" & Message & "','" & type & "');</script>")
+    End Sub
+    Protected Sub ShowMessage3(ByVal Message As String, ByVal type As MessageType)
+        Page.RegisterStartupScript("Mensaje3", "<script>ShowMessage3('" & Message & "','" & type & "');</script>")
+    End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Session("id_per") Is Nothing) Then
@@ -172,20 +177,51 @@ Partial Class administrativo_frmEmailUsat
         End Try
     End Sub
     Private Sub fnActualizarProceso(ByVal dt As DataTable)
-
+        Dim nroprocesados As Integer = 0
+        Dim nronoprocesados As Integer = 0
         Dim filas As Integer = grwResultado.Rows.Count
         Dim filas2 As Integer = dt.Rows.Count
+
+        Dim str As New StringBuilder
+        Dim strnp As New StringBuilder
+
+        str.Append("No Procesados:<br><ul>")
+        strnp.Append("Nro de Procesados:<br><ul>")
+
         For i As Integer = 0 To filas - 1
             For j As Integer = 0 To filas2 - 1
                 'Response.Write("i: " & grwResultado.Rows(i).Cells(0).Text)
                 If grwResultado.Rows(i).Cells(0).Text = dt.Rows(j).Item("nro") Then
 
                     grwResultado.Rows(i).Cells(4).Text = dt.Rows(j).Item("procesado")
-               ' Else
-                 '   grwResultado.Rows(i).Cells(4).Text = "SI"
+
+                    If dt.Rows(j).Item("procesado") = "SI" Then
+                        nroprocesados = nroprocesados + 1
+                    Else
+                        nronoprocesados = nronoprocesados + 1
+
+                        str.Append("<li>" & grwResultado.Rows(i).Cells(1).text & " " & grwResultado.Rows(i).Cells(2).text & "</li>")
+                    End If
+
+                    ' Else
+                    '   grwResultado.Rows(i).Cells(4).Text = "SI" 
                 End If
             Next
         Next
+        str.Append("</ul>")
+        strnp.Append(nroprocesados.ToString)
+
+        strnp.Append("</ul>")
+        'Response.Write(str.ToString)
+
+        If nronoprocesados > 0 Then
+
+            Call ShowMessage2(strnp.ToString, MessageType.Info)
+        End If
+        If nroprocesados > 0 Then
+            Call ShowMessage3(str.ToString, MessageType.Error)
+        End If
+
 
     End Sub
 
