@@ -247,7 +247,7 @@
                                                         CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
                                                         CommandName="Editar" CssClass="btn btn-primary btn-sm"
                                                         ToolTip="Ver Comprobante de Pago">
-                                                        <span><i class="fa fa-search"></i></span>
+                                                        <span><i class="fa fa-paperclip"></i></span>
                                                     </asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>

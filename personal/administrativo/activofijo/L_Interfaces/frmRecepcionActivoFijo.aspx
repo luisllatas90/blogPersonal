@@ -1,10 +1,9 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="InformacionContable.aspx.vb"
-    Inherits="administrativo_activofijo_DatosContables_DatosContables" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="frmRecepcionActivoFijo.aspx.vb" Inherits="administrativo_activofijo_L_Interfaces_frmRecepcionActivoFijo" %>
 
-    <!DOCTYPE html>
-    <html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 
-    <head runat="server">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
         <title>Información Contable de Activos Fijos</title>
 
         <meta charset="UTF-8">
@@ -116,7 +115,23 @@
 
                     //DESHABILITAR
                     estadoTabListado('D');
-                }
+                } else if (tabActivo == 'detalle-tab') {
+                    //HABILITAR
+                    estadoTabDetalle('H');
+
+                    //DESHABILITAR
+                    estadoTabListado('D');
+
+                   
+                } else if (tabActivo == 'Detalle->Listado') {
+                    //HABILITAR
+                    estadoTabDetalle('D');
+
+                    //DESHABILITAR
+                    estadoTabListado('H');
+
+                   
+                } 
             }
 
             function estadoTabListado(estado) {
@@ -130,6 +145,20 @@
                     $("#listado-tab").addClass("disabled");
                     $("#listado").removeClass("show");
                     $("#listado").removeClass("active");
+                }
+            }
+
+            function estadoTabDetalle(estado) {
+                if (estado == 'H') {
+                    $("#detalle-tab").removeClass("disabled");
+                    $("#detalle-tab").addClass("active");
+                    $("#detalle").addClass("show");
+                    $("#detalle").addClass("active");
+                } else {
+                    $("#detalle-tab").removeClass("active");
+                    $("#detalle-tab").addClass("disabled");
+                    $("#detalle").removeClass("show");
+                    $("#detalle").removeClass("active");
                 }
             }
 
@@ -151,8 +180,8 @@
 
     </head>
 
-    <body>
-        <div class="loader"></div>
+  <body>
+    <div class="loader"></div>
         <form id="frmInformacionContable" runat="server">
             <asp:ScriptManager ID="scmInformacionContable" runat="server"></asp:ScriptManager>
 
@@ -162,7 +191,7 @@
             <div class="container-fluid">
                 <!--Cabecera de Panel-->
                 <div class="card div-title">
-                    <div class="row title">INFORMACIÓN CONTABLE DE ACTIVO FIJO</div>
+                    <div class="row title">RECEPCIÓN DE ACTIVO FIJO</div>
                 </div>
                 <!--/Cabecera de Panel-->
                 <!--Tabs-->
@@ -172,14 +201,15 @@
                             aria-controls="listado" aria-selected="true">Listado</a>
 
                     </li>
+                
                     <li class="nav-item">
-                        <a href="#registro" id="registro-tab" class="nav-link disabled" data-toggle="tab" role="tab"
-                            aria-controls="registro" aria-selected="false">Registro</a>
+                        <a href="#detalle" id="detalle-tab" class="nav-link disabled" data-toggle="tab" role="tab"
+                            aria-controls="detalle" aria-selected="false">Detalle</a>
 
                     </li>
                 </ul>
                 <div class="tab-content" id="contentTabs">
-                    <!--Tab de Listado-->
+                    <!--Tab de Listado (Pestaña 01)-->
                     <div class="tab-pane show active" id="listado" role="tabpanel" aria-labelledby="listado-tab">
                         <!--Panel de Filtro de Búsqueda-->
                         <div class="panel-cabecera">
@@ -187,29 +217,37 @@
                                 ChildrenAsTriggers="false">
                                 <ContentTemplate>
                                     <div class="card">
-                                        <div class="card-header">Filtros de Búsqueda</div>
+                                        <div class="card-header">Recepión</div>
                                         <div class="card-body">
                                             <div class="row">
-                                                <label for="cbEstado"
-                                                    class="col-sm-1 col-form-label form-control-sm">Estado:</label>
+                                                <label for="cmbTipoFiltro"
+                                                    class="col-sm-1 col-form-label form-control-sm">Filtrar:</label>
                                                 <div class="col-sm-3">
-                                                    <asp:DropDownList ID="cbEstado" runat="server" AutoPostBack="true"
+                                                   <asp:DropDownList ID="cmbTipoFiltro" runat="server"
+                                                        AutoPostBack="true"
                                                         CssClass="form-control form-control-sm combo_filtro"
                                                         data-live-search="true" AutoComplete="off">
                                                         <asp:ListItem Value="">[-- SELECCIONE --]</asp:ListItem>
-                                                        <asp:ListItem Value="PENDIENTECOMPLETAR">PENDIENTE DE COMPLETAR
+                                                        <asp:ListItem Value="Todos">TODOS
                                                         </asp:ListItem>
-                                                        <asp:ListItem Value="COMPLETO">COMPLETO</asp:ListItem>
+                                                        <asp:ListItem Value="PORCONFIRMAR">POR CONFIRMAR</asp:ListItem>
+                                                        <asp:ListItem Value="PORVALIDAR">POR VALIDAR
+                                                        </asp:ListItem>        
+                                                        <asp:ListItem Value="VALIDADO">VALIDADO
+                                                        </asp:ListItem>    
+                                                        <asp:ListItem Value="COMPRA">EN COMPRA
+                                                        </asp:ListItem>     
                                                     </asp:DropDownList>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <asp:LinkButton ID="btnListar" runat="server"
+                                                </div>    
+                                                <div class ="col-sm-4">
+                                                     <asp:LinkButton ID="btnListarSolicitud" runat="server"
                                                         CssClass="btn btn-accion btn-celeste">
                                                         <i class="fa fa-sync-alt"></i>
                                                         <span class="text">Listar</span>
                                                     </asp:LinkButton>
                                                 </div>
                                             </div>
+                                
                                         </div>
                                     </div>
                                 </ContentTemplate>
@@ -223,47 +261,36 @@
                                 ChildrenAsTriggers="false">
                                 <ContentTemplate>
                                     <asp:GridView ID="grwLista" runat="server" Width="100%" AutoGenerateColumns="false"
-                                        ShowHeader="true" DataKeyNames="codigo_af" CssClass="display table table-sm"
+                                        ShowHeader="true" CssClass="display table table-sm"
                                         GridLines="None">
                                         <Columns>
-                                            <asp:BoundField DataField="desc_af" HeaderText="ACTIVO FIJO" />
-                                            <asp:BoundField DataField="resp_bien" HeaderText="RESP. DEL BIEN" />
-                                            <asp:BoundField DataField="ubicacion" HeaderText="UBICACIÓN" />
+                                            <asp:BoundField DataField="cod_solReq" HeaderText="CÓD. SOLIC." />
+                                            <asp:BoundField DataField="solic" HeaderText="SOLICITANTE" />
+                                            <asp:BoundField DataField="are_solc" HeaderText="ÁREA SOLICITANTE" />
+                                            <asp:BoundField DataField="estado" HeaderText="ESTADO" />
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"
-                                                HeaderText="FIC. CONTROL PAT.">
+                                                HeaderText="OPE.">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="BtnFichaControlPatrimonial" runat="server"
-                                                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
-                                                        CommandName="Editar" CssClass="btn btn-primary btn-sm"
-                                                        ToolTip="Ver Ficha Control Patrimonial">
+                                                    <asp:LinkButton ID="btnVerDetalle" runat="server"
+                                                        CommandArgument="<%# CType(Container, GridViewRow).RowIndex %>"
+                                                        CommandName="VerDetalle" CssClass="btn btn-primary btn-sm"
+                                                        ToolTip="Ver Detalle">
                                                         <span><i class="fa fa-search"></i></span>
                                                     </asp:LinkButton>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"
-                                                HeaderText="COMP. DE PAGO">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="btnVerComprobantePago" runat="server"
-                                                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
-                                                        CommandName="Editar" CssClass="btn btn-primary btn-sm"
-                                                        ToolTip="Ver Comprobante de Pago">
-                                                        <span><i class="fa fa-search"></i></span>
+                                                    <asp:LinkButton ID="btnSolicValid" runat="server"
+                                                        CommandArgument="<%# CType(Container, GridViewRow).RowIndex %>"
+                                                        CommandName="SolValid" CssClass="btn btn-primary btn-sm"
+                                                        ToolTip="Solicitar Validación">
+                                                        <span><i class="fa fa-check"></i></span>
+                                                    </asp:LinkButton>
+                                                     <asp:LinkButton ID="btnSolicCompra" runat="server"
+                                                        CommandArgument="<%# CType(Container, GridViewRow).RowIndex %>"
+                                                        CommandName="SolCompra" CssClass="btn btn-primary btn-sm"
+                                                        ToolTip="Solictar Compra">
+                                                        <span><i class="fa fa-shopping-cart"></i></span>
                                                     </asp:LinkButton>
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"
-                                                HeaderText="DATOS CONTABLES">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="btnAgregarDatosContables" runat="server"
-                                                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
-                                                        CommandName="Agregar" CssClass="btn btn-primary btn-sm"
-                                                        ToolTip="Agregar Datos Contables">
-                                                        <span><i class="fa fa-plus"></i></span>
-                                                    </asp:LinkButton>
-
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>                  
                                         </Columns>
                                         <EmptyDataTemplate>
                                             No se encontraron Datos!
@@ -278,58 +305,77 @@
                         </div>
                         <!--/Contenedor de GridView-->
                     </div>
-                    <!--/Tab de Listado-->
-                    <br>
-                    <!--Tab de Detalle de Pedido-->
-                    <div class="tab-pane" id="registro" role="tabpanel" aria-labelledby="registro-tab">
+                    <!--/Tab de Listado-->                     
+
+                    <!--Tab Detalle (Pestaña 02)  -->  
+                    <div class="tab-pane" id="detalle" role="tabpanel" aria-labelledby="detalle-tab">                      
+                        <!--Panel de Filtro de Búsqueda-->
                         <div class="panel-cabecera">
-                            <asp:UpdatePanel ID="udpRegistro" runat="server" UpdateMode="Conditional"
+                            <asp:UpdatePanel ID="udpDetalle" runat="server" UpdateMode="Conditional"
                                 ChildrenAsTriggers="false">
                                 <ContentTemplate>
                                     <div class="card">
-                                        <div class="card-header">Agregar Datos Contables</div>
-                                        <div class="card-body">
+                                        <div class="card-header"></div>
+                                        <div class="card-body">                       
                                             <div class="row">
-                                                <label for="txtNroCuentaContable"
-                                                    class="col-sm-2 col-form-label form-control-sm">N° Cuenta
-                                                    Contable:</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtNroCuentaContable" runat="server"
-                                                        MaxLength="300"
-                                                        CssClass="form-control form-control-sm uppercase"
-                                                        AutoComplete="off" />
-                                                </div>
+                                                <div class="col-sm-1"> 
+                                                  <asp:LinkButton ID="btnSalirDetalle" runat="server"
+                                                  CssClass="btn btn-accion btn-danger">
+                                                  <i class="fa fa-sign-out-alt"></i>
+                                                  <span class="text">Salir</span>
+                                                  </asp:LinkButton>
+                                                </div>                                  
+                                              
                                             </div>
-                                            <div class="row">
-                                                <label for="txtDepreciacón"
-                                                    class="col-sm-2 col-form-label form-control-sm">Depreciación
-                                                </label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtDepreciacón" runat="server" MaxLength="20"
-                                                        CssClass="form-control form-control-sm uppercase"
-                                                        AutoComplete="off" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer" style="text-align: center;">
-                                            <asp:LinkButton ID="btnGuardar" runat="server"
-                                                CssClass="btn btn-accion btn-verde"
-                                                OnClientClick="return alertConfirm(this, event, '¿Desea registrar datos contables?', 'warning');">
-                                                <i class="fa fa-save"></i>
-                                                <span class="text">Guardar</span>
-                                            </asp:LinkButton>
-                                            <asp:LinkButton ID="btnSalir" runat="server"
-                                                CssClass="btn btn-accion btn-danger">
-                                                <i class="fa fa-sign-out-alt"></i>
-                                                <span class="text">Salir</span>
-                                            </asp:LinkButton>
                                         </div>
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
+                        <!--/Panel de Filtro de Búsqueda-->
+
+                        <!--Contenedor de GridView (Pestaña 02)-->
+                        <div class="table-responsive">
+                            <asp:UpdatePanel ID="udpDetalleSolic" runat="server" UpdateMode="Conditional"
+                                ChildrenAsTriggers="false">
+                                <ContentTemplate>
+                                    <asp:GridView ID="gvDetalle" runat="server" Width="100%" AutoGenerateColumns="false"
+                                        ShowHeader="true" DataKeyNames="cod_nuevoReg"  CssClass="display table table-sm"
+                                        GridLines="None">
+                                        <Columns>
+                                            <asp:BoundField DataField="descrip" HeaderText="DESCRIPCIÓN" />
+                                            <asp:BoundField DataField="cantid" HeaderText="CANTIDAD" />
+                                         
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"
+                                                HeaderText="OPE.">
+                                                <ItemTemplate>                                                   
+                                                    <asp:LinkButton ID="btnElimArticulo" runat="server"
+                                                        CommandArgument="<%# CType(Container, GridViewRow).RowIndex %>"
+                                                        CommandName="ElimArt" CssClass="btn btn-primary btn-sm"
+                                                        ToolTip="Eliminar artículo">
+                                                        <span><i class="fa fa-trash"></i></span>
+                                                    </asp:LinkButton>
+                                                     
+                                                </ItemTemplate>
+                                            </asp:TemplateField>                  
+                                        </Columns>
+                                        <EmptyDataTemplate>
+                                            No se encontraron Datos!
+                                        </EmptyDataTemplate>
+                                        <HeaderStyle BackColor="#D9534F" ForeColor="White" VerticalAlign="Middle"
+                                            HorizontalAlign="Center" Font-Size="12px" />
+                                        <RowStyle Font-Size="11px" />
+                                        <EmptyDataRowStyle ForeColor="Red" CssClass="table table-bordered" />
+                                    </asp:GridView>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                         <!--/Contenedor de GridView (Pestaña 02)-->
+
                     </div>
-                    <!--/Tab de Detalle de Pedido-->
+                    <!--/Tab de Detalle (Pestaña 02)-->   
+                    
+                    
                 </div>
             </div>
 
@@ -416,4 +462,4 @@
         </script>
     </body>
 
-    </html>
+</html>

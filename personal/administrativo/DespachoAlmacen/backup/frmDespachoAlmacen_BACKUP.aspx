@@ -1,12 +1,13 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="InformacionContable.aspx.vb"
-    Inherits="administrativo_activofijo_DatosContables_DatosContables" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="frmDespachoAlmacen.aspx.vb"
+    Inherits="administrativo_DespachoAlmacen_frmDespachoAlmacen" %>
 
-    <!DOCTYPE html>
+    <!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
     <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head runat="server">
-        <title>Información Contable de Activos Fijos</title>
-
+        <title>Despacho de Pedidos</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,42 +16,47 @@
         <meta http-equiv="X-UA-Compatible" content="IE=10" />
 
         <!-- Estilos externos -->
-        <link rel="stylesheet" href="../../../assets/bootstrap-4.1/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="../../../assets/smart-wizard/css/smart_wizard.min.css" />
-        <link rel="stylesheet" href="../../../assets/bootstrap-select-1.13.1/css/bootstrap-select.min.css" />
-        <link rel="stylesheet" href="../../../assets/fontawesome-5.2/css/all.min.css" />
-        <link rel="stylesheet" href="../../../Alumni/css/datatables/jquery.dataTables.min.css?12" />
-        <link rel="stylesheet" href="../../../Alumni/css/sweetalert/sweetalert2.min.css" />
+        <link rel="stylesheet" href="../../assets/bootstrap-4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../assets/smart-wizard/css/smart_wizard.min.css">
+        <link rel="stylesheet" href="../../assets/fontawesome-5.2/css/all.min.css">
+        <link rel="stylesheet" href="../../Alumni/css/datatables/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="../../Alumni/css/sweetalert/sweetalert2.min.css">
+        <link rel="stylesheet" href="css/bootstrap-select.css">
 
         <!-- Estilos propios -->
-        <link rel="stylesheet" href="../../../Alumni/css/estilos.css?13" />
+        <link rel="stylesheet" href="../../Alumni/css/estilos.css?13">
 
         <!-- Scripts externos -->
-        <script src="../../../assets/jquery/jquery-3.3.1.js"></script>
-        <script src="../../../assets/bootstrap-4.1/js/bootstrap.bundle.js"></script>
-        <script src="../../../assets/bootstrap-select-1.13.1/js/bootstrap-select.js"></script>
-        <script src="../../../Alumni/js/popper.js"></script>
-        <script src="../../../Alumni/js/sweetalert/es6-promise.auto.min.js"></script>
-        <script src="../../../Alumni/js/sweetalert/sweetalert2.js"></script>
-        <script src="../../../Alumni/js/datatables/jquery.dataTables.min.js?20"></script>
+        <script src="../../assets/jquery/jquery-3.3.1.js"></script>
+        <script src="../../assets/bootstrap-4.1/js/bootstrap.bundle.js"></script>
+        <script src="../../assets/bootstrap-select-1.13.1/js/bootstrap-select.js?12"></script>
+        <script src="../../Alumni/js/popper.js"></script>
+        <script src="../../Alumni/js/sweetalert/es6-promise.auto.min.js"></script>
+        <script src="../../Alumni/js/sweetalert/sweetalert2.js"></script>
+        <script src="../../Alumni/js/datatables/jquery.dataTables.min.js?1"></script>
 
         <!-- Scripts propios -->
-        <script src="../../../Alumni/js/funciones.js?1"></script>
+        <script src="../../Alumni/js/funciones.js?1"></script>
 
         <script type="text/javascript">
+
             function udpFiltrosUpdate() {
                 /*Combos*/
-                $(".combo_filtro").selectpicker({
+                $('.combo_filtro').selectpicker({
                     size: 6,
                 });
             }
 
             function udpListaUpdate() {
-                formatoGrilla();
+                formatoGrillaListado();
             }
 
-            /* Dar formato a la grilla. */
-            function formatoGrilla() {
+            function udpDetalleUpdate() {
+                formatoGrillaDetalle();
+            }
+
+            /* Dar formato a la grilla (LISTADO). */
+            function formatoGrillaListado() {
                 // Setup - add a text input to each footer cell
                 $('#grwLista thead tr').clone(true).appendTo('#grwLista thead');
                 $('#grwLista thead tr:eq(1) th').each(function (i) {
@@ -72,6 +78,35 @@
 
 
                 var table = $('#grwLista').DataTable({
+                    orderCellsTop: true,
+                });
+
+
+            }
+
+            /* Dar formato a la grilla (DETALLE). */
+            function formatoGrillaDetalle() {
+                // Setup - add a text input to each footer cell
+                $('#grwDetalle thead tr').clone(true).appendTo('#grwDetalle thead');
+                $('#grwDetalle thead tr:eq(1) th').each(function (i) {
+                    var title = $(this).text();
+                    $(this).css("background-color", "white");
+                    $(this).html(
+                        '<input type="text" placeholder="Buscar ' + title + '" />'
+                    );
+
+                    $("input", this).on("keyup change", function () {
+                        if (table.column(i).search() !== this.value) {
+                            table
+                                .column(i)
+                                .search(this.value)
+                                .draw();
+                        }
+                    });
+                });
+
+
+                var table = $('#grwDetalle').DataTable({
                     orderCellsTop: true,
                 });
 
@@ -108,11 +143,11 @@
                     estadoTabListado('H');
 
                     //DESHABILITAR
-                    estadoTabRegistro('D');
+                    estadoTabDetalle('D');
 
-                } else if (tabActivo == 'registro-tab') {
+                } else if (tabActivo == 'detalle-tab') {
                     //HABILITAR
-                    estadoTabRegistro('H');
+                    estadoTabDetalle('H');
 
                     //DESHABILITAR
                     estadoTabListado('D');
@@ -133,28 +168,27 @@
                 }
             }
 
-            function estadoTabRegistro(estado) {
+            function estadoTabDetalle(estado) {
                 if (estado == 'H') {
-                    $("#registro-tab").removeClass("disabled");
-                    $("#registro-tab").addClass("active");
-                    $("#registro").addClass("show");
-                    $("#registro").addClass("active");
+                    $("#detalle-tab").removeClass("disabled");
+                    $("#detalle-tab").addClass("active");
+                    $("#detalle").addClass("show");
+                    $("#detalle").addClass("active");
                 } else {
-                    $("#registro-tab").removeClass("active");
-                    $("#registro-tab").addClass("disabled");
-                    $("#registro").removeClass("show");
-                    $("#registro").removeClass("active");
+                    $("#detalle-tab").removeClass("active");
+                    $("#detalle-tab").addClass("disabled");
+                    $("#detalle").removeClass("show");
+                    $("#detalle").removeClass("active");
                 }
             }
 
         </script>
-
     </head>
 
     <body>
         <div class="loader"></div>
-        <form id="frmInformacionContable" runat="server">
-            <asp:ScriptManager ID="scmInformacionContable" runat="server"></asp:ScriptManager>
+        <form id="frmDespachoAlmacen" runat="server">
+            <asp:ScriptManager ID="scmDespachoAlmacen" runat="server"></asp:ScriptManager>
 
             <asp:UpdatePanel ID="udpScripts" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
             </asp:UpdatePanel>
@@ -162,7 +196,7 @@
             <div class="container-fluid">
                 <!--Cabecera de Panel-->
                 <div class="card div-title">
-                    <div class="row title">INFORMACIÓN CONTABLE DE ACTIVO FIJO</div>
+                    <div class="row title">DESPACHO DE PEDIDOS</div>
                 </div>
                 <!--/Cabecera de Panel-->
                 <!--Tabs-->
@@ -173,13 +207,14 @@
 
                     </li>
                     <li class="nav-item">
-                        <a href="#registro" id="registro-tab" class="nav-link disabled" data-toggle="tab" role="tab"
-                            aria-controls="registro" aria-selected="false">Registro</a>
+                        <a href="#detalle" id="detalle-tab" class="nav-link disabled" data-toggle="tab" role="tab"
+                            aria-controls="detalle" aria-selected="false">Detalle</a>
 
                     </li>
                 </ul>
                 <div class="tab-content" id="contentTabs">
-                    <!--Tab de Listado-->
+                    <!--#################### -->
+                    <!--PESTAÑA 01: TAB. DE LISTADO-->
                     <div class="tab-pane show active" id="listado" role="tabpanel" aria-labelledby="listado-tab">
                         <!--Panel de Filtro de Búsqueda-->
                         <div class="panel-cabecera">
@@ -190,16 +225,25 @@
                                         <div class="card-header">Filtros de Búsqueda</div>
                                         <div class="card-body">
                                             <div class="row">
-                                                <label for="cbEstado"
-                                                    class="col-sm-1 col-form-label form-control-sm">Estado:</label>
+                                                <label for="cmbTipoFiltro"
+                                                    class="col-sm-1 col-form-label form-control-sm">Buscar por:</label>
                                                 <div class="col-sm-3">
-                                                    <asp:DropDownList ID="cbEstado" runat="server" AutoPostBack="true"
+                                                    <asp:DropDownList ID="cmbTipoFiltro" runat="server"
+                                                        AutoPostBack="true"
                                                         CssClass="form-control form-control-sm combo_filtro"
                                                         data-live-search="true" AutoComplete="off">
                                                         <asp:ListItem Value="">[-- SELECCIONE --]</asp:ListItem>
-                                                        <asp:ListItem Value="PENDIENTECOMPLETAR">PENDIENTE DE COMPLETAR
+                                                        <asp:ListItem Value="PEDIDOS_TODOS">MOSTRAR TODOS LOS PEDIDOS
                                                         </asp:ListItem>
-                                                        <asp:ListItem Value="COMPLETO">COMPLETO</asp:ListItem>
+                                                        <asp:ListItem Value="NUM_PEDIDO">NÚMERO DE PEDIDO</asp:ListItem>
+                                                        <asp:ListItem Value="SOL_PEDIDO">SOLICITANTE DE PEDIDO
+                                                        </asp:ListItem>
+                                                        <asp:ListItem Value="ANIO_PEDIDO">AÑO DE PEDIDO
+                                                        </asp:ListItem>
+                                                        <asp:ListItem Value="PRODUCTO">PRODUCTO
+                                                        </asp:ListItem>
+                                                        <asp:ListItem Value="FECHAS">FECHAS (DESDE-HASTA)
+                                                        </asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="col-md-7">
@@ -217,51 +261,29 @@
                         </div>
                         <!--/Panel de Filtro de Búsqueda-->
 
-                        <!--Contenedor de GridView-->
+                        <!--Contenedor de GridView (Pestaña 01)-->
                         <div class="table-responsive">
                             <asp:UpdatePanel ID="udpLista" runat="server" UpdateMode="Conditional"
                                 ChildrenAsTriggers="false">
                                 <ContentTemplate>
                                     <asp:GridView ID="grwLista" runat="server" Width="100%" AutoGenerateColumns="false"
-                                        ShowHeader="true" DataKeyNames="codigo_af" CssClass="display table table-sm"
+                                        ShowHeader="true" DataKeyNames="codPedido" CssClass="display table table-sm"
                                         GridLines="None">
                                         <Columns>
-                                            <asp:BoundField DataField="desc_af" HeaderText="ACTIVO FIJO" />
-                                            <asp:BoundField DataField="resp_bien" HeaderText="RESP. DEL BIEN" />
-                                            <asp:BoundField DataField="ubicacion" HeaderText="UBICACIÓN" />
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"
-                                                HeaderText="FIC. CONTROL PAT.">
+                                            <asp:BoundField DataField="nroPedido" HeaderText="N° DE PEDIDO" />
+                                            <asp:BoundField DataField="fechPedido" HeaderText="FECHA DE PEDIDO" />
+                                            <asp:BoundField DataField="nombSolic" HeaderText="SOLICITANTE" />
+                                            <asp:BoundField DataField="centCosto" HeaderText="CENT. DE COSTOS" />
+                                            <asp:BoundField DataField="codCentCosto" HeaderText="CÓD. CC." />
+
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="OPE.">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="BtnFichaControlPatrimonial" runat="server"
+                                                    <asp:LinkButton ID="btnDetalle" runat="server"
                                                         CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
-                                                        CommandName="Editar" CssClass="btn btn-primary btn-sm"
-                                                        ToolTip="Ver Ficha Control Patrimonial">
+                                                        CommandName="Detalle" CssClass="btn btn-primary btn-sm"
+                                                        ToolTip="Ver Detalle de Pedido">
                                                         <span><i class="fa fa-search"></i></span>
                                                     </asp:LinkButton>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"
-                                                HeaderText="COMP. DE PAGO">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="btnVerComprobantePago" runat="server"
-                                                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
-                                                        CommandName="Editar" CssClass="btn btn-primary btn-sm"
-                                                        ToolTip="Ver Comprobante de Pago">
-                                                        <span><i class="fa fa-search"></i></span>
-                                                    </asp:LinkButton>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"
-                                                HeaderText="DATOS CONTABLES">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="btnAgregarDatosContables" runat="server"
-                                                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
-                                                        CommandName="Agregar" CssClass="btn btn-primary btn-sm"
-                                                        ToolTip="Agregar Datos Contables">
-                                                        <span><i class="fa fa-plus"></i></span>
-                                                    </asp:LinkButton>
-
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         </Columns>
@@ -278,78 +300,62 @@
                         </div>
                         <!--/Contenedor de GridView-->
                     </div>
-                    <!--/Tab de Listado-->
+                    <!--/TAB. DE LISTADO-->
+                    <!--/#################### -->
                     <br>
-                    <!--Tab de Detalle de Pedido-->
-                    <div class="tab-pane" id="registro" role="tabpanel" aria-labelledby="registro-tab">
-                        <div class="panel-cabecera">
-                            <asp:UpdatePanel ID="udpRegistro" runat="server" UpdateMode="Conditional"
+                    <!--#################### -->
+                    <!--PESTAÑA 02: TAB. DE DETALLE DE PEDIDO-->
+                    <div class="tab-pane" id="detalle" role="tabpanel" aria-labelledby="detalle-tab">
+                        <!--Contenedor de GridView (Pestaña 02)-->
+                        <div class="table-responsive">
+                            <asp:UpdatePanel ID="udpDetalle" runat="server" UpdateMode="Conditional"
                                 ChildrenAsTriggers="false">
                                 <ContentTemplate>
-                                    <div class="card">
-                                        <div class="card-header">Agregar Datos Contables</div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <label for="txtNroCuentaContable"
-                                                    class="col-sm-2 col-form-label form-control-sm">N° Cuenta
-                                                    Contable:</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtNroCuentaContable" runat="server"
-                                                        MaxLength="300"
-                                                        CssClass="form-control form-control-sm uppercase"
-                                                        AutoComplete="off" />
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <label for="txtDepreciacón"
-                                                    class="col-sm-2 col-form-label form-control-sm">Depreciación
-                                                </label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtDepreciacón" runat="server" MaxLength="20"
-                                                        CssClass="form-control form-control-sm uppercase"
-                                                        AutoComplete="off" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer" style="text-align: center;">
-                                            <asp:LinkButton ID="btnGuardar" runat="server"
-                                                CssClass="btn btn-accion btn-verde"
-                                                OnClientClick="return alertConfirm(this, event, '¿Desea registrar datos contables?', 'warning');">
-                                                <i class="fa fa-save"></i>
-                                                <span class="text">Guardar</span>
-                                            </asp:LinkButton>
-                                            <asp:LinkButton ID="btnSalir" runat="server"
-                                                CssClass="btn btn-accion btn-danger">
-                                                <i class="fa fa-sign-out-alt"></i>
-                                                <span class="text">Salir</span>
-                                            </asp:LinkButton>
-                                        </div>
-                                    </div>
+                                    <asp:GridView ID="grwDetalle" runat="server" Width="100%"
+                                        AutoGenerateColumns="false" ShowHeader="true" DataKeyNames="codPedido"
+                                        CssClass="display table table-sm" GridLines="None">
+                                        <Columns>
+                                            <asp:BoundField DataField="nroPedido" HeaderText="N° DE PEDIDO" />
+                                            <asp:BoundField DataField="fechPedido" HeaderText="FECHA DE PEDIDO" />
+                                            <asp:BoundField DataField="nombSolic" HeaderText="SOLICITANTE" />
+                                            <asp:BoundField DataField="centCosto" HeaderText="CENT. DE COSTOS" />
+                                            <asp:BoundField DataField="codCentCosto" HeaderText="CÓD. CC." />
+                                        </Columns>
+                                        <EmptyDataTemplate>
+                                            No se encontraron Datos!
+                                        </EmptyDataTemplate>
+                                        <HeaderStyle BackColor="#D9534F" ForeColor="White" VerticalAlign="Middle"
+                                            HorizontalAlign="Center" Font-Size="12px" />
+                                        <RowStyle Font-Size="11px" />
+                                        <EmptyDataRowStyle ForeColor="Red" CssClass="table table-bordered" />
+                                    </asp:GridView>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
+                        <!--/Contenedor de GridView-->
                     </div>
-                    <!--/Tab de Detalle de Pedido-->
+                    <!--/TAB. DE DETALLE DE PEDIDO-->
+                    <!--/#################### -->
                 </div>
             </div>
 
         </form>
 
         <script type="text/javascript">
+            var controlId = '';
+
             /* Ejecutar funciones una vez cargada en su totalidad la página web. */
             $(document).ready(function () {
-                udpFiltrosUpdate();
-
                 /*Ocultar cargando*/
+                udpFiltrosUpdate();
                 $(".loader").fadeOut("slow");
             });
 
 
-
             function udpFiltrosUpdate() {
                 /*Combos*/
-                $(".combo_filtro").selectpicker({
-                    size: 3,
+                $('.combo_filtro').selectpicker({
+                    size: 6,
                 });
             }
 
@@ -364,7 +370,7 @@
                         break;
 
                     case 'btnGuardar':
-                        AlternarLoading(false, 'Registro');
+                        AlternarLoading(false, 'Detalle');
 
                 }
             });
@@ -383,7 +389,7 @@
                         break;
 
                     case 'btnGuardar':
-                        AlternarLoading(true, 'Registro');
+                        AlternarLoading(true, 'Detalle');
 
                 }
             });
@@ -414,6 +420,8 @@
                 }
             }
         </script>
+
+
     </body>
 
     </html>

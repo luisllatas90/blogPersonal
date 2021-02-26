@@ -1,10 +1,10 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="InformacionContable.aspx.vb"
-    Inherits="administrativo_activofijo_DatosContables_DatosContables" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="frmExpedienteBien.aspx.vb" Inherits="administrativo_activofijo_L_Interfaces_frmExpedienteBien" %>
 
-    <!DOCTYPE html>
-    <html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 
-    <head runat="server">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ 
+        <head runat="server">
         <title>Información Contable de Activos Fijos</title>
 
         <meta charset="UTF-8">
@@ -108,11 +108,11 @@
                     estadoTabListado('H');
 
                     //DESHABILITAR
-                    estadoTabRegistro('D');
+                    estadoTabAdjuntar('D');
 
-                } else if (tabActivo == 'registro-tab') {
+                } else if (tabActivo == 'adjuntar-tab') {
                     //HABILITAR
-                    estadoTabRegistro('H');
+                    estadoTabAdjuntar('H');
 
                     //DESHABILITAR
                     estadoTabListado('D');
@@ -133,26 +133,25 @@
                 }
             }
 
-            function estadoTabRegistro(estado) {
+            function estadoTabAdjuntar(estado) {
                 if (estado == 'H') {
-                    $("#registro-tab").removeClass("disabled");
-                    $("#registro-tab").addClass("active");
-                    $("#registro").addClass("show");
-                    $("#registro").addClass("active");
+                    $("#adjuntar-tab").removeClass("disabled");
+                    $("#adjuntar-tab").addClass("active");
+                    $("#adjuntar").addClass("show");
+                    $("#adjuntar").addClass("active");
                 } else {
-                    $("#registro-tab").removeClass("active");
-                    $("#registro-tab").addClass("disabled");
-                    $("#registro").removeClass("show");
-                    $("#registro").removeClass("active");
+                    $("#adjuntar-tab").removeClass("active");
+                    $("#adjuntar-tab").addClass("disabled");
+                    $("#adjuntar").removeClass("show");
+                    $("#adjuntar").removeClass("active");
                 }
             }
 
         </script>
 
     </head>
-
     <body>
-        <div class="loader"></div>
+    <div class="loader"></div>
         <form id="frmInformacionContable" runat="server">
             <asp:ScriptManager ID="scmInformacionContable" runat="server"></asp:ScriptManager>
 
@@ -162,7 +161,7 @@
             <div class="container-fluid">
                 <!--Cabecera de Panel-->
                 <div class="card div-title">
-                    <div class="row title">INFORMACIÓN CONTABLE DE ACTIVO FIJO</div>
+                    <div class="row title">EXPEDIENTE DEL BIEN PARA BAJA</div>
                 </div>
                 <!--/Cabecera de Panel-->
                 <!--Tabs-->
@@ -173,13 +172,13 @@
 
                     </li>
                     <li class="nav-item">
-                        <a href="#registro" id="registro-tab" class="nav-link disabled" data-toggle="tab" role="tab"
-                            aria-controls="registro" aria-selected="false">Registro</a>
+                        <a href="#adjuntar" id="adjuntar-tab" class="nav-link disabled" data-toggle="tab" role="tab"
+                            aria-controls="adjuntar" aria-selected="false">Adjuntar</a>
 
                     </li>
                 </ul>
                 <div class="tab-content" id="contentTabs">
-                    <!--Tab de Listado-->
+                    <!--Tab de Listado (Pestaña 01)-->
                     <div class="tab-pane show active" id="listado" role="tabpanel" aria-labelledby="listado-tab">
                         <!--Panel de Filtro de Búsqueda-->
                         <div class="panel-cabecera">
@@ -187,23 +186,18 @@
                                 ChildrenAsTriggers="false">
                                 <ContentTemplate>
                                     <div class="card">
-                                        <div class="card-header">Filtros de Búsqueda</div>
+                                        <div class="card-header">Filtro</div>
                                         <div class="card-body">
                                             <div class="row">
-                                                <label for="cbEstado"
-                                                    class="col-sm-1 col-form-label form-control-sm">Estado:</label>
+                                                <label for="txtFiltArt"
+                                                    class="col-sm-1 col-form-label form-control-sm">Activo Fijo:</label>
                                                 <div class="col-sm-3">
-                                                    <asp:DropDownList ID="cbEstado" runat="server" AutoPostBack="true"
-                                                        CssClass="form-control form-control-sm combo_filtro"
-                                                        data-live-search="true" AutoComplete="off">
-                                                        <asp:ListItem Value="">[-- SELECCIONE --]</asp:ListItem>
-                                                        <asp:ListItem Value="PENDIENTECOMPLETAR">PENDIENTE DE COMPLETAR
-                                                        </asp:ListItem>
-                                                        <asp:ListItem Value="COMPLETO">COMPLETO</asp:ListItem>
-                                                    </asp:DropDownList>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <asp:LinkButton ID="btnListar" runat="server"
+                                                   <asp:TextBox id="txtFiltArt" runat ="server"></asp:TextBox>
+                                                </div>                                               
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                  <asp:LinkButton ID="btnListarActivoFijo" runat="server"
                                                         CssClass="btn btn-accion btn-celeste">
                                                         <i class="fa fa-sync-alt"></i>
                                                         <span class="text">Listar</span>
@@ -223,47 +217,37 @@
                                 ChildrenAsTriggers="false">
                                 <ContentTemplate>
                                     <asp:GridView ID="grwLista" runat="server" Width="100%" AutoGenerateColumns="false"
-                                        ShowHeader="true" DataKeyNames="codigo_af" CssClass="display table table-sm"
+                                        ShowHeader="true" DataKeyNames="cod_expBien" CssClass="display table table-sm"
                                         GridLines="None">
                                         <Columns>
-                                            <asp:BoundField DataField="desc_af" HeaderText="ACTIVO FIJO" />
-                                            <asp:BoundField DataField="resp_bien" HeaderText="RESP. DEL BIEN" />
-                                            <asp:BoundField DataField="ubicacion" HeaderText="UBICACIÓN" />
+                                            <asp:BoundField DataField="desc_actFijo" HeaderText="ACTIVO FIJO" />
+                                            <asp:BoundField DataField="estado" HeaderText="ESTADO" />                                           
+                                 
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"
-                                                HeaderText="FIC. CONTROL PAT.">
+                                                HeaderText="OPE.">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="BtnFichaControlPatrimonial" runat="server"
-                                                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
-                                                        CommandName="Editar" CssClass="btn btn-primary btn-sm"
-                                                        ToolTip="Ver Ficha Control Patrimonial">
+                                                    <asp:LinkButton ID="btnVerExpBien" runat="server"
+                                                        CommandArgument="<%# CType(Container, GridViewRow).RowIndex %>"
+                                                        CommandName="VerExpBien" CssClass="btn btn-primary btn-sm"
+                                                        ToolTip="Ver Expediente del Bien">
                                                         <span><i class="fa fa-search"></i></span>
                                                     </asp:LinkButton>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"
-                                                HeaderText="COMP. DE PAGO">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="btnVerComprobantePago" runat="server"
-                                                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
-                                                        CommandName="Editar" CssClass="btn btn-primary btn-sm"
-                                                        ToolTip="Ver Comprobante de Pago">
-                                                        <span><i class="fa fa-search"></i></span>
+
+                                                    <asp:LinkButton ID="btnAdjExpBien" runat="server"
+                                                        CommandArgument="<%# CType(Container, GridViewRow).RowIndex %>"
+                                                        CommandName="AdjExpBien" CssClass="btn btn-primary btn-sm"
+                                                        ToolTip="Adjuntar Expediente">
+                                                        <span><i class="fa fa-paperclip"></i></span>
+                                                    </asp:LinkButton>
+                                                    <asp:LinkButton ID="btnEnviar" runat="server"
+                                                        CommandArgument="<%# CType(Container, GridViewRow).RowIndex %>"
+                                                        CommandName="Enviar" CssClass="btn btn-primary btn-sm"
+                                                        ToolTip="Enviar Expediente del bien">
+                                                        <span><i class="fa fa-envelope"></i></span>
                                                     </asp:LinkButton>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-
-                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"
-                                                HeaderText="DATOS CONTABLES">
-                                                <ItemTemplate>
-                                                    <asp:LinkButton ID="btnAgregarDatosContables" runat="server"
-                                                        CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>"
-                                                        CommandName="Agregar" CssClass="btn btn-primary btn-sm"
-                                                        ToolTip="Agregar Datos Contables">
-                                                        <span><i class="fa fa-plus"></i></span>
-                                                    </asp:LinkButton>
-
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                          
                                         </Columns>
                                         <EmptyDataTemplate>
                                             No se encontraron Datos!
@@ -278,58 +262,51 @@
                         </div>
                         <!--/Contenedor de GridView-->
                     </div>
-                    <!--/Tab de Listado-->
-                    <br>
-                    <!--Tab de Detalle de Pedido-->
-                    <div class="tab-pane" id="registro" role="tabpanel" aria-labelledby="registro-tab">
+                    <!--/Tab de Listado-->   
+                    
+                    <!--Tab de Adjuntar Evidencia (Pestaña 02)-->
+                    <div class="tab-pane" id="adjuntar" role="tabpanel" aria-labelledby="adjuntar-tab">                      
+                        <!--Panel de Filtro de Búsqueda-->
                         <div class="panel-cabecera">
-                            <asp:UpdatePanel ID="udpRegistro" runat="server" UpdateMode="Conditional"
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional"
                                 ChildrenAsTriggers="false">
                                 <ContentTemplate>
                                     <div class="card">
-                                        <div class="card-header">Agregar Datos Contables</div>
+                                        <div class="card-header">Adjuntar Evidencias</div>
                                         <div class="card-body">
-                                            <div class="row">
-                                                <label for="txtNroCuentaContable"
-                                                    class="col-sm-2 col-form-label form-control-sm">N° Cuenta
-                                                    Contable:</label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtNroCuentaContable" runat="server"
-                                                        MaxLength="300"
-                                                        CssClass="form-control form-control-sm uppercase"
-                                                        AutoComplete="off" />
+                                            <div class="row">                                               
+                                                <label for="fuAdjuntarEvidencia"
+                                                    class="col-sm-1 col-form-label form-control-sm">Subir Archivo:</label>
+                                                <div class="col-sm-3">
+                                                   <asp:FileUpload runat="server" ID ="fuAdjuntarEvidencia"/>
+                                                </div>   
+                                                <div class="col-sm-1"></div>
+                                                 <div class="col-sm-2">
+                                                    <asp:LinkButton ID="lnkBtnSalirAdjEvid" runat="server"
+                                                        CssClass="btn btn-accion btn-rojo">
+                                                        <i class="fa fa-sign-out-alt"></i>
+                                                        <span class="text">Salir</span>
+                                                    </asp:LinkButton>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <label for="txtDepreciacón"
-                                                    class="col-sm-2 col-form-label form-control-sm">Depreciación
-                                                </label>
-                                                <div class="col-sm-4">
-                                                    <asp:TextBox ID="txtDepreciacón" runat="server" MaxLength="20"
-                                                        CssClass="form-control form-control-sm uppercase"
-                                                        AutoComplete="off" />
+                                                <div class="col-sm-1"> 
+                                                  <asp:LinkButton ID="btnAdjEvidec" runat="server"
+                                                        CssClass="btn btn-accion btn-celeste">
+                                                        <i class="fa fa-save"></i>
+                                                        <span class="text">Registrar Expediente</span>
+                                                  </asp:LinkButton>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="card-footer" style="text-align: center;">
-                                            <asp:LinkButton ID="btnGuardar" runat="server"
-                                                CssClass="btn btn-accion btn-verde"
-                                                OnClientClick="return alertConfirm(this, event, '¿Desea registrar datos contables?', 'warning');">
-                                                <i class="fa fa-save"></i>
-                                                <span class="text">Guardar</span>
-                                            </asp:LinkButton>
-                                            <asp:LinkButton ID="btnSalir" runat="server"
-                                                CssClass="btn btn-accion btn-danger">
-                                                <i class="fa fa-sign-out-alt"></i>
-                                                <span class="text">Salir</span>
-                                            </asp:LinkButton>
                                         </div>
                                     </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
+                        <!--/Panel de Filtro de Búsqueda-->
                     </div>
-                    <!--/Tab de Detalle de Pedido-->
+                    <!--/Tab de Registro-->   
+                    
                 </div>
             </div>
 
@@ -416,4 +393,4 @@
         </script>
     </body>
 
-    </html>
+</html>
